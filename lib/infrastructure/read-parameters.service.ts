@@ -1,5 +1,5 @@
 import { injectable } from "tsyringe";
-import { ValidationParametersService } from "../validation/validation-parameters.service";
+import { ValidationParametersService } from "./validation-parameters.service";
 
 @injectable()
 /*
@@ -11,6 +11,7 @@ export class ReadParametersService {
 
     read(): Array<string> {
         const { argv } = process;
+        this.validationParameters.preValidation(argv);
         return argv;
     }
 }

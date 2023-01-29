@@ -1,5 +1,5 @@
 import { injectable } from "tsyringe";
-import { ReadParametersService } from "../infrastructure/reader/read-parameters.service";
+import { ReadParametersService } from "../infrastructure/read-parameters.service";
 
 @injectable()
 /*
