@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { ReadParametersService } from "./infrastructure/reader/read-parameters.service";
+import "reflect-metadata";
+import { container } from "tsyringe";
 import { CliAppService } from "./app-service/cli-app.service";
 
 /*
     Here the application (CLI) starts.
 */
-const readParameters = new ReadParametersService();
-new CliAppService(readParameters).run();
+container.resolve(CliAppService).run();

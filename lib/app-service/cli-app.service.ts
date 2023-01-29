@@ -1,5 +1,7 @@
+import { injectable } from "tsyringe";
 import { ReadParametersService } from "../infrastructure/reader/read-parameters.service";
 
+@injectable()
 /*
     The main application service that is responsible for
     managing the main flow of the application.
