@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { ReadParametersService } from "./ui/reader/read-parameters.service";
+import { ReadParametersService } from "./infrastructure/reader/read-parameters.service";
 import { CliAppService } from "./app-service/cli-app.service";
 
 /*

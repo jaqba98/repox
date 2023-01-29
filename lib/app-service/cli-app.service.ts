@@ -1,4 +1,4 @@
-import { ReadParametersService } from "../ui/reader/read-parameters.service";
+import { ReadParametersService } from "../infrastructure/reader/read-parameters.service";
 
 /*
     The main application service that is responsible for
