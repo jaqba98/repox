@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import "core-js/actual";
+import "core-js/features/reflect";
 import { container } from "tsyringe";
 import { CliAppService } from "./app-service/cli-app.service";
 
