@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
-import { Cli } from "./ui/cli";
+import { ReadParametersService } from "./ui/reader/read-parameters.service";
+import { CliAppService } from "./app-service/cli-app.service";
 
-new Cli().run();
+/*
+    Here the application (CLI) starts.
+*/
+const readParameters = new ReadParametersService();
+new CliAppService(readParameters).run();
