@@ -1,2 +1,5 @@
 #!/usr/bin/env node
-console.log('Hello repox');
+
+import { Cli } from "./ui/cli";
+
+new Cli().run();
