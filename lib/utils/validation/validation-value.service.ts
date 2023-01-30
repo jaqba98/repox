@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerService } from "../logger/logger.service";
+import { LoggerService } from "../../infrastructure/service/logger.service";
 
 @singleton()
 export class ValidationValueService {
@@ -7,7 +7,6 @@ export class ValidationValueService {
 
   isArrayOfString(value: Array<any>, err: string): void {
     if (value.some((val) => typeof val !== "string")) {
-      this.logger.throw(err);
     }
   }
 }

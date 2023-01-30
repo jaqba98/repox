@@ -1,5 +1,6 @@
 import { injectable } from "tsyringe";
-import { ReadParametersService } from "../infrastructure/read-parameters.service";
+import { LoggerService } from "../infrastructure/service/logger.service";
+import { ReadParametersService } from "../infrastructure/service/read-parameters.service";
 
 @injectable()
 /*
@@ -7,10 +8,18 @@ import { ReadParametersService } from "../infrastructure/read-parameters.service
     managing the main flow of the application.
 */
 export class CliAppService {
-    constructor(private readonly readParameters: ReadParametersService) {}
+  constructor(
+    private readonly readParameters: ReadParametersService,
+    private readonly logger: LoggerService
+  ) {}
 
-    run(): void {
-        const params = this.readParameters.read();
-        console.log(params);
+  run(): void {
+    try {
+      throw new Error("asdasda");
+      const params = this.readParameters.read();
+      console.log(params);
+    } catch (err: any) {
+      this.logger.log(false, err.message, true);
     }
+  }
 }

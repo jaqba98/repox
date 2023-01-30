@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerService } from "../logger/logger.service";
+import { LoggerService } from "../../infrastructure/service/logger.service";
 
 @singleton()
 export class ValidationPrimitiveService {
@@ -7,7 +7,6 @@ export class ValidationPrimitiveService {
 
   isArray(value: any, err: string): void {
     if (!Array.isArray(value)) {
-      this.logger.throw(err);
     }
   }
 }
