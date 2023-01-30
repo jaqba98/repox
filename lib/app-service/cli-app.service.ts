@@ -19,7 +19,11 @@ export class CliAppService {
       const params = this.readParameters.read();
       console.log(params);
     } catch (err: any) {
-      this.logger.log(false, err.message, true);
+      this.logger.log({
+        success: false,
+        message: err.message,
+        exception: false,
+      });
     }
   }
 }
