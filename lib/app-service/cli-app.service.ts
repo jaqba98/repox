@@ -1,29 +1,24 @@
 import { injectable } from "tsyringe";
-import { LoggerService } from "../infrastructure/service/logger.service";
-import { ReadParametersService } from "../infrastructure/service/read-parameters.service";
+import { LogService } from "../infrastructure/service/log.service";
+import { ReadParamsService } from "../infrastructure/service/read-params.service";
 
 @injectable()
-/*
-    The main application service that is responsible for
-    managing the main flow of the application.
-*/
+/**
+ * The main application service that is responsible for
+ * managing the main flow of the application.
+ */
 export class CliAppService {
   constructor(
-    private readonly readParameters: ReadParametersService,
-    private readonly logger: LoggerService
+    private readonly readParams: ReadParamsService,
+    private readonly log: LogService
   ) {}
 
   run(): void {
     try {
-      throw new Error("asdasda");
-      const params = this.readParameters.read();
+      const params = this.readParams.read();
       console.log(params);
-    } catch (err: any) {
-      this.logger.log({
-        success: false,
-        message: err.message,
-        exception: false,
-      });
+    } catch (error: any) {
+      this.log.log({ status: "exception", msg: error });
     }
   }
 }

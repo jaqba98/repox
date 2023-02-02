@@ -7,7 +7,8 @@
     "repox": "main.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "node dist/main.js generate -a -b --aa=123 --bb=true workspace -q -w --qq=test --ww=false"
   },
   "author": "",
   "license": "ISC",
