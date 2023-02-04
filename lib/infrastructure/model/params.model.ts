@@ -8,6 +8,7 @@ export interface ParamsModel {
   base: string;
   index: number;
   type: ArgTypeEnum;
+  belong: ArgTypeEnum;
   hasValue: boolean;
   data: {
     name: string;

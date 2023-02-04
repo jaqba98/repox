@@ -7,12 +7,15 @@ import { ParamsModel } from "../model/params.model";
  * Service responsible for get parameters from command line.
  */
 export class ReadParamsService {
+  private lastArgType: ArgTypeEnum = ArgTypeEnum.program;
+
   read(): Array<ParamsModel> {
     return this.getAllArgs()
       .map((base) => ({ base }))
       .filter((_, index) => this.getProgramArg(index))
       .map((arg, index) => ({ ...arg, index }))
       .map((arg) => ({ ...arg, type: this.getArgType(arg.base, arg.index) }))
+      .map((arg) => ({ ...arg, belong: this.getArgBelonging(arg.type) }))
       .map((arg) => ({ ...arg, hasValue: this.isBaseHasValue(arg.base) }))
       .map((arg) => ({
         ...arg,
@@ -33,6 +36,11 @@ export class ReadParamsService {
     if (base.startsWith("-")) return ArgTypeEnum.alias;
     if (index === 0) return ArgTypeEnum.program;
     return ArgTypeEnum.command;
+  }
+
+  private getArgBelonging(type: ArgTypeEnum): ArgTypeEnum {
+    if (type === ArgTypeEnum.command) this.lastArgType = type;
+    return this.lastArgType;
   }
 
   private isBaseHasValue(base: string): boolean {
