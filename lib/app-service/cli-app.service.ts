@@ -1,4 +1,5 @@
 import { injectable } from "tsyringe";
+import { ParamsModel } from "../infrastructure/model/params.model";
 import { LogService } from "../infrastructure/service/log.service";
 import { ReadParamsService } from "../infrastructure/service/read-params.service";
 
@@ -15,7 +16,7 @@ export class CliAppService {
 
   run(): void {
     try {
-      const params = this.readParams.read();
+      const params: Array<ParamsModel> = this.readParams.read();
       console.log(params);
     } catch (error: any) {
       this.log.log({ status: "exception", msg: error });
