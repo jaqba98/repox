@@ -1,6 +1,6 @@
 import { injectable } from "tsyringe";
-import { ArgTypeEnum } from "../enum/arg-type.enum";
-import { ParamsModel } from "../model/params.model";
+import { ArgTypeEnum } from "../../enum/arg-type.enum";
+import { ParamsModel } from "../../model/params.model";
 
 @injectable()
 /**

@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { LogColorEnum } from "../enum/log-color.enum";
-import { LogModel } from "../model/log.model";
+import { LogColorEnum } from "../../enum/log-color.enum";
+import { LogModel } from "../../model/log.model";
 
 @singleton()
 /**

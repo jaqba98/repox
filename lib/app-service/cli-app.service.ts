@@ -1,7 +1,7 @@
 import { injectable } from "tsyringe";
 import { ParamsModel } from "../infrastructure/model/params.model";
-import { LogService } from "../infrastructure/service/log.service";
-import { ReadParamsService } from "../infrastructure/service/read-params.service";
+import { LogService } from "../infrastructure/service/writer/log.service";
+import { ReadParamsService } from "../infrastructure/service/reader/read-params.service";
 
 @injectable()
 /**
