@@ -2,8 +2,8 @@
 
 import "core-js/features/reflect";
 import { container, singleton } from "tsyringe";
-import { ReadParamsAppSvc } from "./app-svc/read-params-app.svc";
-import { LogSvc } from "./infra/svc/writer/log.svc";
+import { ReadParamsAppSvc } from "./app-service/read-params-app.svc";
+import { LogSvc } from "./infrastructure/service/writer/log.svc";
 
 @singleton()
 /**
@@ -15,7 +15,7 @@ class Main {
   constructor(
     private readonly readParamsApp: ReadParamsAppSvc,
     private readonly log: LogSvc
-  ) {}
+  ) { }
 
   run() {
     const params = this.readParamsApp.run();

@@ -1,7 +1,7 @@
 import { injectable } from "tsyringe";
-import { ReadParamsSvc } from "../infra/svc/reader/read-params.svc";
-import { VerifyParamsDtoSvc } from "../infra/svc/verify/verify-params-dto.svc";
-import { LogSvc } from "../infra/svc/writer/log.svc";
+import { ReadParamsSvc } from "../infrastructure/service/reader/read-params.svc";
+import { VerifyParamsDtoSvc } from "../infrastructure/service/verify/verify-params-dto.svc";
+import { LogSvc } from "../infrastructure/service/writer/log.svc";
 
 @injectable()
 export class ReadParamsAppSvc {
@@ -9,7 +9,7 @@ export class ReadParamsAppSvc {
     private readonly readParams: ReadParamsSvc,
     private readonly verifyParamsDto: VerifyParamsDtoSvc,
     private readonly log: LogSvc
-  ) {}
+  ) { }
 
   run(): any {
     const paramsDto = this.readParams.read();
