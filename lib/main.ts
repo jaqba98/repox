@@ -20,11 +20,6 @@ class Main {
   run() {
     const params = this.readParamsApp.run();
     this.log.write({
-      mode: "info",
-      msg: JSON.stringify(params, null, 2),
-      newLine: true,
-    });
-    this.log.write({
       mode: "succ",
       msg: "Command executed correctly!",
       newLine: false,

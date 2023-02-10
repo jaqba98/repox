@@ -28,7 +28,11 @@ export class ReadParamsSvc {
       }))
       .map((arg) => ({
         ...arg,
-        ...this.getArgNameAndValue(arg.base, arg.hasValue, arg.type),
+        name: this.getArgName(arg.base, arg.hasValue, arg.type),
+      }))
+      .map((arg) => ({
+        ...arg,
+        value: this.getArgValue(arg.base, arg.hasValue),
       }));
   }
 
@@ -39,9 +43,7 @@ export class ReadParamsSvc {
   private getArgType(base: string, index: number): ParamsTypeEnum {
     if (base.startsWith("--")) return ParamsTypeEnum.argument;
     if (base.startsWith("-")) return ParamsTypeEnum.alias;
-    return index === 0
-      ? ParamsTypeEnum.program
-      : ParamsTypeEnum.command;
+    return index === 0 ? ParamsTypeEnum.program : ParamsTypeEnum.command;
   }
 
   private getArgBelonging(type: ParamsTypeEnum): ParamsTypeEnum {
@@ -56,20 +58,23 @@ export class ReadParamsSvc {
     return base.includes("=");
   }
 
-  private getArgNameAndValue(
+  private getArgName(
     base: string,
     hasValue: boolean,
     type: ParamsTypeEnum
-  ): { name: string; value: string } {
+  ): string {
     const name = hasValue ? base.split("=")[0] : base;
+    if (type === ParamsTypeEnum.argument) return name.replace("--", "");
+    if (type === ParamsTypeEnum.alias) return name.replace("-", "");
+    return name;
+  }
+
+  private getArgValue(base: string, hasValue: boolean): string {
     const value = hasValue ? base.split("=")[1] : "";
-    switch (type) {
-      case ParamsTypeEnum.argument:
-        return { name: name.replace("--", ""), value };
-      case ParamsTypeEnum.alias:
-        return { name: name.replace("-", ""), value };
-      default:
-        return { name, value };
-    }
+    return this.clearArgValue(value);
+  }
+
+  private clearArgValue(value: string): string {
+    return value.replace(/^("|'|`)/, "").replace(/("|'|`)$/, "");
   }
 }

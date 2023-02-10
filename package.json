@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "node dist/main.js generate -a -b --aa=123 --bb=true workspace -q=test -w=false --qq --ww"
+    "test": "node dist/main.js generate workspace --target='node'"
   },
   "author": "",
   "license": "ISC",
