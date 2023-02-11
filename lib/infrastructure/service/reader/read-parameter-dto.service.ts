@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { ParameterTypeEnum } from "../enum/parameter-type.enum";
-import { ParameterDtoEntityModel, ParameterDtoModel } from "../model/parameter-dto.model";
+import { ParameterTypeEnum } from "../../enum/parameter-type.enum";
+import { ParameterDtoEntityModel, ParameterDtoModel } from "../../model/parameter-dto.model";
 
 @singleton()
 export class ReadParameterDtoService {

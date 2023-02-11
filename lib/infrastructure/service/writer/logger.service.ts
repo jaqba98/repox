@@ -1,8 +1,8 @@
 import { EOL } from "os";
 import { singleton } from "tsyringe";
-import { LoggerModeEnum } from "../enum/logger-mode.enum";
-import { TextColorEnum } from "../enum/text-color.enum";
-import { LoggerModel } from "../model/logger.model";
+import { LoggerModeEnum } from "../../enum/logger-mode.enum";
+import { TextColorEnum } from "../../enum/text-color.enum";
+import { LoggerModel } from "../../model/logger.model";
 
 @singleton()
 export class LoggerService {

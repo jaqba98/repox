@@ -1,21 +1,18 @@
 import { singleton } from "tsyringe";
-import { LoggerModeEnum } from "../infrastructure/enum/logger-mode.enum";
-import { LoggerService } from "../infrastructure/service/logger.service";
-import { ReadParameterDtoService } from "../infrastructure/service/read-parameter-dto.service";
+import { LoggerModel } from "../infrastructure/model/logger.model";
+import { ReadParameterDtoService } from "../infrastructure/service/reader/read-parameter-dto.service";
+import { ValidationParameterDtoService } from "../infrastructure/service/validator/validation-parameter-dto.service";
 
 @singleton()
 export class ReadParameterAppService {
   constructor(
     private readonly readParameterDto: ReadParameterDtoService,
-    private readonly logger: LoggerService
+    private readonly validationParameterDto: ValidationParameterDtoService
   ) {}
 
-  run(): void {
+  run(): LoggerModel {
     const parameterDto = this.readParameterDto.read();
-    this.logger.log({
-      mode: LoggerModeEnum.information,
-      message: JSON.stringify(parameterDto, null, 2),
-      newLine: true,
-    });
+    const validationDto = this.validationParameterDto.validation(parameterDto);
+    return validationDto;
   }
 }
