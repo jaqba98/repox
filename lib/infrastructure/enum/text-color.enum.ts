@@ -1,6 +1,3 @@
-/**
- * The colors use by command line to display a text message in different color.
- */
 export enum TextColorEnum {
   reset = "\x1b[0m",
   red = "\x1b[31m",

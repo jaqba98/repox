@@ -3,7 +3,7 @@
 import "core-js/features/reflect";
 import { container, singleton } from "tsyringe";
 import { ReadParamsAppSvc } from "./app-service/read-params-app.service";
-import { LogSvc } from "./infrastructure/service/writer/log.service";
+import { LogSvc } from "./infrastructure/service/logger.service";
 
 @singleton()
 /**

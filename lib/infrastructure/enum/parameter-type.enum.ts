@@ -1,6 +1,3 @@
-/**
- * All kinds of parameter types.
- */
 export enum ParameterTypeEnum {
   program = "program",
   command = "command",

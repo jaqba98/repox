@@ -1,7 +1,7 @@
 import { injectable } from "tsyringe";
 import { ReadParamsSvc } from "../infrastructure/service/reader/read-params.service";
 import { VerifyParamsDtoSvc } from "../infrastructure/service/verify/verify-params-dto.service";
-import { LogSvc } from "../infrastructure/service/writer/log.service";
+import { LogSvc } from "../infrastructure/service/logger.service";
 
 @injectable()
 export class ReadParamsAppSvc {
