@@ -1,7 +1,7 @@
 /**
- * All kinds of parameters type.
+ * All kinds of parameter types.
  */
-export enum ParamsTypeEnum {
+export enum ParameterTypeEnum {
   program = "program",
   command = "command",
   argument = "argument",

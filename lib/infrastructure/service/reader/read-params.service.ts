@@ -1,5 +1,5 @@
 import { injectable } from "tsyringe";
-import { ParamsTypeEnum } from "../../enum/params-type.enum";
+import { ParamsTypeEnum } from "../../enum/parameter-type.enum";
 import { ParamsDtoModel } from "../../model/params-dto.model";
 
 @injectable()

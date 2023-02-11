@@ -1,4 +1,4 @@
-import { ParamsTypeEnum } from "../enum/params-type.enum";
+import { ParamsTypeEnum } from "../enum/parameter-type.enum";
 
 /**
  * Parameters transport model which is responsible for

@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { ColorTextEnum } from "../../enum/color.enum";
+import { TextColorEnum } from "../../enum/text-color.enum";
 import { LogModel } from "../../model/log.model";
 import { EOL } from "os";
 
@@ -18,30 +18,30 @@ export class LogSvc {
     const { mode, msg, newLine } = log;
     switch (mode) {
       case "info":
-        this.writeLog("Info", ColorTextEnum.cyan, msg, newLine);
+        this.writeLog("Info", TextColorEnum.cyan, msg, newLine);
         break;
       case "succ":
-        this.writeLog("Success", ColorTextEnum.green, msg, newLine);
+        this.writeLog("Success", TextColorEnum.green, msg, newLine);
         break;
       case "err":
-        this.writeLog("Error", ColorTextEnum.red, msg, newLine);
+        this.writeLog("Error", TextColorEnum.red, msg, newLine);
         break;
       case "warn":
-        this.writeLog("Warning", ColorTextEnum.yellow, msg, newLine);
+        this.writeLog("Warning", TextColorEnum.yellow, msg, newLine);
         break;
       case "excpt":
-        this.writeException(ColorTextEnum.red, msg, newLine);
+        this.writeException(TextColorEnum.red, msg, newLine);
         break;
       default:
         const wrongMode = "Not defined type of log message!";
-        this.writeException(ColorTextEnum.red, wrongMode, newLine);
+        this.writeException(TextColorEnum.red, wrongMode, newLine);
         break;
     }
   }
 
   private writeLog(
     prefix: string,
-    col: ColorTextEnum,
+    col: TextColorEnum,
     msg: string,
     newLine: boolean
   ): void {
@@ -50,7 +50,7 @@ export class LogSvc {
   }
 
   private writeException(
-    col: ColorTextEnum,
+    col: TextColorEnum,
     msg: string,
     newLine: boolean
   ): void {
@@ -60,11 +60,11 @@ export class LogSvc {
 
   private buildMessage(
     prefix: string,
-    col: ColorTextEnum,
+    col: TextColorEnum,
     msg: string,
     newLine: boolean
   ): string {
     const fullPrefix = newLine ? `${prefix}:${EOL}` : `${prefix}: `;
-    return `${col}${fullPrefix}${msg}${ColorTextEnum.default}`;
+    return `${col}${fullPrefix}${msg}${TextColorEnum.reset}`;
   }
 }
