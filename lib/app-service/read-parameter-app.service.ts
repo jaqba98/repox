@@ -8,14 +8,14 @@ export class ReadParameterAppService {
   constructor(
     private readonly readParameterDto: ReadParameterDtoService,
     private readonly logger: LoggerService
-  ) { }
+  ) {}
 
   run(): void {
     const parameterDto = this.readParameterDto.read();
     this.logger.log({
       mode: LoggerModeEnum.information,
       message: JSON.stringify(parameterDto, null, 2),
-      newLine: true
+      newLine: true,
     });
   }
 }
