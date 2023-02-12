@@ -1,6 +1,9 @@
+/**
+ * Types in which the logger can be run.
+ */
 export enum LoggerModeEnum {
   information = "information",
-  success = "success",
   error = "error",
   warning = "warning",
+  success = "success",
 }
