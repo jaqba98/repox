@@ -1,5 +1,4 @@
 import { singleton } from "tsyringe";
-import { LoggerModeEnum } from "../../enum/logger-mode.enum";
 import { ParameterTypeEnum } from "../../enum/parameter-type.enum";
 import { LoggerModel } from "../../model/logger.model";
 import { ParameterDtoModel } from "../../model/parameter-dto.model";
