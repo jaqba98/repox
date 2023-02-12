@@ -1,3 +1,7 @@
+/**
+ * All kinds of colors used to set the color of the text
+ * on the console.
+ */
 export enum TextColorEnum {
   reset = "\x1b[0m",
   red = "\x1b[31m",
