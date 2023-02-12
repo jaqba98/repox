@@ -1,9 +1,0 @@
-Not done:
-
-1. Refactor the current state of project.
-2. Create validation of parameters dto.
-3. Create parameters domain model.
-4. Create parameters domain model builder.
-5. Create validation of parameters domain model.
-
-Done:
