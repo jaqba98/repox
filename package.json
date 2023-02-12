@@ -2,6 +2,7 @@
   "name": "repox",
   "version": "1.0.6",
   "description": "Lightweight monorepo for many projects",
+  "main": "./bin/repox.js",
   "bin": "./bin/repox.js",
   "author": "Jakub Olejarczyk",
   "license": "ISC",

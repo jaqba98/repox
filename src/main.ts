@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import "core-js/features/reflect";
 import { singleton, container } from "tsyringe";
 import { ReadParameterAppService } from "./app-service/read-parameter-app.service";
