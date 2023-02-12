@@ -1,10 +1,14 @@
 import { ParameterTypeEnum } from "../enum/parameter-type.enum";
 
+/**
+ * Parameter data transport model (DTO) for parameters directly
+ * from the command line.
+ */
+
 export interface ParameterDtoEntityModel {
-  baseValue: string;
+  baseParameter: string;
   index: number;
   type: ParameterTypeEnum;
-  belong: ParameterTypeEnum.program | ParameterTypeEnum.command | "myself";
   hasValue: boolean;
   name: string;
   value: string;
