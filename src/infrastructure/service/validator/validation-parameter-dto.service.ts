@@ -23,7 +23,7 @@ export class ValidationParameterDtoService {
     return {
       mode: LoggerModeEnum.success,
       message: "Command executed correctly!",
-      newLine: false
+      newline: false
     };
   }
 }

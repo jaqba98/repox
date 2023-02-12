@@ -7,10 +7,10 @@ import { LoggerModel } from "../../model/logger.model";
 @singleton()
 export class LoggerService {
   log(loggerData: LoggerModel): void {
-    const { mode, message, newLine } = loggerData;
+    const { mode, message, newline } = loggerData;
     const header = this.getLoggerHeader(mode);
     const color = this.getLoggerColor(mode);
-    const result = this.buildMessage(header, color, message, newLine);
+    const result = this.buildMessage(header, color, message, newline);
     console.log(result);
   }
 

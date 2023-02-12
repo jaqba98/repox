@@ -14,7 +14,7 @@ export class ValidationErrorBuilderService {
     return {
       mode: LoggerModeEnum.error,
       message: test,
-      newLine: true
+      newline: true
     }
   }
 }
