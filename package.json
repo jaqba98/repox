@@ -5,6 +5,12 @@
   "bin": "./bin/repox.js",
   "author": "Jakub Olejarczyk",
   "license": "ISC",
+  "scripts": {
+    "remove": "rmdir /s /q dist",
+    "build": "tsc && copy package.json dist",
+    "link": "npm link ./dist",
+    "unlink": "npm unlink ./dist"
+  },
   "devDependencies": {
     "@types/core-js": "^2.5.5",
     "@types/node": "^18.13.0",
@@ -12,6 +18,7 @@
   },
   "dependencies": {
     "core-js": "^3.27.2",
+    "dist": "^0.1.2",
     "tsyringe": "^4.7.0"
   }
 }
