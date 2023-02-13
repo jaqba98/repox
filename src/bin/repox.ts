@@ -1,2 +1,10 @@
 #!/usr/bin/env node
-import "../main";
+
+import { container } from "tsyringe";
+import { MainService } from "../main/main.service";
+
+/**
+ * Lightweight monorepo for many huge projects.
+ */
+
+container.resolve(MainService).run();
