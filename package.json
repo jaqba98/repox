@@ -1,6 +1,6 @@
 {
   "name": "repox",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Lightweight monorepo for many huge projects",
   "main": "./bin/repox.js",
   "bin": "./bin/repox.js",
