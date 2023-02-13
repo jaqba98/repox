@@ -1,12 +1,12 @@
 import { singleton } from "tsyringe";
 import { LoggerModel } from "../infrastructure/model/logger.model";
-import { ReadParameterDtoService } from "../infrastructure/service/reader/read-parameter-dto.service";
+import { ParameterDtoReaderService } from "../infrastructure/service/reader/parameter-dto-reader.service";
 import { ValidationParameterDtoService } from "../infrastructure/service/validator/validation-parameter-dto.service";
 
 @singleton()
 export class ReadParameterAppService {
   constructor(
-    private readonly readParameterDto: ReadParameterDtoService,
+    private readonly readParameterDto: ParameterDtoReaderService,
     private readonly validationParameterDto: ValidationParameterDtoService
   ) {}
 

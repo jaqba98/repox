@@ -5,7 +5,7 @@ import { ParameterTypeEnum } from "../enum/parameter-type.enum";
  * from the command line.
  */
 
-export interface ParameterDtoEntityModel {
+interface ParameterDtoEntityModel {
   baseParameter: string;
   index: number;
   type: ParameterTypeEnum;
