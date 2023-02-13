@@ -13,11 +13,7 @@ export class LoggerService {
     const { mode, message } = logger;
     const header = this.getLoggerHeader(mode);
     const color = this.getLoggerColor(mode);
-    const outputMessage = this.buildLoggerOutputMessage(
-      header,
-      color,
-      message
-    );
+    const outputMessage = this.buildLoggerOutputMessage(header, color, message);
     this.writeLoggerOutputMessage(outputMessage);
   }
 

@@ -14,10 +14,7 @@ export class ParameterDtoReaderService {
       .map((baseParameter, index) => ({ baseParameter, index }))
       .map(parameter => ({
         ...parameter,
-        type: this.getParameterType(
-          parameter.baseParameter,
-          parameter.index
-        ),
+        type: this.getParameterType(parameter.baseParameter, parameter.index),
         hasValue: this.getParameterHasValue(parameter.baseParameter)
       }))
       .map(parameter => ({
@@ -50,15 +47,9 @@ export class ParameterDtoReaderService {
     baseParameter: string,
     index: number
   ): ParameterTypeEnum {
-    if (baseParameter.startsWith("--")) {
-      return ParameterTypeEnum.argument;
-    }
-    if (baseParameter.startsWith("-")) {
-      return ParameterTypeEnum.alias;
-    }
-    return index === 0 ?
-      ParameterTypeEnum.program :
-      ParameterTypeEnum.command;
+    if (baseParameter.startsWith("--")) return ParameterTypeEnum.argument;
+    if (baseParameter.startsWith("-")) return ParameterTypeEnum.alias;
+    return index === 0 ? ParameterTypeEnum.program : ParameterTypeEnum.command;
   }
 
   private getParameterHasValue(baseParameter: string): boolean {
@@ -70,22 +61,13 @@ export class ParameterDtoReaderService {
     hasValue: boolean,
     type: ParameterTypeEnum
   ): string {
-    const name = hasValue ?
-      baseParameter.split("=")[0] :
-      baseParameter;
-    if (type === ParameterTypeEnum.argument) {
-      return name.replace("--", "");
-    }
-    if (type === ParameterTypeEnum.alias) {
-      return name.replace("-", "");
-    }
+    const name = hasValue ? baseParameter.split("=")[0] : baseParameter;
+    if (type === ParameterTypeEnum.argument) return name.replace("--", "");
+    if (type === ParameterTypeEnum.alias) return name.replace("-", "");
     return name;
   }
 
-  private getParameterValue(
-    baseParameter: string,
-    hasValue: boolean
-  ): string {
+  private getParameterValue(baseParameter: string, hasValue: boolean): string {
     const value = hasValue ? baseParameter.split("=")[1] : "";
     return this.clearValue(value);
   }

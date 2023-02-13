@@ -1,12 +1,12 @@
 import "core-js/features/reflect";
 import { singleton, container } from "tsyringe";
-import { ReadParameterAppService } from "./app-service/read-parameter-app.service";
+import { ParameterReaderAppService } from "./app-service/parameter-reader-app.service";
 import { LoggerService } from "./infrastructure/service/writer/logger.service";
 
 @singleton()
 class Main {
   constructor(
-    private readonly readParameterApp: ReadParameterAppService,
+    private readonly readParameterApp: ParameterReaderAppService,
     private readonly logger: LoggerService
   ) {}
 
