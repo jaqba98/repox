@@ -5,5 +5,5 @@ export enum LoggerModeEnum {
   error = "error",
   success = "success",
   warning = "warning",
-  information = "information",
+  information = "information"
 }
