@@ -14,17 +14,20 @@ export class ParameterDtoReaderService {
       .map((baseParameter, index) => ({ baseParameter, index }))
       .map(parameter => ({
         ...parameter,
-        type: this.getType(parameter.baseParameter, parameter.index),
-        hasValue: this.getHasValue(parameter.baseParameter)
+        type: this.getParameterType(
+          parameter.baseParameter,
+          parameter.index
+        ),
+        hasValue: this.getParameterHasValue(parameter.baseParameter)
       }))
       .map(parameter => ({
         ...parameter,
-        name: this.getName(
+        name: this.getParameterName(
           parameter.baseParameter,
           parameter.hasValue,
           parameter.type
         ),
-        value: this.getValue(
+        value: this.getParameterValue(
           parameter.baseParameter,
           parameter.hasValue
         )
@@ -43,14 +46,14 @@ export class ParameterDtoReaderService {
     return index > 1;
   }
 
-  private getType(
-    baseValue: string,
+  private getParameterType(
+    baseParameter: string,
     index: number
   ): ParameterTypeEnum {
-    if (baseValue.startsWith("--")) {
+    if (baseParameter.startsWith("--")) {
       return ParameterTypeEnum.argument;
     }
-    if (baseValue.startsWith("-")) {
+    if (baseParameter.startsWith("-")) {
       return ParameterTypeEnum.alias;
     }
     return index === 0 ?
@@ -58,16 +61,18 @@ export class ParameterDtoReaderService {
       ParameterTypeEnum.command;
   }
 
-  private getHasValue(baseValue: string): boolean {
-    return baseValue.includes("=");
+  private getParameterHasValue(baseParameter: string): boolean {
+    return baseParameter.includes("=");
   }
 
-  private getName(
-    baseValue: string,
+  private getParameterName(
+    baseParameter: string,
     hasValue: boolean,
     type: ParameterTypeEnum
   ): string {
-    const name = hasValue ? baseValue.split("=")[0] : baseValue;
+    const name = hasValue ?
+      baseParameter.split("=")[0] :
+      baseParameter;
     if (type === ParameterTypeEnum.argument) {
       return name.replace("--", "");
     }
@@ -77,8 +82,11 @@ export class ParameterDtoReaderService {
     return name;
   }
 
-  private getValue(baseValue: string, hasValue: boolean): string {
-    const value = hasValue ? baseValue.split("=")[1] : "";
+  private getParameterValue(
+    baseParameter: string,
+    hasValue: boolean
+  ): string {
+    const value = hasValue ? baseParameter.split("=")[1] : "";
     return this.clearValue(value);
   }
 
