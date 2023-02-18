@@ -1,6 +1,6 @@
-import { singleton } from "tsyringe";
-import { ParameterTypeEnum } from "../../enum/parameter-type.enum";
-import { ParameterDtoModel } from "../../model/parameter-dto.model";
+import {singleton} from "tsyringe";
+import {ParameterTypeEnum} from "../../enum/parameter-type.enum";
+import {ParameterDtoModel} from "../../model/parameter-dto.model";
 
 @singleton()
 /**
@@ -11,7 +11,7 @@ export class ParameterDtoReaderService {
   read(): ParameterDtoModel {
     return this.getAllParameters()
       .filter((_, index) => this.getProgramParameter(index))
-      .map((baseParameter, index) => ({ baseParameter, index }))
+      .map((baseParameter, index) => ({baseParameter, index}))
       .map(parameter => ({
         ...parameter,
         type: this.getParameterType(parameter.baseParameter, parameter.index),
@@ -32,7 +32,7 @@ export class ParameterDtoReaderService {
       .reduce<ParameterDtoModel>((acc, curr) => {
         acc.parameters = [...acc.parameters, curr];
         return acc;
-      }, { parameters: [] });
+      }, {parameters: []});
   }
 
   private getAllParameters(): Array<string> {
@@ -67,12 +67,22 @@ export class ParameterDtoReaderService {
     return name;
   }
 
-  private getParameterValue(baseParameter: string, hasValue: boolean): string {
+  private getParameterValue(
+    baseParameter: string,
+    hasValue: boolean
+  ): Array<string> {
     const value = hasValue ? baseParameter.split("=")[1] : "";
-    return this.clearValue(value);
+    return this.clearValue(value, hasValue);
   }
 
-  private clearValue(value: string): string {
-    return value.replace(/^(["'`])/, "").replace(/(["'`])$/, "");
+  private clearValue(value: string, hasValue: boolean): Array<string> {
+    const clearedValues = value
+      .replace(/\s/g, "")
+      .replace(/^(["'`])/, "")
+      .replace(/(["'`])$/, "")
+      .split(",");
+    return hasValue ?
+      clearedValues :
+      clearedValues.filter(val => val !== "");
   }
 }

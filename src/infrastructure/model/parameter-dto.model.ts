@@ -11,7 +11,7 @@ interface ParameterDtoEntityModel {
   type: ParameterTypeEnum;
   hasValue: boolean;
   name: string;
-  value: string;
+  value: Array<string>;
 }
 
 export interface ParameterDtoModel {

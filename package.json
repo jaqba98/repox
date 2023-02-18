@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "core-js": "^3.27.2",
-    "dist": "^0.1.2",
     "tsyringe": "^4.7.0"
   }
 }
