@@ -1,17 +1,19 @@
-import {singleton} from "tsyringe";
-import {ParameterTypeEnum} from "../../enum/parameter-type.enum";
-import {ParameterDtoModel} from "../../model/parameter-dto.model";
+import { singleton } from "tsyringe";
+import { ParameterTypeEnum } from "../../enum/parameter-type.enum";
+import {
+  ParameterDtoModel
+} from "../../model/parameter-dto/parameter-dto.model";
 
 @singleton()
 /**
  * The service is responsible for reading the real parameters from
- * the command line and building the parameter data transport object.
+ * the command line and building the parameter-dto data transport object.
  */
 export class ParameterDtoReaderService {
   read(): ParameterDtoModel {
     return this.getAllParameters()
       .filter((_, index) => this.getProgramParameter(index))
-      .map((baseParameter, index) => ({baseParameter, index}))
+      .map((baseParameter, index) => ({ baseParameter, index }))
       .map(parameter => ({
         ...parameter,
         type: this.getParameterType(parameter.baseParameter, parameter.index),
@@ -32,7 +34,7 @@ export class ParameterDtoReaderService {
       .reduce<ParameterDtoModel>((acc, curr) => {
         acc.parameters = [...acc.parameters, curr];
         return acc;
-      }, {parameters: []});
+      }, { parameters: [] });
   }
 
   private getAllParameters(): Array<string> {

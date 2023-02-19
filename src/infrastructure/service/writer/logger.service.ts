@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerModel } from "../../model/logger.model";
+import { LoggerModel } from "../../model/logger/logger.model";
 import { TextColorEnum } from "../../enum/text-color.enum";
 import { LoggerModeEnum } from "../../enum/logger-mode.enum";
 

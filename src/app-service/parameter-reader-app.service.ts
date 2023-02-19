@@ -2,7 +2,9 @@ import { singleton } from "tsyringe";
 import {
   ParameterDtoReaderService
 } from "../infrastructure/service/reader/parameter-dto-reader.service";
-import { ParameterDtoModel } from "../infrastructure/model/parameter-dto.model";
+import {
+  ParameterDtoModel
+} from "../infrastructure/model/parameter-dto/parameter-dto.model";
 
 @singleton()
 /**
@@ -17,7 +19,7 @@ export class ParameterReaderAppService {
   constructor(private readonly parameterDtoReader: ParameterDtoReaderService) {
   }
 
-  // todo: change ParameterDtoModel to parameter domain model
+  // todo: change ParameterDtoModel to parameter-dto domain model
   run(): ParameterDtoModel {
     return this.parameterDtoReader.read();
   }

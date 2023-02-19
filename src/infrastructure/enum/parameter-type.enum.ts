@@ -1,5 +1,5 @@
 /**
- * All kinds of parameter type.
+ * All kinds of parameter-dto type.
  */
 export enum ParameterTypeEnum {
   program = "program",
