@@ -5,9 +5,10 @@ import {
 import {
   ParameterDtoValidationService
 } from "../infrastructure/service/validation/parameter-dto-validation.service";
+import { LoggerService } from "../infrastructure/service/writer/logger.service";
 import {
-  ParameterDtoValidationModel
-} from "../infrastructure/model/parameter-dto-validation.model";
+  ParameterDtoErrorBuilderService
+} from "../infrastructure/service/builder/parameter-dto-error-builder.service";
 
 @singleton()
 /**
@@ -21,13 +22,19 @@ import {
 export class ParameterReaderAppService {
   constructor(
     private readonly parameterDtoReader: ParameterDtoReaderService,
-    private readonly parameterDtoValidation: ParameterDtoValidationService
+    private readonly parameterDtoValidation: ParameterDtoValidationService,
+    private readonly parameterDtoErrorBuilder: ParameterDtoErrorBuilderService,
+    private readonly logger: LoggerService
   ) {
   }
 
-  run(): ParameterDtoValidationModel {
+  run(): void {
     const parameterDto = this.parameterDtoReader.read();
     const validationDto = this.parameterDtoValidation.validation(parameterDto);
-    return validationDto;
+    if (validationDto.error) {
+      this.logger.log(
+        this.parameterDtoErrorBuilder.build(parameterDto, validationDto)
+      );
+    }
   }
 }

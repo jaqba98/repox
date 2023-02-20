@@ -10,7 +10,8 @@
     "remove": "rmdir /s /q dist",
     "build": "tsc && copy package.json dist",
     "link": "npm link ./dist",
-    "unlink": "npm unlink ./dist"
+    "unlink": "npm unlink ./dist",
+    "refresh": "npm run remove && npm run build && npm run unlink && npm run link"
   },
   "devDependencies": {
     "@types/core-js": "^2.5.5",
