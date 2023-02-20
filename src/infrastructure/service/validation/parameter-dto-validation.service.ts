@@ -17,6 +17,17 @@ export class ParameterDtoValidationService {
   ) {
   }
 
+  /**
+   * 1) Command has to contain only allowed characters.
+   * 2) Program has to be only one.
+   * 3) Program has to be first.
+   * 4) Program must not contain value.
+   * 5) Command has to be only one.
+   * 6) Command must not be first.
+   * 7) Command must not contain value.
+   * 8) Argument / Alias must not be first.
+   * 9) Argument / Alias must have correct structure.
+   * */
   validation(parameterDto: ParameterDtoModel): ParameterDtoValidationModel {
     /* Must have one command */
     const mustHaveOneCommand = this.mustHaveOneCommand.validation(parameterDto);
