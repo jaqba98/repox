@@ -78,13 +78,11 @@ export class ParameterDtoReaderService {
   }
 
   private clearValue(value: string, hasValue: boolean): Array<string> {
-    const clearedValues = value
+    return hasValue ? value
       .replace(/\s/g, "")
       .replace(/^(["'`])/, "")
       .replace(/(["'`])$/, "")
-      .split(",");
-    return hasValue ?
-      clearedValues :
-      clearedValues.filter(val => val !== "");
+      .split(",")
+      .filter(val => val !== "") : [];
   }
 }
