@@ -1,24 +1,25 @@
-import { ParameterDtoEntityModel } from "./parameter-dto.model";
-
 /**
- * Parameter DTO model for validation.
+ * The model of parameter dto for validation.
+ *
+ * Example:
+ * {
+ *   wrongIndexes: [0, 1];
+ *   errors: ["Lorem ipsum error 1"],
+ *   tips: ["Lorem ipsum tip 1"]
+ * }
+ *
+ * Result:
+ * Error: Wrong command!
+ *
+ * repox gen/erate works%pace
+ *       ^^^^^^^^^ ^^^^^^^^^^
+ *
+ * ERR: Lorem ipsum error 1
+ *
+ * TIP: Lorem ipsum tip 1
  */
-
-export interface ParameterDtoValidationEntityModel {
-  entity: ParameterDtoEntityModel;
-  error: boolean;
-}
-
 export interface ParameterDtoValidationModel {
-  entities: Array<ParameterDtoValidationEntityModel>;
-  message: string;
+  wrongIndexes: Array<number>;
+  errors: Array<string>;
+  tips: Array<string>;
 }
-
-/**
- * Error: Incorrect command!
- *
- * repox wo/rks#pace generate
- *       ^^^^^^^^^^^
- *
- * Unsupported characters: / #
- */

@@ -3,8 +3,11 @@ import {
   ParameterDtoReaderService
 } from "../infrastructure/service/reader/parameter-dto-reader.service";
 import {
-  ParameterDtoModel
-} from "../infrastructure/model/parameter-dto.model";
+  ParameterDtoValidationService
+} from "../infrastructure/service/validation/parameter-dto-validation.service";
+import {
+  ParameterDtoValidationModel
+} from "../infrastructure/model/parameter-dto-validation.model";
 
 @singleton()
 /**
@@ -16,11 +19,14 @@ import {
  * 5) Return the domain model.
  */
 export class ParameterReaderAppService {
-  constructor(private readonly parameterDtoReader: ParameterDtoReaderService) {
+  constructor(
+    private readonly parameterDtoReader: ParameterDtoReaderService,
+    private readonly parameterDtoValidation: ParameterDtoValidationService
+  ) {
   }
 
-  // todo: change ParameterDtoModel to parameter-dto domain model
-  run(): ParameterDtoModel {
-    return this.parameterDtoReader.read();
+  run(): ParameterDtoValidationModel {
+    const parameterDto = this.parameterDtoReader.read();
+    return this.parameterDtoValidation.validation(parameterDto);
   }
 }
