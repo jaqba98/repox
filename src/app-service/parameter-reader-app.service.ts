@@ -4,7 +4,7 @@ import {
 } from "../infrastructure/service/reader/parameter-dto-reader.service";
 import {
   ParameterDtoModel
-} from "../infrastructure/model/parameter-dto/parameter-dto.model";
+} from "../infrastructure/model/parameter-dto.model";
 
 @singleton()
 /**

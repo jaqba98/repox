@@ -3,7 +3,6 @@ import {
   ParameterReaderAppService
 } from "../app-service/parameter-reader-app.service";
 import { LoggerService } from "../infrastructure/service/writer/logger.service";
-import { LoggerModeEnum } from "../infrastructure/enum/logger-mode.enum";
 
 @singleton()
 /**
@@ -18,9 +17,6 @@ export class MainService {
 
   run(): void {
     const parameters = this.parameterReaderApp.run();
-    this.logger.log({
-      mode: LoggerModeEnum.information,
-      message: JSON.stringify(parameters, null, 2)
-    });
+    this.logger.log(JSON.stringify(parameters, null, 2));
   }
 }

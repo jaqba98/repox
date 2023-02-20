@@ -1,4 +1,4 @@
-import { ParameterTypeEnum } from "../../enum/parameter-type.enum";
+import { ParameterTypeEnum } from "../enum/parameter-type.enum";
 
 /**
  * Parameter data transport model (DTO) for parameters directly
