@@ -27,6 +27,7 @@ export class ParameterReaderAppService {
 
   run(): ParameterDtoValidationModel {
     const parameterDto = this.parameterDtoReader.read();
-    return this.parameterDtoValidation.validation(parameterDto);
+    const validationDto = this.parameterDtoValidation.validation(parameterDto);
+    return validationDto;
   }
 }

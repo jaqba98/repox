@@ -1,8 +1,6 @@
 import { singleton } from "tsyringe";
 import { ParameterTypeEnum } from "../../enum/parameter-type.enum";
-import {
-  ParameterDtoModel
-} from "../../model/parameter-dto.model";
+import { ParameterDtoModel } from "../../model/parameter-dto.model";
 
 @singleton()
 /**

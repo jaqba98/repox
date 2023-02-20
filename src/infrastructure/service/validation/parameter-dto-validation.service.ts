@@ -4,8 +4,8 @@ import {
 } from "../../model/parameter-dto-validation.model";
 import { ParameterDtoModel } from "../../model/parameter-dto.model";
 import {
-  MustHasOneCommandValidationService
-} from "./must-has-one-command-validation.service";
+  MustHaveOneCommandValidationService
+} from "./must-have-one-command-validation.service";
 
 @singleton()
 /**
@@ -13,15 +13,17 @@ import {
  */
 export class ParameterDtoValidationService {
   constructor(
-    private readonly mustHasOneCommand: MustHasOneCommandValidationService
+    private readonly mustHaveOneCommand: MustHaveOneCommandValidationService
   ) {
   }
 
   validation(parameterDto: ParameterDtoModel): ParameterDtoValidationModel {
-    const mustHasOneCommand = this.mustHasOneCommand.validation(parameterDto);
-    if (mustHasOneCommand.error) {
-      return mustHasOneCommand;
+    /* Must have one command */
+    const mustHaveOneCommand = this.mustHaveOneCommand.validation(parameterDto);
+    if (mustHaveOneCommand.error) {
+      return mustHaveOneCommand;
     }
-    return { error: true, wrongIndexes: [], errors: [], tips: [] }
+    /* Success */
+    return { error: false, wrongIndexes: [], errors: [], tips: [] };
   }
 }

@@ -7,9 +7,9 @@ import { singleton } from "tsyringe";
 
 @singleton()
 /**
- * Check if the parameter dto has only one command.
+ * Check whether the user added only one command name for program.
  */
-export class MustHasOneCommandValidationService {
+export class MustHaveOneCommandValidationService {
   validation(parameterDto: ParameterDtoModel): ParameterDtoValidationModel {
     const commands = parameterDto.parameters
       .filter(parameter => parameter.type === ParameterTypeEnum.command);
@@ -17,18 +17,22 @@ export class MustHasOneCommandValidationService {
       return {
         error: true,
         wrongIndexes: [],
-        errors: ["Nie podałeś komendy"],
-        tips: []
+        errors: ["You have not given any command for a given program!"],
+        tips: ["Enter the command name after the program name."]
       };
     }
     if (commands.length === 1) {
       return { error: false, wrongIndexes: [], errors: [], tips: [] };
     }
+    const wrongIndexes = commands.map(command => command.index);
     return {
       error: true,
-      wrongIndexes: commands.map(command => command.index),
-      errors: ["Za dużo komend!"],
-      tips: []
+      wrongIndexes,
+      errors: [
+        "You have given too many commands for a given program!",
+        "You can only enter one command per program!"
+      ],
+      tips: ["Enter only one command name after the program name."]
     };
   }
 }
