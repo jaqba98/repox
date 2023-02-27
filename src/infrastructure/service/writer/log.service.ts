@@ -11,6 +11,6 @@ export class LogService {
   }
 
   json<TJson>(json: TJson): void {
-    console.log(json);
+    console.log(JSON.stringify(json, null, 2));
   }
 }
