@@ -31,7 +31,7 @@ export interface ParamDtoModel {
  * ERR: Lorem ipsum error 1
  * TIP: Lorem ipsum tip 1
  */
-export interface ParamsDtoValidateModel {
+export interface ParamsDtoValidatorModel {
   isError: boolean;
   wrongParams: Array<number>;
   errors: Array<string>;

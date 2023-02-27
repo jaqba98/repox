@@ -4,7 +4,7 @@ import {
 } from "../app-service/read-param-app.service";
 import {
   LogService
-} from "../infrastructure/service/writer/log.service";
+} from "../infra/service/writer/log.service";
 
 @singleton()
 /**
