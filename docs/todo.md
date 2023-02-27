@@ -7,6 +7,6 @@
 - create all parameter domain model validators
 
 ## In progress
-- refactor the whole project
 
 ## Done
+- refactor the whole project

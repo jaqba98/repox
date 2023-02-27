@@ -1,19 +1,24 @@
 import { singleton } from "tsyringe";
 import {
-  ParameterReaderAppService
-} from "../app-service/parameter-reader-app.service";
+  ReadParamAppService
+} from "../app-service/read-param-app.service";
+import {
+  LogService
+} from "../infrastructure/service/writer/log.service";
 
 @singleton()
 /**
- * The main starting point for the program.
+ * Main launch point of the program.
  */
 export class MainService {
   constructor(
-    private readonly parameterReaderApp: ParameterReaderAppService
+    private readonly readParamApp: ReadParamAppService,
+    private readonly log: LogService
   ) {
   }
 
   run(): void {
-    this.parameterReaderApp.run();
+    const params = this.readParamApp.read();
+    this.log.json(params);
   }
 }
