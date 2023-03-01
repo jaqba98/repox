@@ -1,10 +1,14 @@
 import { singleton } from "tsyringe";
 import {
-  ReadParamAppService
-} from "../app-service/read-param-app.service";
+  ReadParamDtoAppService
+} from "../app-service/read-param-dto-app.service";
+import { LogService } from "../infra/service/writer/log.service";
 import {
-  LogService
-} from "../infra/service/writer/log.service";
+  buildCommandExecutedCorrectlyMsg,
+} from "../infra/service/builder/succ-msg-builder.service";
+import {
+  buildParamDtoValidationErrorMsg
+} from "../infra/service/builder/err-msg-builder.service";
 
 @singleton()
 /**
@@ -12,13 +16,15 @@ import {
  */
 export class MainService {
   constructor(
-    private readonly readParamApp: ReadParamAppService,
+    private readonly readParamDto: ReadParamDtoAppService,
     private readonly log: LogService
   ) {
   }
 
   run(): void {
-    const params = this.readParamApp.read();
-    this.log.json(params);
+    const paramDto = this.readParamDto.read();
+    paramDto.length === 0 ?
+      this.log.msg(buildCommandExecutedCorrectlyMsg()) :
+      this.log.msg(buildParamDtoValidationErrorMsg(paramDto));
   }
 }
