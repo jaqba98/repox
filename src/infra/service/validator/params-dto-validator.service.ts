@@ -27,9 +27,10 @@ import { CorrectOrderService } from "./correct-order.service";
  */
 export class ParamsDtoValidatorService {
   verify(paramsDto: ParamDtoModel): Array<ParamsDtoValidatorModel> {
-    return this.getAllValidators()
+    const error =  this.getAllValidators()
       .map(validator => validator.run(paramsDto))
-      .filter(validator => validator.isError);
+      .find(validator => validator.isError);
+    return error === undefined ? [] : [error];
   }
 
   private getAllValidators(): Array<RunValidatorModel> {

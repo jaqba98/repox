@@ -23,7 +23,7 @@ export class MainService {
 
   run(): void {
     const paramDto = this.readParamDto.read();
-    paramDto.length === 0 ?
+    paramDto === undefined ?
       this.log.msg(buildCommandExecutedCorrectlyMsg()) :
       this.log.msg(buildParamDtoValidationErrorMsg(paramDto));
   }
