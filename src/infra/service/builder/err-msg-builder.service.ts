@@ -1,34 +1,50 @@
 import {
-  buildSuccessMsg,
   buildEmptyString,
-  buildSuccessHeader,
-  buildReset,
-  buildSpace,
   buildErrorHeader,
   buildErrorMsg,
   buildManyErrorMsg,
-  buildManyTipsMsg, buildNewline
+  buildManyTipsMsg,
+  buildNewline,
+  buildReset,
+  buildSpace
 } from "./base-msg-builder.service";
-import { ParamsDtoValidatorModel } from "../../model/param-dto.model";
+import {
+  ParamDtoModel,
+  ParamsDtoValidatorModel
+} from "../../model/param-dto.model";
+import { F_RED, RESET, UNDERSCORE } from "../../const/shell.const";
 
 /**
  * The messages builder for all success
  */
-
+// todo: refactor the builder
 export const buildParamDtoValidationErrorMsg = (
-  paramDto: Array<ParamsDtoValidatorModel>
+  paramDto: ParamDtoModel,
+  verifyDto: Array<ParamsDtoValidatorModel>
 ): string => {
-  const errors = paramDto.map(param => param.errors).flat();
-  const tips = paramDto.map(param => param.tips).flat();
+  const command = paramDto.params
+    .map(param => {
+      if (verifyDto[0].wrongIndexes.includes(param.index)) {
+        return `${UNDERSCORE}${param.baseValue}${RESET}${F_RED}`
+      } else {
+        return param.baseValue;
+      }
+    })
+    .join(" ");
+  const errors = verifyDto.map(dto => dto.errors).flat();
+  const tips = verifyDto.map(dto => dto.tips).flat();
   return buildEmptyString()
     .concat(buildErrorHeader())
     .concat(buildSpace())
     .concat(buildErrorMsg('An error occurred'))
     .concat(buildNewline())
     .concat(buildNewline())
+    .concat(buildErrorMsg(`> repox ${command}`))
+    .concat(buildNewline())
+    .concat(buildNewline())
     .concat(buildManyErrorMsg(errors))
     .concat(buildNewline())
     .concat(buildNewline())
     .concat(buildManyTipsMsg(tips))
-    .concat(buildReset())
+    .concat(buildReset());
 }

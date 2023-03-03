@@ -3,6 +3,7 @@ import {
   ReadParamDtoService
 } from "../infra/service/reader/read-param-dto.service";
 import {
+  ParamDtoModel,
   ParamsDtoValidatorModel
 } from "../infra/model/param-dto.model";
 import {
@@ -25,8 +26,12 @@ export class ReadParamDtoAppService {
   ) {
   }
 
-  read(): Array<ParamsDtoValidatorModel> {
-    const paramsDto = this.readParamDto.read();
-    return this.paramsDtoValidator.verify(paramsDto);
+  read(): {
+    paramDto: ParamDtoModel,
+    verifyDto: Array<ParamsDtoValidatorModel>
+  } {
+    const paramDto = this.readParamDto.read();
+    const verifyDto = this.paramsDtoValidator.verify(paramDto);
+    return { paramDto, verifyDto };
   }
 }
