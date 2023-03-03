@@ -33,11 +33,7 @@ export interface ParamDtoModel {
  */
 export interface ParamsDtoValidatorModel {
   isError: boolean;
-  params: Array<{
-    baseValue: string;
-    index: number;
-    notCorrect: boolean;
-  }>;
+  wrongIndexes: Array<number>;
   errors: Array<string>;
   tips: Array<string>;
 }

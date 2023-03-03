@@ -12,6 +12,6 @@ import { RunValidatorModel } from "../../model/run-validator.model";
  */
 export class SupportedSignsService implements RunValidatorModel {
   run(paramsDto: ParamDtoModel): ParamsDtoValidatorModel {
-    return { isError: false, params: [], errors: [], tips: [] };
+    return { isError: false, wrongIndexes: [], errors: [], tips: [] };
   }
 }
