@@ -1,50 +1,39 @@
-import {
-  buildEmptyString,
-  buildErrorHeader,
-  buildErrorMsg,
-  buildManyErrorMsg,
-  buildManyTipsMsg,
-  buildNewline,
-  buildReset,
-  buildSpace
-} from "./base-msg-builder.service";
+import { F_BRIGHT_RED } from "../../const/shell.const";
 import {
   ParamDtoModel,
   ParamsDtoValidatorModel
 } from "../../model/param-dto.model";
-import { F_RED, RESET, UNDERSCORE } from "../../const/shell.const";
+import {
+  errorMsg, errorsMsg,
+  message,
+  nl,
+  parameter,
+  reset,
+  space, tipsMsg
+} from "./base-msg-builder.service";
 
 /**
- * The messages builder for all success
+ * The messages builder for all success.
  */
-// todo: refactor the builder
-export const buildParamDtoValidationErrorMsg = (
+export const msgParamDtoValidationError = (
   paramDto: ParamDtoModel,
-  verifyDto: Array<ParamsDtoValidatorModel>
+  verifyDto: ParamsDtoValidatorModel
 ): string => {
   const command = paramDto.params
-    .map(param => {
-      if (verifyDto[0].wrongIndexes.includes(param.index)) {
-        return `${UNDERSCORE}${param.baseValue}${RESET}${F_RED}`
-      } else {
-        return param.baseValue;
-      }
-    })
-    .join(" ");
-  const errors = verifyDto.map(dto => dto.errors).flat();
-  const tips = verifyDto.map(dto => dto.tips).flat();
-  return buildEmptyString()
-    .concat(buildErrorHeader())
-    .concat(buildSpace())
-    .concat(buildErrorMsg('An error occurred'))
-    .concat(buildNewline())
-    .concat(buildNewline())
-    .concat(buildErrorMsg(`> repox ${command}`))
-    .concat(buildNewline())
-    .concat(buildNewline())
-    .concat(buildManyErrorMsg(errors))
-    .concat(buildNewline())
-    .concat(buildNewline())
-    .concat(buildManyTipsMsg(tips))
-    .concat(buildReset());
+    .map(param => parameter(
+      param.baseValue,
+      param.index,
+      verifyDto.wrongIndexes
+    ))
+    .join(space());
+  return errorMsg("Command not executed correctly!")
+    .concat(nl())
+    .concat(message(F_BRIGHT_RED, '> repox '))
+    .concat(command)
+    .concat(reset())
+    .concat(nl(2))
+    .concat(errorsMsg(verifyDto.errors))
+    .concat(nl())
+    .concat(tipsMsg(verifyDto.tips))
+    .concat(reset());
 }

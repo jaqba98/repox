@@ -4,10 +4,10 @@ import {
 } from "../app-service/read-param-dto-app.service";
 import { LogService } from "../infra/service/writer/log.service";
 import {
-  buildCommandExecutedCorrectlyMsg,
+  msgCommandExecutedCorrectlySuccess,
 } from "../infra/service/builder/succ-msg-builder.service";
 import {
-  buildParamDtoValidationErrorMsg
+  msgParamDtoValidationError
 } from "../infra/service/builder/err-msg-builder.service";
 
 @singleton()
@@ -24,12 +24,12 @@ export class MainService {
   run(): void {
     const paramDto = this.readParamDto.read();
     if (paramDto.verifyDto.length > 0) {
-      this.log.msg(buildParamDtoValidationErrorMsg(
+      this.log.msg(msgParamDtoValidationError(
         paramDto.paramDto,
-        paramDto.verifyDto
+        paramDto.verifyDto[0]
       ));
       return;
     }
-    this.log.msg(buildCommandExecutedCorrectlyMsg());
+    this.log.msg(msgCommandExecutedCorrectlySuccess());
   }
 }
