@@ -12,6 +12,7 @@ import { RunValidatorModel } from "../../model/run-validator.model";
  */
 export class CorrectPatternService implements RunValidatorModel {
   run(paramsDto: ParamDtoModel): ParamsDtoValidatorModel {
+    // todo: create implementation of this validator
     return { isError: false, wrongIndexes: [], errors: [], tips: [] };
   }
 }
