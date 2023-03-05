@@ -28,7 +28,7 @@ export class ReadParamDtoAppService {
 
   read(): {
     paramDto: ParamDtoModel,
-    verifyDto: Array<ParamsDtoValidatorModel>
+    verifyDto: ParamsDtoValidatorModel | true
   } {
     const paramDto = this.readParamDto.read();
     const verifyDto = this.paramsDtoValidator.verify(paramDto);

@@ -23,10 +23,10 @@ export class MainService {
 
   run(): void {
     const paramDto = this.readParamDto.read();
-    if (paramDto.verifyDto.length > 0) {
+    if (paramDto.verifyDto !== true) {
       this.log.msg(msgParamDtoValidationError(
         paramDto.paramDto,
-        paramDto.verifyDto[0]
+        paramDto.verifyDto
       ));
       return;
     }
