@@ -9,6 +9,9 @@ import {
 import {
   msgParamDtoValidationError
 } from "../infra/service/builder/err-msg-builder.service";
+import {
+  ReadParamDomainAppService
+} from "../app-service/read-param-domain-app.service";
 
 @singleton()
 /**
@@ -17,17 +20,21 @@ import {
 export class MainService {
   constructor(
     private readonly readParamDto: ReadParamDtoAppService,
+    private readonly readParamDomain: ReadParamDomainAppService,
     private readonly log: LogService
   ) {
   }
 
   run(): void {
-    const paramDto = this.readParamDto.read();
-    if (paramDto.verifyDto !== true) {
-      this.log.msg(msgParamDtoValidationError(
-        paramDto.paramDto,
-        paramDto.verifyDto
-      ));
+    const readParamDto = this.readParamDto.read();
+    const { paramDto, verifyDto } = readParamDto;
+    if (verifyDto !== true) {
+      this.log.msg(msgParamDtoValidationError(paramDto, verifyDto));
+      return;
+    }
+    const readParamDomain = this.readParamDomain.read(paramDto);
+    const { paramDomain, verifyDomain } = readParamDomain;
+    if (verifyDomain !== true) {
       return;
     }
     this.log.msg(msgCommandExecutedCorrectlySuccess());

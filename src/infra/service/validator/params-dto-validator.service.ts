@@ -8,7 +8,6 @@ import { RunValidatorModel } from "../../model/run-validator.model";
 import { CorrectPatternService } from "./correct-pattern.service";
 import { SingleProgramService } from "./single-program.service";
 import { SingleCommandService } from "./single-command.service";
-import { CorrectOrderService } from "./correct-order.service";
 
 @singleton()
 /**
@@ -38,8 +37,7 @@ export class ParamsDtoValidatorService {
       SupportedSignsService,
       CorrectPatternService,
       SingleProgramService,
-      SingleCommandService,
-      CorrectOrderService
+      SingleCommandService
     ].map(validator => container.resolve(validator));
   }
 }
