@@ -34,8 +34,16 @@ export class BuildParamDomainService {
       .filter(param => param.index > commandIndex)
       .map(param => this.buildArg(param));
     return {
-      program: { name: program.paramName, args: programArgs },
-      command: { name: command.paramName, args: commandArgs }
+      program: {
+        name: program.paramName,
+        index: program.index,
+        args: programArgs
+      },
+      command: {
+        name: command.paramName,
+        index: command.index,
+        args: commandArgs
+      }
     };
   }
 
@@ -47,11 +55,13 @@ export class BuildParamDomainService {
   private buildArg(param: ParamDtoEntityModel): {
     name: string,
     value: Array<string>,
+    index: number,
     isAlias: boolean
   } {
     return {
       name: param.paramName,
       value: param.paramValues,
+      index: param.index,
       isAlias: param.paramType === ParamTypeEnum.alias
     }
   }

@@ -5,11 +5,13 @@
 export interface ParamDomainArgModel {
   name: string;
   value: Array<string>;
+  index: number;
   isAlias: boolean;
 }
 
 export interface ParamDomainEntityModel {
   name: string;
+  index: number;
   args: Array<ParamDomainArgModel>;
 }
 

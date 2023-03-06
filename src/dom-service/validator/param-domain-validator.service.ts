@@ -1,8 +1,47 @@
-import { singleton } from "tsyringe";
+import { container, singleton } from "tsyringe";
 import {
   ParamDomainModel,
   ParamsDomainValidatorModel
 } from "../../model/param-domain.model";
+import {
+  ParamDtoModel,
+  ParamsDtoValidatorModel
+} from "../../infra/model/param-dto.model";
+import {
+  RunValidatorModel
+} from "../../infra/model/run-validator.model";
+import {
+  SupportedSignsService
+} from "../../infra/service/validator/supported-signs.service";
+import {
+  CorrectPatternService
+} from "../../infra/service/validator/correct-pattern.service";
+import {
+  SingleProgramService
+} from "../../infra/service/validator/single-program.service";
+import {
+  SingleCommandService
+} from "../../infra/service/validator/single-command.service";
+import {
+  RunParamDomainModel
+} from "../../model/run-param-domain.model";
+import { ProgramExistService } from "./program-exist.service";
+import { CommandExistService } from "./command-exist.service";
+import {
+  CommandSupportedByProgramService
+} from "./command-supported-by-program.service";
+import {
+  ArgsSupportedByProgramService
+} from "./args-supported-by-program.service";
+import {
+  ArgsSupportedByCommandService
+} from "./args-supported-by-command.service";
+import {
+  ProgramRequiredArgsService
+} from "./program-required-args.service";
+import {
+  CommandRequiredArgsService
+} from "./command-required-args.service";
 
 @singleton()
 /**
@@ -15,16 +54,28 @@ import {
  * 3.Verify that command is supported by program.
  * 4.Verify that arguments are supported by program.
  * 5.Verify that arguments are supported by command.
+ * 6.Verify that program contains all required args.
+ * 7.Verify that command contains all required args.
  */
 export class ParamDomainValidatorService {
   verify(
     paramDomain: ParamDomainModel
   ): ParamsDomainValidatorModel | true {
-    return {
-      isError: true,
-      wrongIndexes: [0],
-      errors: ["You have given not existing program!"],
-      tips: ["Check the documentation and enter an existing program."]
-    };
+    const error = this.getAllValidators()
+      .map(validator => validator.run(paramDomain))
+      .find(validator => validator.isError);
+    return error === undefined ? true : error;
+  }
+
+  private getAllValidators(): Array<RunParamDomainModel> {
+    return [
+      ProgramExistService,
+      CommandExistService,
+      CommandSupportedByProgramService,
+      ArgsSupportedByProgramService,
+      ArgsSupportedByCommandService,
+      ProgramRequiredArgsService,
+      CommandRequiredArgsService
+    ].map(validator => container.resolve(validator));
   }
 }
