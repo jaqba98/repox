@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   ParamDomainModel,
   ParamsDomainValidatorModel
-} from "../model/domain/param-domain.model";
+} from "../model/param-domain.model";
 import { ParamDtoModel } from "../infra/model/param-dto.model";
 import {
   BuildParamDomainService

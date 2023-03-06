@@ -23,6 +23,7 @@ export interface ParamDomainModel {
  */
 export interface ParamsDomainValidatorModel {
   isError: boolean;
+  wrongIndexes: Array<number>;
   errors: Array<string>;
   tips: Array<string>;
 }

@@ -5,7 +5,7 @@ import {
 } from "../../infra/model/param-dto.model";
 import {
   ParamDomainModel
-} from "../../model/domain/param-domain.model";
+} from "../../model/param-domain.model";
 import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 
 @singleton()

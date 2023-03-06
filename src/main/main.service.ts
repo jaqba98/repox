@@ -35,6 +35,7 @@ export class MainService {
     const readParamDomain = this.readParamDomain.read(paramDto);
     const { paramDomain, verifyDomain } = readParamDomain;
     if (verifyDomain !== true) {
+      this.log.msg(msgParamDtoValidationError(paramDto, verifyDomain));
       return;
     }
     this.log.msg(msgCommandExecutedCorrectlySuccess());
