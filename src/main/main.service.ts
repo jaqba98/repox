@@ -3,13 +3,13 @@ import { singleton } from "tsyringe";
 import {
   ReadParamDtoAppService
 } from "../app-service/read-param-dto-app.service";
-import { LogService } from "../infra/service/writer/log.service";
+import { LogService } from "../infrastructure/service/writer/log.service";
 import {
   msgCommandExecutedCorrectlySuccess,
-} from "../infra/service/builder/succ-msg-builder.service";
+} from "../infrastructure/service/builder/message/success-message-builder.service";
 import {
   msgParamDtoValidationError
-} from "../infra/service/builder/err-msg-builder.service";
+} from "../infrastructure/service/builder/message/error-message-builder.service";
 import {
   ReadParamDomainAppService
 } from "../app-service/read-param-domain-app.service";

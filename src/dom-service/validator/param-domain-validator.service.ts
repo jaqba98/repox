@@ -5,25 +5,6 @@ import {
   ParamsDomainValidatorModel
 } from "../../model/param-domain.model";
 import {
-  ParamDtoModel,
-  ParamsDtoValidatorModel
-} from "../../infra/model/param-dto.model";
-import {
-  RunValidatorModel
-} from "../../infra/model/run-validator.model";
-import {
-  SupportedSignsService
-} from "../../infra/service/validator/supported-signs.service";
-import {
-  CorrectPatternService
-} from "../../infra/service/validator/correct-pattern.service";
-import {
-  SingleProgramService
-} from "../../infra/service/validator/single-program.service";
-import {
-  SingleCommandService
-} from "../../infra/service/validator/single-command.service";
-import {
   RunParamDomainModel
 } from "../../model/run-param-domain.model";
 import { ProgramExistService } from "./program-exist.service";

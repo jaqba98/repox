@@ -1,21 +1,20 @@
-// todo: refactor
 import { singleton } from "tsyringe";
 import {
   ParamDtoModel,
   ParamsDtoValidatorModel
-} from "../../model/param-dto.model";
-import { RunValidatorModel } from "../../model/run-validator.model";
-import { ParamTypeEnum } from "../../enum/param-type.enum";
+} from "../../model/param-dto/param-dto.model";
+import { ValidatorDtoModel } from "../../model/validator-dto/validator-dto.model";
+import { ParamType } from "../../enum/param-dto-type";
 
 @singleton()
 /**
  * The validator is responsible for checking that
  * the given dto parameters have only one command.
  */
-export class SingleCommandService implements RunValidatorModel {
-  run(paramsDto: ParamDtoModel): ParamsDtoValidatorModel {
+export class SingleCommandService implements ValidatorDtoModel {
+  runValidator(paramsDto: ParamDtoModel): ParamsDtoValidatorModel {
     const commands = paramsDto.params.filter(
-      paramDto => paramDto.paramType === ParamTypeEnum.command
+      paramDto => paramDto.paramType === ParamType.command
     );
     if (commands.length === 0) {
       return {
@@ -51,3 +50,4 @@ export class SingleCommandService implements RunValidatorModel {
     }
   }
 }
+// todo: refactor

@@ -3,11 +3,11 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../infra/model/param-dto.model";
+} from "../../infrastructure/model/param-dto/param-dto.model";
 import {
   ParamDomainModel
 } from "../../model/param-domain.model";
-import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
+import { ParamType } from "../../infrastructure/enum/param-dto-type";
 
 @singleton()
 /**
@@ -16,9 +16,9 @@ import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 export class BuildParamDomainService {
   build(paramDto: ParamDtoModel): ParamDomainModel {
     const program = paramDto.params
-      .find(param => param.paramType === ParamTypeEnum.program);
+      .find(param => param.paramType === ParamType.program);
     const command = paramDto.params
-      .find(param => param.paramType === ParamTypeEnum.command);
+      .find(param => param.paramType === ParamType.command);
     if (program === undefined || command === undefined) {
       throw new Error('Program and command must not be undefined!');
     }
@@ -49,8 +49,8 @@ export class BuildParamDomainService {
   }
 
   private isArgument(param: ParamDtoEntityModel): boolean {
-    return param.paramType === ParamTypeEnum.argument ||
-      param.paramType === ParamTypeEnum.alias;
+    return param.paramType === ParamType.argument ||
+      param.paramType === ParamType.alias;
   }
 
   private buildArg(param: ParamDtoEntityModel): {
@@ -63,7 +63,7 @@ export class BuildParamDomainService {
       name: param.paramName,
       value: param.paramValues,
       index: param.index,
-      isAlias: param.paramType === ParamTypeEnum.alias
+      isAlias: param.paramType === ParamType.alias
     }
   }
 }
