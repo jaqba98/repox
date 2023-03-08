@@ -1,3 +1,4 @@
+// todo: refactor
 import { EOL } from "os";
 import {
   B_BRIGHT_GREEN,

@@ -1,3 +1,4 @@
+// todo: refactor
 /**
  * All kinds of constants value for the shell.
  */
