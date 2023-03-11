@@ -8,8 +8,8 @@ import {
   ParamsDtoValidatorModel
 } from "../infrastructure/model/param-dto/param-dto.model";
 import {
-  ParamsDtoValidatorService
-} from "../infrastructure/service/validator/params-dto-validator.service";
+  ParamDtoValidationService
+} from "../infrastructure/service/validation/param-dto-validation.service";
 
 @singleton()
 /**
@@ -20,7 +20,7 @@ import {
 export class ReadParamDtoAppService {
   constructor(
     private readonly readParamDto: ReadParamDtoService,
-    private readonly paramsDtoValidator: ParamsDtoValidatorService
+    private readonly paramsDtoValidator: ParamDtoValidationService
   ) {
   }
 
