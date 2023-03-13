@@ -1,4 +1,4 @@
-import { buildSuccessMsg } from "./base-message-builder.service";
+import { buildSuccessMsg } from "./base-msg-builder.service";
 
 /**
  * The message builder for all success.

@@ -3,11 +3,11 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../infrastructure/model/param-dto/param-dto.model";
+} from "../../infra/model/param-dto/param-dto.model";
 import {
   ParamDomainModel
 } from "../../model/param-domain.model";
-import { ParamType } from "../../infrastructure/enum/param-dto-type";
+import { ParamType } from "../../infra/enum/param-dto-type";
 
 @singleton()
 /**

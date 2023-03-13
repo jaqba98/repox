@@ -4,7 +4,7 @@ import {
   buildManyErrMsg,
   buildManyTipMsg,
   newline
-} from "./base-message-builder.service";
+} from "./base-msg-builder.service";
 import {
   ParamDtoValidationModel
 } from "../../../model/param-dto/param-dto-validation.model";

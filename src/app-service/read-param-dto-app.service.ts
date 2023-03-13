@@ -1,35 +1,30 @@
-// todo: refactor
 import { singleton } from "tsyringe";
 import {
-  ReadParamDtoService
-} from "../infrastructure/service/reader/read-param-dto.service";
-import {
-  ParamDtoModel,
-  ParamsDtoValidatorModel
-} from "../infrastructure/model/param-dto/param-dto.model";
-import {
   ParamDtoValidationService
-} from "../infrastructure/service/validation/param-dto-validation.service";
+} from "../infra/service/validation/param-dto-validation.service";
+import {
+  ReadParamDtoService
+} from "../infra/service/reader/read-param-dto.service";
+import {
+  ParamDtoValidationModel
+} from "../infra/model/param-dto/param-dto-validation.model";
 
 @singleton()
 /**
  * The app service is responsible for:
- * 1) Read parameters from shell and save it to parameter DTO model.
- * 2) Validate the parameter DTO model.
+ * 1) Read params from command line
+ *    and save it to parameter DTO model.
+ * 2) Run validation on the parameter DTO model.
  */
 export class ReadParamDtoAppService {
   constructor(
     private readonly readParamDto: ReadParamDtoService,
-    private readonly paramsDtoValidator: ParamDtoValidationService
+    private readonly paramDtoValidation: ParamDtoValidationService
   ) {
   }
 
-  read(): {
-    paramDto: ParamDtoModel,
-    verifyDto: ParamsDtoValidatorModel | true
-  } {
+  read(): ParamDtoValidationModel {
     const paramDto = this.readParamDto.read();
-    const verifyDto = this.paramsDtoValidator.verify(paramDto);
-    return { paramDto, verifyDto };
+    return this.paramDtoValidation.runValidation(paramDto);
   }
 }

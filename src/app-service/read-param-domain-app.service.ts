@@ -4,7 +4,7 @@ import {
   ParamDomainModel,
   ParamsDomainValidatorModel
 } from "../model/param-domain.model";
-import { ParamDtoModel } from "../infrastructure/model/param-dto/param-dto.model";
+import { ParamDtoModel } from "../infra/model/param-dto/param-dto.model";
 import {
   BuildParamDomainService
 } from "../dom-service/builder/build-param-domain.service";
