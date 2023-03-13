@@ -1,5 +1,5 @@
 import {
-  buildCommandMsg,
+  buildCommandDtoMsg,
   buildErrorMsg,
   buildManyErrMsg,
   buildManyTipMsg,
@@ -18,7 +18,7 @@ export const msgParamDtoValidationError = (
 ): string => {
   return buildErrorMsg("Command not executed correctly!")
     .concat(newline())
-    .concat(buildCommandMsg(validationDto))
+    .concat(buildCommandDtoMsg(validationDto))
     .concat(newline(2))
     .concat(buildManyErrMsg(validationDto.errors))
     .concat(newline())

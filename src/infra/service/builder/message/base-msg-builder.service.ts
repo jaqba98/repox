@@ -4,7 +4,6 @@ import {
   BG_YELLOW,
   FG_GREEN,
   FG_RED,
-  FG_WHITE,
   FG_YELLOW
 } from "../../../const/color.const";
 import { BRIGHT, RESET, UNDERSCORE } from "../../../const/text.const";
@@ -12,6 +11,7 @@ import { EOL } from "os";
 import {
   ParamDtoValidationModel
 } from "../../../model/param-dto/param-dto-validation.model";
+import { ParamTypeEnum } from "../../../enum/param-type.enum";
 
 /**
  * Base message builder which contains group of small builders
@@ -93,11 +93,15 @@ export const buildManyTipMsg = (messages: Array<string>): string =>
     .map(message => buildLine(buildTipMsg(message)))
     .join(buildLine(newline()));
 
-export const buildCommandMsg = (
+export const buildCommandDtoMsg = (
   validationDto: ParamDtoValidationModel
 ): string => {
   const { paramDto, wrongParamIndexes } = validationDto;
   const params = paramDto.params
+    .filter(param =>
+      param.paramType !== ParamTypeEnum.executor &&
+      param.paramType !== ParamTypeEnum.application
+    )
     .map(param => wrongParamIndexes.includes(param.paramIndex) ?
       buildLine(redUnderscoreParam(param.paramBaseValue)) :
       buildLine(redParam(param.paramBaseValue))
