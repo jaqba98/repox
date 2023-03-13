@@ -1,7 +1,7 @@
-// todo: refactor
-/**
- * List of all programs.
- */
-export enum ProgramEnum {
-  generate = 'generate'
-}
+// // todo: refactor
+// /**
+//  * List of all programs.
+//  */
+// export enum ProgramEnum {
+//   generate = 'generate'
+// }

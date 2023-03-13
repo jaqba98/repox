@@ -27,8 +27,10 @@ export class CorrectOrderValidatorService
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
+    const program = paramDto.params
+      .find(param => param.paramType === ParamTypeEnum.program);
     const errors = paramDto.params
-      .filter(param => !this.checkParamOrder(param));
+      .filter(param => !this.checkParamOrder(param, program));
     if (errors.length === 0) {
       return this.buildValidation.paramDtoValidationSuccess(paramDto);
     }
@@ -43,13 +45,19 @@ export class CorrectOrderValidatorService
     );
   }
 
-  private checkParamOrder(param: ParamDtoEntityModel): boolean {
+  private checkParamOrder(
+    param: ParamDtoEntityModel,
+    program: ParamDtoEntityModel | undefined
+  ): boolean {
     const paramOrder = this.getParamOrder()
       .find(order => order.paramTypes.includes(param.paramType));
     if (!paramOrder) {
       throw new Error("Not found any param type!");
     }
-    if (paramOrder.order === 3) {
+    if (paramOrder.order === 3 && !program) {
+      return param.paramIndex >= 2;
+    }
+    if (paramOrder.order === 3 && program) {
       return param.paramIndex >= paramOrder.order;
     }
     return param.paramIndex === paramOrder.order;

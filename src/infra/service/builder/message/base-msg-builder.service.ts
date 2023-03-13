@@ -19,13 +19,13 @@ import {
  */
 
 /** Basics */
-const space = (): string => "\s";
+const space = (): string => " ";
 const reset = (): string => RESET;
 const emptyString = (): string => "";
 
 /** Headers */
 const baseHeader = (bgColor: string, header: string): string =>
-  `${BRIGHT}${bgColor}${FG_WHITE}${space()}${header}${space()}`;
+  `${BRIGHT}${bgColor}${space()}${header}${space()}`;
 const headerSuccess = (header: string): string =>
   baseHeader(BG_GREEN, header);
 const headerError = (header: string): string =>
