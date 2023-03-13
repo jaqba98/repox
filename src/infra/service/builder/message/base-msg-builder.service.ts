@@ -4,7 +4,6 @@ import {
   BG_YELLOW,
   FG_GREEN,
   FG_RED,
-  FG_WHITE,
   FG_YELLOW
 } from "../../../const/color.const";
 import { BRIGHT, RESET, UNDERSCORE } from "../../../const/text.const";
@@ -93,7 +92,7 @@ export const buildManyTipMsg = (messages: Array<string>): string =>
     .map(message => buildLine(buildTipMsg(message)))
     .join(buildLine(newline()));
 
-export const buildCommandMsg = (
+export const buildCommandDtoMsg = (
   validationDto: ParamDtoValidationModel
 ): string => {
   const { paramDto, wrongParamIndexes } = validationDto;

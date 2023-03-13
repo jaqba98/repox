@@ -1,11 +1,12 @@
-// // todo: refactor
-// /**
-//  * List of all arguments and aliases.
-//  */
-// export enum ArgumentEnum {
-//   target = "target"
-// }
-//
-// export enum AliasEnum {
-//   target = "t"
-// }
+/**
+ * List of all arguments and aliases.
+ */
+
+export enum ArgumentEnum {
+  name = "name",
+  unknown = "unknown"
+}
+
+export enum AliasEnum {
+  name = "n"
+}

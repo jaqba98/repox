@@ -9,6 +9,9 @@ import {
   msgCommandExecutedCorrectlySuccess
 } from "../infra/service/builder/message/success-msg-builder.service";
 import { LogService } from "../infra/service/writer/log.service";
+import {
+  ReadParamDomainAppService
+} from "../app-service/read-param-domain-app.service";
 
 @singleton()
 /**
@@ -17,6 +20,7 @@ import { LogService } from "../infra/service/writer/log.service";
 export class MainService {
   constructor(
     private readonly readParamDto: ReadParamDtoAppService,
+    private readonly readParamDomain: ReadParamDomainAppService,
     private readonly log: LogService
   ) {
   }
@@ -27,6 +31,15 @@ export class MainService {
       this.log.message(msgParamDtoValidationError(paramDto));
       return;
     }
+    const paramDomain = this.readParamDomain.build(paramDto.paramDto);
+    if (paramDomain.isError) {
+      this.log.message(msgParamDtoValidationError({
+        ...paramDomain,
+        paramDto: paramDto.paramDto
+      }));
+      return;
+    }
+    this.log.message(JSON.stringify(paramDomain, null, 2));
     this.log.message(msgCommandExecutedCorrectlySuccess());
   }
 }

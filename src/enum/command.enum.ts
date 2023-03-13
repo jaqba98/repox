@@ -1,8 +1,13 @@
-// // todo: refactor
-// /**
-//  * List of all commands.
-//  */
-// export enum CommandEnum {
-//   workspace = 'workspace',
-//   test = 'test'
-// }
+/**
+ * List of all commands.
+ */
+
+export enum CommandEnum {
+  default = "",
+  workspace = "workspace",
+  unknown = "unknown"
+}
+
+export enum CommandAliasEnum {
+  workspace = "w"
+}
