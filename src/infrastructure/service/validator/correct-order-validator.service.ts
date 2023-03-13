@@ -5,10 +5,14 @@ import {
 import {
   BuildParamDtoValidationService
 } from "../builder/validation/build-param-dto-validation.service";
-import { ParamDtoModel } from "../../model/param-dto/param-dto.model";
+import {
+  ParamDtoEntityModel,
+  ParamDtoModel
+} from "../../model/param-dto/param-dto.model";
 import {
   ParamDtoValidationModel
 } from "../../model/param-dto/param-dto-validation.model";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 @singleton()
 /**
@@ -23,6 +27,50 @@ export class CorrectOrderValidatorService
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    return this.buildValidation.paramDtoValidationSuccess(paramDto);
+    const errors = paramDto.params
+      .filter(param => !this.checkParamOrder(param));
+    if (errors.length === 0) {
+      return this.buildValidation.paramDtoValidationSuccess(paramDto);
+    }
+    return this.buildValidation.paramDtoValidationError(
+      errors,
+      ["You have specified the command in the incorrect order!"],
+      [
+        "You have to specify the command in the correct order.",
+        "Pattern: repox <program> <arguments> <command> <arguments>"
+      ],
+      paramDto
+    );
+  }
+
+  private checkParamOrder(param: ParamDtoEntityModel): boolean {
+    const paramOrder = this.getParamOrder()
+      .find(order => order.paramTypes.includes(param.paramType));
+    if (!paramOrder) {
+      throw new Error("Not found any param type!");
+    }
+    if (paramOrder.order === 3) {
+      return param.paramIndex >= paramOrder.order;
+    }
+    return param.paramIndex === paramOrder.order;
+  }
+
+  private getParamOrder(): Array<{
+    order: number,
+    paramTypes: Array<ParamTypeEnum>
+  }> {
+    return [
+      { order: 0, paramTypes: [ParamTypeEnum.executor] },
+      { order: 1, paramTypes: [ParamTypeEnum.application] },
+      { order: 2, paramTypes: [ParamTypeEnum.program] },
+      {
+        order: 3,
+        paramTypes: [
+          ParamTypeEnum.command,
+          ParamTypeEnum.argument,
+          ParamTypeEnum.alias
+        ]
+      }
+    ]
   }
 }
