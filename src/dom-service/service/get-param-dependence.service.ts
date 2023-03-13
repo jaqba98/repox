@@ -43,12 +43,7 @@ export class GetParamDependenceService {
               }
             }
           },
-          args: {
-            [ArgumentEnum.help]: {
-              argName: ArgumentEnum.help,
-              required: true
-            }
-          }
+          args: {}
         };
       case ProgramEnum.unknown:
         return undefined;

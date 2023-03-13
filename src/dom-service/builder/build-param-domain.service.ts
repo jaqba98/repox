@@ -130,9 +130,6 @@ export class BuildParamDomainService {
 
   private parseArgName(argName: string): ArgumentEnum {
     switch (argName) {
-      case ArgumentEnum.help:
-      case AliasEnum.help:
-        return ArgumentEnum.help;
       case ArgumentEnum.name:
       case AliasEnum.name:
         return ArgumentEnum.name;
