@@ -1,5 +1,3 @@
-// todo: refactor
-
 # To Do
 
 ## Waiting
@@ -8,7 +6,7 @@
 
 ## In progress
 
-- refactor the project
+- create the "jest" tests of dto and domain
 
 ## Done
 
@@ -17,3 +15,4 @@
 - create parameter domain model
 - create builder of parameter domain model
 - create all parameter domain model validators
+- refactor the project
