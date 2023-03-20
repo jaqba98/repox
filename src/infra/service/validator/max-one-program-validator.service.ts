@@ -19,7 +19,7 @@ import {
 export class MaxOneProgramValidatorService
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildParamDtoValidation = container.resolve(BuildParamDtoValidationService)
+    private readonly buildValidation: BuildParamDtoValidationService
   ) {
   }
 
@@ -27,9 +27,9 @@ export class MaxOneProgramValidatorService
     const programs = paramDto.params
       .filter(param => param.paramType === ParamTypeEnum.program);
     if (programs.length <= 1) {
-      return this.buildParamDtoValidation.paramDtoValidationSuccess(paramDto);
+      return this.buildValidation.paramDtoValidationSuccess(paramDto);
     }
-    return this.buildParamDtoValidation.paramDtoValidationError(
+    return this.buildValidation.paramDtoValidationError(
       programs,
       ["You have specified too many programs!"],
       [

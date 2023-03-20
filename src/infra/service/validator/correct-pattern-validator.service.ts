@@ -22,7 +22,7 @@ import {
 export class CorrectPatternValidatorService
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildValidation = container.resolve(BuildParamDtoValidationService)
+    private readonly buildValidation: BuildParamDtoValidationService
   ) {
   }
 

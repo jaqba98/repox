@@ -22,7 +22,7 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
 export class CorrectOrderValidatorService
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildValidation = container.resolve(BuildParamDtoValidationService)
+    private readonly buildValidation: BuildParamDtoValidationService
   ) {
   }
 
