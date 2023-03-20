@@ -1,4 +1,4 @@
-import { singleton } from "tsyringe";
+import { container, singleton } from "tsyringe";
 import {
   ValidatorDtoModel
 } from "../../model/validator-dto/validator-dto.model";
@@ -22,7 +22,7 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
 export class CorrectOrderValidatorService
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
+    private readonly buildValidation = container.resolve(BuildParamDtoValidationService)
   ) {
   }
 

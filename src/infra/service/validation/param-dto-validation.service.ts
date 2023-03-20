@@ -43,7 +43,7 @@ import {
  */
 export class ParamDtoValidationService {
   constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
+    private readonly buildValidation = container.resolve(BuildParamDtoValidationService)
   ) {
   }
 
