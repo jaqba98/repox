@@ -11,8 +11,7 @@ import {
 } from "../../model/param-dto/param-dto-validation.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 import {
-  paramDtoValidationError,
-  paramDtoValidationSuccess
+  BuildParamDtoValidationService
 } from "../builder/validation/build-param-dto-validation.service";
 
 @singleton()
@@ -22,14 +21,19 @@ import {
  */
 export class CorrectPatternValidatorService
   implements ValidatorDtoModel {
+  constructor(
+    private readonly buildValidation: BuildParamDtoValidationService
+  ) {
+  }
+
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const errors = paramDto.params
       .filter(param => !this.checkParamPattern(param));
     if (errors.length === 0) {
-      return paramDtoValidationSuccess(paramDto);
+      return this.buildValidation.paramDtoValidationSuccess(paramDto);
     }
     const tips = errors.map(param => this.getParamTip(param));
-    return paramDtoValidationError(
+    return this.buildValidation.paramDtoValidationError(
       errors,
       ["You have added incorrect parameter pattern!"],
       tips,

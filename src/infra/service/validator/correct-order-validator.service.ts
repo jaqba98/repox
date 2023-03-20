@@ -3,8 +3,7 @@ import {
   ValidatorDtoModel
 } from "../../model/validator-dto/validator-dto.model";
 import {
-  paramDtoValidationError,
-  paramDtoValidationSuccess
+  BuildParamDtoValidationService
 } from "../builder/validation/build-param-dto-validation.service";
 import {
   ParamDtoEntityModel,
@@ -22,15 +21,20 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
  */
 export class CorrectOrderValidatorService
   implements ValidatorDtoModel {
+  constructor(
+    private readonly buildValidation: BuildParamDtoValidationService
+  ) {
+  }
+
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const program = paramDto.params
       .find(param => param.paramType === ParamTypeEnum.program);
     const errors = paramDto.params
       .filter(param => !this.checkParamOrder(param, program));
     if (errors.length === 0) {
-      return paramDtoValidationSuccess(paramDto);
+      return this.buildValidation.paramDtoValidationSuccess(paramDto);
     }
-    return paramDtoValidationError(
+    return this.buildValidation.paramDtoValidationError(
       errors,
       ["You have specified the command in the incorrect order!"],
       [

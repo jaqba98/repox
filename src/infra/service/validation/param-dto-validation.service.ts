@@ -16,7 +16,7 @@ import {
   ParamDtoValidationModel
 } from "../../model/param-dto/param-dto-validation.model";
 import {
-  paramDtoValidationSuccess
+  BuildParamDtoValidationService
 } from "../builder/validation/build-param-dto-validation.service";
 import {
   MaxOneCommandValidatorService
@@ -42,13 +42,18 @@ import {
  * 5.Verify that each part of the command are in correct order.
  */
 export class ParamDtoValidationService {
+  constructor(
+    private readonly buildValidation: BuildParamDtoValidationService
+  ) {
+  }
+
   runValidation(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const error = this.getAllValidators()
       .map(validator => validator.runValidator(paramDto))
       .find(result => result.isError);
     return error ?
       error :
-      paramDtoValidationSuccess(paramDto);
+      this.buildValidation.paramDtoValidationSuccess(paramDto);
   }
 
   private getAllValidators(): Array<ValidatorDtoModel> {

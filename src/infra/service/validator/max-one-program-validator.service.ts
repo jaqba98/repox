@@ -8,8 +8,7 @@ import {
 } from "../../model/param-dto/param-dto-validation.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 import {
-  paramDtoValidationError,
-  paramDtoValidationSuccess
+  BuildParamDtoValidationService
 } from "../builder/validation/build-param-dto-validation.service";
 
 @singleton()
@@ -19,13 +18,18 @@ import {
  */
 export class MaxOneProgramValidatorService
   implements ValidatorDtoModel {
+  constructor(
+    private readonly buildValidation: BuildParamDtoValidationService
+  ) {
+  }
+
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const programs = paramDto.params
       .filter(param => param.paramType === ParamTypeEnum.program);
     if (programs.length <= 1) {
-      return paramDtoValidationSuccess(paramDto);
+      return this.buildValidation.paramDtoValidationSuccess(paramDto);
     }
-    return paramDtoValidationError(
+    return this.buildValidation.paramDtoValidationError(
       programs,
       ["You have specified too many programs!"],
       [

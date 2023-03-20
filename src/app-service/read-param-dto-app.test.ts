@@ -1,5 +1,11 @@
 import { expect, test } from "@jest/globals";
-import { container } from "tsyringe";
+import {
+  container,
+  delay,
+  inject,
+  injectable,
+  singleton
+} from "tsyringe";
 import { ParamTypeEnum } from "../infra/enum/param-type.enum";
 import {
   ParamDtoValidationService
