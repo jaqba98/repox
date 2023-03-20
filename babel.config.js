@@ -4,6 +4,7 @@ module.exports = {
     "@babel/preset-typescript"
   ],
   plugins: [
-    ["@babel/plugin-proposal-decorators", {"legacy": false, "decoratorsBeforeExport": true}]
+    ["@babel/plugin-proposal-decorators", {"legacy": false, "decoratorsBeforeExport": true}],
+    "@babel/plugin-proposal-class-properties"
   ]
 };

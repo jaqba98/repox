@@ -1,9 +1,10 @@
-import { container, singleton } from "tsyringe";
+import { singleton } from "tsyringe";
 import {
   ValidatorDtoModel
 } from "../../model/validator-dto/validator-dto.model";
 import {
-  BuildParamDtoValidationService
+  paramDtoValidationError,
+  paramDtoValidationSuccess
 } from "../builder/validation/build-param-dto-validation.service";
 import { ParamDtoModel } from "../../model/param-dto/param-dto.model";
 import {
@@ -19,18 +20,13 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
  */
 export class MaxOneCommandValidatorService
   implements ValidatorDtoModel {
-  constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
-  ) {
-  }
-
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const program = paramDto.params
       .find(param => param.paramType === ParamTypeEnum.program);
     const commands = paramDto.params
       .filter(param => param.paramType === ParamTypeEnum.command);
     if (!program && commands.length > 0) {
-      return this.buildValidation.paramDtoValidationError(
+      return paramDtoValidationError(
         commands,
         ["You have specified the command without any program!"],
         [
@@ -41,7 +37,7 @@ export class MaxOneCommandValidatorService
       );
     }
     if (program && commands.length > 1) {
-      return this.buildValidation.paramDtoValidationError(
+      return paramDtoValidationError(
         commands,
         ["You have specified too many commands!"],
         [
@@ -51,6 +47,6 @@ export class MaxOneCommandValidatorService
         paramDto
       );
     }
-    return this.buildValidation.paramDtoValidationSuccess(paramDto);
+    return paramDtoValidationSuccess(paramDto);
   }
 }

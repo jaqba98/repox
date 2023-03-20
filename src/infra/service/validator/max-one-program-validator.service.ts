@@ -1,4 +1,4 @@
-import { container, injectable, singleton } from "tsyringe";
+import { singleton } from "tsyringe";
 import {
   ValidatorDtoModel
 } from "../../model/validator-dto/validator-dto.model";
@@ -8,7 +8,8 @@ import {
 } from "../../model/param-dto/param-dto-validation.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 import {
-  BuildParamDtoValidationService
+  paramDtoValidationError,
+  paramDtoValidationSuccess
 } from "../builder/validation/build-param-dto-validation.service";
 
 @singleton()
@@ -18,18 +19,13 @@ import {
  */
 export class MaxOneProgramValidatorService
   implements ValidatorDtoModel {
-  constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
-  ) {
-  }
-
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const programs = paramDto.params
       .filter(param => param.paramType === ParamTypeEnum.program);
     if (programs.length <= 1) {
-      return this.buildValidation.paramDtoValidationSuccess(paramDto);
+      return paramDtoValidationSuccess(paramDto);
     }
-    return this.buildValidation.paramDtoValidationError(
+    return paramDtoValidationError(
       programs,
       ["You have specified too many programs!"],
       [

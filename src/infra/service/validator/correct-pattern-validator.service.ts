@@ -1,4 +1,4 @@
-import { container, singleton } from "tsyringe";
+import { singleton } from "tsyringe";
 import {
   ValidatorDtoModel
 } from "../../model/validator-dto/validator-dto.model";
@@ -11,7 +11,8 @@ import {
 } from "../../model/param-dto/param-dto-validation.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 import {
-  BuildParamDtoValidationService
+  paramDtoValidationError,
+  paramDtoValidationSuccess
 } from "../builder/validation/build-param-dto-validation.service";
 
 @singleton()
@@ -21,19 +22,14 @@ import {
  */
 export class CorrectPatternValidatorService
   implements ValidatorDtoModel {
-  constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
-  ) {
-  }
-
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const errors = paramDto.params
       .filter(param => !this.checkParamPattern(param));
     if (errors.length === 0) {
-      return this.buildValidation.paramDtoValidationSuccess(paramDto);
+      return paramDtoValidationSuccess(paramDto);
     }
     const tips = errors.map(param => this.getParamTip(param));
-    return this.buildValidation.paramDtoValidationError(
+    return paramDtoValidationError(
       errors,
       ["You have added incorrect parameter pattern!"],
       tips,
