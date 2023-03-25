@@ -4,6 +4,7 @@ import {
   ParamDtoModel
 } from "../../model/param-dto/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
+import { GetProcessArgvService } from "./get-process-argv.service";
 
 @singleton()
 /**
@@ -11,8 +12,12 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
  * from the command line and building the parameter DTO model.
  */
 export class ReadParamDtoService {
+  constructor(
+    private readonly getProcessArgv: GetProcessArgvService
+  ) {
+  }
   read(): ParamDtoModel {
-    return this.getProcessArgv()
+    return this.getProcessArgv.getArgv()
       .map((value: string, index: number) =>
         this.argToDto(value, index)
       )
@@ -23,14 +28,6 @@ export class ReadParamDtoService {
       .reduce<ParamDtoModel>((acc, curr) =>
         this.buildParamDto(acc, curr), { params: [] }
       );
-  }
-
-  private getProcessArgv(): Array<string> {
-    const { argv } = process;
-    if (!argv) {
-      throw new Error("Failed to read command line arguments!");
-    }
-    return argv;
   }
 
   private argToDto(

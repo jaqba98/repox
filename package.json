@@ -11,9 +11,9 @@
     "build": "tsc && copy package.json dist",
     "link": "npm link ./dist",
     "unlink": "npm unlink ./dist && npm uninstall repox -g",
-    "up": "npm run build && npm run link",
-    "down": "npm run unlink && npm run remove",
-    "test": "jest"
+    "test": "jest",
+    "up": "npm run test && npm run build && npm run link",
+    "down": "npm run unlink && npm run remove"
   },
   "devDependencies": {
     "@types/core-js": "^2.5.5",
