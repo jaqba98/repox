@@ -5,10 +5,11 @@ import {
 import {
   ReadParamDtoAppService
 } from "../../src/app-service/read-param-dto-app.service";
-import {
-  ParamDtoValidationModel
-} from "../../src/infra/model/param-dto/param-dto-validation.model";
 import { ParamTypeEnum } from "../../src/infra/enum/param-type.enum";
+
+/**
+ * Testing of the ReadParamDtoAppService service.
+ */
 
 const child = container.createChildContainer();
 
@@ -17,69 +18,73 @@ const mockGetProcessArgvService = (argv: Array<string>) => {
     useClass: class {
       getArgv(): Array<string> {
         return ["executor", "application", ...argv];
-      };
+      }
     }
   });
 };
 
-const runTest = (argv: Array<string> = []): ParamDtoValidationModel => {
+const runTest = (argv: Array<string>) => {
   mockGetProcessArgvService(argv);
-  const service = child.resolve(ReadParamDtoAppService);
-  return service.read();
+  return child.resolve(ReadParamDtoAppService).read();
 };
 
-afterEach(() => {
+beforeEach(() => {
+  container.clearInstances();
+  container.reset();
+});
+
+afterAll(() => {
   container.clearInstances();
   container.reset();
 });
 
 describe("ReadParamDtoAppService - parameter order", () => {
-  test("should be correct for the command: > repox", () => {
-    expect(runTest().isError).toBeFalsy();
+  test("should be correct for the command: repox", () => {
+    expect(runTest([]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: > repox --version", () => {
-    expect(runTest(["--version"]).isError).toBeFalsy();
+  test("should be correct for the command: repox -v", () => {
+    expect(runTest(["-v"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: > repox generate", () => {
-    expect(runTest(["generate"]).isError).toBeFalsy();
+  test("should be correct for the command: repox g", () => {
+    expect(runTest(["g"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: > repox generate --cache", () => {
-    expect(runTest(["generate", "--cache"]).isError).toBeFalsy();
+  test("should be correct for the command: repox g -c", () => {
+    expect(runTest(["g", "-c"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: > repox --version --cache", () => {
-    expect(runTest(["--version", "--cache"]).isError).toBeFalsy();
+  test("should be correct for the command: repox -v -c", () => {
+    expect(runTest(["-v", "-c"]).isError).toBeFalsy();
   });
 
-  test("should be incorrect for the command: > repox --version generate", () => {
-    expect(runTest(["--version", "generate"]).isError).toBeTruthy();
+  test("should be incorrect for the command: > repox -v g", () => {
+    expect(runTest(["-v", "g"]).isError).toBeTruthy();
   });
 
-  test("should be incorrect for the command: > repox --version generate --cache", () => {
-    expect(runTest(["--version", "generate", "--cache"]).isError).toBeTruthy();
+  test("should be incorrect for the command: repox -v g -c", () => {
+    expect(runTest(["-v", "g", "-c"]).isError).toBeTruthy();
   });
 
-  test("should be incorrect for the command: > repox generate workspace", () => {
-    expect(runTest(["generate", "workspace"]).isError).toBeFalsy();
+  test("should be correct for the command: repox g w", () => {
+    expect(runTest(["g", "w"]).isError).toBeFalsy();
   });
 
-  test("should be incorrect for the command: > repox generate workspace --type=angular", () => {
-    expect(runTest(["generate", "workspace", "--type=angular"]).isError).toBeFalsy();
+  test("should be correct for the command: repox g w -t=test", () => {
+    expect(runTest(["g", "w", "-t=test"]).isError).toBeFalsy();
   });
 
-  test("should be incorrect for the command: > repox generate --cache --type=angular", () => {
-    expect(runTest(["generate", "--cache", "--type=angular"]).isError).toBeFalsy();
+  test("should be correct for the command: repox g -c -t", () => {
+    expect(runTest(["g", "-c", "-t"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: > repox generate --cache workspace", () => {
-    expect(runTest(["generate", "--cache", "workspace"]).isError).toBeFalsy();
+  test("should be correct for the command: repox g -c w", () => {
+    expect(runTest(["g", "-c", "w"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: > repox generate --cache workspace --name", () => {
-    expect(runTest(["generate", "--cache", "workspace", "--name"]).isError).toBeFalsy();
+  test("should be correct for the command: repox g -c w -n", () => {
+    expect(runTest(["g", "-c", "w", "-n"]).isError).toBeFalsy();
   });
 });
 
