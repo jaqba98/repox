@@ -8,8 +8,10 @@ import {
 import {
   ParamDtoValidationModel
 } from "../../src/infra/model/param-dto/param-dto-validation.model";
+import { ParamTypeEnum } from "../../src/infra/enum/param-type.enum";
 
 const child = container.createChildContainer();
+
 const mockGetProcessArgvService = (argv: Array<string>) => {
   child.register(GetProcessArgvService, {
     useClass: class {
@@ -19,6 +21,7 @@ const mockGetProcessArgvService = (argv: Array<string>) => {
     }
   });
 };
+
 const runTest = (argv: Array<string> = []): ParamDtoValidationModel => {
   mockGetProcessArgvService(argv);
   const service = child.resolve(ReadParamDtoAppService);
@@ -82,162 +85,679 @@ describe("ReadParamDtoAppService - parameter order", () => {
 
 describe("ReadParamDtoAppService - parameter structure for program and command", () => {
   test("should be correct for the command: > repox", () => {
-    expect(runTest().isError).toBeFalsy();
+    const result = runTest([]);
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
   });
 
   test("should be correct for the command: > repox generate", () => {
-    expect(runTest(["generate"]).isError).toBeFalsy();
+    const result = runTest(["generate"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[2];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("generate");
+    expect(paramIndex).toEqual(2);
+    expect(paramType).toEqual(ParamTypeEnum.program);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("generate");
+    expect(paramValues).toEqual([]);
   });
 
   test("should be incorrect for the command: > repox gener%%a_&te", () => {
-    expect(runTest(["gener%%a_&te"]).isError).toBeTruthy();
+    const result = runTest(["gener%%a_&te"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[2];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([2]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for gener%%a_&te are: [a-z] [A-Z] [0-9] [-]"]);
+    expect(paramBaseValue).toEqual("gener%%a_&te");
+    expect(paramIndex).toEqual(2);
+    expect(paramType).toEqual(ParamTypeEnum.program);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("gener%%a_&te");
+    expect(paramValues).toEqual([]);
   });
 
   test("should be correct for the command: > repox generate-workspace", () => {
-    expect(runTest(["generate-workspace"]).isError).toBeFalsy();
+    const result = runTest(["generate-workspace"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[2];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("generate-workspace");
+    expect(paramIndex).toEqual(2);
+    expect(paramType).toEqual(ParamTypeEnum.program);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("generate-workspace");
+    expect(paramValues).toEqual([]);
   });
 
-  test('should be incorrect for the command: > repox generate="test"', () => {
-    expect(runTest(['generate="test"']).isError).toBeTruthy();
+  test("should be incorrect for the command: > repox generate=true", () => {
+    const result = runTest(["generate=true"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[2];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([2]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for generate=true are: [a-z] [A-Z] [0-9] [-]"]);
+    expect(paramBaseValue).toEqual("generate=true");
+    expect(paramIndex).toEqual(2);
+    expect(paramType).toEqual(ParamTypeEnum.program);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("generate");
+    expect(paramValues).toEqual(["true"]);
   });
 
   test("should be correct for the command: > repox generate workspace", () => {
-    expect(runTest(["generate", "workspace"]).isError).toBeFalsy();
+    const result = runTest(["generate", "workspace"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("workspace");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.command);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("workspace");
+    expect(paramValues).toEqual([]);
   });
 
   test("should be incorrect for the command: > repox generate work$$sp&&*ace", () => {
-    expect(runTest(["generate", "work$$sp&&*ace"]).isError).toBeTruthy();
+    const result = runTest(["generate", "work$$sp&&*ace"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for work$$sp&&*ace are: [a-z] [A-Z] [0-9] [-]"]);
+    expect(paramBaseValue).toEqual("work$$sp&&*ace");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.command);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("work$$sp&&*ace");
+    expect(paramValues).toEqual([]);
   });
 
   test("should be correct for the command: > repox generate workspace-node", () => {
-    expect(runTest(["generate", "workspace-node"]).isError).toBeFalsy();
+    const result = runTest(["generate", "workspace-node"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("workspace-node");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.command);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("workspace-node");
+    expect(paramValues).toEqual([]);
   });
 
-  test('should be correct for the command: > repox generate workspace="true"', () => {
-    expect(runTest(["generate", 'workspace="true"']).isError).toBeTruthy();
+  test('should be correct for the command: > repox generate workspace=true', () => {
+    const result = runTest(["generate", "workspace=true"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for workspace=true are: [a-z] [A-Z] [0-9] [-]"]);
+    expect(paramBaseValue).toEqual("workspace=true");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.command);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("workspace");
+    expect(paramValues).toEqual(["true"]);
   });
 });
 
 describe("ReadParamDtoAppService - parameter structure for arguments", () => {
   test("should be correct for the command: > repox generate --name", () => {
-    expect(runTest(["generate", "--name"]).isError).toBeFalsy();
+    const result = runTest(["generate", "--name"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("--name");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual([]);
   });
 
   test("should be incorrect for the command: > repox generate --n$$a%^me", () => {
-    expect(runTest(["generate", "--n$$a%^me"]).isError).toBeTruthy();
+    const result = runTest(["generate", "--n$$a%^me"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for --n$$a%^me are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual("--n$$a%^me");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("n$$a%^me");
+    expect(paramValues).toEqual([]);
   });
 
   test("should be correct for the command: > repox generate --name=test", () => {
-    expect(runTest(["generate", "--name=test"]).isError).toBeFalsy();
+    const result = runTest(["generate", "--name=test"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("--name=test");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["test"]);
   });
 
   test('should be correct for the command: > repox generate --name="test"', () => {
-    expect(runTest(["generate", '--name="test"']).isError).toBeFalsy();
+    const result = runTest(["generate", '--name="test"']);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual('--name="test"');
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["test"]);
   });
 
   test("should be correct for the command: > repox generate --name='test'", () => {
-    expect(runTest(["generate", "--name='test'"]).isError).toBeFalsy();
+    const result = runTest(["generate", "--name='test'"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("--name='test'");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["test"]);
   });
 
   test("should be correct for the command: > repox generate --name=`test`", () => {
-    expect(runTest(["generate", "--name=`test`"]).isError).toBeFalsy();
+    const result = runTest(["generate", "--name=`test`"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("--name=`test`");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["test"]);
   });
 
   test("should be incorrect for the command: > repox generate --name=te$$s&&t", () => {
-    expect(runTest(["generate", "--name=te$$s&&t"]).isError).toBeTruthy();
+    const result = runTest(["generate", "--name=te$$s&&t"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for --name=te$$s&&t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual("--name=te$$s&&t");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
   test('should be incorrect for the command: > repox generate --name="te$$s&&t"', () => {
-    expect(runTest(["generate", '--name="te$$s&&t"']).isError).toBeTruthy();
+    const result = runTest(["generate", '--name="te$$s&&t"']);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for --name=\"te$$s&&t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual('--name="te$$s&&t"');
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
   test("should be incorrect for the command: > repox generate --name='te$$s&&t'", () => {
-    expect(runTest(["generate", "--name='te$$s&&t'"]).isError).toBeTruthy();
+    const result = runTest(["generate", "--name='te$$s&&t'"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for --name='te$$s&&t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual("--name='te$$s&&t'");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
   test("should be incorrect for the command: > repox generate --name=`te$$s&&t`", () => {
-    expect(runTest(["generate", "--name=`te$$s&&t`"]).isError).toBeTruthy();
+    const result = runTest(["generate", "--name=`te$$s&&t`"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for --name=`te$$s&&t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual("--name=`te$$s&&t`");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
   test("should be correct for the command: > repox generate --name=test1,test2,test3", () => {
-    expect(runTest(["generate", "--name=test1,test2,test3"]).isError).toBeFalsy();
+    const result = runTest(["generate", "--name=test1,test2,test3"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("--name=test1,test2,test3");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
   test('should be correct for the command: > repox generate --name="test1,test2,test3"', () => {
-    expect(runTest(["generate", '--name="test1,test2,test3"']).isError).toBeFalsy();
+    const result = runTest(["generate", '--name="test1,test2,test3"']);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual('--name="test1,test2,test3"');
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
   test("should be correct for the command: > repox generate --name='test1,test2,test3'", () => {
-    expect(runTest(["generate", "--name='test1,test2,test3'"]).isError).toBeFalsy();
+    const result = runTest(["generate", "--name='test1,test2,test3'"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("--name='test1,test2,test3'");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
   test("should be correct for the command: > repox generate --name=`test1,test2,test3`", () => {
-    expect(runTest(["generate", "--name=`test1,test2,test3`"]).isError).toBeFalsy();
+    const result = runTest(["generate", "--name=`test1,test2,test3`"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("--name=`test1,test2,test3`");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 });
 
 describe("ReadParamDtoAppService - parameter structure for aliases", () => {
   test("should be correct for the command: > repox generate -i", () => {
-    expect(runTest(["generate", "-i"]).isError).toBeFalsy();
+    const result = runTest(["generate", "-i"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("-i");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("i");
+    expect(paramValues).toEqual([]);
   });
 
   test("should be correct for the command: > repox generate -%", () => {
-    expect(runTest(["generate", "-%"]).isError).toBeTruthy();
+    const result = runTest(["generate", "-%"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for -% are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual("-%");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("%");
+    expect(paramValues).toEqual([]);
   });
 
   test("should be correct for the command: > repox generate -name", () => {
-    expect(runTest(["generate", "-name"]).isError).toBeTruthy();
+    const result = runTest(["generate", "-name"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added incorrect parameter pattern!"]);
+    expect(result.tips).toEqual(["Supported pattern for -name are: -<sign> or -<sign>=<value>"]);
+    expect(paramBaseValue).toEqual("-name");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeFalsy();
+    expect(paramName).toEqual("name");
+    expect(paramValues).toEqual([]);
   });
 
   test("should be correct for the command: > repox generate -n=test", () => {
-    expect(runTest(["generate", "-n=test"]).isError).toBeFalsy();
+    const result = runTest(["generate", "-n=test"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("-n=test");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["test"]);
   });
 
   test('should be correct for the command: > repox generate -n="test"', () => {
-    expect(runTest(["generate", '-n="test"']).isError).toBeFalsy();
+    const result = runTest(["generate", '-n="test"']);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual('-n="test"');
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["test"]);
   });
 
   test("should be correct for the command: > repox generate -n='test'", () => {
-    expect(runTest(["generate", "-n='test'"]).isError).toBeFalsy();
+    const result = runTest(["generate", "-n='test'"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("-n='test'");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["test"]);
   });
 
   test("should be correct for the command: > repox generate -n=`test`", () => {
-    expect(runTest(["generate", "-n=`test`"]).isError).toBeFalsy();
+    const result = runTest(["generate", "-n=`test`"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("-n=`test`");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["test"]);
   });
 
   test("should be incorrect for the command: > repox generate -n=te%%s$$t", () => {
-    expect(runTest(["generate", "-n=te%%s$$t"]).isError).toBeTruthy();
+    const result = runTest(["generate", "-n=te%%s$$t"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for -n=te%%s$$t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual("-n=te%%s$$t");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
   test('should be incorrect for the command: > repox generate -n="te%%s$$t"', () => {
-    expect(runTest(["generate", '-n="te%%s$$t"']).isError).toBeTruthy();
+    const result = runTest(["generate", '-n="te%%s$$t"']);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for -n=\"te%%s$$t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual('-n="te%%s$$t"');
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
   test("should be incorrect for the command: > repox generate -n='te%%s$$t'", () => {
-    expect(runTest(["generate", "-n='te%%s$$t'"]).isError).toBeTruthy();
+    const result = runTest(["generate", "-n='te%%s$$t'"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for -n='te%%s$$t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual("-n='te%%s$$t'");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
   test("should be incorrect for the command: > repox generate -n=`te%%s$$t`", () => {
-    expect(runTest(["generate", "-n=`te%%s$$t`"]).isError).toBeTruthy();
+    const result = runTest(["generate", "-n=`te%%s$$t`"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeTruthy();
+    expect(result.wrongParamIndexes).toEqual([3]);
+    expect(result.errors).toEqual(["You have added not supported characters!"]);
+    expect(result.tips).toEqual(["Supported characters for -n=`te%%s$$t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(paramBaseValue).toEqual("-n=`te%%s$$t`");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
   test("should be correct for the command: > repox generate -n=test1,test2,test3", () => {
-    expect(runTest(["generate", "-n=test1,test2,test3"]).isError).toBeFalsy();
+    const result = runTest(["generate", "-n=test1,test2,test3"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("-n=test1,test2,test3");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
   test('should be correct for the command: > repox generate -n="test1,test2,test3"', () => {
-    expect(runTest(["generate", '-n="test1,test2,test3"']).isError).toBeFalsy();
+    const result = runTest(["generate", '-n="test1,test2,test3"']);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual('-n="test1,test2,test3"');
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
   test("should be correct for the command: > repox generate -n='test1,test2,test3'", () => {
-    expect(runTest(["generate", "-n='test1,test2,test3'"]).isError).toBeFalsy();
+    const result = runTest(["generate", "-n='test1,test2,test3'"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("-n='test1,test2,test3'");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
+    expect(paramName).toEqual("n");
+    expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
   test("should be correct for the command: > repox generate -n=`test1,test2,test3`", () => {
-    const argv = ["generate", "-n=`test1,test2,test3`"];
-    const test = runTest(argv);
-    const { paramName, paramValues } = test.paramDto.params[3];
-    expect(test.isError).toBeFalsy();
+    const result = runTest(["generate", "-n=`test1,test2,test3`"]);
+    const {
+      paramBaseValue, paramIndex, paramType, paramHasValue,
+      paramName, paramValues
+    } = result.paramDto.params[3];
+    expect(result.isError).toBeFalsy();
+    expect(result.wrongParamIndexes).toEqual([]);
+    expect(result.errors).toEqual([]);
+    expect(result.tips).toEqual([]);
+    expect(paramBaseValue).toEqual("-n=`test1,test2,test3`");
+    expect(paramIndex).toEqual(3);
+    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramHasValue).toBeTruthy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
