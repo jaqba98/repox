@@ -24,7 +24,12 @@ export class GetParamDependenceService {
               args: {}
             }
           },
-          args: {}
+          args: {
+            [ArgumentEnum.version]: {
+              argName: ArgumentEnum.version,
+              required: false
+            }
+          }
         };
       case ProgramEnum.generate:
         return {

@@ -1,11 +1,11 @@
 import { container } from "tsyringe";
 import {
   GetProcessArgvService
-} from "../../src/infra/service/reader/get-process-argv.service";
+} from "../../infra/service/reader/get-process-argv.service";
 import {
   ReadParamDtoAppService
-} from "../../src/app-service/read-param-dto-app.service";
-import { ParamTypeEnum } from "../../src/infra/enum/param-type.enum";
+} from "../read-param-dto-app.service";
+import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 
 /**
  * Testing of the ReadParamDtoAppService service.
@@ -59,7 +59,7 @@ describe("ReadParamDtoAppService - parameter order", () => {
     expect(runTest(["-v", "-c"]).isError).toBeFalsy();
   });
 
-  test("should be incorrect for the command: > repox -v g", () => {
+  test("should be incorrect for the command: repox -v g", () => {
     expect(runTest(["-v", "g"]).isError).toBeTruthy();
   });
 
@@ -89,7 +89,7 @@ describe("ReadParamDtoAppService - parameter order", () => {
 });
 
 describe("ReadParamDtoAppService - parameter structure for program and command", () => {
-  test("should be correct for the command: > repox", () => {
+  test("should be correct for the command: repox", () => {
     const result = runTest([]);
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -97,7 +97,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(result.tips).toEqual([]);
   });
 
-  test("should be correct for the command: > repox generate", () => {
+  test("should be correct for the command: repox g", () => {
     const result = runTest(["generate"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -115,7 +115,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the command: > repox gener%%a_&te", () => {
+  test("should be incorrect for the command: repox gener%%a_&te", () => {
     const result = runTest(["gener%%a_&te"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -133,7 +133,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the command: > repox generate-workspace", () => {
+  test("should be correct for the command: repox generate-workspace", () => {
     const result = runTest(["generate-workspace"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -151,7 +151,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the command: > repox generate=true", () => {
+  test("should be incorrect for the command: repox generate=true", () => {
     const result = runTest(["generate=true"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -169,7 +169,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramValues).toEqual(["true"]);
   });
 
-  test("should be correct for the command: > repox generate workspace", () => {
+  test("should be correct for the command: repox generate workspace", () => {
     const result = runTest(["generate", "workspace"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -187,7 +187,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the command: > repox generate work$$sp&&*ace", () => {
+  test("should be incorrect for the command: repox generate work$$sp&&*ace", () => {
     const result = runTest(["generate", "work$$sp&&*ace"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -205,7 +205,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the command: > repox generate workspace-node", () => {
+  test("should be correct for the command: repox generate workspace-node", () => {
     const result = runTest(["generate", "workspace-node"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -223,7 +223,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramValues).toEqual([]);
   });
 
-  test('should be correct for the command: > repox generate workspace=true', () => {
+  test('should be correct for the command: repox generate workspace=true', () => {
     const result = runTest(["generate", "workspace=true"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -243,7 +243,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
 });
 
 describe("ReadParamDtoAppService - parameter structure for arguments", () => {
-  test("should be correct for the command: > repox generate --name", () => {
+  test("should be correct for the command: repox generate --name", () => {
     const result = runTest(["generate", "--name"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -261,7 +261,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the command: > repox generate --n$$a%^me", () => {
+  test("should be incorrect for the command: repox generate --n$$a%^me", () => {
     const result = runTest(["generate", "--n$$a%^me"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -279,7 +279,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the command: > repox generate --name=test", () => {
+  test("should be correct for the command: repox generate --name=test", () => {
     const result = runTest(["generate", "--name=test"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -297,7 +297,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test('should be correct for the command: > repox generate --name="test"', () => {
+  test('should be correct for the command: repox generate --name="test"', () => {
     const result = runTest(["generate", '--name="test"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -315,7 +315,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the command: > repox generate --name='test'", () => {
+  test("should be correct for the command: repox generate --name='test'", () => {
     const result = runTest(["generate", "--name='test'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -333,7 +333,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the command: > repox generate --name=`test`", () => {
+  test("should be correct for the command: repox generate --name=`test`", () => {
     const result = runTest(["generate", "--name=`test`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -351,7 +351,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be incorrect for the command: > repox generate --name=te$$s&&t", () => {
+  test("should be incorrect for the command: repox generate --name=te$$s&&t", () => {
     const result = runTest(["generate", "--name=te$$s&&t"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -369,7 +369,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
-  test('should be incorrect for the command: > repox generate --name="te$$s&&t"', () => {
+  test('should be incorrect for the command: repox generate --name="te$$s&&t"', () => {
     const result = runTest(["generate", '--name="te$$s&&t"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -387,7 +387,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
-  test("should be incorrect for the command: > repox generate --name='te$$s&&t'", () => {
+  test("should be incorrect for the command: repox generate --name='te$$s&&t'", () => {
     const result = runTest(["generate", "--name='te$$s&&t'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -405,7 +405,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
-  test("should be incorrect for the command: > repox generate --name=`te$$s&&t`", () => {
+  test("should be incorrect for the command: repox generate --name=`te$$s&&t`", () => {
     const result = runTest(["generate", "--name=`te$$s&&t`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -423,7 +423,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
-  test("should be correct for the command: > repox generate --name=test1,test2,test3", () => {
+  test("should be correct for the command: repox generate --name=test1,test2,test3", () => {
     const result = runTest(["generate", "--name=test1,test2,test3"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -441,7 +441,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test('should be correct for the command: > repox generate --name="test1,test2,test3"', () => {
+  test('should be correct for the command: repox generate --name="test1,test2,test3"', () => {
     const result = runTest(["generate", '--name="test1,test2,test3"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -459,7 +459,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test("should be correct for the command: > repox generate --name='test1,test2,test3'", () => {
+  test("should be correct for the command: repox generate --name='test1,test2,test3'", () => {
     const result = runTest(["generate", "--name='test1,test2,test3'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -477,7 +477,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test("should be correct for the command: > repox generate --name=`test1,test2,test3`", () => {
+  test("should be correct for the command: repox generate --name=`test1,test2,test3`", () => {
     const result = runTest(["generate", "--name=`test1,test2,test3`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -497,7 +497,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
 });
 
 describe("ReadParamDtoAppService - parameter structure for aliases", () => {
-  test("should be correct for the command: > repox generate -i", () => {
+  test("should be correct for the command: repox generate -i", () => {
     const result = runTest(["generate", "-i"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -515,7 +515,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the command: > repox generate -%", () => {
+  test("should be correct for the command: repox generate -%", () => {
     const result = runTest(["generate", "-%"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -533,7 +533,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the command: > repox generate -name", () => {
+  test("should be correct for the command: repox generate -name", () => {
     const result = runTest(["generate", "-name"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -551,7 +551,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the command: > repox generate -n=test", () => {
+  test("should be correct for the command: repox generate -n=test", () => {
     const result = runTest(["generate", "-n=test"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -569,7 +569,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test('should be correct for the command: > repox generate -n="test"', () => {
+  test('should be correct for the command: repox generate -n="test"', () => {
     const result = runTest(["generate", '-n="test"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -587,7 +587,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the command: > repox generate -n='test'", () => {
+  test("should be correct for the command: repox generate -n='test'", () => {
     const result = runTest(["generate", "-n='test'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -605,7 +605,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the command: > repox generate -n=`test`", () => {
+  test("should be correct for the command: repox generate -n=`test`", () => {
     const result = runTest(["generate", "-n=`test`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -623,7 +623,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be incorrect for the command: > repox generate -n=te%%s$$t", () => {
+  test("should be incorrect for the command: repox generate -n=te%%s$$t", () => {
     const result = runTest(["generate", "-n=te%%s$$t"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -641,7 +641,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
-  test('should be incorrect for the command: > repox generate -n="te%%s$$t"', () => {
+  test('should be incorrect for the command: repox generate -n="te%%s$$t"', () => {
     const result = runTest(["generate", '-n="te%%s$$t"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -659,7 +659,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
-  test("should be incorrect for the command: > repox generate -n='te%%s$$t'", () => {
+  test("should be incorrect for the command: repox generate -n='te%%s$$t'", () => {
     const result = runTest(["generate", "-n='te%%s$$t'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -677,7 +677,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
-  test("should be incorrect for the command: > repox generate -n=`te%%s$$t`", () => {
+  test("should be incorrect for the command: repox generate -n=`te%%s$$t`", () => {
     const result = runTest(["generate", "-n=`te%%s$$t`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -695,7 +695,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
-  test("should be correct for the command: > repox generate -n=test1,test2,test3", () => {
+  test("should be correct for the command: repox generate -n=test1,test2,test3", () => {
     const result = runTest(["generate", "-n=test1,test2,test3"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -713,7 +713,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test('should be correct for the command: > repox generate -n="test1,test2,test3"', () => {
+  test('should be correct for the command: repox generate -n="test1,test2,test3"', () => {
     const result = runTest(["generate", '-n="test1,test2,test3"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -731,7 +731,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test("should be correct for the command: > repox generate -n='test1,test2,test3'", () => {
+  test("should be correct for the command: repox generate -n='test1,test2,test3'", () => {
     const result = runTest(["generate", "-n='test1,test2,test3'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -749,7 +749,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test("should be correct for the command: > repox generate -n=`test1,test2,test3`", () => {
+  test("should be correct for the command: repox generate -n=`test1,test2,test3`", () => {
     const result = runTest(["generate", "-n=`test1,test2,test3`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
