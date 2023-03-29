@@ -27,7 +27,7 @@ import {
 class MockGetParamDependenceService {
   getParamDependence(
     program: ProgramEnum
-  ): ParamDependencyModel | undefined {
+  ): ParamDependencyModel {
     switch (program) {
       case ProgramEnum.default:
         return {
@@ -37,10 +37,14 @@ class MockGetParamDependenceService {
               args: {}
             }
           },
-          args: {}
+          args: {
+            [ArgumentEnum.version]: {
+              argName: ArgumentEnum.version,
+              required: true
+            }
+          }
         };
       case ProgramEnum.unknown:
-        return undefined;
       default:
         throw new Error(
           "Failed to find param dependency for given param!"
@@ -99,10 +103,10 @@ describe("ReadParamDomainAppService", () => {
       }
     ]);
     const paramDomainResult: ParamDomainValidationModel = {
-      isError: true,
-      wrongParamIndexes: [2],
-      errors: ["You have specified not existed arguments for program!"],
-      tips: ["You have to specify only existed arguments."],
+      isError: false,
+      wrongParamIndexes: [],
+      errors: [],
+      tips: [],
       paramDomain: {
         program: {
           name: ProgramEnum.default,
