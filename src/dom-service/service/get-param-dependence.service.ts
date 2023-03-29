@@ -14,7 +14,7 @@ import {
 export class GetParamDependenceService {
   getParamDependence(
     program: ProgramEnum
-  ): ParamDependencyModel | undefined {
+  ): ParamDependencyModel {
     switch (program) {
       case ProgramEnum.default:
         return {
@@ -51,7 +51,6 @@ export class GetParamDependenceService {
           args: {}
         };
       case ProgramEnum.unknown:
-        return undefined;
       default:
         throw new Error(
           "Failed to find param dependency for given param!"

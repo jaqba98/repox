@@ -1,4 +1,4 @@
-import { singleton } from "tsyringe";
+import { container, singleton } from "tsyringe";
 import {
   ParamDomainModel
 } from "../../model/param-domain/param-domain.model";
@@ -11,6 +11,21 @@ import {
 import {
   BuildParamDomainValidationService
 } from "../builder/build-param-domain-validation.service";
+import {
+  ProgramExistValidatorService
+} from "../validator/program-exist-validator.service";
+import {
+  CommandExistValidatorService
+} from "../validator/command-exist-validator.service";
+import {
+  ProgramArgsValidatorService
+} from "../validator/program-args-validator.service";
+import {
+  CommandArgsValidatorService
+} from "../validator/command-args-validator.service";
+import {
+  ValidatorDomainModel
+} from "../../model/validator-domain/validator-domain.model";
 
 @singleton()
 /**
@@ -29,63 +44,23 @@ export class ParamDomainValidatorService {
   ): ParamDomainValidationModel {
     const program = this.getParamDependence
       .getParamDependence(paramDomain.program.name);
-    if (!program) {
-      return this.buildParam.paramDomainValidationError(
-        [paramDomain.program.index],
-        ["You have specified not existed program!"],
-        [
-          "You have to specify correct program name.",
-          "Check the documentation to get full list of programs."
-        ],
-        paramDomain
-      );
-    }
     const command = program.commands[paramDomain.command.name];
-    if (!command) {
-      return this.buildParam.paramDomainValidationError(
-        [],
-        ["You have specified not exist command for given program!"],
-        [
-          "You have to specify correct command name.",
-          "Check the documentation to get full list of commands."
-        ],
-        paramDomain
-      );
-    }
-    const missingProgramArgs = Object.values(program.args)
-      .filter(arg => arg.required)
-      .filter(arg => !paramDomain.program.args.find(
-        cmdArg => cmdArg.name === arg.argName
-      ))
-      .map(arg => arg.argName);
-    if (missingProgramArgs.length > 0) {
-      return this.buildParam.paramDomainValidationError(
-        [],
-        ["You have not specified required arguments for program!"],
-        [
-          "You have to specify all required arguments.",
-          `Missing arguments: ${missingProgramArgs.join(",")}`
-        ],
-        paramDomain
-      );
-    }
-    const missingCommandsArgs = Object.values(command.args)
-      .filter(arg => arg.required)
-      .filter(arg => !paramDomain.command.args.find(
-        cmdArg => cmdArg.name === arg.argName
-      ))
-      .map(arg => arg.argName);
-    if (missingCommandsArgs.length > 0) {
-      return this.buildParam.paramDomainValidationError(
-        [],
-        ["You have not specified required arguments for command!"],
-        [
-          "You have to specify all required arguments.",
-          `Missing arguments: ${missingCommandsArgs.join(",")}`
-        ],
-        paramDomain
-      );
-    }
-    return this.buildParam.paramDomainValidationSuccess(paramDomain);
+    const error = this.getAllValidators()
+      .map(validator => validator.runValidator(paramDomain, program, command))
+      .find(result => result.isError);
+    return error ?
+      error :
+      this.buildParam.paramDomainValidationSuccess(paramDomain);
+  }
+
+  private getAllValidators(): Array<ValidatorDomainModel> {
+    return [
+      ProgramExistValidatorService,
+      CommandExistValidatorService,
+      ProgramArgsValidatorService,
+      CommandArgsValidatorService
+    ].map(validator =>
+      container.resolve<ValidatorDomainModel>(validator)
+    );
   }
 }
