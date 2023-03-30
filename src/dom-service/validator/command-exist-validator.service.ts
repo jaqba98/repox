@@ -34,8 +34,8 @@ export class CommandExistValidatorService
 
   runValidator(
     paramDomain: ParamDomainModel,
-    program: ParamDependencyModel,
-    command: ParamDependencyCommandModel
+    program: ParamDependencyModel | undefined,
+    command: ParamDependencyCommandModel | undefined
   ): ParamDomainValidationModel {
     if (!command) {
       return this.buildParam.paramDomainValidationError(

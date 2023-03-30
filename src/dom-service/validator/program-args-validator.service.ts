@@ -35,10 +35,11 @@ export class ProgramArgsValidatorService
 
   runValidator(
     paramDomain: ParamDomainModel,
-    program: ParamDependencyModel,
-    command: ParamDependencyCommandModel
+    program: ParamDependencyModel | undefined,
+    command: ParamDependencyCommandModel | undefined
   ): ParamDomainValidationModel {
-    const missingProgramArgs = Object.values(program.args)
+    const programArgs = program?.args ?? {};
+    const missingProgramArgs = Object.values(programArgs)
       .filter(arg => arg.required)
       .filter(arg => !paramDomain.program.args.find(
         cmdArg => cmdArg.name === arg.argName
@@ -55,7 +56,7 @@ export class ProgramArgsValidatorService
         paramDomain
       );
     }
-    const existedProgramArgs = Object.values(program.args).map(arg => arg.argName);
+    const existedProgramArgs = Object.values(programArgs).map(arg => arg.argName);
     const notExistedProgramArgs = paramDomain.program.args
       .filter(arg => !existedProgramArgs.includes(arg.name))
       .map(arg => arg.index);

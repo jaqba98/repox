@@ -6,3 +6,6 @@ import { buildSuccessMsg } from "./base-msg-builder.service";
 
 export const msgCommandExecutedCorrectlySuccess = (): string =>
   buildSuccessMsg("Command executed correctly!");
+
+export const msgExecCommandSuccess = (command: string): string =>
+  buildSuccessMsg(command);

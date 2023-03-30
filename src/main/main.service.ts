@@ -5,13 +5,13 @@ import {
 import {
   ReadParamDtoAppService
 } from "../app-service/read-param-dto-app.service";
-import {
-  msgCommandExecutedCorrectlySuccess
-} from "../infra/service/builder/message/success-msg-builder.service";
 import { LogService } from "../infra/service/writer/log.service";
 import {
   ReadParamDomainAppService
 } from "../app-service/read-param-domain-app.service";
+import {
+  SelectProgramAppService
+} from "../app-service/select-program-app.service";
 
 @singleton()
 /**
@@ -21,7 +21,8 @@ export class MainService {
   constructor(
     private readonly readParamDto: ReadParamDtoAppService,
     private readonly readParamDomain: ReadParamDomainAppService,
-    private readonly log: LogService
+    private readonly log: LogService,
+    private readonly selectProgram: SelectProgramAppService
   ) {
   }
 
@@ -39,6 +40,6 @@ export class MainService {
       }));
       return;
     }
-    this.log.message(msgCommandExecutedCorrectlySuccess());
+    this.selectProgram.selectProgram(paramDomain.paramDomain);
   }
 }

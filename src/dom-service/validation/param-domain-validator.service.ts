@@ -44,7 +44,7 @@ export class ParamDomainValidatorService {
   ): ParamDomainValidationModel {
     const program = this.getParamDependence
       .getParamDependence(paramDomain.program.name);
-    const command = program.commands[paramDomain.command.name];
+    const command = program?.commands[paramDomain.command.name];
     const error = this.getAllValidators()
       .map(validator => validator.runValidator(paramDomain, program, command))
       .find(result => result.isError);

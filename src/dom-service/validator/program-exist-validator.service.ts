@@ -16,7 +16,6 @@ import {
 } from "../../model/validator-domain/validator-domain.model";
 import {
   ParamDependencyCommandModel,
-  ParamDependencyCommandsModel,
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
 
@@ -35,8 +34,8 @@ export class ProgramExistValidatorService
 
   runValidator(
     paramDomain: ParamDomainModel,
-    program: ParamDependencyModel,
-    command: ParamDependencyCommandModel
+    program: ParamDependencyModel | undefined,
+    command: ParamDependencyCommandModel | undefined
   ): ParamDomainValidationModel {
     if (!program) {
       return this.buildParam.paramDomainValidationError(

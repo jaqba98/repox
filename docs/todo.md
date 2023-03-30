@@ -2,14 +2,16 @@
 
 ## Waiting
 
-- create mechanic of run programs
+- create the program generate and command workspace
 
 ## In progress
 
-- create the "jest" tests of dto and domain
+- refactor the whole project
 
 ## Done
 
+- create mechanic of run programs
+- create the "jest" tests of dto and domain
 - refactor the whole project
 - create all parameter dto validators
 - create parameter domain model

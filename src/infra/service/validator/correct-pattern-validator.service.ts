@@ -68,8 +68,8 @@ export class CorrectPatternValidatorService
     paramBaseValue: string
   ): boolean {
     return paramHasValue ?
-      /^--[a-zA-Z0-9-]+=[a-zA-Z0-9-"'`,\s]+$/gm.test(paramBaseValue) :
-      /^--[a-zA-Z0-9-]+$/gm.test(paramBaseValue);
+      /^--[a-zA-Z0-9-]+=[a-zA-Z0-9-"'/`,\s]+$/gm.test(paramBaseValue) :
+      /^--[a-zA-Z0-9-/]+$/gm.test(paramBaseValue);
   }
 
   private checkAlias(

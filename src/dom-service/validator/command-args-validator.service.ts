@@ -35,10 +35,11 @@ export class CommandArgsValidatorService
 
   runValidator(
     paramDomain: ParamDomainModel,
-    program: ParamDependencyModel,
-    command: ParamDependencyCommandModel
+    program: ParamDependencyModel | undefined,
+    command: ParamDependencyCommandModel | undefined
   ): ParamDomainValidationModel {
-    const missingCommandsArgs = Object.values(command.args)
+    const commandArgs = command?.args ?? {};
+    const missingCommandsArgs = Object.values(commandArgs)
       .filter(arg => arg.required)
       .filter(arg => !paramDomain.command.args.find(
         cmdArg => cmdArg.name === arg.argName
@@ -55,7 +56,7 @@ export class CommandArgsValidatorService
         paramDomain
       );
     }
-    const existedCommandArgs = Object.values(command.args).map(arg => arg.argName);
+    const existedCommandArgs = Object.values(commandArgs).map(arg => arg.argName);
     const notExistedCommandArgs = paramDomain.command.args
       .filter(arg => !existedCommandArgs.includes(arg.name))
       .map(arg => arg.index);
