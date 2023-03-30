@@ -12,10 +12,11 @@
     "skipLibCheck": true
   },
   "include": [
-    "src"
+    "src/**/*"
   ],
   "exclude": [
-    "**/*.test.ts",
-    "**/*.spec.ts"
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.mock.ts"
   ]
 }
