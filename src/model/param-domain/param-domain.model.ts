@@ -1,14 +1,12 @@
+import { ArgumentEnum } from "../../enum/argument.enum";
 import { ProgramEnum } from "../../enum/program.enum";
 import { CommandEnum } from "../../enum/command.enum";
-import { ArgumentEnum } from "../../enum/argument.enum";
 
-/**
- * Parameters domain model for correct parameters.
- */
+/** Parameters domain model for correct parameters. */
 
 export interface ParamDomainArgModel {
   name: ArgumentEnum;
-  value: Array<string>;
+  values: Array<string>;
   index: number;
   isAlias: boolean;
 }

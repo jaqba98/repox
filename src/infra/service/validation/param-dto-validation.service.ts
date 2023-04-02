@@ -1,23 +1,23 @@
 import { container, singleton } from "tsyringe";
 import {
+  BuildParamDtoValidationService
+} from "../builder/validation/build-param-dto-validation.service";
+import { ParamDtoModel } from "../../model/param-dto/param-dto.model";
+import {
+  ParamDtoValidationModel
+} from "../../model/param-dto/param-dto-validation.model";
+import {
   ValidatorDtoModel
 } from "../../model/validator-dto/validator-dto.model";
+import {
+  OnlySupportedCharactersValidatorService
+} from "../validator/only-supported-characters-validator.service";
 import {
   CorrectPatternValidatorService
 } from "../validator/correct-pattern-validator.service";
 import {
   MaxOneProgramValidatorService
 } from "../validator/max-one-program-validator.service";
-import { ParamDtoModel } from "../../model/param-dto/param-dto.model";
-import {
-  OnlySupportedCharactersValidatorService
-} from "../validator/only-supported-characters-validator.service";
-import {
-  ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation.model";
-import {
-  BuildParamDtoValidationService
-} from "../builder/validation/build-param-dto-validation.service";
 import {
   MaxOneCommandValidatorService
 } from "../validator/max-one-command-validator.service";
@@ -30,7 +30,7 @@ import {
  * The service is responsible for run all validators
  * to verify the parameter DTO model.
  *
- * repox <program> <arguments> <command> <arguments>
+ * > repox <program> <arguments> <command> <arguments>
  *
  * Validators:
  * 1.Verify that each part of the command contains only
@@ -38,7 +38,7 @@ import {
  * 2.Verify that each part of the command has correct pattern.
  * 3.Verify that the command contains max 1 program (0 or 1).
  * 4.Verify that the command contains max 1 command
- * (0 or 1 if the program exist and 0 if the program not exist).
+ *   (0 or 1 if the program exist and 0 if the program not exist).
  * 5.Verify that each part of the command are in correct order.
  */
 export class ParamDtoValidationService {
@@ -63,8 +63,8 @@ export class ParamDtoValidationService {
       MaxOneProgramValidatorService,
       MaxOneCommandValidatorService,
       CorrectOrderValidatorService
-    ].map(validator =>
-      container.resolve<ValidatorDtoModel>(validator)
-    );
+    ].map(validator => {
+      return container.resolve<ValidatorDtoModel>(validator);
+    });
   }
 }

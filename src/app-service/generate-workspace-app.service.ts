@@ -3,18 +3,18 @@ import {
   ParamDomainModel
 } from "../model/param-domain/param-domain.model";
 import {
-  ExecCommandService
-} from "../infra/service/exec/exec-command.service";
+  ExecCmdService
+} from "../infra/service/exec/exec-cmd.service";
 
 @singleton()
 export class GenerateWorkspaceAppService {
-  constructor(private readonly execCommand: ExecCommandService) {
+  constructor(private readonly execCommand: ExecCmdService) {
   }
   run(paramDomain: ParamDomainModel): void {
     const name = paramDomain.command.args.find(arg => arg.name === "name");
 
-    this.execCommand.exec(`mkdir ${name?.value[0]}`);
-    this.execCommand.cd(`./${name?.value[0]}`);
+    this.execCommand.exec(`mkdir ${name?.values[0]}`);
+    this.execCommand.cd(`./${name?.values[0]}`);
     this.execCommand.exec("git init");
     this.execCommand.exec("npm init -y");
     this.execCommand.exec("mkdir apps");
@@ -27,3 +27,4 @@ export class GenerateWorkspaceAppService {
     this.execCommand.exec(`git commit -m "init commit" --quiet`);
   }
 }
+// todo: refactor

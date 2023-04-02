@@ -1,4 +1,4 @@
-import { injectable, singleton } from "tsyringe";
+import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
@@ -10,7 +10,7 @@ import {
 @singleton()
 /**
  * The service is responsible for build
- * the param dto validation successes and errors.
+ * the param dto validation for successes and errors.
  */
 export class BuildParamDtoValidationService {
   paramDtoValidationSuccess(
@@ -26,14 +26,14 @@ export class BuildParamDtoValidationService {
   }
 
   paramDtoValidationError(
-    wrongParams: Array<ParamDtoEntityModel>,
+    wrongParamDto: Array<ParamDtoEntityModel>,
     errors: Array<string>,
     tips: Array<string>,
     paramDto: ParamDtoModel
   ): ParamDtoValidationModel {
     return {
       isError: true,
-      wrongParamIndexes: wrongParams.map(param => param.paramIndex),
+      wrongParamIndexes: wrongParamDto.map(param => param.paramIndex),
       errors,
       tips,
       paramDto

@@ -1,12 +1,16 @@
 import {
-  BG_GREEN,
-  BG_RED,
-  BG_YELLOW,
-  FG_GREEN,
-  FG_RED,
-  FG_YELLOW
-} from "../../../const/color.const";
-import { BRIGHT, RESET, UNDERSCORE } from "../../../const/text.const";
+  BG_TEXT_CYAN,
+  BG_TEXT_GREEN,
+  BG_TEXT_RED,
+  BG_TEXT_YELLOW,
+  FG_TEXT_CYAN,
+  FG_TEXT_GREEN,
+  FG_TEXT_RED,
+  FG_TEXT_YELLOW,
+  TEXT_BRIGHT,
+  TEXT_RESET,
+  TEXT_UNDERSCORE
+} from "../../../const/text-style.const";
 import { EOL } from "os";
 import {
   ParamDtoValidationModel
@@ -15,38 +19,42 @@ import { ParamTypeEnum } from "../../../enum/param-type.enum";
 
 /**
  * Base message builder which contains group of small builders
- * to build complete message.
+ * to build complete messages.
  */
 
 /** Basics */
 const space = (): string => " ";
-const reset = (): string => RESET;
+const reset = (): string => TEXT_RESET;
 const emptyString = (): string => "";
 
 /** Headers */
 const baseHeader = (bgColor: string, header: string): string =>
-  `${BRIGHT}${bgColor}${space()}${header}${space()}`;
+  `${TEXT_BRIGHT}${bgColor}${space()}${header}${space()}`;
 const headerSuccess = (header: string): string =>
-  baseHeader(BG_GREEN, header);
+  baseHeader(BG_TEXT_GREEN, header);
 const headerError = (header: string): string =>
-  baseHeader(BG_RED, header);
+  baseHeader(BG_TEXT_RED, header);
 const headerWarning = (header: string): string =>
-  baseHeader(BG_YELLOW, header);
+  baseHeader(BG_TEXT_YELLOW, header);
+const headerInfo = (header: string): string =>
+  baseHeader(BG_TEXT_CYAN, header);
 
 /** Messages */
 const baseMessage = (fgColor: string, message: string): string =>
-  `${BRIGHT}${fgColor}${message}`;
+  `${TEXT_BRIGHT}${fgColor}${message}`;
 const messageSuccess = (message: string): string =>
-  baseMessage(FG_GREEN, message);
+  baseMessage(FG_TEXT_GREEN, message);
 const messageError = (message: string): string =>
-  baseMessage(FG_RED, message);
+  baseMessage(FG_TEXT_RED, message);
 const messageWarning = (message: string): string =>
-  baseMessage(FG_YELLOW, message);
+  baseMessage(FG_TEXT_YELLOW, message);
+const messageInfo = (message: string): string =>
+  baseMessage(FG_TEXT_CYAN, message);
 
 /** Params */
-const redParam = (param: string): string => `${FG_RED}${param}`;
+const redParam = (param: string): string => `${FG_TEXT_RED}${param}`;
 const redUnderscoreParam = (param: string): string =>
-  `${UNDERSCORE}${redParam(param)}`;
+  `${TEXT_UNDERSCORE}${redParam(param)}`;
 
 /** Lines */
 const buildLine = (line: string): string =>
@@ -82,6 +90,12 @@ export const buildTipMsg = (message: string): string =>
     .concat(buildLine(headerWarning("TIP")))
     .concat(buildLine(space()))
     .concat(buildLine(messageWarning(message)));
+
+export const buildInfoMsg = (message: string): string =>
+  emptyString()
+    .concat(buildLine(headerInfo("INF")))
+    .concat(buildLine(space()))
+    .concat(buildLine(messageInfo(message)));
 
 export const buildManyErrMsg = (messages: Array<string>): string =>
   messages

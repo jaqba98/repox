@@ -98,7 +98,7 @@ export class BuildParamDomainService {
   private buildArg(param: ParamDtoEntityModel): ParamDomainArgModel {
     return {
       name: this.parseArgName(param.paramName),
-      value: param.paramValues,
+      values: param.paramValues,
       index: param.paramIndex,
       isAlias: param.paramType === ParamTypeEnum.alias
     }
@@ -141,3 +141,4 @@ export class BuildParamDomainService {
     }
   }
 }
+// todo: refactor

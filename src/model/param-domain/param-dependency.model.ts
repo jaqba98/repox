@@ -1,9 +1,11 @@
+import { ArgumentEnum } from "../../enum/argument.enum";
+import { CommandEnum } from "../../enum/command.enum";
+import { ProgramEnum } from "../../enum/program.enum";
+
 /**
  * The model is used by GetParamDependenceService to give
  * the dependency between programs, commands, arguments and aliases.
  */
-import { CommandEnum } from "../../enum/command.enum";
-import { ArgumentEnum } from "../../enum/argument.enum";
 
 export interface ParamDependencyArgModel {
   argName: ArgumentEnum;
@@ -24,6 +26,7 @@ export interface ParamDependencyCommandsModel {
 }
 
 export interface ParamDependencyModel {
+  programName: ProgramEnum;
   commands: ParamDependencyCommandsModel;
   args: ParamDependencyArgsModel;
 }

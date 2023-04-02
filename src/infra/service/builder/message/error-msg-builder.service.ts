@@ -1,17 +1,15 @@
 import {
+  ParamDtoValidationModel
+} from "../../../model/param-dto/param-dto-validation.model";
+import {
   buildCommandDtoMsg,
   buildErrorMsg,
   buildManyErrMsg,
   buildManyTipMsg,
   newline
 } from "./base-msg-builder.service";
-import {
-  ParamDtoValidationModel
-} from "../../../model/param-dto/param-dto-validation.model";
 
-/**
- * The message builder for all errors.
- */
+/** The message builders for all errors. */
 
 export const msgParamDtoValidationError = (
   validationDto: ParamDtoValidationModel

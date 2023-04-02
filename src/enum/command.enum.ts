@@ -1,6 +1,4 @@
-/**
- * List of all commands.
- */
+/** List of all commands. */
 
 export enum CommandEnum {
   default = "",

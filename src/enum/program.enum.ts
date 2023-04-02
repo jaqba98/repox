@@ -1,6 +1,4 @@
-/**
- * List of all programs.
- */
+/** List of all programs. */
 
 export enum ProgramEnum {
   default = "",

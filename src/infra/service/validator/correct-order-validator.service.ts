@@ -52,7 +52,7 @@ export class CorrectOrderValidatorService
     const paramOrder = this.getParamOrder()
       .find(order => order.paramTypes.includes(param.paramType));
     if (!paramOrder) {
-      throw new Error("Not found any param type!");
+      throw new Error("Not supported param type!");
     }
     if (paramOrder.order === 3 && !program) {
       return param.paramIndex >= 2;

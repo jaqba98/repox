@@ -1,6 +1,4 @@
-/**
- * All kinds of parameter type.
- */
+/** All kinds of parameter type. */
 export enum ParamTypeEnum {
   executor = "executor",
   application = "application",

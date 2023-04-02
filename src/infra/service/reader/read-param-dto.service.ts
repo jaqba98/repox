@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
+import { ReadProcessArgvService } from "./read-process-argv.service";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../model/param-dto/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
-import { GetProcessArgvService } from "./get-process-argv.service";
 
 @singleton()
 /**
@@ -13,24 +13,25 @@ import { GetProcessArgvService } from "./get-process-argv.service";
  */
 export class ReadParamDtoService {
   constructor(
-    private readonly getProcessArgv: GetProcessArgvService
+    private readonly readProcessArgv: ReadProcessArgvService
   ) {
   }
+
   read(): ParamDtoModel {
-    return this.getProcessArgv.getArgv()
-      .map((value: string, index: number) =>
-        this.argToDto(value, index)
-      )
+    return this.readProcessArgv.getArgv()
+      .map((value: string, index: number) => {
+        return this.processArgvToDTO(value, index);
+      })
       .map(param => this.getParamType(param))
       .map(param => this.getParamHasValue(param))
       .map(param => this.getParamName(param))
       .map(param => this.getParamValues(param))
-      .reduce<ParamDtoModel>((acc, curr) =>
-        this.buildParamDto(acc, curr), { params: [] }
-      );
+      .reduce<ParamDtoModel>((acc, curr) => {
+        return this.buildParamDto(acc, curr);
+      }, { params: [] });
   }
 
-  private argToDto(
+  private processArgvToDTO(
     value: string, index: number
   ): Pick<ParamDtoEntityModel, "paramBaseValue" | "paramIndex"> {
     return { paramBaseValue: value, paramIndex: index };
@@ -38,11 +39,8 @@ export class ReadParamDtoService {
 
   private getParamType(
     param: Pick<ParamDtoEntityModel, "paramBaseValue" | "paramIndex">
-  ): Omit<ParamDtoEntityModel,
-    "paramHasValue" |
-    "paramName" |
-    "paramValues"
-  > {
+  ): Omit<ParamDtoEntityModel, "paramHasValue" | "paramName" |
+    "paramValues"> {
     if (param.paramBaseValue.startsWith("--"))
       return { ...param, paramType: ParamTypeEnum.argument };
     if (param.paramBaseValue.startsWith("-"))
@@ -57,11 +55,8 @@ export class ReadParamDtoService {
   }
 
   private getParamHasValue(
-    param: Omit<ParamDtoEntityModel,
-      "paramHasValue" |
-      "paramName" |
-      "paramValues"
-    >
+    param: Omit<ParamDtoEntityModel, "paramHasValue" | "paramName" |
+      "paramValues">
   ): Omit<ParamDtoEntityModel, "paramName" | "paramValues"> {
     return {
       ...param,
@@ -75,14 +70,13 @@ export class ReadParamDtoService {
     const paramName: string = param.paramHasValue ?
       param.paramBaseValue.split("=")[0] :
       param.paramBaseValue;
-    return {
-      ...param,
-      paramName: param.paramType === ParamTypeEnum.argument ?
-        paramName.replace("--", "") :
-        param.paramType === ParamTypeEnum.alias ?
-          paramName.replace("-", "") :
-          paramName
-    };
+    if (param.paramType === ParamTypeEnum.argument) {
+      return { ...param, paramName: paramName.replace("--", "") };
+    } else if (param.paramType === ParamTypeEnum.alias) {
+      return { ...param, paramName: paramName.replace("-", "") };
+    } else {
+      return { ...param, paramName };
+    }
   }
 
   private getParamValues(

@@ -1,7 +1,7 @@
 import { container } from "tsyringe";
 import {
-  GetProcessArgvService
-} from "../../infra/service/reader/get-process-argv.service";
+  ReadProcessArgvService
+} from "../../infra/service/reader/read-process-argv.service";
 import {
   ReadParamDtoAppService
 } from "../read-param-dto-app.service";
@@ -14,7 +14,7 @@ import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 const child = container.createChildContainer();
 
 const mockGetProcessArgvService = (argv: Array<string>) => {
-  child.register(GetProcessArgvService, {
+  child.register(ReadProcessArgvService, {
     useClass: class {
       getArgv(): Array<string> {
         return ["executor", "application", ...argv];
@@ -767,3 +767,4 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 });
+// todo: refactor

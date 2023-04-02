@@ -6,7 +6,7 @@ import { singleton } from "tsyringe";
  * on the screen.
  */
 export class LogService {
-  message(msg: string = ""): void {
+  message(msg: string): void {
     console.log(msg);
   }
 }

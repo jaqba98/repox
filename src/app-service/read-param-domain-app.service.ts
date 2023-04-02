@@ -30,3 +30,4 @@ export class ReadParamDomainAppService {
     return this.paramDomainValidator.runValidation(paramDomain);
   }
 }
+// todo: refactor
