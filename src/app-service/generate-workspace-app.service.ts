@@ -3,12 +3,14 @@ import {
   ExecCmdService
 } from "../infra/service/exec/exec-cmd.service";
 import {
+  ParamDomainArgModel,
   ParamDomainModel
 } from "../model/param-domain/param-domain.model";
 import { LogService } from "../infra/service/writer/log.service";
 import {
   msgCommandExecutedMessageInfo
 } from "../infra/service/builder/message/info-msg-builder.service";
+import { ArgumentEnum } from "../enum/argument.enum";
 
 @singleton()
 /**
@@ -51,8 +53,10 @@ export class GenerateWorkspaceAppService {
   private getCommandArgs(paramDomain: ParamDomainModel): {
     name: Array<string>
   } {
-    const {args} = paramDomain.command;
-    const name = args.find(arg => arg.name === "name")?.values ?? [];
-    return {name};
+    const { args } = paramDomain.command;
+    const argName = args.find(arg => arg.name === ArgumentEnum.name);
+    return {
+      name: argName?.values ?? []
+    };
   }
 }
