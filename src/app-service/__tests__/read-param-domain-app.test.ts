@@ -1,36 +1,35 @@
-import { container } from "tsyringe";
+import { ProgramEnum } from "../../enum/program.enum";
+import {
+  ParamDependencyModel
+} from "../../model/param-domain/param-dependency.model";
 import { CommandEnum } from "../../enum/command.enum";
+import { ArgumentEnum } from "../../enum/argument.enum";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../infra/model/param-dto/param-dto.model";
-import {
-  ReadParamDomainAppService
-} from "../read-param-domain-app.service";
-import { ProgramEnum } from "../../enum/program.enum";
 import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
-import {
-  ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
-import {
-  ParamDependencyModel
-} from "../../model/param-domain/param-dependency.model";
-import { ArgumentEnum } from "../../enum/argument.enum";
+import { container } from "tsyringe";
 import {
   GetParamDependenceService
 } from "../../dom-service/service/get-param-dependence.service";
+import {
+  ReadParamDomainAppService
+} from "../read-param-domain-app.service";
+import {
+  ParamDomainValidationModel
+} from "../../model/param-domain/param-domain-validation.model";
 
-/**
- * Testing of the ReadParamDomainAppService service.
- */
+/** Testing of the ReadParamDomainAppService service. */
 
 class MockGetParamDependenceService {
   getParamDependence(
     program: ProgramEnum
-  ): ParamDependencyModel | undefined {
+  ): ParamDependencyModel {
     switch (program) {
       case ProgramEnum.default:
         return {
+          programName: ProgramEnum.default,
           commands: {
             [CommandEnum.default]: {
               commandName: CommandEnum.default,
@@ -46,6 +45,7 @@ class MockGetParamDependenceService {
         };
       case ProgramEnum.generate:
         return {
+          programName: ProgramEnum.generate,
           commands: {
             [CommandEnum.default]: {
               commandName: CommandEnum.default,
@@ -69,7 +69,11 @@ class MockGetParamDependenceService {
           }
         };
       case ProgramEnum.unknown:
-        return undefined;
+        return {
+          programName: ProgramEnum.unknown,
+          commands: {},
+          args: {}
+        }
       default:
         throw new Error(
           "Failed to find param dependency for given param!"
@@ -140,7 +144,7 @@ describe("ReadParamDomainAppService", () => {
           args: [
             {
               name: ArgumentEnum.unknown,
-              value: [],
+              values: [],
               index: 2,
               isAlias: false
             }
@@ -176,7 +180,7 @@ describe("ReadParamDomainAppService", () => {
           args: [
             {
               name: ArgumentEnum.version,
-              value: [],
+              values: [],
               index: 2,
               isAlias: false
             }
@@ -286,7 +290,7 @@ describe("ReadParamDomainAppService", () => {
           args: [
             {
               name: ArgumentEnum.version,
-              value: [],
+              values: [],
               index: 3,
               isAlias: false
             }
@@ -323,7 +327,7 @@ describe("ReadParamDomainAppService", () => {
     expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
       isError: true,
       wrongParamIndexes: [],
-      errors: ["You have specified not exist command for given program!"],
+      errors: ["You have specified not existed command for given program!"],
       tips: [
         "You have to specify correct command name.",
         "Check the documentation to get full list of commands."
@@ -387,7 +391,7 @@ describe("ReadParamDomainAppService", () => {
           args: [
             {
               name: ArgumentEnum.version,
-              value: [],
+              values: [],
               index: 3,
               isAlias: false
             }
@@ -449,7 +453,7 @@ describe("ReadParamDomainAppService", () => {
           args: [
             {
               name: ArgumentEnum.version,
-              value: [],
+              values: [],
               index: 3,
               isAlias: false
             }
@@ -461,7 +465,7 @@ describe("ReadParamDomainAppService", () => {
           args: [
             {
               name: ArgumentEnum.version,
-              value: [],
+              values: [],
               index: 5,
               isAlias: false
             }
@@ -471,4 +475,3 @@ describe("ReadParamDomainAppService", () => {
     });
   });
 });
-// todo: refactor

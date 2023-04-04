@@ -1,10 +1,10 @@
-import { singleton } from "tsyringe";
 import { CommandEnum } from "../../enum/command.enum";
-import { ArgumentEnum } from "../../enum/argument.enum";
+import { singleton } from "tsyringe";
 import { ProgramEnum } from "../../enum/program.enum";
 import {
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
+import { ArgumentEnum } from "../../enum/argument.enum";
 
 @singleton()
 /**
@@ -12,27 +12,22 @@ import {
  * between programs, commands, arguments and alases.
  */
 export class GetParamDependenceService {
-  getParamDependence(
-    program: ProgramEnum
-  ): ParamDependencyModel | undefined {
+  getParamDependence(program: ProgramEnum): ParamDependencyModel {
     switch (program) {
       case ProgramEnum.default:
         return {
+          programName: ProgramEnum.default,
           commands: {
             [CommandEnum.default]: {
               commandName: CommandEnum.default,
               args: {}
             }
           },
-          args: {
-            [ArgumentEnum.version]: {
-              argName: ArgumentEnum.version,
-              required: false
-            }
-          }
+          args: {}
         };
       case ProgramEnum.generate:
         return {
+          programName: ProgramEnum.generate,
           commands: {
             [CommandEnum.default]: {
               commandName: CommandEnum.default,
@@ -51,12 +46,15 @@ export class GetParamDependenceService {
           args: {}
         };
       case ProgramEnum.unknown:
-        return undefined;
+        return {
+          programName: ProgramEnum.unknown,
+          commands: {},
+          args: {}
+        };
       default:
         throw new Error(
-          "Failed to find param dependency for given param!"
+          "Parameter dependency not found for the given program!"
         );
     }
   }
 }
-// todo: refactor

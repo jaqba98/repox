@@ -1,16 +1,19 @@
 import { container, singleton } from "tsyringe";
 import {
+  GetParamDependenceService
+} from "../service/get-param-dependence.service";
+import {
+  BuildParamDomainValidationService
+} from "../builder/build-param-domain-validation.service";
+import {
   ParamDomainModel
 } from "../../model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import {
-  GetParamDependenceService
-} from "../service/get-param-dependence.service";
-import {
-  BuildParamDomainValidationService
-} from "../builder/build-param-domain-validation.service";
+  ValidatorDomainModel
+} from "../../model/validator-domain/validator-domain.model";
 import {
   ProgramExistValidatorService
 } from "../validator/program-exist-validator.service";
@@ -23,16 +26,12 @@ import {
 import {
   CommandArgsValidatorService
 } from "../validator/command-args-validator.service";
-import {
-  ValidatorDomainModel
-} from "../../model/validator-domain/validator-domain.model";
 
 @singleton()
 /**
- * The service is responsible for verify
- * the parameter domain model.
+ * The service is responsible for verify the parameter domain model.
  */
-export class ParamDomainValidatorService {
+export class ParamDomainValidationService {
   constructor(
     private readonly getParamDependence: GetParamDependenceService,
     private readonly buildParam: BuildParamDomainValidationService
@@ -42,11 +41,13 @@ export class ParamDomainValidatorService {
   runValidation(
     paramDomain: ParamDomainModel
   ): ParamDomainValidationModel {
-    const program = this.getParamDependence
+    const paramDep = this.getParamDependence
       .getParamDependence(paramDomain.program.name);
-    const command = program?.commands[paramDomain.command.name];
+    const command = paramDep.commands[paramDomain.command.name];
     const error = this.getAllValidators()
-      .map(validator => validator.runValidator(paramDomain, program, command))
+      .map(validator => {
+        return validator.runValidator(paramDomain, paramDep, command);
+      })
       .find(result => result.isError);
     return error ?
       error :
@@ -59,9 +60,8 @@ export class ParamDomainValidatorService {
       CommandExistValidatorService,
       ProgramArgsValidatorService,
       CommandArgsValidatorService
-    ].map(validator =>
-      container.resolve<ValidatorDomainModel>(validator)
-    );
+    ].map(validator => {
+      return container.resolve<ValidatorDomainModel>(validator);
+    });
   }
 }
-// todo: refactor

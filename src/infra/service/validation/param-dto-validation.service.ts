@@ -43,7 +43,7 @@ import {
  */
 export class ParamDtoValidationService {
   constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
+    private readonly buildParam: BuildParamDtoValidationService
   ) {
   }
 
@@ -53,7 +53,7 @@ export class ParamDtoValidationService {
       .find(result => result.isError);
     return error ?
       error :
-      this.buildValidation.paramDtoValidationSuccess(paramDto);
+      this.buildParam.paramDtoValidationSuccess(paramDto);
   }
 
   private getAllValidators(): Array<ValidatorDtoModel> {

@@ -2,14 +2,13 @@
 
 ## Waiting
 
-* create the program: generate and command: workspace
-
 ## In progress
 
-* refactor the whole project
+* create the program: generate and command: workspace
 
 ## Done
 
+* refactor the whole project
 * create mechanic of run programs
 * create the "jest" tests of dto and domain
 * refactor the whole project

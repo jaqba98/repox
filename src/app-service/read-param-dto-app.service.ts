@@ -1,20 +1,18 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDtoValidationService
-} from "../infra/service/validation/param-dto-validation.service";
-import {
   ReadParamDtoService
 } from "../infra/service/reader/read-param-dto.service";
+import {
+  ParamDtoValidationService
+} from "../infra/service/validation/param-dto-validation.service";
 import {
   ParamDtoValidationModel
 } from "../infra/model/param-dto/param-dto-validation.model";
 
 @singleton()
 /**
- * The app service is responsible for:
- * 1) Read params from command line
- *    and save it to parameter DTO model.
- * 2) Run validation on the parameter DTO model.
+ * The app service is responsible for read and validate
+ * parameter DTO model from command line.
  */
 export class ReadParamDtoAppService {
   constructor(
@@ -28,4 +26,3 @@ export class ReadParamDtoAppService {
     return this.paramDtoValidation.runValidation(paramDto);
   }
 }
-// todo: refactor

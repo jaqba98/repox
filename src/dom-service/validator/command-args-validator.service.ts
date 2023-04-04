@@ -1,29 +1,28 @@
 import { singleton } from "tsyringe";
 import {
-  BuildParamDomainValidationService
-} from "../builder/build-param-domain-validation.service";
+  ValidatorDomainModel
+} from "../../model/validator-domain/validator-domain.model";
 import {
   GetParamDependenceService
 } from "../service/get-param-dependence.service";
 import {
+  BuildParamDomainValidationService
+} from "../builder/build-param-domain-validation.service";
+import {
   ParamDomainModel
 } from "../../model/param-domain/param-domain.model";
 import {
-  ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
-import {
-  ValidatorDomainModel
-} from "../../model/validator-domain/validator-domain.model";
-import {
   ParamDependencyCommandModel,
-  ParamDependencyCommandsModel,
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
+import {
+  ParamDomainValidationModel
+} from "../../model/param-domain/param-domain-validation.model";
 
 @singleton()
 /**
  * The validator is responsible for checking that
- * the given DTO parameters are in correct order.
+ * the given command arguments are correct.
  */
 export class CommandArgsValidatorService
   implements ValidatorDomainModel {
@@ -35,8 +34,8 @@ export class CommandArgsValidatorService
 
   runValidator(
     paramDomain: ParamDomainModel,
-    program: ParamDependencyModel | undefined,
-    command: ParamDependencyCommandModel | undefined
+    program: ParamDependencyModel,
+    command: ParamDependencyCommandModel
   ): ParamDomainValidationModel {
     const commandArgs = command?.args ?? {};
     const missingCommandsArgs = Object.values(commandArgs)
@@ -56,7 +55,8 @@ export class CommandArgsValidatorService
         paramDomain
       );
     }
-    const existedCommandArgs = Object.values(commandArgs).map(arg => arg.argName);
+    const existedCommandArgs = Object.values(commandArgs)
+      .map(arg => arg.argName);
     const notExistedCommandArgs = paramDomain.command.args
       .filter(arg => !existedCommandArgs.includes(arg.name))
       .map(arg => arg.index);
@@ -71,4 +71,3 @@ export class CommandArgsValidatorService
     return this.buildParam.paramDomainValidationSuccess(paramDomain);
   }
 }
-// todo: refactor

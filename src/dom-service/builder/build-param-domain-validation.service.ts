@@ -25,18 +25,17 @@ export class BuildParamDomainValidationService {
   }
 
   paramDomainValidationError(
-    wrongParams: Array<number>,
+    wrongParamIndexes: Array<number>,
     errors: Array<string>,
     tips: Array<string>,
     paramDomain: ParamDomainModel
   ): ParamDomainValidationModel {
     return {
       isError: true,
-      wrongParamIndexes: wrongParams,
+      wrongParamIndexes,
       errors,
       tips,
       paramDomain
     };
   }
 }
-// todo: refactor

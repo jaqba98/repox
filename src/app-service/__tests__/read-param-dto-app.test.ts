@@ -7,9 +7,7 @@ import {
 } from "../read-param-dto-app.service";
 import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 
-/**
- * Testing of the ReadParamDtoAppService service.
- */
+/** Testing of the ReadParamDtoAppService service. */
 
 const child = container.createChildContainer();
 
@@ -767,4 +765,3 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 });
-// todo: refactor

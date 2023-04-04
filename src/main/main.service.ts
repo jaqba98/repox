@@ -1,28 +1,29 @@
 import { singleton } from "tsyringe";
 import {
-  msgParamDtoValidationError
-} from "../infra/service/builder/message/error-msg-builder.service";
-import {
   ReadParamDtoAppService
 } from "../app-service/read-param-dto-app.service";
-import { LogService } from "../infra/service/writer/log.service";
 import {
   ReadParamDomainAppService
 } from "../app-service/read-param-domain-app.service";
+import { LogService } from "../infra/service/writer/log.service";
 import {
   SelectProgramAppService
 } from "../app-service/select-program-app.service";
+import {
+  msgParamDtoValidationError
+} from "../infra/service/builder/message/error-msg-builder.service";
+import {
+  msgCommandExecutedCorrectlySuccess
+} from "../infra/service/builder/message/success-msg-builder.service";
 
 @singleton()
-/**
- * Main launch point of the program.
- */
+/** Main launch point of the program. */
 export class MainService {
   constructor(
     private readonly readParamDto: ReadParamDtoAppService,
     private readonly readParamDomain: ReadParamDomainAppService,
-    private readonly log: LogService,
-    private readonly selectProgram: SelectProgramAppService
+    private readonly selectProgram: SelectProgramAppService,
+    private readonly log: LogService
   ) {
   }
 
@@ -41,6 +42,6 @@ export class MainService {
       return;
     }
     this.selectProgram.selectProgram(paramDomain.paramDomain);
+    this.log.message(msgCommandExecutedCorrectlySuccess());
   }
 }
-// todo: refactor

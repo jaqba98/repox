@@ -22,6 +22,3 @@ export const msgParamDtoValidationError = (
     .concat(newline())
     .concat(buildManyTipMsg(validationDto.tips));
 }
-
-export const msgCommandNotExecutedCorrectlyError = (): string =>
-  buildErrorMsg("Command not executed correctly!");

@@ -2,9 +2,11 @@
 
 export enum ArgumentEnum {
   name = "name",
+  version = "version",
   unknown = "unknown"
 }
 
 export enum AliasEnum {
-  name = "n"
+  name = "n",
+  version = "v"
 }

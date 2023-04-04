@@ -1,14 +1,5 @@
 import { singleton } from "tsyringe";
 import {
-  CommandAliasEnum,
-  CommandEnum
-} from "../../enum/command.enum";
-import {
-  ProgramAliasEnum,
-  ProgramEnum
-} from "../../enum/program.enum";
-import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
-import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../infra/model/param-dto/param-dto.model";
@@ -17,6 +8,15 @@ import {
   ParamDomainModel
 } from "../../model/param-domain/param-domain.model";
 import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
+import {
+  ProgramAliasEnum,
+  ProgramEnum
+} from "../../enum/program.enum";
+import {
+  CommandAliasEnum,
+  CommandEnum
+} from "../../enum/command.enum";
+import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
 
 @singleton()
 /**
@@ -28,7 +28,7 @@ export class BuildParamDomainService {
     const application = paramDto.params
       .find(param => param.paramType === ParamTypeEnum.application);
     if (!application) {
-      throw new Error('Application cannot be undefined!');
+      throw new Error("Application cannot be undefined!");
     }
     const program = paramDto.params
       .find(param => param.paramType === ParamTypeEnum.program);
@@ -40,18 +40,14 @@ export class BuildParamDomainService {
     const commandIndex = command ?
       command.paramIndex :
       paramDto.params.length;
+    const programName = this.getProgramName(program);
+    const commandName = this.getCommandName(command);
     const programArgs = this.getProgramArgs(
       programIndex,
       commandIndex,
       paramDto
     );
     const commandArgs = this.getCommandArgs(commandIndex, paramDto);
-    const programName = program ?
-      program.paramName :
-      ProgramEnum.default;
-    const commandName = command ?
-      command.paramName :
-      CommandEnum.default;
     return {
       program: {
         name: this.parseProgramName(programName),
@@ -64,6 +60,22 @@ export class BuildParamDomainService {
         args: commandArgs
       }
     };
+  }
+
+  private getProgramName(
+    program: ParamDtoEntityModel | undefined
+  ): string {
+    return program ?
+      program.paramName :
+      ProgramEnum.default;
+  }
+
+  private getCommandName(
+    command: ParamDtoEntityModel | undefined
+  ): string {
+    return command ?
+      command.paramName :
+      CommandEnum.default;
   }
 
   private getProgramArgs(
@@ -91,8 +103,10 @@ export class BuildParamDomainService {
   }
 
   private isArgument(param: ParamDtoEntityModel): boolean {
-    const entities = [ParamTypeEnum.argument, ParamTypeEnum.alias];
-    return entities.includes(param.paramType);
+    return [
+      ParamTypeEnum.argument,
+      ParamTypeEnum.alias
+    ].includes(param.paramType);
   }
 
   private buildArg(param: ParamDtoEntityModel): ParamDomainArgModel {
@@ -101,6 +115,19 @@ export class BuildParamDomainService {
       values: param.paramValues,
       index: param.paramIndex,
       isAlias: param.paramType === ParamTypeEnum.alias
+    }
+  }
+
+  private parseArgName(argName: string): ArgumentEnum {
+    switch (argName) {
+      case ArgumentEnum.name:
+      case AliasEnum.name:
+        return ArgumentEnum.name;
+      case ArgumentEnum.version:
+      case AliasEnum.version:
+        return ArgumentEnum.version;
+      default:
+        return ArgumentEnum.unknown;
     }
   }
 
@@ -127,18 +154,4 @@ export class BuildParamDomainService {
         return CommandEnum.unknown;
     }
   }
-
-  private parseArgName(argName: string): ArgumentEnum {
-    switch (argName) {
-      case ArgumentEnum.version:
-      case AliasEnum.version:
-        return ArgumentEnum.version;
-      case ArgumentEnum.name:
-      case AliasEnum.name:
-        return ArgumentEnum.name;
-      default:
-        return ArgumentEnum.unknown;
-    }
-  }
 }
-// todo: refactor

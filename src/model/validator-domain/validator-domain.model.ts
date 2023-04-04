@@ -14,7 +14,7 @@ import {
 export interface ValidatorDomainModel {
   runValidator(
     paramDomain: ParamDomainModel,
-    program: ParamDependencyModel,
+    paramDep: ParamDependencyModel,
     command: ParamDependencyCommandModel
   ): ParamDomainValidationModel;
 }

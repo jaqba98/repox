@@ -1,29 +1,28 @@
 import { singleton } from "tsyringe";
 import {
-  BuildParamDomainValidationService
-} from "../builder/build-param-domain-validation.service";
+  ValidatorDomainModel
+} from "../../model/validator-domain/validator-domain.model";
 import {
   GetParamDependenceService
 } from "../service/get-param-dependence.service";
 import {
+  BuildParamDomainValidationService
+} from "../builder/build-param-domain-validation.service";
+import {
   ParamDomainModel
 } from "../../model/param-domain/param-domain.model";
 import {
-  ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
-import {
-  ValidatorDomainModel
-} from "../../model/validator-domain/validator-domain.model";
-import {
   ParamDependencyCommandModel,
-  ParamDependencyCommandsModel,
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
+import {
+  ParamDomainValidationModel
+} from "../../model/param-domain/param-domain-validation.model";
 
 @singleton()
 /**
  * The validator is responsible for checking that
- * the given DTO parameters are in correct order.
+ * the given program arguments are correct.
  */
 export class ProgramArgsValidatorService
   implements ValidatorDomainModel {
@@ -35,10 +34,10 @@ export class ProgramArgsValidatorService
 
   runValidator(
     paramDomain: ParamDomainModel,
-    program: ParamDependencyModel | undefined,
-    command: ParamDependencyCommandModel | undefined
+    paramDep: ParamDependencyModel,
+    command: ParamDependencyCommandModel
   ): ParamDomainValidationModel {
-    const programArgs = program?.args ?? {};
+    const programArgs = paramDep.args;
     const missingProgramArgs = Object.values(programArgs)
       .filter(arg => arg.required)
       .filter(arg => !paramDomain.program.args.find(
@@ -56,7 +55,8 @@ export class ProgramArgsValidatorService
         paramDomain
       );
     }
-    const existedProgramArgs = Object.values(programArgs).map(arg => arg.argName);
+    const existedProgramArgs = Object.values(programArgs)
+      .map(arg => arg.argName);
     const notExistedProgramArgs = paramDomain.program.args
       .filter(arg => !existedProgramArgs.includes(arg.name))
       .map(arg => arg.index);
@@ -71,4 +71,3 @@ export class ProgramArgsValidatorService
     return this.buildParam.paramDomainValidationSuccess(paramDomain);
   }
 }
-// todo: refactor
