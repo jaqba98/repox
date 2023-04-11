@@ -2,9 +2,9 @@
 
 ## Waiting
 
-* refactor the whole project
-
 ## In progress
+
+* refactor the whole project
 
 ## Done
 
