@@ -41,6 +41,19 @@ export class GetParamDependenceService {
                   required: true
                 }
               }
+            },
+            [CommandEnum.project]: {
+              commandName: CommandEnum.project,
+              args: {
+                [ArgumentEnum.name]: {
+                  argName: ArgumentEnum.name,
+                  required: true
+                },
+                [ArgumentEnum.type]: {
+                  argName: ArgumentEnum.type,
+                  required: true
+                }
+              }
             }
           },
           args: {}

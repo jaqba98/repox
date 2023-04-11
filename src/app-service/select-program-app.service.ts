@@ -7,6 +7,9 @@ import {
 } from "../model/param-domain/param-domain.model";
 import { ProgramEnum } from "../enum/program.enum";
 import { CommandEnum } from "../enum/command.enum";
+import {
+  GenerateProjectAppService
+} from "./generate-project-app.service";
 
 @singleton()
 /**
@@ -15,7 +18,8 @@ import { CommandEnum } from "../enum/command.enum";
  */
 export class SelectProgramAppService {
   constructor(
-    private readonly generateWorkspace: GenerateWorkspaceAppService
+    private readonly generateWorkspace: GenerateWorkspaceAppService,
+    private readonly generateProject: GenerateProjectAppService
   ) {
   }
 
@@ -24,6 +28,9 @@ export class SelectProgramAppService {
     switch (runProgram) {
       case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
         this.generateWorkspace.run(paramDomain);
+        break;
+      case `${ProgramEnum.generate}-${CommandEnum.project}`:
+        this.generateProject.run(paramDomain);
         break;
       default:
         throw new Error(

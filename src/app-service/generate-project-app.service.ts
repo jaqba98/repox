@@ -4,32 +4,35 @@ import {
 } from "../model/param-domain/param-domain.model";
 import { ArgumentEnum } from "../enum/argument.enum";
 import {
-  WorkspaceGenerateService
-} from "../infra/service/generate/workspace-generate.service";
+  ProjectGenerateService
+} from "../infra/service/generate/project-generate.service";
 
 @singleton()
 /**
- * The service is responsible for generate workspace.
+ * The service is responsible for generate project.
  */
-export class GenerateWorkspaceAppService {
+export class GenerateProjectAppService {
   constructor(
-    private readonly workspaceGenerate: WorkspaceGenerateService
+    private readonly projectGenerate: ProjectGenerateService
   ) {
   }
 
   run(paramDomain: ParamDomainModel): void {
     const commandArgs = this.getCommandArgs(paramDomain);
     commandArgs.name
-      .forEach(name => this.workspaceGenerate.generate(name));
+      .forEach(name => this.projectGenerate.generate(name, <any>commandArgs.type));
   }
 
   private getCommandArgs(paramDomain: ParamDomainModel): {
-    name: Array<string>
+    name: Array<string>,
+    type: string
   } {
     const { args } = paramDomain.command;
     const argName = args.find(arg => arg.name === ArgumentEnum.name);
+    const argType = args.find(arg => arg.name === ArgumentEnum.type);
     return {
-      name: argName?.values ?? []
+      name: argName?.values ?? [],
+      type: argType?.values[0] ?? "",
     };
   }
 }

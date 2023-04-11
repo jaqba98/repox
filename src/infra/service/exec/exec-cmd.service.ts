@@ -1,7 +1,7 @@
 import { execSync } from "child_process";
 import { singleton } from "tsyringe";
 import { chdir } from "process";
-import { closeSync, openSync } from "fs";
+import { closeSync, mkdirSync, openSync } from "fs";
 
 @singleton()
 /**
@@ -30,6 +30,15 @@ export class ExecCmdService {
   createFile(path: string): boolean {
     try {
       closeSync(openSync(path, 'w'));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  createFolder(path: string): boolean {
+    try {
+      mkdirSync(path);
       return true;
     } catch {
       return false;

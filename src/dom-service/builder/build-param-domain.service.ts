@@ -126,6 +126,9 @@ export class BuildParamDomainService {
       case ArgumentEnum.version:
       case AliasEnum.version:
         return ArgumentEnum.version;
+      case ArgumentEnum.type:
+      case AliasEnum.type:
+        return ArgumentEnum.type;
       default:
         return ArgumentEnum.unknown;
     }
@@ -150,6 +153,9 @@ export class BuildParamDomainService {
       case CommandEnum.workspace:
       case CommandAliasEnum.workspace:
         return CommandEnum.workspace;
+      case CommandEnum.project:
+      case CommandAliasEnum.project:
+        return CommandEnum.project;
       default:
         return CommandEnum.unknown;
     }
