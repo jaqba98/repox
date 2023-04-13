@@ -48,11 +48,11 @@ export class ParamDtoValidationService {
   }
 
   runValidation(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const error = this.getAllValidators()
+    const paramDtoErrors = this.getAllValidators()
       .map(validator => validator.runValidator(paramDto))
       .find(result => result.isError);
-    return error ?
-      error :
+    return paramDtoErrors ?
+      paramDtoErrors :
       this.buildParam.paramDtoValidationSuccess(paramDto);
   }
 
@@ -68,4 +68,3 @@ export class ParamDtoValidationService {
     });
   }
 }
-// todo: fix it
