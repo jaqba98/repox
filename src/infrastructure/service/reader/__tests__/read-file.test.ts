@@ -17,6 +17,12 @@ describe("ReadFileService", () => {
     }
   });
 
+  afterAll(() => {
+    if (existsSync(path)) {
+      unlinkSync(path);
+    }
+  });
+
   test("Should be correct when the file exist", () => {
     writeFileSync(path, JSON.stringify(content, null, 2), "utf-8");
     expect(readFile.readJsonFile<JsonModel>(path)).toEqual(content);

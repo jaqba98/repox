@@ -19,6 +19,12 @@ describe("WriteFileService", () => {
     }
   });
 
+  afterAll(() => {
+    if (existsSync(path)) {
+      unlinkSync(path);
+    }
+  });
+
   test("Should correctly save json data to file", () => {
     writeFile.writeJsonFile<TJsonContent>(path, content);
     const dataFromFile = JSON.parse(readFileSync(path, "utf-8"));
