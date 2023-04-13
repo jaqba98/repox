@@ -30,3 +30,4 @@ export interface ParamDependencyModel {
   commands: ParamDependencyCommandsModel;
   args: ParamDependencyArgsModel;
 }
+// todo: fix it

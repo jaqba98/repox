@@ -9,3 +9,4 @@ export enum ProgramEnum {
 export enum ProgramAliasEnum {
   generate = "g"
 }
+// todo: fix it

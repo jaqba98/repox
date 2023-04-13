@@ -11,3 +11,4 @@ export enum CommandAliasEnum {
   workspace = "w",
   project = "p"
 }
+// todo: fix it

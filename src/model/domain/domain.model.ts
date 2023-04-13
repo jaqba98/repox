@@ -16,3 +16,4 @@ export interface DomainModel {
   version: string;
   projects: DomainProjectsModel;
 }
+// todo: fix it

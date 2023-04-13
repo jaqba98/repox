@@ -43,3 +43,4 @@ export class SelectProgramAppService {
     return `${paramDomain.program.name}-${paramDomain.command.name}`;
   }
 }
+// todo: fix it

@@ -52,3 +52,4 @@ export class CommandExistValidatorService
     return this.buildParam.paramDomainValidationSuccess(paramDomain);
   }
 }
+// todo: fix it

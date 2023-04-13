@@ -54,3 +54,4 @@ export class MaxOneCommandValidatorService
     return this.buildValidation.paramDtoValidationSuccess(paramDto);
   }
 }
+// todo: fix it

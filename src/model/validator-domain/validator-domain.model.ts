@@ -18,3 +18,4 @@ export interface ValidatorDomainModel {
     command: ParamDependencyCommandModel
   ): ParamDomainValidationModel;
 }
+// todo: fix it
