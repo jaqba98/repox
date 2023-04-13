@@ -6,6 +6,17 @@ import {
 } from "../../model/param-dto/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 
+type TProcessArgvToDTO =
+  Pick<ParamDtoEntityModel, "paramBaseValue" | "paramIndex">;
+type TParamType =
+  Pick<ParamDtoEntityModel, keyof TProcessArgvToDTO | "paramType">;
+type TParamHasValue =
+  Pick<ParamDtoEntityModel, keyof TParamType | "paramHasValue">;
+type TParamName =
+  Pick<ParamDtoEntityModel, keyof TParamHasValue | "paramName">;
+type TParamValues =
+  Pick<ParamDtoEntityModel, keyof TParamName | "paramValues">;
+
 @singleton()
 /**
  * The service is responsible for reading the real parameters
@@ -20,27 +31,26 @@ export class ReadParamDtoService {
   read(): ParamDtoModel {
     return this.readProcessArgv.getArgv()
       .map((value: string, index: number) => {
-        return this.processArgvToDTO(value, index);
+        return this.getProcessArgvToDTO(value, index);
       })
       .map(param => this.getParamType(param))
       .map(param => this.getParamHasValue(param))
       .map(param => this.getParamName(param))
       .map(param => this.getParamValues(param))
+      .map(param => this.getParamHasManyValues(param))
       .reduce<ParamDtoModel>((acc, curr) => {
         return this.buildParamDto(acc, curr);
       }, { params: [] });
   }
 
-  private processArgvToDTO(
-    value: string, index: number
-  ): Pick<ParamDtoEntityModel, "paramBaseValue" | "paramIndex"> {
+  private getProcessArgvToDTO(
+    value: string,
+    index: number
+  ): TProcessArgvToDTO {
     return { paramBaseValue: value, paramIndex: index };
   }
 
-  private getParamType(
-    param: Pick<ParamDtoEntityModel, "paramBaseValue" | "paramIndex">
-  ): Omit<ParamDtoEntityModel, "paramHasValue" | "paramName" |
-    "paramValues"> {
+  private getParamType(param: TProcessArgvToDTO): TParamType {
     if (param.paramBaseValue.startsWith("--"))
       return { ...param, paramType: ParamTypeEnum.argument };
     if (param.paramBaseValue.startsWith("-"))
@@ -54,19 +64,12 @@ export class ReadParamDtoService {
     return { ...param, paramType: ParamTypeEnum.command };
   }
 
-  private getParamHasValue(
-    param: Omit<ParamDtoEntityModel, "paramHasValue" | "paramName" |
-      "paramValues">
-  ): Omit<ParamDtoEntityModel, "paramName" | "paramValues"> {
-    return {
-      ...param,
-      paramHasValue: param.paramBaseValue.includes("=")
-    };
+  private getParamHasValue(param: TParamType): TParamHasValue {
+    const paramHasValue: boolean = param.paramBaseValue.includes("=");
+    return { ...param, paramHasValue };
   }
 
-  private getParamName(
-    param: Omit<ParamDtoEntityModel, "paramName" | "paramValues">
-  ): Omit<ParamDtoEntityModel, "paramValues"> {
+  private getParamName(param: TParamHasValue): TParamName {
     const paramName: string = param.paramHasValue ?
       param.paramBaseValue.split("=")[0] :
       param.paramBaseValue;
@@ -79,18 +82,27 @@ export class ReadParamDtoService {
     }
   }
 
-  private getParamValues(
-    param: Omit<ParamDtoEntityModel, "paramValues">
+  private getParamValues(param: TParamName): TParamValues {
+    if (param.paramHasValue) {
+      return {
+        ...param,
+        paramValues: param.paramBaseValue
+          .split("=")[1]
+          .replace(/\s/g, "")
+          .replace(/^(["'`])/, "")
+          .replace(/(["'`])$/, "")
+          .split(",")
+      };
+    }
+    return { ...param, paramValues: [] };
+  }
+
+  private getParamHasManyValues(
+    param: TParamValues
   ): ParamDtoEntityModel {
-    if (!param.paramHasValue) return { ...param, paramValues: [] };
     return {
       ...param,
-      paramValues: param.paramBaseValue
-        .split("=")[1]
-        .replace(/\s/g, "")
-        .replace(/^(["'`])/, "")
-        .replace(/(["'`])$/, "")
-        .split(",")
+      paramHasManyValues: param.paramValues.length > 1
     };
   }
 
@@ -98,7 +110,8 @@ export class ReadParamDtoService {
     acc: ParamDtoModel,
     curr: ParamDtoEntityModel
   ): ParamDtoModel {
-    return { params: [...acc.params, curr] };
+    return {
+      params: [...acc.params, curr]
+    };
   }
 }
-// todo: fix it

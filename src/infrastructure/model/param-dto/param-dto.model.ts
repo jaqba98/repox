@@ -10,9 +10,9 @@ export interface ParamDtoEntityModel {
   paramIndex: number;
   paramType: ParamTypeEnum;
   paramHasValue: boolean;
-  paramHasManyValues: boolean;
   paramName: string;
   paramValues: Array<string>;
+  paramHasManyValues: boolean;
 }
 
 export interface ParamDtoModel {

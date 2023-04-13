@@ -1,6 +1,6 @@
 import { container } from "tsyringe";
 import { WriteFileService } from "../write-file.service";
-import { readFileSync, unlinkSync } from "fs";
+import { existsSync, readFileSync, unlinkSync } from "fs";
 
 /** Testing of the WriteFileService service. */
 
@@ -9,12 +9,14 @@ interface TJsonContent {
 }
 
 describe("WriteFileService", () => {
-  const path: string = "write-file-service-test.json";
+  const path: string = "test.json";
   const content: TJsonContent = { hello: "Hello" };
   const writeFile = container.resolve(WriteFileService);
 
-  afterAll(() => {
-    unlinkSync(path);
+  beforeEach(() => {
+    if (existsSync(path)) {
+      unlinkSync(path);
+    }
   });
 
   test("Should correctly save json data to file", () => {

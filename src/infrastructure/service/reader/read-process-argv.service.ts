@@ -10,4 +10,3 @@ export class ReadProcessArgvService {
     return process.argv;
   }
 }
-// todo: fix it
