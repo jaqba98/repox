@@ -3,7 +3,7 @@ import {
   msgCommandExecutedMessageInfo
 } from "../builder/message/info-msg-builder.service";
 import { ExecCmdService } from "../exec/exec-cmd.service";
-import { LogService } from "../writer/log.service";
+import { WriteLogService } from "../writer/write-log.service";
 import { WriteFileService } from "../writer/write-file.service";
 import { DomainModel } from "../../../model/domain/domain.model";
 
@@ -15,7 +15,7 @@ import { DomainModel } from "../../../model/domain/domain.model";
 export class WorkspaceGenerateService {
   constructor(
     private readonly execCommand: ExecCmdService,
-    private readonly log: LogService,
+    private readonly log: WriteLogService,
     private readonly writeFile: WriteFileService
   ) {
   }

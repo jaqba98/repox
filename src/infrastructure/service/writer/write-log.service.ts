@@ -5,9 +5,8 @@ import { singleton } from "tsyringe";
  * The service is responsible for displaying the message
  * on the screen.
  */
-export class LogService {
+export class WriteLogService {
   message(msg: string): void {
     console.log(msg);
   }
 }
-// todo: fix it

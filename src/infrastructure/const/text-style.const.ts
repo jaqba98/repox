@@ -14,4 +14,3 @@ export const BG_TEXT_RED: string = "\x1b[41m";
 export const BG_TEXT_GREEN: string = "\x1b[42m";
 export const BG_TEXT_YELLOW: string = "\x1b[43m";
 export const BG_TEXT_CYAN: string = "\x1b[46m";
-// todo: fix it

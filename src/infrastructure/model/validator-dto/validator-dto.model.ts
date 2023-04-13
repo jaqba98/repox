@@ -10,4 +10,3 @@ import {
 export interface ValidatorDtoModel {
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel;
 }
-// todo: fix it

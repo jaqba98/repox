@@ -5,7 +5,7 @@ import {
 import {
   ReadParamDomainAppService
 } from "../app-service/read-param-domain-app.service";
-import { LogService } from "../infrastructure/service/writer/log.service";
+import { WriteLogService } from "../infrastructure/service/writer/write-log.service";
 import {
   SelectProgramAppService
 } from "../app-service/select-program-app.service";
@@ -23,7 +23,7 @@ export class MainService {
     private readonly readParamDto: ReadParamDtoAppService,
     private readonly readParamDomain: ReadParamDomainAppService,
     private readonly selectProgram: SelectProgramAppService,
-    private readonly log: LogService
+    private readonly log: WriteLogService
   ) {
   }
 
