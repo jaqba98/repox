@@ -2,12 +2,12 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../infra/model/param-dto/param-dto.model";
+} from "../../infrastructure/model/param-dto/param-dto.model";
 import {
   ParamDomainArgModel,
   ParamDomainModel
 } from "../../model/param-domain/param-domain.model";
-import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
+import { ParamTypeEnum } from "../../infrastructure/enum/param-type.enum";
 import {
   ProgramAliasEnum,
   ProgramEnum

@@ -5,7 +5,7 @@ import {
 import { ArgumentEnum } from "../enum/argument.enum";
 import {
   ProjectGenerateService
-} from "../infra/service/generate/project-generate.service";
+} from "../infrastructure/service/generate/project-generate.service";
 
 @singleton()
 /**

@@ -5,16 +5,16 @@ import {
 import {
   ReadParamDomainAppService
 } from "../app-service/read-param-domain-app.service";
-import { LogService } from "../infra/service/writer/log.service";
+import { LogService } from "../infrastructure/service/writer/log.service";
 import {
   SelectProgramAppService
 } from "../app-service/select-program-app.service";
 import {
   msgParamDtoValidationError
-} from "../infra/service/builder/message/error-msg-builder.service";
+} from "../infrastructure/service/builder/message/error-msg-builder.service";
 import {
   msgCommandExecutedCorrectlySuccess
-} from "../infra/service/builder/message/success-msg-builder.service";
+} from "../infrastructure/service/builder/message/success-msg-builder.service";
 
 @singleton()
 /** Main launch point of the program. */

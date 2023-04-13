@@ -5,7 +5,7 @@ import {
 import { ArgumentEnum } from "../enum/argument.enum";
 import {
   WorkspaceGenerateService
-} from "../infra/service/generate/workspace-generate.service";
+} from "../infrastructure/service/generate/workspace-generate.service";
 
 @singleton()
 /**

@@ -7,8 +7,8 @@ import { ArgumentEnum } from "../../enum/argument.enum";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../infra/model/param-dto/param-dto.model";
-import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
+} from "../../infrastructure/model/param-dto/param-dto.model";
+import { ParamTypeEnum } from "../../infrastructure/enum/param-type.enum";
 import { container } from "tsyringe";
 import {
   GetParamDependenceService

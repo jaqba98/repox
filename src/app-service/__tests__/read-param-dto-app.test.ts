@@ -1,11 +1,11 @@
 import { container } from "tsyringe";
 import {
   ReadProcessArgvService
-} from "../../infra/service/reader/read-process-argv.service";
+} from "../../infrastructure/service/reader/read-process-argv.service";
 import {
   ReadParamDtoAppService
 } from "../read-param-dto-app.service";
-import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
+import { ParamTypeEnum } from "../../infrastructure/enum/param-type.enum";
 
 /** Testing of the ReadParamDtoAppService service. */
 

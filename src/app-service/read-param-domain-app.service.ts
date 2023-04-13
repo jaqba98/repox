@@ -7,7 +7,7 @@ import {
 } from "../dom-service/validation/param-domain-validation.service";
 import {
   ParamDtoModel
-} from "../infra/model/param-dto/param-dto.model";
+} from "../infrastructure/model/param-dto/param-dto.model";
 import {
   ParamDomainValidationModel
 } from "../model/param-domain/param-domain-validation.model";
