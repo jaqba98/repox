@@ -22,21 +22,20 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
 export class OnlySupportedCharactersValidatorService
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
+    private readonly buildParam: BuildParamDtoValidationService
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const errors = paramDto.params
+    const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => !this.checkParamCharacters(param));
-    if (errors.length === 0) {
-      return this.buildValidation.paramDtoValidationSuccess(paramDto);
+    if (wrongParamsDto.length === 0) {
+      return this.buildParam.paramDtoValidationSuccess(paramDto);
     }
-    const tips = errors.map(param => this.getParamTip(param));
-    return this.buildValidation.paramDtoValidationError(
-      errors,
+    return this.buildParam.paramDtoValidationError(
+      wrongParamsDto,
       ["You have added not supported characters!"],
-      tips,
+      wrongParamsDto.map(param => this.getParamTip(param)),
       paramDto
     );
   }
@@ -93,4 +92,3 @@ export class OnlySupportedCharactersValidatorService
     return `Supported characters for ${paramBaseValue} are: ${chars}`;
   }
 }
-// todo: fix it

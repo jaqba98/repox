@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   msgCommandExecutedMessageInfo
 } from "../builder/message/info-msg-builder.service";
-import { ExecCmdService } from "../exec/exec-cmd.service";
+import { ExecCommandService } from "../exec/exec-command.service";
 import { WriteLogService } from "../writer/write-log.service";
 import { WriteFileService } from "../writer/write-file.service";
 import { DomainModel } from "../../../model/domain/domain.model";
@@ -14,7 +14,7 @@ import { DomainModel } from "../../../model/domain/domain.model";
  */
 export class WorkspaceGenerateService {
   constructor(
-    private readonly execCommand: ExecCmdService,
+    private readonly execCommand: ExecCommandService,
     private readonly log: WriteLogService,
     private readonly writeFile: WriteFileService
   ) {
@@ -24,15 +24,15 @@ export class WorkspaceGenerateService {
     this.execCommand.createFolder(name);
     this.execCommand.cd(name);
     this.execCommand.exec("git init");
-    this.execCommand.createFile(".gitignore");
+    // this.execCommand.createFile(".gitignore");
     this.execCommand.createFolder("apps");
     this.execCommand.createFolder("libs");
     this.execCommand.createFolder("tools");
-    this.execCommand.createFile("apps/.gitkeep");
-    this.execCommand.createFile("libs/.gitkeep");
-    this.execCommand.createFile("tools/.gitkeep");
+    // this.execCommand.createFile("apps/.gitkeep");
+    // this.execCommand.createFile("libs/.gitkeep");
+    // this.execCommand.createFile("tools/.gitkeep");
     this.execCommand.exec("npm init -y");
-    this.execCommand.createFile("repox.json");
+    // this.execCommand.createFile("repox.json");
     this.writeFile.writeJsonFile<DomainModel>("repox.json", {
       version: "1.0.10",
       projects: {}

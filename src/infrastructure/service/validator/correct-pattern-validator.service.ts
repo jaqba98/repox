@@ -22,21 +22,20 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
 export class CorrectPatternValidatorService
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
+    private readonly buildParam: BuildParamDtoValidationService
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const errors = paramDto.params
+    const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => !this.checkParamPattern(param));
-    if (errors.length === 0) {
-      return this.buildValidation.paramDtoValidationSuccess(paramDto);
+    if (wrongParamsDto.length === 0) {
+      return this.buildParam.paramDtoValidationSuccess(paramDto);
     }
-    const tips = errors.map(param => this.getParamTip(param));
-    return this.buildValidation.paramDtoValidationError(
-      errors,
+    return this.buildParam.paramDtoValidationError(
+      wrongParamsDto,
       ["You have added incorrect parameter pattern!"],
-      tips,
+      wrongParamsDto.map(param => this.getParamTip(param)),
       paramDto
     );
   }
@@ -65,11 +64,11 @@ export class CorrectPatternValidatorService
 
   private checkArgument(
     paramHasValue: boolean,
-    paramBaseValue: string
+    baseValue: string
   ): boolean {
     return paramHasValue ?
-      /^--[a-zA-Z0-9-]+=[a-zA-Z0-9-"'/`,\s]+$/gm.test(paramBaseValue) :
-      /^--[a-zA-Z0-9-/]+$/gm.test(paramBaseValue);
+      /^--[a-zA-Z0-9-]+=[a-zA-Z0-9-"'/`,\s]+$/gm.test(baseValue) :
+      /^--[a-zA-Z0-9-/]+$/gm.test(baseValue);
   }
 
   private checkAlias(
@@ -112,4 +111,3 @@ export class CorrectPatternValidatorService
     return `Supported pattern for ${paramBaseValue} are: ${pattern}`;
   }
 }
-// todo: fix it

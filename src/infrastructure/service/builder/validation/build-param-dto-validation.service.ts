@@ -26,18 +26,19 @@ export class BuildParamDtoValidationService {
   }
 
   paramDtoValidationError(
-    wrongParamDto: Array<ParamDtoEntityModel>,
+    wrongParamsDto: Array<ParamDtoEntityModel>,
     errors: Array<string>,
     tips: Array<string>,
     paramDto: ParamDtoModel
   ): ParamDtoValidationModel {
+    const wrongParamIndexes: Array<number> = wrongParamsDto
+      .map(param => param.paramIndex);
     return {
       isError: true,
-      wrongParamIndexes: wrongParamDto.map(param => param.paramIndex),
+      wrongParamIndexes,
       errors,
       tips,
       paramDto
     };
   }
 }
-// todo: fix it

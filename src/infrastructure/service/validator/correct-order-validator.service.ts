@@ -22,20 +22,20 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
 export class CorrectOrderValidatorService
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
+    private readonly buildParam: BuildParamDtoValidationService
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const program = paramDto.params
+    const program: ParamDtoEntityModel | undefined = paramDto.params
       .find(param => param.paramType === ParamTypeEnum.program);
-    const errors = paramDto.params
+    const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => !this.checkParamOrder(param, program));
-    if (errors.length === 0) {
-      return this.buildValidation.paramDtoValidationSuccess(paramDto);
+    if (wrongParamsDto.length === 0) {
+      return this.buildParam.paramDtoValidationSuccess(paramDto);
     }
-    return this.buildValidation.paramDtoValidationError(
-      errors,
+    return this.buildParam.paramDtoValidationError(
+      wrongParamsDto,
       ["You have specified the command in the incorrect order!"],
       [
         "You have to specify the command in the correct order.",
@@ -79,7 +79,6 @@ export class CorrectOrderValidatorService
           ParamTypeEnum.alias
         ]
       }
-    ]
+    ];
   }
 }
-// todo: fix it

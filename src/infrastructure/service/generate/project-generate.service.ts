@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   msgCommandExecutedMessageInfo
 } from "../builder/message/info-msg-builder.service";
-import { ExecCmdService } from "../exec/exec-cmd.service";
+import { ExecCommandService } from "../exec/exec-command.service";
 import { WriteLogService } from "../writer/write-log.service";
 import { WriteFileService } from "../writer/write-file.service";
 import { DomainModel } from "../../../model/domain/domain.model";
@@ -15,7 +15,7 @@ import { ReadFileService } from "../reader/read-file.service";
  */
 export class ProjectGenerateService {
   constructor(
-    private readonly execCommand: ExecCmdService,
+    private readonly execCommand: ExecCommandService,
     private readonly log: WriteLogService,
     private readonly writeFile: WriteFileService,
     private readonly readFile: ReadFileService

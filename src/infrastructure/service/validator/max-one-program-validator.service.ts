@@ -5,7 +5,10 @@ import {
 import {
   BuildParamDtoValidationService
 } from "../builder/validation/build-param-dto-validation.service";
-import { ParamDtoModel } from "../../model/param-dto/param-dto.model";
+import {
+  ParamDtoEntityModel,
+  ParamDtoModel
+} from "../../model/param-dto/param-dto.model";
 import {
   ParamDtoValidationModel
 } from "../../model/param-dto/param-dto-validation.model";
@@ -19,15 +22,15 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
 export class MaxOneProgramValidatorService
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildValidation: BuildParamDtoValidationService
+    private readonly buildParam: BuildParamDtoValidationService
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const programs = paramDto.params
+    const programs: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => param.paramType === ParamTypeEnum.program);
     if (programs.length > 1) {
-      return this.buildValidation.paramDtoValidationError(
+      return this.buildParam.paramDtoValidationError(
         programs,
         ["You have specified too many programs!"],
         [
@@ -37,7 +40,6 @@ export class MaxOneProgramValidatorService
         paramDto
       );
     }
-    return this.buildValidation.paramDtoValidationSuccess(paramDto);
+    return this.buildParam.paramDtoValidationSuccess(paramDto);
   }
 }
-// todo: fix it
