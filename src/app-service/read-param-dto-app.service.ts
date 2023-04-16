@@ -8,6 +8,9 @@ import {
 import {
   ParamDtoValidationModel
 } from "../infra/model/param-dto/param-dto-validation.model";
+import {
+  ParamDtoModel
+} from "../infra/model/param-dto/param-dto.model";
 
 @singleton()
 /**
@@ -22,8 +25,7 @@ export class ReadParamDtoAppService {
   }
 
   read(): ParamDtoValidationModel {
-    const paramDto = this.readParamDto.read();
+    const paramDto: ParamDtoModel = this.readParamDto.read();
     return this.paramDtoValidation.runValidation(paramDto);
   }
 }
-// todo: fix it
