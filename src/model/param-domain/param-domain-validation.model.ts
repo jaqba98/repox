@@ -8,4 +8,3 @@ export interface ParamDomainValidationModel {
   tips: Array<string>;
   paramDomain: ParamDomainModel;
 }
-// todo: fix it

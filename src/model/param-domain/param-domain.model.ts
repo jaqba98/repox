@@ -22,11 +22,11 @@ export interface ProgramDefaultArgsModel {
 export interface CommandDefaultArgsModel {
 }
 
-export interface CommandGenerateWorkspaceArgsModel {
+export interface ProgramGenerateCommandWorkspaceArgsModel {
   name: BaseFieldModel;
 }
 
-export interface CommandGenerateProjectArgsModel {
+export interface CommandGenerateCommandProjectArgsModel {
   name: BaseFieldModel;
   type: BaseFieldModel;
 }
@@ -37,8 +37,8 @@ export type ParamDomainArgsModel =
   UnknownArgsModel |
   ProgramDefaultArgsModel |
   CommandDefaultArgsModel |
-  CommandGenerateWorkspaceArgsModel |
-  CommandGenerateProjectArgsModel;
+  ProgramGenerateCommandWorkspaceArgsModel |
+  CommandGenerateCommandProjectArgsModel;
 
 export interface ParamDomainEntityModel<TName> {
   name: TName;

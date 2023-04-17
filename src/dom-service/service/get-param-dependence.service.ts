@@ -1,10 +1,10 @@
-import { CommandEnum } from "../../enum/command.enum";
 import { singleton } from "tsyringe";
 import { ProgramEnum } from "../../enum/program.enum";
 import {
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
 import { ArgumentEnum } from "../../enum/argument.enum";
+import { CommandEnum } from "../../enum/command.enum";
 
 @singleton()
 /**
@@ -16,41 +16,50 @@ export class GetParamDependenceService {
     switch (program) {
       case ProgramEnum.default:
         return {
-          programName: ProgramEnum.default,
+          program: ProgramEnum.default,
           commands: {
-            [CommandEnum.default]: {
-              commandName: CommandEnum.default,
+            default: {
+              command: CommandEnum.default,
               args: {}
             }
           },
-          args: {}
+          args: {
+            version: {
+              name: ArgumentEnum.version,
+              mustHasValue: false,
+              mustHasManyValues: false,
+              required: false
+            }
+          }
         };
       case ProgramEnum.generate:
         return {
-          programName: ProgramEnum.generate,
+          program: ProgramEnum.generate,
           commands: {
-            [CommandEnum.default]: {
-              commandName: CommandEnum.default,
-              args: {}
-            },
-            [CommandEnum.workspace]: {
-              commandName: CommandEnum.workspace,
+            workspace: {
+              command: CommandEnum.workspace,
               args: {
-                [ArgumentEnum.name]: {
-                  argName: ArgumentEnum.name,
+                name: {
+                  name: ArgumentEnum.name,
+                  mustHasValue: true,
+                  mustHasManyValues: false,
                   required: true
                 }
               }
             },
-            [CommandEnum.project]: {
-              commandName: CommandEnum.project,
+            project: {
+              command: CommandEnum.project,
               args: {
-                [ArgumentEnum.name]: {
-                  argName: ArgumentEnum.name,
+                name: {
+                  name: ArgumentEnum.name,
+                  mustHasValue: true,
+                  mustHasManyValues: false,
                   required: true
                 },
-                [ArgumentEnum.type]: {
-                  argName: ArgumentEnum.type,
+                type: {
+                  name: ArgumentEnum.type,
+                  mustHasValue: true,
+                  mustHasManyValues: false,
                   required: true
                 }
               }
@@ -60,7 +69,7 @@ export class GetParamDependenceService {
         };
       case ProgramEnum.unknown:
         return {
-          programName: ProgramEnum.unknown,
+          program: ProgramEnum.unknown,
           commands: {},
           args: {}
         };
@@ -71,4 +80,3 @@ export class GetParamDependenceService {
     }
   }
 }
-// todo: fix it

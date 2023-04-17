@@ -8,7 +8,9 @@ import { ProgramEnum } from "../../enum/program.enum";
  */
 
 export interface ParamDependencyArgModel {
-  argName: ArgumentEnum;
+  name: ArgumentEnum;
+  mustHasValue: boolean;
+  mustHasManyValues: boolean;
   required: boolean;
 }
 
@@ -17,7 +19,7 @@ export interface ParamDependencyArgsModel {
 }
 
 export interface ParamDependencyCommandModel {
-  commandName: CommandEnum;
+  command: CommandEnum;
   args: ParamDependencyArgsModel;
 }
 
@@ -26,8 +28,7 @@ export interface ParamDependencyCommandsModel {
 }
 
 export interface ParamDependencyModel {
-  programName: ProgramEnum;
+  program: ProgramEnum;
   commands: ParamDependencyCommandsModel;
   args: ParamDependencyArgsModel;
 }
-// todo: fix it

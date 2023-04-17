@@ -3,6 +3,9 @@ import {
   BuildParamDomainService
 } from "../dom-service/builder/build-param-domain.service";
 import {
+  ParamDomainValidationService
+} from "../dom-service/validation/param-domain-validation.service";
+import {
   ParamDtoModel
 } from "../infra/model/param-dto/param-dto.model";
 import {
@@ -16,21 +19,13 @@ import {
  */
 export class ReadParamDomainAppService {
   constructor(
-    private readonly buildParamDomain: BuildParamDomainService
-    // private readonly domainValidation: ParamDomainValidationService
+    private readonly buildParamDomain: BuildParamDomainService,
+    private readonly paramValidation: ParamDomainValidationService
   ) {
   }
 
   build(paramDto: ParamDtoModel): ParamDomainValidationModel {
     const paramDomain = this.buildParamDomain.build(paramDto);
-    return {
-      isError: false,
-      wrongParamIndexes: [],
-      errors: [],
-      tips: [],
-      paramDomain
-    };
-    // return this.domainValidation.runValidation(paramDomain);
+    return this.paramValidation.runValidation(paramDomain);
   }
 }
-// todo: fix it

@@ -14,8 +14,8 @@ import {
 import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 import {
   CommandDefaultArgsModel,
-  CommandGenerateProjectArgsModel,
-  CommandGenerateWorkspaceArgsModel,
+  CommandGenerateCommandProjectArgsModel,
+  ProgramGenerateCommandWorkspaceArgsModel,
   ParamDomainArgsModel,
   ParamDomainModel,
   ProgramDefaultArgsModel,
@@ -107,7 +107,9 @@ export class BuildParamDomainService {
     programName: ProgramEnum,
     programArgs: Array<ParamDtoEntityModel>
   ): ParamDomainArgsModel {
-    const version = this.getArg(programArgs, ArgumentEnum.version, AliasEnum.version);
+    const version = this.getArg(
+      programArgs, ArgumentEnum.version, AliasEnum.version
+    );
     switch (programName) {
       case ProgramEnum.default:
         return <ProgramDefaultArgsModel>{
@@ -163,13 +165,17 @@ export class BuildParamDomainService {
     commandName: CommandEnum,
     programArgs: Array<ParamDtoEntityModel>
   ): ParamDomainArgsModel {
-    const name = this.getArg(programArgs, ArgumentEnum.name, AliasEnum.name);
-    const type = this.getArg(programArgs, ArgumentEnum.name, AliasEnum.name);
+    const name = this.getArg(
+      programArgs, ArgumentEnum.name, AliasEnum.name
+    );
+    const type = this.getArg(
+      programArgs, ArgumentEnum.name, AliasEnum.name
+    );
     switch (commandName) {
       case CommandEnum.default:
         return <CommandDefaultArgsModel>{};
       case CommandEnum.workspace:
-        return <CommandGenerateWorkspaceArgsModel>{
+        return <ProgramGenerateCommandWorkspaceArgsModel>{
           name: {
             name: ArgumentEnum.name,
             index: name?.paramIndex,
@@ -179,7 +185,7 @@ export class BuildParamDomainService {
           }
         };
       case CommandEnum.project:
-        return <CommandGenerateProjectArgsModel>{
+        return <CommandGenerateCommandProjectArgsModel>{
           name: {
             name: ArgumentEnum.name,
             index: name?.paramIndex,
