@@ -9,9 +9,6 @@ import {
   WriteLogService
 } from "../infra/service/writer/write-log.service";
 import {
-  SelectProgramAppService
-} from "../app-service/select-program-app.service";
-import {
   msgParamDtoValidationError
 } from "../infra/service/builder/message/error-msg-builder.service";
 import {
@@ -24,7 +21,7 @@ export class MainService {
   constructor(
     private readonly readParamDto: ReadParamDtoAppService,
     private readonly readParamDomain: ReadParamDomainAppService,
-    private readonly selectProgram: SelectProgramAppService,
+    // private readonly selectProgram: SelectProgramAppService,
     private readonly log: WriteLogService
   ) {
   }
@@ -43,7 +40,7 @@ export class MainService {
       }));
       return;
     }
-    this.selectProgram.selectProgram(paramDomain.paramDomain);
+    // this.selectProgram.selectProgram(paramDomain.paramDomain);
     this.log.message(msgCommandExecutedCorrectlySuccess());
   }
 }
