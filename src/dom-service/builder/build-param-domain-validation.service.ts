@@ -9,7 +9,7 @@ import {
 @singleton()
 /**
  * The service is responsible for build
- * the param domain validation successes and errors.
+ * the param config validation successes and errors.
  */
 export class BuildParamDomainValidationService {
   paramDomainValidationSuccess(

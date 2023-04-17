@@ -31,7 +31,7 @@ export interface CommandGenerateCommandProjectArgsModel {
   type: BaseFieldModel;
 }
 
-/** Parameter domain model for correct parameters. */
+/** Parameter config model for correct parameters. */
 
 export type ParamDomainArgsModel =
   UnknownArgsModel |

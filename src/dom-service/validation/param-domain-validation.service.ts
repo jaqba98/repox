@@ -17,22 +17,22 @@ import {
 import {
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
-// import {
-//   ProgramExistValidatorService
-// } from "../validator/program-exist-validator.service";
-// import {
-//   CommandExistValidatorService
-// } from "../validator/command-exist-validator.service";
-// import {
-//   ProgramArgsValidatorService
-// } from "../validator/program-args-validator.service";
-// import {
-//   CommandArgsValidatorService
-// } from "../validator/command-args-validator.service";
+import {
+  ProgramExistValidatorService
+} from "../validator/program-exist-validator.service";
+import {
+  CommandExistValidatorService
+} from "../validator/command-exist-validator.service";
+import {
+  ProgramArgsValidatorService
+} from "../validator/program-args-validator.service";
+import {
+  CommandArgsValidatorService
+} from "../validator/command-args-validator.service";
 
 @singleton()
 /**
- * The service is responsible for verify the parameter domain model.
+ * The service is responsible for verify the parameter config model.
  */
 export class ParamDomainValidationService {
   constructor(
@@ -59,10 +59,10 @@ export class ParamDomainValidationService {
 
   private getAllValidators(): Array<ValidatorDomainModel> {
     return [
-      // ProgramExistValidatorService,
-      // CommandExistValidatorService,
-      // ProgramArgsValidatorService,
-      // CommandArgsValidatorService
+      ProgramExistValidatorService,
+      CommandExistValidatorService,
+      ProgramArgsValidatorService,
+      CommandArgsValidatorService
     ].map(validator => {
       return container.resolve<ValidatorDomainModel>(validator);
     });

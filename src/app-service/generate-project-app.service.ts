@@ -1,7 +1,7 @@
 // import { singleton } from "tsyringe";
 // import {
 //   ParamDomainModel
-// } from "../model/param-domain/param-domain.model";
+// } from "../model/param-config/param-config.model";
 // import { ArgumentEnum } from "../enum/argument.enum";
 // import {
 //   ProjectGenerateService

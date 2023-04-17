@@ -5,7 +5,7 @@ test("", () => {
 // import { ProgramEnum } from "../../enum/program.enum";
 // import {
 //   ParamDependencyModel
-// } from "../../model/param-domain/param-dependency.model";
+// } from "../../model/param-config/param-dependency.model";
 // import { CommandEnum } from "../../enum/command.enum";
 // import { ArgumentEnum } from "../../enum/argument.enum";
 // import {
@@ -19,10 +19,10 @@ test("", () => {
 // } from "../../dom-service/service/get-param-dependence.service";
 // import {
 //   ReadParamDomainAppService
-// } from "../read-param-domain-app.service";
+// } from "../read-param-config-app.service";
 // import {
 //   ParamDomainValidationModel
-// } from "../../model/param-domain/param-domain-validation.model";
+// } from "../../model/param-config/param-config-validation.model";
 //
 // /** Testing of the ReadParamDomainAppService service. */
 //

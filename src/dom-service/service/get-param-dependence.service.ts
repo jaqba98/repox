@@ -18,7 +18,7 @@ export class GetParamDependenceService {
         return {
           program: ProgramEnum.default,
           commands: {
-            default: {
+            "": {
               command: CommandEnum.default,
               args: {}
             }
@@ -36,6 +36,10 @@ export class GetParamDependenceService {
         return {
           program: ProgramEnum.generate,
           commands: {
+            "": {
+              command: CommandEnum.default,
+              args: {}
+            },
             workspace: {
               command: CommandEnum.workspace,
               args: {

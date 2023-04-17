@@ -40,8 +40,6 @@ export class MainService {
       }));
       return;
     }
-    // todo: remove it
-    console.log(JSON.stringify(paramDomain, null, 2))
     this.log.message(msgCommandExecutedCorrectlySuccess());
   }
 }

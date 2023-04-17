@@ -4,7 +4,7 @@
 // } from "./generate-workspace-app.service";
 // import {
 //   ParamDomainModel
-// } from "../model/param-domain/param-domain.model";
+// } from "../model/param-config/param-config.model";
 // import { ProgramEnum } from "../enum/program.enum";
 // import { CommandEnum } from "../enum/command.enum";
 // import {

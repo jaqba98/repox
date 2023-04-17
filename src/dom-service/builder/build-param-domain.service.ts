@@ -26,7 +26,7 @@ import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
 @singleton()
 /**
  * The service is responsible for building
- * the parameter domain model.
+ * the parameter config model.
  */
 export class BuildParamDomainService {
   build(paramDto: ParamDtoModel): ParamDomainModel {
@@ -169,7 +169,7 @@ export class BuildParamDomainService {
       programArgs, ArgumentEnum.name, AliasEnum.name
     );
     const type = this.getArg(
-      programArgs, ArgumentEnum.name, AliasEnum.name
+      programArgs, ArgumentEnum.type, AliasEnum.type
     );
     switch (commandName) {
       case CommandEnum.default:

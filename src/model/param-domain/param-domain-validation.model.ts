@@ -1,6 +1,6 @@
 import { ParamDomainModel } from "./param-domain.model";
 
-/** The result model of the parameter domain validation. */
+/** The result model of the parameter config validation. */
 export interface ParamDomainValidationModel {
   isError: boolean;
   wrongParamIndexes: Array<number>;

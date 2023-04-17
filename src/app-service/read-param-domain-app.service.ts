@@ -15,7 +15,7 @@ import {
 @singleton()
 /**
  * The app service is responsible for build and validate
- * the parameter domain model.
+ * the parameter config model.
  */
 export class ReadParamDomainAppService {
   constructor(
