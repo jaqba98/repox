@@ -1,4 +1,4 @@
-import { container } from "tsyringe";
+import { container, DependencyContainer } from "tsyringe";
 import {
   ReadProcessArgvService
 } from "../../infra/service/reader/read-process-argv.service";
@@ -6,12 +6,14 @@ import {
   ReadParamDtoAppService
 } from "../read-param-dto-app.service";
 import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
+import {
+  ParamDtoValidationModel
+} from "../../infra/model/param-dto/param-dto-validation.model";
 
-/** Testing of the ReadParamDtoAppService service. */
+/** Testing of the ReadParamDtoAppService. */
 
-const child = container.createChildContainer();
-
-const mockGetProcessArgvService = (argv: Array<string>) => {
+const runTest = (argv: Array<string>): ParamDtoValidationModel => {
+  const child: DependencyContainer = container.createChildContainer();
   child.register(ReadProcessArgvService, {
     useClass: class {
       getArgv(): Array<string> {
@@ -19,75 +21,66 @@ const mockGetProcessArgvService = (argv: Array<string>) => {
       }
     }
   });
-};
-
-const runTest = (argv: Array<string>) => {
-  mockGetProcessArgvService(argv);
   return child.resolve(ReadParamDtoAppService).read();
 };
 
-beforeEach(() => {
-  container.clearInstances();
-  container.reset();
-});
-
-afterAll(() => {
+afterEach(() => {
   container.clearInstances();
   container.reset();
 });
 
 describe("ReadParamDtoAppService - parameter order", () => {
-  test("should be correct for the command: repox", () => {
+  test("Should be correct for the command: repox", () => {
     expect(runTest([]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: repox -v", () => {
+  test("Should be correct for the command: repox -v", () => {
     expect(runTest(["-v"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: repox g", () => {
+  test("Should be correct for the command: repox g", () => {
     expect(runTest(["g"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: repox g -c", () => {
+  test("Should be correct for the command: repox g -c", () => {
     expect(runTest(["g", "-c"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: repox -v -c", () => {
+  test("Should be correct for the command: repox -v -c", () => {
     expect(runTest(["-v", "-c"]).isError).toBeFalsy();
   });
 
-  test("should be incorrect for the command: repox -v g", () => {
+  test("Should be incorrect for the command: repox -v g", () => {
     expect(runTest(["-v", "g"]).isError).toBeTruthy();
   });
 
-  test("should be incorrect for the command: repox -v g -c", () => {
+  test("Should be incorrect for the command: repox -v g -c", () => {
     expect(runTest(["-v", "g", "-c"]).isError).toBeTruthy();
   });
 
-  test("should be correct for the command: repox g w", () => {
+  test("Should be correct for the command: repox g w", () => {
     expect(runTest(["g", "w"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: repox g w -t=test", () => {
+  test("Should be correct for the command: repox g w -t=test", () => {
     expect(runTest(["g", "w", "-t=test"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: repox g -c -t", () => {
+  test("Should be correct for the command: repox g -c -t", () => {
     expect(runTest(["g", "-c", "-t"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: repox g -c w", () => {
+  test("Should be correct for the command: repox g -c w", () => {
     expect(runTest(["g", "-c", "w"]).isError).toBeFalsy();
   });
 
-  test("should be correct for the command: repox g -c w -n", () => {
+  test("Should be correct for the command: repox g -c w -n", () => {
     expect(runTest(["g", "-c", "w", "-n"]).isError).toBeFalsy();
   });
 });
 
-describe("ReadParamDtoAppService - parameter structure for program and command", () => {
-  test("should be correct for the command: repox", () => {
+describe("ReadParamDtoAppService - parameter structure", () => {
+  test("Should be correct for the command: repox", () => {
     const result = runTest([]);
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -95,11 +88,11 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(result.tips).toEqual([]);
   });
 
-  test("should be correct for the command: repox g", () => {
+  test("Should be correct for the command: repox g", () => {
     const result = runTest(["generate"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[2];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -109,6 +102,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramIndex).toEqual(2);
     expect(paramType).toEqual(ParamTypeEnum.program);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("generate");
     expect(paramValues).toEqual([]);
   });
@@ -117,7 +111,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     const result = runTest(["gener%%a_&te"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[2];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([2]);
@@ -127,6 +121,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramIndex).toEqual(2);
     expect(paramType).toEqual(ParamTypeEnum.program);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("gener%%a_&te");
     expect(paramValues).toEqual([]);
   });
@@ -135,7 +130,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     const result = runTest(["generate-workspace"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[2];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -145,6 +140,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramIndex).toEqual(2);
     expect(paramType).toEqual(ParamTypeEnum.program);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("generate-workspace");
     expect(paramValues).toEqual([]);
   });
@@ -153,7 +149,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     const result = runTest(["generate=true"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[2];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([2]);
@@ -163,6 +159,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramIndex).toEqual(2);
     expect(paramType).toEqual(ParamTypeEnum.program);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("generate");
     expect(paramValues).toEqual(["true"]);
   });
@@ -171,7 +168,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     const result = runTest(["generate", "workspace"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -181,6 +178,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.command);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("workspace");
     expect(paramValues).toEqual([]);
   });
@@ -189,7 +187,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     const result = runTest(["generate", "work$$sp&&*ace"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -199,6 +197,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.command);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("work$$sp&&*ace");
     expect(paramValues).toEqual([]);
   });
@@ -207,7 +206,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     const result = runTest(["generate", "workspace-node"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -217,6 +216,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.command);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("workspace-node");
     expect(paramValues).toEqual([]);
   });
@@ -225,7 +225,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     const result = runTest(["generate", "workspace=true"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -235,6 +235,7 @@ describe("ReadParamDtoAppService - parameter structure for program and command",
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.command);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("workspace");
     expect(paramValues).toEqual(["true"]);
   });
@@ -245,7 +246,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -255,6 +256,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual([]);
   });
@@ -263,7 +265,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--n$$a%^me"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -273,6 +275,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n$$a%^me");
     expect(paramValues).toEqual([]);
   });
@@ -281,7 +284,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name=test"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -291,6 +294,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["test"]);
   });
@@ -299,7 +303,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", '--name="test"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -309,6 +313,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["test"]);
   });
@@ -317,7 +322,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name='test'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -327,6 +332,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["test"]);
   });
@@ -335,7 +341,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name=`test`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -345,6 +351,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["test"]);
   });
@@ -353,7 +360,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name=te$$s&&t"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -363,6 +370,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
@@ -371,7 +379,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", '--name="te$$s&&t"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -381,6 +389,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
@@ -389,7 +398,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name='te$$s&&t'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -399,6 +408,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
@@ -407,7 +417,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name=`te$$s&&t`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -417,6 +427,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
@@ -425,7 +436,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name=test1,test2,test3"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -435,6 +446,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
@@ -443,7 +455,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", '--name="test1,test2,test3"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -453,6 +465,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
@@ -461,7 +474,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name='test1,test2,test3'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -471,6 +484,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
@@ -479,7 +493,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const result = runTest(["generate", "--name=`test1,test2,test3`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -489,6 +503,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.argument);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
@@ -499,7 +514,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-i"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -509,6 +524,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("i");
     expect(paramValues).toEqual([]);
   });
@@ -517,7 +533,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-%"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -527,6 +543,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("%");
     expect(paramValues).toEqual([]);
   });
@@ -535,7 +552,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-name"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -545,6 +562,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeFalsy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
     expect(paramValues).toEqual([]);
   });
@@ -553,7 +571,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-n=test"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -563,6 +581,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["test"]);
   });
@@ -571,7 +590,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", '-n="test"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -581,6 +600,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["test"]);
   });
@@ -589,7 +609,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-n='test'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -599,6 +619,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["test"]);
   });
@@ -607,7 +628,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-n=`test`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -617,6 +638,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["test"]);
   });
@@ -625,7 +647,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-n=te%%s$$t"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -635,6 +657,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
@@ -643,7 +666,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", '-n="te%%s$$t"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -653,6 +676,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
@@ -661,7 +685,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-n='te%%s$$t'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -671,6 +695,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
@@ -679,7 +704,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-n=`te%%s$$t`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([3]);
@@ -689,6 +714,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
@@ -697,7 +723,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-n=test1,test2,test3"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -707,6 +733,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
@@ -715,7 +742,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", '-n="test1,test2,test3"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -725,6 +752,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
@@ -733,7 +761,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-n='test1,test2,test3'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -743,6 +771,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
@@ -751,7 +780,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const result = runTest(["generate", "-n=`test1,test2,test3`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
-      paramName, paramValues
+      paramHasManyValues, paramName, paramValues
     } = result.paramDto.params[3];
     expect(result.isError).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([]);
@@ -761,8 +790,8 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual(ParamTypeEnum.alias);
     expect(paramHasValue).toBeTruthy();
+    expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("n");
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 });
-// todo: fix it
