@@ -1,3 +1,7 @@
+test("", () => {
+  expect(true).toBeTruthy();
+})
+
 // import { container, DependencyContainer } from "tsyringe";
 // import {
 //   ReadProcessArgvService
