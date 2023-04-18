@@ -1,19 +1,19 @@
-import {
-  msgCommandExecutedCorrectlySuccess
-} from "../infra/service/builder/message/success-msg-builder.service";
 import { singleton } from "tsyringe";
 import {
   ReadParamDtoAppService
-} from "../app-service/read-param-dto-app.service";
+} from "../app-service/service/read-param-dto-app.service";
 import {
   ReadParamDomainAppService
-} from "../app-service/read-param-domain-app.service";
+} from "../app-service/service/read-param-domain-app.service";
 import {
   WriteLogService
 } from "../infra/service/writer/write-log.service";
 import {
   msgParamDtoValidationError
 } from "../infra/service/builder/message/error-msg-builder.service";
+import {
+  SelectProgramAppService
+} from "../app-service/service/select-program-app.service";
 
 @singleton()
 /** Main launch point of the program. */
@@ -21,7 +21,8 @@ export class MainService {
   constructor(
     private readonly readParamDto: ReadParamDtoAppService,
     private readonly readParamDomain: ReadParamDomainAppService,
-    private readonly log: WriteLogService
+    private readonly log: WriteLogService,
+    private readonly selectProgram: SelectProgramAppService
   ) {
   }
 
@@ -33,13 +34,12 @@ export class MainService {
     }
     const paramDomain = this.readParamDomain.build(paramDto.paramDto);
     if (paramDomain.isError) {
-      // todo: fix the message
       this.log.message(msgParamDtoValidationError({
         ...paramDomain,
         paramDto: paramDto.paramDto
       }));
       return;
     }
-    this.log.message(msgCommandExecutedCorrectlySuccess());
+    this.selectProgram.selectProgram(paramDomain.paramDomain);
   }
 }

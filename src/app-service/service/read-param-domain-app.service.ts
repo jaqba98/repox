@@ -1,16 +1,16 @@
 import { singleton } from "tsyringe";
 import {
   BuildParamDomainService
-} from "../dom-service/builder/build-param-domain.service";
+} from "../../dom-service/builder/build-param-domain.service";
 import {
   ParamDomainValidationService
-} from "../dom-service/validation/param-domain-validation.service";
+} from "../../dom-service/validation/param-domain-validation.service";
 import {
   ParamDtoModel
-} from "../infra/model/param-dto/param-dto.model";
+} from "../../infra/model/param-dto/param-dto.model";
 import {
   ParamDomainValidationModel
-} from "../model/param-domain/param-domain-validation.model";
+} from "../../model/param-domain/param-domain-validation.model";
 
 @singleton()
 /**

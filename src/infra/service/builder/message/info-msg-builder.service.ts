@@ -4,4 +4,3 @@ import { buildInfoMsg } from "./base-msg-builder.service";
 
 export const msgCommandExecutedMessageInfo = (msg: string): string =>
   buildInfoMsg(msg);
-// todo: fix it

@@ -3,11 +3,14 @@
 export enum ArgumentEnum {
   version = "version",
   name = "name",
-  type = "type"
+  type = "type",
+  clean = "clean",
+  verbose = "verbose"
 }
 
 export enum AliasEnum {
   version = "v",
   name = "n",
-  type = "t"
+  type = "t",
+  clean = "c"
 }

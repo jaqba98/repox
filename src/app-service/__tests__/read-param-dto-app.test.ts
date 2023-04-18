@@ -4,7 +4,7 @@ import {
 } from "../../infra/service/reader/read-process-argv.service";
 import {
   ReadParamDtoAppService
-} from "../read-param-dto-app.service";
+} from "../service/read-param-dto-app.service";
 import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 import {
   ParamDtoValidationModel

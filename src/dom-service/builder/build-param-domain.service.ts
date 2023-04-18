@@ -14,12 +14,12 @@ import {
 import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 import {
   CommandDefaultArgsModel,
-  CommandGenerateCommandProjectArgsModel,
-  ProgramGenerateCommandWorkspaceArgsModel,
+  EmptyArgsModel,
   ParamDomainArgsModel,
   ParamDomainModel,
   ProgramDefaultArgsModel,
-  UnknownArgsModel
+  ProgramGenerateCommandProjectArgsModel,
+  ProgramGenerateCommandWorkspaceArgsModel
 } from "../../model/param-domain/param-domain.model";
 import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
 
@@ -110,6 +110,9 @@ export class BuildParamDomainService {
     const version = this.getArg(
       programArgs, ArgumentEnum.version, AliasEnum.version
     );
+    const clean = this.getArg(
+      programArgs, ArgumentEnum.clean, AliasEnum.clean
+    );
     switch (programName) {
       case ProgramEnum.default:
         return <ProgramDefaultArgsModel>{
@@ -118,11 +121,20 @@ export class BuildParamDomainService {
             index: version?.paramIndex,
             value: version?.paramValues,
             hasValue: version?.paramHasValue,
-            hasManyValues: version?.paramHasManyValues
+            hasManyValues: version?.paramHasManyValues,
+            isDefined: Boolean(version?.paramIndex)
+          },
+          clean: {
+            name: ArgumentEnum.clean,
+            index: clean?.paramIndex,
+            value: clean?.paramValues,
+            hasValue: clean?.paramHasValue,
+            hasManyValues: clean?.paramHasManyValues,
+            isDefined: Boolean(clean?.paramIndex)
           }
         };
       default:
-        return <UnknownArgsModel>{};
+        return <EmptyArgsModel>{};
     }
   }
 
@@ -181,28 +193,31 @@ export class BuildParamDomainService {
             index: name?.paramIndex,
             value: name?.paramValues,
             hasValue: name?.paramHasValue,
-            hasManyValues: name?.paramHasManyValues
+            hasManyValues: name?.paramHasManyValues,
+            isDefined: Boolean(name?.paramIndex)
           }
         };
       case CommandEnum.project:
-        return <CommandGenerateCommandProjectArgsModel>{
+        return <ProgramGenerateCommandProjectArgsModel>{
           name: {
             name: ArgumentEnum.name,
             index: name?.paramIndex,
             value: name?.paramValues,
             hasValue: name?.paramHasValue,
-            hasManyValues: name?.paramHasManyValues
+            hasManyValues: name?.paramHasManyValues,
+            isDefined: Boolean(name?.paramIndex)
           },
           type: {
             name: ArgumentEnum.type,
             index: type?.paramIndex,
             value: type?.paramValues,
             hasValue: type?.paramHasValue,
-            hasManyValues: type?.paramHasManyValues
+            hasManyValues: type?.paramHasManyValues,
+            isDefined: Boolean(type?.paramIndex)
           }
         };
       default:
-        return <UnknownArgsModel>{};
+        return <EmptyArgsModel>{};
     }
   }
 

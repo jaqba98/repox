@@ -2,12 +2,15 @@
 
 ## Waiting
 
+* create the generate workspace project
+
 ## In progress
 
-* refactor the whole project
+* create the generate workspace command
 
 ## Done
 
+* refactor the whole project
 * create the program generate project
 * create the program: generate and command: workspace
 * refactor the whole project

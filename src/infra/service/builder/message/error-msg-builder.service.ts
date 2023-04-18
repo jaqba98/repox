@@ -22,4 +22,3 @@ export const msgParamDtoValidationError = (
     .concat(newline())
     .concat(buildManyTipMsg(validationDto.tips));
 }
-// todo: fix it

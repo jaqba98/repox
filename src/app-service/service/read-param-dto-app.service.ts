@@ -1,16 +1,16 @@
 import { singleton } from "tsyringe";
 import {
   ReadParamDtoService
-} from "../infra/service/reader/read-param-dto.service";
+} from "../../infra/service/reader/read-param-dto.service";
 import {
   ParamDtoValidationService
-} from "../infra/service/validation/param-dto-validation.service";
+} from "../../infra/service/validation/param-dto-validation.service";
 import {
   ParamDtoValidationModel
-} from "../infra/model/param-dto/param-dto-validation.model";
+} from "../../infra/model/param-dto/param-dto-validation.model";
 import {
   ParamDtoModel
-} from "../infra/model/param-dto/param-dto.model";
+} from "../../infra/model/param-dto/param-dto.model";
 
 @singleton()
 /**

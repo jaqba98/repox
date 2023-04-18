@@ -10,13 +10,15 @@ export interface BaseFieldModel {
   value: Array<string>;
   hasValue: boolean;
   hasManyValues: boolean;
+  isDefined: boolean;
 }
 
-export interface UnknownArgsModel {
+export interface EmptyArgsModel {
 }
 
 export interface ProgramDefaultArgsModel {
   version: BaseFieldModel;
+  clean: BaseFieldModel;
 }
 
 export interface CommandDefaultArgsModel {
@@ -26,7 +28,7 @@ export interface ProgramGenerateCommandWorkspaceArgsModel {
   name: BaseFieldModel;
 }
 
-export interface CommandGenerateCommandProjectArgsModel {
+export interface ProgramGenerateCommandProjectArgsModel {
   name: BaseFieldModel;
   type: BaseFieldModel;
 }
@@ -34,11 +36,11 @@ export interface CommandGenerateCommandProjectArgsModel {
 /** Parameter config model for correct parameters. */
 
 export type ParamDomainArgsModel =
-  UnknownArgsModel |
+  EmptyArgsModel |
   ProgramDefaultArgsModel |
   CommandDefaultArgsModel |
   ProgramGenerateCommandWorkspaceArgsModel |
-  CommandGenerateCommandProjectArgsModel;
+  ProgramGenerateCommandProjectArgsModel;
 
 export interface ParamDomainEntityModel<TName> {
   name: TName;
