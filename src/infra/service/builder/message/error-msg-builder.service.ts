@@ -2,7 +2,7 @@ import {
   ParamDtoValidationModel
 } from "../../../model/param-dto/param-dto-validation.model";
 import {
-  buildCommandDtoMsg,
+  buildCommandDtoMsg, buildErrMsg,
   buildErrorMsg,
   buildManyErrMsg,
   buildManyTipMsg,
@@ -10,6 +10,12 @@ import {
 } from "./base-msg-builder.service";
 
 /** The message builders for all errors. */
+
+export const msgErrError = (message: string): string =>
+  buildErrMsg(message);
+
+export const msgCommandExecutedNotCorrectlyError = (): string =>
+  buildErrorMsg("Command not executed correctly!");
 
 export const msgParamDtoValidationError = (
   validationDto: ParamDtoValidationModel

@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { execSync } from "child_process";
 import { chdir } from "process";
-import { mkdirSync } from "fs";
+import { existsSync, mkdirSync } from "fs";
 
 @singleton()
 /**
@@ -27,6 +27,10 @@ export class ExecCommandService {
         `Failed to change folder: ${path}, error: ${err}`
       );
     }
+  }
+
+  pathExist(path: string): boolean {
+    return existsSync(path);
   }
 
   createFolder(path: string): void {
