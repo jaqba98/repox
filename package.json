@@ -1,6 +1,6 @@
 {
   "name": "repox",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Lightweight monorepo for many huge projects.",
   "main": "./bin/repox.js",
   "bin": "./bin/repox.js",
@@ -8,7 +8,7 @@
   "license": "ISC",
   "scripts": {
     "remove": "rmdir /s /q dist",
-    "build": "tsc && copy package.json dist",
+    "build": "tsc && copy package.json dist && copy README.md dist",
     "link": "npm link ./dist",
     "unlink": "npm unlink ./dist && npm uninstall repox -g",
     "test": "jest --silent",
