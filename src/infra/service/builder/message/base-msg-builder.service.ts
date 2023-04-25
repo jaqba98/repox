@@ -79,6 +79,12 @@ export const buildErrorMsg = (message: string): string =>
     .concat(buildLine(space()))
     .concat(buildLine(messageError(message)));
 
+export const buildRepoxInfoMsg = (message: string): string =>
+  emptyString()
+    .concat(buildLine(headerInfo("REPOX")))
+    .concat(buildLine(space()))
+    .concat(buildLine(messageInfo(message)));
+
 export const buildErrMsg = (message: string): string =>
   emptyString()
     .concat(buildLine(headerError("ERR")))

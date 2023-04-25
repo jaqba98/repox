@@ -150,7 +150,7 @@ describe("ReadParamDomainAppService", () => {
           args: {
             version: {
               name: ArgumentEnum.version,
-              value: [],
+              values: [],
               index: 2,
               hasValue: false,
               hasManyValues: false,
@@ -158,7 +158,7 @@ describe("ReadParamDomainAppService", () => {
             },
             clean: {
               name: ArgumentEnum.clean,
-              value: undefined,
+              values: undefined,
               index: undefined,
               hasValue: undefined,
               hasManyValues: undefined,
@@ -297,9 +297,17 @@ describe("ReadParamDomainAppService", () => {
           name: CommandEnum.workspace,
           index: 3,
           args: {
+            config: {
+              name: "config",
+              values: undefined,
+              index: undefined,
+              hasValue: undefined,
+              hasManyValues: undefined,
+              isDefined: false
+            },
             name: {
               name: ArgumentEnum.name,
-              value: [],
+              values: [],
               index: 4,
               hasValue: false,
               hasManyValues: false,

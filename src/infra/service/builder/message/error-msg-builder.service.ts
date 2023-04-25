@@ -11,12 +11,6 @@ import {
 
 /** The message builders for all errors. */
 
-export const msgErrError = (message: string): string =>
-  buildErrMsg(message);
-
-export const msgCommandExecutedNotCorrectlyError = (): string =>
-  buildErrorMsg("Command not executed correctly!");
-
 export const msgParamDtoValidationError = (
   validationDto: ParamDtoValidationModel
 ): string => {

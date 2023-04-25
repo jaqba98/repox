@@ -2,11 +2,11 @@ import { singleton } from "tsyringe";
 import {
   BaseFieldModel
 } from "../../../model/param-domain/param-domain.model";
-import {
-  msgCommandExecutedMessageInfo
-} from "../builder/message/info-msg-builder.service";
 import { WriteLogService } from "../writer/write-log.service";
 import { SYSTEM_VERSION } from "../../../const/domain.const";
+import {
+  buildInfoMsg
+} from "../builder/message/base-msg-builder.service";
 
 @singleton()
 /**
@@ -22,13 +22,9 @@ export class ExecGetCurrentVersionService {
     version: BaseFieldModel,
     clean: BaseFieldModel
   ): void {
-    if (!version.isDefined) {
-      return;
-    }
+    if (!version.isDefined) return;
     clean.isDefined ?
       this.writeLog.message(SYSTEM_VERSION) :
-      this.writeLog.message(
-        msgCommandExecutedMessageInfo(SYSTEM_VERSION)
-      );
+      this.writeLog.message(buildInfoMsg(SYSTEM_VERSION));
   }
 }

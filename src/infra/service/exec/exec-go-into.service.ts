@@ -8,9 +8,9 @@ import {
 
 @singleton()
 /**
- * The service is responsible for create folder by name.
+ * The service is responsible go into selected folder.
  */
-export class ExecCreateFolderService {
+export class ExecGoIntoService {
   constructor(
     private readonly writeLog: WriteLogService,
     private readonly execCommand: ExecCommandService
@@ -19,15 +19,15 @@ export class ExecCreateFolderService {
 
   exec(name: string): boolean {
     this.writeLog.message(buildInfoMsg(
-      `Create the >>> ${name} <<< folder`
+      `Go into the >>> ${name} <<< folder`
     ));
-    if (this.execCommand.pathExist(name)) {
+    if (!this.execCommand.pathExist(name)) {
       this.writeLog.message(
-        buildErrMsg(`The folder already exists!`)
+        buildErrMsg(`The folder not exists!`)
       );
       return false;
     }
-    this.execCommand.createFolder(name);
+    this.execCommand.cd(name);
     return true;
   }
 }

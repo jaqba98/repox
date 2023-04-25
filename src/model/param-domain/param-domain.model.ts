@@ -7,7 +7,7 @@ import { ArgumentEnum } from "../../enum/argument.enum";
 export interface BaseFieldModel {
   name: ArgumentEnum;
   index: number;
-  value: Array<string>;
+  values: Array<string>;
   hasValue: boolean;
   hasManyValues: boolean;
   isDefined: boolean;
@@ -26,6 +26,7 @@ export interface CommandDefaultArgsModel {
 
 export interface ProgramGenerateCommandWorkspaceArgsModel {
   name: BaseFieldModel;
+  config: BaseFieldModel;
 }
 
 export interface ProgramGenerateCommandProjectArgsModel {

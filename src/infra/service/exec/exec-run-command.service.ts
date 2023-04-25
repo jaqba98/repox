@@ -8,26 +8,20 @@ import {
 
 @singleton()
 /**
- * The service is responsible for create folder by name.
+ * The service is responsible for run bash command.
  */
-export class ExecCreateFolderService {
+export class ExecRunCommandService {
   constructor(
     private readonly writeLog: WriteLogService,
     private readonly execCommand: ExecCommandService
   ) {
   }
 
-  exec(name: string): boolean {
+  exec(command: string): boolean {
     this.writeLog.message(buildInfoMsg(
-      `Create the >>> ${name} <<< folder`
+      `Run the >>> ${command} <<< command`
     ));
-    if (this.execCommand.pathExist(name)) {
-      this.writeLog.message(
-        buildErrMsg(`The folder already exists!`)
-      );
-      return false;
-    }
-    this.execCommand.createFolder(name);
+    this.execCommand.exec(command);
     return true;
   }
 }

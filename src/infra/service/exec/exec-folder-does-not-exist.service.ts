@@ -8,9 +8,10 @@ import {
 
 @singleton()
 /**
- * The service is responsible for create folder by name.
+ * The service is responsible for verify whether folder by name
+ * not exists.
  */
-export class ExecCreateFolderService {
+export class ExecFolderDoesNotExistService {
   constructor(
     private readonly writeLog: WriteLogService,
     private readonly execCommand: ExecCommandService
@@ -19,7 +20,7 @@ export class ExecCreateFolderService {
 
   exec(name: string): boolean {
     this.writeLog.message(buildInfoMsg(
-      `Create the >>> ${name} <<< folder`
+      `Verify that the >>> ${name} <<< folder exists`
     ));
     if (this.execCommand.pathExist(name)) {
       this.writeLog.message(
@@ -27,7 +28,6 @@ export class ExecCreateFolderService {
       );
       return false;
     }
-    this.execCommand.createFolder(name);
     return true;
   }
 }

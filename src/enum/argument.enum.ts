@@ -5,12 +5,14 @@ export enum ArgumentEnum {
   name = "name",
   type = "type",
   clean = "clean",
-  verbose = "verbose"
+  verbose = "verbose",
+  config = "config"
 }
 
 export enum AliasEnum {
   version = "v",
   name = "n",
   type = "t",
-  clean = "c"
+  clean = "p",
+  config = "c"
 }

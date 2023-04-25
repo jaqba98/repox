@@ -8,26 +8,26 @@ import {
 
 @singleton()
 /**
- * The service is responsible for create folder by name.
+ * The service is responsible for create file by name.
  */
-export class ExecCreateFolderService {
+export class ExecCreateFileService {
   constructor(
     private readonly writeLog: WriteLogService,
     private readonly execCommand: ExecCommandService
   ) {
   }
 
-  exec(name: string): boolean {
+  exec(fileName: string): boolean {
     this.writeLog.message(buildInfoMsg(
-      `Create the >>> ${name} <<< folder`
+      `Create the >>> ${fileName} <<< file`
     ));
-    if (this.execCommand.pathExist(name)) {
+    if (this.execCommand.pathExist(fileName)) {
       this.writeLog.message(
-        buildErrMsg(`The folder already exists!`)
+        buildErrMsg(`The file already exists!`)
       );
       return false;
     }
-    this.execCommand.createFolder(name);
+    this.execCommand.createFile(fileName);
     return true;
   }
 }

@@ -119,7 +119,7 @@ export class BuildParamDomainService {
           version: {
             name: ArgumentEnum.version,
             index: version?.paramIndex,
-            value: version?.paramValues,
+            values: version?.paramValues,
             hasValue: version?.paramHasValue,
             hasManyValues: version?.paramHasManyValues,
             isDefined: Boolean(version?.paramIndex)
@@ -127,7 +127,7 @@ export class BuildParamDomainService {
           clean: {
             name: ArgumentEnum.clean,
             index: clean?.paramIndex,
-            value: clean?.paramValues,
+            values: clean?.paramValues,
             hasValue: clean?.paramHasValue,
             hasManyValues: clean?.paramHasManyValues,
             isDefined: Boolean(clean?.paramIndex)
@@ -183,6 +183,9 @@ export class BuildParamDomainService {
     const type = this.getArg(
       programArgs, ArgumentEnum.type, AliasEnum.type
     );
+    const config = this.getArg(
+      programArgs, ArgumentEnum.config, AliasEnum.config
+    );
     switch (commandName) {
       case CommandEnum.default:
         return <CommandDefaultArgsModel>{};
@@ -191,10 +194,18 @@ export class BuildParamDomainService {
           name: {
             name: ArgumentEnum.name,
             index: name?.paramIndex,
-            value: name?.paramValues,
+            values: name?.paramValues,
             hasValue: name?.paramHasValue,
             hasManyValues: name?.paramHasManyValues,
             isDefined: Boolean(name?.paramIndex)
+          },
+          config: {
+            name: ArgumentEnum.config,
+            index: config?.paramIndex,
+            values: config?.paramValues,
+            hasValue: config?.paramHasValue,
+            hasManyValues: config?.paramHasManyValues,
+            isDefined: Boolean(config?.paramIndex)
           }
         };
       case CommandEnum.project:
@@ -202,7 +213,7 @@ export class BuildParamDomainService {
           name: {
             name: ArgumentEnum.name,
             index: name?.paramIndex,
-            value: name?.paramValues,
+            values: name?.paramValues,
             hasValue: name?.paramHasValue,
             hasManyValues: name?.paramHasManyValues,
             isDefined: Boolean(name?.paramIndex)
@@ -210,7 +221,7 @@ export class BuildParamDomainService {
           type: {
             name: ArgumentEnum.type,
             index: type?.paramIndex,
-            value: type?.paramValues,
+            values: type?.paramValues,
             hasValue: type?.paramHasValue,
             hasManyValues: type?.paramHasManyValues,
             isDefined: Boolean(type?.paramIndex)

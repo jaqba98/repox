@@ -1,12 +1,9 @@
 import {
-  buildErrMsg,
-  buildInfoMsg
+  buildInfoMsg,
+  buildRepoxInfoMsg, newline
 } from "./base-msg-builder.service";
 
 /** The message builders for all info. */
 
-export const msgInfInfo = (message: string): string =>
-  buildInfoMsg(message);
-
-export const msgCommandExecutedMessageInfo = (msg: string): string =>
-  buildInfoMsg(msg);
+export const msgRunCommandInfo = (command: string): string =>
+  buildRepoxInfoMsg(`Running the ${command} process`);
