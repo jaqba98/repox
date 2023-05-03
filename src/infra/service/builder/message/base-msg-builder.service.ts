@@ -10,7 +10,7 @@ import {
   TEXT_BRIGHT,
   TEXT_RESET,
   TEXT_UNDERSCORE
-} from "../../../const/text-style.const";
+} from "../../../const/text-style";
 import { EOL } from "os";
 import {
   ParamDtoValidationModel
