@@ -1,9 +1,5 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDtoEntityModel,
-  ParamDtoModel
-} from "../../infra/model/param-dto/param-dto.model";
-import {
   ProgramAliasEnum,
   ProgramEnum
 } from "../../enum/program.enum";
@@ -28,7 +24,7 @@ import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
  * the parameter config model.
  */
 export class BuildParamDomainService {
-  build(paramDto: ParamDtoModel): ParamDomainModel {
+  build(paramDto: any): ParamDomainModel {
     const programName: ProgramEnum = this.getProgramName(paramDto);
     const programIndex: number = this.getProgramIndex(paramDto);
     const commandName: CommandEnum = this.getCommandName(paramDto);
@@ -61,9 +57,9 @@ export class BuildParamDomainService {
     };
   }
 
-  private getProgramName(paramDto: ParamDtoModel): ProgramEnum {
-    const program: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === "program");
+  private getProgramName(paramDto: any): ProgramEnum {
+    const program: any | undefined = paramDto.params
+      .find((paramDto: any) => paramDto.paramType === "program");
     if (!program) {
       return ProgramEnum.default;
     }
@@ -78,25 +74,25 @@ export class BuildParamDomainService {
     }
   }
 
-  private getProgramIndex(paramDto: ParamDtoModel): number {
+  private getProgramIndex(paramDto: any): number {
     const application = paramDto.params
-      .find(param => param.paramType === "application");
+      .find((param: any) => param.paramType === "application");
     if (!application) {
       throw new Error("Application cannot be undefined!");
     }
-    const program: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === "program");
+    const program: any | undefined = paramDto.params
+      .find((paramDto: any) => paramDto.paramType === "program");
     return program ? program.paramIndex : application.paramIndex;
   }
 
   private getProgramArgs(
     programIndex: number,
     commandIndex: number,
-    paramDto: ParamDtoModel
-  ): Array<ParamDtoEntityModel> {
+    paramDto: any
+  ): Array<any> {
     return paramDto.params
-      .filter(param => this.isArgument(param))
-      .filter(param =>
+      .filter((param: any) => this.isArgument(param))
+      .filter((param: any) =>
         param.paramIndex > programIndex &&
         param.paramIndex < commandIndex
       )
@@ -104,7 +100,7 @@ export class BuildParamDomainService {
 
   private buildProgramArgs(
     programName: ProgramEnum,
-    programArgs: Array<ParamDtoEntityModel>
+    programArgs: Array<any>
   ): ParamDomainArgsModel {
     const version = this.getArg(
       programArgs, ArgumentEnum.version, AliasEnum.version
@@ -137,9 +133,9 @@ export class BuildParamDomainService {
     }
   }
 
-  private getCommandName(paramDto: ParamDtoModel): CommandEnum {
-    const command: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === "command");
+  private getCommandName(paramDto: any): CommandEnum {
+    const command: any | undefined = paramDto.params
+      .find((paramDto: any) => paramDto.paramType === "command");
     if (!command) {
       return CommandEnum.default;
     }
@@ -157,24 +153,24 @@ export class BuildParamDomainService {
     }
   }
 
-  private getCommandIndex(paramDto: ParamDtoModel): number {
-    const command: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === "command");
+  private getCommandIndex(paramDto: any): number {
+    const command: any | undefined = paramDto.params
+      .find((paramDto: any) => paramDto.paramType === "command");
     return command ? command.paramIndex : paramDto.params.length;
   }
 
   private getCommandArgs(
     commandIndex: number,
-    paramDto: ParamDtoModel
-  ): Array<ParamDtoEntityModel> {
+    paramDto: any
+  ): Array<any> {
     return paramDto.params
-      .filter(param => this.isArgument(param))
-      .filter(param => param.paramIndex > commandIndex)
+      .filter((param: any) => this.isArgument(param))
+      .filter((param: any) => param.paramIndex > commandIndex)
   }
 
   private buildCommandArgs(
     commandName: CommandEnum,
-    programArgs: Array<ParamDtoEntityModel>
+    programArgs: Array<any>
   ): ParamDomainArgsModel {
     const name = this.getArg(
       programArgs, ArgumentEnum.name, AliasEnum.name
@@ -231,7 +227,7 @@ export class BuildParamDomainService {
     }
   }
 
-  private isArgument(paramDto: ParamDtoEntityModel): boolean {
+  private isArgument(paramDto: any): boolean {
     return [
       "argument",
       "alias"
@@ -239,10 +235,10 @@ export class BuildParamDomainService {
   }
 
   private getArg(
-    args: Array<ParamDtoEntityModel>,
+    args: Array<any>,
     argument: ArgumentEnum,
     alias: AliasEnum
-  ): ParamDtoEntityModel | undefined {
+  ): any | undefined {
     return args.find(arg =>
       arg.paramName === argument || arg.paramName === alias
     );

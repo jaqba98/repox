@@ -7,7 +7,7 @@ import {
 } from "../service/read-param-dto-app.service";
 import {
   ParamDtoValidationModel
-} from "../../infra/model/param-dto/param-dto-validation.model";
+} from "../../infra/model/param-dto/param-dto-validation-model";
 
 /** Testing of the ReadParamDtoAppService. */
 

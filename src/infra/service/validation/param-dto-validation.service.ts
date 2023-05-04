@@ -2,13 +2,13 @@ import { container, singleton } from "tsyringe";
 import {
   BuildParamDtoValidationService
 } from "../builder/validation/build-param-dto-validation.service";
-import { ParamDtoModel } from "../../model/param-dto/param-dto.model";
+import { ParamDtoModel } from "../../model/param-dto/param-dto-model";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation.model";
+} from "../../model/param-dto/param-dto-validation-model";
 import {
   ValidatorDtoModel
-} from "../../model/validator-dto/validator-dto.model";
+} from "../../model/validator-dto/validator-dto-model";
 import {
   OnlySupportedCharactersValidatorService
 } from "../validator/only-supported-characters-validator.service";

@@ -1,6 +1,6 @@
 import {
   ParamDtoValidationModel
-} from "../../../model/param-dto/param-dto-validation.model";
+} from "../../../model/param-dto/param-dto-validation-model";
 import {
   buildCommandDtoMsg, buildErrMsg,
   buildErrorMsg,

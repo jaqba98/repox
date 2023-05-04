@@ -3,7 +3,7 @@ import { ReadProcessArgvService } from "./read-process-argv.service";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto.model";
+} from "../../model/param-dto/param-dto-model";
 import { ParamType } from "../../enum/param-type";
 
 type TProcessArgvToDTO =

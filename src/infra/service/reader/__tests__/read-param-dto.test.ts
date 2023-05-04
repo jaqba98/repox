@@ -2,7 +2,7 @@ import { ReadParamDtoService } from "../read-param-dto.service";
 import { container } from "tsyringe";
 import {
   ParamDtoModel
-} from "../../../model/param-dto/param-dto.model";
+} from "../../../model/param-dto/param-dto-model";
 import { ReadProcessArgvService } from "../read-process-argv.service";
 import { ParamType } from "../../../enum/param-type";
 

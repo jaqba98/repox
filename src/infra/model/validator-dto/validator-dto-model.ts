@@ -1,7 +1,7 @@
-import { ParamDtoModel } from "../param-dto/param-dto.model";
+import { ParamDtoModel } from "../param-dto/param-dto-model";
 import {
   ParamDtoValidationModel
-} from "../param-dto/param-dto-validation.model";
+} from "../param-dto/param-dto-validation-model";
 
 /**
  * The model which is implemented for each param DTO validator.

@@ -14,7 +14,7 @@ import {
 import { EOL } from "os";
 import {
   ParamDtoValidationModel
-} from "../../../model/param-dto/param-dto-validation.model";
+} from "../../../model/param-dto/param-dto-validation-model";
 import { ParamType } from "../../../enum/param-type";
 
 /**

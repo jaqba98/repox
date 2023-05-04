@@ -7,10 +7,10 @@ import {
 } from "../../infra/service/validation/param-dto-validation.service";
 import {
   ParamDtoValidationModel
-} from "../../infra/model/param-dto/param-dto-validation.model";
+} from "../../infra/model/param-dto/param-dto-validation-model";
 import {
   ParamDtoModel
-} from "../../infra/model/param-dto/param-dto.model";
+} from "../../infra/model/param-dto/param-dto-model";
 
 @singleton()
 /**
