@@ -3,10 +3,10 @@
  */
 
 export enum ParamType {
-  executor = `executor`,
-  application = `application`,
-  program = `program`,
-  command = `command`,
-  argument = `argument`,
-  alias = `alias`
+  executor = "executor",
+  application = "application",
+  program = "program",
+  command = "command",
+  argument = "argument",
+  alias = "alias"
 }

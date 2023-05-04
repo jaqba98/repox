@@ -1,14 +1,10 @@
-import { ReadParamDtoService } from "../read-param-dto.service";
-import { container } from "tsyringe";
-import {
-  ParamDtoModel
-} from "../../../model/param-dto/param-dto-model";
-import { ReadProcessArgvService } from "../read-process-argv.service";
-import { ParamType } from "../../../enum/param-type";
+import { container, DependencyContainer } from "tsyringe";
+import { ReadProcessArgv } from "./read-process-argv";
+import { ReadParamDto } from "./read-param-dto";
+import { ParamDtoModel } from "../../model/param-dto/param-dto-model";
+import { ParamType } from "../../enum/param-type";
 
-/** Testing of the ReadParamDtoService service. */
-
-class MockReadProcessArgvService {
+class MockReadProcessArgv {
   getArgv(): Array<string> {
     return [
       "node",
@@ -16,28 +12,26 @@ class MockReadProcessArgvService {
       "program",
       "--argument1",
       "--argument2=val1",
-      "--argument3='val1,val2'",
+      `--argument3="val1,val2"`,
       "command",
       "-a",
-      "-b=val1",
-      "-c='val1,val2'"
+      "-b='val1'",
+      "-c=`val1,val2`"
     ];
   }
 }
 
-describe("ReadParamDtoService", () => {
-  const child = container.createChildContainer();
-  child.register(ReadProcessArgvService, {
-    useClass: MockReadProcessArgvService
-  });
-  const readParamDto = child.resolve(ReadParamDtoService);
+describe("ReadParamDto", () => {
+  const child: DependencyContainer = container.createChildContainer();
+  child.register(ReadProcessArgv, { useClass: MockReadProcessArgv });
+  const service: ReadParamDto = child.resolve(ReadParamDto);
 
   afterAll(() => {
     container.clearInstances();
   });
 
   test("Should correctly build param DTO model", () => {
-    expect(readParamDto.read()).toEqual<ParamDtoModel>({
+    expect(service.readParamDto()).toEqual<ParamDtoModel>({
       params: [
         {
           paramBaseValue: "node",
@@ -85,7 +79,7 @@ describe("ReadParamDtoService", () => {
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "--argument3='val1,val2'",
+          paramBaseValue: `--argument3="val1,val2"`,
           paramIndex: 5,
           paramType: ParamType.argument,
           paramHasValue: true,
@@ -112,7 +106,7 @@ describe("ReadParamDtoService", () => {
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "-b=val1",
+          paramBaseValue: "-b='val1'",
           paramIndex: 8,
           paramType: ParamType.alias,
           paramHasValue: true,
@@ -121,7 +115,7 @@ describe("ReadParamDtoService", () => {
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "-c='val1,val2'",
+          paramBaseValue: "-c=`val1,val2`",
           paramIndex: 9,
           paramType: ParamType.alias,
           paramHasValue: true,

@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import {
-  ReadParamDtoService
-} from "../../infra/service/reader/read-param-dto.service";
+  ReadParamDto
+} from "../../infra/service/reader/read-param-dto";
 import {
   ParamDtoValidationService
 } from "../../infra/service/validation/param-dto-validation.service";
@@ -19,13 +19,13 @@ import {
  */
 export class ReadParamDtoAppService {
   constructor(
-    private readonly readParamDto: ReadParamDtoService,
+    private readonly readParamDto: ReadParamDto,
     private readonly paramDtoValidation: ParamDtoValidationService
   ) {
   }
 
   read(): ParamDtoValidationModel {
-    const paramDto: ParamDtoModel = this.readParamDto.read();
+    const paramDto: ParamDtoModel = this.readParamDto.readParamDto();
     return this.paramDtoValidation.runValidation(paramDto);
   }
 }

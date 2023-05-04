@@ -3,7 +3,7 @@
  */
 
 export enum ConfigFile {
-  configJson = `repox.json`,
-  configJs = `repox.js`,
-  configTs = `repox.ts`
+  configJson = "repox.json",
+  configJs = "repox.js",
+  configTs = "repox.ts"
 }

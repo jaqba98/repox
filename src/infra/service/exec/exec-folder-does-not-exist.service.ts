@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { WriteLogService } from "../writer/write-log.service";
-import { ExecCommandService } from "./exec-command.service";
+import { ExecCommand } from "./exec-command";
 import {
   buildErrMsg,
   buildInfoMsg
@@ -14,7 +14,7 @@ import {
 export class ExecFolderDoesNotExistService {
   constructor(
     private readonly writeLog: WriteLogService,
-    private readonly execCommand: ExecCommandService
+    private readonly execCommand: ExecCommand
   ) {
   }
 
