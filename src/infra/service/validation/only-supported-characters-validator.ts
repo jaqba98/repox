@@ -14,34 +14,35 @@ import {
 } from "../../model/param-dto/param-dto-validation-model";
 import { ParamType } from "../../enum/param-type";
 
-@singleton()
 /**
- * The validator is responsible for checking that
- * the given DTO parameters contain only supported characters.
+ * Check the given DTO parameters contain only supported characters.
  */
+@singleton()
 export class OnlySupportedCharactersValidator
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildParam: BuildParamDtoValidation
+    private readonly buildParamDto: BuildParamDtoValidation
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
-      .filter(param => !this.checkParamCharacters(param));
+      .filter(paramDto => !this.checkParamCharacters(paramDto));
     if (wrongParamsDto.length === 0) {
-      return this.buildParam.buildSuccess(paramDto);
+      return this.buildParamDto.buildSuccess(paramDto);
     }
-    return this.buildParam.buildError(
+    return this.buildParamDto.buildError(
       wrongParamsDto,
       ["You have added not supported characters!"],
-      wrongParamsDto.map(param => this.getParamTip(param)),
+      wrongParamsDto.map(wrongParam => this.getParamTip(wrongParam)),
       paramDto
     );
   }
 
-  private checkParamCharacters(param: ParamDtoEntityModel): boolean {
-    const { paramType, paramBaseValue } = param;
+  private checkParamCharacters(
+    paramDto: ParamDtoEntityModel
+  ): boolean {
+    const { paramBaseValue, paramType } = paramDto;
     switch (paramType) {
       case ParamType.executor:
       case ParamType.application:
@@ -65,8 +66,8 @@ export class OnlySupportedCharactersValidator
     return /^[a-zA-Z0-9-="'`,\s]+$/gm.test(paramBaseValue);
   }
 
-  private getParamTip(param: ParamDtoEntityModel): string {
-    const { paramType, paramBaseValue } = param;
+  private getParamTip(paramDto: ParamDtoEntityModel): string {
+    const { paramBaseValue, paramType } = paramDto;
     switch (paramType) {
       case ParamType.program:
       case ParamType.command:
@@ -89,6 +90,6 @@ export class OnlySupportedCharactersValidator
     paramBaseValue: string,
     chars: string
   ): string {
-    return `Supported characters for ${paramBaseValue} are: ${chars}`;
+    return `Supported characters for ${paramBaseValue} are ${chars}`;
   }
 }
