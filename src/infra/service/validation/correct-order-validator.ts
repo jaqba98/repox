@@ -3,8 +3,8 @@ import {
   ValidatorDtoModel
 } from "../../model/validator-dto/validator-dto-model";
 import {
-  BuildParamDtoValidationService
-} from "../builder/validation/build-param-dto-validation.service";
+  BuildParamDtoValidation
+} from "../builder/validation/build-param-dto-validation";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
@@ -19,10 +19,10 @@ import { ParamType } from "../../enum/param-type";
  * The validator is responsible for checking that
  * the given DTO parameters are in correct order.
  */
-export class CorrectOrderValidatorService
+export class CorrectOrderValidator
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildParam: BuildParamDtoValidationService
+    private readonly buildParam: BuildParamDtoValidation
   ) {
   }
 
@@ -32,9 +32,9 @@ export class CorrectOrderValidatorService
     const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => !this.checkParamOrder(param, program));
     if (wrongParamsDto.length === 0) {
-      return this.buildParam.paramDtoValidationSuccess(paramDto);
+      return this.buildParam.buildSuccess(paramDto);
     }
-    return this.buildParam.paramDtoValidationError(
+    return this.buildParam.buildError(
       wrongParamsDto,
       ["You have specified the command in the incorrect order!"],
       [

@@ -3,8 +3,8 @@ import {
   ReadParamDto
 } from "../../infra/service/reader/read-param-dto";
 import {
-  ParamDtoValidationService
-} from "../../infra/service/validation/param-dto-validation.service";
+  ParamDtoValidation
+} from "../../infra/service/validation/param-dto-validation";
 import {
   ParamDtoValidationModel
 } from "../../infra/model/param-dto/param-dto-validation-model";
@@ -20,7 +20,7 @@ import {
 export class ReadParamDtoAppService {
   constructor(
     private readonly readParamDto: ReadParamDto,
-    private readonly paramDtoValidation: ParamDtoValidationService
+    private readonly paramDtoValidation: ParamDtoValidation
   ) {
   }
 

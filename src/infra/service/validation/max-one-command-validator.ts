@@ -3,8 +3,8 @@ import {
   ValidatorDtoModel
 } from "../../model/validator-dto/validator-dto-model";
 import {
-  BuildParamDtoValidationService
-} from "../builder/validation/build-param-dto-validation.service";
+  BuildParamDtoValidation
+} from "../builder/validation/build-param-dto-validation";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
@@ -20,10 +20,10 @@ import { ParamType } from "../../enum/param-type";
  * the given DTO parameters have max one command
  * (0 or 1 if the program exist and 0 if the program not exist).
  */
-export class MaxOneCommandValidatorService
+export class MaxOneCommandValidator
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildParam: BuildParamDtoValidationService
+    private readonly buildParam: BuildParamDtoValidation
   ) {
   }
 
@@ -33,7 +33,7 @@ export class MaxOneCommandValidatorService
     const commands: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => param.paramType === ParamType.command);
     if (!program && commands.length > 0) {
-      return this.buildParam.paramDtoValidationError(
+      return this.buildParam.buildError(
         commands,
         ["You have specified the command without any program!"],
         [
@@ -44,7 +44,7 @@ export class MaxOneCommandValidatorService
       );
     }
     if (program && commands.length > 1) {
-      return this.buildParam.paramDtoValidationError(
+      return this.buildParam.buildError(
         commands,
         ["You have specified too many commands!"],
         [
@@ -54,6 +54,6 @@ export class MaxOneCommandValidatorService
         paramDto
       );
     }
-    return this.buildParam.paramDtoValidationSuccess(paramDto);
+    return this.buildParam.buildSuccess(paramDto);
   }
 }

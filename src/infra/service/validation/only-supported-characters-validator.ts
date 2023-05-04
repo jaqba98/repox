@@ -3,8 +3,8 @@ import {
   ValidatorDtoModel
 } from "../../model/validator-dto/validator-dto-model";
 import {
-  BuildParamDtoValidationService
-} from "../builder/validation/build-param-dto-validation.service";
+  BuildParamDtoValidation
+} from "../builder/validation/build-param-dto-validation";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
@@ -19,10 +19,10 @@ import { ParamType } from "../../enum/param-type";
  * The validator is responsible for checking that
  * the given DTO parameters contain only supported characters.
  */
-export class OnlySupportedCharactersValidatorService
+export class OnlySupportedCharactersValidator
   implements ValidatorDtoModel {
   constructor(
-    private readonly buildParam: BuildParamDtoValidationService
+    private readonly buildParam: BuildParamDtoValidation
   ) {
   }
 
@@ -30,9 +30,9 @@ export class OnlySupportedCharactersValidatorService
     const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => !this.checkParamCharacters(param));
     if (wrongParamsDto.length === 0) {
-      return this.buildParam.paramDtoValidationSuccess(paramDto);
+      return this.buildParam.buildSuccess(paramDto);
     }
-    return this.buildParam.paramDtoValidationError(
+    return this.buildParam.buildError(
       wrongParamsDto,
       ["You have added not supported characters!"],
       wrongParamsDto.map(param => this.getParamTip(param)),

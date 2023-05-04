@@ -7,17 +7,15 @@ import {
   ParamDtoValidationModel
 } from "../../../model/param-dto/param-dto-validation-model";
 
-@singleton()
 /**
- * The service is responsible for build
- * the param dto validation for successes and errors.
+ * Build the response of param DTO validation
+ * for successes and errors.
  */
-export class BuildParamDtoValidationService {
-  paramDtoValidationSuccess(
-    paramDto: ParamDtoModel
-  ): ParamDtoValidationModel {
+@singleton()
+export class BuildParamDtoValidation {
+  buildSuccess(paramDto: ParamDtoModel): ParamDtoValidationModel {
     return {
-      isError: false,
+      success: true,
       wrongParamIndexes: [],
       errors: [],
       tips: [],
@@ -25,16 +23,16 @@ export class BuildParamDtoValidationService {
     };
   }
 
-  paramDtoValidationError(
+  buildError(
     wrongParamsDto: Array<ParamDtoEntityModel>,
     errors: Array<string>,
     tips: Array<string>,
     paramDto: ParamDtoModel
   ): ParamDtoValidationModel {
     const wrongParamIndexes: Array<number> = wrongParamsDto
-      .map(param => param.paramIndex);
+      .map(wrongParam => wrongParam.paramIndex);
     return {
-      isError: true,
+      success: false,
       wrongParamIndexes,
       errors,
       tips,
