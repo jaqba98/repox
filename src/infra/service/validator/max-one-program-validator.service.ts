@@ -12,7 +12,7 @@ import {
 import {
   ParamDtoValidationModel
 } from "../../model/param-dto/param-dto-validation.model";
-import { ParamTypeEnum } from "../../enum/param-type.enum";
+import { ParamType } from "../../enum/param-type";
 
 @singleton()
 /**
@@ -28,7 +28,7 @@ export class MaxOneProgramValidatorService
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const programs: Array<ParamDtoEntityModel> = paramDto.params
-      .filter(param => param.paramType === ParamTypeEnum.program);
+      .filter(param => param.paramType === ParamType.program);
     if (programs.length > 1) {
       return this.buildParam.paramDtoValidationError(
         programs,

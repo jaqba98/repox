@@ -5,7 +5,6 @@ import {
 import {
   ReadParamDtoAppService
 } from "../service/read-param-dto-app.service";
-import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 import {
   ParamDtoValidationModel
 } from "../../infra/model/param-dto/param-dto-validation.model";
@@ -100,7 +99,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("generate");
     expect(paramIndex).toEqual(2);
-    expect(paramType).toEqual(ParamTypeEnum.program);
+    expect(paramType).toEqual("program");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("generate");
@@ -119,7 +118,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     expect(result.tips).toEqual(["Supported characters for gener%%a_&te are: [a-z] [A-Z] [0-9] [-]"]);
     expect(paramBaseValue).toEqual("gener%%a_&te");
     expect(paramIndex).toEqual(2);
-    expect(paramType).toEqual(ParamTypeEnum.program);
+    expect(paramType).toEqual("program");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("gener%%a_&te");
@@ -138,7 +137,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("generate-workspace");
     expect(paramIndex).toEqual(2);
-    expect(paramType).toEqual(ParamTypeEnum.program);
+    expect(paramType).toEqual("program");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("generate-workspace");
@@ -157,7 +156,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     expect(result.tips).toEqual(["Supported characters for generate=true are: [a-z] [A-Z] [0-9] [-]"]);
     expect(paramBaseValue).toEqual("generate=true");
     expect(paramIndex).toEqual(2);
-    expect(paramType).toEqual(ParamTypeEnum.program);
+    expect(paramType).toEqual("program");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("generate");
@@ -176,7 +175,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("workspace");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.command);
+    expect(paramType).toEqual("command");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("workspace");
@@ -195,7 +194,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     expect(result.tips).toEqual(["Supported characters for work$$sp&&*ace are: [a-z] [A-Z] [0-9] [-]"]);
     expect(paramBaseValue).toEqual("work$$sp&&*ace");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.command);
+    expect(paramType).toEqual("command");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("work$$sp&&*ace");
@@ -214,7 +213,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("workspace-node");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.command);
+    expect(paramType).toEqual("command");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("workspace-node");
@@ -233,7 +232,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     expect(result.tips).toEqual(["Supported characters for workspace=true are: [a-z] [A-Z] [0-9] [-]"]);
     expect(paramBaseValue).toEqual("workspace=true");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.command);
+    expect(paramType).toEqual("command");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("workspace");
@@ -254,7 +253,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -273,7 +272,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual(["Supported characters for --n$$a%^me are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("--n$$a%^me");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n$$a%^me");
@@ -292,7 +291,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name=test");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -311,7 +310,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual('--name="test"');
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -330,7 +329,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name='test'");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -349,7 +348,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name=`test`");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -368,7 +367,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual(["Supported characters for --name=te$$s&&t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("--name=te$$s&&t");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -387,7 +386,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual(["Supported characters for --name=\"te$$s&&t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual('--name="te$$s&&t"');
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -406,7 +405,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual(["Supported characters for --name='te$$s&&t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("--name='te$$s&&t'");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -425,7 +424,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual(["Supported characters for --name=`te$$s&&t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("--name=`te$$s&&t`");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -444,7 +443,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name=test1,test2,test3");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("name");
@@ -463,7 +462,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual('--name="test1,test2,test3"');
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("name");
@@ -482,7 +481,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name='test1,test2,test3'");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("name");
@@ -501,7 +500,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name=`test1,test2,test3`");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.argument);
+    expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("name");
@@ -522,7 +521,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-i");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("i");
@@ -541,7 +540,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual(["Supported characters for -% are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("-%");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("%");
@@ -560,7 +559,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual(["Supported pattern for -name are: -<sign> or -<sign>=<value>"]);
     expect(paramBaseValue).toEqual("-name");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeFalsy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("name");
@@ -579,7 +578,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n=test");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
@@ -598,7 +597,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual('-n="test"');
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
@@ -617,7 +616,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n='test'");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
@@ -636,7 +635,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n=`test`");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
@@ -655,7 +654,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual(["Supported characters for -n=te%%s$$t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("-n=te%%s$$t");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
@@ -674,7 +673,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual(["Supported characters for -n=\"te%%s$$t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual('-n="te%%s$$t"');
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
@@ -693,7 +692,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual(["Supported characters for -n='te%%s$$t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("-n='te%%s$$t'");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
@@ -712,7 +711,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual(["Supported characters for -n=`te%%s$$t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("-n=`te%%s$$t`");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeFalsy();
     expect(paramName).toEqual("n");
@@ -731,7 +730,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n=test1,test2,test3");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("n");
@@ -750,7 +749,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual('-n="test1,test2,test3"');
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("n");
@@ -769,7 +768,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n='test1,test2,test3'");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("n");
@@ -788,7 +787,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n=`test1,test2,test3`");
     expect(paramIndex).toEqual(3);
-    expect(paramType).toEqual(ParamTypeEnum.alias);
+    expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
     expect(paramHasManyValues).toBeTruthy();
     expect(paramName).toEqual("n");

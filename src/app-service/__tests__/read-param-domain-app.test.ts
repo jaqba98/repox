@@ -8,7 +8,6 @@ import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../infra/model/param-dto/param-dto.model";
-import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 import { container } from "tsyringe";
 import {
   GetParamDependenceService
@@ -96,7 +95,7 @@ const buildParamDto = (
       {
         paramBaseValue: "node.exe",
         paramIndex: 0,
-        paramType: ParamTypeEnum.executor,
+        paramType: "executor",
         paramHasValue: false,
         paramName: "node.exe",
         paramValues: [],
@@ -105,7 +104,7 @@ const buildParamDto = (
       {
         paramBaseValue: "repox.js",
         paramIndex: 1,
-        paramType: ParamTypeEnum.application,
+        paramType: <any>"application",
         paramHasValue: false,
         paramName: "repox.js",
         paramValues: [],
@@ -132,7 +131,7 @@ describe("ReadParamDomainAppService", () => {
     const paramDto: ParamDtoModel = buildParamDto([{
       paramBaseValue: "--version",
       paramIndex: 2,
-      paramType: ParamTypeEnum.argument,
+      paramType: <any>"argument",
       paramHasValue: false,
       paramName: "version",
       paramValues: [],
@@ -179,7 +178,7 @@ describe("ReadParamDomainAppService", () => {
     const paramDto: ParamDtoModel = buildParamDto([{
       paramBaseValue: "test",
       paramIndex: 2,
-      paramType: ParamTypeEnum.program,
+      paramType: <any>"program",
       paramHasValue: false,
       paramName: "test",
       paramValues: [],
@@ -213,7 +212,7 @@ describe("ReadParamDomainAppService", () => {
       {
         paramBaseValue: "generate",
         paramIndex: 2,
-        paramType: ParamTypeEnum.program,
+        paramType: <any>"program",
         paramHasValue: false,
         paramName: "generate",
         paramValues: [],
@@ -222,7 +221,7 @@ describe("ReadParamDomainAppService", () => {
       {
         paramBaseValue: "test",
         paramIndex: 3,
-        paramType: ParamTypeEnum.command,
+        paramType: <any>"command",
         paramHasValue: false,
         paramName: "test",
         paramValues: [],
@@ -257,7 +256,7 @@ describe("ReadParamDomainAppService", () => {
       {
         paramBaseValue: "generate",
         paramIndex: 2,
-        paramType: ParamTypeEnum.program,
+        paramType: <any>"program",
         paramHasValue: false,
         paramName: "generate",
         paramValues: [],
@@ -266,7 +265,7 @@ describe("ReadParamDomainAppService", () => {
       {
         paramBaseValue: "workspace",
         paramIndex: 3,
-        paramType: ParamTypeEnum.command,
+        paramType: <any>"command",
         paramHasValue: false,
         paramName: "workspace",
         paramValues: [],
@@ -275,7 +274,7 @@ describe("ReadParamDomainAppService", () => {
       {
         paramBaseValue: "--name",
         paramIndex: 4,
-        paramType: ParamTypeEnum.argument,
+        paramType: <any>"argument",
         paramHasValue: false,
         paramName: "name",
         paramValues: [],

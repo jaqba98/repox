@@ -4,7 +4,7 @@ import {
   ParamDtoModel
 } from "../../../model/param-dto/param-dto.model";
 import { ReadProcessArgvService } from "../read-process-argv.service";
-import { ParamTypeEnum } from "../../../enum/param-type.enum";
+import { ParamType } from "../../../enum/param-type";
 
 /** Testing of the ReadParamDtoService service. */
 
@@ -42,7 +42,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "node",
           paramIndex: 0,
-          paramType: ParamTypeEnum.executor,
+          paramType: ParamType.executor,
           paramHasValue: false,
           paramName: "node",
           paramValues: [],
@@ -51,7 +51,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "application",
           paramIndex: 1,
-          paramType: ParamTypeEnum.application,
+          paramType: ParamType.application,
           paramHasValue: false,
           paramName: "application",
           paramValues: [],
@@ -60,7 +60,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "program",
           paramIndex: 2,
-          paramType: ParamTypeEnum.program,
+          paramType: ParamType.program,
           paramHasValue: false,
           paramName: "program",
           paramValues: [],
@@ -69,7 +69,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "--argument1",
           paramIndex: 3,
-          paramType: ParamTypeEnum.argument,
+          paramType: ParamType.argument,
           paramHasValue: false,
           paramName: "argument1",
           paramValues: [],
@@ -78,7 +78,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "--argument2=val1",
           paramIndex: 4,
-          paramType: ParamTypeEnum.argument,
+          paramType: ParamType.argument,
           paramHasValue: true,
           paramName: "argument2",
           paramValues: ["val1"],
@@ -87,7 +87,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "--argument3='val1,val2'",
           paramIndex: 5,
-          paramType: ParamTypeEnum.argument,
+          paramType: ParamType.argument,
           paramHasValue: true,
           paramName: "argument3",
           paramValues: ["val1", "val2"],
@@ -96,7 +96,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "command",
           paramIndex: 6,
-          paramType: ParamTypeEnum.command,
+          paramType: ParamType.command,
           paramHasValue: false,
           paramName: "command",
           paramValues: [],
@@ -105,7 +105,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "-a",
           paramIndex: 7,
-          paramType: ParamTypeEnum.alias,
+          paramType: ParamType.alias,
           paramHasValue: false,
           paramName: "a",
           paramValues: [],
@@ -114,7 +114,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "-b=val1",
           paramIndex: 8,
-          paramType: ParamTypeEnum.alias,
+          paramType: ParamType.alias,
           paramHasValue: true,
           paramName: "b",
           paramValues: ["val1"],
@@ -123,7 +123,7 @@ describe("ReadParamDtoService", () => {
         {
           paramBaseValue: "-c='val1,val2'",
           paramIndex: 9,
-          paramType: ParamTypeEnum.alias,
+          paramType: ParamType.alias,
           paramHasValue: true,
           paramName: "c",
           paramValues: ["val1", "val2"],

@@ -4,7 +4,7 @@ import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../model/param-dto/param-dto.model";
-import { ParamTypeEnum } from "../../enum/param-type.enum";
+import { ParamType } from "../../enum/param-type";
 
 type TProcessArgvToDTO =
   Pick<ParamDtoEntityModel, "paramBaseValue" | "paramIndex">;
@@ -52,16 +52,16 @@ export class ReadParamDtoService {
 
   private getParamType(param: TProcessArgvToDTO): TParamType {
     if (param.paramBaseValue.startsWith("--"))
-      return { ...param, paramType: ParamTypeEnum.argument };
+      return { ...param, paramType: ParamType.argument };
     if (param.paramBaseValue.startsWith("-"))
-      return { ...param, paramType: ParamTypeEnum.alias };
+      return { ...param, paramType: ParamType.alias };
     if (param.paramIndex === 0)
-      return { ...param, paramType: ParamTypeEnum.executor };
+      return { ...param, paramType: ParamType.executor };
     if (param.paramIndex === 1)
-      return { ...param, paramType: ParamTypeEnum.application };
+      return { ...param, paramType: ParamType.application };
     if (param.paramIndex === 2)
-      return { ...param, paramType: ParamTypeEnum.program };
-    return { ...param, paramType: ParamTypeEnum.command };
+      return { ...param, paramType: ParamType.program };
+    return { ...param, paramType: ParamType.command };
   }
 
   private getParamHasValue(param: TParamType): TParamHasValue {
@@ -73,9 +73,9 @@ export class ReadParamDtoService {
     const paramName: string = param.paramHasValue ?
       param.paramBaseValue.split("=")[0] :
       param.paramBaseValue;
-    if (param.paramType === ParamTypeEnum.argument) {
+    if (param.paramType === ParamType.argument) {
       return { ...param, paramName: paramName.replace("--", "") };
-    } else if (param.paramType === ParamTypeEnum.alias) {
+    } else if (param.paramType === ParamType.alias) {
       return { ...param, paramName: paramName.replace("-", "") };
     } else {
       return { ...param, paramName };

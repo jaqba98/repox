@@ -11,7 +11,6 @@ import {
   CommandAliasEnum,
   CommandEnum
 } from "../../enum/command.enum";
-import { ParamTypeEnum } from "../../infra/enum/param-type.enum";
 import {
   CommandDefaultArgsModel,
   EmptyArgsModel,
@@ -64,7 +63,7 @@ export class BuildParamDomainService {
 
   private getProgramName(paramDto: ParamDtoModel): ProgramEnum {
     const program: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === ParamTypeEnum.program);
+      .find(paramDto => paramDto.paramType === "program");
     if (!program) {
       return ProgramEnum.default;
     }
@@ -81,12 +80,12 @@ export class BuildParamDomainService {
 
   private getProgramIndex(paramDto: ParamDtoModel): number {
     const application = paramDto.params
-      .find(param => param.paramType === ParamTypeEnum.application);
+      .find(param => param.paramType === "application");
     if (!application) {
       throw new Error("Application cannot be undefined!");
     }
     const program: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === ParamTypeEnum.program);
+      .find(paramDto => paramDto.paramType === "program");
     return program ? program.paramIndex : application.paramIndex;
   }
 
@@ -140,7 +139,7 @@ export class BuildParamDomainService {
 
   private getCommandName(paramDto: ParamDtoModel): CommandEnum {
     const command: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === ParamTypeEnum.command);
+      .find(paramDto => paramDto.paramType === "command");
     if (!command) {
       return CommandEnum.default;
     }
@@ -160,7 +159,7 @@ export class BuildParamDomainService {
 
   private getCommandIndex(paramDto: ParamDtoModel): number {
     const command: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === ParamTypeEnum.command);
+      .find(paramDto => paramDto.paramType === "command");
     return command ? command.paramIndex : paramDto.params.length;
   }
 
@@ -234,8 +233,8 @@ export class BuildParamDomainService {
 
   private isArgument(paramDto: ParamDtoEntityModel): boolean {
     return [
-      ParamTypeEnum.argument,
-      ParamTypeEnum.alias
+      "argument",
+      "alias"
     ].includes(paramDto.paramType);
   }
 

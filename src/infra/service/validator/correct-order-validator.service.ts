@@ -12,7 +12,7 @@ import {
 import {
   ParamDtoValidationModel
 } from "../../model/param-dto/param-dto-validation.model";
-import { ParamTypeEnum } from "../../enum/param-type.enum";
+import { ParamType } from "../../enum/param-type";
 
 @singleton()
 /**
@@ -28,7 +28,7 @@ export class CorrectOrderValidatorService
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const program: ParamDtoEntityModel | undefined = paramDto.params
-      .find(param => param.paramType === ParamTypeEnum.program);
+      .find(param => param.paramType === ParamType.program);
     const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => !this.checkParamOrder(param, program));
     if (wrongParamsDto.length === 0) {
@@ -65,18 +65,18 @@ export class CorrectOrderValidatorService
 
   private getParamOrder(): Array<{
     order: number,
-    paramTypes: Array<ParamTypeEnum>
+    paramTypes: Array<ParamType>
   }> {
     return [
-      { order: 0, paramTypes: [ParamTypeEnum.executor] },
-      { order: 1, paramTypes: [ParamTypeEnum.application] },
-      { order: 2, paramTypes: [ParamTypeEnum.program] },
+      { order: 0, paramTypes: [ParamType.executor] },
+      { order: 1, paramTypes: [ParamType.application] },
+      { order: 2, paramTypes: [ParamType.program] },
       {
         order: 3,
         paramTypes: [
-          ParamTypeEnum.command,
-          ParamTypeEnum.argument,
-          ParamTypeEnum.alias
+          ParamType.command,
+          ParamType.argument,
+          ParamType.alias
         ]
       }
     ];

@@ -12,7 +12,7 @@ import {
 import {
   ParamDtoValidationModel
 } from "../../model/param-dto/param-dto-validation.model";
-import { ParamTypeEnum } from "../../enum/param-type.enum";
+import { ParamType } from "../../enum/param-type";
 
 @singleton()
 /**
@@ -43,14 +43,14 @@ export class OnlySupportedCharactersValidatorService
   private checkParamCharacters(param: ParamDtoEntityModel): boolean {
     const { paramType, paramBaseValue } = param;
     switch (paramType) {
-      case ParamTypeEnum.executor:
-      case ParamTypeEnum.application:
+      case ParamType.executor:
+      case ParamType.application:
         return true;
-      case ParamTypeEnum.program:
-      case ParamTypeEnum.command:
+      case ParamType.program:
+      case ParamType.command:
         return this.checkProgramAndCommand(paramBaseValue);
-      case ParamTypeEnum.argument:
-      case ParamTypeEnum.alias:
+      case ParamType.argument:
+      case ParamType.alias:
         return this.checkArgumentAndAlias(paramBaseValue);
       default:
         throw new Error(`Not supported parameter type: ${paramType}`);
@@ -68,14 +68,14 @@ export class OnlySupportedCharactersValidatorService
   private getParamTip(param: ParamDtoEntityModel): string {
     const { paramType, paramBaseValue } = param;
     switch (paramType) {
-      case ParamTypeEnum.program:
-      case ParamTypeEnum.command:
+      case ParamType.program:
+      case ParamType.command:
         return this.buildSupportedCharactersMessage(
           paramBaseValue,
           "[a-z] [A-Z] [0-9] [-]"
         );
-      case ParamTypeEnum.argument:
-      case ParamTypeEnum.alias:
+      case ParamType.argument:
+      case ParamType.alias:
         return this.buildSupportedCharactersMessage(
           paramBaseValue,
           "[a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"

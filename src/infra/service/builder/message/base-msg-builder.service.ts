@@ -15,7 +15,7 @@ import { EOL } from "os";
 import {
   ParamDtoValidationModel
 } from "../../../model/param-dto/param-dto-validation.model";
-import { ParamTypeEnum } from "../../../enum/param-type.enum";
+import { ParamType } from "../../../enum/param-type";
 
 /**
  * Base message builder which contains group of small builders
@@ -119,8 +119,8 @@ export const buildCommandDtoMsg = (
   const { paramDto, wrongParamIndexes } = validationDto;
   const params = paramDto.params
     .filter(param =>
-      param.paramType !== ParamTypeEnum.executor &&
-      param.paramType !== ParamTypeEnum.application
+      param.paramType !== ParamType.executor &&
+      param.paramType !== ParamType.application
     )
     .map(param => wrongParamIndexes.includes(param.paramIndex) ?
       buildLine(redUnderscoreParam(param.paramBaseValue)) :

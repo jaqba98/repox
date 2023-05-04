@@ -33,8 +33,8 @@ import {
   ExecCreateFileService
 } from "../../infra/service/exec/exec-create-file.service";
 import {
-  RepoxConfigFileEnum
-} from "../../infra/enum/repox-config-file.enum";
+  GetConfigFileNameService
+} from "../../infra/service/converter/get-config-file-name.service";
 
 @singleton()
 /**
@@ -48,7 +48,8 @@ export class GenerateWorkspaceAppService {
     private readonly createFolder: ExecCreateFolderService,
     private readonly goInto: ExecGoIntoService,
     private readonly runCommand: ExecRunCommandService,
-    private readonly createFile: ExecCreateFileService
+    private readonly createFile: ExecCreateFileService,
+    private readonly getConfigFileName: GetConfigFileNameService
   ) {
   }
 
@@ -102,17 +103,8 @@ export class GenerateWorkspaceAppService {
 
   private getConfiguration(
     config: BaseFieldModel
-  ): RepoxConfigFileEnum {
+  ): string {
     const configType = config.hasValue ? config.values[0] : "json";
-    switch (configType) {
-      case "json":
-        return RepoxConfigFileEnum.repoxJson;
-      case "js":
-        return RepoxConfigFileEnum.repoxJs;
-      case "ts":
-        return RepoxConfigFileEnum.repoxTs;
-      default:
-        return RepoxConfigFileEnum.repoxJson;
-    }
+    return this.getConfigFileName.getConfigFileName(configType);
   }
 }
