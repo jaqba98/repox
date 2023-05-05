@@ -6,10 +6,11 @@
 
 ## In progress
 
-* create the generate workspace command
+* refactor the whole project
 
 ## Done
 
+* create the generate workspace command
 * refactor the whole project
 * create the program generate project
 * create the program: generate and command: workspace

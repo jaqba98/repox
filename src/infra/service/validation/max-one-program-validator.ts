@@ -1,3 +1,7 @@
+import {
+  ParamDtoEntityModel,
+  ParamDtoModel
+} from "../../model/param-dto/param-dto-model";
 import { singleton } from "tsyringe";
 import {
   ValidatorDtoModel
@@ -6,31 +10,25 @@ import {
   BuildParamDtoValidation
 } from "../builder/validation/build-param-dto-validation";
 import {
-  ParamDtoEntityModel,
-  ParamDtoModel
-} from "../../model/param-dto/param-dto-model";
-import {
   ParamDtoValidationModel
 } from "../../model/param-dto/param-dto-validation-model";
 import { ParamType } from "../../enum/param-type";
 
-@singleton()
 /**
- * The validator is responsible for checking that
- * the given DTO parameters have max one program.
+ * Check the given DTO parameters have max one program.
  */
-export class MaxOneProgramValidator
-  implements ValidatorDtoModel {
+@singleton()
+export class MaxOneProgramValidator implements ValidatorDtoModel {
   constructor(
-    private readonly buildParam: BuildParamDtoValidation
+    private readonly buildParamDto: BuildParamDtoValidation
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const programs: Array<ParamDtoEntityModel> = paramDto.params
-      .filter(param => param.paramType === ParamType.program);
+      .filter(paramDto => paramDto.paramType === ParamType.program);
     if (programs.length > 1) {
-      return this.buildParam.buildError(
+      return this.buildParamDto.buildError(
         programs,
         ["You have specified too many programs!"],
         [
@@ -40,6 +38,6 @@ export class MaxOneProgramValidator
         paramDto
       );
     }
-    return this.buildParam.buildSuccess(paramDto);
+    return this.buildParamDto.buildSuccess(paramDto);
   }
 }

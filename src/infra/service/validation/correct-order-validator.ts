@@ -14,27 +14,25 @@ import {
 } from "../../model/param-dto/param-dto-validation-model";
 import { ParamType } from "../../enum/param-type";
 
-@singleton()
 /**
- * The validator is responsible for checking that
- * the given DTO parameters are in correct order.
+ * Check the given DTO parameters are in correct order.
  */
-export class CorrectOrderValidator
-  implements ValidatorDtoModel {
+@singleton()
+export class CorrectOrderValidator implements ValidatorDtoModel {
   constructor(
-    private readonly buildParam: BuildParamDtoValidation
+    private readonly buildParamDto: BuildParamDtoValidation
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const program: ParamDtoEntityModel | undefined = paramDto.params
-      .find(param => param.paramType === ParamType.program);
+      .find(paramDto => paramDto.paramType === ParamType.program);
     const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => !this.checkParamOrder(param, program));
     if (wrongParamsDto.length === 0) {
-      return this.buildParam.buildSuccess(paramDto);
+      return this.buildParamDto.buildSuccess(paramDto);
     }
-    return this.buildParam.buildError(
+    return this.buildParamDto.buildError(
       wrongParamsDto,
       ["You have specified the command in the incorrect order!"],
       [
@@ -52,7 +50,7 @@ export class CorrectOrderValidator
     const paramOrder = this.getParamOrder()
       .find(order => order.paramTypes.includes(param.paramType));
     if (!paramOrder) {
-      throw new Error("Not supported param type!");
+      throw new Error(`Not supported param type ${param.paramType}!`);
     }
     if (paramOrder.order === 3 && !program) {
       return param.paramIndex >= 2;

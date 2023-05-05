@@ -14,34 +14,32 @@ import {
 } from "../../model/param-dto/param-dto-validation-model";
 import { ParamType } from "../../enum/param-type";
 
-@singleton()
 /**
- * The validator is responsible for checking that
- * the given DTO parameters have correct pattern.
+ * Check the given DTO parameters have correct pattern.
  */
-export class CorrectPatternValidator
-  implements ValidatorDtoModel {
+@singleton()
+export class CorrectPatternValidator implements ValidatorDtoModel {
   constructor(
-    private readonly buildParam: BuildParamDtoValidation
+    private readonly buildParamDto: BuildParamDtoValidation
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
-      .filter(param => !this.checkParamPattern(param));
+      .filter(paramDto => !this.checkParamPattern(paramDto));
     if (wrongParamsDto.length === 0) {
-      return this.buildParam.buildSuccess(paramDto);
+      return this.buildParamDto.buildSuccess(paramDto);
     }
-    return this.buildParam.buildError(
+    return this.buildParamDto.buildError(
       wrongParamsDto,
-      ["You have added incorrect parameter pattern!"],
-      wrongParamsDto.map(param => this.getParamTip(param)),
+      ["You have used incorrect parameter pattern!"],
+      wrongParamsDto.map(wrongParam => this.getParamTip(wrongParam)),
       paramDto
     );
   }
 
-  private checkParamPattern(param: ParamDtoEntityModel): boolean {
-    const { paramHasValue, paramType, paramBaseValue } = param;
+  private checkParamPattern(paramDto: ParamDtoEntityModel): boolean {
+    const { paramBaseValue, paramType, paramHasValue } = paramDto;
     switch (paramType) {
       case ParamType.executor:
       case ParamType.application:
@@ -80,8 +78,8 @@ export class CorrectPatternValidator
       /^-[a-zA-Z0-9-]$/gm.test(paramBaseValue);
   }
 
-  private getParamTip(param: ParamDtoEntityModel): string {
-    const { paramType, paramBaseValue } = param;
+  private getParamTip(paramDto: ParamDtoEntityModel): string {
+    const { paramType, paramBaseValue } = paramDto;
     switch (paramType) {
       case ParamType.program:
       case ParamType.command:
@@ -108,6 +106,6 @@ export class CorrectPatternValidator
     paramBaseValue: string,
     pattern: string
   ): string {
-    return `Supported pattern for ${paramBaseValue} are: ${pattern}`;
+    return `Correct pattern for ${paramBaseValue} is: ${pattern}`;
   }
 }
