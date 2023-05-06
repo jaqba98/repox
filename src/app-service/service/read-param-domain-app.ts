@@ -17,7 +17,7 @@ import {
  * The app service is responsible for build and validate
  * the parameter config model.
  */
-export class ReadParamDomainAppService {
+export class ReadParamDomainApp {
   constructor(
     private readonly buildParamDomain: BuildParamDomainService,
     private readonly paramValidation: ParamDomainValidationService

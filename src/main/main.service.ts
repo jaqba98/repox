@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import {
-  ReadParamDtoAppService
-} from "../app-service/service/read-param-dto-app.service";
+  ReadParamDtoApp
+} from "../app-service/service/read-param-dto-app";
 import {
-  ReadParamDomainAppService
-} from "../app-service/service/read-param-domain-app.service";
+  ReadParamDomainApp
+} from "../app-service/service/read-param-domain-app";
 import {
   WriteLogService
 } from "../infra/service/writer/write-log.service";
@@ -12,17 +12,17 @@ import {
   msgParamDtoValidationError
 } from "../infra/service/builder/message/error-msg-builder.service";
 import {
-  SelectProgramAppService
-} from "../app-service/service/select-program-app.service";
+  SelectProgramApp
+} from "../app-service/service/select-program-app";
 
 @singleton()
 /** Main launch point of the program. */
 export class MainService {
   constructor(
-    private readonly readParamDto: ReadParamDtoAppService,
-    private readonly readParamDomain: ReadParamDomainAppService,
+    private readonly readParamDto: ReadParamDtoApp,
+    private readonly readParamDomain: ReadParamDomainApp,
     private readonly log: WriteLogService,
-    private readonly selectProgram: SelectProgramAppService
+    private readonly selectProgram: SelectProgramApp
   ) {
   }
 

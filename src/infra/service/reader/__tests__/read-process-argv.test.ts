@@ -1,5 +1,5 @@
 import { container, DependencyContainer } from "tsyringe";
-import { ReadProcessArgv } from "./read-process-argv";
+import { ReadProcessArgv } from "../read-process-argv";
 
 describe("ReadProcessArgv", () => {
   const child: DependencyContainer = container.createChildContainer();

@@ -1,25 +1,25 @@
-import { ProgramEnum } from "../../enum/program.enum";
+import { ProgramEnum } from "../../../enum/program.enum";
 import {
   ParamDependencyModel
-} from "../../model/param-domain/param-dependency.model";
-import { CommandEnum } from "../../enum/command.enum";
-import { ArgumentEnum } from "../../enum/argument.enum";
+} from "../../../model/param-domain/param-dependency.model";
+import { CommandEnum } from "../../../enum/command.enum";
+import { ArgumentEnum } from "../../../enum/argument.enum";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../infra/model/param-dto/param-dto-model";
+} from "../../../infra/model/param-dto/param-dto-model";
 import { container } from "tsyringe";
 import {
   GetParamDependenceService
-} from "../../dom-service/service/get-param-dependence.service";
+} from "../../../dom-service/service/get-param-dependence.service";
 import {
-  ReadParamDomainAppService
-} from "../service/read-param-domain-app.service";
+  ReadParamDomainApp
+} from "../read-param-domain-app";
 import {
   ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
+} from "../../../model/param-domain/param-domain-validation.model";
 
-/** Testing of the ReadParamDomainAppService. */
+/** Testing of the ReadParamDomainApp. */
 
 class MockGetParamDependenceService {
   getParamDependence(
@@ -120,7 +120,7 @@ describe("ReadParamDomainAppService", () => {
   child.register(GetParamDependenceService, {
     useClass: MockGetParamDependenceService
   });
-  const service = child.resolve(ReadParamDomainAppService);
+  const service = child.resolve(ReadParamDomainApp);
 
   afterAll(() => {
     container.clearInstances();

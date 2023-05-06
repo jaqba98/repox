@@ -1,8 +1,10 @@
 import { container, DependencyContainer } from "tsyringe";
-import { ReadProcessArgv } from "./read-process-argv";
-import { ReadParamDto } from "./read-param-dto";
-import { ParamDtoModel } from "../../model/param-dto/param-dto-model";
-import { ParamType } from "../../enum/param-type";
+import { ReadProcessArgv } from "../read-process-argv";
+import { ReadParamDto } from "../read-param-dto";
+import {
+  ParamDtoModel
+} from "../../../model/param-dto/param-dto-model";
+import { ParamType } from "../../../enum/param-type";
 
 class MockReadProcessArgv {
   getArgv(): Array<string> {

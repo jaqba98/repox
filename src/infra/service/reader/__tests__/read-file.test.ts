@@ -1,5 +1,5 @@
 import { container, DependencyContainer } from "tsyringe";
-import { ReadFile } from "./read-file";
+import { ReadFile } from "../read-file";
 import { existsSync, unlinkSync, writeFileSync } from "fs";
 
 describe("ReadFile - read json", () => {

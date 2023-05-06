@@ -23,7 +23,7 @@ import { CommandEnum } from "../../enum/command.enum";
  * The service is responsible for select service to run by given
  * program and command.
  */
-export class SelectProgramAppService {
+export class SelectProgramApp {
   constructor(
     private readonly programDefault: ProgramDefaultAppService,
     private readonly generateWorkspace: GenerateWorkspaceAppService,

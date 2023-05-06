@@ -12,12 +12,12 @@ import {
   ParamDtoModel
 } from "../../infra/model/param-dto/param-dto-model";
 
-@singleton()
 /**
  * The app service is responsible for read and validate
  * parameter DTO model from command line.
  */
-export class ReadParamDtoAppService {
+@singleton()
+export class ReadParamDtoApp {
   constructor(
     private readonly readParamDto: ReadParamDto,
     private readonly paramDtoValidation: ParamDtoValidation

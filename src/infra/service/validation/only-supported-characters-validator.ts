@@ -90,6 +90,6 @@ export class OnlySupportedCharactersValidator
     paramBaseValue: string,
     chars: string
   ): string {
-    return `Supported characters for ${paramBaseValue} are ${chars}`;
+    return `Supported characters for ${paramBaseValue} are: ${chars}`;
   }
 }
