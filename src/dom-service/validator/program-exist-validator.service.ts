@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { ProgramEnum } from "../../enum/program.enum";
+import { Program } from "../../enum/program";
 import {
   ValidatorDomainModel
 } from "../../model/validator-domain/validator-domain.model";
@@ -34,7 +34,7 @@ export class ProgramExistValidatorService
     paramDep: ParamDependencyModel,
     command: ParamDependencyCommandModel
   ): ParamDomainValidationModel {
-    if (paramDep.program === ProgramEnum.unknown) {
+    if (paramDep.program === Program.unknown) {
       return this.buildParam.paramDomainValidationError(
         [paramDomain.program.index],
         ["You have specified not existed program!"],

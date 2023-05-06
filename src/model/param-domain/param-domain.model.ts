@@ -1,11 +1,11 @@
-import { ProgramEnum } from "../../enum/program.enum";
-import { CommandEnum } from "../../enum/command.enum";
-import { ArgumentEnum } from "../../enum/argument.enum";
+import { Program } from "../../enum/program";
+import { Command } from "../../enum/command";
+import { Argument } from "../../enum/argument";
 
 /** Programs & Commands arguments */
 
 export interface BaseFieldModel {
-  name: ArgumentEnum;
+  name: Argument;
   index: number;
   values: Array<string>;
   hasValue: boolean;
@@ -50,6 +50,6 @@ export interface ParamDomainEntityModel<TName> {
 }
 
 export interface ParamDomainModel {
-  program: ParamDomainEntityModel<ProgramEnum>;
-  command: ParamDomainEntityModel<CommandEnum>;
+  program: ParamDomainEntityModel<Program>;
+  command: ParamDomainEntityModel<Command>;
 }

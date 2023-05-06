@@ -15,8 +15,8 @@ import {
   ProgramGenerateCommandProjectArgsModel,
   ProgramGenerateCommandWorkspaceArgsModel
 } from "../../model/param-domain/param-domain.model";
-import { ProgramEnum } from "../../enum/program.enum";
-import { CommandEnum } from "../../enum/command.enum";
+import { Program } from "../../enum/program";
+import { Command } from "../../enum/command";
 
 @singleton()
 /**
@@ -34,19 +34,19 @@ export class SelectProgramApp {
   selectProgram(paramDomain: ParamDomainModel): void {
     const runProgram: string = this.getRunProgramName(paramDomain);
     switch (runProgram) {
-      case `${ProgramEnum.default}-${CommandEnum.default}`:
+      case `${Program.default}-${Command.default}`:
         this.programDefault.run(
           <ProgramDefaultArgsModel>paramDomain.program.args,
           <EmptyArgsModel>paramDomain.command.args
         );
         break;
-      case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
+      case `${Program.generate}-${Command.workspace}`:
         this.generateWorkspace.run(
           <EmptyArgsModel>paramDomain.program.args,
           <ProgramGenerateCommandWorkspaceArgsModel>paramDomain.command.args
         );
         break;
-      case `${ProgramEnum.generate}-${CommandEnum.project}`:
+      case `${Program.generate}-${Command.project}`:
         this.generateProject.run(
           <EmptyArgsModel>paramDomain.program.args,
           <ProgramGenerateCommandProjectArgsModel>paramDomain.command.args

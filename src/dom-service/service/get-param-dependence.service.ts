@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
-import { ProgramEnum } from "../../enum/program.enum";
+import { Program } from "../../enum/program";
 import {
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
-import { ArgumentEnum } from "../../enum/argument.enum";
-import { CommandEnum } from "../../enum/command.enum";
+import { Argument } from "../../enum/argument";
+import { Command } from "../../enum/command";
 
 @singleton()
 /**
@@ -12,39 +12,39 @@ import { CommandEnum } from "../../enum/command.enum";
  * between programs, commands, arguments and alases.
  */
 export class GetParamDependenceService {
-  getParamDependence(program: ProgramEnum): ParamDependencyModel {
+  getParamDependence(program: Program): ParamDependencyModel {
     switch (program) {
-      case ProgramEnum.default:
+      case Program.default:
         return {
-          program: ProgramEnum.default,
+          program: Program.default,
           commands: {
             "": {
-              command: CommandEnum.default,
+              command: Command.default,
               args: {}
             }
           },
           args: {
             version: {
-              name: ArgumentEnum.version,
+              name: Argument.version,
               mustHasValue: false,
               mustHasManyValues: false,
               required: false
             }
           }
         };
-      case ProgramEnum.generate:
+      case Program.generate:
         return {
-          program: ProgramEnum.generate,
+          program: Program.generate,
           commands: {
             "": {
-              command: CommandEnum.default,
+              command: Command.default,
               args: {}
             },
             workspace: {
-              command: CommandEnum.workspace,
+              command: Command.workspace,
               args: {
                 name: {
-                  name: ArgumentEnum.name,
+                  name: Argument.name,
                   mustHasValue: true,
                   mustHasManyValues: false,
                   required: true
@@ -52,16 +52,16 @@ export class GetParamDependenceService {
               }
             },
             project: {
-              command: CommandEnum.project,
+              command: Command.project,
               args: {
                 name: {
-                  name: ArgumentEnum.name,
+                  name: Argument.name,
                   mustHasValue: true,
                   mustHasManyValues: false,
                   required: true
                 },
                 type: {
-                  name: ArgumentEnum.type,
+                  name: Argument.type,
                   mustHasValue: true,
                   mustHasManyValues: false,
                   required: true
@@ -71,9 +71,9 @@ export class GetParamDependenceService {
           },
           args: {}
         };
-      case ProgramEnum.unknown:
+      case Program.unknown:
         return {
-          program: ProgramEnum.unknown,
+          program: Program.unknown,
           commands: {},
           args: {}
         };

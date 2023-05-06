@@ -1,12 +1,12 @@
 import { singleton } from "tsyringe";
 import {
-  ProgramAliasEnum,
-  ProgramEnum
-} from "../../enum/program.enum";
+  ProgramAlias,
+  Program
+} from "../../enum/program";
 import {
-  CommandAliasEnum,
-  CommandEnum
-} from "../../enum/command.enum";
+  CommandAlias,
+  Command
+} from "../../enum/command";
 import {
   CommandDefaultArgsModel,
   EmptyArgsModel,
@@ -16,7 +16,7 @@ import {
   ProgramGenerateCommandProjectArgsModel,
   ProgramGenerateCommandWorkspaceArgsModel
 } from "../../model/param-domain/param-domain.model";
-import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
+import { AliasEnum, Argument } from "../../enum/argument";
 
 @singleton()
 /**
@@ -25,9 +25,9 @@ import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
  */
 export class BuildParamDomainService {
   build(paramDto: any): ParamDomainModel {
-    const programName: ProgramEnum = this.getProgramName(paramDto);
+    const programName: Program = this.getProgramName(paramDto);
     const programIndex: number = this.getProgramIndex(paramDto);
-    const commandName: CommandEnum = this.getCommandName(paramDto);
+    const commandName: Command = this.getCommandName(paramDto);
     const commandIndex: number = this.getCommandIndex(paramDto);
     const programArgs = this.getProgramArgs(
       programIndex,
@@ -57,20 +57,20 @@ export class BuildParamDomainService {
     };
   }
 
-  private getProgramName(paramDto: any): ProgramEnum {
+  private getProgramName(paramDto: any): Program {
     const program: any | undefined = paramDto.params
       .find((paramDto: any) => paramDto.paramType === "program");
     if (!program) {
-      return ProgramEnum.default;
+      return Program.default;
     }
     switch (program.paramName) {
       case "":
-        return ProgramEnum.default;
-      case ProgramEnum.generate:
-      case ProgramAliasEnum.generate:
-        return ProgramEnum.generate;
+        return Program.default;
+      case Program.generate:
+      case ProgramAlias.generate:
+        return Program.generate;
       default:
-        return ProgramEnum.unknown;
+        return Program.unknown;
     }
   }
 
@@ -99,20 +99,20 @@ export class BuildParamDomainService {
   }
 
   private buildProgramArgs(
-    programName: ProgramEnum,
+    programName: Program,
     programArgs: Array<any>
   ): ParamDomainArgsModel {
     const version = this.getArg(
-      programArgs, ArgumentEnum.version, AliasEnum.version
+      programArgs, Argument.version, AliasEnum.version
     );
     const clean = this.getArg(
-      programArgs, ArgumentEnum.clean, AliasEnum.clean
+      programArgs, Argument.clean, AliasEnum.clean
     );
     switch (programName) {
-      case ProgramEnum.default:
+      case Program.default:
         return <ProgramDefaultArgsModel>{
           version: {
-            name: ArgumentEnum.version,
+            name: Argument.version,
             index: version?.paramIndex,
             values: version?.paramValues,
             hasValue: version?.paramHasValue,
@@ -120,7 +120,7 @@ export class BuildParamDomainService {
             isDefined: Boolean(version?.paramIndex)
           },
           clean: {
-            name: ArgumentEnum.clean,
+            name: Argument.clean,
             index: clean?.paramIndex,
             values: clean?.paramValues,
             hasValue: clean?.paramHasValue,
@@ -133,23 +133,23 @@ export class BuildParamDomainService {
     }
   }
 
-  private getCommandName(paramDto: any): CommandEnum {
+  private getCommandName(paramDto: any): Command {
     const command: any | undefined = paramDto.params
       .find((paramDto: any) => paramDto.paramType === "command");
     if (!command) {
-      return CommandEnum.default;
+      return Command.default;
     }
     switch (command.paramName) {
       case "":
-        return CommandEnum.default;
-      case CommandEnum.workspace:
-      case CommandAliasEnum.workspace:
-        return CommandEnum.workspace;
-      case CommandEnum.project:
-      case CommandAliasEnum.project:
-        return CommandEnum.project;
+        return Command.default;
+      case Command.workspace:
+      case CommandAlias.workspace:
+        return Command.workspace;
+      case Command.project:
+      case CommandAlias.project:
+        return Command.project;
       default:
-        return CommandEnum.unknown;
+        return Command.unknown;
     }
   }
 
@@ -169,25 +169,25 @@ export class BuildParamDomainService {
   }
 
   private buildCommandArgs(
-    commandName: CommandEnum,
+    commandName: Command,
     programArgs: Array<any>
   ): ParamDomainArgsModel {
     const name = this.getArg(
-      programArgs, ArgumentEnum.name, AliasEnum.name
+      programArgs, Argument.name, AliasEnum.name
     );
     const type = this.getArg(
-      programArgs, ArgumentEnum.type, AliasEnum.type
+      programArgs, Argument.type, AliasEnum.type
     );
     const config = this.getArg(
-      programArgs, ArgumentEnum.config, AliasEnum.config
+      programArgs, Argument.config, AliasEnum.config
     );
     switch (commandName) {
-      case CommandEnum.default:
+      case Command.default:
         return <CommandDefaultArgsModel>{};
-      case CommandEnum.workspace:
+      case Command.workspace:
         return <ProgramGenerateCommandWorkspaceArgsModel>{
           name: {
-            name: ArgumentEnum.name,
+            name: Argument.name,
             index: name?.paramIndex,
             values: name?.paramValues,
             hasValue: name?.paramHasValue,
@@ -195,7 +195,7 @@ export class BuildParamDomainService {
             isDefined: Boolean(name?.paramIndex)
           },
           config: {
-            name: ArgumentEnum.config,
+            name: Argument.config,
             index: config?.paramIndex,
             values: config?.paramValues,
             hasValue: config?.paramHasValue,
@@ -203,10 +203,10 @@ export class BuildParamDomainService {
             isDefined: Boolean(config?.paramIndex)
           }
         };
-      case CommandEnum.project:
+      case Command.project:
         return <ProgramGenerateCommandProjectArgsModel>{
           name: {
-            name: ArgumentEnum.name,
+            name: Argument.name,
             index: name?.paramIndex,
             values: name?.paramValues,
             hasValue: name?.paramHasValue,
@@ -214,7 +214,7 @@ export class BuildParamDomainService {
             isDefined: Boolean(name?.paramIndex)
           },
           type: {
-            name: ArgumentEnum.type,
+            name: Argument.type,
             index: type?.paramIndex,
             values: type?.paramValues,
             hasValue: type?.paramHasValue,
@@ -236,7 +236,7 @@ export class BuildParamDomainService {
 
   private getArg(
     args: Array<any>,
-    argument: ArgumentEnum,
+    argument: Argument,
     alias: AliasEnum
   ): any | undefined {
     return args.find(arg =>

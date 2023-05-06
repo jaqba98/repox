@@ -1,9 +1,9 @@
-import { ProgramEnum } from "../../../enum/program.enum";
+import { Program } from "../../../enum/program";
 import {
   ParamDependencyModel
 } from "../../../model/param-domain/param-dependency.model";
-import { CommandEnum } from "../../../enum/command.enum";
-import { ArgumentEnum } from "../../../enum/argument.enum";
+import { Command } from "../../../enum/command";
+import { Argument } from "../../../enum/argument";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
@@ -23,40 +23,40 @@ import {
 
 class MockGetParamDependenceService {
   getParamDependence(
-    program: ProgramEnum
+    program: Program
   ): ParamDependencyModel {
     switch (program) {
-      case ProgramEnum.default:
+      case Program.default:
         return {
-          program: ProgramEnum.default,
+          program: Program.default,
           commands: {
-            [CommandEnum.default]: {
-              command: CommandEnum.default,
+            [Command.default]: {
+              command: Command.default,
               args: {}
             }
           },
           args: {
-            [ArgumentEnum.version]: {
-              name: ArgumentEnum.version,
+            [Argument.version]: {
+              name: Argument.version,
               mustHasValue: false,
               mustHasManyValues: false,
               required: true
             }
           }
         };
-      case ProgramEnum.generate:
+      case Program.generate:
         return {
-          program: ProgramEnum.generate,
+          program: Program.generate,
           commands: {
-            [CommandEnum.default]: {
-              command: CommandEnum.default,
+            [Command.default]: {
+              command: Command.default,
               args: {}
             },
-            [CommandEnum.workspace]: {
-              command: CommandEnum.default,
+            [Command.workspace]: {
+              command: Command.default,
               args: {
-                [ArgumentEnum.version]: {
-                  name: ArgumentEnum.version,
+                [Argument.version]: {
+                  name: Argument.version,
                   mustHasValue: false,
                   mustHasManyValues: false,
                   required: true
@@ -65,17 +65,17 @@ class MockGetParamDependenceService {
             }
           },
           args: {
-            [ArgumentEnum.version]: {
-              name: ArgumentEnum.version,
+            [Argument.version]: {
+              name: Argument.version,
               mustHasValue: false,
               mustHasManyValues: false,
               required: true
             }
           }
         };
-      case ProgramEnum.unknown:
+      case Program.unknown:
         return {
-          program: ProgramEnum.unknown,
+          program: Program.unknown,
           commands: {},
           args: {}
         }
@@ -144,11 +144,11 @@ describe("ReadParamDomainAppService", () => {
       tips: [],
       paramDomain: {
         program: {
-          name: ProgramEnum.default,
+          name: Program.default,
           index: 1,
           args: {
             version: {
-              name: ArgumentEnum.version,
+              name: Argument.version,
               values: [],
               index: 2,
               hasValue: false,
@@ -156,7 +156,7 @@ describe("ReadParamDomainAppService", () => {
               isDefined: true
             },
             clean: {
-              name: ArgumentEnum.clean,
+              name: Argument.clean,
               values: undefined,
               index: undefined,
               hasValue: undefined,
@@ -166,7 +166,7 @@ describe("ReadParamDomainAppService", () => {
           }
         },
         command: {
-          name: CommandEnum.default,
+          name: Command.default,
           index: 3,
           args: {}
         }
@@ -194,12 +194,12 @@ describe("ReadParamDomainAppService", () => {
       ],
       paramDomain: {
         program: {
-          name: ProgramEnum.unknown,
+          name: Program.unknown,
           index: 2,
           args: {}
         },
         command: {
-          name: CommandEnum.default,
+          name: Command.default,
           index: 3,
           args: {}
         }
@@ -238,12 +238,12 @@ describe("ReadParamDomainAppService", () => {
       ],
       paramDomain: {
         program: {
-          name: ProgramEnum.generate,
+          name: Program.generate,
           index: 2,
           args: {}
         },
         command: {
-          name: CommandEnum.unknown,
+          name: Command.unknown,
           index: 3,
           args: {}
         }
@@ -288,12 +288,12 @@ describe("ReadParamDomainAppService", () => {
       tips: [],
       paramDomain: {
         program: {
-          name: ProgramEnum.generate,
+          name: Program.generate,
           index: 2,
           args: {}
         },
         command: {
-          name: CommandEnum.workspace,
+          name: Command.workspace,
           index: 3,
           args: {
             config: {
@@ -305,7 +305,7 @@ describe("ReadParamDomainAppService", () => {
               isDefined: false
             },
             name: {
-              name: ArgumentEnum.name,
+              name: Argument.name,
               values: [],
               index: 4,
               hasValue: false,

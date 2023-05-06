@@ -1,6 +1,6 @@
-import { ArgumentEnum } from "../../enum/argument.enum";
-import { CommandEnum } from "../../enum/command.enum";
-import { ProgramEnum } from "../../enum/program.enum";
+import { Argument } from "../../enum/argument";
+import { Command } from "../../enum/command";
+import { Program } from "../../enum/program";
 
 /**
  * The model is used by GetParamDependenceService to give
@@ -8,7 +8,7 @@ import { ProgramEnum } from "../../enum/program.enum";
  */
 
 export interface ParamDependencyArgModel {
-  name: ArgumentEnum;
+  name: Argument;
   mustHasValue: boolean;
   mustHasManyValues: boolean;
   required: boolean;
@@ -19,7 +19,7 @@ export interface ParamDependencyArgsModel {
 }
 
 export interface ParamDependencyCommandModel {
-  command: CommandEnum;
+  command: Command;
   args: ParamDependencyArgsModel;
 }
 
@@ -28,7 +28,7 @@ export interface ParamDependencyCommandsModel {
 }
 
 export interface ParamDependencyModel {
-  program: ProgramEnum;
+  program: Program;
   commands: ParamDependencyCommandsModel;
   args: ParamDependencyArgsModel;
 }
