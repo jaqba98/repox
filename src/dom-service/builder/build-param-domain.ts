@@ -59,15 +59,14 @@ export class BuildParamDomain {
   private getProgramName(paramDto: ParamDtoModel): Program {
     const program = this.paramDtoFinder.findProgram(paramDto);
     const programName: string = program ? program.paramName : "";
-    switch (programName) {
-      case "":
-        return Program.default;
-      case Program.generate:
-      case ProgramAlias.generate:
-        return Program.generate;
-      default:
-        return Program.unknown;
+    const programAlias = Object.keys(ProgramAlias).find(key =>
+      ProgramAlias[key as keyof typeof ProgramAlias] === programName
+    );
+    if (programAlias) {
+      return Program[programAlias as keyof typeof Program];
     }
+    const programFull = Program[programAlias as keyof typeof Program];
+    return programFull ? programFull : Program.unknown;
   }
 
   private getCommandName(paramDto: ParamDtoModel): Command {
@@ -124,4 +123,5 @@ export class BuildParamDomain {
     }
   }
 }
+
 // todo: refactor this
