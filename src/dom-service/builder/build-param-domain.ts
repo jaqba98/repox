@@ -1,19 +1,19 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDomainArgumentModel,
-  ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
-import { Program, ProgramAlias } from "../../enum/program";
-import { Command, CommandAlias } from "../../enum/command";
-import { Alias, Argument } from "../../enum/argument";
+  ParamDtoFinder
+} from "../../infra/service/finder/param-dto-finder";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../infra/model/param-dto/param-dto-model";
 import {
-  ParamDtoFinder
-} from "../../infra/service/finder/param-dto-finder";
+  ParamDomainArgumentModel,
+  ParamDomainModel
+} from "../../model/param-domain/param-domain-model";
+import { Program, ProgramAlias } from "../../enum/program";
+import { Command, CommandAlias } from "../../enum/command";
 import { ParamType } from "../../infra/enum/param-type";
+import { Alias, Argument } from "../../enum/argument";
 
 /**
  * Build the parameter domain model.
@@ -24,14 +24,22 @@ export class BuildParamDomain {
   }
 
   build(paramDto: ParamDtoModel): ParamDomainModel {
+    const application = this.paramDtoFinder.findApplication(paramDto);
     const program = this.paramDtoFinder.findProgram(paramDto);
     const programBaseName: string = program ? program.paramName : "";
     const command = this.paramDtoFinder.findCommand(paramDto);
     const commandBaseName: string = command ? command.paramName : "";
-    const programName: Program = this.getProgramName(paramDto);
-    const commandName: Command = this.getCommandName(paramDto);
-    const programIndex: number = this.getProgramIndex(paramDto);
-    const commandIndex: number = this.getCommandIndex(paramDto);
+    const programName: Program = this.getProgramName(program);
+    console.log("Name = " + programName);
+    const commandName: Command = this.getCommandName(command);
+    const programIndex: number = this.getProgramIndex(
+      application,
+      program
+    );
+    const commandIndex: number = this.getCommandIndex(
+      command,
+      paramDto
+    );
     const programArgs = this.paramDtoFinder.findProgramArgs(
       paramDto,
       programIndex,
@@ -57,21 +65,31 @@ export class BuildParamDomain {
     };
   }
 
-  private getProgramName(paramDto: ParamDtoModel): Program {
-    const program = this.paramDtoFinder.findProgram(paramDto);
+  private getProgramName(
+    program: ParamDtoEntityModel | undefined
+  ): Program {
     const programName: string = program ? program.paramName : "";
-    const programAlias = Object.keys(ProgramAlias).find(key =>
+    if (programName === "") {
+      return Program.default;
+    }
+    const programNameAlias = Object.keys(ProgramAlias).find(key =>
       ProgramAlias[key as keyof typeof ProgramAlias] === programName
     );
-    if (programAlias) {
+    if (programNameAlias) {
       return Program[programName as keyof typeof Program];
     }
-    const programFull = Program[programName as keyof typeof Program];
-    return programFull ? programFull : Program.unknown;
+    const programNameFull = Object.keys(Program).find(key =>
+      Program[key as keyof typeof Program] === programName
+    );
+    if (programNameFull) {
+      return Program[programName as keyof typeof Program];
+    }
+    return Program.unknown;
   }
 
-  private getCommandName(paramDto: ParamDtoModel): Command {
-    const command = this.paramDtoFinder.findCommand(paramDto);
+  private getCommandName(
+    command: ParamDtoEntityModel | undefined
+  ): Command {
     const commandName: string = command ? command.paramName : "";
     const commandAlias = Object.keys(CommandAlias).find(key =>
       CommandAlias[key as keyof typeof CommandAlias] === commandName
@@ -83,14 +101,17 @@ export class BuildParamDomain {
     return commandFull ? commandFull : Command.unknown;
   }
 
-  private getProgramIndex(paramDto: ParamDtoModel): number {
-    const application = this.paramDtoFinder.findApplication(paramDto);
-    const program = this.paramDtoFinder.findProgram(paramDto);
+  private getProgramIndex(
+    application: ParamDtoEntityModel,
+    program: ParamDtoEntityModel | undefined
+  ): number {
     return program ? program.paramIndex : application.paramIndex;
   }
 
-  private getCommandIndex(paramDto: ParamDtoModel): number {
-    const command = this.paramDtoFinder.findCommand(paramDto);
+  private getCommandIndex(
+    command: ParamDtoEntityModel | undefined,
+    paramDto: ParamDtoModel
+  ): number {
     return command ? command.paramIndex : paramDto.params.length;
   }
 
@@ -125,4 +146,5 @@ export class BuildParamDomain {
     return Argument.unknown;
   }
 }
+
 // todo: refactor this
