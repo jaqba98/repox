@@ -9,7 +9,7 @@ export enum Argument {
   unknown = "unknown"
 }
 
-export enum AliasEnum {
+export enum Alias {
   version = "v",
   name = "n",
   config = "c"

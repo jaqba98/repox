@@ -5,7 +5,7 @@ import {
 } from "../../model/param-domain/param-domain-model";
 import { Program, ProgramAlias } from "../../enum/program";
 import { Command, CommandAlias } from "../../enum/command";
-import { AliasEnum, Argument } from "../../enum/argument";
+import { Alias, Argument } from "../../enum/argument";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
@@ -13,6 +13,7 @@ import {
 import {
   ParamDtoFinder
 } from "../../infra/service/finder/param-dto-finder";
+import { ParamType } from "../../infra/enum/param-type";
 
 /**
  * Build the parameter domain model.
@@ -63,24 +64,23 @@ export class BuildParamDomain {
       ProgramAlias[key as keyof typeof ProgramAlias] === programName
     );
     if (programAlias) {
-      return Program[programAlias as keyof typeof Program];
+      return Program[programName as keyof typeof Program];
     }
-    const programFull = Program[programAlias as keyof typeof Program];
+    const programFull = Program[programName as keyof typeof Program];
     return programFull ? programFull : Program.unknown;
   }
 
   private getCommandName(paramDto: ParamDtoModel): Command {
     const command = this.paramDtoFinder.findCommand(paramDto);
     const commandName: string = command ? command.paramName : "";
-    switch (commandName) {
-      case "":
-        return Command.default;
-      case Command.workspace:
-      case CommandAlias.workspace:
-        return Command.workspace;
-      default:
-        return Command.unknown;
+    const commandAlias = Object.keys(CommandAlias).find(key =>
+      CommandAlias[key as keyof typeof CommandAlias] === commandName
+    );
+    if (commandAlias) {
+      return Command[commandAlias as keyof typeof Command];
     }
+    const commandFull = Command[commandName as keyof typeof Command];
+    return commandFull ? commandFull : Command.unknown;
   }
 
   private getProgramIndex(paramDto: ParamDtoModel): number {
@@ -99,7 +99,10 @@ export class BuildParamDomain {
   ): Array<ParamDomainArgumentModel> {
     return args.map(programArg => ({
       baseName: programArg.paramName,
-      name: this.getArgumentName(programArg.paramName),
+      name: this.getArgumentName(
+        programArg.paramName,
+        programArg.paramType
+      ),
       values: programArg.paramValues,
       index: programArg.paramIndex,
       hasValue: programArg.paramHasValue,
@@ -107,21 +110,19 @@ export class BuildParamDomain {
     }));
   }
 
-  private getArgumentName(arg: string): Argument {
-    switch (arg) {
-      case Argument.version:
-      case AliasEnum.version:
-        return Argument.version;
-      case Argument.name:
-      case AliasEnum.name:
-        return Argument.name;
-      case Argument.config:
-      case AliasEnum.config:
-        return Argument.config;
-      default:
-        return Argument.unknown;
+  private getArgumentName(arg: string, type: ParamType): Argument {
+    if (type === ParamType.argument) {
+      const argument = Argument[arg as keyof typeof Argument];
+      return argument ? argument : Argument.unknown;
     }
+    if (type === ParamType.alias) {
+      const alias = Object.keys(Alias).find(key =>
+        Alias[key as keyof typeof Alias] === arg
+      );
+      return alias ?
+        Argument[alias as keyof typeof Argument] : Argument.unknown;
+    }
+    return Argument.unknown;
   }
 }
-
 // todo: refactor this
