@@ -5,6 +5,9 @@ import {
 import {
   ReadParamDomainApp
 } from "../app-service/service/read-param-domain-app";
+import {
+  msgParamDtoValidationError
+} from "../infra/service/builder/message/error-msg-builder.service";
 
 @singleton()
 /** Main launch point of the program. */
@@ -19,10 +22,11 @@ export class MainService {
 
   run(): void {
     const paramDto = this.readParamDto.read();
-    // if (paramDto.isError) {
-    //   this.log.message(msgParamDtoValidationError(paramDto));
-    //   return;
-    // }
+    if (!paramDto.success) {
+      console.log(msgParamDtoValidationError(paramDto));
+      // this.log.message(msgParamDtoValidationError(paramDto));
+      return;
+    }
     const paramDomain = this.readParamDomain.build(paramDto.paramDto);
     console.log(JSON.stringify(paramDomain, null, 2));
     // if (paramDomain.isError) {
