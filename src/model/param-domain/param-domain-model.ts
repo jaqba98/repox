@@ -7,6 +7,7 @@ import { Command } from "../../enum/command";
  */
 
 export interface ParamDomainArgumentModel {
+  baseName: string;
   name: Argument;
   values: Array<string>;
   index: number;
@@ -15,6 +16,7 @@ export interface ParamDomainArgumentModel {
 }
 
 export interface ParamDomainEntityModel<TName> {
+  baseName: string;
   name: TName;
   index: number;
   args: Array<ParamDomainArgumentModel>;

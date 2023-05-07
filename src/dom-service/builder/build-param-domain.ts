@@ -23,6 +23,10 @@ export class BuildParamDomain {
   }
 
   build(paramDto: ParamDtoModel): ParamDomainModel {
+    const program = this.paramDtoFinder.findProgram(paramDto);
+    const programBaseName: string = program ? program.paramName : "";
+    const command = this.paramDtoFinder.findCommand(paramDto);
+    const commandBaseName: string = command ? command.paramName : "";
     const programName: Program = this.getProgramName(paramDto);
     const commandName: Command = this.getCommandName(paramDto);
     const programIndex: number = this.getProgramIndex(paramDto);
@@ -38,11 +42,13 @@ export class BuildParamDomain {
     );
     return {
       program: {
+        baseName: programBaseName,
         name: programName,
         index: programIndex,
         args: this.buildArguments(programArgs)
       },
       command: {
+        baseName: commandBaseName,
         name: commandName,
         index: commandIndex,
         args: this.buildArguments(commandArgs)
@@ -93,6 +99,7 @@ export class BuildParamDomain {
     args: Array<ParamDtoEntityModel>
   ): Array<ParamDomainArgumentModel> {
     return args.map(programArg => ({
+      baseName: programArg.paramName,
       name: this.getArgumentName(programArg.paramName),
       values: programArg.paramValues,
       index: programArg.paramIndex,
