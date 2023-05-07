@@ -1,16 +1,10 @@
 import { singleton } from "tsyringe";
 import {
-  BuildParamDomainService
-} from "../../dom-service/builder/build-param-domain.service";
-import {
-  ParamDomainValidationService
-} from "../../dom-service/validation/param-domain-validation.service";
+  BuildParamDomain
+} from "../../dom-service/builder/build-param-domain";
 import {
   ParamDtoModel
 } from "../../infra/model/param-dto/param-dto-model";
-import {
-  ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
 
 @singleton()
 /**
@@ -19,13 +13,11 @@ import {
  */
 export class ReadParamDomainApp {
   constructor(
-    private readonly buildParamDomain: BuildParamDomainService,
-    private readonly paramValidation: ParamDomainValidationService
+    private readonly buildParamDomain: BuildParamDomain
   ) {
   }
 
-  build(paramDto: ParamDtoModel): ParamDomainValidationModel {
-    const paramDomain = this.buildParamDomain.build(paramDto);
-    return this.paramValidation.runValidation(paramDomain);
+  build(paramDto: ParamDtoModel): any {
+    return this.buildParamDomain.build(paramDto);
   }
 }

@@ -1,22 +1,22 @@
 import { singleton } from "tsyringe";
 import {
   ParamDomainModel
-} from "../../model/param-domain/param-domain.model";
+} from "../../model/param-domain/param-domain-model";
 import {
   ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
+} from "../../model/param-domain/param-domain-validation-model";
 
-@singleton()
 /**
- * The service is responsible for build
- * the param config validation successes and errors.
+ * Build the response of param domain validation
+ * for successes and errors.
  */
-export class BuildParamDomainValidationService {
-  paramDomainValidationSuccess(
+@singleton()
+export class BuildParamDomainValidation {
+  buildSuccess(
     paramDomain: ParamDomainModel
   ): ParamDomainValidationModel {
     return {
-      isError: false,
+      success: true,
       wrongParamIndexes: [],
       errors: [],
       tips: [],
@@ -24,14 +24,14 @@ export class BuildParamDomainValidationService {
     };
   }
 
-  paramDomainValidationError(
+  buildError(
     wrongParamIndexes: Array<number>,
     errors: Array<string>,
     tips: Array<string>,
     paramDomain: ParamDomainModel
   ): ParamDomainValidationModel {
     return {
-      isError: true,
+      success: false,
       wrongParamIndexes,
       errors,
       tips,

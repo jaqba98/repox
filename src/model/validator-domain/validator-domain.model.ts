@@ -1,11 +1,11 @@
-import { ParamDomainModel } from "../param-domain/param-domain.model";
+import { ParamDomainModel } from "../param-domain/param-domain-model";
 import {
   ParamDependencyCommandModel,
   ParamDependencyModel
-} from "../param-domain/param-dependency.model";
+} from "../param-domain/param-dependency-model";
 import {
   ParamDomainValidationModel
-} from "../param-domain/param-domain-validation.model";
+} from "../param-domain/param-domain-validation-model";
 
 /**
  * The model which is implemented for each param config validator.

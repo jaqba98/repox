@@ -3,8 +3,9 @@
  */
 
 export enum Program {
-  default = "default",
-  generate = "generate"
+  default = "",
+  generate = "generate",
+  unknown = "unknown"
 }
 
 export enum ProgramAlias {

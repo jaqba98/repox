@@ -3,8 +3,9 @@
  */
 
 export enum Command {
-  default = "default",
-  workspace = "workspace"
+  default = "",
+  workspace = "workspace",
+  unknown = "unknown"
 }
 
 export enum CommandAlias {

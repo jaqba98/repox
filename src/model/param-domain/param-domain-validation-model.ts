@@ -1,8 +1,10 @@
-import { ParamDomainModel } from "./param-domain.model";
+import { ParamDomainModel } from "./param-domain-model";
 
-/** The result model of the parameter config validation. */
+/**
+ * The result model of the parameter domain validation.
+ */
 export interface ParamDomainValidationModel {
-  isError: boolean;
+  success: boolean;
   wrongParamIndexes: Array<number>;
   errors: Array<string>;
   tips: Array<string>;

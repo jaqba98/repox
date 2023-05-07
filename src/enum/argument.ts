@@ -1,17 +1,16 @@
-/** List of all arguments and aliases. */
+/**
+ * List of all arguments and aliases.
+ */
 
 export enum Argument {
   version = "version",
   name = "name",
-  type = "type",
-  clean = "clean",
-  config = "config"
+  config = "config",
+  unknown = "unknown"
 }
 
 export enum AliasEnum {
   version = "v",
   name = "n",
-  type = "t",
-  clean = "p",
   config = "c"
 }
