@@ -1,34 +1,4 @@
-// import { container, singleton } from "tsyringe";
-// import {
-//   GetParamDependenceService
-// } from "../service/get-param-dependence.service";
-// import {
-//   BuildParamDomainValidation
-// } from "../builder/build-param-domain-validation";
-// import {
-//   ParamDomainModel
-// } from "../../model/param-domain/param-domain-model";
-// import {
-//   ParamDomainValidationModel
-// } from "../../model/param-domain/param-domain-validation-model";
-// import {
-//   ValidatorDomainModel
-// } from "../../model/validator-domain/validator-domain.model";
-// import {
-//   ParamDependencyModel
-// } from "../../model/param-domain/param-dependency-model";
-// import {
-//   ProgramExistValidatorService
-// } from "./program-exist-validator.service";
-// import {
-//   CommandExistValidatorService
-// } from "./command-exist-validator.service";
-// import {
-//   ProgramArgsValidatorService
-// } from "./program-args-validator.service";
-// import {
-//   CommandArgsValidatorService
-// } from "./command-args-validator.service";
+// import { singleton } from "tsyringe";
 //
 // @singleton()
 // /**
@@ -68,3 +38,4 @@
 //     });
 //   }
 // }
+// todo: refactor this

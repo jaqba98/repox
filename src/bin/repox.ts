@@ -5,3 +5,4 @@ import { container } from "tsyringe";
 import { MainService } from "../main/main.service";
 
 container.resolve(MainService).run();
+// todo: refactor this

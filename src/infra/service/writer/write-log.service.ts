@@ -10,3 +10,4 @@ export class WriteLogService {
     console.log(msg);
   }
 }
+// todo: refactor this

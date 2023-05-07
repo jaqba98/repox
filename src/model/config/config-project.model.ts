@@ -18,3 +18,4 @@ export interface ConfigProjectModel {
     tools: ProjectsModel;
   }
 }
+// todo: refactor this

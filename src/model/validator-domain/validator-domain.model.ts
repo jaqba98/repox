@@ -18,3 +18,4 @@ export interface ValidatorDomainModel {
     commandDep: ParamDependencyCommandModel
   ): ParamDomainValidationModel;
 }
+// todo: refactor this

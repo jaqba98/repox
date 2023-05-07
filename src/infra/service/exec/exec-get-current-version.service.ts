@@ -28,3 +28,4 @@
 //       this.writeLog.message(buildInfoMsg(SYSTEM_VERSION));
 //   }
 // }
+// todo: refactor this
