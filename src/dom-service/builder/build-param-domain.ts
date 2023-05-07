@@ -30,7 +30,6 @@ export class BuildParamDomain {
     const command = this.paramDtoFinder.findCommand(paramDto);
     const commandBaseName: string = command ? command.paramName : "";
     const programName: Program = this.getProgramName(program);
-    console.log("Name = " + programName);
     const commandName: Command = this.getCommandName(command);
     const programIndex: number = this.getProgramIndex(
       application,
@@ -76,13 +75,13 @@ export class BuildParamDomain {
       ProgramAlias[key as keyof typeof ProgramAlias] === programName
     );
     if (programNameAlias) {
-      return Program[programName as keyof typeof Program];
+      return Program[programNameAlias as keyof typeof Program];
     }
     const programNameFull = Object.keys(Program).find(key =>
       Program[key as keyof typeof Program] === programName
     );
     if (programNameFull) {
-      return Program[programName as keyof typeof Program];
+      return Program[programNameFull as keyof typeof Program];
     }
     return Program.unknown;
   }
