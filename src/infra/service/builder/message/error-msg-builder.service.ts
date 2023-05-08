@@ -2,14 +2,16 @@ import {
   ParamDtoValidationModel
 } from "../../../model/param-dto/param-dto-validation-model";
 import {
-  buildCommandDtoMsg, buildErrMsg,
+  buildCommandDtoMsg,
   buildErrorMsg,
   buildManyErrMsg,
   buildManyTipMsg,
   newline
-} from "./base-msg-builder.service";
+} from "./base-msg-builder";
 
-/** The message builders for all errors. */
+/**
+ * The message builders for all errors.
+ */
 
 export const msgParamDtoValidationError = (
   validationDto: ParamDtoValidationModel
@@ -22,4 +24,3 @@ export const msgParamDtoValidationError = (
     .concat(newline())
     .concat(buildManyTipMsg(validationDto.tips));
 }
-// todo: refactor this

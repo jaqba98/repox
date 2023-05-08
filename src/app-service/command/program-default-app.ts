@@ -11,7 +11,7 @@ import {
 import { WriteLog } from "../../infra/service/writer/write-log";
 import {
   buildInfoMsg
-} from "../../infra/service/builder/message/base-msg-builder.service";
+} from "../../infra/service/builder/message/base-msg-builder";
 import { SYSTEM_VERSION } from "../../const/domain.const";
 
 /**

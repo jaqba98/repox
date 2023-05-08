@@ -12,74 +12,6 @@ import {
 } from "../../../model/param-domain/param-domain-validation-model";
 import { ParamType } from "../../../infra/enum/param-type";
 
-/** Testing of the ReadParamDomainApp. */
-
-// class MockGetParamDependenceService {
-//   getParamDependence(
-//     command: Program
-//   ): ParamDependencyModel {
-//     switch (command) {
-//       case Program.default:
-//         return {
-//           command: Program.default,
-//           commands: {
-//             [Command.default]: {
-//               command: Command.default,
-//               args: {}
-//             }
-//           },
-//           args: {
-//             [Argument.version]: {
-//               name: Argument.version,
-//               mustHasValue: false,
-//               mustHasManyValues: false,
-//               required: true
-//             }
-//           }
-//         };
-//       case Program.generate:
-//         return {
-//           command: Program.generate,
-//           commands: {
-//             [Command.default]: {
-//               command: Command.default,
-//               args: {}
-//             },
-//             [Command.workspace]: {
-//               command: Command.default,
-//               args: {
-//                 [Argument.version]: {
-//                   name: Argument.version,
-//                   mustHasValue: false,
-//                   mustHasManyValues: false,
-//                   required: true
-//                 }
-//               }
-//             }
-//           },
-//           args: {
-//             [Argument.version]: {
-//               name: Argument.version,
-//               mustHasValue: false,
-//               mustHasManyValues: false,
-//               required: true
-//             }
-//           }
-//         };
-//       case Program.unknown:
-//         return {
-//           command: Program.unknown,
-//           commands: {},
-//           args: {}
-//         }
-//       default:
-//         throw new Error(
-//           "Failed to find param dependency for given param!"
-//         );
-//     }
-//   }
-// }
-
 const buildParamDto = (
   entities: Array<ParamDtoEntityModel> = []
 ): ParamDtoModel => {
@@ -161,148 +93,84 @@ describe("ReadParamDomainAppService", () => {
     });
   });
 
-  // test("Should be incorrect for not existed command name", () => {
-  //   const paramDto: ParamDtoModel = buildParamDto([{
-  //     paramBaseValue: "test",
-  //     paramIndex: 2,
-  //     paramType: <any>"command",
-  //     paramHasValue: false,
-  //     paramName: "test",
-  //     paramValues: [],
-  //     paramHasManyValues: false
-  //   }]);
-  //   expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
-  //     isError: true,
-  //     wrongParamIndexes: [2],
-  //     errors: ["You have specified not existed command!"],
-  //     tips: [
-  //       "You have to specify correct command name.",
-  //       "Check the documentation to get full list of programs."
-  //     ],
-  //     paramDomain: {
-  //       command: {
-  //         name: Program.unknown,
-  //         index: 2,
-  //         args: {}
-  //       },
-  //       command: {
-  //         name: Command.default,
-  //         index: 3,
-  //         args: {}
-  //       }
-  //     }
-  //   });
-  // });
-  //
-  // test("Should be incorrect for not existed command name for command", () => {
-  //   const paramDto: ParamDtoModel = buildParamDto([
-  //     {
-  //       paramBaseValue: "generate",
-  //       paramIndex: 2,
-  //       paramType: <any>"command",
-  //       paramHasValue: false,
-  //       paramName: "generate",
-  //       paramValues: [],
-  //       paramHasManyValues: false
-  //     },
-  //     {
-  //       paramBaseValue: "test",
-  //       paramIndex: 3,
-  //       paramType: <any>"command",
-  //       paramHasValue: false,
-  //       paramName: "test",
-  //       paramValues: [],
-  //       paramHasManyValues: false
-  //     }
-  //   ]);
-  //   expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
-  //     isError: true,
-  //     wrongParamIndexes: [3],
-  //     errors: ["You have specified not existed command for given command!"],
-  //     tips: [
-  //       "You have to specify correct command name.",
-  //       "Check the documentation to get full list of commands."
-  //     ],
-  //     paramDomain: {
-  //       command: {
-  //         name: Program.generate,
-  //         index: 2,
-  //         args: {}
-  //       },
-  //       command: {
-  //         name: Command.unknown,
-  //         index: 3,
-  //         args: {}
-  //       }
-  //     }
-  //   });
-  // });
-  //
-  // test("Should be correct for command with correct arguments", () => {
-  //   const paramDto: ParamDtoModel = buildParamDto([
-  //     {
-  //       paramBaseValue: "generate",
-  //       paramIndex: 2,
-  //       paramType: <any>"command",
-  //       paramHasValue: false,
-  //       paramName: "generate",
-  //       paramValues: [],
-  //       paramHasManyValues: false
-  //     },
-  //     {
-  //       paramBaseValue: "workspace",
-  //       paramIndex: 3,
-  //       paramType: <any>"command",
-  //       paramHasValue: false,
-  //       paramName: "workspace",
-  //       paramValues: [],
-  //       paramHasManyValues: false
-  //     },
-  //     {
-  //       paramBaseValue: "--name",
-  //       paramIndex: 4,
-  //       paramType: <any>"argument",
-  //       paramHasValue: false,
-  //       paramName: "name",
-  //       paramValues: [],
-  //       paramHasManyValues: false
-  //     },
-  //   ]);
-  //   expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
-  //     isError: false,
-  //     wrongParamIndexes: [],
-  //     errors: [],
-  //     tips: [],
-  //     paramDomain: {
-  //       command: {
-  //         name: Program.generate,
-  //         index: 2,
-  //         args: {}
-  //       },
-  //       command: {
-  //         name: Command.workspace,
-  //         index: 3,
-  //         args: {
-  //           config: {
-  //             name: "config",
-  //             values: undefined,
-  //             index: undefined,
-  //             hasValue: undefined,
-  //             hasManyValues: undefined,
-  //             isDefined: false
-  //           },
-  //           name: {
-  //             name: Argument.name,
-  //             values: [],
-  //             index: 4,
-  //             hasValue: false,
-  //             hasManyValues: false,
-  //             isDefined: true
-  //           }
-  //         }
-  //       }
-  //     }
-  //   });
-  // });
+  test("Should be incorrect for not existed command name", () => {
+    const paramDto: ParamDtoModel = buildParamDto([{
+      paramBaseValue: "test",
+      paramIndex: 2,
+      paramType: ParamType.command,
+      paramHasValue: false,
+      paramName: "test",
+      paramValues: [],
+      paramHasManyValues: false
+    }]);
+    expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
+      success: false,
+      wrongParamIndexes: [2],
+      errors: ["You have specified not existed command!"],
+      tips: [
+        "You have to specify correct command name.",
+        "Check the documentation to get full list of commands."
+      ],
+      paramDomain: {
+        program: {
+          baseName: "",
+          name: Program.default,
+          index: 1,
+          args: []
+        },
+        command: {
+          baseName: "test",
+          name: Command.unknown,
+          index: 2,
+          args: []
+        }
+      }
+    });
+  });
+
+  test("Should be incorrect for not existed command name for command", () => {
+    const paramDto: ParamDtoModel = buildParamDto([
+      {
+        paramBaseValue: "generate",
+        paramIndex: 2,
+        paramType: ParamType.program,
+        paramHasValue: false,
+        paramName: "generate",
+        paramValues: [],
+        paramHasManyValues: false
+      },
+      {
+        paramBaseValue: "test",
+        paramIndex: 3,
+        paramType: ParamType.command,
+        paramHasValue: false,
+        paramName: "test",
+        paramValues: [],
+        paramHasManyValues: false
+      }
+    ]);
+    expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
+      success: false,
+      wrongParamIndexes: [3],
+      errors: ["You have specified not existed command!"],
+      tips: [
+        "You have to specify correct command name.",
+        "Check the documentation to get full list of commands."
+      ],
+      paramDomain: {
+        program: {
+          baseName: "generate",
+          name: Program.generate,
+          index: 2,
+          args: []
+        },
+        command: {
+          baseName: "test",
+          name: Command.unknown,
+          index: 3,
+          args: []
+        }
+      }
+    });
+  });
 });
-// todo: refactor this

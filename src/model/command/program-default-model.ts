@@ -5,3 +5,8 @@
 export interface ProgramDefaultModel {
   version: boolean;
 }
+
+export interface GenerateWorkspaceModel {
+  name: string;
+  config: string;
+}

@@ -1,5 +1,6 @@
 import { singleton } from "tsyringe";
 import {
+  GenerateWorkspaceModel,
   ProgramDefaultModel
 } from "../../model/command/program-default-model";
 import {
@@ -17,17 +18,37 @@ export class BuildCommandModel {
   buildProgramDefaultModel(
     paramDomain: ParamDomainModel
   ): ProgramDefaultModel {
-    const version = this.getParam(paramDomain, Argument.version);
+    const version = this.getProgramParam(paramDomain, Argument.version);
     return {
       version: Boolean(version)
     };
   }
 
-  private getParam(
+  buildGenerateWorkspaceModel(
+    paramDomain: ParamDomainModel
+  ): GenerateWorkspaceModel {
+    console.log(paramDomain);
+    const name = this.getCommandParam(paramDomain, Argument.name);
+    const config = this.getCommandParam(paramDomain, Argument.config);
+    return {
+      name: name?.values[0] || "",
+      config: config?.values[0] || ""
+    };
+  }
+
+  private getProgramParam(
     paramDomain: ParamDomainModel,
     argument: Argument
   ): ParamDomainArgumentModel | undefined {
     return paramDomain.program.args
+      .find(arg => arg.name === argument);
+  }
+
+  private getCommandParam(
+    paramDomain: ParamDomainModel,
+    argument: Argument
+  ): ParamDomainArgumentModel | undefined {
+    return paramDomain.command.args
       .find(arg => arg.name === argument);
   }
 }
