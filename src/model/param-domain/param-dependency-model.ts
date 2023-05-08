@@ -3,14 +3,13 @@ import { Command } from "../../enum/command";
 import { Program } from "../../enum/program";
 
 /**
- * The model is used by GetParamDependenceService to give
- * the dependency between programs, commands, arguments and aliases.
+ * The model represents dependency between programs, commands,
+ * arguments and aliases.
  */
 
 export interface ParamDependencyArgModel {
   name: Argument;
-  mustHasValue: boolean;
-  mustHasManyValues: boolean;
+  valueMode: "empty" | "single" | "many",
   required: boolean;
 }
 
@@ -32,4 +31,3 @@ export interface ParamDependencyModel {
   commands: ParamDependencyCommandsModel;
   args: ParamDependencyArgsModel;
 }
-// todo: refactor this

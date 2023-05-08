@@ -28,14 +28,17 @@ export class MainService {
       return;
     }
     const paramDomain = this.readParamDomain.build(paramDto.paramDto);
-    console.log(JSON.stringify(paramDomain, null, 2));
-    // if (paramDomain.isError) {
-    //   this.log.message(msgParamDtoValidationError({
-    //     ...paramDomain,
-    //     paramDto: paramDto.paramDto
-    //   }));
-    //   return;
-    // }
+    if (!paramDomain.success) {
+      console.log(msgParamDtoValidationError({
+        ...paramDomain,
+        paramDto: paramDto.paramDto
+      }));
+      // this.log.message(msgParamDtoValidationError({
+      //   ...paramDomain,
+      //   paramDto: paramDto.paramDto
+      // }));
+      return;
+    }
     // this.selectProgram.selectProgram(paramDomain.paramDomain);
   }
 }

@@ -6,13 +6,12 @@ import {
 import { Argument } from "../../enum/argument";
 import { Command } from "../../enum/command";
 
-@singleton()
 /**
- * The service is responsible for give the dependence
- * between programs, commands, arguments and alases.
+ * Give dependency between programs, commands arguments and aliases.
  */
-export class GetParamDependenceService {
-  getParamDependence(program: Program): ParamDependencyModel {
+@singleton()
+export class GetParamDependency {
+  getDependency(program: Program): ParamDependencyModel {
     switch (program) {
       case Program.default:
         return {
@@ -26,8 +25,7 @@ export class GetParamDependenceService {
           args: {
             [Argument.version]: {
               name: Argument.version,
-              mustHasValue: false,
-              mustHasManyValues: false,
+              valueMode: "empty",
               required: false
             }
           }
@@ -45,32 +43,23 @@ export class GetParamDependenceService {
               args: {
                 [Argument.name]: {
                   name: Argument.name,
-                  mustHasValue: true,
-                  mustHasManyValues: false,
+                  valueMode: "single",
                   required: true
                 },
                 [Argument.config]: {
                   name: Argument.config,
-                  mustHasValue: true,
-                  mustHasManyValues: false,
-                  required: false
+                  valueMode: "single",
+                  required: true
                 }
               }
             }
           },
           args: {}
         };
-      case Program.unknown:
-        return {
-          program: Program.unknown,
-          commands: {},
-          args: {}
-        };
       default:
         throw new Error(
-          "Parameter dependency not found for the given program!"
+          `No dependencies found for the ${program} program`
         );
     }
   }
 }
-// todo: refactor this

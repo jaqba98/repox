@@ -26,19 +26,13 @@ export class BuildParamDomain {
   build(paramDto: ParamDtoModel): ParamDomainModel {
     const application = this.paramDtoFinder.findApplication(paramDto);
     const program = this.paramDtoFinder.findProgram(paramDto);
-    const programBaseName: string = program ? program.paramName : "";
     const command = this.paramDtoFinder.findCommand(paramDto);
+    const programBaseName: string = program ? program.paramName : "";
     const commandBaseName: string = command ? command.paramName : "";
-    const programName: Program = this.getProgramName(program);
-    const commandName: Command = this.getCommandName(command);
-    const programIndex: number = this.getProgramIndex(
-      application,
-      program
-    );
-    const commandIndex: number = this.getCommandIndex(
-      command,
-      paramDto
-    );
+    const programName: Program = this.getProgramName(programBaseName);
+    const commandName: Command = this.getCommandName(commandBaseName);
+    const programIndex = this.getProgramIndex(application, program);
+    const commandIndex = this.getCommandIndex(command, paramDto);
     const programArgs = this.paramDtoFinder.findProgramArgs(
       paramDto,
       programIndex,
@@ -64,13 +58,8 @@ export class BuildParamDomain {
     };
   }
 
-  private getProgramName(
-    program: ParamDtoEntityModel | undefined
-  ): Program {
-    const programName: string = program ? program.paramName : "";
-    if (programName === "") {
-      return Program.default;
-    }
+  private getProgramName(programName: string): Program {
+    if (programName === Program.default) return Program.default;
     const programNameAlias = Object.keys(ProgramAlias).find(key =>
       ProgramAlias[key as keyof typeof ProgramAlias] === programName
     );
@@ -86,18 +75,21 @@ export class BuildParamDomain {
     return Program.unknown;
   }
 
-  private getCommandName(
-    command: ParamDtoEntityModel | undefined
-  ): Command {
-    const commandName: string = command ? command.paramName : "";
-    const commandAlias = Object.keys(CommandAlias).find(key =>
+  private getCommandName(commandName: string): Command {
+    if (commandName === Command.default) return Command.default;
+    const commandNameAlias = Object.keys(CommandAlias).find(key =>
       CommandAlias[key as keyof typeof CommandAlias] === commandName
     );
-    if (commandAlias) {
-      return Command[commandAlias as keyof typeof Command];
+    if (commandNameAlias) {
+      return Command[commandNameAlias as keyof typeof Command];
     }
-    const commandFull = Command[commandName as keyof typeof Command];
-    return commandFull ? commandFull : Command.unknown;
+    const commandNameFull = Object.keys(Command).find(key =>
+      Command[key as keyof typeof Command] === commandName
+    );
+    if (commandNameFull) {
+      return Command[commandNameFull as keyof typeof Command];
+    }
+    return Command.unknown;
   }
 
   private getProgramIndex(
@@ -132,18 +124,21 @@ export class BuildParamDomain {
 
   private getArgumentName(arg: string, type: ParamType): Argument {
     if (type === ParamType.argument) {
-      const argument = Argument[arg as keyof typeof Argument];
-      return argument ? argument : Argument.unknown;
+      const argument = Object.keys(Argument).find(key =>
+        Argument[key as keyof typeof Argument] === arg
+      );
+      return argument ?
+        Argument[argument as keyof typeof Argument] :
+        Argument.unknown;
     }
     if (type === ParamType.alias) {
       const alias = Object.keys(Alias).find(key =>
         Alias[key as keyof typeof Alias] === arg
       );
       return alias ?
-        Argument[alias as keyof typeof Argument] : Argument.unknown;
+        Argument[alias as keyof typeof Argument] :
+        Argument.unknown;
     }
     return Argument.unknown;
   }
 }
-
-// todo: refactor this
