@@ -5,7 +5,7 @@
 //   ProgramGenerateCommandWorkspaceArgsModel
 // } from "../../model/param-domain/param-domain-model";
 // import {
-//   WriteLogService
+//   WriteLog
 // } from "../../infra/service/writer/write-log.service";
 // import {
 //   msgRunCommandInfo
@@ -42,7 +42,7 @@
 //  */
 // export class GenerateWorkspaceAppService {
 //   constructor(
-//     private readonly writeLog: WriteLogService,
+//     private readonly writeLog: WriteLog,
 //     private readonly folderDoesNotExist: ExecFolderDoesNotExistService,
 //     private readonly gitInstalled: ExecProgramInstalledService,
 //     private readonly createFolder: ExecCreateFolderService,

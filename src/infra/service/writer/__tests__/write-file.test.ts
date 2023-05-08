@@ -1,8 +1,6 @@
 import { container } from "tsyringe";
-import { WriteFileService } from "../write-file.service";
+import { WriteFile } from "../write-file";
 import { existsSync, readFileSync, unlinkSync } from "fs";
-
-/** Testing of the WriteFileService service. */
 
 interface TJsonContent {
   hello: string;
@@ -11,7 +9,7 @@ interface TJsonContent {
 describe("WriteFileService", () => {
   const path: string = "test.json";
   const content: TJsonContent = { hello: "Hello" };
-  const writeFile = container.resolve(WriteFileService);
+  const writeFile = container.resolve(WriteFile);
 
   beforeEach(() => {
     if (existsSync(path)) {
@@ -31,4 +29,3 @@ describe("WriteFileService", () => {
     expect(dataFromFile).toEqual(content);
   });
 });
-// todo: refactor this

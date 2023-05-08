@@ -2,7 +2,7 @@
 // import {
 //   BaseFieldModel
 // } from "../../../model/param-domain/param-domain-model";
-// import { WriteLogService } from "../writer/write-log.service";
+// import { WriteLog } from "../writer/write-log.service";
 // import { SYSTEM_VERSION } from "../../../const/domain.const";
 // import {
 //   buildInfoMsg
@@ -14,7 +14,7 @@
 //  * */
 // export class ExecGetCurrentVersionService {
 //   constructor(
-//     private readonly writeLog: WriteLogService
+//     private readonly writeLog: WriteLog
 //   ) {
 //   }
 //

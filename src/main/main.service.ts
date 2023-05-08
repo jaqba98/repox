@@ -15,7 +15,7 @@ export class MainService {
   constructor(
     private readonly readParamDto: ReadParamDtoApp,
     private readonly readParamDomain: ReadParamDomainApp
-    // private readonly log: WriteLogService,
+    // private readonly log: WriteLog,
     // private readonly selectProgram: SelectProgramApp
   ) {
   }

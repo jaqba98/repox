@@ -1,5 +1,5 @@
 // import { singleton } from "tsyringe";
-// import { WriteLogService } from "../writer/write-log.service";
+// import { WriteLog } from "../writer/write-log.service";
 // import { ExecCommand } from "./exec-command";
 // import {
 //   buildErrMsg,
@@ -12,7 +12,7 @@
 //  */
 // export class ExecCreateFileService {
 //   constructor(
-//     private readonly writeLog: WriteLogService,
+//     private readonly writeLog: WriteLog,
 //     private readonly execCommand: ExecCommand
 //   ) {
 //   }
