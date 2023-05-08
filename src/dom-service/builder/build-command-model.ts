@@ -27,7 +27,6 @@ export class BuildCommandModel {
   buildGenerateWorkspaceModel(
     paramDomain: ParamDomainModel
   ): GenerateWorkspaceModel {
-    console.log(paramDomain);
     const name = this.getCommandParam(paramDomain, Argument.name);
     const config = this.getCommandParam(paramDomain, Argument.config);
     return {

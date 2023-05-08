@@ -1,11 +1,12 @@
 import { singleton } from "tsyringe";
-import {
-  ConfigFile
-} from "../../enum/config-file";
+import { ConfigFile } from "../../enum/config-file";
 
+/**
+ * Converter to get config file name.
+ */
 @singleton()
-export class GetConfigFileNameService {
-  getConfigFileName(configType: string): string {
+export class GetConfigFileName {
+  getConfig(configType: string): ConfigFile {
     switch (configType) {
       case "json":
         return ConfigFile.configJson;
@@ -18,4 +19,3 @@ export class GetConfigFileNameService {
     }
   }
 }
-// todo: refactor this
