@@ -19,6 +19,7 @@ import {
 } from "../../model/param-domain/param-dependency-model";
 import { Program } from "../../enum/program";
 import { Command } from "../../enum/command";
+import { Argument } from "../../enum/argument";
 
 /**
  * The validator is responsible for checking that the given command
@@ -42,6 +43,7 @@ export class CommandArgumentsCorrect
       .getDependency(programName);
     const commandArgs = programDep.commands[commandName].args;
     const wrongArgs = paramDomain.command.args
+      .filter(arg => arg.name !== Argument.unknown)
       .filter(arg => !this.checkCommandArgs(arg, commandArgs));
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess(paramDomain);

@@ -18,9 +18,10 @@ import {
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency-model";
 import { Program } from "../../enum/program";
+import { Argument } from "../../enum/argument";
 
 /**
- * The validator is responsible for checking that the given program
+ * The validator is responsible for checking that the given command
  * arguments are correct.
  */
 @singleton()
@@ -40,6 +41,7 @@ export class ProgramArgumentsCorrect
       .getDependency(programName);
     const programArgs = programDep.args;
     const wrongArgs = paramDomain.program.args
+      .filter(arg => arg.name !== Argument.unknown)
       .filter(arg => !this.checkCommandArgs(arg, programArgs));
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess(paramDomain);

@@ -8,7 +8,7 @@
 //
 // @singleton()
 // /**
-//  * The service is responsible for verify whether program
+//  * The service is responsible for verify whether command
 //  * is installed.
 //  */
 // export class ExecProgramInstalledService {
@@ -17,13 +17,13 @@
 //   ) {
 //   }
 //
-//   exec(program: string): boolean {
+//   exec(command: string): boolean {
 //     this.writeLog.message(buildInfoMsg(
-//       `Verify that the ${program} is installed`
+//       `Verify that the ${command} is installed`
 //     ));
-//     if (!sync(program)) {
+//     if (!sync(command)) {
 //       this.writeLog.message(
-//         buildErrMsg(`The ${program} is not installed`)
+//         buildErrMsg(`The ${command} is not installed`)
 //       );
 //       return false;
 //     }

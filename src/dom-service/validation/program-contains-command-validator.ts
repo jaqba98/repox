@@ -20,7 +20,7 @@ import {
 
 /**
  * The validator is responsible for checking
- * that given program contain given command.
+ * that given command contain given command.
  */
 @singleton()
 export class ProgramContainsCommandValidator
@@ -43,7 +43,7 @@ export class ProgramContainsCommandValidator
     }
     return this.buildParamDomain.buildError(
       [paramDomain.command.index],
-      ["The given command is not supported by the given program!"],
+      ["The given command is not supported by the given command!"],
       [
         "You have to specify supported command name.",
         "Check the documentation to get full list of commands."

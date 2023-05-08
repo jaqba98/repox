@@ -1,4 +1,6 @@
-/** This is model of project configuration. */
+/**
+ * This is configuration domain model of repox.
+ */
 
 export interface ProjectModel {
   name: string;
@@ -10,7 +12,7 @@ export interface ProjectsModel {
   [project: string]: ProjectModel;
 }
 
-export interface ConfigProjectModel {
+export interface RepoxConfigModel {
   version: string;
   projects: {
     apps: ProjectsModel;
@@ -18,4 +20,3 @@ export interface ConfigProjectModel {
     tools: ProjectsModel;
   }
 }
-// todo: refactor this

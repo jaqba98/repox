@@ -36,13 +36,13 @@ import { ProgramArgumentsCorrect } from "./program-arguments-correct";
  * Run all validators to verify the parameter domain model.
  *
  * Validators:
- * 1.Verify that program exists.
+ * 1.Verify that command exists.
  * 2.Verify that command exists.
- * 3.Verify that program contains command.
+ * 3.Verify that command contains command.
  * 4.Verify that arguments exist.
- * 5.Verify that program contains arguments.
+ * 5.Verify that command contains arguments.
  * 6.Verify that command contains arguments.
- * 7.Verify that program does not contain wrong arguments.
+ * 7.Verify that command does not contain wrong arguments.
  * 8.Verify that command does not contain wrong arguments.
  */
 @singleton()
@@ -55,7 +55,7 @@ export class ParamDomainValidation {
   runValidation(
     paramDomain: ParamDomainModel
   ): ParamDomainValidationModel {
-    const paramDomainError: ParamDomainValidationModel | undefined = [
+    const services = [
       ProgramExistValidator,
       CommandExistValidator,
       ProgramContainsCommandValidator,
@@ -66,13 +66,18 @@ export class ParamDomainValidation {
       CommandNotContainsWrongArguments,
       ProgramArgumentsCorrect,
       CommandArgumentsCorrect
-    ]
-      .map(service => {
-        return container.resolve<ValidatorDomainModel>(service);
-      })
-      .map(service => service.runValidator(paramDomain))
-      .find(result => !result.success);
-    return paramDomainError ||
-      this.buildParamDomain.buildSuccess(paramDomain);
+    ];
+    let isError: boolean = false;
+    let result = undefined;
+    for (const service of services) {
+      if (!isError) {
+        const srv = container.resolve<ValidatorDomainModel>(service);
+        result = srv.runValidator(paramDomain);
+        if (!result.success) {
+          isError = true;
+        }
+      }
+    }
+    return result || this.buildParamDomain.buildSuccess(paramDomain);
   }
 }

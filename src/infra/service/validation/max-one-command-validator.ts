@@ -16,7 +16,7 @@ import { ParamType } from "../../enum/param-type";
 
 /**
  * Check the given DTO parameters have max one command
- * (0 or 1 if the program exist and 0 if the program not exist).
+ * (0 or 1 if the command exist and 0 if the command not exist).
  */
 @singleton()
 export class MaxOneCommandValidator implements ValidatorDtoModel {
@@ -33,10 +33,10 @@ export class MaxOneCommandValidator implements ValidatorDtoModel {
     if (!program && commands.length > 0) {
       return this.buildParamDto.buildError(
         commands,
-        ["You have specified the command without any program!"],
+        ["You have specified the command without any command!"],
         [
-          "You have to specify a program.",
-          "Pattern: repox <program> <arguments> <command> <arguments>"
+          "You have to specify a command.",
+          "Pattern: repox <command> <arguments> <command> <arguments>"
         ],
         paramDto
       );
@@ -46,8 +46,8 @@ export class MaxOneCommandValidator implements ValidatorDtoModel {
         commands,
         ["You have specified too many commands!"],
         [
-          "You have to specify one command for the given program.",
-          "Pattern: repox <program> <arguments> <command> <arguments>"
+          "You have to specify one command for the given command.",
+          "Pattern: repox <command> <arguments> <command> <arguments>"
         ],
         paramDto
       );

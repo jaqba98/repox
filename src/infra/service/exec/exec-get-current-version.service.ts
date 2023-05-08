@@ -10,7 +10,7 @@
 //
 // @singleton()
 // /**
-//  * The service is responsible for get current version of program.
+//  * The service is responsible for get current version of command.
 //  * */
 // export class ExecGetCurrentVersionService {
 //   constructor(

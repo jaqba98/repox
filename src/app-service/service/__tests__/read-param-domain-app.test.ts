@@ -16,12 +16,12 @@ import { ParamType } from "../../../infra/enum/param-type";
 
 // class MockGetParamDependenceService {
 //   getParamDependence(
-//     program: Program
+//     command: Program
 //   ): ParamDependencyModel {
-//     switch (program) {
+//     switch (command) {
 //       case Program.default:
 //         return {
-//           program: Program.default,
+//           command: Program.default,
 //           commands: {
 //             [Command.default]: {
 //               command: Command.default,
@@ -39,7 +39,7 @@ import { ParamType } from "../../../infra/enum/param-type";
 //         };
 //       case Program.generate:
 //         return {
-//           program: Program.generate,
+//           command: Program.generate,
 //           commands: {
 //             [Command.default]: {
 //               command: Command.default,
@@ -68,7 +68,7 @@ import { ParamType } from "../../../infra/enum/param-type";
 //         };
 //       case Program.unknown:
 //         return {
-//           program: Program.unknown,
+//           command: Program.unknown,
 //           commands: {},
 //           args: {}
 //         }
@@ -120,7 +120,7 @@ describe("ReadParamDomainAppService", () => {
     container.reset();
   });
 
-  test("Should be correct for default program with correct arguments", () => {
+  test("Should be correct for default command with correct arguments", () => {
     const paramDto: ParamDtoModel = buildParamDto([{
       paramBaseValue: "--version",
       paramIndex: 2,
@@ -161,11 +161,11 @@ describe("ReadParamDomainAppService", () => {
     });
   });
 
-  // test("Should be incorrect for not existed program name", () => {
+  // test("Should be incorrect for not existed command name", () => {
   //   const paramDto: ParamDtoModel = buildParamDto([{
   //     paramBaseValue: "test",
   //     paramIndex: 2,
-  //     paramType: <any>"program",
+  //     paramType: <any>"command",
   //     paramHasValue: false,
   //     paramName: "test",
   //     paramValues: [],
@@ -174,13 +174,13 @@ describe("ReadParamDomainAppService", () => {
   //   expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
   //     isError: true,
   //     wrongParamIndexes: [2],
-  //     errors: ["You have specified not existed program!"],
+  //     errors: ["You have specified not existed command!"],
   //     tips: [
-  //       "You have to specify correct program name.",
+  //       "You have to specify correct command name.",
   //       "Check the documentation to get full list of programs."
   //     ],
   //     paramDomain: {
-  //       program: {
+  //       command: {
   //         name: Program.unknown,
   //         index: 2,
   //         args: {}
@@ -194,12 +194,12 @@ describe("ReadParamDomainAppService", () => {
   //   });
   // });
   //
-  // test("Should be incorrect for not existed command name for program", () => {
+  // test("Should be incorrect for not existed command name for command", () => {
   //   const paramDto: ParamDtoModel = buildParamDto([
   //     {
   //       paramBaseValue: "generate",
   //       paramIndex: 2,
-  //       paramType: <any>"program",
+  //       paramType: <any>"command",
   //       paramHasValue: false,
   //       paramName: "generate",
   //       paramValues: [],
@@ -218,13 +218,13 @@ describe("ReadParamDomainAppService", () => {
   //   expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
   //     isError: true,
   //     wrongParamIndexes: [3],
-  //     errors: ["You have specified not existed command for given program!"],
+  //     errors: ["You have specified not existed command for given command!"],
   //     tips: [
   //       "You have to specify correct command name.",
   //       "Check the documentation to get full list of commands."
   //     ],
   //     paramDomain: {
-  //       program: {
+  //       command: {
   //         name: Program.generate,
   //         index: 2,
   //         args: {}
@@ -243,7 +243,7 @@ describe("ReadParamDomainAppService", () => {
   //     {
   //       paramBaseValue: "generate",
   //       paramIndex: 2,
-  //       paramType: <any>"program",
+  //       paramType: <any>"command",
   //       paramHasValue: false,
   //       paramName: "generate",
   //       paramValues: [],
@@ -274,7 +274,7 @@ describe("ReadParamDomainAppService", () => {
   //     errors: [],
   //     tips: [],
   //     paramDomain: {
-  //       program: {
+  //       command: {
   //         name: Program.generate,
   //         index: 2,
   //         args: {}

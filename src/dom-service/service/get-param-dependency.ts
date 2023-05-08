@@ -49,7 +49,7 @@ export class GetParamDependency {
                 [Argument.config]: {
                   name: Argument.config,
                   valueMode: "single",
-                  required: true
+                  required: false
                 }
               }
             }

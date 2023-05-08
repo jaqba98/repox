@@ -8,38 +8,38 @@ import {
 import {
   msgParamDtoValidationError
 } from "../infra/service/builder/message/error-msg-builder.service";
+import {
+  SelectProgramApp
+} from "../app-service/service/select-program-app";
+import { WriteLog } from "../infra/service/writer/write-log";
 
+/**
+ * Main launch point of the command.
+ */
 @singleton()
-/** Main launch point of the program. */
 export class MainService {
   constructor(
     private readonly readParamDto: ReadParamDtoApp,
-    private readonly readParamDomain: ReadParamDomainApp
-    // private readonly log: WriteLog,
-    // private readonly selectProgram: SelectProgramApp
+    private readonly readParamDomain: ReadParamDomainApp,
+    private readonly selectProgram: SelectProgramApp,
+    private readonly writeLog: WriteLog,
   ) {
   }
 
   run(): void {
     const paramDto = this.readParamDto.read();
     if (!paramDto.success) {
-      console.log(msgParamDtoValidationError(paramDto));
-      // this.log.message(msgParamDtoValidationError(paramDto));
+      this.writeLog.message(msgParamDtoValidationError(paramDto));
       return;
     }
     const paramDomain = this.readParamDomain.build(paramDto.paramDto);
     if (!paramDomain.success) {
-      console.log(msgParamDtoValidationError({
+      this.writeLog.message(msgParamDtoValidationError({
         ...paramDomain,
         paramDto: paramDto.paramDto
       }));
-      // this.log.message(msgParamDtoValidationError({
-      //   ...paramDomain,
-      //   paramDto: paramDto.paramDto
-      // }));
       return;
     }
-    // this.selectProgram.selectProgram(paramDomain.paramDomain);
+    this.selectProgram.selectProgram(paramDomain.paramDomain);
   }
 }
-// todo: refactor this

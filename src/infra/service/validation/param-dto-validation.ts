@@ -21,15 +21,15 @@ import { CorrectOrderValidator } from "./correct-order-validator";
  * Run all validators to verify the parameter DTO model.
  *
  * Pattern:
- * > repox <program> <arguments> <command> <arguments>
+ * > repox <command> <arguments> <command> <arguments>
  *
  * Validators:
  * 1.Verify that each part of the command contains only
  *   supported characters.
  * 2.Verify that each part of the command has correct pattern.
- * 3.Verify that the command contains max 1 program (0 or 1).
+ * 3.Verify that the command contains max 1 command (0 or 1).
  * 4.Verify that the command contains max 1 command
- *   (0 or 1 if the program exist and 0 if the program not exist).
+ *   (0 or 1 if the command exist and 0 if the command not exist).
  * 5.Verify that each part of the command are in correct order.
  */
 @singleton()

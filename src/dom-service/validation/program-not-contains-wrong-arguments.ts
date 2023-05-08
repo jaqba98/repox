@@ -18,7 +18,7 @@ import {
 import { Program } from "../../enum/program";
 
 /**
- * The validator is responsible for checking that the given program
+ * The validator is responsible for checking that the given command
  * does not contain wrong arguments.
  */
 @singleton()
@@ -47,7 +47,7 @@ export class ProgramNotContainsWrongArguments
     const notExistedArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
-      ["You have specified not existed arguments for program!"],
+      ["You have specified not existed arguments for command!"],
       [
         `Not existed arguments for program: ${notExistedArgs}`
       ],

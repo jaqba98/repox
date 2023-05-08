@@ -37,7 +37,7 @@ export class CorrectOrderValidator implements ValidatorDtoModel {
       ["You have specified the command in the incorrect order!"],
       [
         "You have to specify the command in the correct order.",
-        "Pattern: repox <program> <arguments> <command> <arguments>"
+        "Pattern: repox <command> <arguments> <command> <arguments>"
       ],
       paramDto
     );
