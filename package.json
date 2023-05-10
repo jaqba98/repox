@@ -2,13 +2,13 @@
   "name": "repox",
   "version": "1.0.11",
   "description": "Lightweight monorepo for many huge projects.",
-  "main": "./bin/repox.js",
-  "bin": "./bin/repox.js",
+  "main": "./apps/repox/repox.service.js",
+  "bin": "./apps/repox/repox.service.js",
   "author": "Jakub Olejarczyk",
   "license": "ISC",
   "scripts": {
     "remove": "rm -rf dist",
-    "build": "tsc && cp package.json dist && cp README.md dist",
+    "build": "tsc && cp package.json dist && tsc-alias -p tsconfig.json && cp README.md dist",
     "link": "npm link ./dist",
     "unlink": "npm unlink ./dist && npm uninstall repox -g",
     "test": "jest --silent",
@@ -23,6 +23,7 @@
     "jest": "^29.5.0",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.6",
     "typescript": "^5.0.4"
   },
   "dependencies": {

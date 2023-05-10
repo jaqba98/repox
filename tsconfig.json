@@ -4,19 +4,24 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",
-    "rootDir": "./src",
+    "rootDir": "./projects",
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@lib/main": ["projects/libs/main/index.ts"],
+      "@lib/logger": ["projects/libs/logger/index.ts"]
+    }
   },
   "include": [
-    "src/**/*"
+    "projects/**/*"
   ],
   "exclude": [
     "node_modules",
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts"
+    "projects/**/*.spec.ts",
+    "projects/**/*.test.ts"
   ]
 }
