@@ -1,46 +1,30 @@
-import { singleton } from "tsyringe";
-// import {
-//   ReadParamDtoAppService
-// } from "../../../app-service/service/read-param-dto-app";
-// import {
-//   ReadParamDomainApp
-// } from "../../../app-service/service/read-param-domain-app";
-// import {
-//   msgParamDtoValidationError
-// } from "../../../infra/service/builder/message/error-msg-builder.service";
-// import {
-//   SelectProgramApp
-// } from "../../../app-service/service/select-program-app";
-import { LoggerAppService } from "@lib/logger";
+import "core-js/features/reflect";
+import { ReadParamDtoAppService } from "@lib/parameter";
+import { container, singleton } from "tsyringe";
+import { LoggerParamErrorAppService } from "@lib/logger";
 
-/**
- * Main launch point of the command.
- */
 @singleton()
+/**
+ * Main launch point of the program.
+ */
 export class MainService {
   constructor(
-    // private readonly readParamDto: ReadParamDtoAppService,
-    // private readonly readParamDomain: ReadParamDomainApp,
-    // private readonly selectProgram: SelectProgramApp,
-    private readonly logger: LoggerAppService,
+    private readonly readParamDtoApp: ReadParamDtoAppService,
+    private readonly loggerParamErrorApp: LoggerParamErrorAppService,
   ) {
   }
 
   run(): void {
-    this.logger.writeSuccessMessage(false, true, "Hello world");
-    // const paramDto = this.readParamDto.read();
-    // if (!paramDto.success) {
-    //   this.writeLog.message(msgParamDtoValidationError(paramDto));
-    //   return;
-    // }
-    // const paramDomain = this.readParamDomain.build(paramDto.paramDto);
-    // if (!paramDomain.success) {
-    //   this.writeLog.message(msgParamDtoValidationError({
-    //     ...paramDomain,
-    //     paramDto: paramDto.paramDto
-    //   }));
-    //   return;
-    // }
-    // this.selectProgram.selectProgram(paramDomain.paramDomain);
+    const paramDto = this.readParamDtoApp.read();
+    if (!paramDto.success) {
+      return this.loggerParamErrorApp.writeParamError(
+        paramDto.wrongParamIndexes,
+        paramDto.baseValues,
+        paramDto.errors,
+        paramDto.tips
+      );
+    }
   }
 }
+
+container.resolve(MainService).run();

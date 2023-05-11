@@ -17,6 +17,7 @@ export class BuildParamDtoResultService {
     return {
       success: true,
       wrongParamIndexes: [],
+      baseValues: paramDto.params.map(param => param.paramBaseValue),
       errors: [],
       tips: [],
       paramDto
@@ -34,6 +35,7 @@ export class BuildParamDtoResultService {
     return {
       success: false,
       wrongParamIndexes,
+      baseValues: paramDto.params.map(param => param.paramBaseValue),
       errors,
       tips,
       paramDto

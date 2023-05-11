@@ -12,7 +12,6 @@ import {
 import {
   ConvertModeToColorService
 } from "../converter/convert-mode-to-color.service";
-import { LoggerModeEnum } from "../../enum/logger-mode.enum";
 import {
   buildEmptyMessage,
   buildHeader,
@@ -20,7 +19,7 @@ import {
   buildLogo,
   buildMessage,
   buildWord
-} from "../builder/builder-message";
+} from "../builder/builder-message.service";
 
 @singleton()
 /**
@@ -40,8 +39,7 @@ export class BuildMessageService {
   }
 
   private buildLine(line: LoggerLineModel): string {
-    const { isLogo, isHeader, headerContent, message } = line;
-    const mode: LoggerModeEnum = <LoggerModeEnum>line.mode;
+    const { mode, isLogo, isHeader, headerContent, message } = line;
     const fgColor: string = this.convertModeToColor.convertToFg(mode);
     const bgColor: string = this.convertModeToColor.convertToBg(mode);
     const logo: string = this.buildLogo(isLogo, bgColor);
@@ -73,7 +71,7 @@ export class BuildMessageService {
   }
 
   private buildMessage(
-    message: string | Array<LoggerLineMessageModel>,
+    message: string | Array<string> | Array<LoggerLineMessageModel>,
     fgColor: string
   ): string {
     if (typeof message === "string") {
@@ -87,8 +85,11 @@ export class BuildMessageService {
 
   private buildWord(
     fgColor: string,
-    word: LoggerLineMessageModel
+    word: string | LoggerLineMessageModel
   ): string {
+    if (typeof word === "string") {
+      return buildWord(fgColor, word, false);
+    }
     const { value, underscore } = word;
     return buildWord(fgColor, value, underscore);
   }

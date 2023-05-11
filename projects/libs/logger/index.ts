@@ -1,1 +1,1 @@
-export * from "./src/app-service/logger-app.service";
+export * from "./src/app-service/logger-param-error-app.service";

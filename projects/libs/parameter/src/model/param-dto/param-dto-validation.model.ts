@@ -6,6 +6,7 @@ import { ParamDtoModel } from "./param-dto.model";
 export interface ParamDtoValidationModel {
   success: boolean;
   wrongParamIndexes: Array<number>;
+  baseValues: Array<string>;
   errors: Array<string>;
   tips: Array<string>;
   paramDto: ParamDtoModel;

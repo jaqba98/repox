@@ -15,11 +15,11 @@ export interface LoggerLineMessageModel extends LoggerStyleModel {
 }
 
 export interface LoggerLineModel {
-  mode: keyof typeof LoggerModeEnum;
+  mode: LoggerModeEnum;
   isLogo: boolean;
   isHeader: boolean;
   headerContent: string;
-  message: string | Array<LoggerLineMessageModel>;
+  message: string | Array<string> | Array<LoggerLineMessageModel>;
   newline: number;
 }
 

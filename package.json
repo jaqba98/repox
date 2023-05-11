@@ -2,8 +2,8 @@
   "name": "repox",
   "version": "1.0.11",
   "description": "Lightweight monorepo for many huge projects.",
-  "main": "./apps/repox/repox.service.js",
-  "bin": "./apps/repox/repox.service.js",
+  "main": "./apps/repox/src/main.js",
+  "bin": "./apps/repox/src/main.js",
   "author": "Jakub Olejarczyk",
   "license": "ISC",
   "scripts": {
