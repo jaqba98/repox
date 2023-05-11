@@ -1,22 +1,22 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDomainModel
-} from "../../model/validator-domain/validator-domain-model";
+} from "../../parameter/src/model/validator/validator-domain.model";
 import {
   BuildParamDomainValidation
 } from "../builder/build-param-domain-validation";
 import {
   ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
+} from "../../parameter/src/model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation-model";
+} from "../../parameter/src/model/param-domain/param-domain-validation.model";
 import { GetParamDependency } from "../service/get-param-dependency";
 import {
   ParamDependencyModel
-} from "../../model/param-domain/param-dependency-model";
-import { Command } from "../../enum/command";
-import { Program } from "../../enum/program";
+} from "../../parameter/src/model/param-domain/param-dependency.model";
+import { CommandEnum } from "../../parameter/src/enum/command.enum";
+import { ProgramEnum } from "../../parameter/src/enum/program.enum";
 
 /**
  * The validator is responsible for checking that the given command
@@ -34,8 +34,8 @@ export class CommandContainsArguments
   runValidator(
     paramDomain: ParamDomainModel,
   ): ParamDomainValidationModel {
-    const programName: Program = paramDomain.program.name;
-    const commandName: Command = paramDomain.command.name;
+    const programName: ProgramEnum = paramDomain.program.name;
+    const commandName: CommandEnum = paramDomain.command.name;
     const programDep: ParamDependencyModel = this.getParamDependency
       .getDependency(programName);
     const command = programDep.commands[commandName];

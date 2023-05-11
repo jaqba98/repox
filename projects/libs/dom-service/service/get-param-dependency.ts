@@ -1,68 +1,68 @@
 import { singleton } from "tsyringe";
-import { Program } from "../../enum/program";
+import { ProgramEnum } from "../../parameter/src/enum/program.enum";
 import {
   ParamDependencyModel
-} from "../../model/param-domain/param-dependency-model";
-import { Argument } from "../../enum/argument";
-import { Command } from "../../enum/command";
+} from "../../parameter/src/model/param-domain/param-dependency.model";
+import { ArgumentEnum } from "../../parameter/src/enum/argument.enum";
+import { CommandEnum } from "../../parameter/src/enum/command.enum";
 
 /**
  * Give dependency between programs, commands arguments and aliases.
  */
 @singleton()
 export class GetParamDependency {
-  getDependency(program: Program): ParamDependencyModel {
+  getDependency(program: ProgramEnum): ParamDependencyModel {
     switch (program) {
-      case Program.default:
+      case ProgramEnum.default:
         return {
-          program: Program.default,
+          program: ProgramEnum.default,
           commands: {
-            [Command.default]: {
-              command: Command.default,
+            [CommandEnum.default]: {
+              command: CommandEnum.default,
               args: {}
             }
           },
           args: {
-            [Argument.version]: {
-              name: Argument.version,
+            [ArgumentEnum.version]: {
+              name: ArgumentEnum.version,
               valueMode: "empty",
               required: false
             }
           }
         };
-      case Program.generate:
+      case ProgramEnum.generate:
         return {
-          program: Program.generate,
+          program: ProgramEnum.generate,
           commands: {
-            [Command.default]: {
-              command: Command.default,
+            [CommandEnum.default]: {
+              command: CommandEnum.default,
               args: {}
             },
-            [Command.workspace]: {
-              command: Command.workspace,
+            [CommandEnum.workspace]: {
+              command: CommandEnum.workspace,
               args: {
-                [Argument.name]: {
-                  name: Argument.name,
+                [ArgumentEnum.name]: {
+                  name: ArgumentEnum.name,
                   valueMode: "single",
                   required: true
                 },
-                [Argument.config]: {
-                  name: Argument.config,
+                [ArgumentEnum.config]: {
+                  name: ArgumentEnum.config,
                   valueMode: "single",
                   required: false
                 }
               }
             },
-            [Command.project]: {
-              command: Command.project,
+            [CommandEnum.project]: {
+              command: CommandEnum.project,
               args: {
-                [Argument.name]: {
-                  name: Argument.name,
+                [ArgumentEnum.name]: {
+                  name: ArgumentEnum.name,
                   valueMode: "single",
                   required: true
                 },
-                [Argument.type]: {
-                  name: Argument.type,
+                [ArgumentEnum.type]: {
+                  name: ArgumentEnum.type,
                   valueMode: "single",
                   required: true
                 }

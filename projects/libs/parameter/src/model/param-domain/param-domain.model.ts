@@ -1,6 +1,6 @@
-import { Argument } from "../../enum/argument";
-import { Program } from "../../enum/program";
-import { Command } from "../../enum/command";
+import { ArgumentEnum } from "../../enum/argument.enum";
+import { ProgramEnum } from "../../enum/program.enum";
+import { CommandEnum } from "../../enum/command.enum";
 
 /**
  * Domain parameter model for all parameters built from dto.
@@ -8,7 +8,7 @@ import { Command } from "../../enum/command";
 
 export interface ParamDomainArgumentModel {
   baseName: string;
-  name: Argument;
+  name: ArgumentEnum;
   values: Array<string>;
   index: number;
   hasValue: boolean;
@@ -23,6 +23,6 @@ export interface ParamDomainEntityModel<TName> {
 }
 
 export interface ParamDomainModel {
-  program: ParamDomainEntityModel<Program>;
-  command: ParamDomainEntityModel<Command>;
+  program: ParamDomainEntityModel<ProgramEnum>;
+  command: ParamDomainEntityModel<CommandEnum>;
 }

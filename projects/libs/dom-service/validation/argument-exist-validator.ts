@@ -1,17 +1,17 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDomainModel
-} from "../../model/validator-domain/validator-domain-model";
+} from "../../parameter/src/model/validator/validator-domain.model";
 import {
   BuildParamDomainValidation
 } from "../builder/build-param-domain-validation";
 import {
   ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
+} from "../../parameter/src/model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation-model";
-import { Argument } from "../../enum/argument";
+} from "../../parameter/src/model/param-domain/param-domain-validation.model";
+import { ArgumentEnum } from "../../parameter/src/enum/argument.enum";
 
 /**
  * The validator is responsible for checking that
@@ -31,7 +31,7 @@ export class ArgumentExistValidator implements ValidatorDomainModel {
     const commandArgs = paramDomain.command.args;
     const args = [...programArgs, ...commandArgs];
     const wrongArgs = args
-      .filter(arg => arg.name === Argument.unknown);
+      .filter(arg => arg.name === ArgumentEnum.unknown);
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess(paramDomain);
     }

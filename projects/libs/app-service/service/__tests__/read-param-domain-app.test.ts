@@ -1,6 +1,6 @@
-import { Program } from "../../../enum/program";
-import { Command } from "../../../enum/command";
-import { Argument } from "../../../enum/argument";
+import { ProgramEnum } from "../../../parameter/src/enum/program.enum";
+import { CommandEnum } from "../../../parameter/src/enum/command.enum";
+import { ArgumentEnum } from "../../../parameter/src/enum/argument.enum";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
@@ -9,7 +9,7 @@ import { container } from "tsyringe";
 import { ReadParamDomainApp } from "../read-param-domain-app";
 import {
   ParamDomainValidationModel
-} from "../../../model/param-domain/param-domain-validation-model";
+} from "../../../parameter/src/model/param-domain/param-domain-validation.model";
 import { ParamTypeEnum } from "../../../parameter/src/enum/param-type.enum";
 
 const buildParamDto = (
@@ -70,12 +70,12 @@ describe("ReadParamDomainAppService", () => {
       paramDomain: {
         program: {
           baseName: "",
-          name: Program.default,
+          name: ProgramEnum.default,
           index: 1,
           args: [
             {
               baseName: "version",
-              name: Argument.version,
+              name: ArgumentEnum.version,
               values: [],
               index: 2,
               hasValue: false,
@@ -85,7 +85,7 @@ describe("ReadParamDomainAppService", () => {
         },
         command: {
           baseName: "",
-          name: Command.default,
+          name: CommandEnum.default,
           index: 3,
           args: []
         }
@@ -114,13 +114,13 @@ describe("ReadParamDomainAppService", () => {
       paramDomain: {
         program: {
           baseName: "",
-          name: Program.default,
+          name: ProgramEnum.default,
           index: 1,
           args: []
         },
         command: {
           baseName: "test",
-          name: Command.unknown,
+          name: CommandEnum.unknown,
           index: 2,
           args: []
         }
@@ -160,13 +160,13 @@ describe("ReadParamDomainAppService", () => {
       paramDomain: {
         program: {
           baseName: "generate",
-          name: Program.generate,
+          name: ProgramEnum.generate,
           index: 2,
           args: []
         },
         command: {
           baseName: "test",
-          name: Command.unknown,
+          name: CommandEnum.unknown,
           index: 3,
           args: []
         }

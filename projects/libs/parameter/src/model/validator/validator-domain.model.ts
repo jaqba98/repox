@@ -1,7 +1,7 @@
-import { ParamDomainModel } from "../param-domain/param-domain-model";
+import { ParamDomainModel } from "../param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../param-domain/param-domain-validation-model";
+} from "../param-domain/param-domain-validation.model";
 
 /**
  * The model is implemented for each param domain validator.

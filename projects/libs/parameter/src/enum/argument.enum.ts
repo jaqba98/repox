@@ -2,7 +2,7 @@
  * List of all arguments and aliases.
  */
 
-export enum Argument {
+export enum ArgumentEnum {
   version = "version",
   name = "name",
   config = "config",

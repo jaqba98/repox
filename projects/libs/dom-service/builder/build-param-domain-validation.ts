@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import {
   ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
+} from "../../parameter/src/model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation-model";
+} from "../../parameter/src/model/param-domain/param-domain-validation.model";
 
 /**
  * Build the response of param domain validation

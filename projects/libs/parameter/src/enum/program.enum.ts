@@ -2,7 +2,7 @@
  * List of all programs.
  */
 
-export enum Program {
+export enum ProgramEnum {
   default = "",
   generate = "generate",
   unknown = "unknown"

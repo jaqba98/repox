@@ -2,7 +2,7 @@
  * List of all commands.
  */
 
-export enum Command {
+export enum CommandEnum {
   default = "",
   workspace = "workspace",
   project = "project",

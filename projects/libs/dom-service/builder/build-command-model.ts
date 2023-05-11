@@ -6,8 +6,8 @@ import {
 import {
   ParamDomainArgumentModel,
   ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
-import { Argument } from "../../enum/argument";
+} from "../../parameter/src/model/param-domain/param-domain.model";
+import { ArgumentEnum } from "../../parameter/src/enum/argument.enum";
 
 /**
  * The service is responsible for build command model from
@@ -18,7 +18,7 @@ export class BuildCommandModel {
   buildProgramDefaultModel(
     paramDomain: ParamDomainModel
   ): ProgramDefaultModel {
-    const version = this.getProgramParam(paramDomain, Argument.version);
+    const version = this.getProgramParam(paramDomain, ArgumentEnum.version);
     return {
       version: Boolean(version)
     };
@@ -27,8 +27,8 @@ export class BuildCommandModel {
   buildGenerateWorkspaceModel(
     paramDomain: ParamDomainModel
   ): GenerateWorkspaceModel {
-    const name = this.getCommandParam(paramDomain, Argument.name);
-    const config = this.getCommandParam(paramDomain, Argument.config);
+    const name = this.getCommandParam(paramDomain, ArgumentEnum.name);
+    const config = this.getCommandParam(paramDomain, ArgumentEnum.config);
     return {
       name: name?.values[0] || "",
       config: config?.values[0] || ""
@@ -37,7 +37,7 @@ export class BuildCommandModel {
 
   private getProgramParam(
     paramDomain: ParamDomainModel,
-    argument: Argument
+    argument: ArgumentEnum
   ): ParamDomainArgumentModel | undefined {
     return paramDomain.program.args
       .find(arg => arg.name === argument);
@@ -45,7 +45,7 @@ export class BuildCommandModel {
 
   private getCommandParam(
     paramDomain: ParamDomainModel,
-    argument: Argument
+    argument: ArgumentEnum
   ): ParamDomainArgumentModel | undefined {
     return paramDomain.command.args
       .find(arg => arg.name === argument);

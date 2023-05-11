@@ -4,13 +4,13 @@ import {
 } from "../builder/build-param-domain-validation";
 import {
   ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
+} from "../../parameter/src/model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation-model";
+} from "../../parameter/src/model/param-domain/param-domain-validation.model";
 import {
   ValidatorDomainModel
-} from "../../model/validator-domain/validator-domain-model";
+} from "../../parameter/src/model/validator/validator-domain.model";
 import { ProgramExistValidator } from "./program-exist-validator";
 import { CommandExistValidator } from "./command-exist-validator";
 import {

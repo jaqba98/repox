@@ -1,25 +1,25 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDomainModel
-} from "../../model/validator-domain/validator-domain-model";
+} from "../../parameter/src/model/validator/validator-domain.model";
 import {
   BuildParamDomainValidation
 } from "../builder/build-param-domain-validation";
 import {
   ParamDomainArgumentModel,
   ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
+} from "../../parameter/src/model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation-model";
+} from "../../parameter/src/model/param-domain/param-domain-validation.model";
 import { GetParamDependency } from "../service/get-param-dependency";
 import {
   ParamDependencyArgsModel,
   ParamDependencyModel
-} from "../../model/param-domain/param-dependency-model";
-import { Program } from "../../enum/program";
-import { Command } from "../../enum/command";
-import { Argument } from "../../enum/argument";
+} from "../../parameter/src/model/param-domain/param-dependency.model";
+import { ProgramEnum } from "../../parameter/src/enum/program.enum";
+import { CommandEnum } from "../../parameter/src/enum/command.enum";
+import { ArgumentEnum } from "../../parameter/src/enum/argument.enum";
 
 /**
  * The validator is responsible for checking that the given command
@@ -37,13 +37,13 @@ export class CommandArgumentsCorrect
   runValidator(
     paramDomain: ParamDomainModel,
   ): ParamDomainValidationModel {
-    const programName: Program = paramDomain.program.name;
-    const commandName: Command = paramDomain.command.name;
+    const programName: ProgramEnum = paramDomain.program.name;
+    const commandName: CommandEnum = paramDomain.command.name;
     const programDep: ParamDependencyModel = this.getParamDependency
       .getDependency(programName);
     const commandArgs = programDep.commands[commandName].args;
     const wrongArgs = paramDomain.command.args
-      .filter(arg => arg.name !== Argument.unknown)
+      .filter(arg => arg.name !== ArgumentEnum.unknown)
       .filter(arg => !this.checkCommandArgs(arg, commandArgs));
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess(paramDomain);

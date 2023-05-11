@@ -17,12 +17,13 @@ export class MainService {
   run(): void {
     const paramDto = this.readParamDtoApp.read();
     if (!paramDto.success) {
-      return this.loggerParamErrorApp.writeParamError(
+      this.loggerParamErrorApp.writeParamError(
         paramDto.wrongParamIndexes,
         paramDto.baseValues,
         paramDto.errors,
         paramDto.tips
       );
+      return;
     }
   }
 }

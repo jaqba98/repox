@@ -1,17 +1,17 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDomainModel
-} from "../../model/validator-domain/validator-domain-model";
+} from "../../parameter/src/model/validator/validator-domain.model";
 import {
   BuildParamDomainValidation
 } from "../builder/build-param-domain-validation";
 import {
   ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
+} from "../../parameter/src/model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation-model";
-import { Program } from "../../enum/program";
+} from "../../parameter/src/model/param-domain/param-domain-validation.model";
+import { ProgramEnum } from "../../parameter/src/enum/program.enum";
 
 /**
  * The validator is responsible for checking
@@ -27,7 +27,7 @@ export class ProgramExistValidator implements ValidatorDomainModel {
   runValidator(
     paramDomain: ParamDomainModel
   ): ParamDomainValidationModel {
-    if (paramDomain.program.name === Program.unknown) {
+    if (paramDomain.program.name === ProgramEnum.unknown) {
       return this.buildParamDomain.buildError(
         [paramDomain.program.index],
         ["You have specified not existed command!"],

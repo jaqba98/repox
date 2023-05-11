@@ -1,9 +1,9 @@
-// import { Program } from "../../enum/program";
+// import { ProgramEnum } from "../../enum/program";
 // import { container, singleton } from "tsyringe";
 // import {
 //   ParamDomainModel
 // } from "../../model/param-domain/param-domain-model";
-// import { Command } from "../../enum/command";
+// import { CommandEnum } from "../../enum/command";
 // import { ProgramDefaultApp } from "../command/program-default-app";
 // import {
 //   GenerateWorkspaceApp
@@ -19,13 +19,13 @@
 //   selectProgram(paramDomain: ParamDomainModel): void {
 //     const runProgram: string = this.getRunProgramName(paramDomain);
 //     switch (runProgram) {
-//       case `${Program.default}-${Command.default}`:
+//       case `${ProgramEnum.default}-${CommandEnum.default}`:
 //         container.resolve(ProgramDefaultApp).run(paramDomain);
 //         return;
-//       case `${Program.generate}-${Command.workspace}`:
+//       case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
 //         container.resolve(GenerateWorkspaceApp).run(paramDomain);
 //         return;
-//       case `${Program.generate}-${Command.project}`:
+//       case `${ProgramEnum.generate}-${CommandEnum.project}`:
 //         container.resolve(GenerateProjectApp).run(paramDomain);
 //         return;
 //       default:

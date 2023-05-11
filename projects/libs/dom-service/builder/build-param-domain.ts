@@ -9,11 +9,11 @@ import {
 import {
   ParamDomainArgumentModel,
   ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
-import { Program, ProgramAlias } from "../../enum/program";
-import { Command, CommandAlias } from "../../enum/command";
+} from "../../parameter/src/model/param-domain/param-domain.model";
+import { ProgramEnum, ProgramAlias } from "../../parameter/src/enum/program.enum";
+import { CommandEnum, CommandAlias } from "../../parameter/src/enum/command.enum";
 import { ParamTypeEnum } from "../../parameter/src/enum/param-type.enum";
-import { Alias, Argument } from "../../enum/argument";
+import { Alias, ArgumentEnum } from "../../parameter/src/enum/argument.enum";
 
 /**
  * Build the parameter domain model.
@@ -29,8 +29,8 @@ export class BuildParamDomain {
     const command = this.paramDtoFinder.findCommand(paramDto);
     const programBaseName: string = program ? program.paramName : "";
     const commandBaseName: string = command ? command.paramName : "";
-    const programName: Program = this.getProgramName(programBaseName);
-    const commandName: Command = this.getCommandName(commandBaseName);
+    const programName: ProgramEnum = this.getProgramName(programBaseName);
+    const commandName: CommandEnum = this.getCommandName(commandBaseName);
     const programIndex = this.getProgramIndex(application, program);
     const commandIndex = this.getCommandIndex(command, paramDto);
     const programArgs = this.paramDtoFinder.findProgramArgs(
@@ -58,38 +58,38 @@ export class BuildParamDomain {
     };
   }
 
-  private getProgramName(programName: string): Program {
-    if (programName === Program.default) return Program.default;
+  private getProgramName(programName: string): ProgramEnum {
+    if (programName === ProgramEnum.default) return ProgramEnum.default;
     const programNameAlias = Object.keys(ProgramAlias).find(key =>
       ProgramAlias[key as keyof typeof ProgramAlias] === programName
     );
     if (programNameAlias) {
-      return Program[programNameAlias as keyof typeof Program];
+      return ProgramEnum[programNameAlias as keyof typeof ProgramEnum];
     }
-    const programNameFull = Object.keys(Program).find(key =>
-      Program[key as keyof typeof Program] === programName
+    const programNameFull = Object.keys(ProgramEnum).find(key =>
+      ProgramEnum[key as keyof typeof ProgramEnum] === programName
     );
     if (programNameFull) {
-      return Program[programNameFull as keyof typeof Program];
+      return ProgramEnum[programNameFull as keyof typeof ProgramEnum];
     }
-    return Program.unknown;
+    return ProgramEnum.unknown;
   }
 
-  private getCommandName(commandName: string): Command {
-    if (commandName === Command.default) return Command.default;
+  private getCommandName(commandName: string): CommandEnum {
+    if (commandName === CommandEnum.default) return CommandEnum.default;
     const commandNameAlias = Object.keys(CommandAlias).find(key =>
       CommandAlias[key as keyof typeof CommandAlias] === commandName
     );
     if (commandNameAlias) {
-      return Command[commandNameAlias as keyof typeof Command];
+      return CommandEnum[commandNameAlias as keyof typeof CommandEnum];
     }
-    const commandNameFull = Object.keys(Command).find(key =>
-      Command[key as keyof typeof Command] === commandName
+    const commandNameFull = Object.keys(CommandEnum).find(key =>
+      CommandEnum[key as keyof typeof CommandEnum] === commandName
     );
     if (commandNameFull) {
-      return Command[commandNameFull as keyof typeof Command];
+      return CommandEnum[commandNameFull as keyof typeof CommandEnum];
     }
-    return Command.unknown;
+    return CommandEnum.unknown;
   }
 
   private getProgramIndex(
@@ -122,23 +122,23 @@ export class BuildParamDomain {
     }));
   }
 
-  private getArgumentName(arg: string, type: ParamTypeEnum): Argument {
+  private getArgumentName(arg: string, type: ParamTypeEnum): ArgumentEnum {
     if (type === ParamTypeEnum.argument) {
-      const argument = Object.keys(Argument).find(key =>
-        Argument[key as keyof typeof Argument] === arg
+      const argument = Object.keys(ArgumentEnum).find(key =>
+        ArgumentEnum[key as keyof typeof ArgumentEnum] === arg
       );
       return argument ?
-        Argument[argument as keyof typeof Argument] :
-        Argument.unknown;
+        ArgumentEnum[argument as keyof typeof ArgumentEnum] :
+        ArgumentEnum.unknown;
     }
     if (type === ParamTypeEnum.alias) {
       const alias = Object.keys(Alias).find(key =>
         Alias[key as keyof typeof Alias] === arg
       );
       return alias ?
-        Argument[alias as keyof typeof Argument] :
-        Argument.unknown;
+        ArgumentEnum[alias as keyof typeof ArgumentEnum] :
+        ArgumentEnum.unknown;
     }
-    return Argument.unknown;
+    return ArgumentEnum.unknown;
   }
 }

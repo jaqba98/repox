@@ -10,10 +10,10 @@ import {
 } from "../../parameter/src/model/param-dto/param-dto.model";
 import {
   ParamDomainModel
-} from "../../model/param-domain/param-domain-model";
+} from "../../parameter/src/model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation-model";
+} from "../../parameter/src/model/param-domain/param-domain-validation.model";
 
 /**
  * The app service is responsible for read and validate

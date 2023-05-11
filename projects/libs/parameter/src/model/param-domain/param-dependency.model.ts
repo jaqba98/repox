@@ -1,6 +1,6 @@
-import { Argument } from "../../enum/argument";
-import { Command } from "../../enum/command";
-import { Program } from "../../enum/program";
+import { ArgumentEnum } from "../../enum/argument.enum";
+import { CommandEnum } from "../../enum/command.enum";
+import { ProgramEnum } from "../../enum/program.enum";
 
 /**
  * The model represents dependency between programs, commands,
@@ -8,7 +8,7 @@ import { Program } from "../../enum/program";
  */
 
 export interface ParamDependencyArgModel {
-  name: Argument;
+  name: ArgumentEnum;
   valueMode: "empty" | "single" | "many",
   required: boolean;
 }
@@ -18,7 +18,7 @@ export interface ParamDependencyArgsModel {
 }
 
 export interface ParamDependencyCommandModel {
-  command: Command;
+  command: CommandEnum;
   args: ParamDependencyArgsModel;
 }
 
@@ -27,7 +27,7 @@ export interface ParamDependencyCommandsModel {
 }
 
 export interface ParamDependencyModel {
-  program: Program;
+  program: ProgramEnum;
   commands: ParamDependencyCommandsModel;
   args: ParamDependencyArgsModel;
 }
