@@ -44,7 +44,7 @@ export class ProgramNotContainsWrongArgumentsService
         !programArgs.find(programArg => programArg.name === arg.name)
       );
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain, []);
+      return this.buildParamDomain.buildSuccess(paramDomain);
     }
     const notExistedArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
@@ -53,8 +53,7 @@ export class ProgramNotContainsWrongArgumentsService
       [
         `Not existed arguments for program: ${notExistedArgs}`
       ],
-      paramDomain,
-      []
+      paramDomain
     );
   }
 }

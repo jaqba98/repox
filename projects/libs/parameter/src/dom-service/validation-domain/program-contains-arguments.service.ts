@@ -45,7 +45,7 @@ export class ProgramContainsArgumentsService
         .find(arg => arg.name === programArg.name)
       );
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain, []);
+      return this.buildParamDomain.buildSuccess(paramDomain);
     }
     const missingArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
@@ -55,8 +55,7 @@ export class ProgramContainsArgumentsService
         "You have to specify required arguments.",
         `Missing arguments for program are: ${missingArgs}`
       ],
-      paramDomain,
-      []
+      paramDomain
     );
   }
 }

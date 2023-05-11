@@ -46,7 +46,7 @@ export class ProgramArgumentsCorrectService
       .filter(arg => arg.name !== ArgumentEnum.unknown)
       .filter(arg => !this.checkCommandArgs(arg, programArgs));
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain, []);
+      return this.buildParamDomain.buildSuccess(paramDomain);
     }
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
@@ -54,8 +54,7 @@ export class ProgramArgumentsCorrectService
       [
         "Check the documentation to get full list of arguments."
       ],
-      paramDomain,
-      []
+      paramDomain
     );
   }
 

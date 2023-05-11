@@ -41,7 +41,7 @@ export class ProgramContainsCommandValidatorService
     const programDep: ParamDependencyModel = this.getParamDependency
       .getDependency(programName);
     if (programDep.commands[commandName]) {
-      return this.buildParamDomain.buildSuccess(paramDomain, []);
+      return this.buildParamDomain.buildSuccess(paramDomain);
     }
     return this.buildParamDomain.buildError(
       [paramDomain.command.index],
@@ -50,8 +50,7 @@ export class ProgramContainsCommandValidatorService
         "You have to specify supported command name.",
         "Check the documentation to get full list of commands."
       ],
-      paramDomain,
-      []
+      paramDomain
     );
   }
 }

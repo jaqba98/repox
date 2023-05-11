@@ -47,7 +47,7 @@ export class CommandNotContainsWrongArgumentsService
         !commandArgs.find(commandArg => commandArg.name === arg.name)
       );
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain, []);
+      return this.buildParamDomain.buildSuccess(paramDomain);
     }
     const notExistedArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
@@ -56,8 +56,7 @@ export class CommandNotContainsWrongArgumentsService
       [
         `Not existed arguments for command: ${notExistedArgs}`
       ],
-      paramDomain,
-      []
+      paramDomain
     );
   }
 }

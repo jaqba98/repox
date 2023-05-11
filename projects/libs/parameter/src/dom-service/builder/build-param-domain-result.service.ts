@@ -13,13 +13,11 @@ import {
  */
 export class BuildParamDomainResultService {
   buildSuccess(
-    paramDomain: ParamDomainModel,
-    baseValues: Array<string>
+    paramDomain: ParamDomainModel
   ): ParamDomainValidationModel {
     return {
       success: true,
       wrongParamIndexes: [],
-      baseValues,
       errors: [],
       tips: [],
       paramDomain
@@ -30,13 +28,11 @@ export class BuildParamDomainResultService {
     wrongParamIndexes: Array<number>,
     errors: Array<string>,
     tips: Array<string>,
-    paramDomain: ParamDomainModel,
-    baseValues: Array<string>
+    paramDomain: ParamDomainModel
   ): ParamDomainValidationModel {
     return {
       success: false,
       wrongParamIndexes,
-      baseValues,
       errors,
       tips,
       paramDomain

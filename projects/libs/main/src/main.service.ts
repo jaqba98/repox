@@ -35,7 +35,7 @@ export class MainService {
     if (!paramDomain.success) {
       this.loggerParamErrorApp.writeParamError(
         paramDomain.wrongParamIndexes,
-        paramDomain.baseValues,
+        paramDto.baseValues,
         paramDomain.errors,
         paramDomain.tips
       );

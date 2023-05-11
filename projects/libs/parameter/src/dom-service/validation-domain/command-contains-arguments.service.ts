@@ -48,7 +48,7 @@ export class CommandContainsArgumentsService
         .find(arg => arg.name === commandArg.name)
       );
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain, []);
+      return this.buildParamDomain.buildSuccess(paramDomain);
     }
     const missingArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
@@ -58,8 +58,7 @@ export class CommandContainsArgumentsService
         "You have to specify required arguments.",
         `Missing arguments for command are: ${missingArgs}`
       ],
-      paramDomain,
-      []
+      paramDomain
     );
   }
 }

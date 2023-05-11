@@ -34,8 +34,9 @@ export class ArgumentExistValidatorService
     const wrongArgs = args
       .filter(arg => arg.name === ArgumentEnum.unknown);
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain, []);
+      return this.buildParamDomain.buildSuccess(paramDomain);
     }
+
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
       ["You have specified not existed arguments!"],
@@ -43,8 +44,7 @@ export class ArgumentExistValidatorService
         "You have to specify correct arguments.",
         "Check the documentation to get full list of arguments."
       ],
-      paramDomain,
-      []
+      paramDomain
     );
   }
 }

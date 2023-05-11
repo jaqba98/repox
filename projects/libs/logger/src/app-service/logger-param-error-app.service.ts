@@ -49,7 +49,7 @@ export class LoggerParamErrorAppService {
           isLogo: false,
           isHeader: false,
           headerContent: "",
-          newline: 0
+          newline: 1
         },
         {
           message: errors,

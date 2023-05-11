@@ -36,10 +36,9 @@ export class ProgramExistValidatorService
           "You have to specify correct command name.",
           "Check the documentation to get full list of programs."
         ],
-        paramDomain,
-        []
+        paramDomain
       );
     }
-    return this.buildParamDomain.buildSuccess(paramDomain, []);
+    return this.buildParamDomain.buildSuccess(paramDomain);
   }
 }

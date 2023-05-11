@@ -76,7 +76,7 @@ export class ParamDomainValidationService {
       }
     }
     return paramDomainErrors.length === 0 ?
-      this.buildParamDomain.buildSuccess(paramDomain, []) :
+      this.buildParamDomain.buildSuccess(paramDomain) :
       paramDomainErrors[0];
   }
 

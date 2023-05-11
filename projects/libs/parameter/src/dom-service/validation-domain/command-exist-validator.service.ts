@@ -36,10 +36,9 @@ export class CommandExistValidatorService
           "You have to specify correct command name.",
           "Check the documentation to get full list of commands."
         ],
-        paramDomain,
-        []
+        paramDomain
       );
     }
-    return this.buildParamDomain.buildSuccess(paramDomain, []);
+    return this.buildParamDomain.buildSuccess(paramDomain);
   }
 }
