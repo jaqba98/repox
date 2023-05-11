@@ -6,8 +6,8 @@ import {
 import {
   ParamDomainArgumentModel,
   ParamDomainModel
-} from "../../parameter/src/model/param-domain/param-domain.model";
-import { ArgumentEnum } from "../../parameter/src/enum/argument.enum";
+} from "../../../../parameter/src/model/param-domain/param-domain.model";
+import { ArgumentEnum } from "../../../../parameter/src/enum/argument.enum";
 
 /**
  * The service is responsible for build command model from

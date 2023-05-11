@@ -1,11 +1,11 @@
 import {
   ParamDtoValidationModel
-} from "../../../parameter/src/model/param-dto/param-dto-validation.model";
+} from "../../model/param-dto/param-dto-validation.model";
 import { container, DependencyContainer } from "tsyringe";
 import {
   ReadArgvService
-} from "../../../parameter/src/infrastructure/read-argv.service";
-import { ReadParamDtoAppService } from "../../../parameter/src/app-service/read-param-dto-app.service";
+} from "../../infrastructure/read-argv.service";
+import { ReadParamDtoAppService } from "../read-param-dto-app.service";
 
 const runTest = (argv: Array<string>): ParamDtoValidationModel => {
   const child: DependencyContainer = container.createChildContainer();
