@@ -32,7 +32,7 @@ export class LoggerParamErrorAppService {
     const outputMessage: string = this.buildMessage.build({
       lines: [
         {
-          message: "Failed to run command!",
+          message: "Failed to run program!",
           mode: LoggerModeEnum.error,
           isHeader: true,
           isLogo: true,

@@ -16,7 +16,7 @@ import { ProgramEnum } from "../../enum/program.enum";
 @singleton()
 /**
  * The validator is responsible for checking
- * that given command exist.
+ * that given program exist.
  */
 export class ProgramExistValidatorService
   implements ValidatorDomainModel {
@@ -31,9 +31,9 @@ export class ProgramExistValidatorService
     if (paramDomain.program.name === ProgramEnum.unknown) {
       return this.buildParamDomain.buildError(
         [paramDomain.program.index],
-        ["You have specified not existed command!"],
+        ["You have specified not existed program!"],
         [
-          "You have to specify correct command name.",
+          "You have to specify correct program name.",
           "Check the documentation to get full list of programs."
         ],
         paramDomain

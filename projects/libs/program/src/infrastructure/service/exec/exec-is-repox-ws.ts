@@ -1,11 +1,11 @@
 // import { LoggerService } from "../../../logger/src/lib/service/logger.service";
 // import { singleton } from "tsyringe";
-// import { ExecCommand } from "./exec-command";
+// import { ExecCommand } from "./exec-program";
 // import {
 //   buildErrMsg,
 //   buildInfoMsg
 // } from "../../../logger/src/lib/builder/base-msg-builder";
-// import { ConfigFile } from "../../enum/config-file";
+// import { ConfigFileEnum } from "../../enum/config-file";
 //
 // /**
 //  * The service is responsible for verify whether current directory
@@ -23,9 +23,9 @@
 //     this.writeLog.write(buildInfoMsg(
 //       `Verify that the >>> ${name} <<< is a monorepo repox workspace`
 //     ));
-//     if (this.execCommand.pathExist(ConfigFile.configJson)) {
+//     if (this.execCommand.pathExist(ConfigFileEnum.configJson)) {
 //       this.writeLog.write(
-//         buildErrMsg(`The ${ConfigFile.configJson} already exists!`)
+//         buildErrMsg(`The ${ConfigFileEnum.configJson} already exists!`)
 //       );
 //       return false;
 //     }

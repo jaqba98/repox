@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import {
-  RepoxConfigModel
-} from "../../../../model/config/repox-config-model";
+  DomainConfigModel
+} from "../../../../../../domain/src/model/domain-config.model";
 import { SYSTEM_VERSION } from "../../../../../../domain/src/const/domain.const";
 
 /**
@@ -9,7 +9,7 @@ import { SYSTEM_VERSION } from "../../../../../../domain/src/const/domain.const"
  */
 @singleton()
 export class BuildEmptyConfigFile {
-  buildConfigFile(): RepoxConfigModel {
+  buildConfigFile(): DomainConfigModel {
     return {
       version: SYSTEM_VERSION,
       projects: {

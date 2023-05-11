@@ -1,5 +1,5 @@
 /**
- * All kinds of parameter type directly from the command line.
+ * All kinds of parameter type directly from the program line.
  */
 
 export enum ParamTypeEnum {

@@ -1,5 +1,5 @@
 /**
- * This is configuration domain model of repox.
+ * This is configuration model of domain.
  */
 
 export interface ProjectModel {
@@ -12,7 +12,7 @@ export interface ProjectsModel {
   [project: string]: ProjectModel;
 }
 
-export interface RepoxConfigModel {
+export interface DomainConfigModel {
   version: string;
   projects: {
     apps: ProjectsModel;

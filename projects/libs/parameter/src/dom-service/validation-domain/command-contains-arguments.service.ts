@@ -22,7 +22,7 @@ import {
 
 @singleton()
 /**
- * The validator is responsible for checking that the given command
+ * The validator is responsible for checking that the given program
  * contains all required arguments.
  */
 export class CommandContainsArgumentsService
@@ -53,7 +53,7 @@ export class CommandContainsArgumentsService
     const missingArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
       [],
-      ["You have not specified all required arguments for command!"],
+      ["You have not specified all required arguments for program!"],
       [
         "You have to specify required arguments.",
         `Missing arguments for command are: ${missingArgs}`

@@ -5,7 +5,7 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
 @singleton()
 /**
  * Building the parameter DTO model from the
- * real parameters from the command line.
+ * real parameters from the program line.
  */
 export class BuildParamDtoService {
   readParamDto(argv: Array<string>): ParamDtoModel {

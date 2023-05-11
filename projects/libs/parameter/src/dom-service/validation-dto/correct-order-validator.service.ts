@@ -34,10 +34,10 @@ export class CorrectOrderValidatorService implements ValidatorDtoModel {
     }
     return this.buildParamDtoResult.buildError(
       wrongParamsDto,
-      ["You have specified the command in the incorrect order!"],
+      ["You have specified the program in the incorrect order!"],
       [
-        "You have to specify the command in the correct order.",
-        "Pattern: repox <command> <arguments> <command> <arguments>"
+        "You have to specify the program in the correct order.",
+        "Pattern: repox <program> <arguments> <program> <arguments>"
       ],
       paramDto
     );

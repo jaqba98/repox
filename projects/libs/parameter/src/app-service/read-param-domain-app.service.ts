@@ -13,7 +13,7 @@ import {
 @singleton()
 /**
  * The app service is responsible for read and validate
- * parameter domain model from command line.
+ * parameter domain model from program line.
  */
 export class ReadParamDomainAppService {
   constructor(

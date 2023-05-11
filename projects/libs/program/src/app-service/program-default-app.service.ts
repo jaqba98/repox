@@ -7,7 +7,7 @@ import {
 import { LoggerMessageAppService } from "@lib/logger";
 import {
   ProgramDefaultModel
-} from "../model/command/program-default-model";
+} from "../model/program/program-property.model";
 import {
   LoggerModeEnum
 } from "../../../logger/src/enum/logger-mode.enum";
@@ -39,3 +39,4 @@ export class ProgramDefaultAppService {
     }
   }
 }
+// todo: refactor

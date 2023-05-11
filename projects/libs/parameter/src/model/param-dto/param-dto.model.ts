@@ -2,7 +2,7 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 /**
  * The DTO model of parameters (data transport model)
- * for all parameters directly from the command line.
+ * for all parameters directly from the program line.
  */
 
 export interface ParamDtoEntityModel {

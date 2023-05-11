@@ -22,7 +22,7 @@ import {
 
 @singleton()
 /**
- * The validator is responsible for checking that the given command
+ * The validator is responsible for checking that the given program
  * does not contain wrong arguments.
  */
 export class CommandNotContainsWrongArgumentsService
@@ -52,7 +52,7 @@ export class CommandNotContainsWrongArgumentsService
     const notExistedArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
-      ["You have specified not existed arguments for command!"],
+      ["You have specified not existed arguments for program!"],
       [
         `Not existed arguments for command: ${notExistedArgs}`
       ],

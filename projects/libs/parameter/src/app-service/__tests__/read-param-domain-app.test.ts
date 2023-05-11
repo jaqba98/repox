@@ -52,7 +52,7 @@ describe("ReadParamDomainAppService", () => {
     container.reset();
   });
 
-  test("Should be correct for default command with correct arguments", () => {
+  test("Should be correct for default program with correct arguments", () => {
     const paramDto: ParamDtoModel = buildParamDto([{
       paramBaseValue: "--version",
       paramIndex: 2,
@@ -93,7 +93,7 @@ describe("ReadParamDomainAppService", () => {
     });
   });
 
-  test("Should be incorrect for not existed command name", () => {
+  test("Should be incorrect for not existed program name", () => {
     const paramDto: ParamDtoModel = buildParamDto([{
       paramBaseValue: "test",
       paramIndex: 2,
@@ -106,9 +106,9 @@ describe("ReadParamDomainAppService", () => {
     expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
       success: false,
       wrongParamIndexes: [2],
-      errors: ["You have specified not existed command!"],
+      errors: ["You have specified not existed program!"],
       tips: [
-        "You have to specify correct command name.",
+        "You have to specify correct program name.",
         "Check the documentation to get full list of commands."
       ],
       paramDomain: {
@@ -128,7 +128,7 @@ describe("ReadParamDomainAppService", () => {
     });
   });
 
-  test("Should be incorrect for not existed command name for command", () => {
+  test("Should be incorrect for not existed program name for program", () => {
     const paramDto: ParamDtoModel = buildParamDto([
       {
         paramBaseValue: "generate",
@@ -152,9 +152,9 @@ describe("ReadParamDomainAppService", () => {
     expect(service.build(paramDto)).toEqual<ParamDomainValidationModel>({
       success: false,
       wrongParamIndexes: [3],
-      errors: ["You have specified not existed command!"],
+      errors: ["You have specified not existed program!"],
       tips: [
-        "You have to specify correct command name.",
+        "You have to specify correct program name.",
         "Check the documentation to get full list of commands."
       ],
       paramDomain: {

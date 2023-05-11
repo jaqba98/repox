@@ -24,7 +24,7 @@ import {
 
 @singleton()
 /**
- * The validator is responsible for checking that the given command
+ * The validator is responsible for checking that the given program
  * arguments are correct.
  */
 export class ProgramArgumentsCorrectService

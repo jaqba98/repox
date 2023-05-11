@@ -1,6 +1,6 @@
 // import { singleton } from "tsyringe";
 // import { LoggerService } from "../../../logger/src/lib/service/logger.service";
-// import { ExecCommand } from "./exec-command";
+// import { ExecCommand } from "./exec-program";
 // import {
 //   buildErrMsg,
 //   buildInfoMsg
@@ -10,7 +10,7 @@
 // } from "../builder/config/build-empty-config-file";
 // import { WriteFile } from "../writer/write-file";
 // import {
-//   RepoxConfigModel
+//   DomainConfigModel
 // } from "../../../model/config/repox-config-model";
 //
 // /**
@@ -37,7 +37,7 @@
 //       return false;
 //     }
 //     this.execCommand.createFile(fileName);
-//     this.writeFile.writeJsonFile<RepoxConfigModel>(
+//     this.writeFile.writeJsonFile<DomainConfigModel>(
 //       fileName,
 //       this.buildEmptyConfigFile.buildConfigFile()
 //     );

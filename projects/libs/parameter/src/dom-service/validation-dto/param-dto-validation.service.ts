@@ -30,16 +30,16 @@ import {
  * Run all validators to verify the parameter DTO model.
  *
  * Pattern:
- * > repox <command> <arguments> <command> <arguments>
+ * > repox <program> <arguments> <program> <arguments>
  *
  * Validators:
- * 1.Verify that each part of the command contains only
+ * 1.Verify that each part of the program contains only
  *   supported characters.
- * 2.Verify that each part of the command has correct pattern.
- * 3.Verify that the command contains max 1 program (0 or 1).
- * 4.Verify that the command contains max 1 command
+ * 2.Verify that each part of the program has correct pattern.
+ * 3.Verify that the program contains max 1 program (0 or 1).
+ * 4.Verify that the program contains max 1 program
  *   (0 or 1 if the program exist and 0 if the program not exist).
- * 5.Verify that each part of the command are in correct order.
+ * 5.Verify that each part of the program are in correct order.
  */
 export class ParamDtoValidationService {
   constructor(

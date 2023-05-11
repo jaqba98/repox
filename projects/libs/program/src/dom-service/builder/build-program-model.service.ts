@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   GenerateWorkspaceModel,
   ProgramDefaultModel
-} from "../../model/command/program-default-model";
+} from "../../model/program/program-property.model";
 import {
   ParamDomainArgumentModel,
   ParamDomainModel
@@ -10,7 +10,7 @@ import {
 import { ArgumentEnum } from "../../../../parameter/src/enum/argument.enum";
 
 /**
- * The service is responsible for build command model from
+ * The service is responsible for build program model from
  * parameter domain model.
  */
 @singleton()
@@ -28,10 +28,8 @@ export class BuildProgramModelService {
     paramDomain: ParamDomainModel
   ): GenerateWorkspaceModel {
     const name = this.getCommandParam(paramDomain, ArgumentEnum.name);
-    const config = this.getCommandParam(paramDomain, ArgumentEnum.config);
     return {
-      name: name?.values[0] || "",
-      config: config?.values[0] || ""
+      name: name?.values[0] || ""
     };
   }
 

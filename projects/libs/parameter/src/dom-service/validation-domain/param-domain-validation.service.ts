@@ -47,14 +47,14 @@ import {
  * Run all validators to verify the parameter domain model.
  *
  * Validators:
- * 1.Verify that command exists.
- * 2.Verify that command exists.
- * 3.Verify that command contains command.
+ * 1.Verify that program exists.
+ * 2.Verify that program exists.
+ * 3.Verify that program contains program.
  * 4.Verify that arguments exist.
- * 5.Verify that command contains arguments.
- * 6.Verify that command contains arguments.
- * 7.Verify that command does not contain wrong arguments.
- * 8.Verify that command does not contain wrong arguments.
+ * 5.Verify that program contains arguments.
+ * 6.Verify that program contains arguments.
+ * 7.Verify that program does not contain wrong arguments.
+ * 8.Verify that program does not contain wrong arguments.
  */
 export class ParamDomainValidationService {
   constructor(

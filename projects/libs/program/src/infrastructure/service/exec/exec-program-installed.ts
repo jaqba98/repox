@@ -4,10 +4,10 @@
 //   buildErrMsg,
 //   buildInfoMsg
 // } from "../../../logger/src/lib/builder/base-msg-builder";
-// import { sync } from "command-exists";
+// import { sync } from "program-exists";
 //
 // /**
-//  * The service is responsible for verify whether command
+//  * The service is responsible for verify whether program
 //  * is installed.
 //  */
 // @singleton()
@@ -15,13 +15,13 @@
 //   constructor(private readonly writeLog: LoggerService) {
 //   }
 //
-//   exec(command: string): boolean {
+//   exec(program: string): boolean {
 //     this.writeLog.write(buildInfoMsg(
-//       `Verify that the ${command} is installed`
+//       `Verify that the ${program} is installed`
 //     ));
-//     if (!sync(command)) {
+//     if (!sync(program)) {
 //       this.writeLog.write(
-//         buildErrMsg(`The ${command} is not installed`)
+//         buildErrMsg(`The ${program} is not installed`)
 //       );
 //       return false;
 //     }

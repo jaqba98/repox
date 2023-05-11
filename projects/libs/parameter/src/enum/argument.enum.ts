@@ -5,7 +5,6 @@
 export enum ArgumentEnum {
   version = "version",
   name = "name",
-  config = "config",
   type = "type",
   unknown = "unknown"
 }
@@ -13,6 +12,5 @@ export enum ArgumentEnum {
 export enum Alias {
   version = "v",
   name = "n",
-  config = "c",
   type = "t"
 }

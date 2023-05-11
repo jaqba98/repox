@@ -13,7 +13,7 @@ import { ReadArgvService } from "../infrastructure/read-argv.service";
 @singleton()
 /**
  * The app service is responsible for read and validate
- * parameter DTO model from command line.
+ * parameter DTO model from program line.
  */
 export class ReadParamDtoAppService {
   constructor(

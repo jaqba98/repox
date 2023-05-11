@@ -16,7 +16,7 @@ import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 @singleton()
 /**
- * Check the given DTO parameters have max one command.
+ * Check the given DTO parameters have max one program.
  */
 export class MaxOneProgramValidatorService implements ValidatorDtoModel {
   constructor(
@@ -32,8 +32,8 @@ export class MaxOneProgramValidatorService implements ValidatorDtoModel {
         programs,
         ["You have specified too many programs!"],
         [
-          "You have to specify max one command.",
-          "Pattern: repox <command> <arguments> <command> <arguments>"
+          "You have to specify max one program.",
+          "Pattern: repox <program> <arguments> <program> <arguments>"
         ],
         paramDto
       );

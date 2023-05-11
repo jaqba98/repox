@@ -4,7 +4,7 @@ import { closeSync, existsSync, mkdirSync, openSync } from "fs";
 import { chdir } from "process";
 
 /**
- * Executive the command on the command line.
+ * Executive the program on the program line.
  */
 @singleton()
 export class ExecCommand {

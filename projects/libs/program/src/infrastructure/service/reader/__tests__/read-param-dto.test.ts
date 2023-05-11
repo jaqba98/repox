@@ -18,7 +18,7 @@ test("", () => {
 //       "--argument1",
 //       "--argument2=val1",
 //       `--argument3="val1,val2"`,
-//       "command",
+//       "program",
 //       "-a",
 //       "-b='val1'",
 //       "-c=`val1,val2`"
@@ -93,11 +93,11 @@ test("", () => {
 //           paramHasManyValues: true
 //         },
 //         {
-//           paramBaseValue: "command",
+//           paramBaseValue: "program",
 //           paramIndex: 6,
-//           paramType: ParamTypeEnum.command,
+//           paramType: ParamTypeEnum.program,
 //           paramHasValue: false,
-//           paramName: "command",
+//           paramName: "program",
 //           paramValues: [],
 //           paramHasManyValues: false
 //         },

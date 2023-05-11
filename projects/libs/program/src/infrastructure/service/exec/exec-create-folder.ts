@@ -1,17 +1,16 @@
-// import { LoggerService } from "../../../logger/src/lib/service/logger.service";
 // import { singleton } from "tsyringe";
-// import { ExecCommand } from "./exec-command";
+// import { LoggerService } from "../../../logger/src/lib/service/logger.service";
+// import { ExecCommand } from "./exec-program";
 // import {
 //   buildErrMsg,
 //   buildInfoMsg
 // } from "../../../logger/src/lib/builder/base-msg-builder";
 //
 // /**
-//  * The service is responsible for verify whether current directory
-//  * is a repox workspace.
+//  * The service is responsible for create folder by name.
 //  */
 // @singleton()
-// export class ExecGoInto {
+// export class ExecCreateFolder {
 //   constructor(
 //     private readonly writeLog: LoggerService,
 //     private readonly execCommand: ExecCommand
@@ -20,7 +19,7 @@
 //
 //   exec(name: string): boolean {
 //     this.writeLog.write(buildInfoMsg(
-//       `Verify that the >>> ${name} <<< folder exists`
+//       `Create the >>> ${name} <<< folder`
 //     ));
 //     if (this.execCommand.pathExist(name)) {
 //       this.writeLog.write(
@@ -28,6 +27,7 @@
 //       );
 //       return false;
 //     }
+//     this.execCommand.createFolder(name);
 //     return true;
 //   }
 // }

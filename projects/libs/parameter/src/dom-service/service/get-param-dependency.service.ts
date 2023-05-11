@@ -45,11 +45,6 @@ export class GetParamDependencyService {
                   name: ArgumentEnum.name,
                   valueMode: "single",
                   required: true
-                },
-                [ArgumentEnum.config]: {
-                  name: ArgumentEnum.config,
-                  valueMode: "single",
-                  required: false
                 }
               }
             },
