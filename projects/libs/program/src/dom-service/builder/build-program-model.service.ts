@@ -14,7 +14,7 @@ import { ArgumentEnum } from "../../../../parameter/src/enum/argument.enum";
  * parameter domain model.
  */
 @singleton()
-export class BuildCommandModel {
+export class BuildProgramModelService {
   buildProgramDefaultModel(
     paramDomain: ParamDomainModel
   ): ProgramDefaultModel {
@@ -51,3 +51,4 @@ export class BuildCommandModel {
       .find(arg => arg.name === argument);
   }
 }
+// todo: refactor

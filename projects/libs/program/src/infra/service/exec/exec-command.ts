@@ -32,3 +32,4 @@ export class ExecCommand {
     closeSync(openSync(path, "w"))
   }
 }
+// todo: refactor

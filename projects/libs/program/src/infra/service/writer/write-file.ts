@@ -11,3 +11,4 @@ export class WriteFile {
     writeFileSync(path, jsonString);
   }
 }
+// todo: refactor

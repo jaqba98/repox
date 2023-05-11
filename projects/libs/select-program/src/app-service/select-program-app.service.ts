@@ -1,12 +1,15 @@
 import {
   GetRunProgramNameService
 } from "../dom-service/get-run-program-name.service";
-import { singleton } from "tsyringe";
+import { container, singleton } from "tsyringe";
 import {
   CommandEnum,
   ParamDomainModel,
   ProgramEnum
 } from "@lib/parameter";
+import {
+  ProgramDefaultAppService
+} from "../../../program/src/app-service/program-default-app.service";
 
 @singleton()
 /**
@@ -23,7 +26,7 @@ export class SelectProgramAppService {
     const name = this.getRunProgramName.getProgramName(paramDomain);
     switch (name) {
       case `${ProgramEnum.default}-${CommandEnum.default}`:
-        // container.resolve(ProgramDefaultApp).run(paramDomain);
+        container.resolve(ProgramDefaultAppService).run(paramDomain);
         return;
       case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
         // container.resolve(GenerateWorkspaceApp).run(paramDomain);

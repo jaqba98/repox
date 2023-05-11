@@ -20,3 +20,4 @@
 //     this.writeLog.write(msgRunCommandInfo("generate project"));
 //   }
 // }
+// todo: refactor
