@@ -27,7 +27,7 @@ export class MainService {
   }
 
   run(): void {
-    this.logger.writeSimpleMessage("Hello world", "success", true, true);
+    this.logger.writeSuccessMessage(false, true, "Hello world");
     // const paramDto = this.readParamDto.read();
     // if (!paramDto.success) {
     //   this.writeLog.message(msgParamDtoValidationError(paramDto));

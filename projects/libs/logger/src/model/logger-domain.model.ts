@@ -1,13 +1,28 @@
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
 
 /**
- * All models for message builders for logger.
+ * Logger domain model that stores data
+ * that will be used to build a complete message
+ * to be displayed on the console screen.
  */
 
-export interface SimpleMessageModel {
-  message: string;
-  mode: LoggerModeEnum;
+export interface LoggerStyleModel {
+  underscore: boolean;
+}
+
+export interface LoggerLineMessageModel extends LoggerStyleModel {
+  value: string;
+}
+
+export interface LoggerLineModel {
+  mode: keyof typeof LoggerModeEnum;
   isLogo: boolean;
   isHeader: boolean;
+  headerContent: string;
+  message: string | Array<LoggerLineMessageModel>;
+  newline: number;
 }
-// todo: refactor
+
+export interface LoggerDomainModel {
+  lines: Array<LoggerLineModel>;
+}

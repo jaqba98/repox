@@ -1,5 +1,6 @@
 /**
- * All possible types of modes in which a message can be displayed.
+ * All possible types of message modes in which
+ * the message will be displayed.
  */
 export enum LoggerModeEnum {
   success = "success",
@@ -8,4 +9,3 @@ export enum LoggerModeEnum {
   info = "info",
   plain = "plain"
 }
-// todo: refactor
