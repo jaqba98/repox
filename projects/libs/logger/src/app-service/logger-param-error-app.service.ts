@@ -6,7 +6,6 @@ import {
   WriteMessageService
 } from "../infrastructure/write-message.service";
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
-import { LoggerLineMessageModel } from "../model/logger-domain.model";
 import {
   BuildParamErrorMsgService
 } from "../dom-service/service/build-param-error-msg.service";
