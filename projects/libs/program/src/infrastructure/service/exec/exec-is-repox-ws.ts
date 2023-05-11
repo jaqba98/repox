@@ -5,7 +5,7 @@
 //   buildErrMsg,
 //   buildInfoMsg
 // } from "../../../logger/src/lib/builder/base-msg-builder";
-// import { ConfigFileEnum } from "../../enum/config-file";
+// import { RepoxConfigFileEnum } from "../../enum/config-file";
 //
 // /**
 //  * The service is responsible for verify whether current directory
@@ -23,9 +23,9 @@
 //     this.writeLog.write(buildInfoMsg(
 //       `Verify that the >>> ${name} <<< is a monorepo repox workspace`
 //     ));
-//     if (this.execCommand.pathExist(ConfigFileEnum.configJson)) {
+//     if (this.execCommand.pathExist(RepoxConfigFileEnum.configJson)) {
 //       this.writeLog.write(
-//         buildErrMsg(`The ${ConfigFileEnum.configJson} already exists!`)
+//         buildErrMsg(`The ${RepoxConfigFileEnum.configJson} already exists!`)
 //       );
 //       return false;
 //     }

@@ -1,17 +1,17 @@
 import { singleton } from "tsyringe";
-import { ConfigFileEnum } from "../../../enum/config-file.enum";
+import { RepoxConfigFileEnum } from "../../../../../domain/src/enum/repox-config-file.enum";
 
 /**
  * Converter to get config file name.
  */
 @singleton()
 export class GetConfigFileName {
-  getConfig(configType: string): ConfigFileEnum {
+  getConfig(configType: string): RepoxConfigFileEnum {
     switch (configType) {
       case "json":
-        return ConfigFileEnum.configJson;
+        return RepoxConfigFileEnum.repoxConfigJson;
       default:
-        return ConfigFileEnum.configJson;
+        return RepoxConfigFileEnum.repoxConfigJson;
     }
   }
 }

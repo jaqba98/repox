@@ -1,8 +1,8 @@
 import { container, DependencyContainer } from "tsyringe";
-import { ReadFile } from "../read-file";
+import { ReadFileService } from "../read-file.service";
 import { existsSync, unlinkSync, writeFileSync } from "fs";
 
-describe("ReadFile - read json", () => {
+describe("ReadFileService - read json", () => {
   interface JsonModel {
     hello: string;
   }
@@ -10,7 +10,7 @@ describe("ReadFile - read json", () => {
   const path: string = "read-file.test.json";
   const content: JsonModel = { hello: "Hello" };
   const child: DependencyContainer = container.createChildContainer();
-  const service: ReadFile = child.resolve(ReadFile);
+  const service: ReadFileService = child.resolve(ReadFileService);
 
   beforeEach(() => {
     if (existsSync(path)) unlinkSync(path);
@@ -30,4 +30,3 @@ describe("ReadFile - read json", () => {
     expect(() => service.readJsonFile(path)).toThrow(Error);
   });
 });
-// todo: refactor
