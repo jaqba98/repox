@@ -4,7 +4,7 @@ import {
 } from "../dom-service/builder/build-param-dto.service";
 import {
   ParamDtoValidationService
-} from "../dom-service/validation/param-dto-validation.service";
+} from "../dom-service/validation-dto/param-dto-validation.service";
 import {
   ParamDtoValidationModel
 } from "../model/param-dto/param-dto-validation.model";

@@ -1,26 +1,28 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDtoFinder
-} from "../../infra/service/finder/param-dto-finder";
-import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../parameter/src/model/param-dto/param-dto.model";
+} from "../../model/param-dto/param-dto.model";
 import {
   ParamDomainArgumentModel,
   ParamDomainModel
-} from "../../parameter/src/model/param-domain/param-domain.model";
-import { ProgramEnum, ProgramAlias } from "../../parameter/src/enum/program.enum";
-import { CommandEnum, CommandAlias } from "../../parameter/src/enum/command.enum";
-import { ParamTypeEnum } from "../../parameter/src/enum/param-type.enum";
-import { Alias, ArgumentEnum } from "../../parameter/src/enum/argument.enum";
+} from "../../model/param-domain/param-domain.model";
+import { ProgramAlias, ProgramEnum } from "../../enum/program.enum";
+import { CommandAlias, CommandEnum } from "../../enum/command.enum";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
+import { Alias, ArgumentEnum } from "../../enum/argument.enum";
+import {
+  ParamDtoFinderService
+} from "../finder/param-dto-finder.service";
 
+@singleton()
 /**
  * Build the parameter domain model.
  */
-@singleton()
-export class BuildParamDomain {
-  constructor(private readonly paramDtoFinder: ParamDtoFinder) {
+export class BuildParamDomainService {
+  constructor(
+    private readonly paramDtoFinder: ParamDtoFinderService
+  ) {
   }
 
   build(paramDto: ParamDtoModel): ParamDomainModel {
@@ -29,8 +31,8 @@ export class BuildParamDomain {
     const command = this.paramDtoFinder.findCommand(paramDto);
     const programBaseName: string = program ? program.paramName : "";
     const commandBaseName: string = command ? command.paramName : "";
-    const programName: ProgramEnum = this.getProgramName(programBaseName);
-    const commandName: CommandEnum = this.getCommandName(commandBaseName);
+    const programName = this.getProgramName(programBaseName);
+    const commandName = this.getCommandName(commandBaseName);
     const programIndex = this.getProgramIndex(application, program);
     const commandIndex = this.getCommandIndex(command, paramDto);
     const programArgs = this.paramDtoFinder.findProgramArgs(
@@ -59,7 +61,9 @@ export class BuildParamDomain {
   }
 
   private getProgramName(programName: string): ProgramEnum {
-    if (programName === ProgramEnum.default) return ProgramEnum.default;
+    if (programName === ProgramEnum.default) {
+      return ProgramEnum.default;
+    }
     const programNameAlias = Object.keys(ProgramAlias).find(key =>
       ProgramAlias[key as keyof typeof ProgramAlias] === programName
     );
@@ -76,7 +80,9 @@ export class BuildParamDomain {
   }
 
   private getCommandName(commandName: string): CommandEnum {
-    if (commandName === CommandEnum.default) return CommandEnum.default;
+    if (commandName === CommandEnum.default) {
+      return CommandEnum.default;
+    }
     const commandNameAlias = Object.keys(CommandAlias).find(key =>
       CommandAlias[key as keyof typeof CommandAlias] === commandName
     );
@@ -122,7 +128,10 @@ export class BuildParamDomain {
     }));
   }
 
-  private getArgumentName(arg: string, type: ParamTypeEnum): ArgumentEnum {
+  private getArgumentName(
+    arg: string,
+    type: ParamTypeEnum
+  ): ArgumentEnum {
     if (type === ParamTypeEnum.argument) {
       const argument = Object.keys(ArgumentEnum).find(key =>
         ArgumentEnum[key as keyof typeof ArgumentEnum] === arg

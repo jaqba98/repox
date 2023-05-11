@@ -1,16 +1,16 @@
 import { singleton } from "tsyringe";
-import { ProgramEnum } from "../../parameter/src/enum/program.enum";
+import { ProgramEnum } from "../../enum/program.enum";
 import {
   ParamDependencyModel
-} from "../../parameter/src/model/param-domain/param-dependency.model";
-import { ArgumentEnum } from "../../parameter/src/enum/argument.enum";
-import { CommandEnum } from "../../parameter/src/enum/command.enum";
+} from "../../model/param-domain/param-dependency.model";
+import { ArgumentEnum } from "../../enum/argument.enum";
+import { CommandEnum } from "../../enum/command.enum";
 
+@singleton()
 /**
  * Give dependency between programs, commands arguments and aliases.
  */
-@singleton()
-export class GetParamDependency {
+export class GetParamDependencyService {
   getDependency(program: ProgramEnum): ParamDependencyModel {
     switch (program) {
       case ProgramEnum.default:

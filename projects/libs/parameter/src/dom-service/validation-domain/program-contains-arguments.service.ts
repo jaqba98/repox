@@ -1,32 +1,34 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDomainModel
-} from "../../parameter/src/model/validator/validator-domain.model";
+} from "../../model/validator/validator-domain.model";
 import {
-  BuildParamDomainValidation
-} from "../builder/build-param-domain-validation";
+  BuildParamDomainResultService
+} from "../builder/build-param-domain-result.service";
 import {
   ParamDomainModel
-} from "../../parameter/src/model/param-domain/param-domain.model";
+} from "../../model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../parameter/src/model/param-domain/param-domain-validation.model";
-import { GetParamDependency } from "../service/get-param-dependency";
+} from "../../model/param-domain/param-domain-validation.model";
 import {
   ParamDependencyModel
-} from "../../parameter/src/model/param-domain/param-dependency.model";
-import { ProgramEnum } from "../../parameter/src/enum/program.enum";
+} from "../../model/param-domain/param-dependency.model";
+import { ProgramEnum } from "../../enum/program.enum";
+import {
+  GetParamDependencyService
+} from "../service/get-param-dependency.service";
 
+@singleton()
 /**
  * The validator is responsible for checking that the given command
  * contains all required arguments.
  */
-@singleton()
-export class ProgramContainsArguments
+export class ProgramContainsArgumentsService
   implements ValidatorDomainModel {
   constructor(
-    private readonly getParamDependency: GetParamDependency,
-    private readonly buildParamDomain: BuildParamDomainValidation
+    private readonly getParamDependency: GetParamDependencyService,
+    private readonly buildParamDomain: BuildParamDomainResultService
   ) {
   }
 
@@ -43,7 +45,7 @@ export class ProgramContainsArguments
         .find(arg => arg.name === programArg.name)
       );
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain);
+      return this.buildParamDomain.buildSuccess(paramDomain, []);
     }
     const missingArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
@@ -53,7 +55,8 @@ export class ProgramContainsArguments
         "You have to specify required arguments.",
         `Missing arguments for program are: ${missingArgs}`
       ],
-      paramDomain
+      paramDomain,
+      []
     );
   }
 }

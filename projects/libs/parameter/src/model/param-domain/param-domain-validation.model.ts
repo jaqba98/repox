@@ -1,7 +1,7 @@
 import { ParamDomainModel } from "./param-domain.model";
 
 /**
- * The result model of the parameter domain validation.
+ * The result model of the parameter domain validation-domain-dto.
  */
 export interface ParamDomainValidationModel {
   success: boolean;

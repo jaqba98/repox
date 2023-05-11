@@ -1,7 +1,7 @@
 import { ParamDtoModel } from "./param-dto.model";
 
 /**
- * The result model of the parameter DTO validation.
+ * The result model of the parameter DTO validation-domain-dto.
  */
 export interface ParamDtoValidationModel {
   success: boolean;

@@ -1,26 +1,27 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDomainModel
-} from "../../parameter/src/model/validator/validator-domain.model";
+} from "../../model/validator/validator-domain.model";
 import {
-  BuildParamDomainValidation
-} from "../builder/build-param-domain-validation";
+  BuildParamDomainResultService
+} from "../builder/build-param-domain-result.service";
 import {
   ParamDomainModel
-} from "../../parameter/src/model/param-domain/param-domain.model";
+} from "../../model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../parameter/src/model/param-domain/param-domain-validation.model";
-import { ArgumentEnum } from "../../parameter/src/enum/argument.enum";
+} from "../../model/param-domain/param-domain-validation.model";
+import { ArgumentEnum } from "../../enum/argument.enum";
 
+@singleton()
 /**
  * The validator is responsible for checking that
  * the given arguments exist.
  */
-@singleton()
-export class ArgumentExistValidator implements ValidatorDomainModel {
+export class ArgumentExistValidatorService
+  implements ValidatorDomainModel {
   constructor(
-    private readonly buildParamDomain: BuildParamDomainValidation
+    private readonly buildParamDomain: BuildParamDomainResultService
   ) {
   }
 
@@ -33,7 +34,7 @@ export class ArgumentExistValidator implements ValidatorDomainModel {
     const wrongArgs = args
       .filter(arg => arg.name === ArgumentEnum.unknown);
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain);
+      return this.buildParamDomain.buildSuccess(paramDomain, []);
     }
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
@@ -42,7 +43,8 @@ export class ArgumentExistValidator implements ValidatorDomainModel {
         "You have to specify correct arguments.",
         "Check the documentation to get full list of arguments."
       ],
-      paramDomain
+      paramDomain,
+      []
     );
   }
 }

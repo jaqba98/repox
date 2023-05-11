@@ -6,7 +6,7 @@ import {
   ParamDtoModel
 } from "../../../parameter/src/model/param-dto/param-dto.model";
 import { container } from "tsyringe";
-import { ReadParamDomainApp } from "../read-param-domain-app";
+import { ReadParamDomainApp } from "../../../parameter/src/app-service/read-param-domain-app.service";
 import {
   ParamDomainValidationModel
 } from "../../../parameter/src/model/param-domain/param-domain-validation.model";
@@ -42,7 +42,7 @@ const buildParamDto = (
 
 describe("ReadParamDomainAppService", () => {
   const child = container.createChildContainer();
-  // child.register(GetParamDependency, {
+  // child.register(GetParamDependencyService, {
   //   useClass: MockGetParamDependenceService
   // });
   const service = child.resolve(ReadParamDomainApp);

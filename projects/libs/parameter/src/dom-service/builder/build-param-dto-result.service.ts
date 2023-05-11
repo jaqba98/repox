@@ -9,7 +9,7 @@ import {
 
 @singleton()
 /**
- * Build the result of param DTO validation
+ * Build the result of param DTO validation-domain-dto
  * for successes and errors.
  */
 export class BuildParamDtoResultService {

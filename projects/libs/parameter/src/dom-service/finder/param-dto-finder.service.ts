@@ -2,17 +2,15 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../../parameter/src/model/param-dto/param-dto.model";
-import { ParamTypeEnum } from "../../../parameter/src/enum/param-type.enum";
+} from "../../model/param-dto/param-dto.model";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
 
+@singleton()
 /**
  * Find all types of entities from the param dto model.
  */
-@singleton()
-export class ParamDtoFinder {
-  findApplication(
-    paramDto: ParamDtoModel
-  ): ParamDtoEntityModel {
+export class ParamDtoFinderService {
+  findApplication(paramDto: ParamDtoModel): ParamDtoEntityModel {
     const application = paramDto.params
       .find(param => param.paramType === ParamTypeEnum.application);
     if (!application) {

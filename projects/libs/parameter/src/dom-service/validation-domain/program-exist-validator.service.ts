@@ -1,26 +1,27 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDomainModel
-} from "../../parameter/src/model/validator/validator-domain.model";
+} from "../../model/validator/validator-domain.model";
 import {
-  BuildParamDomainValidation
-} from "../builder/build-param-domain-validation";
+  BuildParamDomainResultService
+} from "../builder/build-param-domain-result.service";
 import {
   ParamDomainModel
-} from "../../parameter/src/model/param-domain/param-domain.model";
+} from "../../model/param-domain/param-domain.model";
 import {
   ParamDomainValidationModel
-} from "../../parameter/src/model/param-domain/param-domain-validation.model";
-import { ProgramEnum } from "../../parameter/src/enum/program.enum";
+} from "../../model/param-domain/param-domain-validation.model";
+import { ProgramEnum } from "../../enum/program.enum";
 
+@singleton()
 /**
  * The validator is responsible for checking
  * that given command exist.
  */
-@singleton()
-export class ProgramExistValidator implements ValidatorDomainModel {
+export class ProgramExistValidatorService
+  implements ValidatorDomainModel {
   constructor(
-    private readonly buildParamDomain: BuildParamDomainValidation
+    private readonly buildParamDomain: BuildParamDomainResultService
   ) {
   }
 
@@ -35,9 +36,10 @@ export class ProgramExistValidator implements ValidatorDomainModel {
           "You have to specify correct command name.",
           "Check the documentation to get full list of programs."
         ],
-        paramDomain
+        paramDomain,
+        []
       );
     }
-    return this.buildParamDomain.buildSuccess(paramDomain);
+    return this.buildParamDomain.buildSuccess(paramDomain, []);
   }
 }

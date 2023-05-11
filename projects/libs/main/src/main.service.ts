@@ -1,5 +1,8 @@
 import "core-js/features/reflect";
-import { ReadParamDtoAppService } from "@lib/parameter";
+import {
+  ReadParamDomainAppService,
+  ReadParamDtoAppService
+} from "@lib/parameter";
 import { container, singleton } from "tsyringe";
 import { LoggerParamErrorAppService } from "@lib/logger";
 
@@ -10,6 +13,7 @@ import { LoggerParamErrorAppService } from "@lib/logger";
 export class MainService {
   constructor(
     private readonly readParamDtoApp: ReadParamDtoAppService,
+    private readonly readParamDomainApp: ReadParamDomainAppService,
     private readonly loggerParamErrorApp: LoggerParamErrorAppService,
   ) {
   }
@@ -22,6 +26,18 @@ export class MainService {
         paramDto.baseValues,
         paramDto.errors,
         paramDto.tips
+      );
+      return;
+    }
+    const paramDomain = this.readParamDomainApp.build(
+      paramDto.paramDto
+    );
+    if (!paramDomain.success) {
+      this.loggerParamErrorApp.writeParamError(
+        paramDomain.wrongParamIndexes,
+        paramDomain.baseValues,
+        paramDomain.errors,
+        paramDomain.tips
       );
       return;
     }
