@@ -5,6 +5,7 @@ import {
 } from "@lib/parameter";
 import { container, singleton } from "tsyringe";
 import { LoggerParamErrorAppService } from "@lib/logger";
+import { SelectProgramAppService } from "@lib/select-program";
 
 @singleton()
 /**
@@ -14,6 +15,7 @@ export class MainService {
   constructor(
     private readonly readParamDtoApp: ReadParamDtoAppService,
     private readonly readParamDomainApp: ReadParamDomainAppService,
+    private readonly selectProgramApp: SelectProgramAppService,
     private readonly loggerParamErrorApp: LoggerParamErrorAppService,
   ) {
   }
@@ -41,6 +43,7 @@ export class MainService {
       );
       return;
     }
+    this.selectProgramApp.selectProgram(paramDomain.paramDomain);
   }
 }
 
