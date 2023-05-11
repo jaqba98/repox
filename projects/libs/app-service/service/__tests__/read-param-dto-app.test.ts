@@ -1,22 +1,22 @@
 import {
   ParamDtoValidationModel
-} from "../../../infra/model/param-dto/param-dto-validation-model";
+} from "../../../parameter/src/model/param-dto/param-dto-validation.model";
 import { container, DependencyContainer } from "tsyringe";
 import {
-  ReadProcessArgv
-} from "../../../infra/service/reader/read-process-argv";
-import { ReadParamDtoApp } from "../read-param-dto-app";
+  ReadArgvService
+} from "../../../parameter/src/infrastructure/read-argv.service";
+import { ReadParamDtoAppService } from "../../../parameter/src/app-service/read-param-dto-app.service";
 
 const runTest = (argv: Array<string>): ParamDtoValidationModel => {
   const child: DependencyContainer = container.createChildContainer();
-  child.register(ReadProcessArgv, {
+  child.register(ReadArgvService, {
     useClass: class {
       getArgv(): Array<string> {
         return ["executor", "application", ...argv];
       }
     }
   });
-  return child.resolve(ReadParamDtoApp).read();
+  return child.resolve(ReadParamDtoAppService).read();
 };
 
 afterEach(() => {
@@ -24,7 +24,7 @@ afterEach(() => {
   container.reset();
 });
 
-describe("ReadParamDtoApp - parameter order", () => {
+describe("ReadParamDtoAppService - parameter order", () => {
   test("Should be correct for the command: repox", () => {
     expect(runTest([]).success).toBeTruthy();
   });
@@ -74,7 +74,7 @@ describe("ReadParamDtoApp - parameter order", () => {
   });
 });
 
-describe("ReadParamDtoApp - parameter structure", () => {
+describe("ReadParamDtoAppService - parameter structure", () => {
   test("Should be correct for the command: repox", () => {
     const result = runTest([]);
     expect(result.success).toBeTruthy();
@@ -236,7 +236,7 @@ describe("ReadParamDtoApp - parameter structure", () => {
   });
 });
 
-describe("ReadParamDtoApp - parameter structure for arguments", () => {
+describe("ReadParamDtoAppService - parameter structure for arguments", () => {
   test("should be correct for the command: repox generate --name", () => {
     const result = runTest(["generate", "--name"]);
     const {
@@ -504,7 +504,7 @@ describe("ReadParamDtoApp - parameter structure for arguments", () => {
   });
 });
 
-describe("ReadParamDtoApp - parameter structure for aliases", () => {
+describe("ReadParamDtoAppService - parameter structure for aliases", () => {
   test("should be correct for the command: repox generate -i", () => {
     const result = runTest(["generate", "-i"]);
     const {

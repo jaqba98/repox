@@ -1,4 +1,4 @@
-import { ParamDtoModel } from "./param-dto-model";
+import { ParamDtoModel } from "./param-dto.model";
 
 /**
  * The result model of the parameter DTO validation.

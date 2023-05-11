@@ -1,37 +1,37 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDtoModel
-} from "../../model/validator-dto/validator-dto-model";
+} from "../../model/validator/validator-dto.model";
 import {
-  BuildParamDtoValidation
-} from "../builder/validation/build-param-dto-validation";
+  BuildParamDtoResultService
+} from "../builder/build-param-dto-result.service";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto-model";
+} from "../../model/param-dto/param-dto.model";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation-model";
-import { ParamType } from "../../enum/param-type";
+} from "../../model/param-dto/param-dto-validation.model";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
 
+@singleton()
 /**
  * Check the given DTO parameters have max one command
  * (0 or 1 if the command exist and 0 if the command not exist).
  */
-@singleton()
-export class MaxOneCommandValidator implements ValidatorDtoModel {
+export class MaxOneCommandValidatorService implements ValidatorDtoModel {
   constructor(
-    private readonly buildParamDto: BuildParamDtoValidation
+    private readonly buildParamDtoResult: BuildParamDtoResultService
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const program: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === ParamType.program);
+      .find(param => param.paramType === ParamTypeEnum.program);
     const commands: Array<ParamDtoEntityModel> = paramDto.params
-      .filter(paramDto => paramDto.paramType === ParamType.command);
+      .filter(param => param.paramType === ParamTypeEnum.command);
     if (!program && commands.length > 0) {
-      return this.buildParamDto.buildError(
+      return this.buildParamDtoResult.buildError(
         commands,
         ["You have specified the command without any command!"],
         [
@@ -42,7 +42,7 @@ export class MaxOneCommandValidator implements ValidatorDtoModel {
       );
     }
     if (program && commands.length > 1) {
-      return this.buildParamDto.buildError(
+      return this.buildParamDtoResult.buildError(
         commands,
         ["You have specified too many commands!"],
         [
@@ -52,6 +52,6 @@ export class MaxOneCommandValidator implements ValidatorDtoModel {
         paramDto
       );
     }
-    return this.buildParamDto.buildSuccess(paramDto);
+    return this.buildParamDtoResult.buildSuccess(paramDto);
   }
 }

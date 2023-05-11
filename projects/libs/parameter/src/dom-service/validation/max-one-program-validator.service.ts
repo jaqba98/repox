@@ -1,34 +1,34 @@
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto-model";
+} from "../../model/param-dto/param-dto.model";
 import { singleton } from "tsyringe";
 import {
   ValidatorDtoModel
-} from "../../model/validator-dto/validator-dto-model";
+} from "../../model/validator/validator-dto.model";
 import {
-  BuildParamDtoValidation
-} from "../builder/validation/build-param-dto-validation";
+  BuildParamDtoResultService
+} from "../builder/build-param-dto-result.service";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation-model";
-import { ParamType } from "../../enum/param-type";
+} from "../../model/param-dto/param-dto-validation.model";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
 
+@singleton()
 /**
  * Check the given DTO parameters have max one command.
  */
-@singleton()
-export class MaxOneProgramValidator implements ValidatorDtoModel {
+export class MaxOneProgramValidatorService implements ValidatorDtoModel {
   constructor(
-    private readonly buildParamDto: BuildParamDtoValidation
+    private readonly buildParamDtoResult: BuildParamDtoResultService
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const programs: Array<ParamDtoEntityModel> = paramDto.params
-      .filter(paramDto => paramDto.paramType === ParamType.program);
+      .filter(param => param.paramType === ParamTypeEnum.program);
     if (programs.length > 1) {
-      return this.buildParamDto.buildError(
+      return this.buildParamDtoResult.buildError(
         programs,
         ["You have specified too many programs!"],
         [
@@ -38,6 +38,6 @@ export class MaxOneProgramValidator implements ValidatorDtoModel {
         paramDto
       );
     }
-    return this.buildParamDto.buildSuccess(paramDto);
+    return this.buildParamDtoResult.buildSuccess(paramDto);
   }
 }

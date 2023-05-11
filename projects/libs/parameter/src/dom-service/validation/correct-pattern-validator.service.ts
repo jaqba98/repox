@@ -1,26 +1,26 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDtoModel
-} from "../../model/validator-dto/validator-dto-model";
+} from "../../model/validator/validator-dto.model";
 import {
-  BuildParamDtoValidation
-} from "../builder/validation/build-param-dto-validation";
+  BuildParamDtoResultService
+} from "../builder/build-param-dto-result.service";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto-model";
+} from "../../model/param-dto/param-dto.model";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation-model";
-import { ParamType } from "../../enum/param-type";
+} from "../../model/param-dto/param-dto-validation.model";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
 
+@singleton()
 /**
  * Check the given DTO parameters have correct pattern.
  */
-@singleton()
-export class CorrectPatternValidator implements ValidatorDtoModel {
+export class CorrectPatternValidatorService implements ValidatorDtoModel {
   constructor(
-    private readonly buildParamDto: BuildParamDtoValidation
+    private readonly buildParamDtoResult: BuildParamDtoResultService
   ) {
   }
 
@@ -28,9 +28,9 @@ export class CorrectPatternValidator implements ValidatorDtoModel {
     const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
       .filter(paramDto => !this.checkParamPattern(paramDto));
     if (wrongParamsDto.length === 0) {
-      return this.buildParamDto.buildSuccess(paramDto);
+      return this.buildParamDtoResult.buildSuccess(paramDto);
     }
-    return this.buildParamDto.buildError(
+    return this.buildParamDtoResult.buildError(
       wrongParamsDto,
       ["You have used incorrect parameter pattern!"],
       wrongParamsDto.map(wrongParam => this.getParamTip(wrongParam)),
@@ -41,15 +41,15 @@ export class CorrectPatternValidator implements ValidatorDtoModel {
   private checkParamPattern(paramDto: ParamDtoEntityModel): boolean {
     const { paramBaseValue, paramType, paramHasValue } = paramDto;
     switch (paramType) {
-      case ParamType.executor:
-      case ParamType.application:
+      case ParamTypeEnum.executor:
+      case ParamTypeEnum.application:
         return true;
-      case ParamType.program:
-      case ParamType.command:
+      case ParamTypeEnum.program:
+      case ParamTypeEnum.command:
         return this.checkProgramAndCommand(paramBaseValue);
-      case ParamType.argument:
+      case ParamTypeEnum.argument:
         return this.checkArgument(paramHasValue, paramBaseValue);
-      case ParamType.alias:
+      case ParamTypeEnum.alias:
         return this.checkAlias(paramHasValue, paramBaseValue);
       default:
         throw new Error(`Not supported parameter type: ${paramType}`);
@@ -81,18 +81,18 @@ export class CorrectPatternValidator implements ValidatorDtoModel {
   private getParamTip(paramDto: ParamDtoEntityModel): string {
     const { paramType, paramBaseValue } = paramDto;
     switch (paramType) {
-      case ParamType.program:
-      case ParamType.command:
+      case ParamTypeEnum.program:
+      case ParamTypeEnum.command:
         return this.buildCorrectPatternMessage(
           paramBaseValue,
           "<name>"
         );
-      case ParamType.argument:
+      case ParamTypeEnum.argument:
         return this.buildCorrectPatternMessage(
           paramBaseValue,
           "--<name> or --<name>=<value>"
         );
-      case ParamType.alias:
+      case ParamTypeEnum.alias:
         return this.buildCorrectPatternMessage(
           paramBaseValue,
           "-<sign> or -<sign>=<value>"

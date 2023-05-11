@@ -2,8 +2,8 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto-model";
-import { ParamType } from "../../enum/param-type";
+} from "../../../parameter/src/model/param-dto/param-dto.model";
+import { ParamTypeEnum } from "../../../parameter/src/enum/param-type.enum";
 
 /**
  * Find all types of entities from the param dto model.
@@ -14,7 +14,7 @@ export class ParamDtoFinder {
     paramDto: ParamDtoModel
   ): ParamDtoEntityModel {
     const application = paramDto.params
-      .find(param => param.paramType === ParamType.application);
+      .find(param => param.paramType === ParamTypeEnum.application);
     if (!application) {
       throw new Error("Application cannot be undefined!");
     }
@@ -25,14 +25,14 @@ export class ParamDtoFinder {
     paramDto: ParamDtoModel
   ): ParamDtoEntityModel | undefined {
     return paramDto.params
-      .find(param => param.paramType === ParamType.program);
+      .find(param => param.paramType === ParamTypeEnum.program);
   }
 
   findCommand(
     paramDto: ParamDtoModel
   ): ParamDtoEntityModel | undefined {
     return paramDto.params
-      .find(param => param.paramType === ParamType.command);
+      .find(param => param.paramType === ParamTypeEnum.command);
   }
 
   findProgramArgs(
@@ -42,8 +42,8 @@ export class ParamDtoFinder {
   ): Array<ParamDtoEntityModel> {
     return paramDto.params
       .filter(param =>
-        param.paramType === ParamType.argument ||
-        param.paramType === ParamType.alias
+        param.paramType === ParamTypeEnum.argument ||
+        param.paramType === ParamTypeEnum.alias
       )
       .filter(param =>
         param.paramIndex > programIndex &&
@@ -57,8 +57,8 @@ export class ParamDtoFinder {
   ): Array<ParamDtoEntityModel> {
     return paramDto.params
       .filter(param =>
-        param.paramType === ParamType.argument ||
-        param.paramType === ParamType.alias
+        param.paramType === ParamTypeEnum.argument ||
+        param.paramType === ParamTypeEnum.alias
       )
       .filter(param => param.paramIndex > commandIndex)
   }

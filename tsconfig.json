@@ -13,7 +13,8 @@
     "baseUrl": ".",
     "paths": {
       "@lib/main": ["projects/libs/main/index.ts"],
-      "@lib/logger": ["projects/libs/logger/index.ts"]
+      "@lib/logger": ["projects/libs/logger/index.ts"],
+      "@lib/parameter": ["projects/libs/parameter/index.ts"]
     }
   },
   "include": [

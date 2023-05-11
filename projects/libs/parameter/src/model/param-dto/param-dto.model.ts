@@ -1,4 +1,4 @@
-import { ParamType } from "../../enum/param-type";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 /**
  * The DTO model of parameters (data transport model)
@@ -8,7 +8,7 @@ import { ParamType } from "../../enum/param-type";
 export interface ParamDtoEntityModel {
   paramBaseValue: string;
   paramIndex: number;
-  paramType: ParamType;
+  paramType: ParamTypeEnum;
   paramHasValue: boolean;
   paramName: string;
   paramValues: Array<string>;

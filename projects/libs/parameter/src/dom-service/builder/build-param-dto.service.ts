@@ -1,20 +1,16 @@
 import { singleton } from "tsyringe";
-import { ReadProcessArgv } from "./read-process-argv";
-import { ParamDtoModel } from "../../model/param-dto/param-dto-model";
-import { ParamType } from "../../enum/param-type";
+import { ParamDtoModel } from "../../model/param-dto/param-dto.model";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
 
-/**
- * Reading the real parameters from the command line
- * and building the parameter DTO model.
- */
 @singleton()
-export class ReadParamDto {
-  constructor(private readonly readProcessArgv: ReadProcessArgv) {
-  }
-
-  readParamDto(): ParamDtoModel {
+/**
+ * Building the parameter DTO model from the
+ * real parameters from the command line.
+ */
+export class BuildParamDtoService {
+  readParamDto(argv: Array<string>): ParamDtoModel {
     return {
-      params: this.readProcessArgv.getArgv()
+      params: argv
         .map((arg: string, index: number) => ({
           paramBaseValue: arg,
           paramIndex: index,
@@ -40,27 +36,27 @@ export class ReadParamDto {
     };
   }
 
-  private getParamType(arg: string, index: number): ParamType {
-    if (arg.startsWith("--")) return ParamType.argument;
-    if (arg.startsWith("-")) return ParamType.alias;
-    if (index === 0) return ParamType.executor;
-    if (index === 1) return ParamType.application;
-    if (index === 2) return ParamType.program;
-    return ParamType.command;
+  private getParamType(arg: string, index: number): ParamTypeEnum {
+    if (arg.startsWith("--")) return ParamTypeEnum.argument;
+    if (arg.startsWith("-")) return ParamTypeEnum.alias;
+    if (index === 0) return ParamTypeEnum.executor;
+    if (index === 1) return ParamTypeEnum.application;
+    if (index === 2) return ParamTypeEnum.program;
+    return ParamTypeEnum.command;
   }
 
   private getParamName(
     paramBaseValue: string,
-    paramType: ParamType,
+    paramType: ParamTypeEnum,
     paramHasValue: boolean
   ): string {
     const paramName: string = paramHasValue ?
       paramBaseValue.split("=")[0] :
       paramBaseValue;
-    if (paramType === ParamType.argument) {
+    if (paramType === ParamTypeEnum.argument) {
       return paramName.replace("--", "");
     }
-    if (paramType === ParamType.alias) {
+    if (paramType === ParamTypeEnum.alias) {
       return paramName.replace("-", "");
     }
     return paramName;

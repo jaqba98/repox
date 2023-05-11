@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 // import {
-//   ReadParamDtoApp
+//   ReadParamDtoAppService
 // } from "../../../app-service/service/read-param-dto-app";
 // import {
 //   ReadParamDomainApp
@@ -19,7 +19,7 @@ import { LoggerAppService } from "@lib/logger";
 @singleton()
 export class MainService {
   constructor(
-    // private readonly readParamDto: ReadParamDtoApp,
+    // private readonly readParamDto: ReadParamDtoAppService,
     // private readonly readParamDomain: ReadParamDomainApp,
     // private readonly selectProgram: SelectProgramApp,
     private readonly logger: LoggerAppService,

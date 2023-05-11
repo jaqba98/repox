@@ -5,14 +5,14 @@ import {
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../infra/model/param-dto/param-dto-model";
+} from "../../parameter/src/model/param-dto/param-dto.model";
 import {
   ParamDomainArgumentModel,
   ParamDomainModel
 } from "../../model/param-domain/param-domain-model";
 import { Program, ProgramAlias } from "../../enum/program";
 import { Command, CommandAlias } from "../../enum/command";
-import { ParamType } from "../../infra/enum/param-type";
+import { ParamTypeEnum } from "../../parameter/src/enum/param-type.enum";
 import { Alias, Argument } from "../../enum/argument";
 
 /**
@@ -122,8 +122,8 @@ export class BuildParamDomain {
     }));
   }
 
-  private getArgumentName(arg: string, type: ParamType): Argument {
-    if (type === ParamType.argument) {
+  private getArgumentName(arg: string, type: ParamTypeEnum): Argument {
+    if (type === ParamTypeEnum.argument) {
       const argument = Object.keys(Argument).find(key =>
         Argument[key as keyof typeof Argument] === arg
       );
@@ -131,7 +131,7 @@ export class BuildParamDomain {
         Argument[argument as keyof typeof Argument] :
         Argument.unknown;
     }
-    if (type === ParamType.alias) {
+    if (type === ParamTypeEnum.alias) {
       const alias = Object.keys(Alias).find(key =>
         Alias[key as keyof typeof Alias] === arg
       );

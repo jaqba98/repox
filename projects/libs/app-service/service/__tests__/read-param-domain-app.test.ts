@@ -4,13 +4,13 @@ import { Argument } from "../../../enum/argument";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../../infra/model/param-dto/param-dto-model";
+} from "../../../parameter/src/model/param-dto/param-dto.model";
 import { container } from "tsyringe";
 import { ReadParamDomainApp } from "../read-param-domain-app";
 import {
   ParamDomainValidationModel
 } from "../../../model/param-domain/param-domain-validation-model";
-import { ParamType } from "../../../infra/enum/param-type";
+import { ParamTypeEnum } from "../../../parameter/src/enum/param-type.enum";
 
 const buildParamDto = (
   entities: Array<ParamDtoEntityModel> = []
@@ -56,7 +56,7 @@ describe("ReadParamDomainAppService", () => {
     const paramDto: ParamDtoModel = buildParamDto([{
       paramBaseValue: "--version",
       paramIndex: 2,
-      paramType: ParamType.argument,
+      paramType: ParamTypeEnum.argument,
       paramHasValue: false,
       paramName: "version",
       paramValues: [],
@@ -97,7 +97,7 @@ describe("ReadParamDomainAppService", () => {
     const paramDto: ParamDtoModel = buildParamDto([{
       paramBaseValue: "test",
       paramIndex: 2,
-      paramType: ParamType.command,
+      paramType: ParamTypeEnum.command,
       paramHasValue: false,
       paramName: "test",
       paramValues: [],
@@ -133,7 +133,7 @@ describe("ReadParamDomainAppService", () => {
       {
         paramBaseValue: "generate",
         paramIndex: 2,
-        paramType: ParamType.program,
+        paramType: ParamTypeEnum.program,
         paramHasValue: false,
         paramName: "generate",
         paramValues: [],
@@ -142,7 +142,7 @@ describe("ReadParamDomainAppService", () => {
       {
         paramBaseValue: "test",
         paramIndex: 3,
-        paramType: ParamType.command,
+        paramType: ParamTypeEnum.command,
         paramHasValue: false,
         paramName: "test",
         paramValues: [],

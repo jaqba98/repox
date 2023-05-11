@@ -2,17 +2,17 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../../model/param-dto/param-dto-model";
+} from "../../model/param-dto/param-dto.model";
 import {
   ParamDtoValidationModel
-} from "../../../model/param-dto/param-dto-validation-model";
+} from "../../model/param-dto/param-dto-validation.model";
 
+@singleton()
 /**
- * Build the response of param DTO validation
+ * Build the result of param DTO validation
  * for successes and errors.
  */
-@singleton()
-export class BuildParamDtoValidation {
+export class BuildParamDtoResultService {
   buildSuccess(paramDto: ParamDtoModel): ParamDtoValidationModel {
     return {
       success: true,
@@ -30,7 +30,7 @@ export class BuildParamDtoValidation {
     paramDto: ParamDtoModel
   ): ParamDtoValidationModel {
     const wrongParamIndexes: Array<number> = wrongParamsDto
-      .map(wrongParam => wrongParam.paramIndex);
+      .map(wrongParamDto => wrongParamDto.paramIndex);
     return {
       success: false,
       wrongParamIndexes,

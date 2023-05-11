@@ -1,38 +1,38 @@
 import { singleton } from "tsyringe";
 import {
   ValidatorDtoModel
-} from "../../model/validator-dto/validator-dto-model";
+} from "../../model/validator/validator-dto.model";
 import {
-  BuildParamDtoValidation
-} from "../builder/validation/build-param-dto-validation";
+  BuildParamDtoResultService
+} from "../builder/build-param-dto-result.service";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto-model";
+} from "../../model/param-dto/param-dto.model";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation-model";
-import { ParamType } from "../../enum/param-type";
+} from "../../model/param-dto/param-dto-validation.model";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
 
+@singleton()
 /**
  * Check the given DTO parameters are in correct order.
  */
-@singleton()
-export class CorrectOrderValidator implements ValidatorDtoModel {
+export class CorrectOrderValidatorService implements ValidatorDtoModel {
   constructor(
-    private readonly buildParamDto: BuildParamDtoValidation
+    private readonly buildParamDtoResult: BuildParamDtoResultService
   ) {
   }
 
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
     const program: ParamDtoEntityModel | undefined = paramDto.params
-      .find(paramDto => paramDto.paramType === ParamType.program);
+      .find(param => param.paramType === ParamTypeEnum.program);
     const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
       .filter(param => !this.checkParamOrder(param, program));
     if (wrongParamsDto.length === 0) {
-      return this.buildParamDto.buildSuccess(paramDto);
+      return this.buildParamDtoResult.buildSuccess(paramDto);
     }
-    return this.buildParamDto.buildError(
+    return this.buildParamDtoResult.buildError(
       wrongParamsDto,
       ["You have specified the command in the incorrect order!"],
       [
@@ -63,18 +63,18 @@ export class CorrectOrderValidator implements ValidatorDtoModel {
 
   private getParamOrder(): Array<{
     order: number,
-    paramTypes: Array<ParamType>
+    paramTypes: Array<ParamTypeEnum>
   }> {
     return [
-      { order: 0, paramTypes: [ParamType.executor] },
-      { order: 1, paramTypes: [ParamType.application] },
-      { order: 2, paramTypes: [ParamType.program] },
+      { order: 0, paramTypes: [ParamTypeEnum.executor] },
+      { order: 1, paramTypes: [ParamTypeEnum.application] },
+      { order: 2, paramTypes: [ParamTypeEnum.program] },
       {
         order: 3,
         paramTypes: [
-          ParamType.command,
-          ParamType.argument,
-          ParamType.alias
+          ParamTypeEnum.command,
+          ParamTypeEnum.argument,
+          ParamTypeEnum.alias
         ]
       }
     ];

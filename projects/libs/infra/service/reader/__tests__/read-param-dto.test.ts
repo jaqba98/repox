@@ -1,10 +1,10 @@
 import { container, DependencyContainer } from "tsyringe";
-import { ReadProcessArgv } from "../read-process-argv";
-import { ReadParamDto } from "../read-param-dto";
+import { ReadArgvService } from "../../../../parameter/src/infrastructure/read-argv.service";
+import { BuildParamDtoService } from "../../../../parameter/src/dom-service/builder/build-param-dto.service";
 import {
   ParamDtoModel
-} from "../../../model/param-dto/param-dto-model";
-import { ParamType } from "../../../enum/param-type";
+} from "../../../../parameter/src/model/param-dto/param-dto.model";
+import { ParamTypeEnum } from "../../../../parameter/src/enum/param-type.enum";
 
 class MockReadProcessArgv {
   getArgv(): Array<string> {
@@ -25,8 +25,8 @@ class MockReadProcessArgv {
 
 describe("ReadParamDto", () => {
   const child: DependencyContainer = container.createChildContainer();
-  child.register(ReadProcessArgv, { useClass: MockReadProcessArgv });
-  const service: ReadParamDto = child.resolve(ReadParamDto);
+  child.register(ReadArgvService, { useClass: MockReadProcessArgv });
+  const service: BuildParamDtoService = child.resolve(BuildParamDtoService);
 
   afterAll(() => {
     container.clearInstances();
@@ -38,7 +38,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: "node",
           paramIndex: 0,
-          paramType: ParamType.executor,
+          paramType: ParamTypeEnum.executor,
           paramHasValue: false,
           paramName: "node",
           paramValues: [],
@@ -47,7 +47,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: "application",
           paramIndex: 1,
-          paramType: ParamType.application,
+          paramType: ParamTypeEnum.application,
           paramHasValue: false,
           paramName: "application",
           paramValues: [],
@@ -56,7 +56,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: "program",
           paramIndex: 2,
-          paramType: ParamType.program,
+          paramType: ParamTypeEnum.program,
           paramHasValue: false,
           paramName: "program",
           paramValues: [],
@@ -65,7 +65,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: "--argument1",
           paramIndex: 3,
-          paramType: ParamType.argument,
+          paramType: ParamTypeEnum.argument,
           paramHasValue: false,
           paramName: "argument1",
           paramValues: [],
@@ -74,7 +74,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: "--argument2=val1",
           paramIndex: 4,
-          paramType: ParamType.argument,
+          paramType: ParamTypeEnum.argument,
           paramHasValue: true,
           paramName: "argument2",
           paramValues: ["val1"],
@@ -83,7 +83,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: `--argument3="val1,val2"`,
           paramIndex: 5,
-          paramType: ParamType.argument,
+          paramType: ParamTypeEnum.argument,
           paramHasValue: true,
           paramName: "argument3",
           paramValues: ["val1", "val2"],
@@ -92,7 +92,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: "command",
           paramIndex: 6,
-          paramType: ParamType.command,
+          paramType: ParamTypeEnum.command,
           paramHasValue: false,
           paramName: "command",
           paramValues: [],
@@ -101,7 +101,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: "-a",
           paramIndex: 7,
-          paramType: ParamType.alias,
+          paramType: ParamTypeEnum.alias,
           paramHasValue: false,
           paramName: "a",
           paramValues: [],
@@ -110,7 +110,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: "-b='val1'",
           paramIndex: 8,
-          paramType: ParamType.alias,
+          paramType: ParamTypeEnum.alias,
           paramHasValue: true,
           paramName: "b",
           paramValues: ["val1"],
@@ -119,7 +119,7 @@ describe("ReadParamDto", () => {
         {
           paramBaseValue: "-c=`val1,val2`",
           paramIndex: 9,
-          paramType: ParamType.alias,
+          paramType: ParamTypeEnum.alias,
           paramHasValue: true,
           paramName: "c",
           paramValues: ["val1", "val2"],

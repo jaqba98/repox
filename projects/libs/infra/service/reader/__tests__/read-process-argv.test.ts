@@ -1,9 +1,9 @@
 import { container, DependencyContainer } from "tsyringe";
-import { ReadProcessArgv } from "../read-process-argv";
+import { ReadArgvService } from "../../../../parameter/src/infrastructure/read-argv.service";
 
 describe("ReadProcessArgv", () => {
   const child: DependencyContainer = container.createChildContainer();
-  const service: ReadProcessArgv = child.resolve(ReadProcessArgv);
+  const service: ReadArgvService = child.resolve(ReadArgvService);
   const originalArgv: Array<string> = process.argv;
 
   afterEach(() => {
