@@ -20,6 +20,7 @@ export class ExecProgramInstalledService {
       );
       return true;
     }
+    this.loggerMessageApp.writePlain("", 0);
     this.loggerMessageApp.writeError(
       `Program ${program} is not installed`, 0
     );

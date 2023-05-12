@@ -1,4 +1,5 @@
 import {
+  TEXT_BRIGHT,
   TEXT_RESET,
   TEXT_UNDERSCORE
 } from "../../const/text-style.const";
@@ -21,6 +22,7 @@ export const buildLine = (content: string): string =>
 
 export const buildLogo = (bgColor: string): string =>
   buildEmptyMessage()
+    .concat(TEXT_BRIGHT)
     .concat(bgColor)
     .concat(space)
     .concat("REPOX")
@@ -30,6 +32,7 @@ export const buildHeader = (
   bgColor: string,
   headerContent: string
 ): string => buildEmptyMessage()
+  .concat(TEXT_BRIGHT)
   .concat(bgColor)
   .concat(space)
   .concat(headerContent.toUpperCase())
@@ -39,6 +42,7 @@ export const buildMessage = (
   fgColor: string,
   message: string
 ): string => buildEmptyMessage()
+  .concat(TEXT_BRIGHT)
   .concat(fgColor)
   .concat(message);
 
@@ -48,6 +52,7 @@ export const buildWord = (
   underscore: boolean
 ): string => {
   return buildEmptyMessage()
+    .concat(TEXT_BRIGHT)
     .concat(fgColor)
     .concat(underscore ? TEXT_UNDERSCORE : emptyString)
     .concat(word)

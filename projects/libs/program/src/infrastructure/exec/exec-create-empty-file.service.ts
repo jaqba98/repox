@@ -2,6 +2,7 @@ import { singleton } from "tsyringe";
 import { closeSync, openSync } from "fs";
 import { LoggerMessageAppService } from "@lib/logger";
 import { join } from "path";
+import convertPath from "@stdlib/utils-convert-path";
 
 @singleton()
 /**
@@ -14,9 +15,9 @@ export class ExecCreateEmptyFileService {
   }
 
   exec(pathName: string, fileName: string): void {
-    const path: string = join(pathName, fileName)
+    const path: string = convertPath(join(pathName, fileName), "posix")
     this.loggerMessageApp.writePlain(
-      `Create aa empty ${path} file`, 0
+      `Create the empty ${path} file`, 0
     );
     closeSync(openSync(path, "w"));
   }

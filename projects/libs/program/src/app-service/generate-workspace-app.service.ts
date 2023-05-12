@@ -70,13 +70,15 @@ export class GenerateWorkspaceAppService {
     this.runCommand.exec("tsc --init")
     this.createFolder.exec("projects");
     this.createFolder.exec("projects/apps");
-    this.createEmptyFile.exec("projects/tools/", ".gitkeep");
+    this.createEmptyFile.exec("projects/apps/", ".gitkeep");
     this.createFolder.exec("projects/libs");
-    this.createEmptyFile.exec("projects/tools/", ".gitkeep");
+    this.createEmptyFile.exec("projects/libs/", ".gitkeep");
     this.createFolder.exec("projects/tools");
     this.createEmptyFile.exec("projects/tools/", ".gitkeep");
     this.createEmptyFile.exec("./", DomainConfigFileEnum.domainConfigJson);
     this.createEmptyFile.exec("./", ".gitignore");
     this.goInto.exec("..");
+    this.loggerMessageApp.writePlain("", 0);
+    this.loggerMessageApp.writeSuccess("Command executed correctly!", 0);
   }
 }

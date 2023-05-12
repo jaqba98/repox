@@ -20,6 +20,7 @@ export class ExecFolderDoesNotExistService {
       );
       return true;
     }
+    this.loggerMessageApp.writePlain("", 0);
     this.loggerMessageApp.writeError(
       `The ${folderName} folder already exists`, 0
     );

@@ -31,19 +31,17 @@ export class LoggerMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 
-  writeInfo(
+  writeSuccess(
     message: string,
-    isLogo: boolean,
-    isHeader: boolean,
     newline: number
   ): void {
     const outputMessage: string = this.buildMessage.build({
       lines: [{
         message,
-        mode: LoggerModeEnum.info,
-        isLogo,
-        isHeader,
-        headerContent: "INFO",
+        mode: LoggerModeEnum.success,
+        isLogo: false,
+        isHeader: true,
+        headerContent: "SUCCESS",
         newline
       }]
     });
@@ -61,6 +59,25 @@ export class LoggerMessageAppService {
         isLogo: false,
         isHeader: true,
         headerContent: "ERROR",
+        newline
+      }]
+    });
+    this.writeMessage.write(outputMessage);
+  }
+
+  writeInfo(
+    message: string,
+    isLogo: boolean,
+    isHeader: boolean,
+    newline: number
+  ): void {
+    const outputMessage: string = this.buildMessage.build({
+      lines: [{
+        message,
+        mode: LoggerModeEnum.info,
+        isLogo,
+        isHeader,
+        headerContent: "INFO",
         newline
       }]
     });
