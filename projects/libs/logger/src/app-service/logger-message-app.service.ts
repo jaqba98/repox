@@ -5,11 +5,11 @@ import {
 import {
   WriteMessageService
 } from "../infrastructure/write-message.service";
-import { LoggerModeEnum } from "../enum/logger-mode.enum";
 import {
   BuildParamErrorMsgService
 } from "../dom-service/service/build-param-error-msg.service";
 import { LoggerLineModel } from "../model/logger-domain.model";
+import { LoggerModeEnum } from "../enum/logger-mode.enum";
 
 @singleton()
 /**
@@ -27,6 +27,59 @@ export class LoggerMessageAppService {
   write(line: LoggerLineModel): void {
     const outputMessage: string = this.buildMessage.build({
       lines: [line]
+    });
+    this.writeMessage.write(outputMessage);
+  }
+
+  writeInfo(
+    message: string,
+    isLogo: boolean,
+    isHeader: boolean,
+    newline: number
+  ): void {
+    const outputMessage: string = this.buildMessage.build({
+      lines: [{
+        message,
+        mode: LoggerModeEnum.info,
+        isLogo,
+        isHeader,
+        headerContent: "INFO",
+        newline
+      }]
+    });
+    this.writeMessage.write(outputMessage);
+  }
+
+  writeError(
+    message: string,
+    newline: number
+  ): void {
+    const outputMessage: string = this.buildMessage.build({
+      lines: [{
+        message,
+        mode: LoggerModeEnum.error,
+        isLogo: false,
+        isHeader: true,
+        headerContent: "ERROR",
+        newline
+      }]
+    });
+    this.writeMessage.write(outputMessage);
+  }
+
+  writePlain(
+    message: string,
+    newline: number
+  ): void {
+    const outputMessage: string = this.buildMessage.build({
+      lines: [{
+        message,
+        mode: LoggerModeEnum.plain,
+        isLogo: false,
+        isHeader: false,
+        headerContent: "",
+        newline
+      }]
     });
     this.writeMessage.write(outputMessage);
   }

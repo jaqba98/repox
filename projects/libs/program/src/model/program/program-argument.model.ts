@@ -1,5 +1,5 @@
 /**
- * The interfaces with all properties for all programs.
+ * The model with all arguments for all programs.
  */
 
 export interface ProgramDefaultModel {
@@ -8,4 +8,7 @@ export interface ProgramDefaultModel {
 
 export interface GenerateWorkspaceModel {
   name: string;
+}
+
+export interface GenerateProjectModel {
 }

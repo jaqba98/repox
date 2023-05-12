@@ -3,11 +3,11 @@ import { SYSTEM_VERSION } from "@lib/domain";
 import { ParamDomainModel } from "@lib/parameter";
 import {
   BuildProgramModelService
-} from "../dom-service/builder/build-program-model.service";
+} from "../dom-service/build-program-model.service";
 import { LoggerMessageAppService } from "@lib/logger";
 import {
   ProgramDefaultModel
-} from "../model/program/program-property.model";
+} from "../model/program/program-argument.model";
 import {
   LoggerModeEnum
 } from "../../../logger/src/enum/logger-mode.enum";
@@ -39,4 +39,3 @@ export class ProgramDefaultAppService {
     }
   }
 }
-// todo: refactor

@@ -1,13 +1,13 @@
 import { singleton } from "tsyringe";
 import { LoggerModeEnum } from "../../enum/logger-mode.enum";
 import {
-  BG_TEXT_CYAN,
-  BG_TEXT_GRAY,
+  BG_TEXT_MAGENTA,
+  BG_TEXT_WHITE,
   BG_TEXT_GREEN,
   BG_TEXT_RED,
   BG_TEXT_YELLOW,
-  FG_TEXT_CYAN,
-  FG_TEXT_GRAY,
+  FG_TEXT_MAGENTA,
+  FG_TEXT_WHITE,
   FG_TEXT_GREEN,
   FG_TEXT_RED,
   FG_TEXT_YELLOW
@@ -28,9 +28,9 @@ export class ConvertModeToColorService {
       case LoggerModeEnum.warning:
         return FG_TEXT_YELLOW;
       case LoggerModeEnum.info:
-        return FG_TEXT_CYAN;
+        return FG_TEXT_MAGENTA;
       case LoggerModeEnum.plain:
-        return FG_TEXT_GRAY;
+        return FG_TEXT_WHITE;
       default:
         throw new Error("The converter does not support the type!");
     }
@@ -45,9 +45,9 @@ export class ConvertModeToColorService {
       case LoggerModeEnum.warning:
         return BG_TEXT_YELLOW;
       case LoggerModeEnum.info:
-        return BG_TEXT_CYAN;
+        return BG_TEXT_MAGENTA;
       case LoggerModeEnum.plain:
-        return BG_TEXT_GRAY;
+        return BG_TEXT_WHITE;
       default:
         throw new Error("The converter does not support the type!");
     }
