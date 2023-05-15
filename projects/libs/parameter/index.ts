@@ -4,3 +4,4 @@ export * from "./src/model/param-domain/param-domain.model";
 export * from "./src/enum/program.enum";
 export * from "./src/enum/command.enum";
 export * from "./src/enum/argument.enum";
+// todo: refactor

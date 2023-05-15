@@ -10,3 +10,4 @@ export enum ParamTypeEnum {
   argument = "argument",
   alias = "alias"
 }
+// todo: refactor

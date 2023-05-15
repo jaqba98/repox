@@ -10,3 +10,4 @@ export const newline: string = EOL;
 export const emptyString: string = "";
 
 export const space: string = " ";
+// todo: refactor

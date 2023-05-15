@@ -11,3 +11,4 @@ export enum ProgramEnum {
 export enum ProgramAlias {
   generate = "g"
 }
+// todo: refactor

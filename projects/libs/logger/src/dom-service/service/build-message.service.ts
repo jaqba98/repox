@@ -98,3 +98,4 @@ export class BuildMessageService {
     return newline.repeat(quantityNewline);
   }
 }
+// todo: refactor

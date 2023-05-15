@@ -11,3 +11,4 @@ export class GetRunProgramNameService {
     return `${paramDomain.program.name}-${paramDomain.command.name}`;
   }
 }
+// todo: refactor

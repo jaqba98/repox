@@ -30,3 +30,4 @@ describe("ReadFileService - read json", () => {
     expect(() => service.readJsonFile(path)).toThrow(Error);
   });
 });
+// todo: refactor

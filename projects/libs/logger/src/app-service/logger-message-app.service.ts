@@ -101,3 +101,4 @@ export class LoggerMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 }
+// todo: refactor

@@ -57,3 +57,4 @@ export const buildWord = (
     .concat(underscore ? TEXT_UNDERSCORE : emptyString)
     .concat(word)
 };
+// todo: refactor

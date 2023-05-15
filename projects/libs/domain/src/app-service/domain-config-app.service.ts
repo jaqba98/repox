@@ -27,3 +27,4 @@ export class DomainConfigAppService {
     return this.domainConfigStore.getConfig();
   }
 }
+// todo: refactor

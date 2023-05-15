@@ -19,3 +19,4 @@ export class BuildDomainConfigFileAppService {
     return this.buildEmpty.buildConfigFile();
   }
 }
+// todo: refactor

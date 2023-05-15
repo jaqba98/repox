@@ -14,3 +14,4 @@ export class ReadFileService {
     return <TJson>JSON.parse(fileContent);
   }
 }
+// todo: refactor

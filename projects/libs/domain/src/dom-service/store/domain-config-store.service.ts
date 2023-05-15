@@ -36,3 +36,4 @@ export class DomainConfigStoreService {
     return this.store;
   }
 }
+// todo: refactor
