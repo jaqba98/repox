@@ -1,6 +1,9 @@
 import { singleton } from "tsyringe";
 import { LoggerMessageAppService } from "@lib/logger";
-import { DomainConfigFileEnum } from "@lib/domain";
+import {
+  BuildDomainConfigFileAppService,
+  DomainConfigFileEnum
+} from "@lib/domain";
 import {
   ExecFolderDoesNotExistService
 } from "../infrastructure/exec/exec-folder-does-not-exist.service";
@@ -16,6 +19,8 @@ import {
 import {
   ExecCreateEmptyFileService
 } from "../infrastructure/exec/exec-create-empty-file.service";
+import { WriteFileService } from "@lib/utils";
+import { join } from "path";
 
 @singleton()
 /**
@@ -28,7 +33,9 @@ export class GenerateWorkspaceAppService {
     private readonly goInto: ExecGoIntoService,
     private readonly runCommand: ExecRunCommandService,
     private readonly createEmptyFile: ExecCreateEmptyFileService,
-    private readonly loggerMessageApp: LoggerMessageAppService
+    private readonly loggerMessageApp: LoggerMessageAppService,
+    private readonly writeFile: WriteFileService,
+    private readonly buildDomainConfigFile: BuildDomainConfigFileAppService
   ) {
   }
 
@@ -50,6 +57,9 @@ export class GenerateWorkspaceAppService {
     this.createFolder.exec("projects/tools");
     this.createEmptyFile.exec("projects/tools/", ".gitkeep");
     this.createEmptyFile.exec("./", DomainConfigFileEnum.domainConfigJson);
+    const configJsonFile = join("./", DomainConfigFileEnum.domainConfigJson);
+    const emptyConfigContent = this.buildDomainConfigFile.buildEmptyDomainConfig();
+    this.writeFile.writeJsonFile(configJsonFile, emptyConfigContent);
     this.createEmptyFile.exec("./", ".gitignore");
     this.goInto.exec("..");
     this.loggerMessageApp.writePlain("", 0);
