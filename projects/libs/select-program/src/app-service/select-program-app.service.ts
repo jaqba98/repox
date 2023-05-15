@@ -9,7 +9,7 @@ import {
 } from "@lib/parameter";
 import {
   GenerateProjectAppService,
-  GenerateWorkspaceAppService,
+  GenerateWorkspaceProgramService,
   ProgramDefaultProgramService
 } from "@lib/program";
 
@@ -32,7 +32,7 @@ export class SelectProgramAppService {
           .run(paramDomain);
         return;
       case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
-        container.resolve(GenerateWorkspaceAppService)
+        container.resolve(GenerateWorkspaceProgramService)
           .run(paramDomain);
         return;
       case `${ProgramEnum.generate}-${CommandEnum.project}`:

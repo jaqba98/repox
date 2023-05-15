@@ -2,9 +2,6 @@ import { singleton } from "tsyringe";
 import {
   GetProgramVersionAppService
 } from "../app-service/get-program-version-app.service";
-import {
-  ProgramResultModel
-} from "../model/program/program-result.model";
 
 @singleton()
 /**
@@ -16,10 +13,10 @@ export class ProgramDefaultStepService {
   ) {
   }
 
-  runSteps(version: boolean): ProgramResultModel {
+  runSteps(version: boolean): boolean {
     if (version) {
       this.getProgramVersion.run();
     }
-    return { success: true, message: "" };
+    return true;
   }
 }

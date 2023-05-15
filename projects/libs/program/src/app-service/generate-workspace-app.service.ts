@@ -1,15 +1,6 @@
 import { singleton } from "tsyringe";
-import { ParamDomainModel } from "@lib/parameter";
-import {
-  GenerateWorkspaceModel
-} from "../model/program/program-argument.model";
-import {
-  BuildProgramModelService
-} from "../dom-service/build-program-model.service";
 import { LoggerMessageAppService } from "@lib/logger";
-import {
-  ExecProgramInstalledService
-} from "../infrastructure/exec/exec-program-installed.service";
+import { DomainConfigFileEnum } from "@lib/domain";
 import {
   ExecFolderDoesNotExistService
 } from "../infrastructure/exec/exec-folder-does-not-exist.service";
@@ -25,42 +16,25 @@ import {
 import {
   ExecCreateEmptyFileService
 } from "../infrastructure/exec/exec-create-empty-file.service";
-import { DomainConfigFileEnum } from "@lib/domain";
 
 @singleton()
 /**
- * The program service is responsible for run program
- * generate workspace.
+ * The app service is responsible for generate workspace.
  */
 export class GenerateWorkspaceAppService {
   constructor(
-    private readonly buildProgramModel: BuildProgramModelService,
-    private readonly loggerMessageApp: LoggerMessageAppService,
-    private readonly programInstalled: ExecProgramInstalledService,
     private readonly folderDoesNotExist: ExecFolderDoesNotExistService,
     private readonly createFolder: ExecCreateFolderService,
     private readonly goInto: ExecGoIntoService,
     private readonly runCommand: ExecRunCommandService,
-    private readonly createEmptyFile: ExecCreateEmptyFileService
+    private readonly createEmptyFile: ExecCreateEmptyFileService,
+    private readonly loggerMessageApp: LoggerMessageAppService
   ) {
   }
 
-  run(paramDomain: ParamDomainModel): void {
-    const model: GenerateWorkspaceModel = this.buildProgramModel
-      .buildGenerateWorkspaceModel(paramDomain);
-    this.loggerMessageApp.writeInfo("Running the command: Generate Workspace", true, true, 1);
-    this.loggerMessageApp.writeInfo("System verification", false, true, 0);
-    this.loggerMessageApp.writeInfo("Checking if git is installed", false, false, 0);
-    if (!this.programInstalled.exec("git")) return;
-    if (!this.programInstalled.exec("node")) return;
-    if (!this.programInstalled.exec("npm")) return;
-    this.loggerMessageApp.writePlain("", 0);
-    this.generateWorkspace(model.name);
-  }
-
-  private generateWorkspace(name: string): void {
+  run(name: string): boolean {
     this.loggerMessageApp.writeInfo("Generate workspace", false, true, 0);
-    if (!this.folderDoesNotExist.exec(name)) return;
+    if (!this.folderDoesNotExist.exec(name)) return false;
     this.createFolder.exec(name);
     this.goInto.exec(name);
     this.runCommand.exec("git init");
@@ -79,6 +53,6 @@ export class GenerateWorkspaceAppService {
     this.createEmptyFile.exec("./", ".gitignore");
     this.goInto.exec("..");
     this.loggerMessageApp.writePlain("", 0);
-    this.loggerMessageApp.writeSuccess("Command executed correctly!", 0);
+    return true;
   }
 }
