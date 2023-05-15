@@ -5,7 +5,7 @@ import {
 } from "@lib/parameter";
 import { container, singleton } from "tsyringe";
 import { LoggerParamErrorAppService } from "@lib/logger";
-import { SelectProgramAppService } from "@lib/select-program";
+import { SelectProgramAppService } from "projects/libs/launcher";
 
 @singleton()
 /**
