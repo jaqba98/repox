@@ -27,7 +27,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@stdlib/utils-convert-path": "^0.0.8",
     "command-exists": "^1.2.9",
     "core-js": "^3.30.2",
     "tsyringe": "^4.7.0"
