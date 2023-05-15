@@ -7,6 +7,9 @@ import { ParamDomainModel } from "@lib/parameter";
 import {
   GenerateProjectModel
 } from "../model/program/program-argument.model";
+import {
+  GenerateProjectStepService
+} from "../step/generate-project-step.service";
 
 @singleton()
 /**
@@ -15,15 +18,22 @@ import {
 export class GenerateProjectProgramService {
   constructor(
     private readonly buildCommandModel: BuildProgramModelService,
-    private readonly loggerMessageApp: LoggerMessageAppService
+    private readonly loggerMessageApp: LoggerMessageAppService,
+    private readonly generateProjectStep: GenerateProjectStepService
   ) {
   }
 
   run(paramDomain: ParamDomainModel): void {
     const model: GenerateProjectModel = this.buildCommandModel
       .buildGenerateProjectModel(paramDomain);
-    this.loggerMessageApp.writeSuccess(
-      "The command was executed correctly!", 0
+    if (this.generateProjectStep.runSteps()) {
+      this.loggerMessageApp.writeSuccess(
+        "The command was executed correctly!", 0
+      );
+      return;
+    }
+    this.loggerMessageApp.writeError(
+      "An error occurred while executing the command!", 0
     );
   }
 }

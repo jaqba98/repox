@@ -11,6 +11,7 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": ".",
+    "sourceMap": true,
     "paths": {
       "@lib/main": ["projects/libs/main/index.ts"],
       "@lib/logger": ["projects/libs/logger/index.ts"],
