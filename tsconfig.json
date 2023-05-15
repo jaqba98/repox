@@ -16,7 +16,7 @@
       "@lib/main": ["projects/libs/main/index.ts"],
       "@lib/logger": ["projects/libs/logger/index.ts"],
       "@lib/parameter": ["projects/libs/parameter/index.ts"],
-      "@lib/select-program": ["projects/libs/select-program/index.ts"],
+      "@lib/launcher": ["projects/libs/launcher/index.ts"],
       "@lib/program": ["projects/libs/program/index.ts"],
       "@lib/domain": ["projects/libs/domain/index.ts"],
       "@lib/utils": ["projects/libs/utils/index.ts"]
