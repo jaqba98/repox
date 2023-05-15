@@ -1,24 +1,24 @@
 import { singleton } from "tsyringe";
-import { SYSTEM_VERSION } from "@lib/domain";
-import { ParamDomainModel } from "@lib/parameter";
 import {
   BuildProgramModelService
 } from "../dom-service/build-program-model.service";
+import {
+  ProgramDefaultStepService
+} from "../step/program-default-step.service";
 import { LoggerMessageAppService } from "@lib/logger";
+import { ParamDomainModel } from "@lib/parameter";
 import {
   ProgramDefaultModel
 } from "../model/program/program-argument.model";
-import {
-  LoggerModeEnum
-} from "../../../logger/src/enum/logger-mode.enum";
 
 @singleton()
 /**
- * The program service is responsible for run program default.
+ * The start point of the program default.
  */
-export class ProgramDefaultAppService {
+export class ProgramDefaultProgramService {
   constructor(
     private readonly buildCommandModel: BuildProgramModelService,
+    private readonly programDefaultStep: ProgramDefaultStepService,
     private readonly loggerMessageApp: LoggerMessageAppService
   ) {
   }
@@ -26,16 +26,15 @@ export class ProgramDefaultAppService {
   run(paramDomain: ParamDomainModel): void {
     const model: ProgramDefaultModel = this.buildCommandModel
       .buildProgramDefaultModel(paramDomain);
-    if (model.version) {
-      this.loggerMessageApp.write({
-        message: SYSTEM_VERSION,
-        mode: LoggerModeEnum.info,
-        isLogo: false,
-        isHeader: true,
-        headerContent: "VERSION",
-        newline: 0
-      });
+    const { version } = model;
+    const result = this.programDefaultStep.runSteps(version);
+    if (result.message === "") {
       return;
     }
+    if (result.success) {
+      this.loggerMessageApp.writeSuccess(result.message, 0);
+      return;
+    }
+    this.loggerMessageApp.writeError(result.message, 0);
   }
 }

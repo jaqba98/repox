@@ -10,7 +10,7 @@ import {
 import {
   GenerateProjectAppService,
   GenerateWorkspaceAppService,
-  ProgramDefaultAppService
+  ProgramDefaultProgramService
 } from "@lib/program";
 
 @singleton()
@@ -28,13 +28,16 @@ export class SelectProgramAppService {
     const name = this.getRunProgramName.getProgramName(paramDomain);
     switch (name) {
       case `${ProgramEnum.default}-${CommandEnum.default}`:
-        container.resolve(ProgramDefaultAppService).run(paramDomain);
+        container.resolve(ProgramDefaultProgramService)
+          .run(paramDomain);
         return;
       case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
-        container.resolve(GenerateWorkspaceAppService).run(paramDomain);
+        container.resolve(GenerateWorkspaceAppService)
+          .run(paramDomain);
         return;
       case `${ProgramEnum.generate}-${CommandEnum.project}`:
-        container.resolve(GenerateProjectAppService).run(paramDomain);
+        container.resolve(GenerateProjectAppService)
+          .run(paramDomain);
         return;
       default:
         throw new Error("Not found implementation for given action!");
