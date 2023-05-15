@@ -4,7 +4,7 @@ import {
 } from "../dom-service/service/build-message.service";
 import {
   WriteMessageService
-} from "../infrastructure/write-message.service";
+} from "../infra/write-message.service";
 import {
   BuildParamErrorMsgService
 } from "../dom-service/service/build-param-error-msg.service";

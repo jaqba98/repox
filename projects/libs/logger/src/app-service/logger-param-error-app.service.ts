@@ -4,7 +4,7 @@ import {
 } from "../dom-service/service/build-message.service";
 import {
   WriteMessageService
-} from "../infrastructure/write-message.service";
+} from "../infra/write-message.service";
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
 import {
   BuildParamErrorMsgService

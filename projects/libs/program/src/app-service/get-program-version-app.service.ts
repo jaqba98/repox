@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerMessageAppService, LoggerModeEnum } from "@lib/logger";
+import { LoggerMessageAppService } from "@lib/logger";
 import { SYSTEM_VERSION } from "@lib/domain";
 
 @singleton()
@@ -15,7 +15,7 @@ export class GetProgramVersionAppService {
   run(): void {
     this.loggerMessageApp.write({
       message: SYSTEM_VERSION,
-      mode: LoggerModeEnum.info,
+      mode: <any>"info",
       isLogo: false,
       isHeader: true,
       headerContent: "VERSION",
