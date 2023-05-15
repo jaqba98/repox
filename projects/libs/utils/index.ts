@@ -1,3 +1,3 @@
-export * from "./src/infra/exist-path.srv";
-export * from "./src/infra/read-file.srv";
-export * from "./src/infra/write-file.srv";
+export * from "./src/infra/exist-path.service";
+export * from "./src/infra/read-file.service";
+export * from "./src/infra/write-file.service";

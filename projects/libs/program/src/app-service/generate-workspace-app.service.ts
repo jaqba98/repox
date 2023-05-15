@@ -19,7 +19,7 @@ import {
 import {
   ExecCreateEmptyFileService
 } from "../infrastructure/exec/exec-create-empty-file.service";
-import { WriteFileSrv } from "@lib/utils";
+import { WriteFileService } from "@lib/utils";
 import { join } from "path";
 
 @singleton()
@@ -34,7 +34,7 @@ export class GenerateWorkspaceAppService {
     private readonly runCommand: ExecRunCommandService,
     private readonly createEmptyFile: ExecCreateEmptyFileService,
     private readonly loggerMessageApp: LoggerMessageAppService,
-    private readonly writeFile: WriteFileSrv,
+    private readonly writeFile: WriteFileService,
     private readonly buildDomainConfigFile: BuildDomainConfigFileAppService
   ) {
   }

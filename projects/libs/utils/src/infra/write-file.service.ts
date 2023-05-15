@@ -6,7 +6,7 @@ import { writeFileSync } from "fs";
  * The service is responsible for writing data
  * to a real file on the disc.
  */
-export class WriteFileSrv {
+export class WriteFileService {
   writeJson<T>(path: string, content: T): void {
     writeFileSync(path, JSON.stringify(content, null, 2));
   }

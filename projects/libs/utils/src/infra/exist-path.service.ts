@@ -6,7 +6,7 @@ import { existsSync } from "fs";
  * The service is responsible for checking
  * whether a given path exists in the system.
  */
-export class ExistPathSrv {
+export class ExistPathService {
   checkExist(path: string): boolean {
     return existsSync(path);
   }

@@ -1,14 +1,14 @@
 import { singleton } from "tsyringe";
 import { readFileSync } from "fs";
-import { ExistPathSrv } from "./exist-path.srv";
+import { ExistPathService } from "./exist-path.service";
 
 @singleton()
 /**
  * The service is responsible for read all types of data
  * from real file.
  */
-export class ReadFileSrv {
-  constructor(private readonly existPath: ExistPathSrv) {
+export class ReadFileService {
+  constructor(private readonly existPath: ExistPathService) {
   }
 
   readJson<T>(path: string): T {
