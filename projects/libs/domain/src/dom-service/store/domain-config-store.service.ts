@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { DomainConfigFileEnum, DomainConfigModel } from "@lib/domain";
-import { ReadFileService, WriteFileService } from "@lib/utils";
+import { ReadFileSrv, WriteFileSrv } from "@lib/utils";
 
 @singleton()
 /**
@@ -11,19 +11,19 @@ export class DomainConfigStoreService {
   private store?: DomainConfigModel;
 
   constructor(
-    private readonly readFile: ReadFileService,
-    private readonly writeFile: WriteFileService
+    private readonly readFile: ReadFileSrv,
+    private readonly writeFile: WriteFileSrv
   ) {
   }
 
   loadConfig(): void {
-    this.store = this.readFile.readJsonFile<DomainConfigModel>(
+    this.store = this.readFile.readJson<DomainConfigModel>(
       DomainConfigFileEnum.domainConfigJson
     );
   }
 
   saveConfig(): void {
-    this.writeFile.writeJsonFile(
+    this.writeFile.writeJson(
       DomainConfigFileEnum.domainConfigJson,
       this.store
     );

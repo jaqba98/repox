@@ -19,7 +19,7 @@ import {
 import {
   ExecCreateEmptyFileService
 } from "../infrastructure/exec/exec-create-empty-file.service";
-import { WriteFileService } from "@lib/utils";
+import { WriteFileSrv } from "@lib/utils";
 import { join } from "path";
 
 @singleton()
@@ -34,7 +34,7 @@ export class GenerateWorkspaceAppService {
     private readonly runCommand: ExecRunCommandService,
     private readonly createEmptyFile: ExecCreateEmptyFileService,
     private readonly loggerMessageApp: LoggerMessageAppService,
-    private readonly writeFile: WriteFileService,
+    private readonly writeFile: WriteFileSrv,
     private readonly buildDomainConfigFile: BuildDomainConfigFileAppService
   ) {
   }
@@ -59,7 +59,7 @@ export class GenerateWorkspaceAppService {
     this.createEmptyFile.exec("./", DomainConfigFileEnum.domainConfigJson);
     const configJsonFile = join("./", DomainConfigFileEnum.domainConfigJson);
     const emptyConfigContent = this.buildDomainConfigFile.buildEmptyDomainConfig();
-    this.writeFile.writeJsonFile(configJsonFile, emptyConfigContent);
+    this.writeFile.writeJson(configJsonFile, emptyConfigContent);
     this.createEmptyFile.exec("./", ".gitignore");
     this.goInto.exec("..");
     this.loggerMessageApp.writePlain("", 0);
