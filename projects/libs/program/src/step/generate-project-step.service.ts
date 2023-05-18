@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 import { DomainConfigAppService } from "@lib/domain";
 
 @singleton()
@@ -8,7 +8,7 @@ import { DomainConfigAppService } from "@lib/domain";
  */
 export class GenerateProjectStepService {
   constructor(
-    private readonly loggerMessageApp: LoggerMessageAppService,
+    private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly domainConfigApp: DomainConfigAppService
   ) {
   }

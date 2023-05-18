@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 import {
   BuildDomainConfigFileAppService,
   DomainConfigFileEnum
@@ -33,7 +33,7 @@ export class GenerateWorkspaceAppService {
     private readonly goInto: ExecGoIntoService,
     private readonly runCommand: ExecRunCommandService,
     private readonly createEmptyFile: ExecCreateEmptyFileService,
-    private readonly loggerMessageApp: LoggerMessageAppService,
+    private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly writeFile: WriteFileService,
     private readonly buildDomainConfigFile: BuildDomainConfigFileAppService
   ) {

@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { mkdirSync } from "fs";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**
@@ -8,7 +8,7 @@ import { LoggerMessageAppService } from "@lib/logger";
  */
 export class ExecCreateFolderService {
   constructor(
-    private readonly loggerMessageApp: LoggerMessageAppService
+    private readonly loggerMessageApp: SimpleMessageAppService
   ) {
   }
 

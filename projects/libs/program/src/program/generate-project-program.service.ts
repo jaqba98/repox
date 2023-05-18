@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   BuildProgramModelService
 } from "../dom-service/build-program-model.service";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 import { ParamDomainModel } from "@lib/parameter";
 import {
   GenerateProjectModel
@@ -18,7 +18,7 @@ import {
 export class GenerateProjectProgramService {
   constructor(
     private readonly buildCommandModel: BuildProgramModelService,
-    private readonly loggerMessageApp: LoggerMessageAppService,
+    private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly generateProjectStep: GenerateProjectStepService
   ) {
   }

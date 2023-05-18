@@ -1,3 +1,2 @@
-export * from "./src/app-service/logger-param-error-app.service";
-export * from "./src/app-service/logger-message-app.service";
-// todo: refactor
+export * from "./src/app-service/param-error-message-app.service";
+export * from "./src/app-service/simple-message-app.service";

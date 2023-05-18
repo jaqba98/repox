@@ -4,7 +4,7 @@ import {
   ReadParamDtoAppService
 } from "@lib/parameter";
 import { container, singleton } from "tsyringe";
-import { LoggerParamErrorAppService } from "@lib/logger";
+import { ParamErrorMessageAppService } from "@lib/logger";
 import { SelectProgramAppService } from "@lib/launcher";
 
 @singleton()
@@ -16,7 +16,7 @@ export class MainService {
     private readonly readParamDtoApp: ReadParamDtoAppService,
     private readonly readParamDomainApp: ReadParamDomainAppService,
     private readonly selectProgramApp: SelectProgramAppService,
-    private readonly loggerParamErrorApp: LoggerParamErrorAppService,
+    private readonly loggerParamErrorApp: ParamErrorMessageAppService,
   ) {
   }
 

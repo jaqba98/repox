@@ -1,17 +1,14 @@
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
 
 /**
- * Logger domain model that stores data
- * that will be used to build a complete message
+ * The logger domain model that stores data.
+ * It will be used to build a complete message
  * to be displayed on the console screen.
  */
 
-export interface LoggerStyleModel {
-  underscore: boolean;
-}
-
-export interface LoggerLineMessageModel extends LoggerStyleModel {
+export interface LoggerLineMessageModel {
   value: string;
+  underscore: boolean;
 }
 
 export interface LoggerLineModel {
@@ -19,11 +16,10 @@ export interface LoggerLineModel {
   isLogo: boolean;
   isHeader: boolean;
   headerContent: string;
-  message: string | Array<string> | Array<LoggerLineMessageModel>;
+  message: Array<LoggerLineMessageModel>;
   newline: number;
 }
 
 export interface LoggerDomainModel {
   lines: Array<LoggerLineModel>;
 }
-// todo: refactor

@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { execSync } from "child_process";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**
@@ -8,7 +8,7 @@ import { LoggerMessageAppService } from "@lib/logger";
  */
 export class ExecRunCommandService {
   constructor(
-    private readonly loggerMessageApp: LoggerMessageAppService
+    private readonly loggerMessageApp: SimpleMessageAppService
   ) {
   }
 

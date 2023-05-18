@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 import { SYSTEM_VERSION } from "@lib/domain";
 
 @singleton()
@@ -8,7 +8,7 @@ import { SYSTEM_VERSION } from "@lib/domain";
  */
 export class GetProgramVersionAppService {
   constructor(
-    private readonly loggerMessageApp: LoggerMessageAppService
+    private readonly loggerMessageApp: SimpleMessageAppService
   ) {
   }
 

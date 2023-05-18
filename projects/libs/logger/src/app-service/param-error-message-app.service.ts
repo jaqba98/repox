@@ -1,23 +1,21 @@
 import { singleton } from "tsyringe";
 import {
+  BuildParamErrorMessageService
+} from "../dom-service/builder/build-param-error-message.service";
+import {
   BuildMessageService
-} from "../dom-service/service/build-message.service";
-import {
-  WriteMessageService
-} from "../infra/write-message.service";
+} from "../dom-service/builder/build-message.service";
+import { WriteMessageService } from "../infra/write-message.service";
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
-import {
-  BuildParamErrorMsgService
-} from "../dom-service/service/build-param-error-msg.service";
 
 @singleton()
 /**
- * The logger app service is responsible for
+ * The app service is responsible for
  * displaying param error message on the screen.
  */
-export class LoggerParamErrorAppService {
+export class ParamErrorMessageAppService {
   constructor(
-    private readonly buildParamErrorMsg: BuildParamErrorMsgService,
+    private readonly buildParamError: BuildParamErrorMessageService,
     private readonly buildMessage: BuildMessageService,
     private readonly writeMessage: WriteMessageService
   ) {
@@ -32,7 +30,10 @@ export class LoggerParamErrorAppService {
     const outputMessage: string = this.buildMessage.build({
       lines: [
         {
-          message: "Failed to run program!",
+          message: [{
+            value: "Failed to run program!",
+            underscore: false
+          }],
           mode: LoggerModeEnum.error,
           isHeader: true,
           isLogo: true,
@@ -40,7 +41,7 @@ export class LoggerParamErrorAppService {
           newline: 0
         },
         {
-          message: this.buildParamErrorMsg.build(
+          message: this.buildParamError.build(
             wrongParamIndexes,
             baseValues
           ),
@@ -51,7 +52,10 @@ export class LoggerParamErrorAppService {
           newline: 1
         },
         {
-          message: errors,
+          message: errors.map(error => ({
+            value: error,
+            underscore: true
+          })),
           mode: LoggerModeEnum.error,
           isLogo: false,
           isHeader: true,
@@ -59,7 +63,10 @@ export class LoggerParamErrorAppService {
           newline: 0
         },
         {
-          message: tips,
+          message: tips.map(error => ({
+            value: error,
+            underscore: true
+          })),
           mode: LoggerModeEnum.warning,
           isLogo: false,
           isHeader: true,
@@ -71,4 +78,3 @@ export class LoggerParamErrorAppService {
     this.writeMessage.write(outputMessage);
   }
 }
-// todo: refactor

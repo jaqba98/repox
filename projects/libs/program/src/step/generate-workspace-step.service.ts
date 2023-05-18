@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
@@ -13,7 +13,7 @@ import {
  */
 export class GenerateWorkspaceStepService {
   constructor(
-    private readonly loggerMessageApp: LoggerMessageAppService,
+    private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly systemVerification: SystemVerificationAppService,
     private readonly generateWorkspace: GenerateWorkspaceAppService
   ) {

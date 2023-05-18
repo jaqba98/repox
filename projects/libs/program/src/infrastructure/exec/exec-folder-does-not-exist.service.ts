@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { existsSync } from "fs";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**
@@ -9,7 +9,7 @@ import { LoggerMessageAppService } from "@lib/logger";
  */
 export class ExecFolderDoesNotExistService {
   constructor(
-    private readonly loggerMessageApp: LoggerMessageAppService
+    private readonly loggerMessageApp: SimpleMessageAppService
   ) {
   }
 

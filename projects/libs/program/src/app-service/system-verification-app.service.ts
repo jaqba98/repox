@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 import {
   ExecProgramInstalledService
 } from "../infrastructure/exec/exec-program-installed.service";
@@ -11,7 +11,7 @@ import {
 export class SystemVerificationAppService {
   constructor(
     private readonly programInstalled: ExecProgramInstalledService,
-    private readonly loggerMessageApp: LoggerMessageAppService
+    private readonly loggerMessageApp: SimpleMessageAppService
   ) {
   }
 

@@ -5,7 +5,7 @@ import {
 import {
   ProgramDefaultStepService
 } from "../step/program-default-step.service";
-import { LoggerMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 import { ParamDomainModel } from "@lib/parameter";
 import {
   ProgramDefaultModel
@@ -19,7 +19,7 @@ export class ProgramDefaultProgramService {
   constructor(
     private readonly buildCommandModel: BuildProgramModelService,
     private readonly programDefaultStep: ProgramDefaultStepService,
-    private readonly loggerMessageApp: LoggerMessageAppService
+    private readonly loggerMessageApp: SimpleMessageAppService
   ) {
   }
 
