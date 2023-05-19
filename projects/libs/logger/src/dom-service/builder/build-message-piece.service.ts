@@ -44,14 +44,6 @@ export const buildHeader = (
   .concat(headerContent.toUpperCase())
   .concat(SPACE);
 
-export const buildMessage = (
-  fgColor: string,
-  message: string
-): string => buildEmptyMessage()
-  .concat(TEXT_BRIGHT)
-  .concat(fgColor)
-  .concat(message);
-
 export const buildCleanWord = (
   fgColor: string,
   word: string
