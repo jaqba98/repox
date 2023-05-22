@@ -15,7 +15,7 @@
     "paths": {
       "@lib/main": ["projects/libs/main/index.ts"],
       "@lib/logger": ["projects/libs/logger/index.ts"],
-      "@lib/parameter": ["projects/libs/parameter/index.ts"],
+      "@lib/param-domain": ["projects/libs/param-domain/index.ts"],
       "@lib/param-dto": ["projects/libs/param-dto/index.ts"],
       "@lib/launcher": ["projects/libs/launcher/index.ts"],
       "@lib/program": ["projects/libs/program/index.ts"],
