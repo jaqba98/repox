@@ -1,8 +1,8 @@
-/**
- * All kinds of domain config file for system.
- */
-
-export enum DomainConfigFileEnum {
-  domainConfigJson = "repox.json"
-}
-// todo: refactor
+// /**
+//  * All kinds of domain config file for system.
+//  */
+//
+// export enum DomainConfigFileEnum {
+//   domainConfigJson = "repox.json"
+// }
+// // todo: refactor
