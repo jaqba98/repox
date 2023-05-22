@@ -1,3 +1,6 @@
+test("", () => {
+  expect(true).toBeTruthy();
+});
 // import { ParamTypeEnum } from "../../../../param-dto/src/enum/param-type.enum";
 // import {
 //   ParamDtoEntityModel,
