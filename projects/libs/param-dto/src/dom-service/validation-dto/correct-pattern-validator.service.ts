@@ -1,24 +1,23 @@
 import { singleton } from "tsyringe";
-import {
-  ValidatorDtoModel
-} from "../../model/validator/validator-dto.model";
+import { ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto.model";
+} from "../../model/param-dto.model";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation.model";
+} from "../../model/param-dto-validation.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 @singleton()
 /**
  * Check the given DTO parameters have correct pattern.
  */
-export class CorrectPatternValidatorService implements ValidatorDtoModel {
+export class CorrectPatternValidatorService
+  implements ValidatorDtoModel {
   constructor(
     private readonly buildParamDtoResult: BuildParamDtoResultService
   ) {
@@ -52,7 +51,7 @@ export class CorrectPatternValidatorService implements ValidatorDtoModel {
       case ParamTypeEnum.alias:
         return this.checkAlias(paramHasValue, paramBaseValue);
       default:
-        throw new Error(`Not supported parameter type: ${paramType}`);
+        throw new Error("Not supported parameter type");
     }
   }
 
@@ -98,7 +97,7 @@ export class CorrectPatternValidatorService implements ValidatorDtoModel {
           "-<sign> or -<sign>=<value>"
         );
       default:
-        throw new Error(`Not supported parameter type: ${paramType}`);
+        throw new Error("Not supported parameter type");
     }
   }
 
@@ -109,4 +108,3 @@ export class CorrectPatternValidatorService implements ValidatorDtoModel {
     return `Correct pattern for ${paramBaseValue} is: ${pattern}`;
   }
 }
-// todo: refactor

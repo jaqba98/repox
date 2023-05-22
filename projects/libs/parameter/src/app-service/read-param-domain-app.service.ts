@@ -5,7 +5,7 @@ import {
 import {
   ParamDomainValidationService
 } from "../dom-service/validation-domain/param-domain-validation.service";
-import { ParamDtoModel } from "../model/param-dto/param-dto.model";
+import { ParamDtoModel } from "../../../param-dto/src/model/param-dto.model";
 import {
   ParamDomainValidationModel
 } from "../model/param-domain/param-domain-validation.model";

@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto.model";
+} from "../../model/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 @singleton()
@@ -19,18 +19,14 @@ export class ParamDtoFinderService {
     return application;
   }
 
-  findProgram(
-    paramDto: ParamDtoModel
-  ): ParamDtoEntityModel | undefined {
+  findProgram(paramDto: ParamDtoModel): Array<ParamDtoEntityModel> {
     return paramDto.params
-      .find(param => param.paramType === ParamTypeEnum.program);
+      .filter(param => param.paramType === ParamTypeEnum.program);
   }
 
-  findCommand(
-    paramDto: ParamDtoModel
-  ): ParamDtoEntityModel | undefined {
+  findCommand(paramDto: ParamDtoModel): Array<ParamDtoEntityModel> {
     return paramDto.params
-      .find(param => param.paramType === ParamTypeEnum.command);
+      .filter(param => param.paramType === ParamTypeEnum.command);
   }
 
   findProgramArgs(
@@ -61,4 +57,3 @@ export class ParamDtoFinderService {
       .filter(param => param.paramIndex > commandIndex)
   }
 }
-// todo: refactor

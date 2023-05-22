@@ -1,11 +1,11 @@
 import { singleton } from "tsyringe";
-import { ParamDtoModel } from "../../model/param-dto/param-dto.model";
+import { ParamDtoModel } from "../../model/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 @singleton()
 /**
  * Building the parameter DTO model from the
- * real parameters from the program line.
+ * real parameters from the command line.
  */
 export class BuildParamDtoService {
   readParamDto(argv: Array<string>): ParamDtoModel {
@@ -75,4 +75,3 @@ export class BuildParamDtoService {
       .split(",");
   }
 }
-// todo: refactor

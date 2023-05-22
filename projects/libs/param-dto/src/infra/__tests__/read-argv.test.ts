@@ -1,10 +1,10 @@
-import { container, DependencyContainer } from "tsyringe";
+import { container } from "tsyringe";
 import { ReadArgvService } from "../read-argv.service";
 
 describe("ReadArgvService", () => {
-  const child: DependencyContainer = container.createChildContainer();
-  const service: ReadArgvService = child.resolve(ReadArgvService);
-  const originalArgv: Array<string> = process.argv;
+  const child = container.createChildContainer();
+  const service = child.resolve(ReadArgvService);
+  const originalArgv = process.argv;
 
   afterEach(() => {
     process.argv = originalArgv;
@@ -31,4 +31,3 @@ describe("ReadArgvService", () => {
     expect(service.getArgv()).toEqual([...argv]);
   });
 });
-// todo: refactor

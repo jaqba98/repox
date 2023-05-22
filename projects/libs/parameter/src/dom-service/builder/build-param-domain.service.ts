@@ -2,18 +2,18 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto.model";
+} from "../../../../param-dto/src/model/param-dto.model";
 import {
   ParamDomainArgumentModel,
   ParamDomainModel
 } from "../../model/param-domain/param-domain.model";
 import { ProgramAlias, ProgramEnum } from "../../enum/program.enum";
 import { CommandAlias, CommandEnum } from "../../enum/command.enum";
-import { ParamTypeEnum } from "../../enum/param-type.enum";
+import { ParamTypeEnum } from "../../../../param-dto/src/enum/param-type.enum";
 import { Alias, ArgumentEnum } from "../../enum/argument.enum";
 import {
   ParamDtoFinderService
-} from "../finder/param-dto-finder.service";
+} from "../../../../param-dto/src/dom-service/finder/param-dto-finder.service";
 
 @singleton()
 /**

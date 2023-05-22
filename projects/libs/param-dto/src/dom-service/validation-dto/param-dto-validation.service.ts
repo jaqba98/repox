@@ -2,10 +2,10 @@ import { container, singleton } from "tsyringe";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
-import { ParamDtoModel } from "../../model/param-dto/param-dto.model";
+import { ParamDtoModel } from "../../model/param-dto.model";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation.model";
+} from "../../model/param-dto-validation.model";
 import {
   OnlySupportedCharactersValidatorService
 } from "./only-supported-characters-validator.service";
@@ -21,9 +21,7 @@ import {
 import {
   CorrectOrderValidatorService
 } from "./correct-order-validator.service";
-import {
-  ValidatorDtoModel
-} from "../../model/validator/validator-dto.model";
+import { ValidatorDtoModel } from "../../model/validator-dto.model";
 
 @singleton()
 /**
@@ -33,13 +31,13 @@ import {
  * > repox <program> <arguments> <program> <arguments>
  *
  * Validators:
- * 1.Verify that each part of the program contains only
+ * 1.Verify that each part of the command contains only
  *   supported characters.
- * 2.Verify that each part of the program has correct pattern.
- * 3.Verify that the program contains max 1 program (0 or 1).
- * 4.Verify that the program contains max 1 program
+ * 2.Verify that each part of the command has correct pattern.
+ * 3.Verify that the command contains max 1 program (0 or 1).
+ * 4.Verify that the command contains max 1 command
  *   (0 or 1 if the program exist and 0 if the program not exist).
- * 5.Verify that each part of the program are in correct order.
+ * 5.Verify that each part of the command are in correct order.
  */
 export class ParamDtoValidationService {
   constructor(
@@ -48,12 +46,11 @@ export class ParamDtoValidationService {
   }
 
   runValidation(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const paramDtoErrors = this.getValidators()
-      .map(service => service.runValidator(paramDto))
-      .filter(result => !result.success);
-    return paramDtoErrors.length === 0 ?
-      this.buildParamDtoResult.buildSuccess(paramDto) :
-      paramDtoErrors[0];
+    for (const service of this.getValidators()) {
+      const result = service.runValidator(paramDto);
+      if (!result.success) return result;
+    }
+    return this.buildParamDtoResult.buildSuccess(paramDto);
   }
 
   private getValidators(): Array<ValidatorDtoModel> {
@@ -66,4 +63,3 @@ export class ParamDtoValidationService {
     ].map(service => container.resolve<ValidatorDtoModel>(service));
   }
 }
-// todo: refactor

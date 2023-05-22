@@ -1,7 +1,7 @@
-import { ParamDtoModel } from "../param-dto/param-dto.model";
+import { ParamDtoModel } from "./param-dto.model";
 import {
   ParamDtoValidationModel
-} from "../param-dto/param-dto-validation.model";
+} from "./param-dto-validation.model";
 
 /**
  * The model which is implemented for each parameter DTO validator.
@@ -10,4 +10,3 @@ import {
 export interface ValidatorDtoModel {
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel;
 }
-// todo: refactor

@@ -1,8 +1,8 @@
-import { ParamTypeEnum } from "../../enum/param-type.enum";
+import { ParamTypeEnum } from "../enum/param-type.enum";
 
 /**
  * The DTO model of parameters (data transport model)
- * for all parameters directly from the program line.
+ * for all parameters directly from the command line.
  */
 
 export interface ParamDtoEntityModel {
@@ -18,4 +18,3 @@ export interface ParamDtoEntityModel {
 export interface ParamDtoModel {
   params: Array<ParamDtoEntityModel>;
 }
-// todo: refactor

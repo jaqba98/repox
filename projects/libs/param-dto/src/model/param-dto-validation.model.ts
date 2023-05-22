@@ -1,7 +1,7 @@
 import { ParamDtoModel } from "./param-dto.model";
 
 /**
- * The result model of the parameter DTO validation-domain-dto.
+ * The result model of the parameter DTO validation.
  */
 export interface ParamDtoValidationModel {
   success: boolean;
@@ -11,4 +11,3 @@ export interface ParamDtoValidationModel {
   tips: Array<string>;
   paramDto: ParamDtoModel;
 }
-// todo: refactor

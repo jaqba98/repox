@@ -2,14 +2,14 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto.model";
+} from "../../model/param-dto.model";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation.model";
+} from "../../model/param-dto-validation.model";
 
 @singleton()
 /**
- * Build the result of param DTO validation-domain-dto
+ * Build the result of param DTO validation
  * for successes and errors.
  */
 export class BuildParamDtoResultService {
@@ -30,11 +30,9 @@ export class BuildParamDtoResultService {
     tips: Array<string>,
     paramDto: ParamDtoModel
   ): ParamDtoValidationModel {
-    const wrongParamIndexes: Array<number> = wrongParamsDto
-      .map(wrongParamDto => wrongParamDto.paramIndex);
     return {
       success: false,
-      wrongParamIndexes,
+      wrongParamIndexes: wrongParamsDto.map(item => item.paramIndex),
       baseValues: paramDto.params.map(param => param.paramBaseValue),
       errors,
       tips,
@@ -42,4 +40,3 @@ export class BuildParamDtoResultService {
     };
   }
 }
-// todo: refactor

@@ -1,17 +1,15 @@
 import { singleton } from "tsyringe";
-import {
-  ValidatorDtoModel
-} from "../../model/validator/validator-dto.model";
+import { ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto.model";
+} from "../../model/param-dto.model";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation.model";
+} from "../../model/param-dto-validation.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 @singleton()
@@ -54,7 +52,7 @@ export class OnlySupportedCharactersValidatorService
       case ParamTypeEnum.alias:
         return this.checkArgumentAndAlias(paramBaseValue);
       default:
-        throw new Error(`Not supported parameter type: ${paramType}`);
+        throw new Error("Not supported parameter type!");
     }
   }
 
@@ -82,7 +80,7 @@ export class OnlySupportedCharactersValidatorService
           "[a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"
         );
       default:
-        throw new Error(`Not supported parameter type: ${paramType}`);
+        throw new Error("Not supported parameter type!");
     }
   }
 
@@ -93,4 +91,3 @@ export class OnlySupportedCharactersValidatorService
     return `Supported characters for ${paramBaseValue} are: ${chars}`;
   }
 }
-// todo: refactor

@@ -1,8 +1,8 @@
-import { ParamTypeEnum } from "../../enum/param-type.enum";
+import { ParamTypeEnum } from "../../../../param-dto/src/enum/param-type.enum";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
-} from "../../model/param-dto/param-dto.model";
+} from "../../../../param-dto/src/model/param-dto.model";
 import { container } from "tsyringe";
 import {
   ParamDomainValidationModel

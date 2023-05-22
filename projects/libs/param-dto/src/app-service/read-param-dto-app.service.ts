@@ -7,13 +7,13 @@ import {
 } from "../dom-service/validation-dto/param-dto-validation.service";
 import {
   ParamDtoValidationModel
-} from "../model/param-dto/param-dto-validation.model";
-import { ReadArgvService } from "../infrastructure/read-argv.service";
+} from "../model/param-dto-validation.model";
+import { ReadArgvService } from "../infra/read-argv.service";
 
 @singleton()
 /**
  * The app service is responsible for read and validate
- * parameter DTO model from program line.
+ * parameter DTO model from command line.
  */
 export class ReadParamDtoAppService {
   constructor(
@@ -29,4 +29,3 @@ export class ReadParamDtoAppService {
     return this.paramDtoValidation.runValidation(paramDto);
   }
 }
-// todo: refactor

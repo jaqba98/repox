@@ -1,14 +1,14 @@
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto/param-dto-validation.model";
-import { container, DependencyContainer } from "tsyringe";
+} from "../../model/param-dto-validation.model";
+import { container } from "tsyringe";
+import { ReadArgvService } from "../../infra/read-argv.service";
 import {
-  ReadArgvService
-} from "../../infrastructure/read-argv.service";
-import { ReadParamDtoAppService } from "../read-param-dto-app.service";
+  ReadParamDtoAppService
+} from "../read-param-dto-app.service";
 
 const runTest = (argv: Array<string>): ParamDtoValidationModel => {
-  const child: DependencyContainer = container.createChildContainer();
+  const child = container.createChildContainer();
   child.register(ReadArgvService, {
     useClass: class {
       getArgv(): Array<string> {
@@ -790,4 +790,3 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 });
-// todo: refactor

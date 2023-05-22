@@ -1,7 +1,7 @@
 /**
- * All kinds of parameter type directly from the program line.
+ * All kinds of parameter type
+ * directly from the command line.
  */
-
 export enum ParamTypeEnum {
   executor = "executor",
   application = "application",
@@ -10,4 +10,3 @@ export enum ParamTypeEnum {
   argument = "argument",
   alias = "alias"
 }
-// todo: refactor

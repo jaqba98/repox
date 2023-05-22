@@ -1,8 +1,6 @@
-import { container, DependencyContainer } from "tsyringe";
+import { container } from "tsyringe";
 import { BuildParamDtoService } from "../build-param-dto.service";
-import {
-  ParamDtoModel
-} from "../../../model/param-dto/param-dto.model";
+import { ParamDtoModel } from "../../../model/param-dto.model";
 import { ParamTypeEnum } from "../../../enum/param-type.enum";
 
 class MockReadProcessArgv {
@@ -23,8 +21,8 @@ class MockReadProcessArgv {
 }
 
 describe("ReadParamDtoService", () => {
-  const child: DependencyContainer = container.createChildContainer();
-  const service: BuildParamDtoService = child.resolve(BuildParamDtoService);
+  const child = container.createChildContainer();
+  const service = child.resolve(BuildParamDtoService);
   const argv = container.resolve(MockReadProcessArgv).getArgv();
 
   afterAll(() => {
@@ -128,4 +126,3 @@ describe("ReadParamDtoService", () => {
     });
   })
 });
-// todo: refactor
