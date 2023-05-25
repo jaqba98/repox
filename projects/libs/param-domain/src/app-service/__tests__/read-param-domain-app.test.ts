@@ -14,7 +14,7 @@ test("", () => {
 // import { ArgumentEnum } from "../../enum/argument.enum";
 // import { CommandEnum } from "../../enum/command.enum";
 // import {
-//   ReadParamDomainAppService
+//   BuildParamDomainAppService
 // } from "../read-param-domain-app.service";
 //
 //
@@ -46,9 +46,9 @@ test("", () => {
 //   };
 // };
 //
-// describe("ReadParamDomainAppService", () => {
+// describe("BuildParamDomainAppService", () => {
 //   const child = container.createChildContainer();
-//   const service = child.resolve(ReadParamDomainAppService);
+//   const service = child.resolve(BuildParamDomainAppService);
 //
 //   afterAll(() => {
 //     container.clearInstances();

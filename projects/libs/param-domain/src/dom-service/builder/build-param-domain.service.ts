@@ -4,13 +4,13 @@
 //   ParamDtoModel
 // } from "../../../../param-dto/src/model/param-dto.model";
 // import {
-//   ParamDomainArgumentModel,
+//   ParamDomainArgModel,
 //   ParamDomainModel
 // } from "../../model/param-domain/param-domain.model";
-// import { ProgramAlias, ProgramEnum } from "../../enum/program.enum";
-// import { CommandAlias, CommandEnum } from "../../enum/command.enum";
+// import { ProgramAliasEnum, ProgramEnum } from "../../enum/program.enum";
+// import { CommandAliasEnum, CommandEnum } from "../../enum/command.enum";
 // import { ParamTypeEnum } from "../../../../param-dto/src/enum/param-type.enum";
-// import { Alias, ArgumentEnum } from "../../enum/argument.enum";
+// import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
 // import {
 //   ParamDtoFinderService
 // } from "../../../../param-dto/src/dom-service/finder/param-dto-finder.service";
@@ -25,10 +25,10 @@
 //   ) {
 //   }
 //
-//   build(paramDto: ParamDtoModel): ParamDomainModel {
+//   build(paramDto: ParamDtoModel): ParamDomainModel<any, any> {
 //     const application = this.paramDtoFinder.findApplication(paramDto);
-//     const program = this.paramDtoFinder.findProgram(paramDto);
-//     const command = this.paramDtoFinder.findCommand(paramDto);
+//     const program = this.paramDtoFinder.findProgram(paramDto)[0];
+//     const command = this.paramDtoFinder.findCommand(paramDto)[0];
 //     const programBaseName: string = program ? program.paramName : "";
 //     const commandBaseName: string = command ? command.paramName : "";
 //     const programName = this.getProgramName(programBaseName);
@@ -49,13 +49,15 @@
 //         baseName: programBaseName,
 //         name: programName,
 //         index: programIndex,
-//         args: this.buildArguments(programArgs)
+//         args: this.buildArguments(programArgs),
+//         model: {}
 //       },
 //       command: {
 //         baseName: commandBaseName,
 //         name: commandName,
 //         index: commandIndex,
-//         args: this.buildArguments(commandArgs)
+//         args: this.buildArguments(commandArgs),
+//         model: {}
 //       }
 //     };
 //   }
@@ -64,8 +66,8 @@
 //     if (programName === ProgramEnum.default) {
 //       return ProgramEnum.default;
 //     }
-//     const programNameAlias = Object.keys(ProgramAlias).find(key =>
-//       ProgramAlias[key as keyof typeof ProgramAlias] === programName
+//     const programNameAlias = Object.keys(ProgramAliasEnum).find(key =>
+//       ProgramAliasEnum[key as keyof typeof ProgramAliasEnum] === programName
 //     );
 //     if (programNameAlias) {
 //       return ProgramEnum[programNameAlias as keyof typeof ProgramEnum];
@@ -83,8 +85,8 @@
 //     if (commandName === CommandEnum.default) {
 //       return CommandEnum.default;
 //     }
-//     const commandNameAlias = Object.keys(CommandAlias).find(key =>
-//       CommandAlias[key as keyof typeof CommandAlias] === commandName
+//     const commandNameAlias = Object.keys(CommandAliasEnum).find(key =>
+//       CommandAliasEnum[key as keyof typeof CommandAliasEnum] === commandName
 //     );
 //     if (commandNameAlias) {
 //       return CommandEnum[commandNameAlias as keyof typeof CommandEnum];
@@ -114,17 +116,14 @@
 //
 //   private buildArguments(
 //     args: Array<ParamDtoEntityModel>
-//   ): Array<ParamDomainArgumentModel> {
+//   ): Array<ParamDomainArgModel> {
 //     return args.map(programArg => ({
 //       baseName: programArg.paramName,
 //       name: this.getArgumentName(
 //         programArg.paramName,
 //         programArg.paramType
 //       ),
-//       values: programArg.paramValues,
-//       index: programArg.paramIndex,
-//       hasValue: programArg.paramHasValue,
-//       hasManyValues: programArg.paramHasManyValues
+//       index: programArg.paramIndex
 //     }));
 //   }
 //
@@ -141,8 +140,8 @@
 //         ArgumentEnum.unknown;
 //     }
 //     if (type === ParamTypeEnum.alias) {
-//       const alias = Object.keys(Alias).find(key =>
-//         Alias[key as keyof typeof Alias] === arg
+//       const alias = Object.keys(AliasEnum).find(key =>
+//         AliasEnum[key as keyof typeof AliasEnum] === arg
 //       );
 //       return alias ?
 //         ArgumentEnum[alias as keyof typeof ArgumentEnum] :
