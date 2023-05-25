@@ -88,7 +88,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[2];
+    } = result.model.params[2];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -107,7 +107,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[2];
+    } = result.model.params[2];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([2]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -126,7 +126,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[2];
+    } = result.model.params[2];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -145,7 +145,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[2];
+    } = result.model.params[2];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([2]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -164,7 +164,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -183,7 +183,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -202,7 +202,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -221,7 +221,7 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -242,7 +242,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -261,7 +261,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -280,7 +280,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -299,7 +299,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -318,7 +318,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -337,7 +337,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -356,7 +356,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -375,7 +375,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -394,7 +394,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -413,7 +413,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -432,7 +432,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -451,7 +451,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -470,7 +470,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -489,7 +489,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -510,7 +510,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -529,7 +529,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -548,7 +548,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have used incorrect parameter pattern!"]);
@@ -567,7 +567,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -586,7 +586,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -605,7 +605,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -624,7 +624,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -643,7 +643,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -662,7 +662,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -681,7 +681,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -700,7 +700,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeFalsy();
     expect(result.wrongParamIndexes).toEqual([3]);
     expect(result.errors).toEqual(["You have added not supported characters!"]);
@@ -719,7 +719,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -738,7 +738,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -757,7 +757,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
@@ -776,7 +776,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.paramDto.params[3];
+    } = result.model.params[3];
     expect(result.success).toBeTruthy();
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);

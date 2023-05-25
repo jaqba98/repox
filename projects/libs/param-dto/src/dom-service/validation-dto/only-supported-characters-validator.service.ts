@@ -4,12 +4,12 @@ import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
 import {
+  ParamDtoValidationModel
+} from "../../model/param-dto-validation.model";
+import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../model/param-dto.model";
-import {
-  ParamDtoValidationModel
-} from "../../model/param-dto-validation.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 @singleton()

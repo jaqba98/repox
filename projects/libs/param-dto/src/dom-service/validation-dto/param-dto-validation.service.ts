@@ -2,7 +2,6 @@ import { container, singleton } from "tsyringe";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
-import { ParamDtoModel } from "../../model/param-dto.model";
 import {
   ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
@@ -22,6 +21,7 @@ import {
   CorrectOrderValidatorService
 } from "./correct-order-validator.service";
 import { ValidatorDtoModel } from "../../model/validator-dto.model";
+import { ParamDtoModel } from "../../model/param-dto.model";
 
 @singleton()
 /**

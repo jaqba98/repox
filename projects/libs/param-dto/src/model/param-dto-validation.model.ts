@@ -9,5 +9,5 @@ export interface ParamDtoValidationModel {
   baseValues: Array<string>;
   errors: Array<string>;
   tips: Array<string>;
-  paramDto: ParamDtoModel;
+  model: ParamDtoModel;
 }

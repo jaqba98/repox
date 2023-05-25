@@ -16,6 +16,9 @@ export interface ParamDomainBaseEntityModel<TName> {
 
 export interface ParamDomainArgModel
   extends ParamDomainBaseEntityModel<ArgumentEnum> {
+  values: Array<string>;
+  hasValue: boolean;
+  hasManyValues: boolean;
 }
 
 export interface ParamDomainEntityModel<TName, TArgs>

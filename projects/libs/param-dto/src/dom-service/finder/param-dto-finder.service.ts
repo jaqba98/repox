@@ -1,9 +1,9 @@
 import { singleton } from "tsyringe";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
 import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../model/param-dto.model";
-import { ParamTypeEnum } from "../../enum/param-type.enum";
 
 @singleton()
 /**

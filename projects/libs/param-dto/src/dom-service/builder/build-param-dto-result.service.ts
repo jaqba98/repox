@@ -1,11 +1,11 @@
 import { singleton } from "tsyringe";
 import {
+  ParamDtoValidationModel
+} from "../../model/param-dto-validation.model";
+import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../model/param-dto.model";
-import {
-  ParamDtoValidationModel
-} from "../../model/param-dto-validation.model";
 
 @singleton()
 /**
@@ -20,7 +20,7 @@ export class BuildParamDtoResultService {
       baseValues: paramDto.params.map(param => param.paramBaseValue),
       errors: [],
       tips: [],
-      paramDto
+      model: paramDto
     };
   }
 
@@ -36,7 +36,7 @@ export class BuildParamDtoResultService {
       baseValues: paramDto.params.map(param => param.paramBaseValue),
       errors,
       tips,
-      paramDto
+      model: paramDto
     };
   }
 }

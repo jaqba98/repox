@@ -3,13 +3,13 @@ import { ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
-import { ParamDtoModel } from "../../model/param-dto.model";
 import {
   ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
 import {
   ParamDtoFinderService
 } from "../finder/param-dto-finder.service";
+import { ParamDtoModel } from "../../model/param-dto.model";
 
 @singleton()
 /**

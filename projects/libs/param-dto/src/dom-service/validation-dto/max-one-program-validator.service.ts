@@ -1,4 +1,3 @@
-import { ParamDtoModel } from "../../model/param-dto.model";
 import { singleton } from "tsyringe";
 import { ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
@@ -10,6 +9,7 @@ import {
 import {
   ParamDtoFinderService
 } from "../finder/param-dto-finder.service";
+import { ParamDtoModel } from "../../model/param-dto.model";
 
 @singleton()
 /**

@@ -1,6 +1,9 @@
 import { singleton } from "tsyringe";
 import { ReadParamDtoAppService } from "@lib/param-dto";
 import { ParamErrorMessageAppService } from "@lib/logger";
+import {
+  BuildParamDomainService
+} from "../dom-service/builder/build-param-domain.service";
 
 @singleton()
 /**
@@ -10,7 +13,8 @@ import { ParamErrorMessageAppService } from "@lib/logger";
 export class BuildParamDomainAppService {
   constructor(
     private readonly readParamDto: ReadParamDtoAppService,
-    private readonly paramErrorMessage: ParamErrorMessageAppService
+    private readonly paramErrorMessage: ParamErrorMessageAppService,
+    private readonly buildParamDomain: BuildParamDomainService
   ) {
   }
 
@@ -25,5 +29,7 @@ export class BuildParamDomainAppService {
       );
       return;
     }
+    const paramDomain = this.buildParamDomain.build(paramDto.model);
+    console.log(JSON.stringify(paramDomain, null, 2));
   }
 }
