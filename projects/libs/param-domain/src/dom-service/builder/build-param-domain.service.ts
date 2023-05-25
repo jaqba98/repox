@@ -17,6 +17,9 @@ import {
   ParamDtoFinderService,
   ParamDtoModel, ParamTypeEnum
 } from "@lib/param-dto";
+import {
+  BuildParamModelService
+} from "./build-param-model.service";
 
 @singleton()
 /**
@@ -24,7 +27,8 @@ import {
  */
 export class BuildParamDomainService {
   constructor(
-    private readonly paramDtoFinder: ParamDtoFinderService
+    private readonly paramDtoFinder: ParamDtoFinderService,
+    private readonly buildParamModel: BuildParamModelService
   ) {
   }
 
@@ -57,14 +61,20 @@ export class BuildParamDomainService {
         name: programName,
         index: programIndex,
         args: this.buildArguments(programArgs),
-        model: <any>{}
+        model: this.buildParamModel.buildProgramModel(
+          programName,
+          programArgs
+        )
       },
       command: {
         baseName: commandBaseName,
         name: commandName,
         index: commandIndex,
         args: this.buildArguments(commandArgs),
-        model: <any>{}
+        model: this.buildParamModel.buildCommandModel(
+          commandName,
+          programArgs
+        )
       }
     };
   }

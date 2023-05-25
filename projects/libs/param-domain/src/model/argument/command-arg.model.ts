@@ -4,16 +4,17 @@ import { ArgumentEnum } from "../../enum/argument.enum";
  * List of models for commands arguments.
  */
 
-export interface GenerateWorkspaceCommandArgsModel {
+export interface EmptyCommandArgsModel {
+}
+
+export interface WorkspaceCommandArgsModel {
   [ArgumentEnum.name]: string;
 }
 
-export interface GenerateProjectCommandArgsModel {
+export interface ProjectCommandArgsModel {
   [ArgumentEnum.name]: string;
   [ArgumentEnum.type]: string;
 }
 
-export interface CommandArgModel
-  extends GenerateWorkspaceCommandArgsModel,
-    GenerateProjectCommandArgsModel {
-}
+export type CommandArgModel = EmptyCommandArgsModel |
+  WorkspaceCommandArgsModel | ProjectCommandArgsModel;
