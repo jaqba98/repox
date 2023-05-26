@@ -15,11 +15,10 @@ import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
 import {
   ParamDtoEntityModel,
   ParamDtoFinderService,
-  ParamDtoModel, ParamTypeEnum
+  ParamDtoModel,
+  ParamTypeEnum
 } from "@lib/param-dto";
-import {
-  BuildParamModelService
-} from "./build-param-model.service";
+import { BuildParamModelService } from "./build-param-model.service";
 
 @singleton()
 /**
@@ -55,25 +54,28 @@ export class BuildParamDomainService {
       model,
       commandIndex
     );
+    const programFullArgs = this.buildArguments(programArgs);
+    const commandFullArgs = this.buildArguments(commandArgs);
     return {
       program: {
         baseName: programBaseName,
         name: programName,
         index: programIndex,
-        args: this.buildArguments(programArgs),
+        args: programFullArgs,
         model: this.buildParamModel.buildProgramModel(
           programName,
-          programArgs
+          programFullArgs
         )
       },
       command: {
         baseName: commandBaseName,
         name: commandName,
         index: commandIndex,
-        args: this.buildArguments(commandArgs),
+        args: commandFullArgs,
         model: this.buildParamModel.buildCommandModel(
+          programName,
           commandName,
-          programArgs
+          commandFullArgs
         )
       }
     };
