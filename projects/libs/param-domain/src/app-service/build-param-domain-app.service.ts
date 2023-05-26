@@ -4,6 +4,9 @@ import { ParamErrorMessageAppService } from "@lib/logger";
 import {
   BuildParamDomainService
 } from "../dom-service/builder/build-param-domain.service";
+import {
+  ParamDomainValidationService
+} from "../dom-service/validation-domain/param-domain-validation.service";
 
 @singleton()
 /**
@@ -14,7 +17,8 @@ export class BuildParamDomainAppService {
   constructor(
     private readonly readParamDto: ReadParamDtoAppService,
     private readonly paramErrorMessage: ParamErrorMessageAppService,
-    private readonly buildParamDomain: BuildParamDomainService
+    private readonly buildParamDomain: BuildParamDomainService,
+    private readonly paramDomain: ParamDomainValidationService
   ) {
   }
 
@@ -30,6 +34,18 @@ export class BuildParamDomainAppService {
       return;
     }
     const paramDomain = this.buildParamDomain.build(paramDto.model);
-    console.log(JSON.stringify(paramDomain, null, 2));
+    const paramDomainValidation = this.paramDomain.runValidation(
+      paramDomain
+    );
+    if (!paramDomainValidation.success) {
+      this.paramErrorMessage.writeParamError(
+        paramDomainValidation.wrongParamIndexes,
+        paramDto.baseValues,
+        paramDomainValidation.errors,
+        paramDomainValidation.tips
+      );
+      return;
+    }
+    console.log(JSON.stringify(paramDomainValidation, null, 2));
   }
 }
