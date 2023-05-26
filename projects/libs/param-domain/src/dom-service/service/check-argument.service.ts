@@ -11,8 +11,8 @@ import { singleton } from "tsyringe";
  * The service is responsible for check value mode
  * for given argument.
  */
-export class CheckValueModeService {
-  check(
+export class CheckArgumentService {
+  valueMode(
     programArg: ParamDomainArgModel,
     dependencyArgs: ParamDependencyArgsModel
   ): { success: boolean; error: string; index: number } {
@@ -39,5 +39,27 @@ export class CheckValueModeService {
       }
     }
     return { success: true, error: "", index: programArg.index }
+  }
+
+  argumentValue(
+    paramArgs: ParamDomainArgModel,
+    dependencyArgs: ParamDependencyArgsModel
+  ): { success: boolean; error: string; index: number } {
+    const arg = dependencyArgs[paramArgs.name];
+    if (arg.value.length === 0) {
+      return { success: true, error: "", index: paramArgs.index }
+    }
+    const wrongValues = paramArgs.values
+      .filter(paramArg => !arg.value.includes(paramArg));
+    if (wrongValues.length === 0) {
+      return { success: true, error: "", index: paramArgs.index }
+    }
+    const errorValues = wrongValues.join(',');
+    const supportedValues = arg.value.join(',');
+    return {
+      success: false,
+      error: `The argument cannot contain values: ${errorValues}, supported values are: ${supportedValues}`,
+      index: paramArgs.index
+    }
   }
 }

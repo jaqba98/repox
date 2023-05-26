@@ -20,8 +20,8 @@ import {
 } from "../../model/param-domain/param-dependency.model";
 import { ArgumentEnum } from "../../enum/argument.enum";
 import {
-  CheckValueModeService
-} from "../service/check-value-mode.service";
+  CheckArgumentService
+} from "../service/check-argument.service";
 
 @singleton()
 /**
@@ -33,7 +33,7 @@ export class ProgramArgumentsCorrectService
   constructor(
     private readonly getParamDependency: GetParamDependencyService,
     private readonly buildParamDomain: BuildParamDomainResultService,
-    private readonly checkValueMode: CheckValueModeService
+    private readonly checkArgument: CheckArgumentService
   ) {
   }
 
@@ -46,7 +46,7 @@ export class ProgramArgumentsCorrectService
     const programArgs = programDep.args;
     const wrongArgs = paramDomain.program.args
       .filter(arg => arg.name !== ArgumentEnum.unknown)
-      .map(arg => this.checkValueMode.check(arg, programArgs))
+      .map(arg => this.checkArgument.valueMode(arg, programArgs))
       .filter(arg => !arg.success);
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess(paramDomain);

@@ -15,7 +15,6 @@ import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import { ProgramEnum } from "../../enum/program.enum";
-import { CommandEnum } from "../../enum/command.enum";
 import {
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
@@ -26,10 +25,10 @@ import {
 
 @singleton()
 /**
- * The validator is responsible for checking that the given command
- * arguments are correct.
+ * The validator is responsible for checking that the given program
+ * arguments have correct value.
  */
-export class CommandArgumentsCorrectService
+export class ProgramArgumentsCorrectValueService
   implements ValidatorDomainModel {
   constructor(
     private readonly getParamDependency: GetParamDependencyService,
@@ -42,13 +41,12 @@ export class CommandArgumentsCorrectService
     paramDomain: ParamDomainModel,
   ): ParamDomainValidationModel {
     const programName: ProgramEnum = paramDomain.program.name;
-    const commandName: CommandEnum = paramDomain.command.name;
     const programDep: ParamDependencyModel = this.getParamDependency
       .getDependency(programName);
-    const commandArgs = programDep.commands[commandName].args;
-    const wrongArgs = paramDomain.command.args
+    const programArgs = programDep.args;
+    const wrongArgs = paramDomain.program.args
       .filter(arg => arg.name !== ArgumentEnum.unknown)
-      .map(arg => this.checkArgument.valueMode(arg, commandArgs))
+      .map(arg => this.checkArgument.argumentValue(arg, programArgs))
       .filter(arg => !arg.success);
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess(paramDomain);

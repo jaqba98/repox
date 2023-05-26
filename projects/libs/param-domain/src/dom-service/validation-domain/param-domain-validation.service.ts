@@ -41,6 +41,12 @@ import {
 import {
   CommandArgumentsCorrectService
 } from "./command-arguments-correct.service";
+import {
+  ProgramArgumentsCorrectValueService
+} from "./program-arguments-correct-value.service";
+import {
+  CommandArgumentsCorrectValueService
+} from "./command-arguments-correct-value.service";
 
 @singleton()
 /**
@@ -57,6 +63,8 @@ import {
  * 8.Verify that command does not contain wrong arguments.
  * 9.Verify that program arguments are correctly.
  * 10.Verify that command arguments are correctly.
+ * 11.Verify that program arguments have correct value.
+ * 12.Verify that command arguments have correct value.
  */
 export class ParamDomainValidationService {
   constructor(
@@ -85,7 +93,9 @@ export class ParamDomainValidationService {
       ProgramNotContainsWrongArgumentsService,
       CommandNotContainsWrongArgumentsService,
       ProgramArgumentsCorrectService,
-      CommandArgumentsCorrectService
+      CommandArgumentsCorrectService,
+      ProgramArgumentsCorrectValueService,
+      CommandArgumentsCorrectValueService
     ].map(service => {
       return container.resolve<ValidatorDomainModel>(service);
     });
