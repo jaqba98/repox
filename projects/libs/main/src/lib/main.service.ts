@@ -1,8 +1,8 @@
 import "core-js/features/reflect";
 import { container, singleton } from "tsyringe";
-import { BuildParamDomainAppService } from "@lib/param-domain";
 import { ReadParamDtoAppService } from "@lib/param-dto";
 import { ParamErrorMessageAppService } from "@lib/logger";
+import { BuildParamDomainAppService } from "@lib/param-domain";
 
 @singleton()
 /**

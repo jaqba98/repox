@@ -12,13 +12,13 @@ import {
   CommandEnum
 } from "../../enum/command.enum";
 import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
+import { BuildParamModelService } from "./build-param-model.service";
 import {
   ParamDtoEntityModel,
   ParamDtoFinderService,
   ParamDtoModel,
   ParamTypeEnum
 } from "@lib/param-dto";
-import { BuildParamModelService } from "./build-param-model.service";
 
 @singleton()
 /**
