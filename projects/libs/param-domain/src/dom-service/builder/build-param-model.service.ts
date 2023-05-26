@@ -30,10 +30,8 @@ export class BuildParamModelService {
     switch (programName) {
       case ProgramEnum.default:
         return this.buildDefaultProgram(model);
-      case ProgramEnum.generate:
-        return this.buildEmptyProgram();
       default:
-        throw new Error("Not supported program name!");
+        return <EmptyProgramArgModel>{};
     }
   }
 
@@ -44,38 +42,28 @@ export class BuildParamModelService {
   ): CommandArgumentModel {
     const fullName = `${programName}-${commandName}`;
     switch (fullName) {
-      case `${ProgramEnum.default}-${CommandEnum.default}`:
-        return this.buildEmptyCommand();
       case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
         return this.buildGenerateWorkspaceCommand(model);
       case `${ProgramEnum.generate}-${CommandEnum.project}`:
         return this.buildGenerateProjectCommand(model);
       default:
-        throw new Error("Not supported program name!");
+        return <EmptyCommandArgModel>{};
     }
-  }
-
-  private buildEmptyProgram(): EmptyProgramArgModel {
-    return {};
   }
 
   private buildDefaultProgram(
     model: Array<ParamDomainArgModel>
   ): DefaultProgramArgModel {
     return {
-      version: this.getArgValue(model, ArgumentEnum.version, false)
+      version: this.getVal(model, ArgumentEnum.version, false)
     }
-  }
-
-  private buildEmptyCommand(): EmptyCommandArgModel {
-    return {};
   }
 
   private buildGenerateWorkspaceCommand(
     model: Array<ParamDomainArgModel>
   ): GenerateWorkspaceCommandArgModel {
     return {
-      name: this.getArgValue(model, ArgumentEnum.name, "")
+      name: this.getVal(model, ArgumentEnum.name, "")
     };
   }
 
@@ -83,25 +71,25 @@ export class BuildParamModelService {
     model: Array<ParamDomainArgModel>
   ): GenerateProjectCommandArgModel {
     return {
-      name: this.getArgValue(model, ArgumentEnum.name, ""),
-      type: this.getArgValue(model, ArgumentEnum.type, "")
+      name: this.getVal(model, ArgumentEnum.name, ""),
+      type: this.getVal(model, ArgumentEnum.type, "")
     };
   }
 
-  private getArgValue<TValue>(
+  private getVal<TValue>(
     model: Array<ParamDomainArgModel>,
     argumentName: ArgumentEnum,
-    defVal: TValue
+    defaultValue: TValue
   ): TValue {
     const arg = model.find(arg => arg.name === argumentName);
     if (!arg) {
-      return defVal;
+      return defaultValue;
     }
-    switch (typeof defVal) {
+    switch (typeof defaultValue) {
       case "boolean":
-        return <TValue>(arg.name === ArgumentEnum.version || defVal);
+        return <TValue>(arg || defaultValue);
       case "string":
-        return <TValue>(arg.values.at(0) || defVal);
+        return <TValue>(arg.values.at(0) || defaultValue);
       default:
         throw new Error("Not supported type of data!");
     }
