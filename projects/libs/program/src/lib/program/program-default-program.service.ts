@@ -18,8 +18,8 @@ export class ProgramDefaultProgramService {
   }
 
   run(paramDomain: ParamDomainModel): void {
-    const programModel = <DefaultProgramArgModel>paramDomain
-      .program.model;
+    const programModel = <DefaultProgramArgModel>
+      paramDomain.program.model;
     this.programDefaultStep.runSteps(programModel);
   }
 }

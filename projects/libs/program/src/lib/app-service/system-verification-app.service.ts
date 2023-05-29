@@ -1,24 +1,21 @@
-// import { singleton } from "tsyringe";
-//
-// @singleton()
-// /**
-//  * The app service is responsible for system verification.
-//  */
-// export class SystemVerificationAppService {
-//   // constructor(
-//   //   private readonly programInstalled: ExecProgramInstalledService,
-//   //   private readonly loggerMessageApp: SimpleMessageAppService
-//   // ) {
-//   // }
-//
-//   run(): void {
-//     // this.loggerMessageApp.writeInfo("System verification", false, true, 0);
-//     // this.loggerMessageApp.writeInfo("Checking if git is installed", false, false, 0);
-//     // if (!this.programInstalled.exec("git")) return false;
-//     // this.loggerMessageApp.writeInfo("Checking if node is installed", false, false, 0);
-//     // if (!this.programInstalled.exec("node")) return false;
-//     // this.loggerMessageApp.writeInfo("Checking if npm is installed", false, false, 0);
-//     // return this.programInstalled.exec("npm");
-//   }
-// }
-// // todo: refactor
+import { singleton } from "tsyringe";
+import {
+  ProgramInstalledService
+} from "../infra/program-installed.service";
+
+@singleton()
+/**
+ * The app service is responsible for system verification.
+ */
+export class SystemVerificationAppService {
+  constructor(
+    private readonly programInstalled: ProgramInstalledService
+  ) {
+  }
+
+  checkSystem(): boolean {
+    if (!this.programInstalled.check("git")) return false;
+    if (!this.programInstalled.check("node")) return false;
+    return this.programInstalled.check("npm");
+  }
+}

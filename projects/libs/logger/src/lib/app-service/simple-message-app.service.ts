@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { WriteMessageService } from "../infra/write-message.service";
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
-import { EMPTY_STRING } from "../const/symbol.const";
+import { EMPTY_STRING, NEW_LINE } from "../const/symbol.const";
 import {
   BuildSimpleMessageService
 } from "../dom-service/builder/build-simple-message.service";
@@ -100,5 +100,9 @@ export class SimpleMessageAppService {
       newline
     );
     this.writeMessage.write(outputMessage);
+  }
+
+  writeNewline(): void {
+    this.writeMessage.write(NEW_LINE);
   }
 }
