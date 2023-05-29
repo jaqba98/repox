@@ -18,7 +18,6 @@ export class FolderDoesNotExistService {
       "Checks if the folder with the given name does not exist", 0
     );
     if (!existsSync(folderName)) return true;
-    this.simpleMessage.writeNewline();
     this.simpleMessage.writeError(
       `The ${folderName} folder already exist`, 0, false, true
     );
