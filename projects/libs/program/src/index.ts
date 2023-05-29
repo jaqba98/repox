@@ -1,4 +1,3 @@
-// export * from "./src/program/program-default-program.service";
-// export * from "./src/program/generate-workspace-program.service";
-// export * from "./src/program/generate-project-program.service";
-// // todo: refactor
+export * from "./lib/program/program-default-program.service";
+export * from "./lib/program/generate-workspace-program.service";
+export * from "./lib/program/generate-project-program.service";

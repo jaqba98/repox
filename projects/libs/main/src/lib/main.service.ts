@@ -3,6 +3,7 @@ import { container, singleton } from "tsyringe";
 import { ReadParamDtoAppService } from "@lib/param-dto";
 import { ParamErrorMessageAppService } from "@lib/logger";
 import { BuildParamDomainAppService } from "@lib/param-domain";
+import { SelectProgramAppService } from "@lib/launcher";
 
 @singleton()
 /**
@@ -12,7 +13,8 @@ export class MainService {
   constructor(
     private readonly readParamDto: ReadParamDtoAppService,
     private readonly paramErrorMessage: ParamErrorMessageAppService,
-    private readonly buildParamDomain: BuildParamDomainAppService
+    private readonly buildParamDomain: BuildParamDomainAppService,
+    private readonly selectProgram: SelectProgramAppService
   ) {
   }
   run(): void {
@@ -36,6 +38,7 @@ export class MainService {
       );
       return;
     }
+    this.selectProgram.selectProgram(paramDomain.paramDomain);
   }
 }
 
