@@ -10,11 +10,7 @@ export class BuildEmptyConfigFileService {
   buildConfigFile(): DomainConfigModel {
     return {
       version: SYSTEM_VERSION,
-      projects: {
-        apps: {},
-        libs: {},
-        tools: {}
-      }
+      projects: {}
     };
   }
 }

@@ -14,9 +14,5 @@ export interface ProjectsModel {
 
 export interface DomainConfigModel {
   version: string;
-  projects: {
-    apps: ProjectsModel;
-    libs: ProjectsModel;
-    tools: ProjectsModel;
-  }
+  projects: ProjectsModel;
 }
