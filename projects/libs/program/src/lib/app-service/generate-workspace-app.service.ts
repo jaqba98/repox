@@ -54,8 +54,9 @@ export class GenerateWorkspaceAppService {
     this.writeFile.writeJson(DomainConfigFileEnum.configJson, config);
     this.createEmptyFile.create(".gitignore");
     this.goInto.goInto("..");
+    this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
-      "Workspace created correctly!", 0, false, true
+      "Workspace created correctly!", 1, false, true
     );
     return true;
   }
