@@ -20,16 +20,17 @@ export class SimpleMessageAppService {
 
   writeSuccess(
     message: string,
+    newline: number,
     isLogo: boolean,
     isHeader: boolean,
-    newline: number
+    headerContent: string = "SUCCESS"
   ): void {
     const outputMessage: string = this.buildSimpleMessage.build(
       message,
       LoggerModeEnum.success,
       isLogo,
       isHeader,
-      "SUCCESS",
+      headerContent,
       newline
     );
     this.writeMessage.write(outputMessage);
@@ -37,16 +38,17 @@ export class SimpleMessageAppService {
 
   writeError(
     message: string,
+    newline: number,
     isLogo: boolean,
     isHeader: boolean,
-    newline: number
+    headerContent: string = "ERROR"
   ): void {
     const outputMessage: string = this.buildSimpleMessage.build(
       message,
       LoggerModeEnum.error,
       isLogo,
       isHeader,
-      "ERROR",
+      headerContent,
       newline
     );
     this.writeMessage.write(outputMessage);
@@ -54,16 +56,17 @@ export class SimpleMessageAppService {
 
   writeWarning(
     message: string,
+    newline: number,
     isLogo: boolean,
     isHeader: boolean,
-    newline: number
+    headerContent: string = "WARNING"
   ): void {
     const outputMessage: string = this.buildSimpleMessage.build(
       message,
       LoggerModeEnum.warning,
       isLogo,
       isHeader,
-      "WARNING",
+      headerContent,
       newline
     );
     this.writeMessage.write(outputMessage);
@@ -71,16 +74,17 @@ export class SimpleMessageAppService {
 
   writeInfo(
     message: string,
+    newline: number,
     isLogo: boolean,
     isHeader: boolean,
-    newline: number
+    headerContent: string = "INFO"
   ): void {
     const outputMessage: string = this.buildSimpleMessage.build(
       message,
       LoggerModeEnum.info,
       isLogo,
       isHeader,
-      "INFO",
+      headerContent,
       newline
     );
     this.writeMessage.write(outputMessage);

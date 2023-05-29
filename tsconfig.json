@@ -20,7 +20,8 @@
       "@lib/launcher": ["projects/libs/launcher/src/index.ts"],
       "@lib/program": ["projects/libs/program/src/index.ts"],
       "@lib/domain": ["projects/libs/domain/src/index.ts"],
-      "@lib/utils": ["projects/libs/utils/src/index.ts"]
+      "@lib/utils": ["projects/libs/utils/src/index.ts"],
+      "@lib/const": ["projects/libs/const/src/index.ts"]
     }
   },
   "include": [

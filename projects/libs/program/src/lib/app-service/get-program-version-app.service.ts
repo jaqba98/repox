@@ -1,24 +1,20 @@
-// import { singleton } from "tsyringe";
-//
-// @singleton()
-// /**
-//  * The app service is responsible for display current version.
-//  */
-// export class GetProgramVersionAppService {
-//   // constructor(
-//   //   private readonly loggerMessageApp: SimpleMessageAppService
-//   // ) {
-//   // }
-//
-//   run(): void {
-//     // this.loggerMessageApp.write({
-//     //   message: SYSTEM_VERSION,
-//     //   mode: <any>"info",
-//     //   isLogo: false,
-//     //   isHeader: true,
-//     //   headerContent: "VERSION",
-//     //   newline: 0
-//     // });
-//   }
-// }
-// // todo: refactor
+import { singleton } from "tsyringe";
+import { SimpleMessageAppService } from "@lib/logger";
+import { SYSTEM_VERSION } from "@lib/const";
+
+@singleton()
+/**
+ * The app service is responsible for display current version.
+ */
+export class GetProgramVersionAppService {
+  constructor(
+    private readonly simpleMessage: SimpleMessageAppService
+  ) {
+  }
+
+  getProgramVersion(): void {
+    this.simpleMessage.writeInfo(
+      SYSTEM_VERSION, 0, false, true, "VERSION"
+    );
+  }
+}
