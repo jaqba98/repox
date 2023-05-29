@@ -1,12 +1,17 @@
 import { singleton } from "tsyringe";
+import {
+  FolderDoesNotExistService
+} from "../infra/folder-does-not-exist.service";
+import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**
  * The app service is responsible for generate workspace.
  */
 export class GenerateWorkspaceAppService {
-  // constructor(
-  //   private readonly folderDoesNotExist: ExecFolderDoesNotExistService,
+  constructor(
+    private readonly loggerMessageApp: SimpleMessageAppService,
+    private readonly folderDoesNotExist: FolderDoesNotExistService,
   //   private readonly createFolder: ExecCreateFolderService,
   //   private readonly goInto: ExecGoIntoService,
   //   private readonly runCommand: ExecRunCommandService,
@@ -14,12 +19,11 @@ export class GenerateWorkspaceAppService {
   //   private readonly loggerMessageApp: SimpleMessageAppService,
   //   private readonly writeFile: WriteFileService,
   //   private readonly buildDomainConfigFile: BuildDomainConfigFileAppService
-  // ) {
-  // }
+  ) {
+  }
 
   generateWorkspace(name: string): boolean {
-    // this.loggerMessageApp.writeInfo("Generate workspace", false, true, 0);
-    // if (!this.folderDoesNotExist.exec(name)) return false;
+    if (!this.folderDoesNotExist.notExist(name)) return false;
     // this.createFolder.exec(name);
     // this.goInto.exec(name);
     // this.runCommand.exec("git init");
