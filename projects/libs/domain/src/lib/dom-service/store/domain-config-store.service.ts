@@ -2,16 +2,8 @@ import { singleton } from "tsyringe";
 import { DomainConfigFileEnum } from "@lib/domain";
 import { ReadFileService, WriteFileService } from "@lib/utils";
 import { DomainConfigModel } from "../../model/domain-config.model";
-import {
-  ConvertProjectTypeService
-} from "../../../../../project/src/lib/dom-service/converter/convert-project-type.service";
-import {
-  BuildProjectPathService
-} from "../../../../../project/src/lib/dom-service/builder/build-project-path.service";
 import { ProjectDomainModel, ProjectTypeEnum } from "@lib/project";
-import { SimpleMessageAppService } from "@lib/logger";
 import { SYSTEM_VERSION } from "@lib/const";
-import * as process from "process";
 
 @singleton()
 /**

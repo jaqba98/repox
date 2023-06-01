@@ -1,5 +1,8 @@
 import { singleton } from "tsyringe";
-import { DomainConfigAppService } from "@lib/domain";
+import {
+  DomainConfigAppService,
+  TsconfigDomainAppService
+} from "@lib/domain";
 import { ProjectAppService } from "@lib/project";
 import { SimpleMessageAppService } from "@lib/logger";
 import { CreateFolderService } from "../infra/create-folder.service";
@@ -11,6 +14,7 @@ import {
 import {
   CreateEmptyFileService
 } from "../infra/create-empty-file.service";
+import { join } from "path";
 
 @singleton()
 /**
@@ -25,7 +29,8 @@ export class GenerateProjectAppService {
     private readonly createFolder: CreateFolderService,
     private readonly goInto: GoIntoService,
     private readonly runCommand: RunCommandService,
-    private readonly createEmptyFile: CreateEmptyFileService
+    private readonly createEmptyFile: CreateEmptyFileService,
+    private readonly tsconfigDomainApp: TsconfigDomainAppService
   ) {
   }
 
@@ -60,10 +65,18 @@ export class GenerateProjectAppService {
     this.goInto.goInto(projectPath);
     this.runCommand.exec("npm init -y");
     this.runCommand.exec("tsc --init");
+    this.runCommand.exec("sed -i -r '/^[ \\t]*\\//d; '/^[[:space:]]*$/d'; s/\\/\\*(.*?)\\*\\///g' tsconfig.json")
     this.createFolder.create("src");
     this.createEmptyFile.create("src/index.ts");
     this.createFolder.create("src/lib");
     this.createEmptyFile.create("src/lib/.gitkeep");
+    // Add alias to tsconfig.json
+    this.simpleMessage.writePlain("Create the project alias", 0);
+    this.tsconfigDomainApp.loadTsconfigConfig();
+    const indexPath = join(projectPath, "index.ts");
+    this.tsconfigDomainApp.addPath(name, projectType, indexPath);
+    this.tsconfigDomainApp.saveTsconfigConfig();
+    // Success message
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
       "Project created correctly!", 1, false, true

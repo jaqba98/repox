@@ -43,6 +43,7 @@ export class GenerateWorkspaceAppService {
     this.runCommand.exec("npm install typescript --save-dev");
     this.runCommand.exec("npm install jest --save-dev");
     this.runCommand.exec("tsc --init")
+    this.runCommand.exec("sed -i -r '/^[ \\t]*\\//d; '/^[[:space:]]*$/d'; s/\\/\\*(.*?)\\*\\///g' tsconfig.json")
     this.createFolder.create("projects");
     this.createFolder.create("projects/apps");
     this.createEmptyFile.create("projects/apps/.gitkeep");

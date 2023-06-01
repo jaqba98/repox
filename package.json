@@ -13,7 +13,8 @@
     "unlink": "npm unlink ./dist && npm uninstall repox -g",
     "test": "jest --silent",
     "up": "npm run test && npm run build && npm run link",
-    "down": "npm run unlink && npm run remove"
+    "down": "npm run unlink && npm run remove",
+    "serve": "cd tmp/dog && repox g p -n=test -t=app"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
