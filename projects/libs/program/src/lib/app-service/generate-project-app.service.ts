@@ -59,10 +59,15 @@ export class GenerateProjectAppService {
     this.createFolder.create(projectPath);
     this.goInto.goInto(projectPath);
     this.runCommand.exec("npm init -y");
+    this.runCommand.exec("tsc --init");
     this.createFolder.create("src");
     this.createEmptyFile.create("src/index.ts");
     this.createFolder.create("src/lib");
     this.createEmptyFile.create("src/lib/.gitkeep");
+    this.simpleMessage.writeNewline();
+    this.simpleMessage.writeSuccess(
+      "Project created correctly!", 1, false, true
+    );
     return true;
   }
 }
