@@ -30,3 +30,4 @@ export class GenerateProjectStepService {
     if (!this.generateProjectApp.generateProject(name, type)) return;
   }
 }
+// todo: refactor

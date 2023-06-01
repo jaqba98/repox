@@ -17,3 +17,4 @@ export const BG_TEXT_GREEN: string = "\x1b[42m";
 export const BG_TEXT_YELLOW: string = "\x1b[43m";
 export const BG_TEXT_MAGENTA: string = "\x1b[45m";
 export const BG_TEXT_GRAY: string = "\x1b[100m";
+// todo: refactor

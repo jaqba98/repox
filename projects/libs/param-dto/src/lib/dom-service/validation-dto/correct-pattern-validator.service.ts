@@ -108,3 +108,4 @@ export class CorrectPatternValidatorService
     return `Correct pattern for ${paramBaseValue} is: ${pattern}`;
   }
 }
+// todo: refactor

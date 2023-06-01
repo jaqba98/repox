@@ -12,3 +12,4 @@ export interface DefaultProgramArgModel {
 export type ProgramArgumentModel =
   EmptyProgramArgModel |
   DefaultProgramArgModel;
+// todo: refactor

@@ -7,3 +7,4 @@ export const GIT_IGNORE_CONTENT: string = `node_modules
 dist
 tmp
 `;
+// todo: refactor

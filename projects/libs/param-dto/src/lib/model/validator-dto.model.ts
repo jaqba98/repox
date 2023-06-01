@@ -10,3 +10,4 @@ import { ParamDtoModel } from "./param-dto.model";
 export interface ValidatorDtoModel {
   runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel;
 }
+// todo: refactor

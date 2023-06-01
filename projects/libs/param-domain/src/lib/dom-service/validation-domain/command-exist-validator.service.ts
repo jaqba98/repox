@@ -42,3 +42,4 @@ export class CommandExistValidatorService
     return this.buildParamDomain.buildSuccess(paramDomain);
   }
 }
+// todo: refactor

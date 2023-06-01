@@ -60,3 +60,4 @@ export const buildUnderscoreWord = (
   .concat(fgColor)
   .concat(TEXT_UNDERSCORE)
   .concat(word);
+// todo: refactor

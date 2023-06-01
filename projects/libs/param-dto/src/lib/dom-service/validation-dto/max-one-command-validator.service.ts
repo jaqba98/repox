@@ -52,3 +52,4 @@ export class MaxOneCommandValidatorService
     return this.buildParamDtoResult.buildSuccess(paramDto);
   }
 }
+// todo: refactor

@@ -10,3 +10,4 @@ export interface ParamDomainValidationModel {
   tips: Array<string>;
   paramDomain: ParamDomainModel;
 }
+// todo: refactor

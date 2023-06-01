@@ -5,3 +5,4 @@ export interface ProjectDomainModel {
   type: ProjectTypeEnum;
   path: string;
 }
+// todo: refactor

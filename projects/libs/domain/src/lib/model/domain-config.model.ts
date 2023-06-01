@@ -12,3 +12,4 @@ export interface DomainConfigModel {
   version: string;
   projects: ProjectsModel;
 }
+// todo: refactor

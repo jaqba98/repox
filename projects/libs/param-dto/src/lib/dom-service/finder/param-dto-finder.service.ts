@@ -57,3 +57,4 @@ export class ParamDtoFinderService {
       .filter(param => param.paramIndex > commandIndex)
   }
 }
+// todo: refactor

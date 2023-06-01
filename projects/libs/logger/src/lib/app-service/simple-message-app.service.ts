@@ -106,3 +106,4 @@ export class SimpleMessageAppService {
     this.writeMessage.write(NEW_LINE);
   }
 }
+// todo: refactor
