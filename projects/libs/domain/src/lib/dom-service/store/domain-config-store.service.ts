@@ -8,7 +8,7 @@ import {
 import {
   BuildProjectPathService
 } from "../../../../../project/src/lib/dom-service/builder/build-project-path.service";
-import { ProjectTypeEnum } from "@lib/project";
+import { ProjectDomainModel, ProjectTypeEnum } from "@lib/project";
 import { SimpleMessageAppService } from "@lib/logger";
 import { SYSTEM_VERSION } from "@lib/const";
 import * as process from "process";
@@ -52,5 +52,10 @@ export class DomainConfigStoreService {
     name: string, type: ProjectTypeEnum, path: string
   ): void {
     this.store.projects[name] = { name, type, path };
+  }
+
+  getProject(name: string): ProjectDomainModel | undefined {
+    return Object.values(this.store.projects)
+      .find(project => project.name === name);
   }
 }

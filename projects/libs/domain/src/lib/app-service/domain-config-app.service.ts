@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   DomainConfigStoreService
 } from "../dom-service/store/domain-config-store.service";
-import { ProjectTypeEnum } from "@lib/project";
+import { ProjectDomainModel, ProjectTypeEnum } from "@lib/project";
 
 @singleton()
 /**
@@ -31,5 +31,9 @@ export class DomainConfigAppService {
     name: string, type: ProjectTypeEnum, path: string
   ): void {
     this.domainConfigStore.addProject(name, type, path);
+  }
+
+  getProject(name: string): ProjectDomainModel | undefined {
+    return this.domainConfigStore.getProject(name);
   }
 }

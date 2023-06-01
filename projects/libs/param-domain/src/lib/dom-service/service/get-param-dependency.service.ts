@@ -70,6 +70,28 @@ export class GetParamDependencyService {
           },
           args: {}
         };
+      case ProgramEnum.build:
+        return {
+          program: ProgramEnum.default,
+          commands: {
+            [CommandEnum.default]: {
+              command: CommandEnum.default,
+              args: {}
+            },
+            [CommandEnum.project]: {
+              command: CommandEnum.project,
+              args: {
+                [ArgumentEnum.name]: {
+                  name: ArgumentEnum.name,
+                  value: [],
+                  valueMode: "single",
+                  required: true
+                }
+              }
+            },
+          },
+          args: {}
+        };
       default:
         throw new Error("No dependencies found for the program!");
     }

@@ -8,6 +8,7 @@ import {
   ProgramEnum
 } from "@lib/param-domain";
 import {
+  BuildProjectProgramService,
   GenerateProjectProgramService,
   GenerateWorkspaceProgramService,
   ProgramDefaultProgramService
@@ -39,6 +40,10 @@ export class SelectProgramAppService {
         return;
       case `${ProgramEnum.generate}-${CommandEnum.project}`:
         container.resolve(GenerateProjectProgramService)
+          .run(paramDomain);
+        return;
+      case `${ProgramEnum.build}-${CommandEnum.project}`:
+        container.resolve(BuildProjectProgramService)
           .run(paramDomain);
         return;
       default:

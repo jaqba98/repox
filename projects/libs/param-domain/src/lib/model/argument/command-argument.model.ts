@@ -14,7 +14,12 @@ export interface GenerateProjectCommandArgModel {
   type: string;
 }
 
+export interface BuildProjectCommandArgModel {
+  name: string;
+}
+
 export type CommandArgumentModel =
   EmptyCommandArgModel |
   GenerateWorkspaceCommandArgModel |
-  GenerateProjectCommandArgModel;
+  GenerateProjectCommandArgModel |
+  BuildProjectCommandArgModel;

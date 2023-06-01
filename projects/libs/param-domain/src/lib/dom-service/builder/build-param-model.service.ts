@@ -5,6 +5,7 @@ import {
   ProgramArgumentModel
 } from "../../model/argument/program-argument.model";
 import {
+  BuildProjectCommandArgModel,
   CommandArgumentModel,
   EmptyCommandArgModel,
   GenerateProjectCommandArgModel,
@@ -46,6 +47,8 @@ export class BuildParamModelService {
         return this.buildGenerateWorkspaceCommand(model);
       case `${ProgramEnum.generate}-${CommandEnum.project}`:
         return this.buildGenerateProjectCommand(model);
+      case `${ProgramEnum.build}-${CommandEnum.project}`:
+        return this.buildGenerateProjectCommand(model);
       default:
         return <EmptyCommandArgModel>{};
     }
@@ -73,6 +76,14 @@ export class BuildParamModelService {
     return {
       name: this.getVal(model, ArgumentEnum.name, ""),
       type: this.getVal(model, ArgumentEnum.type, "")
+    };
+  }
+
+  private buildBuildProjectCommand(
+    model: Array<ParamDomainArgModel>
+  ): BuildProjectCommandArgModel {
+    return {
+      name: this.getVal(model, ArgumentEnum.name, "")
     };
   }
 
