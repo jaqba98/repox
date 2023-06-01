@@ -1,6 +1,8 @@
 # Repox
 
-## Lightweight monorepo for many huge projects.
+### Description
+
+Lightweight monorepo for many huge projects.
 
 ### Commands
 
@@ -14,4 +16,16 @@ Generate the workspace
 
 ```
 repox generate workspace --name="repox"
+```
+
+Generate the project
+
+```
+repox generate project --name="project1" --type="app"
+```
+
+Build the project
+
+```
+repox build project --name="project1"
 ```
