@@ -11,7 +11,8 @@ import {
 } from "../infra/create-empty-file.service";
 import {
   BuildConfigFileAppService,
-  DomainConfigFileEnum
+  DomainConfigFileEnum,
+  TsconfigDomainModel
 } from "@lib/domain";
 import { WriteFileService } from "@lib/utils";
 import { GIT_IGNORE_CONTENT } from "@lib/const";
@@ -43,7 +44,11 @@ export class GenerateWorkspaceAppService {
     this.runCommand.exec("npm install typescript --save-dev");
     this.runCommand.exec("npm install jest --save-dev");
     this.runCommand.exec("tsc --init")
-    this.runCommand.exec("sed -i -r '/^[ \\t]*\\//d; '/^[[:space:]]*$/d'; s/\\/\\*(.*?)\\*\\///g' tsconfig.json")
+    this.writeFile.writeJson<TsconfigDomainModel>("tsconfig.json", {
+      compilerOptions: {
+        paths: {}
+      }
+    });
     this.createFolder.create("projects");
     this.createFolder.create("projects/apps");
     this.createEmptyFile.create("projects/apps/.gitkeep");

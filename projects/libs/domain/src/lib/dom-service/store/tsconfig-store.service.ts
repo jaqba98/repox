@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { ReadFileService, WriteFileService } from "@lib/utils";
-import { ProjectDomainModel, ProjectTypeEnum } from "@lib/project";
+import { ProjectTypeEnum } from "@lib/project";
 import {
   TsconfigDomainModel
 } from "../../model/tsconfig-domain.model";

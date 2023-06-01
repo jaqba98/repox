@@ -60,6 +60,12 @@ export class GenerateProjectAppService {
     // Save the configuration file
     this.simpleMessage.writePlain("Save repox configuration", 0);
     this.domainConfigApp.saveDomainConfig();
+    // Add alias to tsconfig.json
+    this.simpleMessage.writePlain("Create the project alias", 0);
+    this.tsconfigDomainApp.loadTsconfigConfig();
+    const indexPath = join(projectPath, "index.ts");
+    this.tsconfigDomainApp.addPath(name, projectType, indexPath);
+    this.tsconfigDomainApp.saveTsconfigConfig();
     // Create project on the system
     this.createFolder.create(projectPath);
     this.goInto.goInto(projectPath);
@@ -70,12 +76,6 @@ export class GenerateProjectAppService {
     this.createEmptyFile.create("src/index.ts");
     this.createFolder.create("src/lib");
     this.createEmptyFile.create("src/lib/.gitkeep");
-    // Add alias to tsconfig.json
-    this.simpleMessage.writePlain("Create the project alias", 0);
-    this.tsconfigDomainApp.loadTsconfigConfig();
-    const indexPath = join(projectPath, "index.ts");
-    this.tsconfigDomainApp.addPath(name, projectType, indexPath);
-    this.tsconfigDomainApp.saveTsconfigConfig();
     // Success message
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
