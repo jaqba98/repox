@@ -14,6 +14,7 @@ import {
   DomainConfigFileEnum
 } from "@lib/domain";
 import { WriteFileService } from "@lib/utils";
+import { GIT_IGNORE_CONTENT } from "@lib/const";
 
 @singleton()
 /**
@@ -53,6 +54,9 @@ export class GenerateWorkspaceAppService {
     const config = this.buildConfigFile.buildEmptyDomainConfig();
     this.writeFile.writeJson(DomainConfigFileEnum.configJson, config);
     this.createEmptyFile.create(".gitignore");
+    this.writeFile.writeText(".gitignore", GIT_IGNORE_CONTENT);
+    this.runCommand.exec("git add .");
+    this.runCommand.exec(`git commit -m "init commit"`);
     this.goInto.goInto("..");
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
