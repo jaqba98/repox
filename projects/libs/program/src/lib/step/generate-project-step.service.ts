@@ -5,6 +5,9 @@ import { SimpleMessageAppService } from "@lib/logger";
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
+import {
+  GenerateProjectAppService
+} from "../app-service/generate-project-app.service";
 
 @singleton()
 /**
@@ -12,9 +15,9 @@ import {
  */
 export class GenerateProjectStepService {
   constructor(
-    private readonly domainConfigApp: DomainConfigAppService,
     private readonly systemVerification: SystemVerificationAppService,
-    private readonly loggerMessageApp: SimpleMessageAppService
+    private readonly loggerMessageApp: SimpleMessageAppService,
+    private readonly generateProjectApp: GenerateProjectAppService
   ) {
   }
 
@@ -23,9 +26,7 @@ export class GenerateProjectStepService {
       "Project generation", 1, true, true
     );
     if (!this.systemVerification.checkSystem()) return;
-    this.domainConfigApp.loadDomainConfig();
-    const { name } = commandModel;
-    this.domainConfigApp.addProject(name);
-    this.domainConfigApp.saveDomainConfig();
+    const { name, type } = commandModel;
+    if (!this.generateProjectApp.generateProject(name, type)) return;
   }
 }

@@ -14,7 +14,7 @@ export class CreateFolderService {
 
   create(folderName: string): void {
     this.simpleMessage.writePlain(
-      `Create the ${folderName} workspace folder`, 0
+      `Create the ${folderName} folder`, 0
     );
     mkdirSync(folderName);
   }

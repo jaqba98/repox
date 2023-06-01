@@ -1,6 +1,5 @@
 import { singleton } from "tsyringe";
 import {
-  GenerateProjectCommandArgModel,
   GenerateWorkspaceCommandArgModel,
   ParamDomainModel
 } from "@lib/param-domain";

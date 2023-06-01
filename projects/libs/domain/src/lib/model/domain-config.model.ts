@@ -1,15 +1,11 @@
+import { ProjectDomainModel } from "@lib/project";
+
 /**
  * This is configuration model of domain.
  */
 
-export interface ProjectModel {
-  name: string;
-  type: 'app' | 'lib' | 'tool';
-  path: string;
-}
-
 export interface ProjectsModel {
-  [project: string]: ProjectModel;
+  [project: string]: ProjectDomainModel;
 }
 
 export interface DomainConfigModel {

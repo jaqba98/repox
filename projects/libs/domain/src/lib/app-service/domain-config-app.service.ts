@@ -2,6 +2,7 @@ import { singleton } from "tsyringe";
 import {
   DomainConfigStoreService
 } from "../dom-service/store/domain-config-store.service";
+import { ProjectTypeEnum } from "@lib/project";
 
 @singleton()
 /**
@@ -22,7 +23,13 @@ export class DomainConfigAppService {
     this.domainConfigStore.saveConfig();
   }
 
-  addProject(name: string): void {
-    this.domainConfigStore.addProject(name);
+  checkProjectExist(name: string): boolean {
+    return this.domainConfigStore.checkProjectExist(name);
+  }
+
+  addProject(
+    name: string, type: ProjectTypeEnum, path: string
+  ): void {
+    this.domainConfigStore.addProject(name, type, path);
   }
 }

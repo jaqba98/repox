@@ -2,6 +2,16 @@ import { singleton } from "tsyringe";
 import { DomainConfigFileEnum } from "@lib/domain";
 import { ReadFileService, WriteFileService } from "@lib/utils";
 import { DomainConfigModel } from "../../model/domain-config.model";
+import {
+  ConvertProjectTypeService
+} from "../../../../../project/src/lib/dom-service/converter/convert-project-type.service";
+import {
+  BuildProjectPathService
+} from "../../../../../project/src/lib/dom-service/builder/build-project-path.service";
+import { ProjectTypeEnum } from "@lib/project";
+import { SimpleMessageAppService } from "@lib/logger";
+import { SYSTEM_VERSION } from "@lib/const";
+import * as process from "process";
 
 @singleton()
 /**
@@ -9,12 +19,16 @@ import { DomainConfigModel } from "../../model/domain-config.model";
  * write and modify the domain configuration.
  */
 export class DomainConfigStoreService {
-  private store?: DomainConfigModel;
+  private store: DomainConfigModel;
 
   constructor(
     private readonly readFile: ReadFileService,
     private readonly writeFile: WriteFileService
   ) {
+    this.store = {
+      version: SYSTEM_VERSION,
+      projects: {}
+    };
   }
 
   loadConfig(): void {
@@ -29,10 +43,14 @@ export class DomainConfigStoreService {
     );
   }
 
-  addProject(name: string): void {
-    if (this.store === undefined) {
-      throw new Error("The store is undefined! Cannot add project!");
-    }
-    this.store.projects[name] = { name, type: "app", path: "" };
+  checkProjectExist(name: string): boolean {
+    return Object.values(this.store.projects)
+      .some(project => project.name === name);
+  }
+
+  addProject(
+    name: string, type: ProjectTypeEnum, path: string
+  ): void {
+    this.store.projects[name] = { name, type, path };
   }
 }
