@@ -7,7 +7,7 @@ import { SYSTEM_VERSION } from "@lib/const";
 
 @singleton()
 /**
- * The store of domain configuration, which is used to read,
+ * The base-store of domain configuration, which is used to read,
  * write and modify the domain configuration.
  */
 export class DomainConfigStoreService {

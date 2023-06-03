@@ -7,7 +7,7 @@ import {
 
 @singleton()
 /**
- * The store of tsconfig configuration, which is used to read,
+ * The base-store of tsconfig configuration, which is used to read,
  * write and modify the tsconfig configuration.
  */
 export class TsconfigStoreService {
