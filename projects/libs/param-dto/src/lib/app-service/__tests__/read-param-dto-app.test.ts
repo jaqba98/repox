@@ -57,8 +57,8 @@ describe("ReadParamDtoAppService - parameter order", () => {
     expect(runTest(["g", "w"]).success).toBeTruthy();
   });
 
-  test("Should be correct for the program: repox g w -t=__tests__", () => {
-    expect(runTest(["g", "w", "-t=__tests__"]).success).toBeTruthy();
+  test("Should be correct for the program: repox g w -t=test", () => {
+    expect(runTest(["g", "w", "-t=test"]).success).toBeTruthy();
   });
 
   test("Should be correct for the program: repox g -c -t", () => {
@@ -275,8 +275,8 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the program: repox generate --name=__tests__", () => {
-    const result = runTest(["generate", "--name=__tests__"]);
+  test("should be correct for the program: repox generate --name=test", () => {
+    const result = runTest(["generate", "--name=test"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -285,7 +285,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
     expect(result.tips).toEqual([]);
-    expect(paramBaseValue).toEqual("--name=__tests__");
+    expect(paramBaseValue).toEqual("--name=test");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
@@ -294,8 +294,8 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test('should be correct for the program: repox generate --name="__tests__"', () => {
-    const result = runTest(["generate", '--name="__tests__"']);
+  test('should be correct for the program: repox generate --name="test"', () => {
+    const result = runTest(["generate", '--name="test"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -304,7 +304,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
     expect(result.tips).toEqual([]);
-    expect(paramBaseValue).toEqual('--name="__tests__"');
+    expect(paramBaseValue).toEqual('--name="test"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
@@ -313,8 +313,8 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the program: repox generate --name='__tests__'", () => {
-    const result = runTest(["generate", "--name='__tests__'"]);
+  test("should be correct for the program: repox generate --name='test'", () => {
+    const result = runTest(["generate", "--name='test'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -323,7 +323,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
     expect(result.tips).toEqual([]);
-    expect(paramBaseValue).toEqual("--name='__tests__'");
+    expect(paramBaseValue).toEqual("--name='test'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
@@ -332,8 +332,8 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the program: repox generate --name=`__tests__`", () => {
-    const result = runTest(["generate", "--name=`__tests__`"]);
+  test("should be correct for the program: repox generate --name=`test`", () => {
+    const result = runTest(["generate", "--name=`test`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -342,7 +342,7 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
     expect(result.tips).toEqual([]);
-    expect(paramBaseValue).toEqual("--name=`__tests__`");
+    expect(paramBaseValue).toEqual("--name=`test`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
@@ -562,8 +562,8 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the program: repox generate -n=__tests__", () => {
-    const result = runTest(["generate", "-n=__tests__"]);
+  test("should be correct for the program: repox generate -n=test", () => {
+    const result = runTest(["generate", "-n=test"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -572,7 +572,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
     expect(result.tips).toEqual([]);
-    expect(paramBaseValue).toEqual("-n=__tests__");
+    expect(paramBaseValue).toEqual("-n=test");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
@@ -581,8 +581,8 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test('should be correct for the program: repox generate -n="__tests__"', () => {
-    const result = runTest(["generate", '-n="__tests__"']);
+  test('should be correct for the program: repox generate -n="test"', () => {
+    const result = runTest(["generate", '-n="test"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -591,7 +591,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
     expect(result.tips).toEqual([]);
-    expect(paramBaseValue).toEqual('-n="__tests__"');
+    expect(paramBaseValue).toEqual('-n="test"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
@@ -600,8 +600,8 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the program: repox generate -n='__tests__'", () => {
-    const result = runTest(["generate", "-n='__tests__'"]);
+  test("should be correct for the program: repox generate -n='test'", () => {
+    const result = runTest(["generate", "-n='test'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -610,7 +610,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
     expect(result.tips).toEqual([]);
-    expect(paramBaseValue).toEqual("-n='__tests__'");
+    expect(paramBaseValue).toEqual("-n='test'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
@@ -619,8 +619,8 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the program: repox generate -n=`__tests__`", () => {
-    const result = runTest(["generate", "-n=`__tests__`"]);
+  test("should be correct for the program: repox generate -n=`test`", () => {
+    const result = runTest(["generate", "-n=`test`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -629,7 +629,7 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(result.wrongParamIndexes).toEqual([]);
     expect(result.errors).toEqual([]);
     expect(result.tips).toEqual([]);
-    expect(paramBaseValue).toEqual("-n=`__tests__`");
+    expect(paramBaseValue).toEqual("-n=`test`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
