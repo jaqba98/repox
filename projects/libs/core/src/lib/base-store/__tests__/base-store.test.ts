@@ -74,3 +74,4 @@ describe("BaseStoreService", () => {
     expect(service.getItem<boolean>(["prop4", "prop41"])).toBeFalsy();
   });
 });
+// todo: refactor

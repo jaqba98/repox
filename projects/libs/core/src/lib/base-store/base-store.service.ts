@@ -66,3 +66,4 @@ export class BaseStoreService<TData> {
       : this.getCurrentItem<TItem>(dataElement, remainingPaths);
   }
 }
+// todo: refactor
