@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { BaseStoreAppService } from "@lib/base-base-store";
 import { ParamDtoModel } from "@lib/param-dto";
+import { BaseStoreService } from "@lib/core";
 
 @singleton()
 /**
@@ -8,5 +8,5 @@ import { ParamDtoModel } from "@lib/param-dto";
  * from other projects.
  */
 export class ParamDtoStoreAppService
-  extends BaseStoreAppService<ParamDtoModel> {
+  extends BaseStoreService<ParamDtoModel> {
 }
