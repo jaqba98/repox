@@ -23,7 +23,7 @@
       "@lib/utils": ["projects/libs/utils/src/index.ts"],
       "@lib/const": ["projects/libs/const/src/index.ts"],
       "@lib/project": ["projects/libs/project/src/index.ts"],
-      "@lib/base-store": ["projects/libs/base-store/src/index.ts"]
+      "@lib/core": ["projects/libs/core/src/index.ts"]
     }
   },
   "include": [

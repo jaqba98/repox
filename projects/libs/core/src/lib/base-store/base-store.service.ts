@@ -1,6 +1,10 @@
 import { singleton } from "tsyringe";
 
 @singleton()
+/**
+ * The base store service provides crude store operations.
+ * It extends other specific stores.
+ */
 export class BaseStoreService<TData> {
   private data: TData | undefined;
 
@@ -8,8 +12,8 @@ export class BaseStoreService<TData> {
     this.data = undefined;
   }
 
-  setData(model: TData): void {
-    this.data = model;
+  setData(data: TData): void {
+    this.data = data;
   }
 
   getData(): TData {
