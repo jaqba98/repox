@@ -12,10 +12,6 @@ import {
 import {
   FindParamDtoEntityService
 } from "../dom-service/finder/find-param-dto-entity.service";
-import {
-  AliasEnum,
-  ArgumentEnum
-} from "../../../../param-domain/src/lib/enum/argument.enum";
 
 @singleton()
 /**
