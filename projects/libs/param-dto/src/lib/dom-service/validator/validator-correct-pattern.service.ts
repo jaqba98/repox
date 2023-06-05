@@ -3,37 +3,39 @@ import { ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
+import { ParamDtoEntityModel } from "../../model/param-dto.model";
 import {
   ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
-import {
-  ParamDtoEntityModel,
-  ParamDtoModel
-} from "../../model/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
+import {
+  ParamDtoStoreService
+} from "../store/param-dto-store.service";
 
 @singleton()
 /**
  * Check the given DTO parameters have correct pattern.
  */
-export class CorrectPatternValidatorService
+export class ValidatorCorrectPatternService
   implements ValidatorDtoModel {
   constructor(
+    private readonly paramDtoStore: ParamDtoStoreService,
     private readonly buildParamDtoResult: BuildParamDtoResultService
   ) {
   }
 
-  runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
-      .filter(paramDto => !this.checkParamPattern(paramDto));
+  runValidator(): ParamDtoValidationModel {
+    const paramDto = this.paramDtoStore.getParamDto();
+    const wrongParamsDto = paramDto.params.filter(
+      param => !this.checkParamPattern(param)
+    );
     if (wrongParamsDto.length === 0) {
-      return this.buildParamDtoResult.buildSuccess(paramDto);
+      return this.buildParamDtoResult.buildSuccess();
     }
     return this.buildParamDtoResult.buildError(
       wrongParamsDto,
       ["You have used incorrect parameter pattern!"],
-      wrongParamsDto.map(wrongParam => this.getParamTip(wrongParam)),
-      paramDto
+      wrongParamsDto.map(param => this.getParamTip(param))
     );
   }
 
@@ -108,4 +110,3 @@ export class CorrectPatternValidatorService
     return `Correct pattern for ${paramBaseValue} is: ${pattern}`;
   }
 }
-// todo: refactor

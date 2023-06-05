@@ -1,28 +1,40 @@
 import { singleton } from "tsyringe";
 import { ParamDtoModel } from "../../model/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
+import {
+  ALIAS_PREFIX,
+  ARGUMENT_PREFIX,
+  EQUAL_SIGN,
+  VALUE_SEPARATION
+} from "../../const/param-dto.const";
+import {
+  ParamDtoStoreService
+} from "../store/param-dto-store.service";
 
 @singleton()
 /**
- * Building the parameter DTO model from the
- * real parameters from the command line.
+ * Build the parameter DTO model
+ * from the command line parameters.
  */
 export class BuildParamDtoService {
-  readParamDto(argv: Array<string>): ParamDtoModel {
-    return {
+  constructor(private readonly paramDtoStore: ParamDtoStoreService) {
+  }
+
+  buildParamDto(argv: Array<string>): void {
+    const paramDto: ParamDtoModel = {
       params: argv
         .map((arg: string, index: number) => ({
           paramBaseValue: arg,
           paramIndex: index,
           paramType: this.getParamType(arg, index),
-          paramHasValue: arg.includes("=")
+          paramHasValue: arg.includes(EQUAL_SIGN)
         }))
         .map(param => ({
           ...param,
           paramName: this.getParamName(
             param.paramBaseValue,
-            param.paramType,
-            param.paramHasValue
+            param.paramHasValue,
+            param.paramType
           ),
           paramValues: this.getParamValues(
             param.paramBaseValue,
@@ -34,11 +46,14 @@ export class BuildParamDtoService {
           paramHasManyValues: param.paramValues.length > 1
         }))
     };
+    this.paramDtoStore.setParamDto(paramDto);
   }
 
   private getParamType(arg: string, index: number): ParamTypeEnum {
-    if (arg.startsWith("--")) return ParamTypeEnum.argument;
-    if (arg.startsWith("-")) return ParamTypeEnum.alias;
+    if (arg.startsWith(ARGUMENT_PREFIX)) {
+      return ParamTypeEnum.argument;
+    }
+    if (arg.startsWith(ALIAS_PREFIX)) return ParamTypeEnum.alias;
     if (index === 0) return ParamTypeEnum.executor;
     if (index === 1) return ParamTypeEnum.application;
     if (index === 2) return ParamTypeEnum.program;
@@ -47,17 +62,17 @@ export class BuildParamDtoService {
 
   private getParamName(
     paramBaseValue: string,
-    paramType: ParamTypeEnum,
-    paramHasValue: boolean
+    paramHasValue: boolean,
+    paramType: ParamTypeEnum
   ): string {
     const paramName: string = paramHasValue ?
-      paramBaseValue.split("=")[0] :
+      paramBaseValue.split(EQUAL_SIGN)[0] :
       paramBaseValue;
     if (paramType === ParamTypeEnum.argument) {
-      return paramName.replace("--", "");
+      return paramName.replace(ARGUMENT_PREFIX, "");
     }
     if (paramType === ParamTypeEnum.alias) {
-      return paramName.replace("-", "");
+      return paramName.replace(ALIAS_PREFIX, "");
     }
     return paramName;
   }
@@ -68,11 +83,10 @@ export class BuildParamDtoService {
   ): Array<string> {
     if (!paramHasValue) return [];
     return paramBaseValue
-      .split("=")[1]
+      .split(EQUAL_SIGN)[1]
       .replace(/\s/g, "")
       .replace(/^(["'`])/, "")
       .replace(/(["'`])$/, "")
-      .split(",");
+      .split(VALUE_SEPARATION);
   }
 }
-// todo: refactor

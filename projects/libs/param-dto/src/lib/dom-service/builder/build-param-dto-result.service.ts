@@ -1,43 +1,51 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDtoValidationModel
-} from "../../model/param-dto-validation.model";
-import {
   ParamDtoEntityModel,
   ParamDtoModel
 } from "../../model/param-dto.model";
+import {
+  ParamDtoValidationModel
+} from "../../model/param-dto-validation.model";
+import {
+  ParamDtoStoreService
+} from "../store/param-dto-store.service";
 
 @singleton()
 /**
- * Build the result of param DTO validation
- * for successes and errors.
+ * Build the result of the param DTO validation
+ * for success and error.
  */
 export class BuildParamDtoResultService {
-  buildSuccess(paramDto: ParamDtoModel): ParamDtoValidationModel {
+  constructor(private readonly paramDtoStore: ParamDtoStoreService) {
+  }
+
+  buildSuccess(): ParamDtoValidationModel {
+    const paramDto = this.paramDtoStore.getParamDto();
     return {
       success: true,
-      wrongParamIndexes: [],
-      baseValues: paramDto.params.map(param => param.paramBaseValue),
+      wrongIndexes: [],
+      baseValues: this.getBaseValues(paramDto),
       errors: [],
-      tips: [],
-      model: paramDto
+      tips: []
     };
   }
 
   buildError(
     wrongParamsDto: Array<ParamDtoEntityModel>,
     errors: Array<string>,
-    tips: Array<string>,
-    paramDto: ParamDtoModel
+    tips: Array<string>
   ): ParamDtoValidationModel {
+    const paramDto = this.paramDtoStore.getParamDto();
     return {
       success: false,
-      wrongParamIndexes: wrongParamsDto.map(item => item.paramIndex),
-      baseValues: paramDto.params.map(param => param.paramBaseValue),
+      wrongIndexes: wrongParamsDto.map(item => item.paramIndex),
+      baseValues: this.getBaseValues(paramDto),
       errors,
-      tips,
-      model: paramDto
+      tips
     };
   }
+
+  private getBaseValues(paramDto: ParamDtoModel): Array<string> {
+    return paramDto.params.map(param => param.paramBaseValue);
+  }
 }
-// todo: refactor

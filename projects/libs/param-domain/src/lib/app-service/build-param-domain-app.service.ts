@@ -8,7 +8,6 @@ import {
 import {
   ParamDomainValidationModel
 } from "../model/param-domain/param-domain-validation.model";
-import { ParamDtoModel } from "@lib/param-dto";
 
 @singleton()
 /**
@@ -22,8 +21,8 @@ export class BuildParamDomainAppService {
   ) {
   }
 
-  build(paramDto: ParamDtoModel): ParamDomainValidationModel {
-    const paramDomain = this.buildParamDomain.build(paramDto);
+  build(): ParamDomainValidationModel {
+    const paramDomain = this.buildParamDomain.build();
     return this.paramDomain.runValidation(paramDomain);
   }
 }

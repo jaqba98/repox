@@ -13,12 +13,7 @@ import {
 } from "../../enum/command.enum";
 import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
 import { BuildParamModelService } from "./build-param-model.service";
-import {
-  ParamDtoEntityModel,
-  ParamDtoFinderService,
-  ParamDtoModel,
-  ParamTypeEnum
-} from "@lib/param-dto";
+import { GetParamDtoDataAppService } from "@lib/param-dto";
 
 @singleton()
 /**
@@ -26,32 +21,28 @@ import {
  */
 export class BuildParamDomainService {
   constructor(
-    private readonly paramDtoFinder: ParamDtoFinderService,
-    private readonly buildParamModel: BuildParamModelService
+    private readonly buildParamModel: BuildParamModelService,
+    private readonly getParamDto: GetParamDtoDataAppService
   ) {
   }
 
-  build(model: ParamDtoModel): ParamDomainModel {
-    const application = this.paramDtoFinder.findApplication(model);
-    const program = this.paramDtoFinder.findProgram(model).at(0);
-    const command = this.paramDtoFinder.findCommand(model).at(0);
-    const programBaseName = program ? program.paramName : "";
-    const commandBaseName = command ? command.paramName : "";
+  build(): ParamDomainModel {
+    const applicationIndex = this.getParamDto.getApplicationIndex();
+    const programBaseName = this.getParamDto.getProgramName();
+    const commandBaseName = this.getParamDto.getCommandName();
     const programName = this.getProgramName(programBaseName);
     const commandName = this.getCommandName(commandBaseName);
-    const programIndex = program ?
-      program.paramIndex :
-      application.paramIndex;
-    const commandIndex = command ?
-      command.paramIndex :
-      model.params.length;
-    const programArgs = this.paramDtoFinder.findProgramArgs(
-      model,
-      programIndex,
-      commandIndex
+    const programIndex = programBaseName === "" ?
+      applicationIndex :
+      this.getParamDto.getProgramIndex();
+    console.log(commandBaseName)
+    const commandIndex = commandBaseName === "" ?
+      this.getParamDto.getParamDto().params.length :
+      this.getParamDto.getCommandIndex();
+    const programArgs = this.getParamDto.getProgramArgs(
+      programIndex, commandIndex
     );
-    const commandArgs = this.paramDtoFinder.findCommandArgs(
-      model,
+    const commandArgs = this.getParamDto.getCommandArgs(
       commandIndex
     );
     const programFullArgs = this.buildArguments(programArgs);
@@ -122,7 +113,7 @@ export class BuildParamDomainService {
   }
 
   private buildArguments(
-    args: Array<ParamDtoEntityModel>
+    args: Array<any>
   ): Array<ParamDomainArgModel> {
     return args.map(arg => (<ParamDomainArgModel>{
       baseName: arg.paramBaseValue,
@@ -134,9 +125,9 @@ export class BuildParamDomainService {
     }));
   }
 
-  private getArgumentName(arg: ParamDtoEntityModel): ArgumentEnum {
+  private getArgumentName(arg: any): ArgumentEnum {
     const { paramType, paramName } = arg;
-    if (paramType === ParamTypeEnum.argument) {
+    if (<any>paramType === "argument") {
       const argument = Object.keys(ArgumentEnum).find(key =>
         ArgumentEnum[key as keyof typeof ArgumentEnum] === paramName
       );
@@ -144,7 +135,7 @@ export class BuildParamDomainService {
         ArgumentEnum[argument as keyof typeof ArgumentEnum] :
         ArgumentEnum.unknown;
     }
-    if (paramType === ParamTypeEnum.alias) {
+    if (<any>paramType === "alias") {
       const alias = Object.keys(AliasEnum).find(key =>
         AliasEnum[key as keyof typeof AliasEnum] === paramName
       );
@@ -155,4 +146,5 @@ export class BuildParamDomainService {
     return ArgumentEnum.unknown;
   }
 }
+
 // todo: refactor

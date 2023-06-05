@@ -3,43 +3,43 @@ import { ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
+import { ParamDtoEntityModel } from "../../model/param-dto.model";
 import {
   ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
-import {
-  ParamDtoEntityModel,
-  ParamDtoModel
-} from "../../model/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
+import {
+  ParamDtoStoreService
+} from "../store/param-dto-store.service";
 
 @singleton()
 /**
- * Check the given DTO parameters contain only supported characters.
+ * Check the given DTO parameters contain only supported signs.
  */
-export class OnlySupportedCharactersValidatorService
+export class ValidatorOnlySupportedSignService
   implements ValidatorDtoModel {
   constructor(
+    private readonly paramDtoStore: ParamDtoStoreService,
     private readonly buildParamDtoResult: BuildParamDtoResultService
   ) {
   }
 
-  runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
-      .filter(paramDto => !this.checkParamCharacters(paramDto));
+  runValidator(): ParamDtoValidationModel {
+    const paramDto = this.paramDtoStore.getParamDto();
+    const wrongParamsDto = paramDto.params.filter(
+      param => !this.checkParamSigns(param)
+    );
     if (wrongParamsDto.length === 0) {
-      return this.buildParamDtoResult.buildSuccess(paramDto);
+      return this.buildParamDtoResult.buildSuccess();
     }
     return this.buildParamDtoResult.buildError(
       wrongParamsDto,
-      ["You have added not supported characters!"],
-      wrongParamsDto.map(wrongParam => this.getParamTip(wrongParam)),
-      paramDto
+      ["You have used not supported signs!"],
+      wrongParamsDto.map(param => this.getParamTip(param))
     );
   }
 
-  private checkParamCharacters(
-    paramDto: ParamDtoEntityModel
-  ): boolean {
+  private checkParamSigns(paramDto: ParamDtoEntityModel): boolean {
     const { paramBaseValue, paramType } = paramDto;
     switch (paramType) {
       case ParamTypeEnum.executor:
@@ -69,13 +69,13 @@ export class OnlySupportedCharactersValidatorService
     switch (paramType) {
       case ParamTypeEnum.program:
       case ParamTypeEnum.command:
-        return this.buildSupportedCharactersMessage(
+        return this.buildSupportedSignsMessage(
           paramBaseValue,
           "[a-z] [A-Z] [0-9] [-]"
         );
       case ParamTypeEnum.argument:
       case ParamTypeEnum.alias:
-        return this.buildSupportedCharactersMessage(
+        return this.buildSupportedSignsMessage(
           paramBaseValue,
           "[a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"
         );
@@ -84,11 +84,10 @@ export class OnlySupportedCharactersValidatorService
     }
   }
 
-  private buildSupportedCharactersMessage(
+  private buildSupportedSignsMessage(
     paramBaseValue: string,
-    chars: string
+    signs: string
   ): string {
-    return `Supported characters for ${paramBaseValue} are: ${chars}`;
+    return `Supported signs for ${paramBaseValue} are: ${signs}`;
   }
 }
-// todo: refactor

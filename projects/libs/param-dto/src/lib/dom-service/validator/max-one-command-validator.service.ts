@@ -4,29 +4,32 @@ import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
 import {
+  FindParamDtoEntityService
+} from "../finder/find-param-dto-entity.service";
+import {
   ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
 import {
-  ParamDtoFinderService
-} from "../finder/param-dto-finder.service";
-import { ParamDtoModel } from "../../model/param-dto.model";
+  ParamDtoStoreService
+} from "../store/param-dto-store.service";
 
 @singleton()
 /**
- * Check the given DTO parameters have max one program
+ * Check the given DTO parameters have max one command
  * (0 or 1 if the program exist and 0 if the program not exist).
  */
 export class MaxOneCommandValidatorService
   implements ValidatorDtoModel {
   constructor(
+    private readonly paramDtoStore: ParamDtoStoreService,
     private readonly buildParamDtoResult: BuildParamDtoResultService,
-    private readonly paramDtoFinder: ParamDtoFinderService
+    private readonly findParamDtoEntity: FindParamDtoEntityService
   ) {
   }
 
-  runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const program = this.paramDtoFinder.findProgram(paramDto)[0];
-    const commands = this.paramDtoFinder.findCommand(paramDto);
+  runValidator(): ParamDtoValidationModel {
+    const program = this.findParamDtoEntity.findPrograms()[0];
+    const commands = this.findParamDtoEntity.findCommands();
     if (!program && commands.length > 0) {
       return this.buildParamDtoResult.buildError(
         commands,
@@ -34,8 +37,7 @@ export class MaxOneCommandValidatorService
         [
           "You have to specify a program.",
           "Pattern: repox <program> <arguments> <program> <arguments>"
-        ],
-        paramDto
+        ]
       );
     }
     if (program && commands.length > 1) {
@@ -45,11 +47,9 @@ export class MaxOneCommandValidatorService
         [
           "You have to specify one command for the given program.",
           "Pattern: repox <program> <arguments> <program> <arguments>"
-        ],
-        paramDto
+        ]
       );
     }
-    return this.buildParamDtoResult.buildSuccess(paramDto);
+    return this.buildParamDtoResult.buildSuccess();
   }
 }
-// todo: refactor

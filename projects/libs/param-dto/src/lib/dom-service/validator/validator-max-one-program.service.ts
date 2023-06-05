@@ -7,24 +7,27 @@ import {
   ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
 import {
-  ParamDtoFinderService
-} from "../finder/param-dto-finder.service";
-import { ParamDtoModel } from "../../model/param-dto.model";
+  FindParamDtoEntityService
+} from "../finder/find-param-dto-entity.service";
+import {
+  ParamDtoStoreService
+} from "../store/param-dto-store.service";
 
 @singleton()
 /**
  * Check the given DTO parameters have max one program.
  */
-export class MaxOneProgramValidatorService
+export class ValidatorMaxOneProgramService
   implements ValidatorDtoModel {
   constructor(
+    private readonly paramDtoStore: ParamDtoStoreService,
     private readonly buildParamDtoResult: BuildParamDtoResultService,
-    private readonly paramDtoFinder: ParamDtoFinderService
+    private readonly findParamDtoEntity: FindParamDtoEntityService
   ) {
   }
 
-  runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const programs = this.paramDtoFinder.findProgram(paramDto);
+  runValidator(): ParamDtoValidationModel {
+    const programs = this.findParamDtoEntity.findPrograms();
     if (programs.length > 1) {
       return this.buildParamDtoResult.buildError(
         programs,
@@ -32,11 +35,9 @@ export class MaxOneProgramValidatorService
         [
           "You have to specify max one program.",
           "Pattern: repox <program> <arguments> <program> <arguments>"
-        ],
-        paramDto
+        ]
       );
     }
-    return this.buildParamDtoResult.buildSuccess(paramDto);
+    return this.buildParamDtoResult.buildSuccess();
   }
 }
-// todo: refactor

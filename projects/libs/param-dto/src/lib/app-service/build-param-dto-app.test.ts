@@ -1,86 +1,91 @@
+import { container } from "tsyringe";
+import {
+  BuildParamDtoAppService
+} from "./build-param-dto-app.service";
+import {
+  ParamDtoStoreService
+} from "../dom-service/store/param-dto-store.service";
 import {
   ParamDtoValidationModel
-} from "../../model/param-dto-validation.model";
-import { container } from "tsyringe";
-import { ReadArgvService } from "../../infra/read-argv.service";
-import {
-  ReadParamDtoAppService
-} from "../read-param-dto-app.service";
+} from "../model/param-dto-validation.model";
+import { ParamDtoModel } from "../model/param-dto.model";
 
-const runTest = (argv: Array<string>): ParamDtoValidationModel => {
-  const child = container.createChildContainer();
-  child.register(ReadArgvService, {
-    useClass: class {
-      getArgv(): Array<string> {
-        return ["executor", "application", ...argv];
-      }
-    }
-  });
-  return child.resolve(ReadParamDtoAppService).read();
+const runTest = (argv: Array<string>): {
+  paramDto: ParamDtoModel,
+  paramDtoValidation: ParamDtoValidationModel
+} => {
+  const store = container.resolve(ParamDtoStoreService);
+  const service = container.resolve(BuildParamDtoAppService);
+  process.argv = ["executor", "application", ...argv];
+  service.read();
+  return {
+    paramDto: store.getParamDto(),
+    paramDtoValidation: store.getParamDtoValidation()
+  };
 };
 
-afterEach(() => {
+afterAll(() => {
   container.clearInstances();
   container.reset();
 });
 
-describe("ReadParamDtoAppService - parameter order", () => {
+describe("BuildParamDtoAppService - parameter order", () => {
   test("Should be correct for the program: repox", () => {
-    expect(runTest([]).success).toBeTruthy();
+    expect(runTest([]).paramDtoValidation.success).toBeTruthy();
   });
 
   test("Should be correct for the program: repox -v", () => {
-    expect(runTest(["-v"]).success).toBeTruthy();
+    expect(runTest(["-v"]).paramDtoValidation.success).toBeTruthy();
   });
 
   test("Should be correct for the program: repox g", () => {
-    expect(runTest(["g"]).success).toBeTruthy();
+    expect(runTest(["g"]).paramDtoValidation.success).toBeTruthy();
   });
 
   test("Should be correct for the program: repox g -c", () => {
-    expect(runTest(["g", "-c"]).success).toBeTruthy();
+    expect(runTest(["g", "-c"]).paramDtoValidation.success).toBeTruthy();
   });
 
   test("Should be correct for the program: repox -v -c", () => {
-    expect(runTest(["-v", "-c"]).success).toBeTruthy();
+    expect(runTest(["-v", "-c"]).paramDtoValidation.success).toBeTruthy();
   });
 
   test("Should be incorrect for the program: repox -v g", () => {
-    expect(runTest(["-v", "g"]).success).toBeFalsy();
+    expect(runTest(["-v", "g"]).paramDtoValidation.success).toBeFalsy();
   });
 
   test("Should be incorrect for the program: repox -v g -c", () => {
-    expect(runTest(["-v", "g", "-c"]).success).toBeFalsy();
+    expect(runTest(["-v", "g", "-c"]).paramDtoValidation.success).toBeFalsy();
   });
 
   test("Should be correct for the program: repox g w", () => {
-    expect(runTest(["g", "w"]).success).toBeTruthy();
+    expect(runTest(["g", "w"]).paramDtoValidation.success).toBeTruthy();
   });
 
   test("Should be correct for the program: repox g w -t=test", () => {
-    expect(runTest(["g", "w", "-t=test"]).success).toBeTruthy();
+    expect(runTest(["g", "w", "-t=test"]).paramDtoValidation.success).toBeTruthy();
   });
 
   test("Should be correct for the program: repox g -c -t", () => {
-    expect(runTest(["g", "-c", "-t"]).success).toBeTruthy();
+    expect(runTest(["g", "-c", "-t"]).paramDtoValidation.success).toBeTruthy();
   });
 
   test("Should be correct for the program: repox g -c w", () => {
-    expect(runTest(["g", "-c", "w"]).success).toBeTruthy();
+    expect(runTest(["g", "-c", "w"]).paramDtoValidation.success).toBeTruthy();
   });
 
   test("Should be correct for the program: repox g -c w -n", () => {
-    expect(runTest(["g", "-c", "w", "-n"]).success).toBeTruthy();
+    expect(runTest(["g", "-c", "w", "-n"]).paramDtoValidation.success).toBeTruthy();
   });
 });
 
-describe("ReadParamDtoAppService - parameter structure", () => {
+describe("BuildParamDtoAppService - parameter structure", () => {
   test("Should be correct for the program: repox", () => {
     const result = runTest([]);
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
   });
 
   test("Should be correct for the program: repox g", () => {
@@ -88,11 +93,11 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[2];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[2];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("generate");
     expect(paramIndex).toEqual(2);
     expect(paramType).toEqual("program");
@@ -107,11 +112,11 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[2];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([2]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for gener%%a_&te are: [a-z] [A-Z] [0-9] [-]"]);
+    } = result.paramDto.params[2];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([2]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for gener%%a_&te are: [a-z] [A-Z] [0-9] [-]"]);
     expect(paramBaseValue).toEqual("gener%%a_&te");
     expect(paramIndex).toEqual(2);
     expect(paramType).toEqual("program");
@@ -126,11 +131,11 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[2];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[2];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("generate-workspace");
     expect(paramIndex).toEqual(2);
     expect(paramType).toEqual("program");
@@ -145,11 +150,11 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[2];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([2]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for generate=true are: [a-z] [A-Z] [0-9] [-]"]);
+    } = result.paramDto.params[2];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([2]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for generate=true are: [a-z] [A-Z] [0-9] [-]"]);
     expect(paramBaseValue).toEqual("generate=true");
     expect(paramIndex).toEqual(2);
     expect(paramType).toEqual("program");
@@ -164,11 +169,11 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("workspace");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("command");
@@ -183,11 +188,11 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for work$$sp&&*ace are: [a-z] [A-Z] [0-9] [-]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for work$$sp&&*ace are: [a-z] [A-Z] [0-9] [-]"]);
     expect(paramBaseValue).toEqual("work$$sp&&*ace");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("command");
@@ -202,11 +207,11 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("workspace-node");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("command");
@@ -221,11 +226,11 @@ describe("ReadParamDtoAppService - parameter structure", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for workspace=true are: [a-z] [A-Z] [0-9] [-]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for workspace=true are: [a-z] [A-Z] [0-9] [-]"]);
     expect(paramBaseValue).toEqual("workspace=true");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("command");
@@ -236,17 +241,17 @@ describe("ReadParamDtoAppService - parameter structure", () => {
   });
 });
 
-describe("ReadParamDtoAppService - parameter structure for arguments", () => {
+describe("BuildParamDtoAppService - parameter structure for arguments", () => {
   test("should be correct for the program: repox generate --name", () => {
     const result = runTest(["generate", "--name"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -261,11 +266,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for --n$$a%^me are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --n$$a%^me are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("--n$$a%^me");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -280,11 +285,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name=test");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -299,11 +304,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual('--name="test"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -318,11 +323,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name='test'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -337,11 +342,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name=`test`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -356,11 +361,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for --name=te$$s&&t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=te$$s&&t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("--name=te$$s&&t");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -375,11 +380,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for --name=\"te$$s&&t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=\"te$$s&&t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual('--name="te$$s&&t"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -394,11 +399,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for --name='te$$s&&t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name='te$$s&&t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("--name='te$$s&&t'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -413,11 +418,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for --name=`te$$s&&t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=`te$$s&&t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("--name=`te$$s&&t`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -432,11 +437,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name=test1,test2,test3");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -451,11 +456,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual('--name="test1,test2,test3"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -470,11 +475,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name='test1,test2,test3'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -489,11 +494,11 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("--name=`test1,test2,test3`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -504,17 +509,17 @@ describe("ReadParamDtoAppService - parameter structure for arguments", () => {
   });
 });
 
-describe("ReadParamDtoAppService - parameter structure for aliases", () => {
+describe("BuildParamDtoAppService - parameter structure for aliases", () => {
   test("should be correct for the program: repox generate -i", () => {
     const result = runTest(["generate", "-i"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-i");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -529,11 +534,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for -% are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -% are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("-%");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -548,11 +553,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have used incorrect parameter pattern!"]);
-    expect(result.tips).toEqual(["Correct pattern for -name is: -<sign> or -<sign>=<value>"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used incorrect parameter pattern!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Correct pattern for -name is: -<sign> or -<sign>=<value>"]);
     expect(paramBaseValue).toEqual("-name");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -567,11 +572,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n=test");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -586,11 +591,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual('-n="test"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -605,11 +610,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n='test'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -624,11 +629,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n=`test`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -643,11 +648,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for -n=te%%s$$t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=te%%s$$t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("-n=te%%s$$t");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -662,11 +667,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for -n=\"te%%s$$t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=\"te%%s$$t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual('-n="te%%s$$t"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -681,11 +686,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for -n='te%%s$$t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n='te%%s$$t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("-n='te%%s$$t'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -700,11 +705,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeFalsy();
-    expect(result.wrongParamIndexes).toEqual([3]);
-    expect(result.errors).toEqual(["You have added not supported characters!"]);
-    expect(result.tips).toEqual(["Supported characters for -n=`te%%s$$t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeFalsy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
+    expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=`te%%s$$t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
     expect(paramBaseValue).toEqual("-n=`te%%s$$t`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -719,11 +724,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n=test1,test2,test3");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -738,11 +743,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual('-n="test1,test2,test3"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -757,11 +762,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n='test1,test2,test3'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -776,11 +781,11 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
-    } = result.model.params[3];
-    expect(result.success).toBeTruthy();
-    expect(result.wrongParamIndexes).toEqual([]);
-    expect(result.errors).toEqual([]);
-    expect(result.tips).toEqual([]);
+    } = result.paramDto.params[3];
+    expect(result.paramDtoValidation.success).toBeTruthy();
+    expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
+    expect(result.paramDtoValidation.errors).toEqual([]);
+    expect(result.paramDtoValidation.tips).toEqual([]);
     expect(paramBaseValue).toEqual("-n=`test1,test2,test3`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -790,4 +795,3 @@ describe("ReadParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 });
-// todo: refactor

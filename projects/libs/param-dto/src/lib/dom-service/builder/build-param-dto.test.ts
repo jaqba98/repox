@@ -1,9 +1,12 @@
 import { container } from "tsyringe";
-import { BuildParamDtoService } from "../build-param-dto.service";
-import { ParamDtoModel } from "../../../model/param-dto.model";
-import { ParamTypeEnum } from "../../../enum/param-type.enum";
+import { BuildParamDtoService } from "./build-param-dto.service";
+import { ParamDtoModel } from "../../model/param-dto.model";
+import { ParamTypeEnum } from "../../enum/param-type.enum";
+import {
+  ParamDtoStoreService
+} from "../store/param-dto-store.service";
 
-class MockReadProcessArgv {
+class MockReadArgvService {
   getArgv(): Array<string> {
     return [
       "node",
@@ -20,17 +23,16 @@ class MockReadProcessArgv {
   }
 }
 
-describe("ReadParamDtoService", () => {
-  const child = container.createChildContainer();
-  const service = child.resolve(BuildParamDtoService);
-  const argv = container.resolve(MockReadProcessArgv).getArgv();
+describe("BuildParamDtoService", () => {
+  const service = container.resolve(BuildParamDtoService);
+  const argv = container.resolve(MockReadArgvService).getArgv();
+  const store = container.resolve(ParamDtoStoreService);
 
-  afterAll(() => {
-    container.clearInstances();
-  });
+  afterAll(() => container.clearInstances());
 
   test("Should correctly build param DTO model", () => {
-    expect(service.readParamDto(argv)).toEqual<ParamDtoModel>({
+    service.buildParamDto(argv);
+    expect(store.getParamDto()).toEqual<ParamDtoModel>({
       params: [
         {
           paramBaseValue: "node",
@@ -124,6 +126,5 @@ describe("ReadParamDtoService", () => {
         }
       ]
     });
-  })
+  });
 });
-// todo: refactor

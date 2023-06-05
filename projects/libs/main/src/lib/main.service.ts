@@ -1,6 +1,9 @@
 import "core-js/features/reflect";
 import { container, singleton } from "tsyringe";
-import { ReadParamDtoAppService } from "@lib/param-dto";
+import {
+  BuildParamDtoAppService,
+  GetParamDtoDataAppService
+} from "@lib/param-dto";
 import { ParamErrorMessageAppService } from "@lib/logger";
 import { BuildParamDomainAppService } from "@lib/param-domain";
 import { SelectProgramAppService } from "@lib/launcher";
@@ -11,24 +14,26 @@ import { SelectProgramAppService } from "@lib/launcher";
  */
 export class MainService {
   constructor(
-    private readonly readParamDto: ReadParamDtoAppService,
+    private readonly readParamDto: BuildParamDtoAppService,
     private readonly paramErrorMessage: ParamErrorMessageAppService,
     private readonly buildParamDomain: BuildParamDomainAppService,
-    private readonly selectProgram: SelectProgramAppService
+    private readonly selectProgram: SelectProgramAppService,
+    private readonly getParamDto: GetParamDtoDataAppService
   ) {
   }
   run(): void {
-    const paramDto = this.readParamDto.read();
+    this.readParamDto.read();
+    const paramDto = this.getParamDto.getParamDtoValidation();
     if (!paramDto.success) {
       this.paramErrorMessage.writeParamError(
-        paramDto.wrongParamIndexes,
+        paramDto.wrongIndexes,
         paramDto.baseValues,
         paramDto.errors,
         paramDto.tips
       );
       return;
     }
-    const paramDomain = this.buildParamDomain.build(paramDto.model);
+    const paramDomain = this.buildParamDomain.build();
     if (!paramDomain.success) {
       this.paramErrorMessage.writeParamError(
         paramDomain.wrongParamIndexes,

@@ -4,35 +4,38 @@ import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
 import {
+  FindParamDtoEntityService
+} from "../finder/find-param-dto-entity.service";
+import { ParamDtoEntityModel } from "../../model/param-dto.model";
+import {
   ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
-import {
-  ParamDtoFinderService
-} from "../finder/param-dto-finder.service";
-import {
-  ParamDtoEntityModel,
-  ParamDtoModel
-} from "../../model/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
+import {
+  ParamDtoStoreService
+} from "../store/param-dto-store.service";
 
 @singleton()
 /**
  * Check the given DTO parameters are in correct order.
  */
-export class CorrectOrderValidatorService
+export class ValidatorCorrectOrderService
   implements ValidatorDtoModel {
   constructor(
+    private readonly paramDtoStore: ParamDtoStoreService,
     private readonly buildParamDtoResult: BuildParamDtoResultService,
-    private readonly paramDtoFinder: ParamDtoFinderService
+    private readonly findParamDtoEntity: FindParamDtoEntityService
   ) {
   }
 
-  runValidator(paramDto: ParamDtoModel): ParamDtoValidationModel {
-    const program = this.paramDtoFinder.findProgram(paramDto)[0];
-    const wrongParamsDto: Array<ParamDtoEntityModel> = paramDto.params
-      .filter(param => !this.checkParamOrder(param, program));
+  runValidator(): ParamDtoValidationModel {
+    const paramDto = this.paramDtoStore.getParamDto();
+    const program = this.findParamDtoEntity.findPrograms()[0];
+    const wrongParamsDto = paramDto.params.filter(
+      param => !this.checkParamOrder(param, program)
+    );
     if (wrongParamsDto.length === 0) {
-      return this.buildParamDtoResult.buildSuccess(paramDto);
+      return this.buildParamDtoResult.buildSuccess();
     }
     return this.buildParamDtoResult.buildError(
       wrongParamsDto,
@@ -40,27 +43,27 @@ export class CorrectOrderValidatorService
       [
         "You have to specify the program in the correct order.",
         "Pattern: repox <program> <arguments> <program> <arguments>"
-      ],
-      paramDto
+      ]
     );
   }
 
   private checkParamOrder(
-    param: ParamDtoEntityModel,
+    paramDto: ParamDtoEntityModel,
     program: ParamDtoEntityModel | undefined
   ): boolean {
-    const paramOrder = this.getParamOrder()
-      .find(order => order.paramTypes.includes(param.paramType));
+    const paramOrder = this.getParamOrder().find(
+      order => order.paramTypes.includes(paramDto.paramType)
+    );
     if (!paramOrder) {
       throw new Error("Not supported param type!");
     }
     if (paramOrder.order === 3 && !program) {
-      return param.paramIndex >= 2;
+      return paramDto.paramIndex >= 2;
     }
     if (paramOrder.order === 3 && program) {
-      return param.paramIndex >= paramOrder.order;
+      return paramDto.paramIndex >= paramOrder.order;
     }
-    return param.paramIndex === paramOrder.order;
+    return paramDto.paramIndex === paramOrder.order;
   }
 
   private getParamOrder(): Array<{
@@ -82,4 +85,3 @@ export class CorrectOrderValidatorService
     ];
   }
 }
-// todo: refactor
