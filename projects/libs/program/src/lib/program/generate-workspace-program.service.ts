@@ -17,7 +17,7 @@ export class GenerateWorkspaceProgramService {
   ) {
   }
 
-  run(paramDomain: ParamDomainModel): void {
+  run(): void {
     const commandModel = <GenerateWorkspaceCommandArgModel>
       paramDomain.command.model;
     this.step.runSteps(commandModel);

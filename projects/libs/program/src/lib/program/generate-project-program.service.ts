@@ -17,7 +17,7 @@ export class GenerateProjectProgramService {
   ) {
   }
 
-  run(paramDomain: ParamDomainModel): void {
+  run(): void {
     const commandModel = <GenerateProjectCommandArgModel>
       paramDomain.command.model;
     this.step.runSteps(commandModel);

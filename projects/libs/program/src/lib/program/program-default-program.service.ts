@@ -17,7 +17,7 @@ export class ProgramDefaultProgramService {
   ) {
   }
 
-  run(paramDomain: ParamDomainModel): void {
+  run(): void {
     const programModel = <DefaultProgramArgModel>
       paramDomain.program.model;
     this.programDefaultStep.runSteps(programModel);
