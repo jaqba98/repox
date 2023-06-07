@@ -25,7 +25,7 @@ export class GetParamDependencyService {
           args: {
             [ArgumentEnum.version]: {
               name: ArgumentEnum.version,
-              value: [],
+              values: [],
               valueMode: "empty",
               required: false
             }
@@ -44,7 +44,7 @@ export class GetParamDependencyService {
               args: {
                 [ArgumentEnum.name]: {
                   name: ArgumentEnum.name,
-                  value: [],
+                  values: [],
                   valueMode: "single",
                   required: true
                 }
@@ -55,13 +55,13 @@ export class GetParamDependencyService {
               args: {
                 [ArgumentEnum.name]: {
                   name: ArgumentEnum.name,
-                  value: [],
+                  values: [],
                   valueMode: "single",
                   required: true
                 },
                 [ArgumentEnum.type]: {
                   name: ArgumentEnum.type,
-                  value: ["app", "lib", "tool"],
+                  values: ["app", "lib", "tool"],
                   valueMode: "single",
                   required: true
                 }
@@ -83,7 +83,7 @@ export class GetParamDependencyService {
               args: {
                 [ArgumentEnum.name]: {
                   name: ArgumentEnum.name,
-                  value: [],
+                  values: [],
                   valueMode: "single",
                   required: true
                 }

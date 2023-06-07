@@ -9,8 +9,8 @@ import { ProgramEnum } from "../../enum/program.enum";
 
 export interface ParamDependencyArgModel {
   name: ArgumentEnum;
-  value: Array<string>;
-  valueMode: "empty" | "single" | "many",
+  values: Array<string>;
+  valueMode: "empty" | "single" | "many";
   required: boolean;
 }
 
@@ -32,4 +32,3 @@ export interface ParamDependencyModel {
   commands: ParamDependencyCommandsModel;
   args: ParamDependencyArgsModel;
 }
-// todo: refactor

@@ -1,5 +1,5 @@
 /**
- * List of all programs.
+ * The enum contains all programs available in the system.
  */
 
 export enum ProgramEnum {
@@ -13,4 +13,3 @@ export enum ProgramAliasEnum {
   generate = "g",
   build = "b"
 }
-// todo: refactor

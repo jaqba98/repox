@@ -17,7 +17,7 @@ export class BuildParamDomainResultService {
   ): ParamDomainValidationModel {
     return {
       success: true,
-      wrongParamIndexes: [],
+      wrongIndexes: [],
       errors: [],
       tips: [],
       paramDomain
@@ -32,7 +32,7 @@ export class BuildParamDomainResultService {
   ): ParamDomainValidationModel {
     return {
       success: false,
-      wrongParamIndexes,
+      wrongIndexes: wrongParamIndexes,
       errors,
       tips,
       paramDomain

@@ -1,16 +1,16 @@
 import { singleton } from "tsyringe";
 import {
-  DefaultProgramArgModel,
-  EmptyProgramArgModel,
-  ProgramArgumentModel
-} from "../../model/argument/program-argument.model";
+  DefaultProgramArgDomainModel,
+  EmptyProgramArgDomainModel,
+  ProgramArgDomainModel
+} from "../../model/arg-domain/program-arg-domain.model";
 import {
   BuildProjectCommandArgModel,
-  CommandArgumentModel,
+  CommandArgDomainModel,
   EmptyCommandArgModel,
   GenerateProjectCommandArgModel,
   GenerateWorkspaceCommandArgModel
-} from "../../model/argument/command-argument.model";
+} from "../../model/arg-domain/command-arg-domain.model";
 import { ProgramEnum } from "../../enum/program.enum";
 import { CommandEnum } from "../../enum/command.enum";
 import {
@@ -27,12 +27,12 @@ export class BuildParamModelService {
   buildProgramModel(
     programName: ProgramEnum,
     model: Array<ParamDomainArgModel>
-  ): ProgramArgumentModel {
+  ): ProgramArgDomainModel {
     switch (programName) {
       case ProgramEnum.default:
         return this.buildDefaultProgram(model);
       default:
-        return <EmptyProgramArgModel>{};
+        return <EmptyProgramArgDomainModel>{};
     }
   }
 
@@ -40,7 +40,7 @@ export class BuildParamModelService {
     programName: ProgramEnum,
     commandName: CommandEnum,
     model: Array<ParamDomainArgModel>
-  ): CommandArgumentModel {
+  ): CommandArgDomainModel {
     const fullName = `${programName}-${commandName}`;
     switch (fullName) {
       case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
@@ -56,7 +56,7 @@ export class BuildParamModelService {
 
   private buildDefaultProgram(
     model: Array<ParamDomainArgModel>
-  ): DefaultProgramArgModel {
+  ): DefaultProgramArgDomainModel {
     return {
       version: this.getVal(model, ArgumentEnum.version, false)
     }

@@ -1,5 +1,6 @@
 /**
- * List of all arguments and aliases.
+ * The enum contains all arguments and aliases
+ * available in the system.
  */
 
 export enum ArgumentEnum {
@@ -14,4 +15,3 @@ export enum AliasEnum {
   name = "n",
   type = "t"
 }
-// todo: refactor

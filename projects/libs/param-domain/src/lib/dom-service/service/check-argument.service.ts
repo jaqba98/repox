@@ -9,7 +9,7 @@ import { singleton } from "tsyringe";
 @singleton()
 /**
  * The service is responsible for check value mode
- * for given argument.
+ * for given arg-domain.
  */
 export class CheckArgumentService {
   valueMode(
@@ -46,16 +46,16 @@ export class CheckArgumentService {
     dependencyArgs: ParamDependencyArgsModel
   ): { success: boolean; error: string; index: number } {
     const arg = dependencyArgs[paramArgs.name];
-    if (arg.value.length === 0) {
+    if (arg.values.length === 0) {
       return { success: true, error: "", index: paramArgs.index }
     }
     const wrongValues = paramArgs.values
-      .filter(paramArg => !arg.value.includes(paramArg));
+      .filter(paramArg => !arg.values.includes(paramArg));
     if (wrongValues.length === 0) {
       return { success: true, error: "", index: paramArgs.index }
     }
     const errorValues = wrongValues.join(',');
-    const supportedValues = arg.value.join(',');
+    const supportedValues = arg.values.join(',');
     return {
       success: false,
       error: `The argument cannot contain values: ${errorValues}, supported values are: ${supportedValues}`,

@@ -1,20 +1,21 @@
 import { ArgumentEnum } from "../../enum/argument.enum";
 import { ProgramEnum } from "../../enum/program.enum";
 import {
-  ProgramArgumentModel
-} from "../argument/program-argument.model";
+  ProgramArgDomainModel
+} from "../arg-domain/program-arg-domain.model";
 import { CommandEnum } from "../../enum/command.enum";
 import {
-  CommandArgumentModel
-} from "../argument/command-argument.model";
+  CommandArgDomainModel
+} from "../arg-domain/command-arg-domain.model";
 
 /**
- * Domain parameter model for all parameters built from dto.
+ * Domain parameter model for all parameters
+ * prepared with param DTO model.
  */
 
-export interface ParamDomainBaseEntityModel<TName> {
+export interface ParamDomainBaseEntityModel<TParamName> {
   baseName: string;
-  name: TName;
+  name: TParamName;
   index: number;
 }
 
@@ -25,14 +26,13 @@ export interface ParamDomainArgModel
   hasManyValues: boolean;
 }
 
-export interface ParamDomainEntityModel<TName, TArgs>
-  extends ParamDomainBaseEntityModel<TName> {
+export interface ParamDomainEntityModel<TParamName, TParamModel>
+  extends ParamDomainBaseEntityModel<TParamName> {
   args: Array<ParamDomainArgModel>;
-  model: TArgs;
+  model: TParamModel;
 }
 
 export interface ParamDomainModel {
-  program: ParamDomainEntityModel<ProgramEnum, ProgramArgumentModel>;
-  command: ParamDomainEntityModel<CommandEnum, CommandArgumentModel>;
+  program: ParamDomainEntityModel<ProgramEnum, ProgramArgDomainModel>;
+  command: ParamDomainEntityModel<CommandEnum, CommandArgDomainModel>;
 }
-// todo: refactor
