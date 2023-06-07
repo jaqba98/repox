@@ -22,24 +22,27 @@ import { ArgumentEnum } from "../../enum/argument.enum";
 import {
   CheckArgumentService
 } from "../service/check-argument.service";
+import {
+  ParamDomainStoreService
+} from "../store/param-domain-store.service";
 
 @singleton()
 /**
  * The validator is responsible for checking that the given program
  * arguments are correct.
  */
-export class ProgramArgumentsCorrectService
+export class ValidatorProgramArgumentsCorrectService
   implements ValidatorDomainModel {
   constructor(
     private readonly getParamDependency: GetParamDependencyService,
     private readonly buildParamDomain: BuildParamDomainResultService,
-    private readonly checkArgument: CheckArgumentService
+    private readonly checkArgument: CheckArgumentService,
+    private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
-    paramDomain: ParamDomainModel,
-  ): ParamDomainValidationModel {
+  runValidator(): ParamDomainValidationModel {
+    const paramDomain = this.paramDomainStore.getParamDomain();
     const programName: ProgramEnum = paramDomain.program.name;
     const programDep: ParamDependencyModel = this.getParamDependency
       .getDependency(programName);
@@ -49,16 +52,14 @@ export class ProgramArgumentsCorrectService
       .map(arg => this.checkArgument.valueMode(arg, programArgs))
       .filter(arg => !arg.success);
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain);
+      return this.buildParamDomain.buildSuccess();
     }
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
       [...wrongArgs.map(arg => arg.error)],
       [
         "Check the documentation to get full list of arguments."
-      ],
-      paramDomain
+      ]
     );
   }
 }
-// todo: refactor

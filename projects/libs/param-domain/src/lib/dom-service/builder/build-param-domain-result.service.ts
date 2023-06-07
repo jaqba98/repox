@@ -1,42 +1,33 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDomainModel
-} from "../../model/param-domain/param-domain.model";
-import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 
 @singleton()
 /**
- * Build the result of param domain validation
- * for successes and errors.
+ * Build the result of the param domain validation
+ * for success and error.
  */
 export class BuildParamDomainResultService {
-  buildSuccess(
-    paramDomain: ParamDomainModel
-  ): ParamDomainValidationModel {
+  buildSuccess(): ParamDomainValidationModel {
     return {
       success: true,
       wrongIndexes: [],
       errors: [],
-      tips: [],
-      paramDomain
+      tips: []
     };
   }
 
   buildError(
-    wrongParamIndexes: Array<number>,
+    wrongIndexes: Array<number>,
     errors: Array<string>,
-    tips: Array<string>,
-    paramDomain: ParamDomainModel
+    tips: Array<string>
   ): ParamDomainValidationModel {
     return {
       success: false,
-      wrongIndexes: wrongParamIndexes,
+      wrongIndexes,
       errors,
-      tips,
-      paramDomain
+      tips
     };
   }
 }
-// todo: refactor

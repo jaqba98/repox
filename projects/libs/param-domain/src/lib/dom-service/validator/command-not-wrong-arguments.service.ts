@@ -6,9 +6,6 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainModel
-} from "../../model/param-domain/param-domain.model";
-import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import {
@@ -19,23 +16,26 @@ import { CommandEnum } from "../../enum/command.enum";
 import {
   GetParamDependencyService
 } from "../service/get-param-dependency.service";
+import {
+  ParamDomainStoreService
+} from "../store/param-domain-store.service";
 
 @singleton()
 /**
  * The validator is responsible for checking that the given command
  * does not contain wrong arguments.
  */
-export class CommandNotContainsWrongArgumentsService
+export class CommandNotWrongArgumentsService
   implements ValidatorDomainModel {
   constructor(
     private readonly getParamDependency: GetParamDependencyService,
-    private readonly buildParamDomain: BuildParamDomainResultService
+    private readonly buildParamDomain: BuildParamDomainResultService,
+    private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
-    paramDomain: ParamDomainModel,
-  ): ParamDomainValidationModel {
+  runValidator(): ParamDomainValidationModel {
+    const paramDomain = this.paramDomainStore.getParamDomain();
     const programName: ProgramEnum = paramDomain.program.name;
     const commandName: CommandEnum = paramDomain.command.name;
     const programDep: ParamDependencyModel = this.getParamDependency
@@ -46,7 +46,7 @@ export class CommandNotContainsWrongArgumentsService
       !commandArgs.find(commandArg => commandArg.name === arg.name)
     );
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain);
+      return this.buildParamDomain.buildSuccess();
     }
     const notExistedArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
@@ -54,9 +54,7 @@ export class CommandNotContainsWrongArgumentsService
       ["You have specified not existed arguments for command!"],
       [
         `Not existed arguments for command: ${notExistedArgs}`
-      ],
-      paramDomain
+      ]
     );
   }
 }
-// todo: refactor

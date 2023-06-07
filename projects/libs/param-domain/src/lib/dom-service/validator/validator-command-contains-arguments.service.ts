@@ -9,9 +9,6 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainModel
-} from "../../model/param-domain/param-domain.model";
-import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import { ProgramEnum } from "../../enum/program.enum";
@@ -19,48 +16,48 @@ import { CommandEnum } from "../../enum/command.enum";
 import {
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
-import { ArgumentEnum } from "../../enum/argument.enum";
 import {
-  CheckArgumentService
-} from "../service/check-argument.service";
+  ParamDomainStoreService
+} from "../store/param-domain-store.service";
 
 @singleton()
 /**
  * The validator is responsible for checking that the given command
- * arguments are correct.
+ * contains all required arguments.
  */
-export class CommandArgumentsCorrectService
+export class ValidatorCommandContainsArgumentsService
   implements ValidatorDomainModel {
   constructor(
     private readonly getParamDependency: GetParamDependencyService,
     private readonly buildParamDomain: BuildParamDomainResultService,
-    private readonly checkArgument: CheckArgumentService
+    private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
-    paramDomain: ParamDomainModel,
-  ): ParamDomainValidationModel {
+  runValidator(): ParamDomainValidationModel {
+    const paramDomain = this.paramDomainStore.getParamDomain();
     const programName: ProgramEnum = paramDomain.program.name;
     const commandName: CommandEnum = paramDomain.command.name;
     const programDep: ParamDependencyModel = this.getParamDependency
       .getDependency(programName);
-    const commandArgs = programDep.commands[commandName].args;
-    const wrongArgs = paramDomain.command.args
-      .filter(arg => arg.name !== ArgumentEnum.unknown)
-      .map(arg => this.checkArgument.valueMode(arg, commandArgs))
-      .filter(arg => !arg.success);
+    const command = programDep.commands[commandName];
+    const commandArgs = command.args;
+    const wrongArgs = Object.values(commandArgs)
+      .filter(commandArg => commandArg.required)
+      .filter(commandArg => !paramDomain.command.args
+        .find(arg => arg.name === commandArg.name)
+      );
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain);
+      return this.buildParamDomain.buildSuccess();
     }
+    const missingArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
-      [...wrongArgs.map(arg => arg.index)],
-      [...wrongArgs.map(arg => arg.error)],
+      [],
+      ["You have not specified all required arguments for command!"],
       [
-        "Check the documentation to get full list of arguments."
-      ],
-      paramDomain
+        "You have to specify required arguments.",
+        `Missing arguments for command are: ${missingArgs}`
+      ]
     );
   }
 }
-// todo: refactor

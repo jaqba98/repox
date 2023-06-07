@@ -6,9 +6,6 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainModel
-} from "../../model/param-domain/param-domain.model";
-import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import {
@@ -18,23 +15,26 @@ import { ProgramEnum } from "../../enum/program.enum";
 import {
   GetParamDependencyService
 } from "../service/get-param-dependency.service";
+import {
+  ParamDomainStoreService
+} from "../store/param-domain-store.service";
 
 @singleton()
 /**
  * The validator is responsible for checking that the given program
  * does not contain wrong arguments.
  */
-export class ProgramNotContainsWrongArgumentsService
+export class ValidatorProgramNotWrongArgumentsService
   implements ValidatorDomainModel {
   constructor(
     private readonly getParamDependency: GetParamDependencyService,
-    private readonly buildParamDomain: BuildParamDomainResultService
+    private readonly buildParamDomain: BuildParamDomainResultService,
+    private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
-    paramDomain: ParamDomainModel,
-  ): ParamDomainValidationModel {
+  runValidator(): ParamDomainValidationModel {
+    const paramDomain = this.paramDomainStore.getParamDomain();
     const programName: ProgramEnum = paramDomain.program.name;
     const programDep: ParamDependencyModel = this.getParamDependency
       .getDependency(programName);
@@ -43,7 +43,7 @@ export class ProgramNotContainsWrongArgumentsService
       !programArgs.find(programArg => programArg.name === arg.name)
     );
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain);
+      return this.buildParamDomain.buildSuccess();
     }
     const notExistedArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
@@ -51,9 +51,7 @@ export class ProgramNotContainsWrongArgumentsService
       ["You have specified not existed arguments for program!"],
       [
         `Not existed arguments for program: ${notExistedArgs}`
-      ],
-      paramDomain
+      ]
     );
   }
 }
-// todo: refactor

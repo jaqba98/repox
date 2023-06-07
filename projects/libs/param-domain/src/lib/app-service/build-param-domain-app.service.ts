@@ -3,27 +3,23 @@ import {
   BuildParamDomainService
 } from "../dom-service/builder/build-param-domain.service";
 import {
-  ParamDomainValidationService
-} from "../dom-service/validation-domain/param-domain-validation.service";
-import {
-  ParamDomainValidationModel
-} from "../model/param-domain/param-domain-validation.model";
+  ValidationParamDomainService
+} from "../dom-service/validation/validation-param-domain.service";
 
 @singleton()
 /**
  * The app service is responsible for building
- * parameter domain model from command line.
+ * parameter domain model from param DTO.
  */
 export class BuildParamDomainAppService {
   constructor(
     private readonly buildParamDomain: BuildParamDomainService,
-    private readonly paramDomain: ParamDomainValidationService
+    private readonly paramDomain: ValidationParamDomainService
   ) {
   }
 
-  build(): ParamDomainValidationModel {
-    const paramDomain = this.buildParamDomain.build();
-    return this.paramDomain.runValidation(paramDomain);
+  build(): void {
+    this.buildParamDomain.build();
+    this.paramDomain.runValidation();
   }
 }
-// todo: refactor

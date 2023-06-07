@@ -3,12 +3,12 @@ import { ProgramEnum } from "../../enum/program.enum";
 import {
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
-import { ArgumentEnum } from "../../enum/argument.enum";
 import { CommandEnum } from "../../enum/command.enum";
+import { ArgumentEnum } from "../../enum/argument.enum";
 
 @singleton()
 /**
- * Get dependency between programs, commands arguments and aliases.
+ * Get dependency between programs, commands and arguments.
  */
 export class GetParamDependencyService {
   getDependency(program: ProgramEnum): ParamDependencyModel {
@@ -97,4 +97,3 @@ export class GetParamDependencyService {
     }
   }
 }
-// todo: refactor

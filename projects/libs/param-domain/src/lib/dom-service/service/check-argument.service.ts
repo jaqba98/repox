@@ -1,66 +1,67 @@
+import { singleton } from "tsyringe";
 import {
   ParamDomainArgModel
 } from "../../model/param-domain/param-domain.model";
 import {
   ParamDependencyArgsModel
 } from "../../model/param-domain/param-dependency.model";
-import { singleton } from "tsyringe";
 
 @singleton()
 /**
  * The service is responsible for check value mode
- * for given arg-domain.
+ * for given argument.
  */
 export class CheckArgumentService {
   valueMode(
-    programArg: ParamDomainArgModel,
+    domainArg: ParamDomainArgModel,
     dependencyArgs: ParamDependencyArgsModel
   ): { success: boolean; error: string; index: number } {
-    const arg = dependencyArgs[programArg.name];
-    if (arg.valueMode === "empty" && programArg.values.length !== 0) {
+    const arg = dependencyArgs[domainArg.name];
+    const { valueMode } = arg;
+    if (valueMode === "empty" && domainArg.values.length !== 0) {
       return {
         success: false,
         error: `The ${arg.name} argument has to empty!`,
-        index: programArg.index
+        index: domainArg.index
       }
     }
-    if (arg.valueMode === "single" && programArg.values.length !== 1) {
+    if (valueMode === "single" && domainArg.values.length !== 1) {
       return {
         success: false,
         error: `The ${arg.name} argument has to single value!`,
-        index: programArg.index
+        index: domainArg.index
       }
     }
-    if (arg.valueMode === "many" && programArg.values.length <= 1) {
+    if (valueMode === "many" && domainArg.values.length <= 1) {
       return {
         success: false,
         error: `The ${arg.name} argument has to multiple value!`,
-        index: programArg.index
+        index: domainArg.index
       }
     }
-    return { success: true, error: "", index: programArg.index }
+    return { success: true, error: "", index: domainArg.index }
   }
 
   argumentValue(
-    paramArgs: ParamDomainArgModel,
+    domainArgs: ParamDomainArgModel,
     dependencyArgs: ParamDependencyArgsModel
   ): { success: boolean; error: string; index: number } {
-    const arg = dependencyArgs[paramArgs.name];
+    const arg = dependencyArgs[domainArgs.name];
     if (arg.values.length === 0) {
-      return { success: true, error: "", index: paramArgs.index }
+      return { success: true, error: "", index: domainArgs.index }
     }
-    const wrongValues = paramArgs.values
+    const wrongValues = domainArgs.values
       .filter(paramArg => !arg.values.includes(paramArg));
     if (wrongValues.length === 0) {
-      return { success: true, error: "", index: paramArgs.index }
+      return { success: true, error: "", index: domainArgs.index }
     }
     const errorValues = wrongValues.join(',');
     const supportedValues = arg.values.join(',');
     return {
       success: false,
-      error: `The argument cannot contain values: ${errorValues}, supported values are: ${supportedValues}`,
-      index: paramArgs.index
+      error: `The argument cannot contain values: ${errorValues},`
+        .concat(`supported values are: ${supportedValues}`),
+      index: domainArgs.index
     }
   }
 }
-// todo: refactor

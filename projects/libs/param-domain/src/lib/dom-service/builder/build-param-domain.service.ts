@@ -1,5 +1,7 @@
 import { singleton } from "tsyringe";
-import { BuildParamModelService } from "./build-param-model.service";
+import {
+  BuildParamArgDomainService
+} from "./build-param-arg-domain.service";
 import {
   GetParamDtoArgAppService,
   GetParamDtoDataAppService,
@@ -29,7 +31,7 @@ import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
  */
 export class BuildParamDomainService {
   constructor(
-    private readonly buildParamModel: BuildParamModelService,
+    private readonly buildParamArgDomain: BuildParamArgDomainService,
     private readonly getParamDtoDataApp: GetParamDtoDataAppService,
     private readonly paramDomainStore: ParamDomainStoreService,
     private readonly getParamDtoNameApp: GetParamDtoNameAppService,
@@ -75,7 +77,7 @@ export class BuildParamDomainService {
         name: programName,
         index: programIndex,
         args: programFullArgs,
-        model: this.buildParamModel.buildProgramModel(
+        model: this.buildParamArgDomain.buildProgramModel(
           programName,
           programFullArgs
         )
@@ -85,7 +87,7 @@ export class BuildParamDomainService {
         name: commandName,
         index: commandIndex,
         args: commandFullArgs,
-        model: this.buildParamModel.buildCommandModel(
+        model: this.buildParamArgDomain.buildCommandModel(
           programName,
           commandName,
           commandFullArgs

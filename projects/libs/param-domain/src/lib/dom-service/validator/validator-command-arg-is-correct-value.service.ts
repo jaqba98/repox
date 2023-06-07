@@ -9,9 +9,6 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainModel
-} from "../../model/param-domain/param-domain.model";
-import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import { ProgramEnum } from "../../enum/program.enum";
@@ -22,43 +19,46 @@ import { ArgumentEnum } from "../../enum/argument.enum";
 import {
   CheckArgumentService
 } from "../service/check-argument.service";
+import { CommandEnum } from "../../enum/command.enum";
+import {
+  ParamDomainStoreService
+} from "../store/param-domain-store.service";
 
 @singleton()
 /**
- * The validator is responsible for checking that the given program
+ * The validator is responsible for checking that the given command
  * arguments have correct value.
  */
-export class ProgramArgumentsCorrectValueService
+export class ValidatorCommandArgIsCorrectValueService
   implements ValidatorDomainModel {
   constructor(
     private readonly getParamDependency: GetParamDependencyService,
     private readonly buildParamDomain: BuildParamDomainResultService,
-    private readonly checkArgument: CheckArgumentService
+    private readonly checkArgument: CheckArgumentService,
+    private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
-    paramDomain: ParamDomainModel,
-  ): ParamDomainValidationModel {
+  runValidator(): ParamDomainValidationModel {
+    const paramDomain = this.paramDomainStore.getParamDomain();
     const programName: ProgramEnum = paramDomain.program.name;
+    const commandName: CommandEnum = paramDomain.command.name;
     const programDep: ParamDependencyModel = this.getParamDependency
       .getDependency(programName);
-    const programArgs = programDep.args;
-    const wrongArgs = paramDomain.program.args
+    const commandArgs = programDep.commands[commandName].args;
+    const wrongArgs = paramDomain.command.args
       .filter(arg => arg.name !== ArgumentEnum.unknown)
-      .map(arg => this.checkArgument.argumentValue(arg, programArgs))
+      .map(arg => this.checkArgument.argumentValue(arg, commandArgs))
       .filter(arg => !arg.success);
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain);
+      return this.buildParamDomain.buildSuccess();
     }
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
       [...wrongArgs.map(arg => arg.error)],
       [
         "Check the documentation to get full list of arguments."
-      ],
-      paramDomain
+      ]
     );
   }
 }
-// todo: refactor

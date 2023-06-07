@@ -9,54 +9,54 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainModel
-} from "../../model/param-domain/param-domain.model";
-import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import { ProgramEnum } from "../../enum/program.enum";
 import {
   ParamDependencyModel
 } from "../../model/param-domain/param-dependency.model";
+import { ArgumentEnum } from "../../enum/argument.enum";
+import {
+  CheckArgumentService
+} from "../service/check-argument.service";
+import {
+  ParamDomainStoreService
+} from "../store/param-domain-store.service";
 
 @singleton()
 /**
  * The validator is responsible for checking that the given program
- * contains all required arguments.
+ * arguments have correct value.
  */
-export class ProgramContainsArgumentsService
+export class ValidatorProgramArgIsCorrectValueService
   implements ValidatorDomainModel {
   constructor(
     private readonly getParamDependency: GetParamDependencyService,
-    private readonly buildParamDomain: BuildParamDomainResultService
+    private readonly buildParamDomain: BuildParamDomainResultService,
+    private readonly checkArgument: CheckArgumentService,
+    private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
-    paramDomain: ParamDomainModel,
-  ): ParamDomainValidationModel {
+  runValidator(): ParamDomainValidationModel {
+    const paramDomain = this.paramDomainStore.getParamDomain();
     const programName: ProgramEnum = paramDomain.program.name;
     const programDep: ParamDependencyModel = this.getParamDependency
       .getDependency(programName);
     const programArgs = programDep.args;
-    const wrongArgs = Object.values(programArgs)
-      .filter(programArg => programArg.required)
-      .filter(programArg => !paramDomain.program.args
-        .find(arg => arg.name === programArg.name)
-      );
+    const wrongArgs = paramDomain.program.args
+      .filter(arg => arg.name !== ArgumentEnum.unknown)
+      .map(arg => this.checkArgument.argumentValue(arg, programArgs))
+      .filter(arg => !arg.success);
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain);
+      return this.buildParamDomain.buildSuccess();
     }
-    const missingArgs = wrongArgs.map(arg => arg.name).join(',');
     return this.buildParamDomain.buildError(
-      [],
-      ["You have not specified all required arguments for program!"],
+      [...wrongArgs.map(arg => arg.index)],
+      [...wrongArgs.map(arg => arg.error)],
       [
-        "You have to specify required arguments.",
-        `Missing arguments for program are: ${missingArgs}`
-      ],
-      paramDomain
+        "Check the documentation to get full list of arguments."
+      ]
     );
   }
 }
-// todo: refactor

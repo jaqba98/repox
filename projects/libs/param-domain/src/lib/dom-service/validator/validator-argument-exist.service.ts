@@ -6,35 +6,35 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainModel
-} from "../../model/param-domain/param-domain.model";
-import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import { ArgumentEnum } from "../../enum/argument.enum";
+import {
+  ParamDomainStoreService
+} from "../store/param-domain-store.service";
 
 @singleton()
 /**
  * The validator is responsible for checking that
  * the given arguments exist.
  */
-export class ArgumentExistValidatorService
+export class ValidatorArgumentExistService
   implements ValidatorDomainModel {
   constructor(
-    private readonly buildParamDomain: BuildParamDomainResultService
+    private readonly buildParamDomain: BuildParamDomainResultService,
+    private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
-    paramDomain: ParamDomainModel,
-  ): ParamDomainValidationModel {
+  runValidator(): ParamDomainValidationModel {
+    const paramDomain = this.paramDomainStore.getParamDomain();
     const programArgs = paramDomain.program.args;
     const commandArgs = paramDomain.command.args;
     const args = [...programArgs, ...commandArgs];
     const wrongArgs = args
       .filter(arg => arg.name === ArgumentEnum.unknown);
     if (wrongArgs.length === 0) {
-      return this.buildParamDomain.buildSuccess(paramDomain);
+      return this.buildParamDomain.buildSuccess();
     }
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
@@ -42,9 +42,7 @@ export class ArgumentExistValidatorService
       [
         "You have to specify correct arguments.",
         "Check the documentation to get full list of arguments."
-      ],
-      paramDomain
+      ]
     );
   }
 }
-// todo: refactor
