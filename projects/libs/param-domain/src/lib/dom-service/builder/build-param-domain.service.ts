@@ -1,4 +1,14 @@
 import { singleton } from "tsyringe";
+import { BuildParamModelService } from "./build-param-model.service";
+import {
+  GetParamDtoArgAppService,
+  GetParamDtoDataAppService,
+  GetParamDtoIndexAppService,
+  GetParamDtoNameAppService
+} from "@lib/param-dto";
+import {
+  ParamDomainStoreService
+} from "../store/param-domain-store.service";
 import {
   ParamDomainArgModel,
   ParamDomainModel
@@ -12,8 +22,6 @@ import {
   CommandEnum
 } from "../../enum/command.enum";
 import { AliasEnum, ArgumentEnum } from "../../enum/argument.enum";
-import { BuildParamModelService } from "./build-param-model.service";
-import { GetParamDtoDataAppService } from "@lib/param-dto";
 
 @singleton()
 /**
@@ -22,32 +30,46 @@ import { GetParamDtoDataAppService } from "@lib/param-dto";
 export class BuildParamDomainService {
   constructor(
     private readonly buildParamModel: BuildParamModelService,
-    private readonly getParamDto: GetParamDtoDataAppService
+    private readonly getParamDtoDataApp: GetParamDtoDataAppService,
+    private readonly paramDomainStore: ParamDomainStoreService,
+    private readonly getParamDtoNameApp: GetParamDtoNameAppService,
+    private readonly getParamDtoIndexApp: GetParamDtoIndexAppService,
+    private readonly getParamDtoArgApp: GetParamDtoArgAppService
   ) {
   }
 
-  build(): ParamDomainModel {
-    const applicationIndex = this.getParamDto.getApplicationIndex();
-    const programBaseName = this.getParamDto.getProgramName();
-    const commandBaseName = this.getParamDto.getCommandName();
+  build(): void {
+    const programBaseName = this.getParamDtoNameApp.getProgramName();
+    const commandBaseName = this.getParamDtoNameApp.getCommandName();
+    const programIndex = this.getParamDtoIndexApp
+      .getProgramIndex(programBaseName);
+    const commandIndex = this.getParamDtoIndexApp
+      .getCommandIndex(commandBaseName);
     const programName = this.getProgramName(programBaseName);
     const commandName = this.getCommandName(commandBaseName);
-    const programIndex = programBaseName === "" ?
-      applicationIndex :
-      this.getParamDto.getProgramIndex();
-    console.log(commandBaseName)
-    const commandIndex = commandBaseName === "" ?
-      this.getParamDto.getParamDto().params.length :
-      this.getParamDto.getCommandIndex();
-    const programArgs = this.getParamDto.getProgramArgs(
-      programIndex, commandIndex
-    );
-    const commandArgs = this.getParamDto.getCommandArgs(
-      commandIndex
-    );
-    const programFullArgs = this.buildArguments(programArgs);
-    const commandFullArgs = this.buildArguments(commandArgs);
-    return {
+    const programArgs = this.getParamDtoArgApp
+      .getProgramArgs(programIndex, commandIndex);
+    const commandArgs = this.getParamDtoArgApp
+      .getCommandArgs(commandIndex);
+    const programFullArgs = programArgs.map(arg => (
+      <ParamDomainArgModel>{
+        baseName: arg.paramBaseValue,
+        name: this.getArgumentName(arg.paramType, arg.paramName),
+        index: arg.paramIndex,
+        values: arg.paramValues,
+        hasValue: arg.paramHasValue,
+        hasManyValues: arg.paramHasManyValues
+      }));
+    const commandFullArgs = commandArgs.map(arg => (
+      <ParamDomainArgModel>{
+        baseName: arg.paramBaseValue,
+        name: this.getArgumentName(arg.paramType, arg.paramName),
+        index: arg.paramIndex,
+        values: arg.paramValues,
+        hasValue: arg.paramHasValue,
+        hasManyValues: arg.paramHasManyValues
+      }));
+    const paramDomain: ParamDomainModel = {
       program: {
         baseName: programBaseName,
         name: programName,
@@ -70,6 +92,7 @@ export class BuildParamDomainService {
         )
       }
     };
+    this.paramDomainStore.setParamDomain(paramDomain);
   }
 
   private getProgramName(programName: string): ProgramEnum {
@@ -112,22 +135,10 @@ export class BuildParamDomainService {
     return CommandEnum.unknown;
   }
 
-  private buildArguments(
-    args: Array<any>
-  ): Array<ParamDomainArgModel> {
-    return args.map(arg => (<ParamDomainArgModel>{
-      baseName: arg.paramBaseValue,
-      name: this.getArgumentName(arg),
-      index: arg.paramIndex,
-      values: arg.paramValues,
-      hasValue: arg.paramHasValue,
-      hasManyValues: arg.paramHasManyValues
-    }));
-  }
-
-  private getArgumentName(arg: any): ArgumentEnum {
-    const { paramType, paramName } = arg;
-    if (<any>paramType === "argument") {
+  private getArgumentName(
+    paramType: string, paramName: string
+  ): ArgumentEnum {
+    if (paramType === "argument") {
       const argument = Object.keys(ArgumentEnum).find(key =>
         ArgumentEnum[key as keyof typeof ArgumentEnum] === paramName
       );
@@ -135,7 +146,7 @@ export class BuildParamDomainService {
         ArgumentEnum[argument as keyof typeof ArgumentEnum] :
         ArgumentEnum.unknown;
     }
-    if (<any>paramType === "alias") {
+    if (paramType === "alias") {
       const alias = Object.keys(AliasEnum).find(key =>
         AliasEnum[key as keyof typeof AliasEnum] === paramName
       );
@@ -146,5 +157,3 @@ export class BuildParamDomainService {
     return ArgumentEnum.unknown;
   }
 }
-
-// todo: refactor
