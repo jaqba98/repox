@@ -1,7 +1,6 @@
 import { LoggerModeEnum } from "../../enum/logger-mode.enum";
 import { singleton } from "tsyringe";
 import { BuildMessageService } from "./build-message.service";
-import { LoggerDomainModel } from "../../model/logger-domain.model";
 
 @singleton()
 /**
@@ -31,4 +30,3 @@ export class BuildSimpleMessageService {
     });
   }
 }
-// todo: refactor

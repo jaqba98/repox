@@ -1,7 +1,9 @@
 import { singleton } from "tsyringe";
-import { WriteMessageService } from "../infra/write-message.service";
+import {
+  WriteMessageService
+} from "../infrastructure/write-message.service";
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
-import { EMPTY_STRING, NEW_LINE } from "../const/symbol.const";
+import { EMPTY_STRING, NEW_LINE } from "@lib/const";
 import {
   BuildSimpleMessageService
 } from "../dom-service/builder/build-simple-message.service";
@@ -106,4 +108,3 @@ export class SimpleMessageAppService {
     this.writeMessage.write(NEW_LINE);
   }
 }
-// todo: refactor

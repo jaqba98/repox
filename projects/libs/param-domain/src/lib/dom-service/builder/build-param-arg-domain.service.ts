@@ -17,6 +17,7 @@ import {
   GenerateWorkspaceCommandArgDomainModel
 } from "../../model/arg-domain/command-arg-domain.model";
 import { ArgumentEnum } from "../../enum/argument.enum";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -66,7 +67,7 @@ export class BuildParamArgDomainService {
     model: Array<ParamDomainArgModel>
   ): GenerateWorkspaceCommandArgDomainModel {
     return {
-      workspaceName: this.getValue(model, ArgumentEnum.name, "")
+      workspaceName: this.getValue(model, ArgumentEnum.name)
     };
   }
 
@@ -74,8 +75,8 @@ export class BuildParamArgDomainService {
     model: Array<ParamDomainArgModel>
   ): GenerateProjectCommandArgDomainModel {
     return {
-      projectName: this.getValue(model, ArgumentEnum.name, ""),
-      projectType: this.getValue(model, ArgumentEnum.type, "")
+      projectName: this.getValue(model, ArgumentEnum.name),
+      projectType: this.getValue(model, ArgumentEnum.type)
     };
   }
 
@@ -83,14 +84,14 @@ export class BuildParamArgDomainService {
     model: Array<ParamDomainArgModel>
   ): BuildProjectCommandArgDomainModel {
     return {
-      projectName: this.getValue(model, ArgumentEnum.name, "")
+      projectName: this.getValue(model, ArgumentEnum.name)
     };
   }
 
   private getValue<TValue>(
     model: Array<ParamDomainArgModel>,
     argumentName: ArgumentEnum,
-    defaultValue: TValue
+    defaultValue: TValue = <TValue>EMPTY_STRING
   ): TValue {
     const arg = model.find(arg => arg.name === argumentName);
     if (!arg) {

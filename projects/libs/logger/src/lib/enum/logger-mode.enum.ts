@@ -9,4 +9,3 @@ export enum LoggerModeEnum {
   info = "info",
   plain = "plain"
 }
-// todo: refactor

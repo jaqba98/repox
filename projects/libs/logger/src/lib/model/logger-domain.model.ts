@@ -23,4 +23,3 @@ export interface LoggerLineModel {
 export interface LoggerDomainModel {
   lines: Array<LoggerLineModel>;
 }
-// todo: refactor

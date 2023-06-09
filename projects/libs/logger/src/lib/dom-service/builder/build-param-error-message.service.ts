@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   LoggerLineMessageModel
 } from "../../model/logger-domain.model";
-import { PARAM_PREFIX } from "../../const/symbol.const";
+import { PARAM_PREFIX } from "@lib/const";
 
 @singleton()
 /**
@@ -26,4 +26,3 @@ export class BuildParamErrorMessageService {
     return [{ value: PARAM_PREFIX, underscore: false }, ...message];
   }
 }
-// todo: refactor

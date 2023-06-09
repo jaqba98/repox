@@ -7,11 +7,7 @@ import {
   LoggerLineMessageModel,
   LoggerLineModel
 } from "../../model/logger-domain.model";
-import {
-  EMPTY_STRING,
-  NEW_LINE,
-  SPACE
-} from "../../const/symbol.const";
+import { EMPTY_STRING, NEW_LINE, SPACE } from "@lib/const";
 import {
   buildCleanWord,
   buildEmptyMessage,
@@ -77,4 +73,3 @@ export class BuildMessageService {
       buildCleanWord(fgColor, value);
   }
 }
-// todo: refactor

@@ -5,6 +5,7 @@ import {
 import {
   FindParamDtoEntityService
 } from "../dom-service/finder/find-param-dto-entity.service";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -20,11 +21,11 @@ export class GetParamDtoNameAppService {
 
   getProgramName(): string {
     const program = this.findParamDtoEntity.findPrograms().at(0);
-    return program ? program.paramName : "";
+    return program ? program.paramName : EMPTY_STRING;
   }
 
   getCommandName(): string {
     const command = this.findParamDtoEntity.findCommands().at(0);
-    return command ? command.paramName : "";
+    return command ? command.paramName : EMPTY_STRING;
   }
 }

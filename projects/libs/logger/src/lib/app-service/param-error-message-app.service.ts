@@ -5,12 +5,14 @@ import {
 import {
   BuildMessageService
 } from "../dom-service/builder/build-message.service";
-import { WriteMessageService } from "../infra/write-message.service";
+import {
+  WriteMessageService
+} from "../infrastructure/write-message.service";
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
 import {
   BuildLinesService
 } from "../dom-service/builder/build-lines.service";
-import { EMPTY_STRING } from "../const/symbol.const";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -63,4 +65,3 @@ export class ParamErrorMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 }
-// todo: refactor

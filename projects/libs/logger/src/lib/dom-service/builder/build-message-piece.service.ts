@@ -3,12 +3,7 @@ import {
   TEXT_RESET,
   TEXT_UNDERSCORE
 } from "../../const/text-style.const";
-import {
-  EMPTY_STRING,
-  LOGO,
-  NEW_LINE,
-  SPACE
-} from "../../const/symbol.const";
+import { EMPTY_STRING, LOGO, NEW_LINE, SPACE } from "@lib/const";
 
 /**
  * The message builder which contains group of small builders
@@ -60,4 +55,3 @@ export const buildUnderscoreWord = (
   .concat(fgColor)
   .concat(TEXT_UNDERSCORE)
   .concat(word);
-// todo: refactor
