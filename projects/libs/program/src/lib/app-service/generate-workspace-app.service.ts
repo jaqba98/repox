@@ -3,6 +3,12 @@ import { SimpleMessageAppService } from "@lib/logger";
 import {
   FolderNotExistService
 } from "../infra/folder-not-exist.service";
+import { CreateFolderService } from "../infra/create-folder.service";
+import { GoIntoService } from "../infra/go-into.service";
+import {
+  CreateEmptyFileService
+} from "../infra/create-empty-file.service";
+import { RunCommandService } from "../infra/run-command.service";
 
 @singleton()
 /**
@@ -11,11 +17,11 @@ import {
 export class GenerateWorkspaceAppService {
   constructor(
     private readonly loggerMessageApp: SimpleMessageAppService,
-    private readonly folderNotExist: FolderNotExistService
-    // private readonly createFolder: CreateFolderService,
-    // private readonly goInto: GoIntoService,
-    // private readonly runCommand: RunCommandService,
-    // private readonly createEmptyFile: CreateEmptyFileService,
+    private readonly folderNotExist: FolderNotExistService,
+    private readonly createFolder: CreateFolderService,
+    private readonly goInto: GoIntoService,
+    private readonly createEmptyFile: CreateEmptyFileService,
+    private readonly runCommand: RunCommandService,
     // private readonly buildConfigFile: BuildConfigFileAppService,
     // private readonly writeFile: WriteFileService,
     // private readonly simpleMessage: SimpleMessageAppService
@@ -27,10 +33,20 @@ export class GenerateWorkspaceAppService {
     if (!this.folderNotExist.exist(workspaceName)) {
       return false;
     }
-    // this.createFolder.create(workspaceName);
-    // this.goInto.goInto(workspaceName);
+    // Create empty workspace structure
+    this.createFolder.create(workspaceName);
+    this.goInto.goInto(workspaceName);
+    this.createFolder.create("projects");
+    this.createFolder.create("projects/apps");
+    this.createFolder.create("projects/libs");
+    this.createFolder.create("projects/tools");
+    this.createEmptyFile.create("projects/apps/.gitkeep");
+    this.createEmptyFile.create("projects/libs/.gitkeep");
+    this.createEmptyFile.create("projects/tools/.gitkeep");
+    // Init npm project
+    this.runCommand.exec("npm init -y");
+
     // this.runCommand.exec("git init");
-    // this.runCommand.exec("npm init -y");
     // this.runCommand.exec("npm install typescript --save-dev");
     // this.runCommand.exec("npm install jest --save-dev");
     // this.runCommand.exec("tsc --init")
@@ -39,13 +55,6 @@ export class GenerateWorkspaceAppService {
     //     paths: {}
     //   }
     // });
-    // this.createFolder.create("projects");
-    // this.createFolder.create("projects/apps");
-    // this.createEmptyFile.create("projects/apps/.gitkeep");
-    // this.createFolder.create("projects/libs");
-    // this.createEmptyFile.create("projects/libs/.gitkeep");
-    // this.createFolder.create("projects/tools");
-    // this.createEmptyFile.create("projects/tools/.gitkeep");
     // this.createEmptyFile.create(DomainConfigFileEnum.configJson);
     // const config = this.buildConfigFile.buildEmptyDomainConfig();
     // this.writeFile.writeJson(DomainConfigFileEnum.configJson, config);

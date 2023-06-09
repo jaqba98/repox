@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
 import { WriteFileService } from "@lib/utils";
+import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**
@@ -13,11 +13,8 @@ export class CreateEmptyFileService {
   ) {
   }
 
-  create(path: string): void {
-    this.simpleMessage.writePlain(
-      `Create the empty file: ${path}`, 0
-    );
-    this.writeFile.writeText(path, "");
+  create(file: string): void {
+    this.simpleMessage.writePlain(`Create the empty ${file} file`, 0);
+    this.writeFile.writeText(file, "");
   }
 }
-// todo: refactor

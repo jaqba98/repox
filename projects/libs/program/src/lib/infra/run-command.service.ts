@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { execSync } from "child_process";
 import { SimpleMessageAppService } from "@lib/logger";
+import { execSync } from "child_process";
 
 @singleton()
 /**
@@ -13,8 +13,7 @@ export class RunCommandService {
   }
 
   exec(cmd: string): void {
-    this.simpleMessage.writePlain(`Run the command: ${cmd}`, 0);
+    this.simpleMessage.writePlain(`Run the ${cmd} command`, 0);
     execSync(cmd);
   }
 }
-// todo: refactor

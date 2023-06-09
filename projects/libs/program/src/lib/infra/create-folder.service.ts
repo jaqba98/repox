@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-import { mkdirSync } from 'fs';
+import { mkdirSync } from "fs";
 
 @singleton()
 /**
@@ -14,9 +14,8 @@ export class CreateFolderService {
 
   create(folderName: string): void {
     this.simpleMessage.writePlain(
-      `Create the ${folderName} folder`, 0
+      `Create a folder named ${folderName}`, 0
     );
     mkdirSync(folderName);
   }
 }
-// todo: refactor

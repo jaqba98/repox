@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { chdir } from "process";
 import { SimpleMessageAppService } from "@lib/logger";
+import { chdir } from "process";
 
 @singleton()
 /**
@@ -13,8 +13,7 @@ export class GoIntoService {
   }
 
   goInto(path: string): void {
-    this.simpleMessage.writePlain(`Go into the ${path}`, 0);
+    this.simpleMessage.writePlain(`Go into the ${path} path`, 0);
     chdir(path);
   }
 }
-// todo: refactor
