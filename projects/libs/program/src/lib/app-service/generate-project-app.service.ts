@@ -9,8 +9,8 @@ import { CreateFolderService } from "../infra/create-folder.service";
 import { GoIntoService } from "../infra/go-into.service";
 import { RunCommandService } from "../infra/run-command.service";
 import {
-  FolderDoesNotExistService
-} from "../infra/folder-does-not-exist.service";
+  FolderNotExistService
+} from "../infra/folder-not-exist.service";
 import {
   CreateEmptyFileService
 } from "../infra/create-empty-file.service";
@@ -22,7 +22,7 @@ import { join } from "path";
  */
 export class GenerateProjectAppService {
   constructor(
-    private readonly folderDoesNotExist: FolderDoesNotExistService,
+    private readonly folderDoesNotExist: FolderNotExistService,
     private readonly domainConfigApp: DomainConfigAppService,
     private readonly projectApp: ProjectAppService,
     private readonly simpleMessage: SimpleMessageAppService,
@@ -51,7 +51,7 @@ export class GenerateProjectAppService {
       );
       return false;
     }
-    if (!this.folderDoesNotExist.notExist(projectPath)) return false;
+    if (!this.folderDoesNotExist.exist(projectPath)) return false;
     // Add project to the configuration file
     this.simpleMessage.writePlain(
       "Add new project to repox configuration file", 0

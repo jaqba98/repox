@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import {
-  FolderDoesNotExistService
-} from "../infra/folder-does-not-exist.service";
+  FolderNotExistService
+} from "../infra/folder-not-exist.service";
 import { DomainConfigAppService } from "@lib/domain";
 import { ProjectAppService } from "@lib/project";
 import { SimpleMessageAppService } from "@lib/logger";
@@ -15,7 +15,7 @@ import { join } from "path";
  */
 export class BuildProjectAppService {
   constructor(
-    private readonly folderDoesNotExist: FolderDoesNotExistService,
+    private readonly folderDoesNotExist: FolderNotExistService,
     private readonly domainConfigApp: DomainConfigAppService,
     private readonly projectApp: ProjectAppService,
     private readonly runCommand: RunCommandService,

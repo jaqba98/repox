@@ -2,6 +2,10 @@ import { singleton } from "tsyringe";
 import {
   GenerateWorkspaceStepService
 } from "../step/generate-workspace-step.service";
+import {
+  GenerateWorkspaceCommandArgDomainModel,
+  GetParamDomainDataAppService
+} from "@lib/param-domain";
 
 @singleton()
 /**
@@ -9,14 +13,14 @@ import {
  */
 export class GenerateWorkspaceProgramService {
   constructor(
-    private readonly step: GenerateWorkspaceStepService
+    private readonly step: GenerateWorkspaceStepService,
+    private readonly getParamDomainData: GetParamDomainDataAppService
   ) {
   }
 
   run(): void {
-    // const commandModel = <GenerateWorkspaceCommandArgModel>
-    //   paramDomain.command.model;
-    // this.step.runSteps(commandModel);
+    const commandModel = <GenerateWorkspaceCommandArgDomainModel>
+      this.getParamDomainData.getParamDomain().command.model;
+    this.step.runSteps(commandModel);
   }
 }
-// todo: refactor

@@ -6,6 +6,9 @@ import {
 import {
   GenerateWorkspaceAppService
 } from "../app-service/generate-workspace-app.service";
+import {
+  GenerateWorkspaceCommandArgDomainModel
+} from "@lib/param-domain";
 
 @singleton()
 /**
@@ -13,19 +16,20 @@ import {
  */
 export class GenerateWorkspaceStepService {
   constructor(
-    private readonly loggerMessageApp: SimpleMessageAppService,
+    private readonly simpleMessage: SimpleMessageAppService,
     private readonly systemVerification: SystemVerificationAppService,
-    private readonly generateWorkspace: GenerateWorkspaceAppService
+    private readonly generate: GenerateWorkspaceAppService
   ) {
   }
 
-  runSteps(): void {
-    // this.loggerMessageApp.writeInfo(
-    //   "Workspace generation", 1, true, true
-    // );
-    // if (!this.systemVerification.checkSystem()) return;
-    // const { name } = commandModel;
-    // if (!this.generateWorkspace.generateWorkspace(name)) return;
+  runSteps(model: GenerateWorkspaceCommandArgDomainModel): void {
+    // Display the command header
+    this.simpleMessage.writeInfo(
+      "Workspace generation", 1, true, true
+    );
+    // Check the system correctness
+    if (!this.systemVerification.checkSystem()) return;
+    // Generate workspace
+    if (!this.generate.generateWorkspace(model.workspaceName)) return;
   }
 }
-// todo: refactor
