@@ -7,7 +7,7 @@ import {
   BuildProjectProgramService,
   GenerateProjectProgramService,
   GenerateWorkspaceProgramService,
-  ProgramDefaultProgramService
+  DefaultDefaultProgramService
 } from "@lib/program";
 
 @singleton()
@@ -25,7 +25,7 @@ export class SelectProgramAppService {
     const programName = this.getRunProgramName.getProgramName();
     switch (programName) {
       case `${ProgramEnum.default}-${CommandEnum.default}`:
-        container.resolve(ProgramDefaultProgramService).run();
+        container.resolve(DefaultDefaultProgramService).run();
         return;
       case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
         container.resolve(GenerateWorkspaceProgramService).run();

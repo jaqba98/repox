@@ -1,9 +1,5 @@
 import { singleton } from "tsyringe";
 import {
-  BuildProjectCommandArgModel,
-  ParamDomainModel
-} from "@lib/param-domain";
-import {
   BuildProjectStepService
 } from "../step/build-project-step.service";
 
@@ -18,9 +14,9 @@ export class BuildProjectProgramService {
   }
 
   run(): void {
-    const commandModel = <BuildProjectCommandArgModel>
-      paramDomain.command.model;
-    this.step.runSteps(commandModel);
+    // const commandModel = <BuildProjectCommandArgModel>
+    //   paramDomain.command.model;
+    // this.step.runSteps(commandModel);
   }
 }
 // todo: refactor

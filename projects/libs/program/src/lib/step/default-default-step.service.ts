@@ -1,28 +1,31 @@
 import { singleton } from "tsyringe";
-import { DefaultProgramArgModel } from "@lib/param-domain";
+import {
+  SystemVerificationAppService
+} from "../app-service/system-verification-app.service";
 import {
   GetProgramVersionAppService
 } from "../app-service/get-program-version-app.service";
 import {
-  SystemVerificationAppService
-} from "../app-service/system-verification-app.service";
+  DefaultDefaultProgramArgDomainModel
+} from "@lib/param-domain";
 
 @singleton()
 /**
- * The list of steps for the program default program.
+ * The list of steps for the program default.
  */
-export class ProgramDefaultStepService {
+export class DefaultDefaultStepService {
   constructor(
     private readonly systemVerification: SystemVerificationAppService,
     private readonly getProgramVersion: GetProgramVersionAppService
   ) {
   }
 
-  runSteps(programModel: DefaultProgramArgModel): void {
+  runSteps(programModel: DefaultDefaultProgramArgDomainModel): void {
+    // Check the system correctness
     if (!this.systemVerification.checkSystem()) return;
     if (programModel.version) {
+      // Display the program version
       this.getProgramVersion.getProgramVersion();
     }
   }
 }
-// todo: refactor

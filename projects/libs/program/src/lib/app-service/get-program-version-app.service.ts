@@ -18,4 +18,3 @@ export class GetProgramVersionAppService {
     );
   }
 }
-// todo: refactor

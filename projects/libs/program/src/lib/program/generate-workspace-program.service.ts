@@ -1,9 +1,5 @@
 import { singleton } from "tsyringe";
 import {
-  GenerateWorkspaceCommandArgModel,
-  ParamDomainModel
-} from "@lib/param-domain";
-import {
   GenerateWorkspaceStepService
 } from "../step/generate-workspace-step.service";
 
@@ -18,9 +14,9 @@ export class GenerateWorkspaceProgramService {
   }
 
   run(): void {
-    const commandModel = <GenerateWorkspaceCommandArgModel>
-      paramDomain.command.model;
-    this.step.runSteps(commandModel);
+    // const commandModel = <GenerateWorkspaceCommandArgModel>
+    //   paramDomain.command.model;
+    // this.step.runSteps(commandModel);
   }
 }
 // todo: refactor

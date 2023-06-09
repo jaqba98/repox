@@ -1,5 +1,4 @@
 import { singleton } from "tsyringe";
-import { GenerateWorkspaceCommandArgModel } from "@lib/param-domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
   SystemVerificationAppService
@@ -20,13 +19,13 @@ export class GenerateWorkspaceStepService {
   ) {
   }
 
-  runSteps(commandModel: GenerateWorkspaceCommandArgModel): void {
-    this.loggerMessageApp.writeInfo(
-      "Workspace generation", 1, true, true
-    );
-    if (!this.systemVerification.checkSystem()) return;
-    const { name } = commandModel;
-    if (!this.generateWorkspace.generateWorkspace(name)) return;
+  runSteps(): void {
+    // this.loggerMessageApp.writeInfo(
+    //   "Workspace generation", 1, true, true
+    // );
+    // if (!this.systemVerification.checkSystem()) return;
+    // const { name } = commandModel;
+    // if (!this.generateWorkspace.generateWorkspace(name)) return;
   }
 }
 // todo: refactor

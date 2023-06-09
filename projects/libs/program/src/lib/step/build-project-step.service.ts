@@ -1,5 +1,4 @@
 import { singleton } from "tsyringe";
-import { BuildProjectCommandArgModel } from "@lib/param-domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
   SystemVerificationAppService
@@ -20,13 +19,13 @@ export class BuildProjectStepService {
   ) {
   }
 
-  runSteps(commandModel: BuildProjectCommandArgModel): void {
-    this.loggerMessageApp.writeInfo(
-      "Build project", 1, true, true
-    );
-    if (!this.systemVerification.checkSystem()) return;
-    const { name } = commandModel;
-    if (!this.buildProjectApp.buildProject(name)) return;
+  runSteps(): void {
+    // this.loggerMessageApp.writeInfo(
+    //   "Build project", 1, true, true
+    // );
+    // if (!this.systemVerification.checkSystem()) return;
+    // const { name } = commandModel;
+    // if (!this.buildProjectApp.buildProject(name)) return;
   }
 }
 // todo: refactor

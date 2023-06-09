@@ -1,9 +1,5 @@
 import { singleton } from "tsyringe";
 import {
-  GenerateProjectCommandArgModel,
-  ParamDomainModel
-} from "@lib/param-domain";
-import {
   GenerateProjectStepService
 } from "../step/generate-project-step.service";
 
@@ -18,9 +14,9 @@ export class GenerateProjectProgramService {
   }
 
   run(): void {
-    const commandModel = <GenerateProjectCommandArgModel>
-      paramDomain.command.model;
-    this.step.runSteps(commandModel);
+    // const commandModel = <GenerateProjectCommandArgModel>
+    //   paramDomain.command.model;
+    // this.step.runSteps(commandModel);
   }
 }
 // todo: refactor

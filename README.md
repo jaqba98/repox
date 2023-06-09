@@ -1,31 +1,40 @@
-# Repox
+# Repox Monorepo System
 
-### Description
+## Getting Started
 
-Lightweight monorepo for many huge projects.
+---
 
-### Commands
-
-Check the version
+### Checking the version
 
 ```
 repox --version
 ```
 
-Generate the workspace
+### Generating the Repox workspace
 
 ```
-repox generate workspace --name="repox"
+repox generate workspace --name="workspace-example"
 ```
 
-Generate the project
+### Generating the project
 
 ```
-repox generate project --name="project1" --type="app"
+repox generate project --name="project-example" --type="app"
 ```
 
-Build the project
+ All possible project types
+- ```app``` - application
+- ```lib``` - library
+- ```tool``` - tool
+
+### Building the project
 
 ```
-repox build project --name="project1"
+repox build project --name="project-example"
+```
+
+### Publishing the project
+
+```
+repox publish project --name="project-example"
 ```

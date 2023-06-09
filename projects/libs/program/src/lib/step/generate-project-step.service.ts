@@ -1,6 +1,4 @@
 import { singleton } from "tsyringe";
-import { GenerateProjectCommandArgModel } from "@lib/param-domain";
-import { DomainConfigAppService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
   SystemVerificationAppService
@@ -21,13 +19,13 @@ export class GenerateProjectStepService {
   ) {
   }
 
-  runSteps(commandModel: GenerateProjectCommandArgModel): void {
-    this.loggerMessageApp.writeInfo(
-      "Project generation", 1, true, true
-    );
-    if (!this.systemVerification.checkSystem()) return;
-    const { name, type } = commandModel;
-    if (!this.generateProjectApp.generateProject(name, type)) return;
+  runSteps(): void {
+    // this.loggerMessageApp.writeInfo(
+    //   "Project generation", 1, true, true
+    // );
+    // if (!this.systemVerification.checkSystem()) return;
+    // const { name, type } = commandModel;
+    // if (!this.generateProjectApp.generateProject(name, type)) return;
   }
 }
 // todo: refactor

@@ -19,4 +19,3 @@ export class SystemVerificationAppService {
     return this.programInstalled.check("npm");
   }
 }
-// todo: refactor

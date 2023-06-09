@@ -10,7 +10,6 @@ import {
 import {
   ParamDtoStoreService
 } from "../store/param-dto-store.service";
-import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -70,10 +69,10 @@ export class BuildParamDtoService {
       paramBaseValue.split(EQUAL_SIGN)[0] :
       paramBaseValue;
     if (paramType === ParamTypeEnum.argument) {
-      return paramName.replace(ARGUMENT_PREFIX, EMPTY_STRING);
+      return paramName.replace(ARGUMENT_PREFIX, "");
     }
     if (paramType === ParamTypeEnum.alias) {
-      return paramName.replace(ALIAS_PREFIX, EMPTY_STRING);
+      return paramName.replace(ALIAS_PREFIX, "");
     }
     return paramName;
   }
@@ -85,9 +84,9 @@ export class BuildParamDtoService {
     if (!paramHasValue) return [];
     return paramBaseValue
       .split(EQUAL_SIGN)[1]
-      .replace(/\s/g, EMPTY_STRING)
-      .replace(/^(["'`])/, EMPTY_STRING)
-      .replace(/(["'`])$/, EMPTY_STRING)
+      .replace(/\s/g, "")
+      .replace(/^(["'`])/, "")
+      .replace(/(["'`])$/, "")
       .split(VALUE_SEPARATION);
   }
 }

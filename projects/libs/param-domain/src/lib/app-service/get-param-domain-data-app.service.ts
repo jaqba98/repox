@@ -5,6 +5,9 @@ import {
 import {
   ParamDomainValidationModel
 } from "../model/param-domain/param-domain-validation.model";
+import {
+  ParamDomainModel
+} from "../model/param-domain/param-domain.model";
 
 @singleton()
 /**
@@ -15,6 +18,10 @@ export class GetParamDomainDataAppService {
   constructor(
     private readonly paramDomainStore: ParamDomainStoreService
   ) {
+  }
+
+  getParamDomain(): ParamDomainModel {
+    return this.paramDomainStore.getParamDomain();
   }
 
   getParamDomainValidation(): ParamDomainValidationModel {
