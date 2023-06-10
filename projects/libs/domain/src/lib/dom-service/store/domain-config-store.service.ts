@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { DomainConfigFileEnum } from "@lib/domain";
 import { ReadFileService, WriteFileService } from "@lib/utils";
-import { DomainConfigModel } from "../../model/domain-config.model";
+import { RepoxConfigModel } from "../../model/repox-config.model";
 import { ProjectDomainModel, ProjectTypeEnum } from "@lib/project";
 import { SYSTEM_VERSION } from "@lib/const";
 
@@ -11,7 +11,7 @@ import { SYSTEM_VERSION } from "@lib/const";
  * write and modify the domain configuration.
  */
 export class DomainConfigStoreService {
-  private store: DomainConfigModel;
+  private store: RepoxConfigModel;
 
   constructor(
     private readonly readFile: ReadFileService,
@@ -24,14 +24,14 @@ export class DomainConfigStoreService {
   }
 
   loadConfig(): void {
-    this.store = this.readFile.readJson<DomainConfigModel>(
-      DomainConfigFileEnum.configJson
+    this.store = this.readFile.readJson<RepoxConfigModel>(
+      DomainConfigFileEnum.repoxJsonFile
     );
   }
 
   saveConfig(): void {
     this.writeFile.writeJson(
-      DomainConfigFileEnum.configJson, this.store
+      DomainConfigFileEnum.repoxJsonFile, this.store
     );
   }
 

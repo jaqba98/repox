@@ -9,6 +9,11 @@ import {
   CreateEmptyFileService
 } from "../infra/create-empty-file.service";
 import { RunCommandService } from "../infra/run-command.service";
+import { WriteFileService } from "@lib/utils";
+import {
+  BuildDefaultDomainAppService,
+  DomainConfigFileEnum
+} from "@lib/domain";
 
 @singleton()
 /**
@@ -16,15 +21,14 @@ import { RunCommandService } from "../infra/run-command.service";
  */
 export class GenerateWorkspaceAppService {
   constructor(
-    private readonly loggerMessageApp: SimpleMessageAppService,
+    private readonly simpleMessage: SimpleMessageAppService,
     private readonly folderNotExist: FolderNotExistService,
     private readonly createFolder: CreateFolderService,
     private readonly goInto: GoIntoService,
     private readonly createEmptyFile: CreateEmptyFileService,
     private readonly runCommand: RunCommandService,
-    // private readonly buildConfigFile: BuildConfigFileAppService,
-    // private readonly writeFile: WriteFileService,
-    // private readonly simpleMessage: SimpleMessageAppService
+    private readonly writeFile: WriteFileService,
+    private readonly buildDefaultDomain: BuildDefaultDomainAppService
   ) {
   }
 
@@ -45,30 +49,35 @@ export class GenerateWorkspaceAppService {
     this.createEmptyFile.create("projects/tools/.gitkeep");
     // Init npm project
     this.runCommand.exec("npm init -y");
-
-    // this.runCommand.exec("git init");
-    // this.runCommand.exec("npm install typescript --save-dev");
-    // this.runCommand.exec("npm install jest --save-dev");
-    // this.runCommand.exec("tsc --init")
-    // this.writeFile.writeJson<TsconfigDomainModel>("tsconfig.json", {
-    //   compilerOptions: {
-    //     paths: {}
-    //   }
-    // });
-    // this.createEmptyFile.create(DomainConfigFileEnum.configJson);
-    // const config = this.buildConfigFile.buildEmptyDomainConfig();
-    // this.writeFile.writeJson(DomainConfigFileEnum.configJson, config);
-    // this.createEmptyFile.create(".gitignore");
-    // this.writeFile.writeText(".gitignore", GIT_IGNORE_CONTENT);
-    // this.runCommand.exec("git add .");
-    // this.runCommand.exec(`git commit -m "init commit"`);
-    // this.goInto.goInto("..");
-    // this.simpleMessage.writeNewline();
-    // this.simpleMessage.writeSuccess(
-    //   "Workspace created correctly!", 1, false, true
-    // );
+    // Install all required npm
+    this.runCommand.exec("npm i typescript --save-dev");
+    // Init typescript configuration
+    this.runCommand.exec("tsc --init");
+    this.writeFile.writeJson(
+      DomainConfigFileEnum.tsconfigJsonFile,
+      this.buildDefaultDomain.buildTsconfig()
+    );
+    // Create the repox configuration
+    this.createEmptyFile.create(DomainConfigFileEnum.repoxJsonFile);
+    this.writeFile.writeJson(
+      DomainConfigFileEnum.repoxJsonFile,
+      this.buildDefaultDomain.buildRepoxConfig()
+    );
+    // Init git repository
+    this.runCommand.exec("git init");
+    this.runCommand.exec("git config --local core.autocrlf false");
+    this.createEmptyFile.create(DomainConfigFileEnum.gitignoreFile);
+    this.writeFile.writeText(
+      DomainConfigFileEnum.gitignoreFile,
+      this.buildDefaultDomain.buildGitIgnore()
+    );
+    this.runCommand.exec("git add .");
+    this.runCommand.exec(`git commit -m "init commit"`);
+    // Write success message
+    this.simpleMessage.writeNewline();
+    this.simpleMessage.writeSuccess(
+      "Workspace created correctly!", 1, false, true
+    );
     return true;
   }
 }
-
-// todo: refactor

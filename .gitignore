@@ -6,3 +6,6 @@ dist/
 
 # Dependency directories
 node_modules/
+
+# Temporary files and directories
+tmp/

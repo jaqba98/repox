@@ -3,6 +3,8 @@
  */
 
 export enum DomainConfigFileEnum {
-  configJson = "repox.json"
+  repoxJsonFile = "repox.json",
+  tsconfigJsonFile = "tsconfig.json",
+  gitignoreFile = ".gitignore"
 }
 // todo: refactor
