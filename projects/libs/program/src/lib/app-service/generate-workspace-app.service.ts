@@ -54,13 +54,13 @@ export class GenerateWorkspaceAppService {
     // Init typescript configuration
     this.runCommand.exec("tsc --init");
     this.writeFile.writeJson(
-      DomainConfigFileEnum.tsconfigJsonFile,
+      DomainConfigFileEnum.tsconfigJson,
       this.buildDefaultDomain.buildTsconfig()
     );
     // Create the repox configuration
-    this.createEmptyFile.create(DomainConfigFileEnum.repoxJsonFile);
+    this.createEmptyFile.create(DomainConfigFileEnum.repoxJson);
     this.writeFile.writeJson(
-      DomainConfigFileEnum.repoxJsonFile,
+      DomainConfigFileEnum.repoxJson,
       this.buildDefaultDomain.buildRepoxConfig()
     );
     // Init git repository

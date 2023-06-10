@@ -5,7 +5,7 @@ import {
   TSCONFIG_DEFAULT
 } from "../const/default-domain.const";
 import { TsconfigDomainModel } from "../model/tsconfig-domain.model";
-import { RepoxConfigModel } from "../model/repox-config.model";
+import { RepoxDomainModel } from "../model/repox-domain.model";
 
 @singleton()
 /**
@@ -21,7 +21,7 @@ export class BuildDefaultDomainAppService {
     return TSCONFIG_DEFAULT;
   }
 
-  buildRepoxConfig(): RepoxConfigModel {
+  buildRepoxConfig(): RepoxDomainModel {
     return REPOX_CONFIG_DEFAULT;
   }
 }

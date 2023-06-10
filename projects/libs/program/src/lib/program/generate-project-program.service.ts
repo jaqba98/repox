@@ -2,6 +2,10 @@ import { singleton } from "tsyringe";
 import {
   GenerateProjectStepService
 } from "../step/generate-project-step.service";
+import {
+  GenerateProjectCommandArgDomainModel,
+  GetParamDomainDataAppService
+} from "@lib/param-domain";
 
 @singleton()
 /**
@@ -9,14 +13,14 @@ import {
  */
 export class GenerateProjectProgramService {
   constructor(
-    private readonly step: GenerateProjectStepService
+    private readonly step: GenerateProjectStepService,
+    private readonly getParamDomainData: GetParamDomainDataAppService
   ) {
   }
 
   run(): void {
-    // const commandModel = <GenerateProjectCommandArgModel>
-    //   paramDomain.command.model;
-    // this.step.runSteps(commandModel);
+    const commandModel = <GenerateProjectCommandArgDomainModel>
+      this.getParamDomainData.getParamDomain().command.model;
+    this.step.runSteps(commandModel);
   }
 }
-// todo: refactor

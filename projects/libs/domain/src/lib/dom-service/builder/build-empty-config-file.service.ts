@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { RepoxConfigModel } from "../../model/repox-config.model";
+import { RepoxDomainModel } from "../../model/repox-domain.model";
 import { SYSTEM_VERSION } from "@lib/const";
 
 @singleton()
@@ -7,7 +7,7 @@ import { SYSTEM_VERSION } from "@lib/const";
  * Build empty content of domain config repox file.
  */
 export class BuildEmptyConfigFileService {
-  buildConfigFile(): RepoxConfigModel {
+  buildConfigFile(): RepoxDomainModel {
     return {
       version: SYSTEM_VERSION,
       projects: {}

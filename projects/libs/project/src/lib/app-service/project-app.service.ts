@@ -6,6 +6,9 @@ import {
   BuildProjectPathService
 } from "../dom-service/builder/build-project-path.service";
 import { ProjectTypeEnum } from "../enum/project-type.enum";
+import {
+  BuildProjectAliasService
+} from "../dom-service/builder/build-project-alias.service";
 
 @singleton()
 /**
@@ -14,8 +17,13 @@ import { ProjectTypeEnum } from "../enum/project-type.enum";
 export class ProjectAppService {
   constructor(
     private readonly convertProjectType: ConvertProjectTypeService,
-    private readonly buildProjectPath: BuildProjectPathService
+    private readonly buildProjectPath: BuildProjectPathService,
+    private readonly buildProjectAlias: BuildProjectAliasService
   ) {
+  }
+
+  getProjectType(type: string): ProjectTypeEnum {
+    return this.convertProjectType.convert(type);
   }
 
   getProjectPath(name: string, type: ProjectTypeEnum): string {
@@ -23,8 +31,7 @@ export class ProjectAppService {
     return this.buildProjectPath.buildPath(name, projectType);
   }
 
-  getProjectType(type: string): ProjectTypeEnum {
-    return this.convertProjectType.convert(type);
+  getProjectAlias(name: string, type: ProjectTypeEnum): string {
+    return this.buildProjectAlias.buildAlias(name, type);
   }
 }
-// todo: refactor

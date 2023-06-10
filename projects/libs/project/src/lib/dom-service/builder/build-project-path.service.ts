@@ -11,14 +11,20 @@ export class BuildProjectPathService {
   buildPath(name: string, type: ProjectTypeEnum): string {
     switch (type) {
       case ProjectTypeEnum.app:
-        return join("projects", ProjectFolderEnum.apps, name);
+        return this.getPath(ProjectFolderEnum.apps, name);
       case ProjectTypeEnum.lib:
-        return join("projects", ProjectFolderEnum.libs, name);
+        return this.getPath(ProjectFolderEnum.libs, name);
       case ProjectTypeEnum.tool:
-        return join("projects", ProjectFolderEnum.tools, name);
+        return this.getPath(ProjectFolderEnum.tools, name);
       default:
         throw new Error("Failed to generate project path!");
     }
   }
+
+  private getPath(
+    type: ProjectFolderEnum,
+    name: string
+  ): string {
+    return join("projects", type, name).replace(/\\/g, "/");
+  }
 }
-// todo: refactor

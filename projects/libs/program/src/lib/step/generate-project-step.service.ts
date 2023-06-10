@@ -1,11 +1,14 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
+import { SimpleMessageAppService } from "@lib/logger";
 import {
   GenerateProjectAppService
 } from "../app-service/generate-project-app.service";
+import {
+  GenerateProjectCommandArgDomainModel
+} from "@lib/param-domain";
 
 @singleton()
 /**
@@ -13,19 +16,25 @@ import {
  */
 export class GenerateProjectStepService {
   constructor(
+    private readonly simpleMessage: SimpleMessageAppService,
     private readonly systemVerification: SystemVerificationAppService,
-    private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly generateProjectApp: GenerateProjectAppService
   ) {
   }
 
-  runSteps(): void {
-    // this.loggerMessageApp.writeInfo(
-    //   "Project generation", 1, true, true
-    // );
-    // if (!this.systemVerification.checkSystem()) return;
-    // const { name, type } = commandModel;
-    // if (!this.generateProjectApp.generateProject(name, type)) return;
+  runSteps(model: GenerateProjectCommandArgDomainModel): void {
+    // Display the command header
+    this.simpleMessage.writeInfo(
+      "Project generation", 1, true, true
+    );
+    // Check the system correctness
+    if (!this.systemVerification.checkSystem()) return;
+    // Generate project
+    const { projectName, projectType } = model;
+    if (!this.generateProjectApp.generateProject(
+      projectName, projectType
+    )) {
+      return;
+    }
   }
 }
-// todo: refactor

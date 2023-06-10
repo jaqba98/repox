@@ -1,20 +1,20 @@
 import { singleton } from "tsyringe";
+import { FileExistService } from "../infra/file-exist.service";
 import {
-  DomainConfigAppService,
-  TsconfigDomainAppService
+  DomainConfigFileEnum,
+  DomainConfigStoreService
 } from "@lib/domain";
-import { ProjectAppService } from "@lib/project";
 import { SimpleMessageAppService } from "@lib/logger";
+import { ProjectAppService } from "@lib/project";
+import {
+  FolderNotExistService
+} from "../infra/folder-not-exist.service";
 import { CreateFolderService } from "../infra/create-folder.service";
 import { GoIntoService } from "../infra/go-into.service";
 import { RunCommandService } from "../infra/run-command.service";
 import {
-  FolderNotExistService
-} from "../infra/folder-not-exist.service";
-import {
   CreateEmptyFileService
 } from "../infra/create-empty-file.service";
-import { join } from "path";
 
 @singleton()
 /**
@@ -22,56 +22,63 @@ import { join } from "path";
  */
 export class GenerateProjectAppService {
   constructor(
-    private readonly folderDoesNotExist: FolderNotExistService,
-    private readonly domainConfigApp: DomainConfigAppService,
-    private readonly projectApp: ProjectAppService,
+    private readonly fileExist: FileExistService,
+    private readonly domainConfigStore: DomainConfigStoreService,
     private readonly simpleMessage: SimpleMessageAppService,
+    private readonly folderNotExist: FolderNotExistService,
+    private readonly projectApp: ProjectAppService,
     private readonly createFolder: CreateFolderService,
     private readonly goInto: GoIntoService,
     private readonly runCommand: RunCommandService,
-    private readonly createEmptyFile: CreateEmptyFileService,
-    private readonly tsconfigDomainApp: TsconfigDomainAppService
+    private readonly createEmptyFile: CreateEmptyFileService
   ) {
   }
 
-  generateProject(name: string, type: string): boolean {
+  generateProject(projectName: string, type: string): boolean {
     // Prepare data to process
     const projectType = this.projectApp.getProjectType(type);
     const projectPath = this.projectApp.getProjectPath(
-      name, projectType
+      projectName, projectType
     );
-    // Load the configuration file
-    this.simpleMessage.writePlain("Load repox configuration", 0);
-    this.domainConfigApp.loadDomainConfig();
-    // Check project exist
-    this.simpleMessage.writePlain("Check project exist", 0);
-    if (this.domainConfigApp.checkProjectExist(name)) {
+    const projectAlias = this.projectApp.getProjectAlias(
+      projectName, projectType
+    );
+    // Check whether the current folder is the workspace
+    if (!this.fileExist.exist(DomainConfigFileEnum.repoxJson)) {
+      return false;
+    }
+    if (!this.fileExist.exist(DomainConfigFileEnum.tsconfigJson)) {
+      return false;
+    }
+    // Load the configuration files
+    this.domainConfigStore.loadConfig();
+    // Check whether the project exist
+    if (this.domainConfigStore.existProject(projectName)) {
       this.simpleMessage.writeError(
-        `The ${name} project already exist`, 0, false, true
+        `The ${projectName} project already exist!`, 0, false, true
       );
       return false;
     }
-    if (!this.folderDoesNotExist.exist(projectPath)) return false;
-    // Add project to the configuration file
-    this.simpleMessage.writePlain(
-      "Add new project to repox configuration file", 0
+    if (this.domainConfigStore.existAlias(projectAlias)) {
+      this.simpleMessage.writeError(
+        `The ${projectAlias} alias already exist!`, 0, false, true
+      );
+      return false;
+    }
+    if (!this.folderNotExist.exist(projectPath)) return false;
+    // Add new project to the configuration file
+    this.domainConfigStore.addProject(
+      projectName, projectType, projectPath
     );
-    this.domainConfigApp.addProject(name, projectType, projectPath);
-    // Save the configuration file
-    this.simpleMessage.writePlain("Save repox configuration", 0);
-    this.domainConfigApp.saveDomainConfig();
-    // Add alias to tsconfig.json
-    this.simpleMessage.writePlain("Create the project alias", 0);
-    this.tsconfigDomainApp.loadTsconfigConfig();
-    const indexPath = join(projectPath, "index.ts");
-    this.tsconfigDomainApp.addPath(name, projectType, indexPath);
-    this.tsconfigDomainApp.saveTsconfigConfig();
+    this.domainConfigStore.addAlias(
+      projectAlias, `${projectPath}/src`
+    );
+    // Save the configuration files
+    this.domainConfigStore.saveConfig();
     // Create project on the system
     this.createFolder.create(projectPath);
     this.goInto.goInto(projectPath);
     this.runCommand.exec("npm init -y");
-    this.runCommand.exec("tsc --init");
-    this.runCommand.exec("sed -i -r '/^[ \\t]*\\//d; '/^[[:space:]]*$/d'; s/\\/\\*(.*?)\\*\\///g' tsconfig.json")
     this.createFolder.create("src");
     this.createEmptyFile.create("src/index.ts");
     this.createFolder.create("src/lib");
@@ -84,4 +91,3 @@ export class GenerateProjectAppService {
     return true;
   }
 }
-// todo: refactor

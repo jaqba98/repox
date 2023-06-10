@@ -23,4 +23,3 @@ export interface TsconfigDomainModel {
   "include": Array<string>;
   "exclude": Array<string>;
 }
-// todo: refactor
