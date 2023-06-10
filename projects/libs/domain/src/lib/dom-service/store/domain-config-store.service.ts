@@ -2,11 +2,13 @@ import { singleton } from "tsyringe";
 import { DomainConfigModel } from "../../model/domain-config.model";
 import { ReadFileService, WriteFileService } from "@lib/utils";
 import { RepoxDomainModel } from "../../model/repox-domain.model";
-import { DomainConfigFileEnum } from "@lib/domain";
 import {
   TsconfigDomainModel
 } from "../../model/tsconfig-domain.model";
 import { ProjectDomainModel, ProjectTypeEnum } from "@lib/project";
+import {
+  DomainConfigFileEnum
+} from "../../enum/domain-config-file.enum";
 
 @singleton()
 /**

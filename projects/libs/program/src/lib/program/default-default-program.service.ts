@@ -5,7 +5,7 @@ import {
 import {
   DefaultDefaultProgramArgDomainModel,
   GetParamDomainDataAppService
-} from "@lib/param-domain";
+} from "projects/libs/param-domain/src";
 
 @singleton()
 /**

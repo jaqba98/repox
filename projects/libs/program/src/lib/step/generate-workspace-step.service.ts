@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "projects/libs/logger/src";
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
@@ -8,7 +8,7 @@ import {
 } from "../app-service/generate-workspace-app.service";
 import {
   GenerateWorkspaceCommandArgDomainModel
-} from "@lib/param-domain";
+} from "projects/libs/param-domain/src";
 
 @singleton()
 /**

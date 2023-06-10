@@ -3,7 +3,7 @@ import {
   TEXT_RESET,
   TEXT_UNDERSCORE
 } from "../../const/text-style.const";
-import { EMPTY_STRING, LOGO, NEW_LINE, SPACE } from "@lib/const";
+import { EMPTY_STRING, LOGO, NEW_LINE, SPACE } from "projects/libs/const/src";
 
 /**
  * The message builder which contains group of small builders

@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
-import { SYSTEM_VERSION } from "@lib/const";
+import { SimpleMessageAppService } from "projects/libs/logger/src";
+import { SYSTEM_VERSION } from "projects/libs/const/src";
 
 @singleton()
 /**

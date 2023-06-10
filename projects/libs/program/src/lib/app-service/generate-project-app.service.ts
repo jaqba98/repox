@@ -4,8 +4,8 @@ import {
   BuildDefaultDomainAppService,
   DomainConfigFileEnum,
   DomainConfigStoreService
-} from "@lib/domain";
-import { SimpleMessageAppService } from "@lib/logger";
+} from "projects/libs/domain/src";
+import { SimpleMessageAppService } from "projects/libs/logger/src";
 import { ProjectAppService } from "@lib/project";
 import {
   FolderNotExistService

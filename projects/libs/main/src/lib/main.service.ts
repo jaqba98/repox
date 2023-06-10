@@ -4,12 +4,12 @@ import {
   BuildParamDtoAppService,
   GetParamDtoDataAppService
 } from "@lib/param-dto";
-import { ParamErrorMessageAppService } from "@lib/logger";
+import { ParamErrorMessageAppService } from "projects/libs/logger/src";
 import {
   BuildParamDomainAppService,
   GetParamDomainDataAppService
 } from "@lib/param-domain";
-import { SelectProgramAppService } from "@lib/launcher";
+import { SelectProgramAppService } from "projects/libs/launcher/src";
 
 @singleton()
 /**

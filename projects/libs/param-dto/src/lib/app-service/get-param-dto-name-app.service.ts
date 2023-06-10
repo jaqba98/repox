@@ -5,7 +5,7 @@ import {
 import {
   FindParamDtoEntityService
 } from "../dom-service/finder/find-param-dto-entity.service";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "projects/libs/const/src";
 
 @singleton()
 /**

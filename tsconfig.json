@@ -13,17 +13,39 @@
     "baseUrl": ".",
     "sourceMap": true,
     "paths": {
-      "@app/repox": ["projects/apps/repox/src/index.ts"],
-      "@lib/main": ["projects/libs/main/src/index.ts"],
-      "@lib/logger": ["projects/libs/logger/src/index.ts"],
-      "@lib/param-domain": ["projects/libs/param-domain/src/index.ts"],
-      "@lib/param-dto": ["projects/libs/param-dto/src/index.ts"],
-      "@lib/launcher": ["projects/libs/launcher/src/index.ts"],
-      "@lib/program": ["projects/libs/program/src/index.ts"],
-      "@lib/domain": ["projects/libs/domain/src/index.ts"],
-      "@lib/utils": ["projects/libs/utils/src/index.ts"],
-      "@lib/const": ["projects/libs/const/src/index.ts"],
-      "@lib/project": ["projects/libs/project/src/index.ts"]
+      "@app/repox": [
+        "projects/apps/repox/src/index.ts"
+      ],
+      "@lib/const": [
+        "projects/libs/const/src/index.ts"
+      ],
+      "@lib/domain": [
+        "projects/libs/domain/src/index.ts"
+      ],
+      "@lib/launcher": [
+        "projects/libs/launcher/src/index.ts"
+      ],
+      "@lib/logger": [
+        "projects/libs/logger/src/index.ts"
+      ],
+      "@lib/main": [
+        "projects/libs/main/src/index.ts"
+      ],
+      "@lib/param-domain": [
+        "projects/libs/param-domain/src/index.ts"
+      ],
+      "@lib/param-dto": [
+        "projects/libs/param-dto/src/index.ts"
+      ],
+      "@lib/program": [
+        "projects/libs/program/src/index.ts"
+      ],
+      "@lib/project": [
+        "projects/libs/project/src/index.ts"
+      ],
+      "@lib/utils": [
+        "projects/libs/utils/src/index.ts"
+      ]
     }
   },
   "include": [

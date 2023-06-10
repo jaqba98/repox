@@ -3,12 +3,12 @@ import {
   FolderNotExistService
 } from "../infra/folder-not-exist.service";
 import { ProjectAppService } from "@lib/project";
-import { SimpleMessageAppService } from "@lib/logger";
+import { SimpleMessageAppService } from "projects/libs/logger/src";
 import { RunCommandService } from "../infra/run-command.service";
 import {
   DomainConfigFileEnum,
   DomainConfigStoreService
-} from "@lib/domain";
+} from "projects/libs/domain/src";
 import { FileExistService } from "../infra/file-exist.service";
 
 @singleton()

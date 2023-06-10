@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   LoggerLineMessageModel
 } from "../../model/logger-domain.model";
-import { PARAM_PREFIX } from "@lib/const";
+import { PARAM_PREFIX } from "projects/libs/const/src";
 
 @singleton()
 /**

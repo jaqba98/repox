@@ -1,4 +1,60 @@
 {
   "version": "1.2.0",
-  "projects": {}
+  "projects": {
+    "repox": {
+      "name": "repox",
+      "type": "app",
+      "path": "projects/apps/repox"
+    },
+    "const": {
+      "name": "const",
+      "type": "lib",
+      "path": "projects/libs/const"
+    },
+    "domain": {
+      "name": "domain",
+      "type": "lib",
+      "path": "projects/libs/domain"
+    },
+    "launcher": {
+      "name": "launcher",
+      "type": "lib",
+      "path": "projects/libs/launcher"
+    },
+    "logger": {
+      "name": "logger",
+      "type": "lib",
+      "path": "projects/libs/logger"
+    },
+    "main": {
+      "name": "main",
+      "type": "lib",
+      "path": "projects/libs/main"
+    },
+    "param-domain": {
+      "name": "param-domain",
+      "type": "lib",
+      "path": "projects/libs/param-domain"
+    },
+    "param-dto": {
+      "name": "param-dto",
+      "type": "lib",
+      "path": "projects/libs/param-dto"
+    },
+    "program": {
+      "name": "program",
+      "type": "lib",
+      "path": "projects/libs/program"
+    },
+    "project": {
+      "name": "project",
+      "type": "lib",
+      "path": "projects/libs/project"
+    },
+    "utils": {
+      "name": "utils",
+      "type": "lib",
+      "path": "projects/libs/utils"
+    }
+  }
 }
