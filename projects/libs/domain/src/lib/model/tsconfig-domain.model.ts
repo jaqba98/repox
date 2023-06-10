@@ -23,3 +23,8 @@ export interface TsconfigDomainModel {
   "include": Array<string>;
   "exclude": Array<string>;
 }
+
+export interface TsconfigProjectDomainModel {
+  compilerOptions: {
+  };
+}

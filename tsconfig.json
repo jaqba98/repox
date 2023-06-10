@@ -22,8 +22,7 @@
       "@lib/domain": ["projects/libs/domain/src/index.ts"],
       "@lib/utils": ["projects/libs/utils/src/index.ts"],
       "@lib/const": ["projects/libs/const/src/index.ts"],
-      "@lib/project": ["projects/libs/project/src/index.ts"],
-      "@lib/core": ["projects/libs/core/src/index.ts"]
+      "@lib/project": ["projects/libs/project/src/index.ts"]
     }
   },
   "include": [

@@ -1,6 +1,7 @@
 import { singleton } from "tsyringe";
 import { FileExistService } from "../infra/file-exist.service";
 import {
+  BuildDefaultDomainAppService,
   DomainConfigFileEnum,
   DomainConfigStoreService
 } from "@lib/domain";
@@ -15,6 +16,7 @@ import { RunCommandService } from "../infra/run-command.service";
 import {
   CreateEmptyFileService
 } from "../infra/create-empty-file.service";
+import { WriteFileService } from "@lib/utils";
 
 @singleton()
 /**
@@ -30,7 +32,9 @@ export class GenerateProjectAppService {
     private readonly createFolder: CreateFolderService,
     private readonly goInto: GoIntoService,
     private readonly runCommand: RunCommandService,
-    private readonly createEmptyFile: CreateEmptyFileService
+    private readonly writeFile: WriteFileService,
+    private readonly createEmptyFile: CreateEmptyFileService,
+    private readonly buildDefaultDomain: BuildDefaultDomainAppService
   ) {
   }
 
@@ -79,6 +83,11 @@ export class GenerateProjectAppService {
     this.createFolder.create(projectPath);
     this.goInto.goInto(projectPath);
     this.runCommand.exec("npm init -y");
+    this.runCommand.exec("tsc --init");
+    this.writeFile.writeJson(
+      DomainConfigFileEnum.tsconfigJson,
+      this.buildDefaultDomain.buildTsconfigProject()
+    );
     this.createFolder.create("src");
     this.createEmptyFile.create("src/index.ts");
     this.createFolder.create("src/lib");

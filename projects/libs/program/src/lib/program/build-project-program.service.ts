@@ -2,6 +2,10 @@ import { singleton } from "tsyringe";
 import {
   BuildProjectStepService
 } from "../step/build-project-step.service";
+import {
+  BuildProjectCommandArgDomainModel,
+  GetParamDomainDataAppService
+} from "@lib/param-domain";
 
 @singleton()
 /**
@@ -9,14 +13,14 @@ import {
  */
 export class BuildProjectProgramService {
   constructor(
-    private readonly step: BuildProjectStepService
+    private readonly step: BuildProjectStepService,
+    private readonly getParamDomainData: GetParamDomainDataAppService
   ) {
   }
 
   run(): void {
-    // const commandModel = <BuildProjectCommandArgModel>
-    //   paramDomain.command.model;
-    // this.step.runSteps(commandModel);
+    const commandModel = <BuildProjectCommandArgDomainModel>
+      this.getParamDomainData.getParamDomain().command.model;
+    this.step.runSteps(commandModel);
   }
 }
-// todo: refactor

@@ -2,9 +2,12 @@ import { singleton } from "tsyringe";
 import {
   GIT_IGNORE_DEFAULT,
   REPOX_CONFIG_DEFAULT,
-  TSCONFIG_DEFAULT
+  TSCONFIG_DEFAULT, TSCONFIG_PROJECT
 } from "../const/default-domain.const";
-import { TsconfigDomainModel } from "../model/tsconfig-domain.model";
+import {
+  TsconfigDomainModel,
+  TsconfigProjectDomainModel
+} from "../model/tsconfig-domain.model";
 import { RepoxDomainModel } from "../model/repox-domain.model";
 
 @singleton()
@@ -19,6 +22,10 @@ export class BuildDefaultDomainAppService {
 
   buildTsconfig(): TsconfigDomainModel {
     return TSCONFIG_DEFAULT;
+  }
+
+  buildTsconfigProject(): TsconfigProjectDomainModel {
+    return TSCONFIG_PROJECT;
   }
 
   buildRepoxConfig(): RepoxDomainModel {

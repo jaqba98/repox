@@ -1,6 +1,9 @@
 import { RepoxDomainModel } from "../model/repox-domain.model";
 import { SYSTEM_VERSION } from "@lib/const";
-import { TsconfigDomainModel } from "../model/tsconfig-domain.model";
+import {
+  TsconfigDomainModel,
+  TsconfigProjectDomainModel
+} from "../model/tsconfig-domain.model";
 
 /**
  * The file contains all default content for domain files.
@@ -43,6 +46,10 @@ export const TSCONFIG_DEFAULT: TsconfigDomainModel = {
     "projects/**/*.spec.ts",
     "projects/**/*.test.ts"
   ]
+};
+
+export const TSCONFIG_PROJECT: TsconfigProjectDomainModel = {
+  compilerOptions: {}
 };
 
 export const REPOX_CONFIG_DEFAULT: RepoxDomainModel = {

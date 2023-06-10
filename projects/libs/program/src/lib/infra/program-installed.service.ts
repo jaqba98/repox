@@ -25,4 +25,3 @@ export class ProgramInstalledService {
     return false;
   }
 }
-// todo: refactor

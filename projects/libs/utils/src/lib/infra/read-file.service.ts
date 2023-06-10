@@ -18,4 +18,3 @@ export class ReadFileService {
     return <T>JSON.parse(readFileSync(path, "utf-8"));
   }
 }
-// todo: refactor

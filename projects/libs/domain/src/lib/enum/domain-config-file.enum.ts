@@ -7,4 +7,3 @@ export enum DomainConfigFileEnum {
   tsconfigJson = "tsconfig.json",
   gitignoreFile = ".gitignore"
 }
-// todo: refactor

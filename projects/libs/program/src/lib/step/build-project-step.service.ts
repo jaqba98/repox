@@ -1,11 +1,12 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
+import { SimpleMessageAppService } from "@lib/logger";
 import {
   BuildProjectAppService
 } from "../app-service/build-project-app.service";
+import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -19,13 +20,12 @@ export class BuildProjectStepService {
   ) {
   }
 
-  runSteps(): void {
-    // this.loggerMessageApp.writeInfo(
-    //   "Build project", 1, true, true
-    // );
-    // if (!this.systemVerification.checkSystem()) return;
-    // const { name } = commandModel;
-    // if (!this.buildProjectApp.buildProject(name)) return;
+  runSteps(model: BuildProjectCommandArgDomainModel): void {
+    this.loggerMessageApp.writeInfo(
+      "Build project", 1, true, true
+    );
+    if (!this.systemVerification.checkSystem()) return;
+    const { projectName } = model;
+    if (!this.buildProjectApp.buildProject(projectName)) return;
   }
 }
-// todo: refactor

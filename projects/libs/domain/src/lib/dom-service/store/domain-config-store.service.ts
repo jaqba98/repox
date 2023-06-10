@@ -6,7 +6,7 @@ import { DomainConfigFileEnum } from "@lib/domain";
 import {
   TsconfigDomainModel
 } from "../../model/tsconfig-domain.model";
-import { ProjectTypeEnum } from "@lib/project";
+import { ProjectDomainModel, ProjectTypeEnum } from "@lib/project";
 
 @singleton()
 /**
@@ -88,5 +88,17 @@ export class DomainConfigStoreService {
       .tsconfigDomain
       .compilerOptions
       .paths[alias] = [projectPath];
+  }
+
+  getProject(projectName: string): ProjectDomainModel {
+    if (this.config === undefined) {
+      throw new Error("The domain config store is undefined!");
+    }
+    const project = Object.values(this.config.repoxDomain.projects)
+      .find(project => project.name === projectName);
+    if (project === undefined) {
+      throw new Error("The project not exist!");
+    }
+    return project;
   }
 }
