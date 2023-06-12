@@ -60,9 +60,11 @@ export class BuildProjectAppService {
     // Compile the project
     this.simpleMessage.writePlain("Compile the project", 0);
     const projectDir = `--project ${project.path}/tsconfig.json`;
-    const tsAliasDir = `-p ${project.path}/tsconfig.json`;
-    const outDir = `--outDir ./dist/${project.name}`;
+    const distFolder = `./dist/${project.name}`;
+    const outDir = `--outDir ${distFolder}`;
     this.runCommand.exec(`tsc ${projectDir} ${outDir}`);
+    this.runCommand.exec(`cp package.json ${distFolder}`);
+    this.runCommand.exec(`cp tsconfig.json ${distFolder}`);
     this.runCommand.exec("tsc-alias");
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
