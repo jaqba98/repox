@@ -84,7 +84,8 @@ export class DomainConfigStoreService {
     this.config.repoxDomain.projects[projectName] = {
       name: projectName,
       type: projectType,
-      path: projectPath
+      path: projectPath,
+      assets: []
     }
   }
 

@@ -4,57 +4,71 @@
     "repox": {
       "name": "repox",
       "type": "app",
-      "path": "projects/apps/repox"
+      "path": "projects/apps/repox",
+      "assets": [
+        "package.json",
+        "README.md"
+      ]
     },
     "const": {
       "name": "const",
       "type": "lib",
-      "path": "projects/libs/const"
+      "path": "projects/libs/const",
+      "assets": []
     },
     "domain": {
       "name": "domain",
       "type": "lib",
-      "path": "projects/libs/domain"
+      "path": "projects/libs/domain",
+      "assets": []
     },
     "launcher": {
       "name": "launcher",
       "type": "lib",
-      "path": "projects/libs/launcher"
+      "path": "projects/libs/launcher",
+      "assets": []
     },
     "logger": {
       "name": "logger",
       "type": "lib",
-      "path": "projects/libs/logger"
+      "path": "projects/libs/logger",
+      "assets": []
     },
     "main": {
       "name": "main",
       "type": "lib",
-      "path": "projects/libs/main"
+      "path": "projects/libs/main",
+      "assets": []
     },
     "param-domain": {
       "name": "param-domain",
       "type": "lib",
-      "path": "projects/libs/param-domain"
+      "path": "projects/libs/param-domain",
+      "assets": []
     },
     "param-dto": {
       "name": "param-dto",
       "type": "lib",
-      "path": "projects/libs/param-dto"
+      "path": "projects/libs/param-dto",
+      "assets": []
     },
     "program": {
       "name": "program",
       "type": "lib",
-      "path": "projects/libs/program"
+      "path": "projects/libs/program",
+      "assets": []
     },
     "project": {
       "name": "project",
       "type": "lib",
-      "path": "projects/libs/project"
+      "path": "projects/libs/project",
+      "assets": []
     },
     "utils": {
       "name": "utils",
       "type": "lib",
-      "path": "projects/libs/utils"
+      "path": "projects/libs/utils",
+      "assets": []
     }
   }
 }

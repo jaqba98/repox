@@ -7,4 +7,5 @@ export interface ProjectDomainModel {
   name: string;
   type: ProjectTypeEnum;
   path: string;
+  assets: Array<string>;
 }

@@ -64,8 +64,10 @@ export class BuildProjectAppService {
     const outDir = `--outDir ${distFolder}`;
     this.runCommand.exec(`tsc ${projectDir} ${outDir}`);
     this.runCommand.exec(`tsc-alias ${outDir}`);
-    this.runCommand.exec(`cp package.json ${distFolder}`);
-    this.runCommand.exec(`cp README.md ${distFolder}`);
+    // Copy assets to the dist folder
+    project.assets.forEach(asset => {
+      this.runCommand.exec(`cp ${asset} ${distFolder}`);
+    })
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
       "Project created correctly!", 1, false, true
