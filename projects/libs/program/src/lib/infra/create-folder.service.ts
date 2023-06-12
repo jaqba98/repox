@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "projects/libs/logger/src";
 import { mkdirSync } from "fs";
+import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**

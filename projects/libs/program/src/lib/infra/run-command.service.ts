@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "projects/libs/logger/src";
 import { execSync } from "child_process";
+import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**

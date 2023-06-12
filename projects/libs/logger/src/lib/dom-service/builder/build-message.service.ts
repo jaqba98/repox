@@ -7,7 +7,7 @@ import {
   LoggerLineMessageModel,
   LoggerLineModel
 } from "../../model/logger-domain.model";
-import { EMPTY_STRING, NEW_LINE, SPACE } from "projects/libs/const/src";
+import { EMPTY_STRING, NEW_LINE, SPACE } from "@lib/const";
 import {
   buildCleanWord,
   buildEmptyMessage,

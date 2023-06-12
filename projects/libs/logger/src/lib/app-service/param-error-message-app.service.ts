@@ -12,7 +12,7 @@ import { LoggerModeEnum } from "../enum/logger-mode.enum";
 import {
   BuildLinesService
 } from "../dom-service/builder/build-lines.service";
-import { EMPTY_STRING } from "projects/libs/const/src";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**

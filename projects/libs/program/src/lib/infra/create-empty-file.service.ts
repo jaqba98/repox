@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { WriteFileService } from "@lib/utils";
-import { SimpleMessageAppService } from "projects/libs/logger/src";
+import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**

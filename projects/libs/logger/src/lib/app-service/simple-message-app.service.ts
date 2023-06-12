@@ -3,7 +3,7 @@ import {
   WriteMessageService
 } from "../infrastructure/write-message.service";
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
-import { EMPTY_STRING, NEW_LINE } from "projects/libs/const/src";
+import { EMPTY_STRING, NEW_LINE } from "@lib/const";
 import {
   BuildSimpleMessageService
 } from "../dom-service/builder/build-simple-message.service";

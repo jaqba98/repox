@@ -2,13 +2,13 @@ import { singleton } from "tsyringe";
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
-import { SimpleMessageAppService } from "projects/libs/logger/src";
 import {
   GenerateProjectAppService
 } from "../app-service/generate-project-app.service";
+import { SimpleMessageAppService } from "@lib/logger";
 import {
   GenerateProjectCommandArgDomainModel
-} from "projects/libs/param-domain/src";
+} from "@lib/param-domain";
 
 @singleton()
 /**

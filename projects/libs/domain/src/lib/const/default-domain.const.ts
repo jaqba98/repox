@@ -1,5 +1,5 @@
 import { RepoxDomainModel } from "../model/repox-domain.model";
-import { SYSTEM_VERSION } from "projects/libs/const/src";
+import { SYSTEM_VERSION } from "@lib/const";
 import {
   TsconfigDomainModel,
   TsconfigProjectDomainModel

@@ -17,7 +17,7 @@ import {
   GenerateWorkspaceCommandArgDomainModel
 } from "../../model/arg-domain/command-arg-domain.model";
 import { ArgumentEnum } from "../../enum/argument.enum";
-import { EMPTY_STRING } from "projects/libs/const/src";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**

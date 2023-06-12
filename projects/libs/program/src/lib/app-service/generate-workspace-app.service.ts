@@ -1,5 +1,4 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "projects/libs/logger/src";
 import {
   FolderNotExistService
 } from "../infra/folder-not-exist.service";
@@ -10,10 +9,11 @@ import {
 } from "../infra/create-empty-file.service";
 import { RunCommandService } from "../infra/run-command.service";
 import { WriteFileService } from "@lib/utils";
+import { SimpleMessageAppService } from "@lib/logger";
 import {
   BuildDefaultDomainAppService,
   DomainConfigFileEnum
-} from "projects/libs/domain/src";
+} from "@lib/domain";
 
 @singleton()
 /**

@@ -2,11 +2,11 @@ import { singleton } from "tsyringe";
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
-import { SimpleMessageAppService } from "projects/libs/logger/src";
 import {
   BuildProjectAppService
 } from "../app-service/build-project-app.service";
-import { BuildProjectCommandArgDomainModel } from "projects/libs/param-domain/src";
+import { SimpleMessageAppService } from "@lib/logger";
+import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
 
 @singleton()
 /**

@@ -7,7 +7,7 @@ import {
 } from "../app-service/get-program-version-app.service";
 import {
   DefaultDefaultProgramArgDomainModel
-} from "projects/libs/param-domain/src";
+} from "@lib/param-domain";
 
 @singleton()
 /**
