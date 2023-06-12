@@ -51,6 +51,7 @@
   "exclude": [
     "node_modules",
     "projects/**/*.spec.ts",
-    "projects/**/*.test.ts"
+    "projects/**/*.test.ts",
+    "jest.config.ts"
   ]
 }
