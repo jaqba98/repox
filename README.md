@@ -1,4 +1,4 @@
-# Repox Monorepo System
+# Repox Monorepo System - by Jakub Olejarczyk
 
 ## Getting Started
 
