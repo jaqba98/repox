@@ -7,6 +7,6 @@ import { join } from "path";
  */
 export class PathUtilsService {
   createPath(pathItems: Array<string>): string {
-    return join(...pathItems);
+    return join(...pathItems).replace(/\\/g, '/');
   }
 }
