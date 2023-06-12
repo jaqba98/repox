@@ -48,9 +48,6 @@
       ]
     }
   },
-  "include": [
-    "projects/**/*"
-  ],
   "exclude": [
     "node_modules",
     "projects/**/*.spec.ts",

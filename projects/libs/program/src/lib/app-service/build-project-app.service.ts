@@ -24,8 +24,7 @@ export class BuildProjectAppService {
     private readonly domainConfigStore: DomainConfigStoreService,
     private readonly projectApp: ProjectAppService,
     private readonly runCommand: RunCommandService,
-    private readonly simpleMessage: SimpleMessageAppService,
-    private readonly goInto: GoIntoService
+    private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
 
@@ -60,8 +59,9 @@ export class BuildProjectAppService {
     const project = this.domainConfigStore.getProject(projectName);
     // Compile the project
     this.simpleMessage.writePlain("Compile the project", 0);
-    this.goInto.goInto(project.path);
-    this.runCommand.exec("tsc");
+    const projectDir = `--project ${project.path}/tsconfig.json`;
+    const outDir = `--outDir ./dist/${project.name}`;
+    this.runCommand.exec(`tsc ${projectDir} ${outDir}`);
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
       "Project created correctly!", 1, false, true

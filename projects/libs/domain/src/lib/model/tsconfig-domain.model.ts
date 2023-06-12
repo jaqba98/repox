@@ -25,9 +25,5 @@ export interface TsconfigDomainModel {
 }
 
 export interface TsconfigProjectDomainModel {
-  extends: string;
-  compilerOptions: {
-    "rootDir": string,
-    "outDir": string
-  }
+  extends: string
 }

@@ -49,11 +49,7 @@ export const TSCONFIG_DEFAULT: TsconfigDomainModel = {
 };
 
 export const TSCONFIG_PROJECT: TsconfigProjectDomainModel = {
-  extends: "../../../tsconfig.json",
-  compilerOptions: {
-    rootDir: "./src",
-    outDir: "./dist"
-  }
+  extends: "../../../tsconfig.json"
 };
 
 export const REPOX_CONFIG_DEFAULT: RepoxDomainModel = {
