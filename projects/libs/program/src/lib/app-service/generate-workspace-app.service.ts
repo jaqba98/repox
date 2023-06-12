@@ -51,6 +51,7 @@ export class GenerateWorkspaceAppService {
     this.runCommand.exec("npm init -y");
     // Install all required npm
     this.runCommand.exec("npm i typescript --save-dev");
+    this.runCommand.exec("npm i tsc-alias --save-dev");
     // Init typescript configuration
     this.runCommand.exec("tsc --init");
     this.writeFile.writeJson(
