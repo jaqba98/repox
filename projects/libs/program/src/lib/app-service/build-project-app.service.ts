@@ -10,6 +10,7 @@ import {
   DomainConfigStoreService
 } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
+import { GoIntoService } from "../infra/go-into.service";
 
 @singleton()
 /**
@@ -23,7 +24,8 @@ export class BuildProjectAppService {
     private readonly domainConfigStore: DomainConfigStoreService,
     private readonly projectApp: ProjectAppService,
     private readonly runCommand: RunCommandService,
-    private readonly simpleMessage: SimpleMessageAppService
+    private readonly simpleMessage: SimpleMessageAppService,
+    private readonly goInto: GoIntoService
   ) {
   }
 
@@ -58,9 +60,8 @@ export class BuildProjectAppService {
     const project = this.domainConfigStore.getProject(projectName);
     // Compile the project
     this.simpleMessage.writePlain("Compile the project", 0);
-    const outDir = `--outDir ./dist/${project.name}`;
-    const projectDir = `--project ${project.path}`;
-    this.runCommand.exec(`tsc ${outDir} ${projectDir}`);
+    this.goInto.goInto(project.path);
+    this.runCommand.exec("tsc");
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
       "Project created correctly!", 1, false, true
