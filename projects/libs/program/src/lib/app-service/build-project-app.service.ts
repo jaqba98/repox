@@ -65,6 +65,7 @@ export class BuildProjectAppService {
     this.runCommand.exec(`tsc ${projectDir} ${outDir}`);
     this.runCommand.exec(`tsc-alias ${outDir}`);
     this.runCommand.exec(`cp package.json ${distFolder}`);
+    this.runCommand.exec(`cp README.md ${distFolder}`);
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
       "Project created correctly!", 1, false, true

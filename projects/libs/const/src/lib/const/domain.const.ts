@@ -2,4 +2,4 @@
  * All constants related to the domain.
  */
 
-export const SYSTEM_VERSION: string = "1.2.11";
+export const SYSTEM_VERSION: string = "1.2.12";
