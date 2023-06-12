@@ -63,9 +63,8 @@ export class BuildProjectAppService {
     const distFolder = `./dist/${project.name}`;
     const outDir = `--outDir ${distFolder}`;
     this.runCommand.exec(`tsc ${projectDir} ${outDir}`);
-    this.runCommand.exec(`cp package.json ${distFolder}`);
-    this.runCommand.exec(`cp tsconfig.json ${distFolder}`);
     this.runCommand.exec("tsc-alias");
+    this.runCommand.exec(`cp package.json ${distFolder}`);
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
       "Project created correctly!", 1, false, true

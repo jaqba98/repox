@@ -1,6 +1,6 @@
 {
   "name": "repox",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "Lightweight monorepo for many huge projects.",
   "main": "./apps/repox/src/index.js",
   "bin": "./apps/repox/src/index.js",
@@ -22,7 +22,7 @@
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.0",
     "jest": "^29.5.0",
-    "repox": "^1.2.9",
+    "repox": "^1.2.10",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.6",
