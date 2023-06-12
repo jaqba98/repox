@@ -74,9 +74,7 @@ export class GenerateProjectAppService {
     this.domainConfigStore.addProject(
       projectName, projectType, projectPath
     );
-    this.domainConfigStore.addAlias(
-      projectAlias, `${projectPath}/src`
-    );
+    this.domainConfigStore.addAlias(projectAlias, projectPath);
     // Save the configuration files
     this.domainConfigStore.saveConfig();
     // Create project on the system

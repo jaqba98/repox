@@ -1,6 +1,10 @@
 import { singleton } from "tsyringe";
 import { DomainConfigModel } from "../../model/domain-config.model";
-import { ReadFileService, WriteFileService } from "@lib/utils";
+import {
+  PathUtilsService,
+  ReadFileService,
+  WriteFileService
+} from "@lib/utils";
 import { RepoxDomainModel } from "../../model/repox-domain.model";
 import {
   TsconfigDomainModel
@@ -9,6 +13,7 @@ import { ProjectDomainModel, ProjectTypeEnum } from "@lib/project";
 import {
   DomainConfigFileEnum
 } from "../../enum/domain-config-file.enum";
+import { INDEX_TS_FILE, SRC_FOLDER } from "@lib/const";
 
 @singleton()
 /**
@@ -20,7 +25,8 @@ export class DomainConfigStoreService {
 
   constructor(
     private readonly readFile: ReadFileService,
-    private readonly writeFile: WriteFileService
+    private readonly writeFile: WriteFileService,
+    private readonly pathUtils: PathUtilsService
   ) {
     this.config = undefined;
   }
@@ -86,10 +92,13 @@ export class DomainConfigStoreService {
     if (this.config === undefined) {
       throw new Error("The domain config store is undefined!");
     }
+    const indexFile = this.pathUtils.createPath(
+      [projectPath, SRC_FOLDER, INDEX_TS_FILE]
+    );
     this.config
       .tsconfigDomain
       .compilerOptions
-      .paths[alias] = [projectPath];
+      .paths[alias] = [indexFile];
   }
 
   getProject(projectName: string): ProjectDomainModel {

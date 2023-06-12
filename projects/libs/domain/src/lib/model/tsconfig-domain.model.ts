@@ -25,6 +25,5 @@ export interface TsconfigDomainModel {
 }
 
 export interface TsconfigProjectDomainModel {
-  compilerOptions: {
-  };
+  extends: string;
 }
