@@ -1,40 +1,120 @@
-# Repox Monorepo System - by Jakub Olejarczyk
+# Repox Monorepo
 
-## Getting Started
+## Contents
+
+1) Commands
+
+   [Check version](#check-version)
+   
+   [Create workspace](#create-workspace)
+   
+   [Create project](#create-project)
+   
+   [Build project](#build-project)
+
+2) Configurations
+
+   [Repox configuration](#repox-configuration)
 
 ---
 
-### Checking the version
+## <span id="check-version">Check version</span>
 
-```
+
+```shell
 repox --version
 ```
 
-### Generating the Repox workspace
+#### You can use alias instead of argument.
 
-```
-repox generate workspace --name="workspace-example"
-```
-
-### Generating the project
-
-```
-repox generate project --name="project-example" --type="app"
+```shell
+repox -v
 ```
 
- All possible project types
-- ```app``` - application
-- ```lib``` - library
-- ```tool``` - tool
+---
 
-### Building the project
+## <span id="create-workspace">Create workspace</span>
 
-```
-repox build project --name="project-example"
+
+```shell
+repox generate workspace --name="example-workspace"
 ```
 
-### Publishing the project
+#### A list of all the arguments for the generation workspace program.
 
+| Argument | Alias | Description              |
+|----------|-------|--------------------------|
+| --name   | -n    | Specify a workspace name |
+
+---
+
+## <span id="create-project">Create project</span>
+
+
+```shell
+repox generate project --name="example-project" --type="app"
 ```
-repox publish project --name="project-example"
+
+#### A list of all the arguments for the generation project program.
+
+| Argument | Alias | Description            |
+|----------|-------|------------------------|
+| --name   | -n    | Specify a project name |
+| --type   | -t    | Specify a project type |
+
+#### Possible project type values:
+
+| Type value | Description         |
+|------------|---------------------|
+| app        | Application project |
+| lib        | Library project     |
+| tool       | Tool project        |
+
+---
+
+## <span id="build-project">Build project</span>
+
+
+```shell
+repox build project --name="example-project"
+```
+
+#### A list of all the arguments for the build project program.
+
+| Argument | Alias | Description            |
+|----------|-------|------------------------|
+| --name   | -n    | Specify a project name |
+
+---
+
+## <span id="repox-configuration">Repox configuration</span>
+
+```json5
+{
+   // The current version of the configuration
+   "version": "1.0.0",
+   // List of all projects in monorepo
+   "projects": {
+      // An example project in monorepo
+      "example-project": {
+         // The name of the project
+         "name": "example-project",
+         // The type of the project
+         "type": "app",
+         // The path localization of the project
+         "path": "projects/apps/example-project",
+         // Additional assets to the project
+         "assets": [
+            {
+               // The path to the location where asset exist
+               "inputDir": "projects/apps/example-project",
+               // File name of asset
+               "fileName": "package.json",
+               // The path to the target location
+               "outputDir": "dist/example-project"
+            }
+         ]
+      }
+   }
+}
 ```
