@@ -8,7 +8,7 @@
   "license": "ISC",
   "scripts": {
     "remove": "rm -rf dist",
-    "build": "tsc && cp package.json dist && tsc-alias -p tsconfig.json && cp README.md dist",
+    "build": "tsc && cp package.json dist && tsc-alias -p tsconfig.json",
     "link": "npm link ./dist",
     "unlink": "npm unlink ./dist && npm uninstall repox -g",
     "test": "jest --silent",

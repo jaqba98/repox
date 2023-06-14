@@ -6,8 +6,16 @@
       "type": "app",
       "path": "projects/apps/repox",
       "assets": [
-        "package.json",
-        "README.md"
+        {
+          "inputDir": "projects/apps/repox",
+          "fileName": "package.json",
+          "outputDir": "dist/repox"
+        },
+        {
+          "inputDir": "projects/apps/repox",
+          "fileName": "README.md",
+          "outputDir": "dist/repox"
+        }
       ]
     },
     "const": {

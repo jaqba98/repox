@@ -10,7 +10,7 @@ import {
   DomainConfigStoreService
 } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
-import { GoIntoService } from "../infra/go-into.service";
+import { CopyFileService } from "../infra/copy-file.service";
 
 @singleton()
 /**
@@ -24,7 +24,8 @@ export class BuildProjectAppService {
     private readonly domainConfigStore: DomainConfigStoreService,
     private readonly projectApp: ProjectAppService,
     private readonly runCommand: RunCommandService,
-    private readonly simpleMessage: SimpleMessageAppService
+    private readonly simpleMessage: SimpleMessageAppService,
+    private readonly copyFile: CopyFileService
   ) {
   }
 
@@ -64,10 +65,13 @@ export class BuildProjectAppService {
     const outDir = `--outDir ${distFolder}`;
     this.runCommand.exec(`tsc ${projectDir} ${outDir}`);
     this.runCommand.exec(`tsc-alias ${outDir}`);
-    // Copy assets to the dist folder
+    // Copy assets
     project.assets.forEach(asset => {
-      this.runCommand.exec(`cp ${asset} ${distFolder}`);
+      this.copyFile.copy(
+        asset.inputDir, asset.outputDir, asset.fileName
+      );
     })
+    // Write a success message
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
       "Project created correctly!", 1, false, true
