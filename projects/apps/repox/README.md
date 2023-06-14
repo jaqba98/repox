@@ -1,8 +1,8 @@
-# Repox Monorepo
+# Repox
 
 ## Contents
 
-1) Commands
+1) Repox monorepo commands
 
    [Check version](#check-version)
    
@@ -17,6 +17,10 @@
 2) Configurations
 
    [Repox configuration](#repox-configuration)
+
+3) Repox style framework
+
+   [Repox style framework](#repox-style-framework)
 
 ---
 
@@ -133,3 +137,7 @@ repox link project --name="example-project"
    }
 }
 ```
+
+---
+
+## <span id="repox-style-framework">Repox style framework</span>
