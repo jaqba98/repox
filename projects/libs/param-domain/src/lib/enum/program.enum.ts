@@ -6,10 +6,12 @@ export enum ProgramEnum {
   default = "",
   generate = "generate",
   build = "build",
+  link = "link",
   unknown = "unknown"
 }
 
 export enum ProgramAliasEnum {
   generate = "g",
-  build = "b"
+  build = "b",
+  link = "link"
 }

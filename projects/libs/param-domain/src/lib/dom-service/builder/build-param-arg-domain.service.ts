@@ -10,6 +10,7 @@ import {
 } from "../../model/arg-domain/program-arg-domain.model";
 import { CommandEnum } from "../../enum/command.enum";
 import {
+  BuildLinkProjectCommandArgDomainModel,
   BuildProjectCommandArgDomainModel,
   CommandArgDomainModel,
   EmptyCommandArgDomainModel,
@@ -50,6 +51,8 @@ export class BuildParamArgDomainService {
         return this.buildGenerateProjectCommand(model);
       case `${ProgramEnum.build}-${CommandEnum.project}`:
         return this.buildBuildProjectCommand(model);
+      case `${ProgramEnum.link}-${CommandEnum.project}`:
+        return this.buildLinkProjectCommand(model);
       default:
         return <EmptyCommandArgDomainModel>{};
     }
@@ -83,6 +86,14 @@ export class BuildParamArgDomainService {
   private buildBuildProjectCommand(
     model: Array<ParamDomainArgModel>
   ): BuildProjectCommandArgDomainModel {
+    return {
+      projectName: this.getValue(model, ArgumentEnum.name)
+    };
+  }
+
+  private buildLinkProjectCommand(
+    model: Array<ParamDomainArgModel>
+  ): BuildLinkProjectCommandArgDomainModel {
     return {
       projectName: this.getValue(model, ArgumentEnum.name)
     };

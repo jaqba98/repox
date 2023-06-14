@@ -5,9 +5,9 @@ import {
 import { CommandEnum, ProgramEnum } from "@lib/param-domain";
 import {
   BuildProjectProgramService,
+  DefaultDefaultProgramService,
   GenerateProjectProgramService,
-  GenerateWorkspaceProgramService,
-  DefaultDefaultProgramService
+  GenerateWorkspaceProgramService, LinkProjectProgramService
 } from "@lib/program";
 
 @singleton()
@@ -35,6 +35,8 @@ export class SelectProgramAppService {
         return;
       case `${ProgramEnum.build}-${CommandEnum.project}`:
         container.resolve(BuildProjectProgramService).run();
+      case `${ProgramEnum.link}-${CommandEnum.project}`:
+        container.resolve(LinkProjectProgramService).run();
         return;
       default:
         throw new Error(

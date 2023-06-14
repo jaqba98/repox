@@ -18,8 +18,13 @@ export interface BuildProjectCommandArgDomainModel {
   projectName: string;
 }
 
+export interface BuildLinkProjectCommandArgDomainModel {
+  projectName: string;
+}
+
 export type CommandArgDomainModel =
   EmptyCommandArgDomainModel |
   GenerateWorkspaceCommandArgDomainModel |
   GenerateProjectCommandArgDomainModel |
-  BuildProjectCommandArgDomainModel;
+  BuildProjectCommandArgDomainModel |
+  BuildLinkProjectCommandArgDomainModel;
