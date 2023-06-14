@@ -46,13 +46,6 @@ export class GenerateProjectAppService {
     const projectAlias = this.projectApp.getProjectAlias(
       projectName, projectType
     );
-    // Check whether the current folder is the workspace
-    if (!this.fileExist.exist(DomainConfigFileEnum.repoxJson)) {
-      return false;
-    }
-    if (!this.fileExist.exist(DomainConfigFileEnum.tsconfigJson)) {
-      return false;
-    }
     // Load the configuration files
     this.domainConfigStore.loadConfig();
     // Check whether the project exist

@@ -29,16 +29,6 @@ export class LinkProjectAppService {
   }
 
   linkProject(projectName: string): boolean {
-    // Check whether the current folder is the workspace
-    this.simpleMessage.writePlain(
-      "Check whether the current folder is the workspace", 0
-    );
-    if (!this.fileExist.exist(DomainConfigFileEnum.repoxJson)) {
-      return false;
-    }
-    if (!this.fileExist.exist(DomainConfigFileEnum.tsconfigJson)) {
-      return false;
-    }
     // Load the configuration files
     this.simpleMessage.writePlain(
       "Load the configuration files", 0

@@ -7,6 +7,9 @@ import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
 import {
   LinkProjectAppService
 } from "../app-service/link-project-app.service";
+import {
+  FolderIsWorkspaceAppService
+} from "../app-service/folder-is-workspace-app.service";
 
 @singleton()
 /**
@@ -16,7 +19,8 @@ export class LinkProjectStepService {
   constructor(
     private readonly systemVerification: SystemVerificationAppService,
     private readonly loggerMessageApp: SimpleMessageAppService,
-    private readonly linkProjectApp: LinkProjectAppService
+    private readonly linkProjectApp: LinkProjectAppService,
+    private readonly folderIsWorkspace: FolderIsWorkspaceAppService
   ) {
   }
 
@@ -25,6 +29,7 @@ export class LinkProjectStepService {
       "Link project", 1, true, true
     );
     if (!this.systemVerification.checkSystem()) return;
+    if (!this.folderIsWorkspace.checkFolder()) return;
     const { projectName } = model;
     if (!this.linkProjectApp.linkProject(projectName)) return;
   }
