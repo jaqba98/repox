@@ -14,6 +14,6 @@ export class RunCommandService {
 
   exec(cmd: string): void {
     this.simpleMessage.writePlain(`Run the ${cmd} command`, 0);
-    execSync(cmd);
+    execSync(`npx ${cmd}`);
   }
 }
