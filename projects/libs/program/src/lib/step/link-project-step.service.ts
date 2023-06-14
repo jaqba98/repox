@@ -10,6 +10,9 @@ import {
 import {
   FolderIsWorkspaceAppService
 } from "../app-service/folder-is-workspace-app.service";
+import {
+  LoadConfigFileAppService
+} from "../app-service/load-config-file-app.service";
 
 @singleton()
 /**
@@ -20,7 +23,8 @@ export class LinkProjectStepService {
     private readonly systemVerification: SystemVerificationAppService,
     private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly linkProjectApp: LinkProjectAppService,
-    private readonly folderIsWorkspace: FolderIsWorkspaceAppService
+    private readonly folderIsWorkspace: FolderIsWorkspaceAppService,
+    private readonly loadConfigFileApp: LoadConfigFileAppService
   ) {
   }
 
@@ -30,6 +34,7 @@ export class LinkProjectStepService {
     );
     if (!this.systemVerification.checkSystem()) return;
     if (!this.folderIsWorkspace.checkFolder()) return;
+    if (!this.loadConfigFileApp.loadConfig()) return;
     const { projectName } = model;
     if (!this.linkProjectApp.linkProject(projectName)) return;
   }

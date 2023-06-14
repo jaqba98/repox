@@ -12,7 +12,8 @@ import {
 } from "../infra/create-empty-file.service";
 import { WriteFileService } from "@lib/utils";
 import {
-  BuildDefaultDomainAppService, DomainConfigFileEnum,
+  BuildDefaultDomainAppService,
+  DomainConfigFileEnum,
   DomainConfigStoreService
 } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
@@ -46,8 +47,6 @@ export class GenerateProjectAppService {
     const projectAlias = this.projectApp.getProjectAlias(
       projectName, projectType
     );
-    // Load the configuration files
-    this.domainConfigStore.loadConfig();
     // Check whether the project exist
     if (this.domainConfigStore.existProject(projectName)) {
       this.simpleMessage.writeError(

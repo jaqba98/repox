@@ -5,12 +5,8 @@ import {
 import { ProjectAppService } from "@lib/project";
 import { RunCommandService } from "../infra/run-command.service";
 import { FileExistService } from "../infra/file-exist.service";
-import {
-  DomainConfigFileEnum,
-  DomainConfigStoreService
-} from "@lib/domain";
+import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
-import { CopyFileService } from "../infra/copy-file.service";
 
 @singleton()
 /**
@@ -29,11 +25,6 @@ export class LinkProjectAppService {
   }
 
   linkProject(projectName: string): boolean {
-    // Load the configuration files
-    this.simpleMessage.writePlain(
-      "Load the configuration files", 0
-    );
-    this.domainConfigStore.loadConfig();
     // Check whether the project exist
     this.simpleMessage.writePlain(
       "Check whether the project exist", 0

@@ -12,6 +12,9 @@ import {
 import {
   FolderIsWorkspaceAppService
 } from "../app-service/folder-is-workspace-app.service";
+import {
+  LoadConfigFileAppService
+} from "../app-service/load-config-file-app.service";
 
 @singleton()
 /**
@@ -22,7 +25,8 @@ export class GenerateProjectStepService {
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly systemVerification: SystemVerificationAppService,
     private readonly generateProjectApp: GenerateProjectAppService,
-    private readonly folderIsWorkspace: FolderIsWorkspaceAppService
+    private readonly folderIsWorkspace: FolderIsWorkspaceAppService,
+    private readonly loadConfigFileApp: LoadConfigFileAppService
   ) {
   }
 
@@ -34,6 +38,7 @@ export class GenerateProjectStepService {
     // Check the system correctness
     if (!this.systemVerification.checkSystem()) return;
     if (!this.folderIsWorkspace.checkFolder()) return;
+    if (!this.loadConfigFileApp.loadConfig()) return;
     // Generate project
     const { projectName, projectType } = model;
     if (!this.generateProjectApp.generateProject(
