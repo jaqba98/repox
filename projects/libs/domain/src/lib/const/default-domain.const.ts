@@ -1,5 +1,4 @@
 import { RepoxDomainModel } from "../model/repox-domain.model";
-import { SYSTEM_VERSION } from "@lib/const";
 import {
   TsconfigDomainModel,
   TsconfigProjectDomainModel
@@ -53,6 +52,5 @@ export const TSCONFIG_PROJECT: TsconfigProjectDomainModel = {
 };
 
 export const REPOX_CONFIG_DEFAULT: RepoxDomainModel = {
-  version: SYSTEM_VERSION,
   projects: {}
 };

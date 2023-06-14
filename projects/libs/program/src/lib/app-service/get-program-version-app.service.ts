@@ -1,6 +1,10 @@
 import { singleton } from "tsyringe";
-import { SYSTEM_VERSION } from "@lib/const";
 import { SimpleMessageAppService } from "@lib/logger";
+import {
+  GetNpmPackageFileService,
+  ReadFileService
+} from "@lib/utils";
+import { PackageJsonModel } from "@lib/domain";
 
 @singleton()
 /**
@@ -8,13 +12,19 @@ import { SimpleMessageAppService } from "@lib/logger";
  */
 export class GetProgramVersionAppService {
   constructor(
-    private readonly simpleMessage: SimpleMessageAppService
+    private readonly simpleMessage: SimpleMessageAppService,
+    private readonly getNpmPackageFile: GetNpmPackageFileService,
+    private readonly readFile: ReadFileService
   ) {
   }
 
   getProgramVersion(): void {
+    const packageJson = this.getNpmPackageFile.getPackageJsonPath();
+    const packageJsonFile = this.readFile.readJson<PackageJsonModel>(
+      packageJson
+    );
     this.simpleMessage.writeInfo(
-      SYSTEM_VERSION, 0, false, true, "VERSION"
+      packageJsonFile.version, 0, false, true, "VERSION"
     );
   }
 }

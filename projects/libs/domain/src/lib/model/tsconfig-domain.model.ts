@@ -20,8 +20,8 @@ export interface TsconfigDomainModel {
     sourceMap: boolean;
     paths: CompilerOptionsPathsModel;
   };
-  "include": Array<string>;
-  "exclude": Array<string>;
+  include: Array<string>;
+  exclude: Array<string>;
 }
 
 export interface TsconfigProjectDomainModel {

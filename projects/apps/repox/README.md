@@ -91,8 +91,6 @@ repox build project --name="example-project"
 
 ```json5
 {
-   // The current version of the configuration
-   "version": "1.0.0",
    // List of all projects in monorepo
    "projects": {
       // An example project in monorepo

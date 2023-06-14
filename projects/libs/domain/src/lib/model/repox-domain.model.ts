@@ -9,6 +9,5 @@ export interface ProjectsModel {
 }
 
 export interface RepoxDomainModel {
-  version: string;
   projects: ProjectsModel;
 }
