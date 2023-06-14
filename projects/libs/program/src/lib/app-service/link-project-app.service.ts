@@ -24,8 +24,7 @@ export class LinkProjectAppService {
     private readonly domainConfigStore: DomainConfigStoreService,
     private readonly projectApp: ProjectAppService,
     private readonly runCommand: RunCommandService,
-    private readonly simpleMessage: SimpleMessageAppService,
-    private readonly copyFile: CopyFileService
+    private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
 

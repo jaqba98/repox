@@ -35,6 +35,7 @@ export class SelectProgramAppService {
         return;
       case `${ProgramEnum.build}-${CommandEnum.project}`:
         container.resolve(BuildProjectProgramService).run();
+        return;
       case `${ProgramEnum.link}-${CommandEnum.project}`:
         container.resolve(LinkProjectProgramService).run();
         return;
