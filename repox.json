@@ -11,7 +11,7 @@
           "outputDir": "dist/repox"
         },
         {
-          "inputDir": "projects/apps/repox",
+          "inputDir": "projects/apps/repox/doc",
           "fileName": "README.md",
           "outputDir": "dist/repox"
         }

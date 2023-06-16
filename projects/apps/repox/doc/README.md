@@ -22,7 +22,7 @@
 
    [Repox style framework](#repox-style-framework)
 
----
+<br>
 
 ## <span id="check-version">Check version</span>
 
@@ -37,7 +37,7 @@ repox --version
 repox -v
 ```
 
----
+<br>
 
 ## <span id="create-workspace">Create workspace</span>
 
@@ -52,7 +52,7 @@ repox generate workspace --name="example-workspace"
 |----------|-------|--------------------------|
 | --name   | -n    | Specify a workspace name |
 
----
+<br>
 
 ## <span id="create-project">Create project</span>
 
@@ -76,7 +76,7 @@ repox generate project --name="example-project" --type="app"
 | lib        | Library project     |
 | tool       | Tool project        |
 
----
+<br>
 
 ## <span id="build-project">Build project</span>
 
@@ -91,7 +91,7 @@ repox build project --name="example-project"
 |----------|-------|------------------------|
 | --name   | -n    | Specify a project name |
 
----
+<br>
 
 ## <span id="link-project">Link project</span>
 
@@ -106,7 +106,7 @@ repox link project --name="example-project"
 |----------|-------|------------------------|
 | --name   | -n    | Specify a project name |
 
----
+<br>
 
 ## <span id="repox-configuration">Repox configuration</span>
 
@@ -137,7 +137,3 @@ repox link project --name="example-project"
    }
 }
 ```
-
----
-
-## <span id="repox-style-framework">Repox style framework</span>
