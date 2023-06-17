@@ -39,8 +39,7 @@ export class UnlinkProjectAppService {
     const project = this.domainConfigStore.getProject(projectName);
     // Unlink the project
     this.simpleMessage.writePlain("Unlink the project", 0);
-    const distFolder = `./dist/${project.name}`;
-    this.runCommand.exec(`npm unlink ${distFolder}`);
+    this.runCommand.exec(`npm uninstall ${project.name} -g`);
     // Write a success message
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(

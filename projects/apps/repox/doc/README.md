@@ -14,6 +14,8 @@
 
    [Link project](#link-project)
 
+   [Unlink project](#unlink-project)
+
 2) Configurations
 
    [Repox configuration](#repox-configuration)
@@ -101,6 +103,21 @@ repox link project --name="example-project"
 ```
 
 #### A list of all the arguments for the link project program.
+
+| Argument | Alias | Description            |
+|----------|-------|------------------------|
+| --name   | -n    | Specify a project name |
+
+<br>
+
+## <span id="unlink-project">Unlink project</span>
+
+
+```shell
+repox unlink project --name="example-project"
+```
+
+#### A list of all the arguments for the unlink project program.
 
 | Argument | Alias | Description            |
 |----------|-------|------------------------|
