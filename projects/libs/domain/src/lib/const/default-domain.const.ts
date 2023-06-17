@@ -47,8 +47,12 @@ export const TSCONFIG_DEFAULT: TsconfigDomainModel = {
   ]
 };
 
-export const TSCONFIG_PROJECT: TsconfigProjectDomainModel = {
-  extends: "../../../tsconfig.json"
+export const TSCONFIG_PROJECT = (
+  rootTsconfigPath: string
+): TsconfigProjectDomainModel => {
+  return {
+    extends: rootTsconfigPath
+  };
 };
 
 export const REPOX_CONFIG_DEFAULT: RepoxDomainModel = {

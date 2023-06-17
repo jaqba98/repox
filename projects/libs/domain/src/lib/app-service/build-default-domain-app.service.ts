@@ -24,8 +24,10 @@ export class BuildDefaultDomainAppService {
     return TSCONFIG_DEFAULT;
   }
 
-  buildTsconfigProject(): TsconfigProjectDomainModel {
-    return TSCONFIG_PROJECT;
+  buildTsconfigProject(
+    rootTsconfigPath: string
+  ): TsconfigProjectDomainModel {
+    return TSCONFIG_PROJECT(rootTsconfigPath);
   }
 
   buildRepoxConfig(): RepoxDomainModel {

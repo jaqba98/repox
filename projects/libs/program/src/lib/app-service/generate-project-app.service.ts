@@ -46,9 +46,8 @@ export class GenerateProjectAppService {
     const projectPath = path === "" ?
       this.projectApp.getProjectPath(projectName, projectType) :
       path;
-    const projectAlias = this.projectApp.getProjectAlias(
-      projectName, projectType
-    );
+    const projectAlias = this.projectApp
+      .getProjectAlias(projectName, projectType);
     // Check whether the project exist
     if (this.domainConfigStore.existProject(projectName)) {
       this.simpleMessage.writeError(
@@ -75,9 +74,14 @@ export class GenerateProjectAppService {
     this.goInto.goInto(projectPath);
     this.runCommand.exec("npm init -y");
     this.runCommand.exec("tsc --init");
+    const rootTsconfigPath: string = projectPath
+      .split("/")
+      .map(() => "..")
+      .join("/")
+      .concat("tsconfig.json");
     this.writeFile.writeJson(
       DomainConfigFileEnum.tsconfigJson,
-      this.buildDefaultDomain.buildTsconfigProject()
+      this.buildDefaultDomain.buildTsconfigProject(rootTsconfigPath)
     );
     this.createFolder.create("src");
     this.createEmptyFile.create("src/index.ts");
