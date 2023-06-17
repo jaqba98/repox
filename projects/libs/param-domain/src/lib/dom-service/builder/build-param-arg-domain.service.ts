@@ -53,6 +53,8 @@ export class BuildParamArgDomainService {
         return this.buildBuildProjectCommand(model);
       case `${ProgramEnum.link}-${CommandEnum.project}`:
         return this.buildLinkProjectCommand(model);
+      case `${ProgramEnum.unlink}-${CommandEnum.project}`:
+        return this.buildUnlinkProjectCommand(model);
       default:
         return <EmptyCommandArgDomainModel>{};
     }
@@ -92,6 +94,14 @@ export class BuildParamArgDomainService {
   }
 
   private buildLinkProjectCommand(
+    model: Array<ParamDomainArgModel>
+  ): BuildLinkProjectCommandArgDomainModel {
+    return {
+      projectName: this.getValue(model, ArgumentEnum.name)
+    };
+  }
+
+  private buildUnlinkProjectCommand(
     model: Array<ParamDomainArgModel>
   ): BuildLinkProjectCommandArgDomainModel {
     return {

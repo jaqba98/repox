@@ -7,7 +7,9 @@ import {
   BuildProjectProgramService,
   DefaultDefaultProgramService,
   GenerateProjectProgramService,
-  GenerateWorkspaceProgramService, LinkProjectProgramService
+  GenerateWorkspaceProgramService,
+  LinkProjectProgramService,
+  UnlinkProjectProgramService
 } from "@lib/program";
 
 @singleton()
@@ -38,6 +40,9 @@ export class SelectProgramAppService {
         return;
       case `${ProgramEnum.link}-${CommandEnum.project}`:
         container.resolve(LinkProjectProgramService).run();
+        return;
+      case `${ProgramEnum.unlink}-${CommandEnum.project}`:
+        container.resolve(UnlinkProjectProgramService).run();
         return;
       default:
         throw new Error(

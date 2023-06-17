@@ -7,11 +7,13 @@ export enum ProgramEnum {
   generate = "generate",
   build = "build",
   link = "link",
+  unlink = "unlink",
   unknown = "unknown"
 }
 
 export enum ProgramAliasEnum {
   generate = "g",
   build = "b",
-  link = "link"
+  link = "l",
+  unlink = "u"
 }

@@ -1,12 +1,13 @@
 {
   "name": "repox",
-  "version": "1.2.17",
-  "description": "",
-  "main": "index.js",
+  "version": "1.2.18",
+  "description": "Lightweight monorepo for many huge projects.",
+  "main": "./apps/repox/src/index.js",
+  "bin": "./apps/repox/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jakub Olejarczyk",
   "license": "ISC"
 }

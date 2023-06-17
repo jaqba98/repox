@@ -22,9 +22,14 @@ export interface BuildLinkProjectCommandArgDomainModel {
   projectName: string;
 }
 
+export interface BuildUnlinkProjectCommandArgDomainModel {
+  projectName: string;
+}
+
 export type CommandArgDomainModel =
   EmptyCommandArgDomainModel |
   GenerateWorkspaceCommandArgDomainModel |
   GenerateProjectCommandArgDomainModel |
   BuildProjectCommandArgDomainModel |
-  BuildLinkProjectCommandArgDomainModel;
+  BuildLinkProjectCommandArgDomainModel |
+  BuildUnlinkProjectCommandArgDomainModel;
