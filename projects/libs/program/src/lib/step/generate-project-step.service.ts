@@ -40,9 +40,9 @@ export class GenerateProjectStepService {
     if (!this.folderIsWorkspace.checkFolder()) return;
     if (!this.loadConfigFileApp.loadConfig()) return;
     // Generate project
-    const { projectName, projectType } = model;
+    const { projectName, projectType, projectPath } = model;
     if (!this.generateProjectApp.generateProject(
-      projectName, projectType
+      projectName, projectType, projectPath
     )) {
       return;
     }

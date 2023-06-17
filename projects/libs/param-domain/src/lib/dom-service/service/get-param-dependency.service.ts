@@ -64,6 +64,12 @@ export class GetParamDependencyService {
                   values: ["app", "lib", "tool"],
                   valueMode: "single",
                   required: true
+                },
+                [ArgumentEnum.path]: {
+                  name: ArgumentEnum.path,
+                  values: [],
+                  valueMode: "single",
+                  required: false
                 }
               }
             }

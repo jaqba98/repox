@@ -7,11 +7,13 @@ export enum ArgumentEnum {
   version = "version",
   name = "name",
   type = "type",
+  path = "path",
   unknown = "unknown"
 }
 
 export enum AliasEnum {
   version = "v",
   name = "n",
-  type = "t"
+  type = "t",
+  path = "p"
 }

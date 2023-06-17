@@ -38,12 +38,14 @@ export class GenerateProjectAppService {
   ) {
   }
 
-  generateProject(projectName: string, type: string): boolean {
+  generateProject(
+    projectName: string, type: string, path: string
+  ): boolean {
     // Prepare data to process
     const projectType = this.projectApp.getProjectType(type);
-    const projectPath = this.projectApp.getProjectPath(
-      projectName, projectType
-    );
+    const projectPath = path === "" ?
+      this.projectApp.getProjectPath(projectName, projectType) :
+      path;
     const projectAlias = this.projectApp.getProjectAlias(
       projectName, projectType
     );
