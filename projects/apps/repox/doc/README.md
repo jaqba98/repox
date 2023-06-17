@@ -69,6 +69,7 @@ repox generate project --name="example-project" --type="app"
 |----------|-------|------------------------|
 | --name   | -n    | Specify a project name |
 | --type   | -t    | Specify a project type |
+| --path   | -p    | Specify a project path |
 
 #### Possible project type values:
 
