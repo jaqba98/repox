@@ -61,7 +61,7 @@ export class ValidatorOnlySupportedSignService
   }
 
   private checkArgumentAndAlias(paramBaseValue: string): boolean {
-    return /^[a-zA-Z0-9-="'`,/\s]+$/gm.test(paramBaseValue);
+    return /^[a-zA-Z0-9-="'`,/.\s]+$/gm.test(paramBaseValue);
   }
 
   private getParamTip(paramDto: ParamDtoEntityModel): string {
@@ -77,7 +77,7 @@ export class ValidatorOnlySupportedSignService
       case ParamTypeEnum.alias:
         return this.buildSupportedSignsMessage(
           paramBaseValue,
-          "[a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [space]"
+          "[a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"
         );
       default:
         throw new Error("Not supported parameter type!");
