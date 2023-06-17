@@ -82,7 +82,7 @@ export class BuildParamArgDomainService {
     return {
       projectName: this.getValue(model, ArgumentEnum.name),
       projectType: this.getValue(model, ArgumentEnum.type),
-      projectPath: this.getValue(model, ArgumentEnum.type)
+      projectPath: this.getValue(model, ArgumentEnum.path)
     };
   }
 
