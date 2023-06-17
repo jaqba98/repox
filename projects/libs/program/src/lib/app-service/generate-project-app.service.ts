@@ -78,7 +78,7 @@ export class GenerateProjectAppService {
       .split("/")
       .map(() => "..")
       .join("/")
-      .concat("tsconfig.json");
+      .concat("/tsconfig.json");
     this.writeFile.writeJson(
       DomainConfigFileEnum.tsconfigJson,
       this.buildDefaultDomain.buildTsconfigProject(rootTsconfigPath)

@@ -16,6 +16,6 @@ export class CreateFolderService {
     this.simpleMessage.writePlain(
       `Create a folder named ${folderName}`, 0
     );
-    mkdirSync(folderName);
+    mkdirSync(folderName, { recursive: true });
   }
 }
