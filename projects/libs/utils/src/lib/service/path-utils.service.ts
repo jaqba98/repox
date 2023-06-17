@@ -9,4 +9,8 @@ export class PathUtilsService {
   createPath(pathItems: Array<string>): string {
     return join(...pathItems).replace(/\\/g, '/');
   }
+
+  normalizePath(path: string): string {
+    return path.replace(/\\/g, '/');
+  }
 }

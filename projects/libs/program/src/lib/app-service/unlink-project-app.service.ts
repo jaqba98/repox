@@ -2,7 +2,6 @@ import { singleton } from "tsyringe";
 import {
   FolderNotExistService
 } from "../infra/folder-not-exist.service";
-import { ProjectAppService } from "@lib/project";
 import { RunCommandService } from "../infra/run-command.service";
 import { FileExistService } from "../infra/file-exist.service";
 import { DomainConfigStoreService } from "@lib/domain";
@@ -17,7 +16,6 @@ export class UnlinkProjectAppService {
     private readonly fileExist: FileExistService,
     private readonly folderDoesNotExist: FolderNotExistService,
     private readonly domainConfigStore: DomainConfigStoreService,
-    private readonly projectApp: ProjectAppService,
     private readonly runCommand: RunCommandService,
     private readonly simpleMessage: SimpleMessageAppService
   ) {

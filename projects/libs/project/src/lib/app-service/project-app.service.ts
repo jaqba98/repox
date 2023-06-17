@@ -9,6 +9,9 @@ import { ProjectTypeEnum } from "../enum/project-type.enum";
 import {
   BuildProjectAliasService
 } from "../dom-service/builder/build-project-alias.service";
+import {
+  ReadProjectFilesService
+} from "../infrastructure/read-project-files.service";
 
 @singleton()
 /**
@@ -18,7 +21,8 @@ export class ProjectAppService {
   constructor(
     private readonly convertProjectType: ConvertProjectTypeService,
     private readonly buildProjectPath: BuildProjectPathService,
-    private readonly buildProjectAlias: BuildProjectAliasService
+    private readonly buildProjectAlias: BuildProjectAliasService,
+    private readonly readProjectFiles: ReadProjectFilesService
   ) {
   }
 
@@ -33,5 +37,9 @@ export class ProjectAppService {
 
   getProjectAlias(name: string, type: ProjectTypeEnum): string {
     return this.buildProjectAlias.buildAlias(name, type);
+  }
+
+  getProjectFiles(projectPath: string): Array<string> {
+    return this.readProjectFiles.readFiles(projectPath);
   }
 }

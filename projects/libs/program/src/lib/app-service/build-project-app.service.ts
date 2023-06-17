@@ -2,12 +2,12 @@ import { singleton } from "tsyringe";
 import {
   FolderNotExistService
 } from "../infra/folder-not-exist.service";
-import { ProjectAppService } from "@lib/project";
 import { RunCommandService } from "../infra/run-command.service";
 import { FileExistService } from "../infra/file-exist.service";
 import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import { CopyFileService } from "../infra/copy-file.service";
+import { ProjectAppService } from "@lib/project";
 
 @singleton()
 /**
@@ -19,10 +19,10 @@ export class BuildProjectAppService {
     private readonly fileExist: FileExistService,
     private readonly folderDoesNotExist: FolderNotExistService,
     private readonly domainConfigStore: DomainConfigStoreService,
-    private readonly projectApp: ProjectAppService,
     private readonly runCommand: RunCommandService,
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly copyFile: CopyFileService
+    private readonly copyFile: CopyFileService,
+    private readonly projectApp: ProjectAppService
   ) {
   }
 
@@ -40,6 +40,8 @@ export class BuildProjectAppService {
     // Get project data
     this.simpleMessage.writePlain("Get project data", 0);
     const project = this.domainConfigStore.getProject(projectName);
+    const files = this.projectApp.getProjectFiles(project.path);
+    console.log(files);
     // Compile the project
     this.simpleMessage.writePlain("Compile the project", 0);
     const projectDir = `--project ${project.path}/tsconfig.json`;
