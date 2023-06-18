@@ -47,7 +47,9 @@ export class GenerateProjectStepService {
     this.simple.writeInfo("Project generation", 1, true, true);
     // System verification
     if (!this.systemVerification.checkSystem()) return;
+    // Check whether folder is a workspace
     if (!this.folderIsWorkspace.checkFolder()) return;
+
     if (!this.loadConfigFileApp.loadConfig()) return
     if (!this.projectNotExist.check(name, type, path)) return;
     // Generate a project

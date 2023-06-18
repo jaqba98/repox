@@ -19,32 +19,26 @@ export class SystemVerificationAppService {
 
   checkSystem(): boolean {
     if (!this.programInstalled.check("git")) {
-      this.simple.writeError(
-        "The GIT is not installed on the computer", 0, false, true
-      );
-      this.simple.writeWarning(
-        "Install GIT on the computer", 0, false, true
-      );
+      this.writeErrorMessage("GIT");
       return false;
     }
     if (!this.programInstalled.check("node")) {
-      this.simple.writeError(
-        "The NODE.JS is not installed on the computer", 0, false, true
-      );
-      this.simple.writeWarning(
-        "Install NODE.JS on the computer", 0, false, true
-      );
+      this.writeErrorMessage("NODE");
       return false;
     }
     if (!this.programInstalled.check("npm")) {
-      this.simple.writeError(
-        "The NPM is not installed on the computer", 0, false, true
-      );
-      this.simple.writeWarning(
-        "Install NPM on the computer", 0, false, true
-      );
+      this.writeErrorMessage("NPM");
       return false;
     }
     return true;
+  }
+
+  private writeErrorMessage(program: string): void {
+    this.simple.writeError(
+      `The ${program} is not installed`, 0, false, true
+    );
+    this.simple.writeWarning(
+      `Install ${program} on the computer`, 0, false, true
+    );
   }
 }
