@@ -19,10 +19,10 @@ import {
 import {
   GenerateProjectCommandArgDomainModel
 } from "@lib/param-domain";
-import {
-  ChangePathService
-} from "../infrastructure/change-path.service";
 import appRootPath from "app-root-path";
+import {
+  GoToProjectRootAppService
+} from "../app-service/go-to-project-root-app.service";
 
 @singleton()
 /**
@@ -30,7 +30,7 @@ import appRootPath from "app-root-path";
  */
 export class GenerateProjectStepService {
   constructor(
-    private readonly changePath: ChangePathService,
+    private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly simple: SimpleMessageAppService,
     private readonly projectApp: ProjectAppService,
     private readonly systemVerification: SystemVerificationAppService,
@@ -43,7 +43,7 @@ export class GenerateProjectStepService {
 
   runSteps(commandArgDm: GenerateProjectCommandArgDomainModel): void {
     // Go to the root of the project
-    this.changePath.change(appRootPath.path);
+    this.goToProjectRoot.goToRoot();
     // Prepare data to generate project
     const name = commandArgDm.name;
     const basePath = commandArgDm.path;
