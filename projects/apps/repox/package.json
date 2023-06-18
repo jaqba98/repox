@@ -1,6 +1,6 @@
 {
   "name": "repox",
-  "version": "1.2.30",
+  "version": "1.2.31",
   "description": "Lightweight monorepo for many huge projects.",
   "main": "./apps/repox/src/index.js",
   "bin": "./apps/repox/src/index.js",
@@ -11,6 +11,7 @@
   "author": "Jakub Olejarczyk",
   "license": "ISC",
   "dependencies": {
+    "app-root-path": "^3.1.0",
     "command-exists": "^1.2.9",
     "core-js": "^3.31.0",
     "glob": "^10.2.7",
