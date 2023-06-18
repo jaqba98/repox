@@ -39,7 +39,7 @@ export class LinkProjectAppService {
     // Link the project
     this.simpleMessage.writePlain("Link the project", 0);
     const distFolder = `./dist/${project.name}`;
-    this.runCommand.exec(`npm link ${distFolder}`);
+    this.runCommand.run(`npm link ${distFolder}`);
     // Write a success message
     this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(

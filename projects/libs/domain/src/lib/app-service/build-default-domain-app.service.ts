@@ -24,10 +24,13 @@ export class BuildDefaultDomainAppService {
     return TSCONFIG_DEFAULT;
   }
 
-  buildTsconfigProject(
-    rootTsconfigPath: string
-  ): TsconfigProjectDomainModel {
-    return TSCONFIG_PROJECT(rootTsconfigPath);
+  buildTsconfigProject(path: string): TsconfigProjectDomainModel {
+    const baseTsconfigPath = path
+      .split("/")
+      .map(() => "..")
+      .join("/")
+      .concat("/tsconfig.json");
+    return TSCONFIG_PROJECT(baseTsconfigPath);
   }
 
   buildRepoxConfig(): RepoxDomainModel {

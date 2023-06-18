@@ -2,14 +2,11 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import { ProjectAppService } from "@lib/project";
-import {
-  DomainConfigStoreService,
-  repoxDmFile,
-  tsconfigDmFile
-} from "@lib/domain";
+import { DomainConfigStoreService } from "@lib/domain";
 import {
   FolderNotExistService
 } from "../infrastructure/folder-not-exist.service";
+import { REPOX_FILE, TSCONFIG_FILE } from "@lib/const";
 
 @singleton()
 /**
@@ -25,7 +22,7 @@ export class ProjectNotExistAppService {
   ) {
   }
 
-  checkProjectNotExist(
+  check(
     projectName: string,
     projectType: string,
     projectPath: string
@@ -50,7 +47,7 @@ export class ProjectNotExistAppService {
   ): boolean {
     if (this.store.existProject(projectName)) {
       this.simple.writeError(
-        `The ${projectName} project exists in the ${repoxDmFile}`,
+        `The ${projectName} project exists in the ${REPOX_FILE}`,
         0, false, true
       );
       this.simple.writeWarning(
@@ -70,7 +67,7 @@ export class ProjectNotExistAppService {
     );
     if (this.store.existAlias(alias)) {
       this.simple.writeError(
-        `The ${projectName} alias exists in the ${tsconfigDmFile}`, 0,
+        `The ${projectName} alias exists in the ${TSCONFIG_FILE}`, 0,
         false, true
       );
       this.simple.writeWarning(

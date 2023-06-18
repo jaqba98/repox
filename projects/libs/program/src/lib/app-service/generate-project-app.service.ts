@@ -1,25 +1,32 @@
+// Refactored file
 import { singleton } from "tsyringe";
-import { FileExistService } from "../infrastructure/file-exist.service";
-import { ProjectAppService } from "@lib/project";
-import {
-  FolderNotExistService
-} from "../infrastructure/folder-not-exist.service";
-import { CreateFolderService } from "../infrastructure/create-folder.service";
-import { GoIntoService } from "../infrastructure/go-into.service";
-import { RunCommandService } from "../infrastructure/run-command.service";
-import {
-  CreateEmptyFileService
-} from "../infrastructure/create-empty-file.service";
-import { WriteFileService } from "@lib/utils";
 import {
   BuildDefaultDomainAppService,
-  DomainConfigFileEnum,
-  DomainConfigStoreService
+  DomainConfigStoreService,
+  TsconfigProjectDomainModel
 } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
-  GenerateProjectCommandArgDomainModel
-} from "@lib/param-domain";
+  CreateFolderService
+} from "../infrastructure/create-folder.service";
+import {
+  ChangePathService
+} from "../infrastructure/change-path.service";
+import {
+  RunCommandService
+} from "../infrastructure/run-command.service";
+import { PathUtilsService, WriteFileService } from "@lib/utils";
+import {
+  CreateEmptyFileService
+} from "../infrastructure/create-empty-file.service";
+import { ProjectTypeEnum } from "@lib/project";
+import {
+  GIT_KEEP,
+  INDEX_FILE,
+  LIB,
+  SRC,
+  TSCONFIG_FILE
+} from "@lib/const";
 
 @singleton()
 /**
@@ -27,59 +34,66 @@ import {
  */
 export class GenerateProjectAppService {
   constructor(
-    private readonly fileExist: FileExistService,
-    private readonly domainConfigStore: DomainConfigStoreService,
     private readonly simple: SimpleMessageAppService,
-    private readonly folderNotExist: FolderNotExistService,
-    private readonly projectApp: ProjectAppService,
+    private readonly domainConfigStore: DomainConfigStoreService,
+    private readonly pathUtils: PathUtilsService,
     private readonly createFolder: CreateFolderService,
-    private readonly goInto: GoIntoService,
+    private readonly changePath: ChangePathService,
     private readonly runCommand: RunCommandService,
     private readonly writeFile: WriteFileService,
-    private readonly createEmptyFile: CreateEmptyFileService,
-    private readonly buildDefaultDomain: BuildDefaultDomainAppService
+    private readonly buildDefaultDomain: BuildDefaultDomainAppService,
+    private readonly createEmptyFile: CreateEmptyFileService
   ) {
   }
 
-  generateProject(
-    model: GenerateProjectCommandArgDomainModel
+  generate(
+    name: string,
+    type: ProjectTypeEnum,
+    path: string,
+    alias: string
   ): boolean {
-    // Prepare data to process
-    const name = model.name;
-    const basePath = model.path;
-    const type = this.projectApp.getProjectType(model.type);
-    const path = this.projectApp.getProjectPath(name, type, basePath);
-    const alias = this.projectApp.getProjectAlias(name, type);
-    // Add new project to the configuration file
-    this.domainConfigStore.addProject(
-      name, type, path
+    if (!this.generateConfig(name, type, path, alias)) return false;
+    return this.generateFiles(path);
+  }
+
+  private generateConfig(
+    name: string,
+    type: ProjectTypeEnum,
+    path: string,
+    alias: string
+  ): boolean {
+    // Display generate project config header
+    this.simple.writePlain("Generate project configuration");
+    // Add a new project to the repox.json file
+    this.domainConfigStore.addProject(name, type, path);
+    // Add a new alias to the tsconfig.json file
+    const aliasPath = this.pathUtils.createPath(
+      [path, SRC, INDEX_FILE]
     );
-    this.domainConfigStore.addAlias(alias, path);
-    // Save the configuration files
+    this.domainConfigStore.addAlias(alias, aliasPath);
+    // Save the domain config on the disc
     this.domainConfigStore.saveConfig();
-    // Create project on the system
+    return true;
+  }
+
+  private generateFiles(path: string): boolean {
+    // Display generate project files header
+    this.simple.writePlain("Generate project files");
+    // Create the project file and go inside
     this.createFolder.create(path);
-    this.goInto.goInto(path);
-    this.runCommand.exec("npm init -y");
-    this.runCommand.exec("tsc --init");
-    const rootTsconfigPath: string = path
-      .split("/")
-      .map(() => "..")
-      .join("/")
-      .concat("/tsconfig.json");
-    this.writeFile.writeJson(
-      DomainConfigFileEnum.tsconfigJson,
-      this.buildDefaultDomain.buildTsconfigProject(rootTsconfigPath)
+    this.changePath.change(path);
+    // Init the project
+    this.runCommand.runNpm("npm init -y");
+    this.runCommand.runNpm("tsc --init");
+    this.writeFile.writeJson<TsconfigProjectDomainModel>(
+      TSCONFIG_FILE,
+      this.buildDefaultDomain.buildTsconfigProject(path)
     );
-    this.createFolder.create("src");
-    this.createEmptyFile.create("src/index.ts");
-    this.createFolder.create("src/lib");
-    this.createEmptyFile.create("src/lib/.gitkeep");
-    // Success message
-    this.simple.writeNewline();
-    this.simple.writeSuccess(
-      "Project created correctly!", 1, false, true
-    );
+    // Create all sub folders and files
+    this.createFolder.create(SRC);
+    this.createEmptyFile.create(`${SRC}/${INDEX_FILE}`);
+    this.createFolder.create(`${SRC}/${LIB}`);
+    this.createEmptyFile.create(`${SRC}/${LIB}/${GIT_KEEP}`);
     return true;
   }
 }

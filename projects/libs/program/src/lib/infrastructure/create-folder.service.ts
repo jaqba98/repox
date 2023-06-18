@@ -1,21 +1,14 @@
+// Refactored file
 import { singleton } from "tsyringe";
 import { mkdirSync } from "fs";
-import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**
- * The service is responsible for create folder by name.
+ * The service is responsible for creating an empty folder
+ * in the given path.
  */
 export class CreateFolderService {
-  constructor(
-    private readonly simpleMessage: SimpleMessageAppService
-  ) {
-  }
-
-  create(folderName: string): void {
-    this.simpleMessage.writePlain(
-      `Create a folder named ${folderName}`, 0
-    );
-    mkdirSync(folderName, { recursive: true });
+  create(folderPath: string): void {
+    mkdirSync(folderPath, { recursive: true });
   }
 }

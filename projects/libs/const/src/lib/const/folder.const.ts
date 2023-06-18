@@ -2,4 +2,6 @@
  * The file contains all kinds of folders.
  */
 
-export const SRC_FOLDER: string = "src";
+export const SRC: string = "src";
+
+export const LIB: string = "lib";

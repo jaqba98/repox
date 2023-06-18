@@ -1,20 +1,19 @@
+// Refactored file
 import { singleton } from "tsyringe";
 import { WriteFileService } from "@lib/utils";
-import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**
- * The service is responsible for create empty file by name.
+ * The service is responsible for creating an empty file
+ * in the given path.
  */
 export class CreateEmptyFileService {
   constructor(
-    private readonly writeFile: WriteFileService,
-    private readonly simpleMessage: SimpleMessageAppService
+    private readonly writeFile: WriteFileService
   ) {
   }
 
-  create(file: string): void {
-    this.simpleMessage.writePlain(`Create the empty ${file} file`, 0);
-    this.writeFile.writeText(file, "");
+  create(filePath: string): void {
+    this.writeFile.writeText(filePath, "");
   }
 }

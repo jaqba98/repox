@@ -1,19 +1,17 @@
+// Refactored file
 import { singleton } from "tsyringe";
 import { execSync } from "child_process";
-import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**
- * The service is responsible for run bash command.
+ * The service is responsible for running the command in bash.
  */
 export class RunCommandService {
-  constructor(
-    private readonly simpleMessage: SimpleMessageAppService
-  ) {
+  run(command: string): void {
+    execSync(command);
   }
 
-  exec(cmd: string): void {
-    this.simpleMessage.writePlain(`Run the ${cmd} command`, 0);
-    execSync(`npx ${cmd}`);
+  runNpm(command: string): void {
+    execSync(`npx ${command}`);
   }
 }

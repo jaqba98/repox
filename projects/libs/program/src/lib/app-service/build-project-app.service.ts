@@ -51,8 +51,8 @@ export class BuildProjectAppService {
     const projectDir = `--project ${project.path}/tsconfig.json`;
     const distFolder = `./dist/${project.name}`;
     const outDir = `--outDir ${distFolder}`;
-    this.runCommand.exec(`tsc ${projectDir} ${outDir}`);
-    this.runCommand.exec(`tsc-alias ${outDir}`);
+    this.runCommand.run(`tsc ${projectDir} ${outDir}`);
+    this.runCommand.run(`tsc-alias ${outDir}`);
     // Copy assets
     project.assets.forEach(asset => {
       this.copyFile.copy(
