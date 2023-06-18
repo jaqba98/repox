@@ -6,7 +6,7 @@ import { ProjectTypeEnum, } from "../../enum/project-type.enum";
  * The service is responsible for create alias for project.
  */
 export class BuildProjectAliasService {
-  buildAlias(name: string, type: ProjectTypeEnum): string {
+  buildAlias(type: ProjectTypeEnum, name: string): string {
     return `@${type}/${name}`;
   }
 }

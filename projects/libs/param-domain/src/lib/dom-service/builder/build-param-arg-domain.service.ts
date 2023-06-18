@@ -80,9 +80,9 @@ export class BuildParamArgDomainService {
     model: Array<ParamDomainArgModel>
   ): GenerateProjectCommandArgDomainModel {
     return {
-      projectName: this.getValue(model, ArgumentEnum.name),
-      projectType: this.getValue(model, ArgumentEnum.type),
-      projectPath: this.getValue(model, ArgumentEnum.path)
+      name: this.getValue(model, ArgumentEnum.name),
+      type: this.getValue(model, ArgumentEnum.type),
+      path: this.getValue(model, ArgumentEnum.path)
     };
   }
 

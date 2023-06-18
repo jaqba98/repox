@@ -15,6 +15,9 @@ import {
 import {
   LoadConfigFileAppService
 } from "../app-service/load-config-file-app.service";
+import {
+  ProjectNotExistAppService
+} from "../app-service/project-not-exist-app.service";
 
 @singleton()
 /**
@@ -26,11 +29,12 @@ export class GenerateProjectStepService {
     private readonly systemVerification: SystemVerificationAppService,
     private readonly generateProjectApp: GenerateProjectAppService,
     private readonly folderIsWorkspace: FolderIsWorkspaceAppService,
-    private readonly loadConfigFileApp: LoadConfigFileAppService
+    private readonly loadConfigFileApp: LoadConfigFileAppService,
+    private readonly projectNotExist: ProjectNotExistAppService
   ) {
   }
 
-  runSteps(model: GenerateProjectCommandArgDomainModel): void {
+  runSteps(commandArgDm: GenerateProjectCommandArgDomainModel): void {
     // Display the command header
     this.simpleMessage.writeInfo(
       "Project generation", 1, true, true
@@ -38,12 +42,13 @@ export class GenerateProjectStepService {
     // Check the system correctness
     if (!this.systemVerification.checkSystem()) return;
     if (!this.folderIsWorkspace.checkFolder()) return;
-    if (!this.loadConfigFileApp.loadConfig()) return;
+    if (!this.loadConfigFileApp.loadConfig()) return
+    const { name, type, path } = commandArgDm;
+    if (!this.projectNotExist.checkProjectNotExist(name, type, path)) {
+      return;
+    }
     // Generate project
-    const { projectName, projectType, projectPath } = model;
-    if (!this.generateProjectApp.generateProject(
-      projectName, projectType, projectPath
-    )) {
+    if (!this.generateProjectApp.generateProject(commandArgDm)) {
       return;
     }
   }

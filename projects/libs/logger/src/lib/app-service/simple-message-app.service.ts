@@ -92,7 +92,7 @@ export class SimpleMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 
-  writePlain(message: string, newline: number): void {
+  writePlain(message: string, newline: number = 0): void {
     const outputMessage: string = this.buildSimpleMessage.build(
       message,
       LoggerModeEnum.plain,

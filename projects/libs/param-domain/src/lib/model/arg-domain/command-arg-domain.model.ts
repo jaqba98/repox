@@ -10,9 +10,9 @@ export interface GenerateWorkspaceCommandArgDomainModel {
 }
 
 export interface GenerateProjectCommandArgDomainModel {
-  projectName: string;
-  projectType: string;
-  projectPath: string;
+  name: string;
+  type: string;
+  path: string;
 }
 
 export interface BuildProjectCommandArgDomainModel {

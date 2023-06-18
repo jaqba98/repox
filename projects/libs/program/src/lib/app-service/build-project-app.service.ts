@@ -1,12 +1,16 @@
 import { singleton } from "tsyringe";
 import {
   FolderNotExistService
-} from "../infra/folder-not-exist.service";
-import { RunCommandService } from "../infra/run-command.service";
-import { FileExistService } from "../infra/file-exist.service";
+} from "../infrastructure/folder-not-exist.service";
+import {
+  RunCommandService
+} from "../infrastructure/run-command.service";
+import {
+  FileExistService
+} from "../infrastructure/file-exist.service";
 import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
-import { CopyFileService } from "../infra/copy-file.service";
+import { CopyFileService } from "../infrastructure/copy-file.service";
 import { ProjectAppService } from "@lib/project";
 
 @singleton()

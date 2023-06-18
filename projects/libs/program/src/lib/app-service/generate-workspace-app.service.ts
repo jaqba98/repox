@@ -34,7 +34,7 @@ export class GenerateWorkspaceAppService {
 
   generateWorkspace(workspaceName: string): boolean {
     // Check whether the workspace folder not exist
-    if (!this.folderNotExist.exist(workspaceName)) {
+    if (!this.folderNotExist.notExist(workspaceName)) {
       return false;
     }
     // Create empty workspace structure

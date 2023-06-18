@@ -30,13 +30,20 @@ export class ProjectAppService {
     return this.convertProjectType.convert(type);
   }
 
-  getProjectPath(name: string, type: ProjectTypeEnum): string {
+  getProjectPath(
+    projectName: string,
+    type: string,
+    projectPath: string
+  ): string {
     const projectType = this.getProjectType(type);
-    return this.buildProjectPath.buildPath(name, projectType);
+    return projectPath === "" ?
+      this.buildProjectPath.buildPath(projectName, projectType) :
+      projectPath.concat(`/${projectName}`);
   }
 
-  getProjectAlias(name: string, type: ProjectTypeEnum): string {
-    return this.buildProjectAlias.buildAlias(name, type);
+  getProjectAlias(type: string, name: string): string {
+    const projectType = this.getProjectType(type);
+    return this.buildProjectAlias.buildAlias(projectType, name);
   }
 
   getProjectFiles(projectPath: string): Array<string> {

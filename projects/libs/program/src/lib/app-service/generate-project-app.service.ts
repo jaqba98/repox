@@ -17,6 +17,9 @@ import {
   DomainConfigStoreService
 } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
+import {
+  GenerateProjectCommandArgDomainModel
+} from "@lib/param-domain";
 
 @singleton()
 /**
@@ -26,7 +29,7 @@ export class GenerateProjectAppService {
   constructor(
     private readonly fileExist: FileExistService,
     private readonly domainConfigStore: DomainConfigStoreService,
-    private readonly simpleMessage: SimpleMessageAppService,
+    private readonly simple: SimpleMessageAppService,
     private readonly folderNotExist: FolderNotExistService,
     private readonly projectApp: ProjectAppService,
     private readonly createFolder: CreateFolderService,
@@ -39,42 +42,27 @@ export class GenerateProjectAppService {
   }
 
   generateProject(
-    projectName: string, type: string, path: string
+    model: GenerateProjectCommandArgDomainModel
   ): boolean {
     // Prepare data to process
-    const projectType = this.projectApp.getProjectType(type);
-    const projectPath = path === "" ?
-      this.projectApp.getProjectPath(projectName, projectType) :
-      path;
-    const projectAlias = this.projectApp
-      .getProjectAlias(projectName, projectType);
-    // Check whether the project exist
-    if (this.domainConfigStore.existProject(projectName)) {
-      this.simpleMessage.writeError(
-        `The ${projectName} project already exist!`, 0, false, true
-      );
-      return false;
-    }
-    if (this.domainConfigStore.existAlias(projectAlias)) {
-      this.simpleMessage.writeError(
-        `The ${projectAlias} alias already exist!`, 0, false, true
-      );
-      return false;
-    }
-    if (!this.folderNotExist.exist(projectPath)) return false;
+    const name = model.name;
+    const basePath = model.path;
+    const type = this.projectApp.getProjectType(model.type);
+    const path = this.projectApp.getProjectPath(name, type, basePath);
+    const alias = this.projectApp.getProjectAlias(name, type);
     // Add new project to the configuration file
     this.domainConfigStore.addProject(
-      projectName, projectType, projectPath
+      name, type, path
     );
-    this.domainConfigStore.addAlias(projectAlias, projectPath);
+    this.domainConfigStore.addAlias(alias, path);
     // Save the configuration files
     this.domainConfigStore.saveConfig();
     // Create project on the system
-    this.createFolder.create(projectPath);
-    this.goInto.goInto(projectPath);
+    this.createFolder.create(path);
+    this.goInto.goInto(path);
     this.runCommand.exec("npm init -y");
     this.runCommand.exec("tsc --init");
-    const rootTsconfigPath: string = projectPath
+    const rootTsconfigPath: string = path
       .split("/")
       .map(() => "..")
       .join("/")
@@ -88,8 +76,8 @@ export class GenerateProjectAppService {
     this.createFolder.create("src/lib");
     this.createEmptyFile.create("src/lib/.gitkeep");
     // Success message
-    this.simpleMessage.writeNewline();
-    this.simpleMessage.writeSuccess(
+    this.simple.writeNewline();
+    this.simple.writeSuccess(
       "Project created correctly!", 1, false, true
     );
     return true;
