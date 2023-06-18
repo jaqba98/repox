@@ -42,7 +42,7 @@ export class GenerateProjectStepService {
     const basePath = commandArgDm.path;
     const type = this.projectApp.getProjectType(commandArgDm.type);
     const path = this.projectApp.getProjectPath(name, type, basePath);
-    const alias = this.projectApp.getProjectAlias(name, type);
+    const alias = this.projectApp.getProjectAlias(type, name);
     // Display generate project header
     this.simple.writeInfo("Project generation", 1, true, true);
     // System verification
