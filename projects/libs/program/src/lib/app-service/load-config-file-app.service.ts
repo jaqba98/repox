@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { FileExistService } from "../infra/file-exist.service";
+import { FileExistService } from "../infrastructure/file-exist.service";
 import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 

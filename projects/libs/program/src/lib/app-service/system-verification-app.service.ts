@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import {
   ProgramInstalledService
-} from "../infra/program-installed.service";
+} from "../infrastructure/program-installed.service";
 
 @singleton()
 /**

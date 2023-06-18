@@ -1,13 +1,13 @@
 import { singleton } from "tsyringe";
 import {
   FolderNotExistService
-} from "../infra/folder-not-exist.service";
-import { CreateFolderService } from "../infra/create-folder.service";
-import { GoIntoService } from "../infra/go-into.service";
+} from "../infrastructure/folder-not-exist.service";
+import { CreateFolderService } from "../infrastructure/create-folder.service";
+import { GoIntoService } from "../infrastructure/go-into.service";
 import {
   CreateEmptyFileService
-} from "../infra/create-empty-file.service";
-import { RunCommandService } from "../infra/run-command.service";
+} from "../infrastructure/create-empty-file.service";
+import { RunCommandService } from "../infrastructure/run-command.service";
 import { WriteFileService } from "@lib/utils";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
@@ -34,7 +34,7 @@ export class GenerateWorkspaceAppService {
 
   generateWorkspace(workspaceName: string): boolean {
     // Check whether the workspace folder not exist
-    if (!this.folderNotExist.notExist(workspaceName)) {
+    if (!this.folderNotExist.checkNotExist(workspaceName)) {
       return false;
     }
     // Create empty workspace structure
