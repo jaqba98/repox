@@ -158,7 +158,12 @@ repox unlink project --name="example-project"
                // The path to the target location
                "outputDir": "dist/example-project"
             }
-         ]
+         ],
+         // The scheme according to which the project will be build
+         "scheme": {
+            // Type of scheme
+            "type": "typescript"
+         }
       }
    }
 }

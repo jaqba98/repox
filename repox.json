@@ -15,67 +15,100 @@
           "fileName": "README.md",
           "outputDir": "dist/repox"
         }
-      ]
+      ],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "const": {
       "name": "const",
       "type": "lib",
       "path": "projects/libs/const",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "domain": {
       "name": "domain",
       "type": "lib",
       "path": "projects/libs/domain",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "launcher": {
       "name": "launcher",
       "type": "lib",
       "path": "projects/libs/launcher",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "logger": {
       "name": "logger",
       "type": "lib",
       "path": "projects/libs/logger",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "main": {
       "name": "main",
       "type": "lib",
       "path": "projects/libs/main",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "param-domain": {
       "name": "param-domain",
       "type": "lib",
       "path": "projects/libs/param-domain",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "param-dto": {
       "name": "param-dto",
       "type": "lib",
       "path": "projects/libs/param-dto",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "program": {
       "name": "program",
       "type": "lib",
       "path": "projects/libs/program",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "project": {
       "name": "project",
       "type": "lib",
       "path": "projects/libs/project",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     },
     "utils": {
       "name": "utils",
       "type": "lib",
       "path": "projects/libs/utils",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     }
   }
 }
