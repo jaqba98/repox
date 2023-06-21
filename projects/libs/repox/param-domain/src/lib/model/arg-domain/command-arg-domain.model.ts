@@ -9,7 +9,7 @@ export interface GenerateWorkspaceCommandArgDomainModel {
   workspaceName: string;
 }
 
-export interface GenerateProjectCommandArgDomainModel {
+export interface GenerateProjectCommandArgModel {
   name: string;
   type: string;
   path: string;
@@ -31,7 +31,7 @@ export interface BuildUnlinkProjectCommandArgDomainModel {
 export type CommandArgDomainModel =
   EmptyCommandArgDomainModel |
   GenerateWorkspaceCommandArgDomainModel |
-  GenerateProjectCommandArgDomainModel |
+  GenerateProjectCommandArgModel |
   BuildProjectCommandArgDomainModel |
   BuildLinkProjectCommandArgDomainModel |
   BuildUnlinkProjectCommandArgDomainModel;

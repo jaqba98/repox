@@ -14,7 +14,7 @@ import {
   BuildProjectCommandArgDomainModel,
   CommandArgDomainModel,
   EmptyCommandArgDomainModel,
-  GenerateProjectCommandArgDomainModel,
+  GenerateProjectCommandArgModel,
   GenerateWorkspaceCommandArgDomainModel
 } from "../../model/arg-domain/command-arg-domain.model";
 import { ArgumentEnum } from "../../enum/argument.enum";
@@ -78,7 +78,7 @@ export class BuildParamArgDomainService {
 
   private buildGenerateProjectCommand(
     model: Array<ParamDomainArgModel>
-  ): GenerateProjectCommandArgDomainModel {
+  ): GenerateProjectCommandArgModel {
     return {
       name: this.getValue(model, ArgumentEnum.name),
       type: this.getValue(model, ArgumentEnum.type),

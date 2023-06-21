@@ -21,7 +21,7 @@ import {
   ProjectNotExistAppService
 } from "../app-service/project-not-exist-app.service";
 import {
-  GenerateProjectCommandArgDomainModel
+  GenerateProjectCommandArgModel
 } from "@lib/param-domain";
 
 @singleton()
@@ -41,7 +41,7 @@ export class GenerateProjectStepService {
   ) {
   }
 
-  runSteps(commandArgDm: GenerateProjectCommandArgDomainModel): void {
+  runSteps(commandArgDm: GenerateProjectCommandArgModel): void {
     // Display generate project header
     this.simple.writeInfo("Project generation", 1, true, true);
     // Go to the root of the project
