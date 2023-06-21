@@ -4,7 +4,7 @@ import {
 } from "../step/build-project-step.service";
 import {
   BuildProjectCommandArgDomainModel,
-  GetParamDomainDataAppService
+  ParamDomainAppService
 } from "@lib/param-domain";
 
 @singleton()
@@ -14,7 +14,7 @@ import {
 export class BuildProjectProgramService {
   constructor(
     private readonly step: BuildProjectStepService,
-    private readonly getParamDomainData: GetParamDomainDataAppService
+    private readonly getParamDomainData: ParamDomainAppService
   ) {
   }
 

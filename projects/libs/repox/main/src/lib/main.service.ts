@@ -6,7 +6,7 @@ import {
 } from "@lib/param-dto";
 import {
   BuildParamDomainAppService,
-  GetParamDomainDataAppService
+  ParamDomainAppService
 } from "@lib/param-domain";
 import { SelectProgramAppService } from "@lib/launcher";
 import { ParamErrorMessageAppService } from "@lib/logger";
@@ -22,7 +22,7 @@ export class MainService {
     private readonly buildParamDomain: BuildParamDomainAppService,
     private readonly selectProgram: SelectProgramAppService,
     private readonly getParamDtoData: GetParamDtoDataAppService,
-    private readonly getParamDomainData: GetParamDomainDataAppService
+    private readonly getParamDomainData: ParamDomainAppService
   ) {
   }
 

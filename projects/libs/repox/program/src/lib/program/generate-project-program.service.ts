@@ -1,28 +1,27 @@
-// Refactored file
 import { singleton } from "tsyringe";
 import {
   GenerateProjectStepService
 } from "../step/generate-project-step.service";
 import {
   GenerateProjectCommandArgDomainModel,
-  GetParamDomainDataAppService
+  ParamDomainAppService
 } from "@lib/param-domain";
 
 @singleton()
 /**
- * The start point of the generate project program.
+ * The program service is responsible for starting the process
+ * of generating a new project.
  */
 export class GenerateProjectProgramService {
   constructor(
-    private readonly generateProjectStep: GenerateProjectStepService,
-    private readonly getParamDomainData: GetParamDomainDataAppService
+    private readonly paramDomain: ParamDomainAppService,
+    private readonly generateProjectStep: GenerateProjectStepService
   ) {
   }
 
-  run(): void {
-    const commandArgDm = <GenerateProjectCommandArgDomainModel>
-      this.getParamDomainData.getParamDomain().command.model;
-    this.generateProjectStep.runSteps(commandArgDm);
+  runProgram(): void {
+    const commandArg = <GenerateProjectCommandArgDomainModel>
+      this.paramDomain.getParamDomain().command.model;
+    this.generateProjectStep.runSteps(commandArg);
   }
 }
-// todo: refactor

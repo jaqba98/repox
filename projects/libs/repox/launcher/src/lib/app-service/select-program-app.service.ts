@@ -33,7 +33,7 @@ export class SelectProgramAppService {
         container.resolve(GenerateWorkspaceProgramService).run();
         return;
       case `${ProgramEnum.generate}-${CommandEnum.project}`:
-        container.resolve(GenerateProjectProgramService).run();
+        container.resolve(GenerateProjectProgramService).runProgram();
         return;
       case `${ProgramEnum.build}-${CommandEnum.project}`:
         container.resolve(BuildProjectProgramService).run();

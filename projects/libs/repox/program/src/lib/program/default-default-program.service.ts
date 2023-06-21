@@ -4,7 +4,7 @@ import {
 } from "../step/default-default-step.service";
 import {
   DefaultDefaultProgramArgDomainModel,
-  GetParamDomainDataAppService
+  ParamDomainAppService
 } from "@lib/param-domain";
 
 @singleton()
@@ -14,7 +14,7 @@ import {
 export class DefaultDefaultProgramService {
   constructor(
     private readonly defaultDefaultStep: DefaultDefaultStepService,
-    private readonly getParamDomainData: GetParamDomainDataAppService
+    private readonly getParamDomainData: ParamDomainAppService
   ) {
   }
 

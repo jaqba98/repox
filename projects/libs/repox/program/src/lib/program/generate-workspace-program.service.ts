@@ -4,7 +4,7 @@ import {
 } from "../step/generate-workspace-step.service";
 import {
   GenerateWorkspaceCommandArgDomainModel,
-  GetParamDomainDataAppService
+  ParamDomainAppService
 } from "@lib/param-domain";
 
 @singleton()
@@ -14,7 +14,7 @@ import {
 export class GenerateWorkspaceProgramService {
   constructor(
     private readonly step: GenerateWorkspaceStepService,
-    private readonly getParamDomainData: GetParamDomainDataAppService
+    private readonly getParamDomainData: ParamDomainAppService
   ) {
   }
 

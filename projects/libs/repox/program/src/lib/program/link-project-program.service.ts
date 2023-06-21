@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import {
   BuildLinkProjectCommandArgDomainModel,
-  GetParamDomainDataAppService
+  ParamDomainAppService
 } from "@lib/param-domain";
 import {
   LinkProjectStepService
@@ -14,7 +14,7 @@ import {
 export class LinkProjectProgramService {
   constructor(
     private readonly step: LinkProjectStepService,
-    private readonly getParamDomainData: GetParamDomainDataAppService
+    private readonly getParamDomainData: ParamDomainAppService
   ) {
   }
 

@@ -14,7 +14,7 @@ import {
  * The service is responsible for give param domain data
  * for other projects.
  */
-export class GetParamDomainDataAppService {
+export class ParamDomainAppService {
   constructor(
     private readonly paramDomainStore: ParamDomainStoreService
   ) {
