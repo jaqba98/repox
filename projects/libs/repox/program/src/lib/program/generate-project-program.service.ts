@@ -6,7 +6,7 @@ import {
   GenerateProjectCommandArgModel,
   ParamDomainAppService
 } from "@lib/param-domain";
-import { ProjectAppService, ProjectSchemeEnum } from "@lib/project";
+import { ProjectAppService } from "@lib/project";
 import {
   GenerateProjectProgramModel
 } from "../model/program/generate-project-program.model";
@@ -32,15 +32,13 @@ export class GenerateProjectProgramService {
   private prepareStepData(): GenerateProjectProgramModel {
     const commandArg = <GenerateProjectCommandArgModel>
       this.paramDomain.getParamDomain().command.model;
-    const { name, type, path } = commandArg;
+    const { name, type, path, scheme } = commandArg;
     return {
       projectName: name,
       projectType: this.project.getProjectType(type),
       projectPath: this.project.getProjectPath(name, type, path),
       projectAlias: this.project.getProjectAlias(name, type),
-      projectScheme: <ProjectSchemeEnum>commandArg.scheme
+      projectScheme: this.project.getProjectScheme(scheme)
     }
   }
 }
-
-// todo: refactor

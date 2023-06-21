@@ -12,6 +12,7 @@ import {
 import {
   ReadProjectFilesService
 } from "../infrastructure/read-project-files.service";
+import { ProjectSchemeEnum } from "../enum/project-scheme.enum";
 
 @singleton()
 /**
@@ -48,6 +49,10 @@ export class ProjectAppService {
 
   getProjectFiles(projectPath: string): Array<string> {
     return this.readProjectFiles.readFiles(projectPath);
+  }
+
+  getProjectScheme(scheme: string): ProjectSchemeEnum {
+    return <ProjectSchemeEnum> scheme;
   }
 }
 // todo: refactor
