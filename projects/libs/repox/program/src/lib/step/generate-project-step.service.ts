@@ -1,10 +1,13 @@
-// Refactored file
 import { singleton } from "tsyringe";
 import {
   GoToProjectRootAppService
 } from "../app-service/go-to-project-root-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
-import { ProjectAppService, ProjectSchemeEnum } from "@lib/project";
+import {
+  ProjectAppService,
+  ProjectSchemeEnum,
+  ProjectTypeEnum
+} from "@lib/project";
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
@@ -20,9 +23,6 @@ import {
 import {
   ProjectNotExistAppService
 } from "../app-service/project-not-exist-app.service";
-import {
-  GenerateProjectCommandArgModel
-} from "@lib/param-domain";
 
 @singleton()
 /**
@@ -41,18 +41,19 @@ export class GenerateProjectStepService {
   ) {
   }
 
-  runSteps(commandArgDm: GenerateProjectCommandArgModel): void {
+  runSteps(
+    model: {
+      projectName: string,
+      projectType: ProjectTypeEnum,
+      projectPath: string,
+      projectAlias: string,
+      projectScheme: ProjectSchemeEnum
+    }
+  ): void {
     // Display generate project header
     this.simple.writeInfo("Project generation", 1, true, true);
     // Go to the root of the project
     if (!this.goToProjectRoot.goToRoot()) return;
-    // Prepare data for generation
-    const name = commandArgDm.name;
-    const basePath = commandArgDm.path;
-    const scheme = <ProjectSchemeEnum>commandArgDm.scheme;
-    const type = this.projectApp.getProjectType(commandArgDm.type);
-    const path = this.projectApp.getProjectPath(name, type, basePath);
-    const alias = this.projectApp.getProjectAlias(type, name);
     // System verification
     if (!this.systemVerification.checkSystem()) return;
     // Check workspace
@@ -60,10 +61,10 @@ export class GenerateProjectStepService {
     // Loading configuration
     if (!this.loadConfigFileApp.loadConfig()) return;
     // Check that the project does not exist
-    if (!this.projectNotExist.check(name, type, path)) return;
+    if (!this.projectNotExist.check(model.projectName, model.projectType, model.projectPath)) return;
     // Generate a project
     if (!this.generateProjectApp.generate(
-      name, type, path, alias, scheme
+      model.projectName, model.projectType, model.projectPath, model.projectAlias, model.projectScheme
     )) {
       return;
     }

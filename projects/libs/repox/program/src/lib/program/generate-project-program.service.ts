@@ -6,6 +6,10 @@ import {
   GenerateProjectCommandArgModel,
   ParamDomainAppService
 } from "@lib/param-domain";
+import { ProjectAppService, ProjectSchemeEnum } from "@lib/project";
+import {
+  GenerateProjectProgramModel
+} from "../model/program/generate-project-program.model";
 
 @singleton()
 /**
@@ -14,14 +18,29 @@ import {
  */
 export class GenerateProjectProgramService {
   constructor(
+    private readonly generateProjectStep: GenerateProjectStepService,
     private readonly paramDomain: ParamDomainAppService,
-    private readonly generateProjectStep: GenerateProjectStepService
+    private readonly project: ProjectAppService
   ) {
   }
 
   runProgram(): void {
+    const stepData = this.prepareStepData();
+    this.generateProjectStep.runSteps(stepData);
+  }
+
+  private prepareStepData(): GenerateProjectProgramModel {
     const commandArg = <GenerateProjectCommandArgModel>
       this.paramDomain.getParamDomain().command.model;
-    this.generateProjectStep.runSteps(commandArg);
+    const { name, type, path } = commandArg;
+    return {
+      projectName: name,
+      projectType: this.project.getProjectType(type),
+      projectPath: this.project.getProjectPath(name, type, path),
+      projectAlias: this.project.getProjectAlias(name, type),
+      projectScheme: <ProjectSchemeEnum>commandArg.scheme
+    }
   }
 }
+
+// todo: refactor

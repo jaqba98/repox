@@ -41,7 +41,7 @@ export class ProjectAppService {
       projectPath.concat(`/${projectName}`);
   }
 
-  getProjectAlias(type: string, name: string): string {
+  getProjectAlias(name: string, type: string): string {
     const projectType = this.getProjectType(type);
     return this.buildProjectAlias.buildAlias(projectType, name);
   }
