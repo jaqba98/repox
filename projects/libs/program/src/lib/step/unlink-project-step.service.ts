@@ -8,8 +8,8 @@ import {
   LinkProjectAppService
 } from "../app-service/link-project-app.service";
 import {
-  FolderIsWorkspaceAppService
-} from "../app-service/folder-is-workspace-app.service";
+  WorkspaceCheckAppService
+} from "../app-service/workspace-check-app.service";
 import {
   LoadConfigFileAppService
 } from "../app-service/load-config-file-app.service";
@@ -26,7 +26,7 @@ export class UnlinkProjectStepService {
     private readonly systemVerification: SystemVerificationAppService,
     private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly unlinkProjectApp: UnlinkProjectAppService,
-    private readonly folderIsWorkspace: FolderIsWorkspaceAppService,
+    private readonly folderIsWorkspace: WorkspaceCheckAppService,
     private readonly loadConfigFileApp: LoadConfigFileAppService
   ) {
   }
@@ -36,7 +36,7 @@ export class UnlinkProjectStepService {
       "Unlink project", 1, true, true
     );
     if (!this.systemVerification.checkSystem()) return;
-    if (!this.folderIsWorkspace.checkFolder()) return;
+    if (!this.folderIsWorkspace.checkWorkspace()) return;
     if (!this.loadConfigFileApp.loadConfig()) return;
     const { projectName } = model;
     if (!this.unlinkProjectApp.unlinkProject(projectName)) return;

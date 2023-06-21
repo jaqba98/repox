@@ -1,3 +1,4 @@
+// Refactored file
 import { singleton } from "tsyringe";
 import {
   GenerateProjectStepService
@@ -13,14 +14,14 @@ import {
  */
 export class GenerateProjectProgramService {
   constructor(
-    private readonly step: GenerateProjectStepService,
+    private readonly generateProjectStep: GenerateProjectStepService,
     private readonly getParamDomainData: GetParamDomainDataAppService
   ) {
   }
 
   run(): void {
-    const commandModel = <GenerateProjectCommandArgDomainModel>
+    const commandArgDm = <GenerateProjectCommandArgDomainModel>
       this.getParamDomainData.getParamDomain().command.model;
-    this.step.runSteps(commandModel);
+    this.generateProjectStep.runSteps(commandArgDm);
   }
 }

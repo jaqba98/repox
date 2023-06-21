@@ -1,7 +1,7 @@
+// Refactored file
 import { singleton } from "tsyringe";
-import { FileExistService } from "../infrastructure/file-exist.service";
-import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
+import { DomainConfigStoreService } from "@lib/domain";
 
 @singleton()
 /**
@@ -9,14 +9,13 @@ import { SimpleMessageAppService } from "@lib/logger";
  */
 export class LoadConfigFileAppService {
   constructor(
-    private readonly fileExist: FileExistService,
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly domainConfigStore: DomainConfigStoreService
   ) {
   }
 
   loadConfig(): boolean {
-    this.simpleMessage.writePlain("Load the config files", 0);
+    this.simpleMessage.writePlain("Loading configuration", 0);
     this.domainConfigStore.loadConfig();
     return true;
   }

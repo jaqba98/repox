@@ -1,4 +1,8 @@
+// Refactored file
 import { singleton } from "tsyringe";
+import {
+  GoToProjectRootAppService
+} from "../app-service/go-to-project-root-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
 import { ProjectAppService } from "@lib/project";
 import {
@@ -8,8 +12,8 @@ import {
   GenerateProjectAppService
 } from "../app-service/generate-project-app.service";
 import {
-  FolderIsWorkspaceAppService
-} from "../app-service/folder-is-workspace-app.service";
+  WorkspaceCheckAppService
+} from "../app-service/workspace-check-app.service";
 import {
   LoadConfigFileAppService
 } from "../app-service/load-config-file-app.service";
@@ -19,10 +23,6 @@ import {
 import {
   GenerateProjectCommandArgDomainModel
 } from "@lib/param-domain";
-import appRootPath from "app-root-path";
-import {
-  GoToProjectRootAppService
-} from "../app-service/go-to-project-root-app.service";
 
 @singleton()
 /**
@@ -30,34 +30,35 @@ import {
  */
 export class GenerateProjectStepService {
   constructor(
-    private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly simple: SimpleMessageAppService,
+    private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly projectApp: ProjectAppService,
     private readonly systemVerification: SystemVerificationAppService,
+    private readonly workspaceCheck: WorkspaceCheckAppService,
     private readonly generateProjectApp: GenerateProjectAppService,
-    private readonly folderIsWorkspace: FolderIsWorkspaceAppService,
     private readonly loadConfigFileApp: LoadConfigFileAppService,
     private readonly projectNotExist: ProjectNotExistAppService
   ) {
   }
 
   runSteps(commandArgDm: GenerateProjectCommandArgDomainModel): void {
+    // Display generate project header
+    this.simple.writeInfo("Project generation", 1, true, true);
     // Go to the root of the project
-    this.goToProjectRoot.goToRoot();
-    // Prepare data to generate project
+    if (!this.goToProjectRoot.goToRoot()) return;
+    // Prepare data for generation
     const name = commandArgDm.name;
     const basePath = commandArgDm.path;
     const type = this.projectApp.getProjectType(commandArgDm.type);
     const path = this.projectApp.getProjectPath(name, type, basePath);
     const alias = this.projectApp.getProjectAlias(type, name);
-    // Display generate project header
-    this.simple.writeInfo("Project generation", 1, true, true);
     // System verification
     if (!this.systemVerification.checkSystem()) return;
-    // Check whether folder is a workspace
-    if (!this.folderIsWorkspace.checkFolder()) return;
-
-    if (!this.loadConfigFileApp.loadConfig()) return
+    // Check workspace
+    if (!this.workspaceCheck.checkWorkspace()) return;
+    // Loading configuration
+    if (!this.loadConfigFileApp.loadConfig()) return;
+    // Check that the project does not exist
     if (!this.projectNotExist.check(name, type, path)) return;
     // Generate a project
     if (!this.generateProjectApp.generate(name, type, path, alias)) {
