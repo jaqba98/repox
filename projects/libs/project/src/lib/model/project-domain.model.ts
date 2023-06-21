@@ -1,8 +1,13 @@
 import { ProjectTypeEnum } from "../enum/project-type.enum";
+import { ProjectSchemeEnum } from "../enum/project-scheme.enum";
 
 /**
  * The model represents the project inside the monorepo.
  */
+
+export interface ProjectSchemeModel {
+  type: ProjectSchemeEnum;
+}
 
 export interface ProjectAssetsModel {
   inputDir: string;
@@ -15,4 +20,5 @@ export interface ProjectDomainModel {
   type: ProjectTypeEnum;
   path: string;
   assets: Array<ProjectAssetsModel>;
+  scheme: ProjectSchemeModel;
 }

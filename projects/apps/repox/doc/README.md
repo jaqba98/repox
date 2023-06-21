@@ -60,16 +60,17 @@ repox generate workspace --name="example-workspace"
 
 
 ```shell
-repox generate project --name="example-project" --type="app"
+repox generate project --name="example-project" --type="app" --scheme="typescript"
 ```
 
 #### A list of all the arguments for the generation project program.
 
-| Argument | Alias | Description            |
-|----------|-------|------------------------|
-| --name   | -n    | Specify a project name |
-| --type   | -t    | Specify a project type |
-| --path   | -p    | Specify a project path |
+| Argument | Alias | Description              |
+|----------|-------|--------------------------|
+| --name   | -n    | Specify a project name   |
+| --type   | -t    | Specify a project type   |
+| --path   | -p    | Specify a project path   |
+| --scheme | -s    | Specify a project scheme |
 
 #### Possible project type values:
 
@@ -78,6 +79,13 @@ repox generate project --name="example-project" --type="app"
 | app        | Application project |
 | lib        | Library project     |
 | tool       | Tool project        |
+
+#### Possible project scheme values:
+
+| Project scheme | Description        |
+|----------------|--------------------|
+| static-page    | Static html page   |
+| typescript     | Typescript project |
 
 <br>
 

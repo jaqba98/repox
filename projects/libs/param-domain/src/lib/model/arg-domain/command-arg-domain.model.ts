@@ -13,6 +13,7 @@ export interface GenerateProjectCommandArgDomainModel {
   name: string;
   type: string;
   path: string;
+  scheme: string;
 }
 
 export interface BuildProjectCommandArgDomainModel {

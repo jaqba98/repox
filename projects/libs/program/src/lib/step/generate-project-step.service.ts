@@ -4,7 +4,7 @@ import {
   GoToProjectRootAppService
 } from "../app-service/go-to-project-root-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
-import { ProjectAppService } from "@lib/project";
+import { ProjectAppService, ProjectSchemeEnum } from "@lib/project";
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
@@ -49,6 +49,7 @@ export class GenerateProjectStepService {
     // Prepare data for generation
     const name = commandArgDm.name;
     const basePath = commandArgDm.path;
+    const scheme = <ProjectSchemeEnum>commandArgDm.scheme;
     const type = this.projectApp.getProjectType(commandArgDm.type);
     const path = this.projectApp.getProjectPath(name, type, basePath);
     const alias = this.projectApp.getProjectAlias(type, name);
@@ -61,7 +62,9 @@ export class GenerateProjectStepService {
     // Check that the project does not exist
     if (!this.projectNotExist.check(name, type, path)) return;
     // Generate a project
-    if (!this.generateProjectApp.generate(name, type, path, alias)) {
+    if (!this.generateProjectApp.generate(
+      name, type, path, alias, scheme
+    )) {
       return;
     }
     // Display a success message

@@ -19,7 +19,10 @@ import { PathUtilsService, WriteFileService } from "@lib/utils";
 import {
   CreateEmptyFileService
 } from "../infrastructure/create-empty-file.service";
-import { ProjectTypeEnum } from "@lib/project";
+import {
+  BuildProjectSchemeAppService, ProjectSchemeEnum,
+  ProjectTypeEnum
+} from "@lib/project";
 import {
   GIT_KEEP,
   INDEX_FILE,
@@ -42,7 +45,8 @@ export class GenerateProjectAppService {
     private readonly runCommand: RunCommandService,
     private readonly writeFile: WriteFileService,
     private readonly buildDefaultDomain: BuildDefaultDomainAppService,
-    private readonly createEmptyFile: CreateEmptyFileService
+    private readonly createEmptyFile: CreateEmptyFileService,
+    private readonly buildProjectScheme: BuildProjectSchemeAppService
   ) {
   }
 
@@ -50,9 +54,12 @@ export class GenerateProjectAppService {
     name: string,
     type: ProjectTypeEnum,
     path: string,
-    alias: string
+    alias: string,
+    scheme: ProjectSchemeEnum
   ): boolean {
-    if (!this.generateConfig(name, type, path, alias)) return false;
+    if (!this.generateConfig(name, type, path, alias, scheme)) {
+      return false;
+    }
     return this.generateFiles(path);
   }
 
@@ -60,12 +67,13 @@ export class GenerateProjectAppService {
     name: string,
     type: ProjectTypeEnum,
     path: string,
-    alias: string
+    alias: string,
+    scheme: ProjectSchemeEnum
   ): boolean {
     // Display generate project config header
     this.simple.writePlain("Generate project configuration");
     // Add a new project to the repox.json file
-    this.domainConfigStore.addProject(name, type, path);
+    this.domainConfigStore.addProject(name, type, path, scheme);
     // Add a new alias to the tsconfig.json file
     const aliasPath = this.pathUtils.createPath(
       [path, SRC, INDEX_FILE]

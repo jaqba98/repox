@@ -8,6 +8,7 @@ export enum ArgumentEnum {
   name = "name",
   type = "type",
   path = "path",
+  scheme = "scheme",
   unknown = "unknown"
 }
 
@@ -15,5 +16,6 @@ export enum AliasEnum {
   version = "v",
   name = "n",
   type = "t",
-  path = "p"
+  path = "p",
+  scheme = "s"
 }

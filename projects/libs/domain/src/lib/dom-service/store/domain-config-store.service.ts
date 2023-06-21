@@ -5,7 +5,11 @@ import { RepoxDomainModel } from "../../model/repox-domain.model";
 import {
   TsconfigDomainModel
 } from "../../model/tsconfig-domain.model";
-import { ProjectDomainModel, ProjectTypeEnum } from "@lib/project";
+import {
+  BuildProjectSchemeAppService,
+  ProjectDomainModel, ProjectSchemeEnum,
+  ProjectTypeEnum
+} from "@lib/project";
 import {
   DomainConfigFileEnum
 } from "../../enum/domain-config-file.enum";
@@ -20,7 +24,8 @@ export class DomainConfigStoreService {
 
   constructor(
     private readonly readFile: ReadFileService,
-    private readonly writeFile: WriteFileService
+    private readonly writeFile: WriteFileService,
+    private readonly buildProjectScheme: BuildProjectSchemeAppService
   ) {
     this.config = undefined;
   }
@@ -70,16 +75,19 @@ export class DomainConfigStoreService {
   addProject(
     projectName: string,
     projectType: ProjectTypeEnum,
-    projectPath: string
+    projectPath: string,
+    scheme: ProjectSchemeEnum
   ): void {
     if (this.config === undefined) {
       throw new Error("The domain config store is undefined!");
     }
+    const projectScheme = this.buildProjectScheme.buildScheme(scheme);
     this.config.repoxDomain.projects[projectName] = {
       name: projectName,
       type: projectType,
       path: projectPath,
-      assets: []
+      assets: [],
+      scheme: projectScheme
     }
   }
 
