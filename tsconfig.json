@@ -44,7 +44,7 @@
         "projects/libs/repox/project/src/index.ts"
       ],
       "@lib/utils": [
-        "projects/libs/repox/utils/src/index.ts"
+        "projects/libs/utils/src/index.ts"
       ]
     }
   },
