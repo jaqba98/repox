@@ -23,7 +23,7 @@
     "const": {
       "name": "const",
       "type": "lib",
-      "path": "projects/libs/const",
+      "path": "projects/libs/repox/const",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -32,7 +32,7 @@
     "domain": {
       "name": "domain",
       "type": "lib",
-      "path": "projects/libs/domain",
+      "path": "projects/libs/repox/domain",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -41,7 +41,7 @@
     "launcher": {
       "name": "launcher",
       "type": "lib",
-      "path": "projects/libs/launcher",
+      "path": "projects/libs/repox/launcher",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -50,7 +50,7 @@
     "logger": {
       "name": "logger",
       "type": "lib",
-      "path": "projects/libs/logger",
+      "path": "projects/libs/repox/logger",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -59,7 +59,7 @@
     "main": {
       "name": "main",
       "type": "lib",
-      "path": "projects/libs/main",
+      "path": "projects/libs/repox/main",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -68,7 +68,7 @@
     "param-domain": {
       "name": "param-domain",
       "type": "lib",
-      "path": "projects/libs/param-domain",
+      "path": "projects/libs/repox/param-domain",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -77,7 +77,7 @@
     "param-dto": {
       "name": "param-dto",
       "type": "lib",
-      "path": "projects/libs/param-dto",
+      "path": "projects/libs/repox/param-dto",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -86,7 +86,7 @@
     "program": {
       "name": "program",
       "type": "lib",
-      "path": "projects/libs/program",
+      "path": "projects/libs/repox/program",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -95,7 +95,7 @@
     "project": {
       "name": "project",
       "type": "lib",
-      "path": "projects/libs/project",
+      "path": "projects/libs/repox/project",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -104,7 +104,7 @@
     "utils": {
       "name": "utils",
       "type": "lib",
-      "path": "projects/libs/utils",
+      "path": "projects/libs/repox/utils",
       "assets": [],
       "scheme": {
         "type": "typescript"
