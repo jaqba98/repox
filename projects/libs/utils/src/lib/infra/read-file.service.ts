@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { readFileSync } from "fs";
-import { ExistPathService } from "./exist-path.service";
+import { PathUtilsService } from "./path-utils.service";
 
 @singleton()
 /**
@@ -8,7 +8,7 @@ import { ExistPathService } from "./exist-path.service";
  * from real file.
  */
 export class ReadFileService {
-  constructor(private readonly existPath: ExistPathService) {
+  constructor(private readonly existPath: PathUtilsService) {
   }
 
   readJson<T>(path: string): T {

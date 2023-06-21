@@ -56,6 +56,18 @@ export class SimpleMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 
+  error(message: string): void {
+    const outputMessage: string = this.buildSimpleMessage.build(
+      message,
+      LoggerModeEnum.error,
+      true,
+      true,
+      "ERROR",
+      0
+    );
+    this.writeMessage.write(outputMessage);
+  }
+
   writeWarning(
     message: string,
     newline: number,
@@ -108,4 +120,5 @@ export class SimpleMessageAppService {
     this.writeMessage.write(NEW_LINE);
   }
 }
+
 // todo: refactor
