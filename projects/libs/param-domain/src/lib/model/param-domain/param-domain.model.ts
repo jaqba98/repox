@@ -36,3 +36,4 @@ export interface ParamDomainModel {
   program: ParamDomainEntityModel<ProgramEnum, ProgramArgDomainModel>;
   command: ParamDomainEntityModel<CommandEnum, CommandArgDomainModel>;
 }
+// todo: refactor

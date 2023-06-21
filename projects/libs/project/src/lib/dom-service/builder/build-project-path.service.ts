@@ -28,3 +28,4 @@ export class BuildProjectPathService {
     return join("projects", type, name).replace(/\\/g, "/");
   }
 }
+// todo: refactor

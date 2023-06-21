@@ -27,3 +27,4 @@ export interface TsconfigDomainModel {
 export interface TsconfigProjectDomainModel {
   extends: string
 }
+// todo: refactor

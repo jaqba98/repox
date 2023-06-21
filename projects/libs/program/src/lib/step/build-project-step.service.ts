@@ -39,3 +39,4 @@ export class BuildProjectStepService {
     if (!this.buildProjectApp.buildProject(projectName)) return;
   }
 }
+// todo: refactor

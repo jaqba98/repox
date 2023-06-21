@@ -72,3 +72,4 @@ export class GenerateProjectStepService {
     this.simple.writeSuccess("Project created", 1, false, true);
   }
 }
+// todo: refactor

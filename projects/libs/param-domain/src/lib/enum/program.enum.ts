@@ -17,3 +17,4 @@ export enum ProgramAliasEnum {
   link = "l",
   unlink = "u"
 }
+// todo: refactor

@@ -73,3 +73,4 @@ export class BuildMessageService {
       buildCleanWord(fgColor, value);
   }
 }
+// todo: refactor

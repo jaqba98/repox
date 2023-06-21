@@ -28,3 +28,4 @@ export class GetParamDomainDataAppService {
     return this.paramDomainStore.getParamDomainValidation();
   }
 }
+// todo: refactor

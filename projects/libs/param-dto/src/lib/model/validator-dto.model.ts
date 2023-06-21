@@ -9,3 +9,4 @@ import {
 export interface ValidatorDtoModel {
   runValidator(): ParamDtoValidationModel;
 }
+// todo: refactor

@@ -10,3 +10,4 @@ export class BuildProjectAliasService {
     return `@${type}/${name}`;
   }
 }
+// todo: refactor

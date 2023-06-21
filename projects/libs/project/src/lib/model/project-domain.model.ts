@@ -22,3 +22,4 @@ export interface ProjectDomainModel {
   assets: Array<ProjectAssetsModel>;
   scheme: ProjectSchemeModel;
 }
+// todo: refactor

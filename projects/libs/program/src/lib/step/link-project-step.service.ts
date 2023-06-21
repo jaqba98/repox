@@ -39,3 +39,4 @@ export class LinkProjectStepService {
     if (!this.linkProjectApp.linkProject(projectName)) return;
   }
 }
+// todo: refactor

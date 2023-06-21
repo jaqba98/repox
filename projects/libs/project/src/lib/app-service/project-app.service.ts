@@ -50,3 +50,4 @@ export class ProjectAppService {
     return this.readProjectFiles.readFiles(projectPath);
   }
 }
+// todo: refactor

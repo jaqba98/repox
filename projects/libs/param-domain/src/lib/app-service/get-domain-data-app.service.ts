@@ -21,3 +21,4 @@ export class GetDomainDataAppService {
     return this.paramDomainStore.getParamDomain().command.name;
   }
 }
+// todo: refactor

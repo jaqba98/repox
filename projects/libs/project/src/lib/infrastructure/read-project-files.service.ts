@@ -17,3 +17,4 @@ export class ReadProjectFilesService {
       .map(path => this.pathUtils.normalizePath(path));
   }
 }
+// todo: refactor

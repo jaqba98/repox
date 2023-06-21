@@ -6,3 +6,4 @@ export enum ProjectSchemeEnum {
   staticPage = "static-page",
   typescript = "typescript"
 }
+// todo: refactor

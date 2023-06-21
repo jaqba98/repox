@@ -8,3 +8,4 @@ export interface DomainConfigModel {
   repoxDomain: RepoxDomainModel;
   tsconfigDomain: TsconfigDomainModel;
 }
+// todo: refactor

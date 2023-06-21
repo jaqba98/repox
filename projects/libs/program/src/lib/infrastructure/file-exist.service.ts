@@ -12,3 +12,4 @@ export class FileExistService {
     return existsSync(folderPath);
   }
 }
+// todo: refactor

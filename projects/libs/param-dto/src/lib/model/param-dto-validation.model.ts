@@ -8,3 +8,4 @@ export interface ParamDtoValidationModel {
   errors: Array<string>;
   tips: Array<string>;
 }
+// todo: refactor

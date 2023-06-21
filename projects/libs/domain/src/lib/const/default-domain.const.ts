@@ -58,3 +58,4 @@ export const TSCONFIG_PROJECT = (
 export const REPOX_CONFIG_DEFAULT: RepoxDomainModel = {
   projects: {}
 };
+// todo: refactor
