@@ -26,7 +26,7 @@
         "projects/libs/repox/launcher/src/index.ts"
       ],
       "@lib/logger": [
-        "projects/libs/repox/logger/src/index.ts"
+        "projects/libs/logger/src/index.ts"
       ],
       "@lib/main": [
         "projects/libs/repox/main/src/index.ts"
