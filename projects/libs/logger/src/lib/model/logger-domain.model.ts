@@ -6,21 +6,23 @@ import { LoggerModeEnum } from "../enum/logger-mode.enum";
  * to be displayed on the console screen.
  */
 
-export interface LoggerLineMessageModel {
-  value: string;
+export interface LoggerWordModel {
+  content: string;
   underscore: boolean;
+}
+
+export interface LoggerHeaderModel {
+  content: string;
+  visible: boolean;
 }
 
 export interface LoggerLineModel {
   mode: LoggerModeEnum;
-  isLogo: boolean;
-  isHeader: boolean;
-  headerContent: string;
-  message: Array<LoggerLineMessageModel>;
-  newline: number;
+  logo: LoggerHeaderModel;
+  header: LoggerHeaderModel;
+  words: Array<LoggerWordModel>;
 }
 
 export interface LoggerDomainModel {
   lines: Array<LoggerLineModel>;
 }
-// todo: refactor

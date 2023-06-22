@@ -15,12 +15,12 @@ import {
 
 @singleton()
 /**
- * The converter service is responsible for
- * convert the logger mode to the color value representation.
+ * The converter service is responsible for convert
+ * the logger mode to the color value.
  */
 export class ConvertModeToColorService {
-  convertToFg(loggerMode: LoggerModeEnum): string {
-    switch (loggerMode) {
+  convertToFg(mode: LoggerModeEnum): string {
+    switch (mode) {
       case LoggerModeEnum.success:
         return FG_TEXT_GREEN;
       case LoggerModeEnum.error:
@@ -32,12 +32,12 @@ export class ConvertModeToColorService {
       case LoggerModeEnum.plain:
         return FG_TEXT_GRAY;
       default:
-        throw new Error("The converter does not support the type!");
+        throw new Error(`The ${mode} is not supported logger type!`);
     }
   }
 
-  convertToBg(loggerMode: LoggerModeEnum): string {
-    switch (loggerMode) {
+  convertToBg(mode: LoggerModeEnum): string {
+    switch (mode) {
       case LoggerModeEnum.success:
         return BG_TEXT_GREEN;
       case LoggerModeEnum.error:
@@ -49,8 +49,7 @@ export class ConvertModeToColorService {
       case LoggerModeEnum.plain:
         return BG_TEXT_GRAY;
       default:
-        throw new Error("The converter does not support the type!");
+        throw new Error(`The ${mode} is not supported logger type!`);
     }
   }
 }
-// todo: refactor

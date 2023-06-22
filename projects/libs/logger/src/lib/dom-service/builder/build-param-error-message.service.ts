@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  LoggerLineMessageModel
+  LoggerWordModel
 } from "../../model/logger-domain.model";
 import { PARAM_PREFIX } from "@lib/const";
 
@@ -13,8 +13,8 @@ export class BuildParamErrorMessageService {
   build(
     wrongParamIndexes: Array<number>,
     baseValues: Array<string>
-  ): Array<LoggerLineMessageModel> {
-    const message: Array<LoggerLineMessageModel> = baseValues
+  ): Array<LoggerWordModel> {
+    const message: Array<LoggerWordModel> = baseValues
       .map((param, index): {
         value: string,
         underscore: boolean

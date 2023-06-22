@@ -1,5 +1,6 @@
 /**
- * Constants that define text styles.
+ * Constants that define the text styles that will be displayed
+ * on the console screen.
  */
 
 export const TEXT_RESET: string = "\x1b[0m";
@@ -17,4 +18,3 @@ export const BG_TEXT_GREEN: string = "\x1b[42m";
 export const BG_TEXT_YELLOW: string = "\x1b[43m";
 export const BG_TEXT_MAGENTA: string = "\x1b[45m";
 export const BG_TEXT_GRAY: string = "\x1b[100m";
-// todo: refactor

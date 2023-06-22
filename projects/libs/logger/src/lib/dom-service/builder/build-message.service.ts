@@ -4,18 +4,17 @@ import {
 } from "../converter/convert-mode-to-color.service";
 import {
   LoggerDomainModel,
-  LoggerLineMessageModel,
-  LoggerLineModel
+  LoggerLineModel,
+  LoggerWordModel
 } from "../../model/logger-domain.model";
 import { EMPTY_STRING, NEW_LINE, SPACE } from "@lib/const";
 import {
-  buildCleanWord,
   buildEmptyMessage,
   buildHeader,
   buildLine,
   buildLogo,
-  buildNewLine,
-  buildUnderscoreWord
+  buildUnderscoreWord,
+  buildWord
 } from "./build-message-piece.service";
 
 @singleton()
@@ -29,48 +28,46 @@ export class BuildMessageService {
   ) {
   }
 
-  build(model: LoggerDomainModel): string {
-    return model.lines
+  build(loggerDomain: LoggerDomainModel): string {
+    return loggerDomain.lines
       .map(line => this.buildLine(line))
       .join(NEW_LINE);
   }
 
-  private buildLine(line: LoggerLineModel): string {
-    const { mode, isLogo, isHeader, headerContent, message } = line;
-    const fgColor: string = this.convertModeToColor.convertToFg(mode);
-    const bgColor: string = this.convertModeToColor.convertToBg(mode);
-    const logo: string = isLogo ?
-      buildLogo(bgColor) :
+  private buildLine(loggerLine: LoggerLineModel): string {
+    const { mode, logo, header, words } = loggerLine;
+    const fgColor = this.convertModeToColor.convertToFg(mode);
+    const bgColor = this.convertModeToColor.convertToBg(mode);
+    const logoContent = logo.visible ?
+      buildLogo(bgColor, logo.content) :
       buildEmptyMessage();
-    const header: string = isHeader ?
-      buildHeader(bgColor, headerContent) :
+    const headerContent = header.visible ?
+      buildHeader(bgColor, header.content) :
       buildEmptyMessage();
-    const fullMessage: string = this.buildMessage(message, fgColor);
-    const newline: string = buildNewLine(line.newline);
-    return [logo, header, fullMessage, newline]
+    const message = this.buildMessage(words, fgColor);
+    return [logoContent, headerContent, message]
       .filter(entity => entity !== EMPTY_STRING)
       .map(entity => buildLine(entity))
       .join(SPACE);
   }
 
   private buildMessage(
-    message: LoggerLineModel["message"],
+    words: LoggerLineModel["words"],
     fgColor: string
   ): string {
-    return message
-      .map(entity => this.buildMessageEntity(entity, fgColor))
-      .map(entity => buildLine(entity))
+    return words
+      .map(word => this.buildMessageWord(word, fgColor))
+      .map(word => buildLine(word))
       .join(SPACE);
   }
 
-  private buildMessageEntity(
-    entity: LoggerLineMessageModel,
+  private buildMessageWord(
+    word: LoggerWordModel,
     fgColor: string
   ): string {
-    const { value, underscore } = entity;
+    const { content, underscore } = word;
     return underscore ?
-      buildUnderscoreWord(fgColor, value) :
-      buildCleanWord(fgColor, value);
+      buildUnderscoreWord(fgColor, content) :
+      buildWord(fgColor, content);
   }
 }
-// todo: refactor
