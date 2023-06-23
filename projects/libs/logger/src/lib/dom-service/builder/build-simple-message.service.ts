@@ -47,7 +47,8 @@ export class BuildSimpleMessageService {
         mode: loggerMode,
         logo: { visible: logoVisible, content: logo },
         header: { visible: true, content: headerContent },
-        words: [{ content: message, underscore: false }]
+        words: [{ content: message, underscore: false }],
+        newline: 0
       }]
     });
   }

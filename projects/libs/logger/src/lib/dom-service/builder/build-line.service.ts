@@ -27,7 +27,8 @@ export class BuildLineService {
       mode,
       logo: { visible: false, content: EMPTY_STRING },
       header: { visible: true, content: headerContent },
-      words: [{ content: line, underscore: false }]
+      words: [{ content: line, underscore: false }],
+      newline: 0
     }));
   }
 

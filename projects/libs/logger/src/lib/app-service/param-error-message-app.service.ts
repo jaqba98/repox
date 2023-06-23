@@ -50,7 +50,8 @@ export class ParamErrorMessageAppService {
           },
           words: [
             { content: "Failed to run program!", underscore: false }
-          ]
+          ],
+          newline: 1
         },
         {
           mode: LoggerModeEnum.error,
@@ -60,7 +61,8 @@ export class ParamErrorMessageAppService {
             wrongParamIndexes,
             baseValues,
             logo
-          )
+          ),
+          newline: 1
         },
         ...this.buildLines.buildErrorLines(errors),
         ...this.buildLines.buildTipLines(tips)

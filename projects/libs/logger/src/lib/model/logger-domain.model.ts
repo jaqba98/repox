@@ -21,6 +21,7 @@ export interface LoggerLineModel {
   logo: LoggerHeaderModel;
   header: LoggerHeaderModel;
   words: Array<LoggerWordModel>;
+  newline: number
 }
 
 export interface LoggerDomainModel {

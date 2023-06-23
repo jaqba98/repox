@@ -12,7 +12,7 @@ import {
   buildEmptyMessage,
   buildHeader,
   buildLine,
-  buildLogo,
+  buildLogo, buildNewLine,
   buildUnderscoreWord,
   buildWord
 } from "./build-message-piece.service";
@@ -45,7 +45,8 @@ export class BuildMessageService {
       buildHeader(bgColor, header.content) :
       buildEmptyMessage();
     const message = this.buildMessage(words, fgColor);
-    return [logoContent, headerContent, message]
+    const newline = buildNewLine(loggerLine.newline);
+    return [logoContent, headerContent, message, newline]
       .filter(entity => entity !== EMPTY_STRING)
       .map(entity => buildLine(entity))
       .join(SPACE);
