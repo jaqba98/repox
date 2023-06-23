@@ -8,6 +8,5 @@ import { EOL } from "os";
 export const NEW_LINE: string = EOL;
 export const EMPTY_STRING: string = "";
 export const SPACE: string = " ";
-export const LOGO: string = "REPOX";
-export const PARAM_PREFIX: string = "> repox";
+export const REPOX_LOGO: string = "REPOX";
 // todo: refactor

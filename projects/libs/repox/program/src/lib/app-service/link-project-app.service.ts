@@ -6,6 +6,7 @@ import { RunCommandService } from "../infrastructure/run-command.service";
 import { FileExistService } from "../infrastructure/file-exist.service";
 import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
+import { REPOX_LOGO } from "@lib/const";
 
 @singleton()
 /**
@@ -25,25 +26,25 @@ export class LinkProjectAppService {
   linkProject(projectName: string): boolean {
     // Check whether the project exist
     this.simpleMessage.writePlain(
-      "Check whether the project exist", 0
+      "Check whether the project exist"
     );
     if (!this.domainConfigStore.existProject(projectName)) {
       this.simpleMessage.writeError(
-        `The ${projectName} not exist!`, 0, false, true
+        `The ${projectName} not exist!`, REPOX_LOGO
       );
       return false;
     }
     // Get project data
-    this.simpleMessage.writePlain("Get project data", 0);
+    this.simpleMessage.writePlain("Get project data");
     const project = this.domainConfigStore.getProject(projectName);
     // Link the project
-    this.simpleMessage.writePlain("Link the project", 0);
+    this.simpleMessage.writePlain("Link the project");
     const distFolder = `./dist/${project.name}`;
     this.runCommand.run(`npm link ${distFolder}`);
     // Write a success message
-    this.simpleMessage.writeNewline();
+    // this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
-      "Project linked correctly!", 1, false, true
+      "Project linked correctly!", REPOX_LOGO
     );
     return true;
   }

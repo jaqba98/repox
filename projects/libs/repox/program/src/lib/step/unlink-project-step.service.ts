@@ -16,6 +16,7 @@ import {
 import {
   UnlinkProjectAppService
 } from "../app-service/unlink-project-app.service";
+import { REPOX_LOGO } from "@lib/const";
 
 @singleton()
 /**
@@ -33,7 +34,7 @@ export class UnlinkProjectStepService {
 
   runSteps(model: BuildProjectCommandArgDomainModel): void {
     this.loggerMessageApp.writeInfo(
-      "Unlink project", 1, true, true
+      "Unlink project", REPOX_LOGO
     );
     if (!this.systemVerification.checkSystem()) return;
     if (!this.folderIsWorkspace.checkWorkspace()) return;

@@ -9,6 +9,7 @@ import { SimpleMessageAppService } from "@lib/logger";
 import {
   GenerateWorkspaceCommandArgDomainModel
 } from "@lib/param-domain";
+import { REPOX_LOGO } from "@lib/const";
 
 @singleton()
 /**
@@ -25,7 +26,7 @@ export class GenerateWorkspaceStepService {
   runSteps(model: GenerateWorkspaceCommandArgDomainModel): void {
     // Display the command header
     this.simpleMessage.writeInfo(
-      "Workspace generation", 1, true, true
+      "Workspace generation", REPOX_LOGO
     );
     // Check the system correctness
     if (!this.systemVerification.checkSystem()) return;

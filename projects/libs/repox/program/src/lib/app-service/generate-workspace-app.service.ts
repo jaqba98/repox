@@ -13,6 +13,7 @@ import {
   BuildDefaultDomainAppService,
   DomainConfigFileEnum
 } from "@lib/domain";
+import { REPOX_LOGO } from "@lib/const";
 
 @singleton()
 /**
@@ -74,9 +75,9 @@ export class GenerateWorkspaceAppService {
     this.runCommand.run("git add .");
     this.runCommand.run(`git commit -m "init commit"`);
     // Write success message
-    this.simpleMessage.writeNewline();
+    // this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
-      "Workspace created correctly!", 1, false, true
+      "Workspace created correctly!", REPOX_LOGO
     );
     return true;
   }

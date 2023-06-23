@@ -4,7 +4,7 @@ import {
   FileExistService
 } from "../infrastructure/file-exist.service";
 import { SimpleMessageAppService } from "@lib/logger";
-import { REPOX_FILE, TSCONFIG_FILE } from "@lib/const";
+import { REPOX_FILE, REPOX_LOGO, TSCONFIG_FILE } from "@lib/const";
 
 @singleton()
 /**
@@ -19,7 +19,7 @@ export class WorkspaceCheckAppService {
   }
 
   checkWorkspace(): boolean {
-    this.simpleMessage.writePlain("Check workspace", 0);
+    this.simpleMessage.writePlain("Check workspace");
     if (!this.fileExist.exist(REPOX_FILE)) {
       this.displayError(REPOX_FILE);
       return false;
@@ -33,7 +33,7 @@ export class WorkspaceCheckAppService {
 
   private displayError(configFile: string): void {
     this.simpleMessage.writeError(
-      `The ${configFile} configuration file not found`, 0, false, true
+      `The ${configFile} configuration file not found`, REPOX_LOGO
     );
   }
 }

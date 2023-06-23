@@ -12,6 +12,7 @@ import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import { CopyFileService } from "../infrastructure/copy-file.service";
 import { ProjectAppService } from "@lib/project";
+import { REPOX_LOGO } from "@lib/const";
 
 @singleton()
 /**
@@ -33,21 +34,21 @@ export class BuildProjectAppService {
   buildProject(projectName: string): boolean {
     // Check whether the project exist
     this.simpleMessage.writePlain(
-      "Check whether the project exist", 0
+      "Check whether the project exist"
     );
     if (!this.domainConfigStore.existProject(projectName)) {
       this.simpleMessage.writeError(
-        `The ${projectName} not exist!`, 0, false, true
+        `The ${projectName} not exist!`, REPOX_LOGO
       );
       return false;
     }
     // Get project data
-    this.simpleMessage.writePlain("Get project data", 0);
+    this.simpleMessage.writePlain("Get project data");
     const project = this.domainConfigStore.getProject(projectName);
     const files = this.projectApp.getProjectFiles(project.path);
     console.log(files);
     // Compile the project
-    this.simpleMessage.writePlain("Compile the project", 0);
+    this.simpleMessage.writePlain("Compile the project");
     const projectDir = `--project ${project.path}/tsconfig.json`;
     const distFolder = `./dist/${project.name}`;
     const outDir = `--outDir ${distFolder}`;
@@ -60,9 +61,9 @@ export class BuildProjectAppService {
       );
     })
     // Write a success message
-    this.simpleMessage.writeNewline();
+    // this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(
-      "Project created correctly!", 1, false, true
+      "Project created correctly!", REPOX_LOGO
     );
     return true;
   }

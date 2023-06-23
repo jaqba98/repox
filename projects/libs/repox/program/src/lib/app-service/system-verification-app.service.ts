@@ -4,6 +4,7 @@ import {
   ProgramInstalledService
 } from "../infrastructure/program-installed.service";
 import { SimpleMessageAppService } from "@lib/logger";
+import { REPOX_LOGO } from "@lib/const";
 
 @singleton()
 /**
@@ -35,10 +36,10 @@ export class SystemVerificationAppService {
 
   private writeErrorMessage(program: string): void {
     this.simple.writeError(
-      `The ${program} is not installed`, 0, false, true
+      `The ${program} is not installed`, REPOX_LOGO
     );
     this.simple.writeWarning(
-      `Install ${program} on the computer`, 0, false, true
+      `Install ${program} on the computer`, REPOX_LOGO
     );
   }
 }

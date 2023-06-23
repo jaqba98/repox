@@ -2,6 +2,7 @@ import { singleton } from "tsyringe";
 import { copyFileSync, existsSync } from "fs";
 import { SimpleMessageAppService } from "@lib/logger";
 import { join } from "path";
+import { REPOX_LOGO } from "@lib/const";
 
 @singleton()
 /**
@@ -19,17 +20,17 @@ export class CopyFileService {
     const inputPath = join(inputDir, fileName);
     const outputPath = join(outputDir, fileName);
     this.simpleMessage.writePlain(
-      `Copy the ${inputPath} file to ${outputPath}`, 0
+      `Copy the ${inputPath} file to ${outputPath}`
     );
     if (!existsSync(inputPath)) {
       this.simpleMessage.writeError(
-        "The input path does not exist!", 0, false, true
+        "The input path does not exist!", REPOX_LOGO
       );
       return false;
     }
     if (!existsSync(outputDir)) {
       this.simpleMessage.writeError(
-        "The output path does not exist!", 0, false, true
+        "The output path does not exist!", REPOX_LOGO
       );
       return false;
     }

@@ -15,7 +15,7 @@ export class LoadConfigFileAppService {
   }
 
   loadConfig(): boolean {
-    this.simpleMessage.writePlain("Loading configuration", 0);
+    this.simpleMessage.writePlain("Loading configuration");
     this.domainConfigStore.loadConfig();
     return true;
   }

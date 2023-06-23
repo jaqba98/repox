@@ -10,6 +10,7 @@ import {
 } from "@lib/param-domain";
 import { SelectProgramAppService } from "@lib/launcher";
 import { ParamErrorMessageAppService } from "@lib/logger";
+import { REPOX_LOGO } from "@lib/const";
 
 @singleton()
 /**
@@ -34,7 +35,8 @@ export class MainService {
         paramDto.wrongIndexes,
         paramDto.baseValues,
         paramDto.errors,
-        paramDto.tips
+        paramDto.tips,
+        REPOX_LOGO
       );
       return;
     }
@@ -46,7 +48,8 @@ export class MainService {
         paramDomain.wrongIndexes,
         paramDto.baseValues,
         paramDomain.errors,
-        paramDomain.tips
+        paramDomain.tips,
+        REPOX_LOGO
       );
       return;
     }

@@ -13,6 +13,7 @@ import {
 import {
   LoadConfigFileAppService
 } from "../app-service/load-config-file-app.service";
+import { REPOX_LOGO } from "@lib/const";
 
 @singleton()
 /**
@@ -30,7 +31,7 @@ export class BuildProjectStepService {
 
   runSteps(model: BuildProjectCommandArgDomainModel): void {
     this.loggerMessageApp.writeInfo(
-      "Build project", 1, true, true
+      "Build project", REPOX_LOGO
     );
     if (!this.systemVerification.checkSystem()) return;
     if (!this.folderIsWorkspace.checkWorkspace()) return;

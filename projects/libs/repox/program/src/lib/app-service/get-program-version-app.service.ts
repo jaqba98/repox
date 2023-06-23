@@ -24,7 +24,7 @@ export class GetProgramVersionAppService {
       packageJson
     );
     this.simpleMessage.writeInfo(
-      packageJsonFile.version, 0, false, true, "VERSION"
+      packageJsonFile.version
     );
   }
 }
