@@ -8,23 +8,27 @@ import {
 import {
   WriteMessageService
 } from "../infrastructure/write-message.service";
+import {
+  BuildLineService
+} from "../dom-service/builder/build-line.service";
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
 import {
-  BuildLinesService
-} from "../dom-service/builder/build-lines.service";
+  BuildSimpleMessageService
+} from "../dom-service/builder/build-simple-message.service";
 import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
- * The app service is responsible for
- * displaying param error message on the screen.
+ * The app service is responsible for displaying
+ * param error message on the console screen.
  */
 export class ParamErrorMessageAppService {
   constructor(
-    private readonly buildParamError: BuildParamErrorMessageService,
     private readonly buildMessage: BuildMessageService,
-    private readonly writeMessage: WriteMessageService,
-    private readonly buildLines: BuildLinesService
+    private readonly buildLines: BuildLineService,
+    private readonly buildParamError: BuildParamErrorMessageService,
+    private readonly buildSimpleMessage: BuildSimpleMessageService,
+    private readonly writeMessage: WriteMessageService
   ) {
   }
 
@@ -32,31 +36,31 @@ export class ParamErrorMessageAppService {
     wrongParamIndexes: Array<number>,
     baseValues: Array<string>,
     errors: Array<string>,
-    tips: Array<string>
+    tips: Array<string>,
+    logo: string
   ): void {
-    const outputMessage: string = this.buildMessage.build({
+    const outputMessage = this.buildMessage.build({
       lines: [
         {
-          message: [{
-            value: "Failed to run program!",
-            underscore: false
-          }],
           mode: LoggerModeEnum.error,
-          isHeader: true,
-          isLogo: true,
-          headerContent: "ERROR",
-          newline: 0
+          logo: { visible: true, content: logo },
+          header: {
+            visible: true,
+            content: LoggerModeEnum.error.toUpperCase()
+          },
+          words: [
+            { content: "Failed to run program!", underscore: false }
+          ]
         },
         {
-          message: this.buildParamError.build(
-            wrongParamIndexes,
-            baseValues
-          ),
           mode: LoggerModeEnum.error,
-          isLogo: false,
-          isHeader: false,
-          headerContent: EMPTY_STRING,
-          newline: 1
+          logo: { visible: false, content: EMPTY_STRING },
+          header: { visible: false, content: EMPTY_STRING },
+          words: this.buildParamError.build(
+            wrongParamIndexes,
+            baseValues,
+            logo
+          )
         },
         ...this.buildLines.buildErrorLines(errors),
         ...this.buildLines.buildTipLines(tips)
@@ -65,4 +69,3 @@ export class ParamErrorMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 }
-// todo: refactor

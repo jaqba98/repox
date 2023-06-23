@@ -1,8 +1,5 @@
 import { singleton } from "tsyringe";
-import {
-  LoggerWordModel
-} from "../../model/logger-domain.model";
-import { PARAM_PREFIX } from "@lib/const";
+import { LoggerWordModel } from "../../model/logger-domain.model";
 
 @singleton()
 /**
@@ -12,18 +9,16 @@ import { PARAM_PREFIX } from "@lib/const";
 export class BuildParamErrorMessageService {
   build(
     wrongParamIndexes: Array<number>,
-    baseValues: Array<string>
+    baseValues: Array<string>,
+    logo: string
   ): Array<LoggerWordModel> {
-    const message: Array<LoggerWordModel> = baseValues
-      .map((param, index): {
-        value: string,
-        underscore: boolean
-      } => ({
-        value: param,
+    const prefixContent = `> ${logo.toLowerCase()}`;
+    const words: Array<LoggerWordModel> = baseValues
+      .map((param, index): LoggerWordModel => ({
+        content: param,
         underscore: wrongParamIndexes.includes(index)
       }))
       .filter((_, index): boolean => index > 1);
-    return [{ value: PARAM_PREFIX, underscore: false }, ...message];
+    return [{ content: prefixContent, underscore: false }, ...words];
   }
 }
-// todo: refactor

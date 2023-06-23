@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { BuildMessageService } from "./build-message.service";
 import { LoggerModeEnum } from "../../enum/logger-mode.enum";
-import { LoggerHeaderEnum } from "../../enum/logger-header.enum";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -11,43 +11,44 @@ export class BuildSimpleMessageService {
   constructor(private readonly buildMessage: BuildMessageService) {
   }
 
-  // todo: tu skończyłem
-  buildSuccessMessage(message: string, logo: string): string {
+  buildSuccess(message: string, logo: string): string {
+    return this.baseBuildMsg(message, logo, LoggerModeEnum.success);
+  }
+
+  buildError(message: string, logo: string): string {
+    return this.baseBuildMsg(message, logo, LoggerModeEnum.error);
+  }
+
+  buildWarning(message: string, logo: string): string {
+    return this.baseBuildMsg(message, logo, LoggerModeEnum.warning);
+  }
+
+  buildInfo(message: string, logo: string): string {
+    return this.baseBuildMsg(message, logo, LoggerModeEnum.info);
+  }
+
+  buildPlain(message: string): string {
+    return this.baseBuildMsg(
+      message,
+      EMPTY_STRING,
+      LoggerModeEnum.plain
+    );
+  }
+
+  private baseBuildMsg(
+    message: string,
+    logo: string,
+    loggerMode: LoggerModeEnum
+  ): string {
+    const logoVisible = logo !== EMPTY_STRING;
+    const headerContent = loggerMode.toUpperCase();
     return this.buildMessage.build({
       lines: [{
-        mode: LoggerModeEnum.success,
-        logo: {
-          visible: true,
-          content: logo
-        },
-        header: {
-          visible: true,
-          content: LoggerHeaderEnum.success
-        },
-        words: [{ content: message, underscore: false }],
+        mode: loggerMode,
+        logo: { visible: logoVisible, content: logo },
+        header: { visible: true, content: headerContent },
+        words: [{ content: message, underscore: false }]
       }]
     });
   }
-
-  // build(
-  //   message: string,
-  //   mode: LoggerModeEnum,
-  //   isLogo: boolean,
-  //   isHeader: boolean,
-  //   headerContent: string,
-  //   newline: number
-  // ): string {
-  //   return this.buildMessage.build({
-  //     lines: [{
-  //       message: [{ value: message, underscore: false }],
-  //       mode,
-  //       isLogo,
-  //       isHeader,
-  //       headerContent,
-  //       newline
-  //     }]
-  //   });
-  // }
 }
-
-// todo: refactor

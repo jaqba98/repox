@@ -1,17 +1,16 @@
 import { singleton } from "tsyringe";
 import {
-  WriteMessageService
-} from "../infrastructure/write-message.service";
-import { LoggerModeEnum } from "../enum/logger-mode.enum";
-import { EMPTY_STRING, NEW_LINE } from "@lib/const";
-import {
   BuildSimpleMessageService
 } from "../dom-service/builder/build-simple-message.service";
+import {
+  WriteMessageService
+} from "../infrastructure/write-message.service";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
- * The app service is responsible for
- * displaying simple message on the screen.
+ * The app service is responsible for displaying simple message
+ * on the console screen.
  */
 export class SimpleMessageAppService {
   constructor(
@@ -20,105 +19,40 @@ export class SimpleMessageAppService {
   ) {
   }
 
-  writeSuccess(
-    message: string,
-    newline: number,
-    isLogo: boolean,
-    isHeader: boolean,
-    headerContent: string = "SUCCESS"
-  ): void {
-    const outputMessage: string = this.buildSimpleMessage.build(
+  writeSuccess(message: string, logo: string = EMPTY_STRING): void {
+    const outputMessage = this.buildSimpleMessage.buildSuccess(
       message,
-      LoggerModeEnum.success,
-      isLogo,
-      isHeader,
-      headerContent,
-      newline
+      logo
     );
     this.writeMessage.write(outputMessage);
   }
 
-  writeError(
-    message: string,
-    newline: number,
-    isLogo: boolean,
-    isHeader: boolean,
-    headerContent: string = "ERROR"
-  ): void {
-    const outputMessage: string = this.buildSimpleMessage.build(
+  writeError(message: string, logo: string = EMPTY_STRING): void {
+    const outputMessage = this.buildSimpleMessage.buildError(
       message,
-      LoggerModeEnum.error,
-      isLogo,
-      isHeader,
-      headerContent,
-      newline
+      logo
     );
     this.writeMessage.write(outputMessage);
   }
 
-  error(message: string): void {
-    const outputMessage: string = this.buildSimpleMessage.build(
+  writeWarning(message: string, logo: string = EMPTY_STRING): void {
+    const outputMessage = this.buildSimpleMessage.buildWarning(
       message,
-      LoggerModeEnum.error,
-      true,
-      true,
-      "ERROR",
-      0
+      logo
     );
     this.writeMessage.write(outputMessage);
   }
 
-  writeWarning(
-    message: string,
-    newline: number,
-    isLogo: boolean,
-    isHeader: boolean,
-    headerContent: string = "WARNING"
-  ): void {
-    const outputMessage: string = this.buildSimpleMessage.build(
+  writeInfo(message: string, logo: string = EMPTY_STRING): void {
+    const outputMessage = this.buildSimpleMessage.buildInfo(
       message,
-      LoggerModeEnum.warning,
-      isLogo,
-      isHeader,
-      headerContent,
-      newline
+      logo
     );
     this.writeMessage.write(outputMessage);
   }
 
-  writeInfo(
-    message: string,
-    newline: number,
-    isLogo: boolean,
-    isHeader: boolean,
-    headerContent: string = "INFO"
-  ): void {
-    const outputMessage: string = this.buildSimpleMessage.build(
-      message,
-      LoggerModeEnum.info,
-      isLogo,
-      isHeader,
-      headerContent,
-      newline
-    );
+  writePlain(message: string): void {
+    const outputMessage = this.buildSimpleMessage.buildPlain(message);
     this.writeMessage.write(outputMessage);
-  }
-
-  writePlain(message: string, newline: number = 0): void {
-    const outputMessage: string = this.buildSimpleMessage.build(
-      message,
-      LoggerModeEnum.plain,
-      false,
-      false,
-      EMPTY_STRING,
-      newline
-    );
-    this.writeMessage.write(outputMessage);
-  }
-
-  writeNewline(): void {
-    this.writeMessage.write(NEW_LINE);
   }
 }
-
-// todo: refactor
