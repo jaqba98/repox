@@ -5,16 +5,15 @@ import { join } from "path";
 
 @singleton()
 /**
- * The service is responsible for checking
- * whether a given path exists in the system.
+ * The service contains a group of utils to path manage.
  */
 export class PathUtilsService {
-  checkExist(path: string): boolean {
+  existPath(path: string): boolean {
     return existsSync(path);
   }
 
-  checkNotExist(path: string): boolean {
-    return !this.checkExist(path);
+  noExistPath(path: string): boolean {
+    return !this.existPath(path);
   }
 
   changePath(path: string): void {
@@ -22,11 +21,10 @@ export class PathUtilsService {
   }
 
   createPath(pathItems: Array<string>): string {
-    return join(...pathItems).replace(/\\/g, '/');
+    return this.normalizePath(join(...pathItems));
   }
 
   normalizePath(path: string): string {
-    return path.replace(/\\/g, '/');
+    return path.replace(/\\/g, "/");
   }
 }
-// todo: refactor

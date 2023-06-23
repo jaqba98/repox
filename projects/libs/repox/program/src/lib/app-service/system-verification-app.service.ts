@@ -2,7 +2,7 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/const";
-import { ProgramInstalledService } from "@lib/utils";
+import { SystemUtilsService } from "@lib/utils";
 
 @singleton()
 /**
@@ -11,21 +11,21 @@ import { ProgramInstalledService } from "@lib/utils";
  */
 export class SystemVerificationAppService {
   constructor(
-    private readonly programInstalled: ProgramInstalledService,
+    private readonly programInstalled: SystemUtilsService,
     private readonly simple: SimpleMessageAppService
   ) {
   }
 
   checkSystem(): boolean {
-    if (!this.programInstalled.check("git")) {
+    if (!this.programInstalled.checkProgramExist("git")) {
       this.writeErrorMessage("GIT");
       return false;
     }
-    if (!this.programInstalled.check("node")) {
+    if (!this.programInstalled.checkProgramExist("node")) {
       this.writeErrorMessage("NODE");
       return false;
     }
-    if (!this.programInstalled.check("npm")) {
+    if (!this.programInstalled.checkProgramExist("npm")) {
       this.writeErrorMessage("NPM");
       return false;
     }

@@ -4,10 +4,9 @@ import { SimpleMessageAppService } from "@lib/logger";
 import { ProjectAppService } from "@lib/project";
 import { REPOX_LOGO } from "@lib/const";
 import {
-  CopyFileService,
-  FileExistService,
-  FolderNotExistService,
-  RunCommandService
+  FileUtilsService,
+  FolderUtilsService,
+  RunCommandUtilsService
 } from "@lib/utils";
 
 @singleton()
@@ -17,12 +16,12 @@ import {
  */
 export class BuildProjectAppService {
   constructor(
-    private readonly fileExist: FileExistService,
-    private readonly folderDoesNotExist: FolderNotExistService,
+    private readonly fileExist: FileUtilsService,
+    private readonly folderDoesNotExist: FolderUtilsService,
     private readonly domainConfigStore: DomainConfigStoreService,
-    private readonly runCommand: RunCommandService,
+    private readonly runCommand: RunCommandUtilsService,
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly copyFile: CopyFileService,
+    private readonly fileUtils: FileUtilsService,
     private readonly projectApp: ProjectAppService
   ) {
   }
@@ -48,12 +47,13 @@ export class BuildProjectAppService {
     const projectDir = `--project ${project.path}/tsconfig.json`;
     const distFolder = `./dist/${project.name}`;
     const outDir = `--outDir ${distFolder}`;
-    this.runCommand.run(`tsc ${projectDir} ${outDir}`);
-    this.runCommand.run(`tsc-alias ${outDir}`);
+    this.runCommand.runCommand(`tsc ${projectDir} ${outDir}`);
+    this.runCommand.runCommand(`tsc-alias ${outDir}`);
     // Copy assets
     project.assets.forEach(asset => {
-      this.copyFile.copy(
-        asset.inputDir, asset.outputDir, asset.fileName
+      this.fileUtils.copyFile(
+        `${asset.inputDir}/${asset.fileName}`,
+        `${asset.outputDir}/${asset.fileName}`
       );
     })
     // Write a success message

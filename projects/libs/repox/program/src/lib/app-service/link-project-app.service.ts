@@ -3,9 +3,9 @@ import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/const";
 import {
-  FileExistService,
-  FolderNotExistService,
-  RunCommandService
+  FileUtilsService,
+  FolderUtilsService,
+  RunCommandUtilsService
 } from "@lib/utils";
 
 @singleton()
@@ -15,10 +15,10 @@ import {
  */
 export class LinkProjectAppService {
   constructor(
-    private readonly fileExist: FileExistService,
-    private readonly folderDoesNotExist: FolderNotExistService,
+    private readonly fileExist: FileUtilsService,
+    private readonly folderDoesNotExist: FolderUtilsService,
     private readonly domainConfigStore: DomainConfigStoreService,
-    private readonly runCommand: RunCommandService,
+    private readonly runCommand: RunCommandUtilsService,
     private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
@@ -40,7 +40,7 @@ export class LinkProjectAppService {
     // Link the project
     this.simpleMessage.writePlain("Link the project");
     const distFolder = `./dist/${project.name}`;
-    this.runCommand.run(`npm link ${distFolder}`);
+    this.runCommand.runCommand(`npm link ${distFolder}`);
     // Write a success message
     // this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(

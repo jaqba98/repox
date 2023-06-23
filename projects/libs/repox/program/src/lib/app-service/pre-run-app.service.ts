@@ -18,7 +18,7 @@ export class PreRunAppService {
 
   run(): boolean {
     // Go to the root project path.
-    if (this.pathUtils.checkNotExist(path)) {
+    if (this.pathUtils.noExistPath(path)) {
       this.simpleMessage.writeError(
         `The path ${path} does not exist!`, REPOX_LOGO
       );

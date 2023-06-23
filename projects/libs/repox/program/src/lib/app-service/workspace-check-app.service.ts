@@ -2,7 +2,7 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import { REPOX_FILE, REPOX_LOGO, TSCONFIG_FILE } from "@lib/const";
-import { FileExistService } from "@lib/utils";
+import { FileUtilsService } from "@lib/utils";
 
 @singleton()
 /**
@@ -11,18 +11,18 @@ import { FileExistService } from "@lib/utils";
  */
 export class WorkspaceCheckAppService {
   constructor(
-    private readonly fileExist: FileExistService,
+    private readonly fileExist: FileUtilsService,
     private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
 
   checkWorkspace(): boolean {
     this.simpleMessage.writePlain("Check workspace");
-    if (!this.fileExist.exist(REPOX_FILE)) {
+    if (!this.fileExist.existFile(REPOX_FILE)) {
       this.displayError(REPOX_FILE);
       return false;
     }
-    if (!this.fileExist.exist(TSCONFIG_FILE)) {
+    if (!this.fileExist.existFile(TSCONFIG_FILE)) {
       this.displayError(TSCONFIG_FILE);
       return false;
     }

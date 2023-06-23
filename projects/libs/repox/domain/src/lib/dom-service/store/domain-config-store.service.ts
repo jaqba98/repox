@@ -1,13 +1,14 @@
 import { singleton } from "tsyringe";
 import { DomainConfigModel } from "../../model/domain-config.model";
-import { ReadFileService, WriteFileService } from "@lib/utils";
+import { FileUtilsService } from "@lib/utils";
 import { RepoxDomainModel } from "../../model/repox-domain.model";
 import {
   TsconfigDomainModel
 } from "../../model/tsconfig-domain.model";
 import {
   BuildProjectSchemeAppService,
-  ProjectDomainModel, ProjectSchemeEnum,
+  ProjectDomainModel,
+  ProjectSchemeEnum,
   ProjectTypeEnum
 } from "@lib/project";
 import {
@@ -23,8 +24,8 @@ export class DomainConfigStoreService {
   private config: DomainConfigModel | undefined;
 
   constructor(
-    private readonly readFile: ReadFileService,
-    private readonly writeFile: WriteFileService,
+    private readonly readFile: FileUtilsService,
+    private readonly writeFile: FileUtilsService,
     private readonly buildProjectScheme: BuildProjectSchemeAppService
   ) {
     this.config = undefined;
@@ -32,10 +33,10 @@ export class DomainConfigStoreService {
 
   loadConfig(): void {
     this.config = {
-      repoxDomain: this.readFile.readJson<RepoxDomainModel>(
+      repoxDomain: this.readFile.readJsonFile<RepoxDomainModel>(
         DomainConfigFileEnum.repoxJson
       ),
-      tsconfigDomain: this.readFile.readJson<TsconfigDomainModel>(
+      tsconfigDomain: this.readFile.readJsonFile<TsconfigDomainModel>(
         DomainConfigFileEnum.tsconfigJson
       )
     }
@@ -45,10 +46,10 @@ export class DomainConfigStoreService {
     if (this.config === undefined) {
       throw new Error("The domain config store is undefined!");
     }
-    this.writeFile.writeJson(
+    this.writeFile.writeJsonFile(
       DomainConfigFileEnum.repoxJson, this.config.repoxDomain
     );
-    this.writeFile.writeJson(
+    this.writeFile.writeJsonFile(
       DomainConfigFileEnum.tsconfigJson, this.config.tsconfigDomain
     );
   }
