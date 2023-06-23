@@ -1,10 +1,5 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-import {
-  GetNpmPackageFileService,
-  ReadFileService
-} from "@lib/utils";
-import { PackageJsonModel } from "@lib/domain";
 
 @singleton()
 /**
@@ -12,20 +7,12 @@ import { PackageJsonModel } from "@lib/domain";
  */
 export class GetProgramVersionAppService {
   constructor(
-    private readonly simpleMessage: SimpleMessageAppService,
-    private readonly getNpmPackageFile: GetNpmPackageFileService,
-    private readonly readFile: ReadFileService
+    private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
 
   getProgramVersion(): void {
-    const packageJson = this.getNpmPackageFile.getPackageJsonPath();
-    const packageJsonFile = this.readFile.readJson<PackageJsonModel>(
-      packageJson
-    );
-    this.simpleMessage.writeInfo(
-      packageJsonFile.version
-    );
+    this.simpleMessage.writeInfo("1.0.0");
   }
 }
 // todo: refactor

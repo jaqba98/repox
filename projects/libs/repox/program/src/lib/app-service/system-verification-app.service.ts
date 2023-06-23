@@ -1,10 +1,8 @@
 // Refactored file
 import { singleton } from "tsyringe";
-import {
-  ProgramInstalledService
-} from "../infrastructure/program-installed.service";
 import { SimpleMessageAppService } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/const";
+import { ProgramInstalledService } from "@lib/utils";
 
 @singleton()
 /**

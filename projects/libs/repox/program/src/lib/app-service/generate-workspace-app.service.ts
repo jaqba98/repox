@@ -1,13 +1,12 @@
 import { singleton } from "tsyringe";
 import {
-  FolderNotExistService
-} from "../infrastructure/folder-not-exist.service";
-import { CreateFolderService } from "../infrastructure/create-folder.service";
-import {
-  CreateEmptyFileService
-} from "../infrastructure/create-empty-file.service";
-import { RunCommandService } from "../infrastructure/run-command.service";
-import { ChangePathService, WriteFileService } from "@lib/utils";
+  CreateEmptyFileService,
+  CreateFolderService,
+  FolderNotExistService,
+  PathUtilsService,
+  RunCommandService,
+  WriteFileService
+} from "@lib/utils";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
   BuildDefaultDomainAppService,
@@ -24,7 +23,7 @@ export class GenerateWorkspaceAppService {
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly folderNotExist: FolderNotExistService,
     private readonly createFolder: CreateFolderService,
-    private readonly goInto: ChangePathService,
+    private readonly goInto: PathUtilsService,
     private readonly createEmptyFile: CreateEmptyFileService,
     private readonly runCommand: RunCommandService,
     private readonly writeFile: WriteFileService,
@@ -39,7 +38,7 @@ export class GenerateWorkspaceAppService {
     }
     // Create empty workspace structure
     this.createFolder.create(workspaceName);
-    this.goInto.change(workspaceName);
+    this.goInto.changePath(workspaceName);
     this.createFolder.create("projects");
     this.createFolder.create("projects/apps");
     this.createFolder.create("projects/libs");
@@ -82,4 +81,5 @@ export class GenerateWorkspaceAppService {
     return true;
   }
 }
+
 // todo: refactor

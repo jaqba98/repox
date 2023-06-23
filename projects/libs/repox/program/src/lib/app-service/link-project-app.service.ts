@@ -1,12 +1,12 @@
 import { singleton } from "tsyringe";
-import {
-  FolderNotExistService
-} from "../infrastructure/folder-not-exist.service";
-import { RunCommandService } from "../infrastructure/run-command.service";
-import { FileExistService } from "../infrastructure/file-exist.service";
 import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/const";
+import {
+  FileExistService,
+  FolderNotExistService,
+  RunCommandService
+} from "@lib/utils";
 
 @singleton()
 /**

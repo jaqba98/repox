@@ -1,10 +1,8 @@
 // Refactored file
 import { singleton } from "tsyringe";
-import {
-  FileExistService
-} from "../infrastructure/file-exist.service";
 import { SimpleMessageAppService } from "@lib/logger";
 import { REPOX_FILE, REPOX_LOGO, TSCONFIG_FILE } from "@lib/const";
+import { FileExistService } from "@lib/utils";
 
 @singleton()
 /**

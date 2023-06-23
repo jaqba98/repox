@@ -1,18 +1,14 @@
 import { singleton } from "tsyringe";
-import {
-  FolderNotExistService
-} from "../infrastructure/folder-not-exist.service";
-import {
-  RunCommandService
-} from "../infrastructure/run-command.service";
-import {
-  FileExistService
-} from "../infrastructure/file-exist.service";
 import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
-import { CopyFileService } from "../infrastructure/copy-file.service";
 import { ProjectAppService } from "@lib/project";
 import { REPOX_LOGO } from "@lib/const";
+import {
+  CopyFileService,
+  FileExistService,
+  FolderNotExistService,
+  RunCommandService
+} from "@lib/utils";
 
 @singleton()
 /**
@@ -68,4 +64,5 @@ export class BuildProjectAppService {
     return true;
   }
 }
+
 // todo: refactor
