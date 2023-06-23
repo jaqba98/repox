@@ -1,23 +1,18 @@
 import { singleton } from "tsyringe";
-import {
-  copyFileSync,
-  existsSync,
-  readFileSync,
-  writeFileSync
-} from "fs";
+import { copyFileSync, readFileSync, writeFileSync } from "fs";
 import { EMPTY_STRING } from "@lib/const";
+import { PathUtilsService } from "./path-utils.service";
 
 @singleton()
 /**
  * The service contains a group of utils to file manage.
  */
 export class FileUtilsService {
-  copyFile(input: string, output: string): void {
-    copyFileSync(input, output);
+  constructor(private readonly pathUtils: PathUtilsService) {
   }
 
-  existFile(filePath: string): boolean {
-    return existsSync(filePath);
+  copyFile(input: string, output: string): void {
+    copyFileSync(input, output);
   }
 
   createEmptyFile(filePath: string): void {
@@ -25,7 +20,7 @@ export class FileUtilsService {
   }
 
   readJsonFile<T>(filePath: string): T {
-    if (!this.existFile(filePath)) {
+    if (!this.pathUtils.existPath(filePath)) {
       throw new Error("The specified file does not exist!");
     }
     return <T>JSON.parse(readFileSync(filePath, "utf-8"));

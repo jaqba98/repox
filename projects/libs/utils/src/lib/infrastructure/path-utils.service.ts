@@ -12,7 +12,7 @@ export class PathUtilsService {
     return existsSync(path);
   }
 
-  noExistPath(path: string): boolean {
+  notExistPath(path: string): boolean {
     return !this.existPath(path);
   }
 

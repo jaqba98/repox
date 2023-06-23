@@ -1,15 +1,12 @@
 import { singleton } from "tsyringe";
 import {
-  SystemVerificationAppService
-} from "../app-service/system-verification-app.service";
-import {
   BuildProjectAppService
 } from "../app-service/build-project-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
 import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
 import {
-  WorkspaceCheckAppService
-} from "../app-service/workspace-check-app.service";
+  CheckWorkspaceAppService
+} from "../app-service/check-workspace-app.service";
 import {
   LoadConfigFileAppService
 } from "../app-service/load-config-file-app.service";
@@ -21,10 +18,9 @@ import { REPOX_LOGO } from "@lib/const";
  */
 export class BuildProjectStepService {
   constructor(
-    private readonly systemVerification: SystemVerificationAppService,
     private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly buildProjectApp: BuildProjectAppService,
-    private readonly folderIsWorkspace: WorkspaceCheckAppService,
+    private readonly folderIsWorkspace: CheckWorkspaceAppService,
     private readonly loadConfigFileApp: LoadConfigFileAppService
   ) {
   }
@@ -33,8 +29,7 @@ export class BuildProjectStepService {
     this.loggerMessageApp.writeInfo(
       "Build project", REPOX_LOGO
     );
-    if (!this.systemVerification.checkSystem()) return;
-    if (!this.folderIsWorkspace.checkWorkspace()) return;
+    if (!this.folderIsWorkspace.run()) return;
     if (!this.loadConfigFileApp.loadConfig()) return;
     const { projectName } = model;
     if (!this.buildProjectApp.buildProject(projectName)) return;

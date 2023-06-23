@@ -1,15 +1,9 @@
 import { singleton } from "tsyringe";
-import {
-  SystemVerificationAppService
-} from "../app-service/system-verification-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
 import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
 import {
-  LinkProjectAppService
-} from "../app-service/link-project-app.service";
-import {
-  WorkspaceCheckAppService
-} from "../app-service/workspace-check-app.service";
+  CheckWorkspaceAppService
+} from "../app-service/check-workspace-app.service";
 import {
   LoadConfigFileAppService
 } from "../app-service/load-config-file-app.service";
@@ -24,10 +18,9 @@ import { REPOX_LOGO } from "@lib/const";
  */
 export class UnlinkProjectStepService {
   constructor(
-    private readonly systemVerification: SystemVerificationAppService,
     private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly unlinkProjectApp: UnlinkProjectAppService,
-    private readonly folderIsWorkspace: WorkspaceCheckAppService,
+    private readonly folderIsWorkspace: CheckWorkspaceAppService,
     private readonly loadConfigFileApp: LoadConfigFileAppService
   ) {
   }
@@ -36,8 +29,7 @@ export class UnlinkProjectStepService {
     this.loggerMessageApp.writeInfo(
       "Unlink project", REPOX_LOGO
     );
-    if (!this.systemVerification.checkSystem()) return;
-    if (!this.folderIsWorkspace.checkWorkspace()) return;
+    if (!this.folderIsWorkspace.run()) return;
     if (!this.loadConfigFileApp.loadConfig()) return;
     const { projectName } = model;
     if (!this.unlinkProjectApp.unlinkProject(projectName)) return;

@@ -1,8 +1,5 @@
 import { singleton } from "tsyringe";
 import {
-  SystemVerificationAppService
-} from "../app-service/system-verification-app.service";
-import {
   GenerateWorkspaceAppService
 } from "../app-service/generate-workspace-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
@@ -18,7 +15,6 @@ import { REPOX_LOGO } from "@lib/const";
 export class GenerateWorkspaceStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly systemVerification: SystemVerificationAppService,
     private readonly generate: GenerateWorkspaceAppService
   ) {
   }
@@ -28,8 +24,6 @@ export class GenerateWorkspaceStepService {
     this.simpleMessage.writeInfo(
       "Workspace generation", REPOX_LOGO
     );
-    // Check the system correctness
-    if (!this.systemVerification.checkSystem()) return;
     // Generate workspace
     if (!this.generate.generateWorkspace(model.workspaceName)) return;
   }

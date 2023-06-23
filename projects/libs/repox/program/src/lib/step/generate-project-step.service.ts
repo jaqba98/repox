@@ -3,6 +3,11 @@ import {
   GenerateProjectProgramModel
 } from "../model/program/generate-project-program.model";
 import { PreRunAppService } from "../app-service/pre-run-app.service";
+import { SimpleMessageAppService } from "@lib/logger";
+import { REPOX_LOGO } from "@lib/const";
+import {
+  CheckWorkspaceAppService
+} from "../app-service/check-workspace-app.service";
 
 @singleton()
 /**
@@ -10,8 +15,9 @@ import { PreRunAppService } from "../app-service/pre-run-app.service";
  */
 export class GenerateProjectStepService {
   constructor(
-    private readonly preRun: PreRunAppService
-    // private readonly simple: SimpleMessageAppService,
+    private readonly simple: SimpleMessageAppService,
+    private readonly preRun: PreRunAppService,
+    private readonly checkWorkspace: CheckWorkspaceAppService
     // private readonly goToProjectRoot: GoToProjectRootAppService,
     // private readonly projectApp: ProjectAppService,
     // private readonly systemVerification: SystemVerificationAppService,
@@ -23,15 +29,9 @@ export class GenerateProjectStepService {
   }
 
   runSteps(programModel: GenerateProjectProgramModel): void {
+    this.simple.writeInfo("Project generation", REPOX_LOGO);
     if (!this.preRun.run()) return;
-    // // Display generate project header
-    // this.simple.writeInfo("Project generation", 1, true, true);
-    // // Go to the root of the project
-    // if (!this.goToProjectRoot.goToRoot()) return;
-    // // System verification
-    // if (!this.systemVerification.checkSystem()) return;
-    // // Check workspace
-    // if (!this.workspaceCheck.checkWorkspace()) return;
+    if (!this.checkWorkspace.run()) return;
     // // Loading configuration
     // if (!this.loadConfigFileApp.loadConfig()) return;
     // // Check that the project does not exist
