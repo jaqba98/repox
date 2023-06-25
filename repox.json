@@ -92,15 +92,6 @@
         "type": "typescript"
       }
     },
-    "project": {
-      "name": "project",
-      "type": "lib",
-      "path": "projects/libs/repox/project",
-      "assets": [],
-      "scheme": {
-        "type": "typescript"
-      }
-    },
     "utils": {
       "name": "utils",
       "type": "lib",

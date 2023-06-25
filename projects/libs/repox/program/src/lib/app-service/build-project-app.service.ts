@@ -1,7 +1,9 @@
 import { singleton } from "tsyringe";
-import { DomainConfigStoreService } from "@lib/domain";
+import {
+  DomainConfigStoreService,
+  ProjectAppService
+} from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
-import { ProjectAppService } from "@lib/project";
 import { REPOX_LOGO } from "@lib/const";
 import {
   FileUtilsService,

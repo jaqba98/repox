@@ -1,4 +1,4 @@
-import { ProjectSchemeEnum, ProjectTypeEnum } from "@lib/project";
+import { ProjectSchemeEnum, ProjectTypeEnum } from "@lib/domain";
 
 /**
  * The model contains all properties

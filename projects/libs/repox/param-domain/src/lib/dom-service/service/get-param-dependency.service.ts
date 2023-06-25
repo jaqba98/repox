@@ -5,7 +5,7 @@ import {
 } from "../../model/param-domain/param-dependency.model";
 import { CommandEnum } from "../../enum/command.enum";
 import { ArgumentEnum } from "../../enum/argument.enum";
-import { ProjectSchemeEnum } from "@lib/project";
+import { ProjectSchemeEnum } from "@lib/domain";
 
 @singleton()
 /**

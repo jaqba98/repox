@@ -6,10 +6,10 @@ import {
   GenerateProjectCommandArgModel,
   ParamDomainAppService
 } from "@lib/param-domain";
-import { ProjectAppService } from "@lib/project";
 import {
   GenerateProjectProgramModel
 } from "../model/program/generate-project-program.model";
+import { ProjectAppService } from "@lib/domain";
 
 @singleton()
 /**

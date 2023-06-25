@@ -6,14 +6,14 @@ import {
   TsconfigDomainModel
 } from "../../model/tsconfig-domain.model";
 import {
-  BuildProjectSchemeAppService,
-  ProjectDomainModel,
-  ProjectSchemeEnum,
-  ProjectTypeEnum
-} from "@lib/project";
-import {
   DomainConfigFileEnum
 } from "../../enum/domain-config-file.enum";
+import {
+  BuildProjectSchemeAppService
+} from "../../app-service/build-project-scheme-app.service";
+import { ProjectTypeEnum } from "../../enum/project-type.enum";
+import { ProjectSchemeEnum } from "../../enum/project-scheme.enum";
+import { ProjectDomainModel } from "../../model/project-domain.model";
 
 @singleton()
 /**
@@ -114,4 +114,5 @@ export class DomainConfigStoreService {
     return project;
   }
 }
+
 // todo: refactor

@@ -40,9 +40,6 @@
       "@lib/program": [
         "projects/libs/repox/program/src/index.ts"
       ],
-      "@lib/project": [
-        "projects/libs/repox/project/src/index.ts"
-      ],
       "@lib/utils": [
         "projects/libs/utils/src/index.ts"
       ]
