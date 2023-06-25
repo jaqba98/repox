@@ -52,12 +52,12 @@ export class BuildProjectAppService {
     this.runCommand.runCommand(`tsc ${projectDir} ${outDir}`);
     this.runCommand.runCommand(`tsc-alias ${outDir}`);
     // Copy assets
-    project.assets.forEach(asset => {
-      this.fileUtils.copyFile(
-        `${asset.inputDir}/${asset.fileName}`,
-        `${asset.outputDir}/${asset.fileName}`
-      );
-    })
+    // project.assets.forEach((asset: any) => {
+    //   this.fileUtils.copyFile(
+    //     `${asset.inputDir}/${asset.fileName}`,
+    //     `${asset.outputDir}/${asset.fileName}`
+    //   );
+    // })
     // Write a success message
     // this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(

@@ -1,10 +1,6 @@
 import { singleton } from "tsyringe";
-import { DomainConfigModel } from "../../model/domain-config.model";
+import { DomainConfigModel } from "../../model/domain-model/domain-config.model";
 import { FileUtilsService } from "@lib/utils";
-import { RepoxDomainModel } from "../../model/repox-domain.model";
-import {
-  TsconfigDomainModel
-} from "../../model/tsconfig-domain.model";
 import {
   DomainConfigFileEnum
 } from "../../enum/domain-config-file.enum";
@@ -13,7 +9,10 @@ import {
 } from "../../app-service/build-project-scheme-app.service";
 import { ProjectTypeEnum } from "../../enum/project-type.enum";
 import { ProjectSchemeEnum } from "../../enum/project-scheme.enum";
-import { ProjectDomainModel } from "../../model/project-domain.model";
+import { RepoxDtoModel } from "../../model/dto-model/repox-dto.model";
+import {
+  TsconfigDtoModel
+} from "../../model/dto-model/tsconfig-dto.model";
 
 @singleton()
 /**
@@ -21,7 +20,7 @@ import { ProjectDomainModel } from "../../model/project-domain.model";
  * write and modify the domain configuration.
  */
 export class DomainConfigStoreService {
-  private config: DomainConfigModel | undefined;
+  private config: any | undefined;
 
   constructor(
     private readonly readFile: FileUtilsService,
@@ -33,10 +32,10 @@ export class DomainConfigStoreService {
 
   loadConfig(): void {
     this.config = {
-      repoxDomain: this.readFile.readJsonFile<RepoxDomainModel>(
+      repoxDomain: this.readFile.readJsonFile<RepoxDtoModel>(
         DomainConfigFileEnum.repoxJson
       ),
-      tsconfigDomain: this.readFile.readJsonFile<TsconfigDomainModel>(
+      tsconfigDomain: this.readFile.readJsonFile<TsconfigDtoModel>(
         DomainConfigFileEnum.tsconfigJson
       )
     }
@@ -60,7 +59,7 @@ export class DomainConfigStoreService {
     }
     return Boolean(
       Object.values(this.config.repoxDomain.projects)
-        .find(project => project.name === projectName)
+        .find((project: any) => project.name === projectName)
     );
   }
 
@@ -87,7 +86,6 @@ export class DomainConfigStoreService {
       name: projectName,
       type: projectType,
       path: projectPath,
-      assets: [],
       scheme: projectScheme
     }
   }
@@ -102,12 +100,12 @@ export class DomainConfigStoreService {
       .paths[alias] = [projectPath];
   }
 
-  getProject(projectName: string): ProjectDomainModel {
+  getProject(projectName: string): any {
     if (this.config === undefined) {
       throw new Error("The domain config store is undefined!");
     }
     const project = Object.values(this.config.repoxDomain.projects)
-      .find(project => project.name === projectName);
+      .find((project: any) => project.name === projectName);
     if (project === undefined) {
       throw new Error("The project not exist!");
     }

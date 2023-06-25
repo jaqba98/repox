@@ -1,6 +1,8 @@
 import { singleton } from "tsyringe";
 import { ProjectSchemeEnum } from "../enum/project-scheme.enum";
-import { ProjectSchemeModel } from "../model/project-domain.model";
+import {
+  RepoxSchemeDtoModel
+} from "../model/dto-model/repox-dto.model";
 
 @singleton()
 /**
@@ -8,9 +10,10 @@ import { ProjectSchemeModel } from "../model/project-domain.model";
  * for given type.
  */
 export class BuildProjectSchemeAppService {
-  buildScheme(scheme: ProjectSchemeEnum): ProjectSchemeModel {
+  buildScheme(scheme: ProjectSchemeEnum): RepoxSchemeDtoModel {
     return {
-      type: scheme
+      type: scheme,
+      build: {}
     }
   }
 }

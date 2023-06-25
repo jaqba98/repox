@@ -2,13 +2,13 @@ import { singleton } from "tsyringe";
 import {
   GIT_IGNORE_DEFAULT,
   REPOX_CONFIG_DEFAULT,
-  TSCONFIG_DEFAULT, TSCONFIG_PROJECT
+  TSCONFIG_DEFAULT,
+  TSCONFIG_PROJECT
 } from "../const/default-domain.const";
+import { RepoxDtoModel } from "../model/dto-model/repox-dto.model";
 import {
-  TsconfigDomainModel,
-  TsconfigProjectDomainModel
-} from "../model/tsconfig-domain.model";
-import { RepoxDomainModel } from "../model/repox-domain.model";
+  TsconfigDtoModel
+} from "../model/dto-model/tsconfig-dto.model";
 
 @singleton()
 /**
@@ -20,11 +20,11 @@ export class BuildDefaultDomainAppService {
     return GIT_IGNORE_DEFAULT;
   }
 
-  buildTsconfig(): TsconfigDomainModel {
+  buildTsconfig(): TsconfigDtoModel {
     return TSCONFIG_DEFAULT;
   }
 
-  buildTsconfigProject(path: string): TsconfigProjectDomainModel {
+  buildTsconfigProject(path: string): TsconfigDtoModel {
     const baseTsconfigPath = path
       .split("/")
       .map(() => "..")
@@ -33,8 +33,9 @@ export class BuildDefaultDomainAppService {
     return TSCONFIG_PROJECT(baseTsconfigPath);
   }
 
-  buildRepoxConfig(): RepoxDomainModel {
+  buildRepoxConfig(): RepoxDtoModel {
     return REPOX_CONFIG_DEFAULT;
   }
 }
+
 // todo: refactor

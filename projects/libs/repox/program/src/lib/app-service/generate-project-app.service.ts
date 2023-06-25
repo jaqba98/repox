@@ -3,7 +3,7 @@ import { singleton } from "tsyringe";
 import {
   BuildDefaultDomainAppService,
   DomainConfigStoreService,
-  TsconfigProjectDomainModel
+  TsconfigDtoModel
 } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 // import {

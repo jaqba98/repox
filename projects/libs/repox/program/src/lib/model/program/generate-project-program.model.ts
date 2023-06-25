@@ -1,4 +1,4 @@
-import { ProjectSchemeEnum, ProjectTypeEnum } from "@lib/domain";
+// import { ProjectSchemeEnum, ProjectTypeEnum } from "@lib/domain";
 
 /**
  * The model contains all properties
@@ -6,8 +6,8 @@ import { ProjectSchemeEnum, ProjectTypeEnum } from "@lib/domain";
  */
 export interface GenerateProjectProgramModel {
   projectName: string;
-  projectType: ProjectTypeEnum;
+  projectType: any;
   projectPath: string;
   projectAlias: string;
-  projectScheme: ProjectSchemeEnum;
+  projectScheme: any;
 }

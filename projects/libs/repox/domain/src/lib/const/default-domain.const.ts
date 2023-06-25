@@ -1,12 +1,9 @@
-import { RepoxDomainModel } from "../model/repox-domain.model";
-import {
-  TsconfigDomainModel,
-  TsconfigProjectDomainModel
-} from "../model/tsconfig-domain.model";
+import { RepoxDtoModel } from "../model/dto-model/repox-dto.model";
 
 /**
  * The file contains all default content for domain files.
  */
+
 
 export const GIT_IGNORE_DEFAULT: string = `# Workspace
 .idea/
@@ -22,7 +19,7 @@ node_modules/
 tmp/
 `;
 
-export const TSCONFIG_DEFAULT: TsconfigDomainModel = {
+export const TSCONFIG_DEFAULT: any = {
   compilerOptions: {
     target: "ES2022",
     experimentalDecorators: true,
@@ -49,13 +46,13 @@ export const TSCONFIG_DEFAULT: TsconfigDomainModel = {
 
 export const TSCONFIG_PROJECT = (
   rootTsconfigPath: string
-): TsconfigProjectDomainModel => {
+): any => {
   return {
     extends: rootTsconfigPath
   };
 };
 
-export const REPOX_CONFIG_DEFAULT: RepoxDomainModel = {
+export const REPOX_CONFIG_DEFAULT: RepoxDtoModel = {
   projects: {}
 };
 // todo: refactor
