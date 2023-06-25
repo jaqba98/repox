@@ -5,16 +5,17 @@ import { ProjectTypeEnum } from "../../enum/project-type.enum";
  * The real model of the repox configuration file on the disc.
  */
 
-export interface RepoxStaticPageDtoModel {
+export interface RepoxBuildStaticPageDtoModel {
   // todo: invent the build structure of static page
 }
 
-export interface RepoxTypescriptDtoModel {
+export interface RepoxBuildTypescriptDtoModel {
   // todo: invent the build structure of typescript
 }
 
-export interface RepoxBuildDtoModel extends RepoxStaticPageDtoModel,
-  RepoxTypescriptDtoModel {
+export interface RepoxBuildDtoModel
+  extends RepoxBuildStaticPageDtoModel,
+    RepoxBuildTypescriptDtoModel {
 }
 
 export interface RepoxSchemeDtoModel {
