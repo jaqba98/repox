@@ -1,58 +1,59 @@
-// import { singleton } from "tsyringe";
-// import {
-//   ConvertProjectTypeService
-// } from "../dom-service/converter/convert-project-type.service";
-// import {
-//   BuildProjectPathService
-// } from "../dom-service/builder/build-project-path.service";
-// import { DomainTypeEnum } from "../enum/domain-type.enum";
-// import {
-//   BuildProjectAliasService
-// } from "../dom-service/builder/build-project-alias.service";
-// import {
-//   ReadProjectFilesService
-// } from "../infrastructure/read-project-files.service";
-// import { DomainExecutorEnum } from "../enum/domain-executor.enum";
-//
-// @singleton()
-// /**
-//  * The app service is responsible for manipulate of project.
-//  */
-// export class ProjectAppService {
-//   constructor(
-//     private readonly convertProjectType: ConvertProjectTypeService,
-//     private readonly buildProjectPath: BuildProjectPathService,
-//     private readonly buildProjectAlias: BuildProjectAliasService,
-//     private readonly readProjectFiles: ReadProjectFilesService
-//   ) {
-//   }
-//
-//   getProjectType(type: string): DomainTypeEnum {
-//     return this.convertProjectType.convert(type);
-//   }
-//
-//   getProjectPath(
-//     projectName: string,
-//     type: string,
-//     projectPath: string
-//   ): string {
-//     const projectType = this.getProjectType(type);
-//     return projectPath === "" ?
-//       this.buildProjectPath.buildPath(projectName, projectType) :
-//       projectPath.concat(`/${projectName}`);
-//   }
-//
-//   getProjectAlias(name: string, type: string): string {
-//     const projectType = this.getProjectType(type);
-//     return this.buildProjectAlias.buildAlias(projectType, name);
-//   }
-//
-//   getProjectFiles(projectPath: string): Array<string> {
-//     return this.readProjectFiles.readFiles(projectPath);
-//   }
-//
-//   getProjectScheme(scheme: string): DomainExecutorEnum {
-//     return <DomainExecutorEnum> scheme;
-//   }
-// }
-// // todo: refactor
+import { singleton } from "tsyringe";
+import { ProjectTypeEnum } from "../enum/project/project-type.enum";
+import {
+  ConvertProjectTypeService
+} from "../dom-service/converter/convert-project-type.service";
+import { EMPTY_STRING } from "@lib/const";
+import { PathUtilsService } from "@lib/utils";
+import {
+  WorkspaceFolderEnum
+} from "../enum/workspace/workspace-folder.enum";
+import {
+  BuildProjectAliasService
+} from "../dom-service/builder/build-project-alias.service";
+import {
+  ProjectExecutorEnum
+} from "../enum/project/project-executor.enum";
+import {
+  ConvertProjectSchemeService
+} from "../dom-service/converter/convert-project-scheme.service";
+
+@singleton()
+/**
+ * The app service is responsible for manipulate of project.
+ */
+export class ProjectAppService {
+  constructor(
+    private readonly convertProjectType: ConvertProjectTypeService,
+    private readonly pathUtils: PathUtilsService,
+    private readonly buildProjectAlias: BuildProjectAliasService,
+    private readonly convertProjectScheme: ConvertProjectSchemeService
+  ) {
+  }
+
+  getProjectType(type: string): ProjectTypeEnum {
+    return this.convertProjectType.toProjectType(type);
+  }
+
+  getProjectPath(name: string, type: string, path: string): string {
+    if (path === EMPTY_STRING) {
+      const projectType = this.convertProjectType.toProjectType(type);
+      const workspaceType = this.convertProjectType.toWorkspaceFolder(
+        projectType
+      );
+      return this.pathUtils.createPath([
+        WorkspaceFolderEnum.projects, workspaceType, name
+      ]);
+    }
+    return this.pathUtils.createPath([path, name]);
+  }
+
+  getProjectAlias(name: string, type: string): string {
+    const projectType = this.convertProjectType.toProjectType(type);
+    return this.buildProjectAlias.buildAlias(name, projectType);
+  }
+
+  getProjectScheme(scheme: string): ProjectExecutorEnum {
+    return this.convertProjectScheme.toProjectExecutor(scheme);
+  }
+}

@@ -3,7 +3,7 @@ import { DomainModel } from "../../model/domain.model";
 import { TsconfigModel } from "../../model/tsconfig.model";
 import { FileModel } from "../../model/file.model";
 import { FileUtilsService } from "@lib/utils";
-import { DomainFileEnum } from "../../enum/domain/domain-file.enum";
+import { ConfigFileEnum } from "../../enum/config/config-file.enum";
 
 @singleton()
 /**
@@ -25,11 +25,11 @@ export class DomainStoreService {
   loadDomain(): void {
     // Read domain configuration file
     this.domain = this.fileUtils.readJsonFile<DomainModel>(
-      DomainFileEnum.domainJson
+      ConfigFileEnum.domainJson
     );
     // Read tsconfig configuration file
     this.tsconfig = this.fileUtils.readJsonFile<TsconfigModel>(
-      DomainFileEnum.tsconfigJson
+      ConfigFileEnum.tsconfigJson
     );
     // Read all files for all projects
     this.file = Object.values(this.domain.projects)

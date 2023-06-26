@@ -1,8 +1,8 @@
 /**
- * All kinds of domain file.
+ * All kinds of config file.
  */
 
-export enum DomainFileEnum {
+export enum ConfigFileEnum {
   domainJson = "repox.json",
   tsconfigJson = "tsconfig.json"
 }

@@ -1,22 +1,41 @@
 import { singleton } from "tsyringe";
-import { DomainTypeEnum } from "../../enum/domain-type.enum";
+import {
+  ProjectTypeEnum
+} from "../../enum/project/project-type.enum";
+import {
+  WorkspaceFolderEnum
+} from "../../enum/workspace/workspace-folder.enum";
 
 @singleton()
 /**
  * The service is responsible for convert string to project type.
  */
 export class ConvertProjectTypeService {
-  convert(type: string): DomainTypeEnum {
-    switch (type) {
+  toProjectType(projectType: string): ProjectTypeEnum {
+    switch (projectType) {
       case "app":
-        return DomainTypeEnum.app;
+        return ProjectTypeEnum.app;
       case "lib":
-        return DomainTypeEnum.lib;
+        return ProjectTypeEnum.lib;
       case "tool":
-        return DomainTypeEnum.tool;
+        return ProjectTypeEnum.tool;
+      default:
+        throw new Error("Failed to convert the project type!");
+    }
+  }
+
+  toWorkspaceFolder(
+    projectType: ProjectTypeEnum
+  ): WorkspaceFolderEnum {
+    switch (projectType) {
+      case ProjectTypeEnum.app:
+        return WorkspaceFolderEnum.apps;
+      case ProjectTypeEnum.lib:
+        return WorkspaceFolderEnum.libs;
+      case ProjectTypeEnum.tool:
+        return WorkspaceFolderEnum.tools;
       default:
         throw new Error("Failed to convert the project type!");
     }
   }
 }
-// todo: refactor
