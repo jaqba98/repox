@@ -1,12 +1,9 @@
 import { EOL } from "os";
 
 /**
- * Constants defining all the symbols needed to
- * correctly display the message.
+ * Constants defining all symbols used in the entire workspace.
  */
 
 export const NEW_LINE: string = EOL;
 export const EMPTY_STRING: string = "";
 export const SPACE: string = " ";
-export const REPOX_LOGO: string = "REPOX";
-// todo: refactor

@@ -1,12 +1,12 @@
 import { singleton } from "tsyringe";
 // import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
-import { REPOX_LOGO } from "@lib/const";
 import {
   FileUtilsService,
   FolderUtilsService,
   RunCommandUtilsService
 } from "@lib/utils";
+import { REPOX_LOGO } from "@lib/workspace";
 
 @singleton()
 /**

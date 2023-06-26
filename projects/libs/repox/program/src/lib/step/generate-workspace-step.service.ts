@@ -6,7 +6,7 @@ import { SimpleMessageAppService } from "@lib/logger";
 import {
   GenerateWorkspaceCommandArgDomainModel
 } from "@lib/param-domain";
-import { REPOX_LOGO } from "@lib/const";
+import { REPOX_LOGO } from "@lib/workspace";
 
 @singleton()
 /**

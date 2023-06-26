@@ -10,7 +10,7 @@ import {
 } from "@lib/param-domain";
 import { SelectProgramAppService } from "@lib/launcher";
 import { ParamErrorMessageAppService } from "@lib/logger";
-import { REPOX_LOGO } from "@lib/const";
+import { REPOX_LOGO } from "@lib/workspace";
 
 @singleton()
 /**

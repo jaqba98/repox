@@ -17,7 +17,7 @@
         "projects/apps/repox/src/index.ts"
       ],
       "@lib/const": [
-        "projects/libs/repox/const/src/index.ts"
+        "projects/libs/const/src/index.ts"
       ],
       "@lib/workspace": [
         "projects/libs/repox/workspace/src/index.ts"

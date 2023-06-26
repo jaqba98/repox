@@ -4,10 +4,10 @@ import {
 } from "../model/program/generate-project-program.model";
 import { PreRunAppService } from "../app-service/pre-run-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
-import { REPOX_LOGO } from "@lib/const";
 import {
   CheckWorkspaceAppService
 } from "../app-service/check-workspace-app.service";
+import { REPOX_LOGO } from "@lib/workspace";
 
 @singleton()
 /**

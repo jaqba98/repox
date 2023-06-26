@@ -2,8 +2,8 @@ import { singleton } from "tsyringe";
 import { path } from "app-root-path";
 import { PathUtilsService, SystemUtilsService } from "@lib/utils";
 import { SimpleMessageAppService } from "@lib/logger";
-import { REPOX_LOGO } from "@lib/const";
 import { ProgramSystemEnum } from "../enum/program-system.enum";
+import { REPOX_LOGO } from "@lib/workspace";
 
 @singleton()
 /**
