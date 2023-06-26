@@ -1,7 +1,7 @@
 // Refactored file
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-import { DomainConfigStoreService } from "@lib/domain";
+// import { DomainConfigStoreService } from "@lib/domain";
 
 @singleton()
 /**
@@ -10,13 +10,13 @@ import { DomainConfigStoreService } from "@lib/domain";
 export class LoadConfigFileAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly domainConfigStore: DomainConfigStoreService
+    // private readonly domainConfigStore: DomainConfigStoreService
   ) {
   }
 
   loadConfig(): boolean {
     this.simpleMessage.writePlain("Loading configuration");
-    this.domainConfigStore.loadConfig();
+    // this.domainConfigStore.loadConfig();
     return true;
   }
 }

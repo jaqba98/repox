@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { DomainConfigStoreService } from "@lib/domain";
+// import { DomainConfigStoreService } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/const";
 import {
@@ -17,7 +17,7 @@ export class LinkProjectAppService {
   constructor(
     private readonly fileExist: FileUtilsService,
     private readonly folderDoesNotExist: FolderUtilsService,
-    private readonly domainConfigStore: DomainConfigStoreService,
+    // private readonly domainConfigStore: DomainConfigStoreService,
     private readonly runCommand: RunCommandUtilsService,
     private readonly simpleMessage: SimpleMessageAppService
   ) {
@@ -28,19 +28,19 @@ export class LinkProjectAppService {
     this.simpleMessage.writePlain(
       "Check whether the project exist"
     );
-    if (!this.domainConfigStore.existProject(projectName)) {
-      this.simpleMessage.writeError(
-        `The ${projectName} not exist!`, REPOX_LOGO
-      );
-      return false;
-    }
+    // if (!this.domainConfigStore.existProject(projectName)) {
+    //   this.simpleMessage.writeError(
+    //     `The ${projectName} not exist!`, REPOX_LOGO
+    //   );
+    //   return false;
+    // }
     // Get project data
     this.simpleMessage.writePlain("Get project data");
-    const project = this.domainConfigStore.getProject(projectName);
+    // const project = this.domainConfigStore.getProject(projectName);
     // Link the project
     this.simpleMessage.writePlain("Link the project");
-    const distFolder = `./dist/${project.name}`;
-    this.runCommand.runCommand(`npm link ${distFolder}`);
+    // const distFolder = `./dist/${project.name}`;
+    // this.runCommand.runCommand(`npm link ${distFolder}`);
     // Write a success message
     // this.simpleMessage.writeNewline();
     this.simpleMessage.writeSuccess(

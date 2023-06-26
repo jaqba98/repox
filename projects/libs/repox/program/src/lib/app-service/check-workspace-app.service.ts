@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import { PathUtilsService } from "@lib/utils";
 import { SimpleMessageAppService } from "@lib/logger";
-import {
-  CheckDomainFilesAppService,
-  DomainStoreService
-} from "@lib/domain";
+// import {
+//   CheckDomainFilesAppService,
+//   DomainStoreService
+// } from "@lib/domain";
 
 @singleton()
 /**
@@ -13,19 +13,19 @@ import {
  */
 export class CheckWorkspaceAppService {
   constructor(
-    private readonly checkDomainFiles: CheckDomainFilesAppService,
+    // private readonly checkDomainFiles: CheckDomainFilesAppService,
     private readonly pathUtils: PathUtilsService,
-    private readonly domainStore: DomainStoreService,
+    // private readonly domainStore: DomainStoreService,
     private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
 
   run(): boolean {
-    if (!this.checkDomainFiles.checkFilesExist()) {
-      this.simpleMessage.writeError("Wrong workspace structure");
-    }
-    this.domainStore.loadDomain();
-    // Check workspace files have correct structure
+    // if (!this.checkDomainFiles.checkFilesExist()) {
+    //   this.simpleMessage.writeError("Wrong workspace structure");
+    // }
+    // this.domainStore.loadDomain();
+    // // Check workspace files have correct structure
     return true;
   }
 
@@ -35,3 +35,5 @@ export class CheckWorkspaceAppService {
     );
   }
 }
+
+// todo: refactor

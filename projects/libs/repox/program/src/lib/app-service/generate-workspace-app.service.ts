@@ -6,7 +6,7 @@ import {
   RunCommandUtilsService
 } from "@lib/utils";
 import { SimpleMessageAppService } from "@lib/logger";
-import { BuildDefaultDomainAppService } from "@lib/domain";
+// import { BuildDefaultDomainAppService } from "@lib/domain";
 
 @singleton()
 /**
@@ -21,7 +21,7 @@ export class GenerateWorkspaceAppService {
     private readonly createEmptyFile: FileUtilsService,
     private readonly runCommand: RunCommandUtilsService,
     private readonly writeFile: FileUtilsService,
-    private readonly buildDefaultDomain: BuildDefaultDomainAppService
+    // private readonly buildDefaultDomain: BuildDefaultDomainAppService
   ) {
   }
 
