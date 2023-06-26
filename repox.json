@@ -23,16 +23,25 @@
     "const": {
       "name": "const",
       "type": "lib",
-      "path": "projects/libs/repox/const",
+      "path": "projects/libs/const",
       "assets": [],
       "scheme": {
         "type": "typescript"
       }
     },
-    "domain": {
-      "name": "domain",
+    "logger": {
+      "name": "logger",
       "type": "lib",
-      "path": "projects/libs/repox/domain",
+      "path": "projects/libs/logger",
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
+    },
+    "param-dto": {
+      "name": "param-dto",
+      "type": "lib",
+      "path": "projects/libs/param-dto",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -42,15 +51,6 @@
       "name": "launcher",
       "type": "lib",
       "path": "projects/libs/repox/launcher",
-      "assets": [],
-      "scheme": {
-        "type": "typescript"
-      }
-    },
-    "logger": {
-      "name": "logger",
-      "type": "lib",
-      "path": "projects/libs/repox/logger",
       "assets": [],
       "scheme": {
         "type": "typescript"
@@ -74,15 +74,6 @@
         "type": "typescript"
       }
     },
-    "param-dto": {
-      "name": "param-dto",
-      "type": "lib",
-      "path": "projects/libs/repox/param-dto",
-      "assets": [],
-      "scheme": {
-        "type": "typescript"
-      }
-    },
     "program": {
       "name": "program",
       "type": "lib",
@@ -92,20 +83,23 @@
         "type": "typescript"
       }
     },
-    "utils": {
-      "name": "utils",
+    "workspace": {
+      "name": "workspace",
       "type": "lib",
-      "path": "projects/libs/repox/utils",
+      "path": "projects/libs/repox/workspace",
       "assets": [],
       "scheme": {
         "type": "typescript"
       }
     },
-    "project": {
-      "name": "project",
+    "utils": {
+      "name": "utils",
       "type": "lib",
-      "path": "projects/libs/project",
-      "assets": []
+      "path": "projects/libs/utils",
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     }
   }
 }
