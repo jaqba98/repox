@@ -1,17 +1,15 @@
 import { singleton } from "tsyringe";
-import {
-  ProjectExecutorEnum
-} from "../../enum/project/project-executor.enum";
+import { ProjectSchemeEnum } from "@lib/workspace";
 
 @singleton()
 /**
  * The service is responsible for convert scheme to project executor.
  */
 export class ConvertProjectSchemeService {
-  toProjectExecutor(scheme: string): ProjectExecutorEnum {
+  toProjectExecutor(scheme: string): ProjectSchemeEnum {
     switch (scheme) {
-      case ProjectExecutorEnum.typescript:
-        return ProjectExecutorEnum.typescript;
+      case ProjectSchemeEnum.schemeTypescript:
+        return ProjectSchemeEnum.schemeTypescript;
       default:
         throw new Error("Failed to convert the project scheme!");
     }

@@ -1,12 +1,6 @@
-// Refactored file
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-import { ProjectAppService } from "@lib/project";
-import { DomainConfigStoreService } from "@lib/domain";
-import {
-  FolderNotExistService
-} from "../infrastructure/folder-not-exist.service";
-import { REPOX_FILE, TSCONFIG_FILE } from "@lib/const";
+
 
 @singleton()
 /**
@@ -16,9 +10,9 @@ import { REPOX_FILE, TSCONFIG_FILE } from "@lib/const";
 export class ProjectNotExistAppService {
   constructor(
     private readonly simple: SimpleMessageAppService,
-    private readonly project: ProjectAppService,
-    private readonly store: DomainConfigStoreService,
-    private readonly folderNotExist: FolderNotExistService,
+    // private readonly project: ProjectAppService,
+    // private readonly store: DomainConfigStoreService,
+    // private readonly folderNotExist: FolderNotExistService,
   ) {
   }
 
@@ -45,16 +39,15 @@ export class ProjectNotExistAppService {
   private projectNotExistInRepoxJson(
     projectName: string
   ): boolean {
-    if (this.store.existProject(projectName)) {
-      this.simple.writeError(
-        `The ${projectName} project exists in the ${REPOX_FILE}`,
-        0, false, true
-      );
-      this.simple.writeWarning(
-        "Enter a different project name", 0, false, true
-      );
-      return false;
-    }
+    // if (this.store.existProject(projectName)) {
+    //   this.simple.writeError(
+    //     `The ${projectName} project exists in the ${REPOX_FILE}`
+    //   );
+    //   this.simple.writeWarning(
+    //     "Enter a different project name"
+    //   );
+    //   return false;
+    // }
     return true;
   }
 
@@ -62,19 +55,19 @@ export class ProjectNotExistAppService {
     projectName: string,
     projectType: string
   ): boolean {
-    const alias = this.project.getProjectAlias(
-      projectType, projectName
-    );
-    if (this.store.existAlias(alias)) {
-      this.simple.writeError(
-        `The ${projectName} alias exists in the ${TSCONFIG_FILE}`, 0,
-        false, true
-      );
-      this.simple.writeWarning(
-        "Enter a different project name", 0, false, true
-      );
-      return false;
-    }
+    // const alias = this.project.getProjectAlias(
+    //   projectType, projectName
+    // );
+    // if (this.store.existAlias(alias)) {
+    //   this.simple.writeError(
+    //     `The ${projectName} alias exists in the ${TSCONFIG_FILE}`, 0,
+    //     false, true
+    //   );
+    //   this.simple.writeWarning(
+    //     "Enter a different project name"
+    //   );
+    //   return false;
+    // }
     return true;
   }
 
@@ -83,18 +76,18 @@ export class ProjectNotExistAppService {
     projectType: string,
     projectPath: string
   ): boolean {
-    const projectFullPath = this.project.getProjectPath(
-      projectName, projectType, projectPath
-    );
-    if (this.folderNotExist.checkNotExist(projectFullPath)) {
-      return true;
-    }
-    this.simple.writeError(
-      `The ${projectFullPath} path already exist`, 0, false, true
-    );
-    this.simple.writeWarning(
-      "Enter a different project path", 0, false, true
-    );
+    // const projectFullPath = this.project.getProjectPath(
+    //   projectName, projectType, projectPath
+    // );
+    // if (this.folderNotExist.checkNotExist(projectFullPath)) {
+    //   return true;
+    // }
+    // this.simple.writeError(
+    //   `The ${projectFullPath} path already exist`
+    // );
+    // this.simple.writeWarning(
+    //   "Enter a different project path"
+    // );
     return false;
   }
 }

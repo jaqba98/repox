@@ -18,9 +18,9 @@ import {
 
 @singleton()
 /**
- * The service is responsible for get project ingredients.
+ * The service gives methods to manage projects.
  */
-export class GetProjectAppService {
+export class ProjectAppService {
   constructor(
     private readonly convertProjectType: ConvertProjectTypeService,
     private readonly buildProjectPath: BuildProjectPathService,
@@ -29,19 +29,19 @@ export class GetProjectAppService {
   ) {
   }
 
-  projectType(type: string): ProjectTypeEnum {
+  getProjectType(type: string): ProjectTypeEnum {
     return this.convertProjectType.toProjectType(type);
   }
 
-  projectPath(name: string, type: string, path: string): string {
+  getProjectPath(name: string, type: string, path: string): string {
     return this.buildProjectPath.buildPath(name, type, path);
   }
 
-  projectAlias(name: string, type: string): string {
+  getProjectAlias(name: string, type: string): string {
     return this.buildProjectAlias.buildAlias(name, type);
   }
 
-  projectScheme(scheme: string): ProjectSchemeEnum {
+  getProjectScheme(scheme: string): ProjectSchemeEnum {
     return this.convertProjectScheme.toProjectExecutor(scheme);
   }
 }

@@ -1,6 +1,6 @@
 /**
- * All kinds of project executors.
+ * All kinds of project scheme.
  */
-export enum ProjectExecutorEnum {
-  typescript = "typescript"
+export enum ProjectSchemeEnum {
+  schemeTypescript = "typescript"
 }

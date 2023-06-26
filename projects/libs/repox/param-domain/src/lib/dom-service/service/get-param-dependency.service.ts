@@ -5,6 +5,7 @@ import {
 } from "../../model/param-domain/param-dependency.model";
 import { CommandEnum } from "../../enum/command.enum";
 import { ArgumentEnum } from "../../enum/argument.enum";
+import { ProjectSchemeEnum } from "@lib/workspace";
 
 @singleton()
 /**
@@ -73,8 +74,7 @@ export class GetParamDependencyService {
                 },
                 [ArgumentEnum.scheme]: {
                   name: ArgumentEnum.scheme,
-                  // values: Object.values(ProjectSchemeEnum),
-                  values: [],
+                  values: Object.values(ProjectSchemeEnum),
                   valueMode: "single",
                   required: true
                 }

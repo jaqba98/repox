@@ -1,10 +1,7 @@
 import { singleton } from "tsyringe";
-import { PathUtilsService } from "@lib/utils";
+import { ConfigFileEnum } from "@lib/workspace";
 import { SimpleMessageAppService } from "@lib/logger";
-// import {
-//   CheckDomainFilesAppService,
-//   DomainStoreService
-// } from "@lib/domain";
+import { PathUtilsService } from "@lib/utils";
 
 @singleton()
 /**
@@ -13,26 +10,25 @@ import { SimpleMessageAppService } from "@lib/logger";
  */
 export class CheckWorkspaceAppService {
   constructor(
-    // private readonly checkDomainFiles: CheckDomainFilesAppService,
-    private readonly pathUtils: PathUtilsService,
-    // private readonly domainStore: DomainStoreService,
-    private readonly simpleMessage: SimpleMessageAppService
+    private readonly simple: SimpleMessageAppService,
+    private readonly pathUtils: PathUtilsService
   ) {
   }
 
   run(): boolean {
-    // if (!this.checkDomainFiles.checkFilesExist()) {
-    //   this.simpleMessage.writeError("Wrong workspace structure");
-    // }
-    // this.domainStore.loadDomain();
-    // // Check workspace files have correct structure
+    if (this.pathUtils.notExistPath(ConfigFileEnum.domainJson)) {
+      this.writeConfigExistError(ConfigFileEnum.domainJson);
+      return false;
+    }
+    if (this.pathUtils.notExistPath(ConfigFileEnum.tsconfigJson)) {
+      this.writeConfigExistError(ConfigFileEnum.tsconfigJson);
+      return false;
+    }
     return true;
   }
 
-  private writeCheckWorkspaceError(fileName: string): void {
-    this.simpleMessage.writeError(
-      `The ${fileName} configuration file not found`
-    );
+  private writeConfigExistError(configFile: ConfigFileEnum): void {
+    this.simple.writeError(`Not exist ${configFile} config file!`);
   }
 }
 

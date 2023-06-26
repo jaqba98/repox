@@ -31,6 +31,7 @@
     "command-exists": "^1.2.9",
     "core-js": "^3.31.0",
     "glob": "^10.2.7",
+    "jsonschema": "^1.4.1",
     "tsyringe": "^4.7.0"
   }
 }

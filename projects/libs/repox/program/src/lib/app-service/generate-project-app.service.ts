@@ -1,10 +1,9 @@
 // Refactored file
 import { singleton } from "tsyringe";
-import {
-  BuildDefaultDomainAppService,
-  DomainConfigStoreService,
-  TsconfigDtoModel
-} from "@lib/domain";
+// import {
+//   BuildDefaultDomainAppService,
+//   DomainConfigStoreService
+// } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 // import {
 //   CreateFolderService
@@ -19,14 +18,7 @@ import { SimpleMessageAppService } from "@lib/logger";
 // import {
 //   CreateEmptyFileService
 // } from "../infrastructure/create-empty-file.service";
-import { ProjectSchemeEnum, ProjectTypeEnum } from "@lib/project";
-import {
-  GIT_KEEP,
-  INDEX_FILE,
-  LIB,
-  SRC,
-  TSCONFIG_FILE
-} from "@lib/const";
+// import { ProjectSchemeEnum, ProjectTypeEnum } from "@lib/project";
 
 @singleton()
 /**
@@ -35,23 +27,23 @@ import {
 export class GenerateProjectAppService {
   constructor(
     private readonly simple: SimpleMessageAppService,
-    private readonly domainConfigStore: DomainConfigStoreService,
+    // private readonly domainConfigStore: DomainConfigStoreService,
     // private readonly pathUtils: PathUtilsService,
     // private readonly createFolder: CreateFolderService,
     // private readonly changePath: ChangePathService,
     // private readonly runCommand: RunCommandService,
     // private readonly writeFile: WriteFileService,
-    private readonly buildDefaultDomain: BuildDefaultDomainAppService,
+    // private readonly buildDefaultDomain: BuildDefaultDomainAppService,
     // private readonly createEmptyFile: CreateEmptyFileService
   ) {
   }
 
   generate(
     name: string,
-    type: ProjectTypeEnum,
+    type: any,
     path: string,
     alias: string,
-    scheme: ProjectSchemeEnum
+    scheme: any
   ): boolean {
     return true;
     // // Display generate project config header
@@ -107,4 +99,5 @@ export class GenerateProjectAppService {
   //   return true;
   // }
 }
+
 // todo: refactor

@@ -1,6 +1,4 @@
-import {
-  ProjectExecutorEnum
-} from "../enum/project/project-executor.enum";
+import { ProjectSchemeEnum } from "@lib/workspace";
 import { ProjectTypeEnum } from "../enum/project/project-type.enum";
 
 /**
@@ -26,7 +24,7 @@ export interface DomainBuildOptionsModel
 }
 
 export interface DomainSchemeBuildModel {
-  executor: ProjectExecutorEnum;
+  executor: ProjectSchemeEnum;
   options: DomainBuildOptionsModel;
 }
 
