@@ -48,3 +48,4 @@ export interface DomainProjectsModel {
 export interface DomainModel {
   projects: DomainProjectsModel;
 }
+// todo: refactor

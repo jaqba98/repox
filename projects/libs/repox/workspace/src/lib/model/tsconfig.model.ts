@@ -7,3 +7,4 @@ import { IRawTSConfig } from "tsc-alias/dist/interfaces";
 
 export interface TsconfigModel extends IRawTSConfig {
 }
+// todo: refactor

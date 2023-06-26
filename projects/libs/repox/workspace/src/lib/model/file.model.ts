@@ -12,3 +12,4 @@ export interface FileModel {
   projectName: string;
   projectFiles: Array<FileItemModel>;
 }
+// todo: refactor
