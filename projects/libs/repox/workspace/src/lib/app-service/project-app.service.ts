@@ -7,8 +7,8 @@ import {
   BuildProjectAliasService
 } from "../dom-service/builder/build-project-alias.service";
 import {
-  ProjectExecutorEnum
-} from "../enum/project/project-executor.enum";
+  ProjectSchemeEnum
+} from "../enum/project/project-scheme.enum";
 import {
   ConvertProjectSchemeService
 } from "../dom-service/converter/convert-project-scheme.service";
@@ -18,10 +18,9 @@ import {
 
 @singleton()
 /**
- * The service is responsible for get project data by input data
- * like: project type by type or project path.
+ * The service is responsible for get project ingredients.
  */
-export class GetProjectDataAppService {
+export class GetProjectAppService {
   constructor(
     private readonly convertProjectType: ConvertProjectTypeService,
     private readonly buildProjectPath: BuildProjectPathService,
@@ -30,19 +29,19 @@ export class GetProjectDataAppService {
   ) {
   }
 
-  getProjectType(type: string): ProjectTypeEnum {
+  projectType(type: string): ProjectTypeEnum {
     return this.convertProjectType.toProjectType(type);
   }
 
-  getProjectPath(name: string, type: string, path: string): string {
+  projectPath(name: string, type: string, path: string): string {
     return this.buildProjectPath.buildPath(name, type, path);
   }
 
-  getProjectAlias(name: string, type: string): string {
+  projectAlias(name: string, type: string): string {
     return this.buildProjectAlias.buildAlias(name, type);
   }
 
-  getProjectScheme(scheme: string): ProjectExecutorEnum {
+  projectScheme(scheme: string): ProjectSchemeEnum {
     return this.convertProjectScheme.toProjectExecutor(scheme);
   }
 }
