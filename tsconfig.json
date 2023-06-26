@@ -19,8 +19,8 @@
       "@lib/const": [
         "projects/libs/repox/const/src/index.ts"
       ],
-      "@lib/domain": [
-        "projects/libs/repox/domain/src/index.ts"
+      "@lib/workspace": [
+        "projects/libs/repox/workspace/src/index.ts"
       ],
       "@lib/launcher": [
         "projects/libs/repox/launcher/src/index.ts"

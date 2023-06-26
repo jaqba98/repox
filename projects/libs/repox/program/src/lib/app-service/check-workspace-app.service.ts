@@ -1,7 +1,10 @@
 import { singleton } from "tsyringe";
 import { PathUtilsService } from "@lib/utils";
 import { SimpleMessageAppService } from "@lib/logger";
-import { REPOX_FILE, TSCONFIG_FILE } from "@lib/const";
+import {
+  CheckDomainFilesAppService,
+  DomainStoreService
+} from "@lib/domain";
 
 @singleton()
 /**
@@ -10,22 +13,19 @@ import { REPOX_FILE, TSCONFIG_FILE } from "@lib/const";
  */
 export class CheckWorkspaceAppService {
   constructor(
+    private readonly checkDomainFiles: CheckDomainFilesAppService,
     private readonly pathUtils: PathUtilsService,
+    private readonly domainStore: DomainStoreService,
     private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
 
   run(): boolean {
-    // Check workspace
-    if (this.pathUtils.notExistPath(REPOX_FILE)) {
-      this.writeCheckWorkspaceError(REPOX_FILE);
-      return false;
+    if (!this.checkDomainFiles.checkFilesExist()) {
+      this.simpleMessage.writeError("Wrong workspace structure");
     }
-    if (this.pathUtils.notExistPath(TSCONFIG_FILE)) {
-      this.writeCheckWorkspaceError(TSCONFIG_FILE);
-      return false;
-    }
-    // todo: add content structure verification of above files
+    this.domainStore.loadDomain();
+    // Check workspace files have correct structure
     return true;
   }
 

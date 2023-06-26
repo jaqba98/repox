@@ -1,19 +1,19 @@
 import { singleton } from "tsyringe";
-import { ProjectTypeEnum } from "../../enum/project-type.enum";
+import { DomainTypeEnum } from "../../enum/domain-type.enum";
 
 @singleton()
 /**
  * The service is responsible for convert string to project type.
  */
 export class ConvertProjectTypeService {
-  convert(type: string): ProjectTypeEnum {
+  convert(type: string): DomainTypeEnum {
     switch (type) {
       case "app":
-        return ProjectTypeEnum.app;
+        return DomainTypeEnum.app;
       case "lib":
-        return ProjectTypeEnum.lib;
+        return DomainTypeEnum.lib;
       case "tool":
-        return ProjectTypeEnum.tool;
+        return DomainTypeEnum.tool;
       default:
         throw new Error("Failed to convert the project type!");
     }

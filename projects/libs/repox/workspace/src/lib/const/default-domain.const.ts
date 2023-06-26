@@ -1,4 +1,4 @@
-import { RepoxDtoModel } from "../model/dto-model/repox-dto.model";
+import { DomainDtoModel } from "../model/dto-model/domain-dto.model";
 
 /**
  * The file contains all default content for domain files.
@@ -52,7 +52,7 @@ export const TSCONFIG_PROJECT = (
   };
 };
 
-export const REPOX_CONFIG_DEFAULT: RepoxDtoModel = {
+export const REPOX_CONFIG_DEFAULT: DomainDtoModel = {
   projects: {}
 };
 // todo: refactor

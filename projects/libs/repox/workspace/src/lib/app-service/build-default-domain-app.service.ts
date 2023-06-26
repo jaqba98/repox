@@ -5,7 +5,7 @@ import {
   TSCONFIG_DEFAULT,
   TSCONFIG_PROJECT
 } from "../const/default-domain.const";
-import { RepoxDtoModel } from "../model/dto-model/repox-dto.model";
+import { DomainDtoModel } from "../model/dto-model/domain-dto.model";
 import {
   TsconfigDtoModel
 } from "../model/dto-model/tsconfig-dto.model";
@@ -33,7 +33,7 @@ export class BuildDefaultDomainAppService {
     return TSCONFIG_PROJECT(baseTsconfigPath);
   }
 
-  buildRepoxConfig(): RepoxDtoModel {
+  buildRepoxConfig(): DomainDtoModel {
     return REPOX_CONFIG_DEFAULT;
   }
 }

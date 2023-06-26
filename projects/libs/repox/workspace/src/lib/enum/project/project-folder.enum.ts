@@ -6,4 +6,3 @@ export enum ProjectFolderEnum {
   libs = "libs",
   tools = "tools"
 }
-// todo: refactor
