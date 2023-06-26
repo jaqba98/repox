@@ -9,7 +9,7 @@ import {
 import {
   GenerateProjectProgramModel
 } from "../model/program/generate-project-program.model";
-import { ProjectAppService } from "@lib/workspace";
+import { GetProjectDataAppService } from "@lib/workspace";
 
 @singleton()
 /**
@@ -20,7 +20,7 @@ export class GenerateProjectProgramService {
   constructor(
     private readonly generateProjectStep: GenerateProjectStepService,
     private readonly paramDomain: ParamDomainAppService,
-    private readonly project: ProjectAppService
+    private readonly getProjectData: GetProjectDataAppService
   ) {
   }
 
@@ -35,10 +35,12 @@ export class GenerateProjectProgramService {
     const { name, type, path, scheme } = commandArg;
     return {
       projectName: name,
-      projectType: this.project.getProjectType(type),
-      projectPath: this.project.getProjectPath(name, type, path),
-      projectAlias: this.project.getProjectAlias(name, type),
-      projectScheme: this.project.getProjectScheme(scheme)
+      projectType: this.getProjectData.getProjectType(type),
+      projectPath: this.getProjectData.getProjectPath(
+        name, type, path
+      ),
+      projectAlias: this.getProjectData.getProjectAlias(name, type),
+      projectScheme: this.getProjectData.getProjectScheme(scheme)
     }
   }
 }

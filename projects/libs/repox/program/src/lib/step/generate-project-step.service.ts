@@ -5,9 +5,6 @@ import {
 import { PreRunAppService } from "../app-service/pre-run-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/const";
-import {
-  CheckWorkspaceAppService
-} from "../app-service/check-workspace-app.service";
 
 @singleton()
 /**
@@ -16,8 +13,8 @@ import {
 export class GenerateProjectStepService {
   constructor(
     private readonly simple: SimpleMessageAppService,
-    private readonly preRun: PreRunAppService,
-    private readonly checkWorkspace: CheckWorkspaceAppService
+    private readonly preRun: PreRunAppService
+    // private readonly checkWorkspace: CheckWorkspaceAppService
     // private readonly goToProjectRoot: GoToProjectRootAppService,
     // private readonly projectApp: ProjectAppService,
     // private readonly systemVerification: SystemVerificationAppService,
@@ -31,7 +28,8 @@ export class GenerateProjectStepService {
   runSteps(programModel: GenerateProjectProgramModel): void {
     this.simple.writeInfo("Project generation", REPOX_LOGO);
     if (!this.preRun.run()) return;
-    if (!this.checkWorkspace.run()) return;
+    console.log(programModel);
+    // if (!this.checkWorkspace.run()) return;
     // // Loading configuration
     // if (!this.loadConfigFileApp.loadConfig()) return;
     // // Check that the project does not exist

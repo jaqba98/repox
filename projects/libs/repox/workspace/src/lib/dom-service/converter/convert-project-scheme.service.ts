@@ -10,7 +10,7 @@ import {
 export class ConvertProjectSchemeService {
   toProjectExecutor(scheme: string): ProjectExecutorEnum {
     switch (scheme) {
-      case "typescript":
+      case ProjectExecutorEnum.typescript:
         return ProjectExecutorEnum.typescript;
       default:
         throw new Error("Failed to convert the project scheme!");

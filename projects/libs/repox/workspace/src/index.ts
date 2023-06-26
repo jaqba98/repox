@@ -1,2 +1,2 @@
-export * from "./lib/app-service/project-app.service";
+export * from "./lib/app-service/get-project-data-app.service";
 // todo: refactor

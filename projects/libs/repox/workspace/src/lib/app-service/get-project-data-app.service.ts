@@ -3,11 +3,6 @@ import { ProjectTypeEnum } from "../enum/project/project-type.enum";
 import {
   ConvertProjectTypeService
 } from "../dom-service/converter/convert-project-type.service";
-import { EMPTY_STRING } from "@lib/const";
-import { PathUtilsService } from "@lib/utils";
-import {
-  WorkspaceFolderEnum
-} from "../enum/workspace/workspace-folder.enum";
 import {
   BuildProjectAliasService
 } from "../dom-service/builder/build-project-alias.service";
@@ -17,15 +12,19 @@ import {
 import {
   ConvertProjectSchemeService
 } from "../dom-service/converter/convert-project-scheme.service";
+import {
+  BuildProjectPathService
+} from "../dom-service/builder/build-project-path.service";
 
 @singleton()
 /**
- * The app service is responsible for manipulate of project.
+ * The service is responsible for get project data by input data
+ * like: project type by type or project path.
  */
-export class ProjectAppService {
+export class GetProjectDataAppService {
   constructor(
     private readonly convertProjectType: ConvertProjectTypeService,
-    private readonly pathUtils: PathUtilsService,
+    private readonly buildProjectPath: BuildProjectPathService,
     private readonly buildProjectAlias: BuildProjectAliasService,
     private readonly convertProjectScheme: ConvertProjectSchemeService
   ) {
@@ -36,21 +35,11 @@ export class ProjectAppService {
   }
 
   getProjectPath(name: string, type: string, path: string): string {
-    if (path === EMPTY_STRING) {
-      const projectType = this.convertProjectType.toProjectType(type);
-      const workspaceType = this.convertProjectType.toWorkspaceFolder(
-        projectType
-      );
-      return this.pathUtils.createPath([
-        WorkspaceFolderEnum.projects, workspaceType, name
-      ]);
-    }
-    return this.pathUtils.createPath([path, name]);
+    return this.buildProjectPath.buildPath(name, type, path);
   }
 
   getProjectAlias(name: string, type: string): string {
-    const projectType = this.convertProjectType.toProjectType(type);
-    return this.buildProjectAlias.buildAlias(name, projectType);
+    return this.buildProjectAlias.buildAlias(name, type);
   }
 
   getProjectScheme(scheme: string): ProjectExecutorEnum {
