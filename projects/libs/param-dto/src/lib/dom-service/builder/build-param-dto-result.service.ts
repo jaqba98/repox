@@ -49,4 +49,3 @@ export class BuildParamDtoResultService {
     return paramDto.params.map(param => param.paramBaseValue);
   }
 }
-// todo: refactor

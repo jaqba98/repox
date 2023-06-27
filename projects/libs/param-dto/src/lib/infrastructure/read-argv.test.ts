@@ -1,15 +1,15 @@
 import { container } from "tsyringe";
 import { ReadArgvService } from "./read-argv.service";
 
-describe("ReadArgvService", () => {
+describe("ReadArgvService", (): void => {
   const originalArgv: Array<string> = process.argv;
 
-  afterAll(() => {
+  afterAll((): void => {
     process.argv = originalArgv;
     container.clearInstances();
   });
 
-  test("Should return the correct parameters given by user", () => {
+  test("Should return the parameters given by user", (): void => {
     const service = container.resolve(ReadArgvService);
     const argv: Array<string> = [
       "node", "app", "program", "arg_1", "command", "alias_1"
@@ -18,4 +18,3 @@ describe("ReadArgvService", () => {
     expect(service.getArgv()).toEqual([...argv]);
   });
 });
-// todo: refactor

@@ -18,7 +18,7 @@ import {
  * Check the given DTO parameters have max one command
  * (0 or 1 if the program exist and 0 if the program not exist).
  */
-export class MaxOneCommandValidatorService
+export class ValidatorMaxOneCommandService
   implements ValidatorDtoModel {
   constructor(
     private readonly paramDtoStore: ParamDtoStoreService,
@@ -53,4 +53,3 @@ export class MaxOneCommandValidatorService
     return this.buildParamDtoResult.buildSuccess();
   }
 }
-// todo: refactor

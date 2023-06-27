@@ -1,6 +1,5 @@
 export * from "./lib/app-service/build-param-dto-app.service";
-export * from "./lib/app-service/get-param-dto-data-app.service";
-export * from "./lib/app-service/get-param-dto-name-app.service";
-export * from "./lib/app-service/get-param-dto-index-app.service";
 export * from "./lib/app-service/get-param-dto-arg-app.service";
-// todo: refactor
+export * from "./lib/app-service/get-param-dto-data-app.service";
+export * from "./lib/app-service/get-param-dto-index-app.service";
+export * from "./lib/app-service/get-param-dto-name-app.service";

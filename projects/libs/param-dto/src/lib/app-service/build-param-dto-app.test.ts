@@ -24,63 +24,64 @@ const runTest = (argv: Array<string>): {
   };
 };
 
-afterAll(() => {
+afterAll((): void => {
   container.clearInstances();
   container.reset();
 });
 
-describe("BuildParamDtoAppService - parameter order", () => {
-  test("Should be correct for the program: repox", () => {
+
+describe("BuildParamDtoAppService - parameter order", (): void => {
+  test("Should be correct for the program: name", (): void => {
     expect(runTest([]).paramDtoValidation.success).toBeTruthy();
   });
 
-  test("Should be correct for the program: repox -v", () => {
+  test("Should be correct for the program: name -v", (): void => {
     expect(runTest(["-v"]).paramDtoValidation.success).toBeTruthy();
   });
 
-  test("Should be correct for the program: repox g", () => {
+  test("Should be correct for the program: name g", (): void => {
     expect(runTest(["g"]).paramDtoValidation.success).toBeTruthy();
   });
 
-  test("Should be correct for the program: repox g -c", () => {
+  test("Should be correct for the program: name g -c", (): void => {
     expect(runTest(["g", "-c"]).paramDtoValidation.success).toBeTruthy();
   });
 
-  test("Should be correct for the program: repox -v -c", () => {
+  test("Should be correct for the program: name -v -c", (): void => {
     expect(runTest(["-v", "-c"]).paramDtoValidation.success).toBeTruthy();
   });
 
-  test("Should be incorrect for the program: repox -v g", () => {
+  test("Should be incorrect for the program: name -v g", (): void => {
     expect(runTest(["-v", "g"]).paramDtoValidation.success).toBeFalsy();
   });
 
-  test("Should be incorrect for the program: repox -v g -c", () => {
+  test("Should be incorrect for the program: name -v g -c", (): void => {
     expect(runTest(["-v", "g", "-c"]).paramDtoValidation.success).toBeFalsy();
   });
 
-  test("Should be correct for the program: repox g w", () => {
+  test("Should be correct for the program: name g w", (): void => {
     expect(runTest(["g", "w"]).paramDtoValidation.success).toBeTruthy();
   });
 
-  test("Should be correct for the program: repox g w -t=test", () => {
+  test("Should be correct for the program: name g w -t=test", (): void => {
     expect(runTest(["g", "w", "-t=test"]).paramDtoValidation.success).toBeTruthy();
   });
 
-  test("Should be correct for the program: repox g -c -t", () => {
+  test("Should be correct for the program: name g -c -t", (): void => {
     expect(runTest(["g", "-c", "-t"]).paramDtoValidation.success).toBeTruthy();
   });
 
-  test("Should be correct for the program: repox g -c w", () => {
+  test("Should be correct for the program: name g -c w", (): void => {
     expect(runTest(["g", "-c", "w"]).paramDtoValidation.success).toBeTruthy();
   });
 
-  test("Should be correct for the program: repox g -c w -n", () => {
+  test("Should be correct for the program: name g -c w -n", (): void => {
     expect(runTest(["g", "-c", "w", "-n"]).paramDtoValidation.success).toBeTruthy();
   });
 });
 
-describe("BuildParamDtoAppService - parameter structure", () => {
-  test("Should be correct for the program: repox", () => {
+describe("BuildParamDtoAppService - parameter structure", (): void => {
+  test("Should be correct for the program: name", (): void => {
     const result = runTest([]);
     expect(result.paramDtoValidation.success).toBeTruthy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
@@ -88,7 +89,7 @@ describe("BuildParamDtoAppService - parameter structure", () => {
     expect(result.paramDtoValidation.tips).toEqual([]);
   });
 
-  test("Should be correct for the program: repox g", () => {
+  test("Should be correct for the program: name g", (): void => {
     const result = runTest(["generate"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -107,7 +108,7 @@ describe("BuildParamDtoAppService - parameter structure", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the program: repox gener%%a_&te", () => {
+  test("should be incorrect for the program: name gener%%a_&te", (): void => {
     const result = runTest(["gener%%a_&te"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -126,7 +127,7 @@ describe("BuildParamDtoAppService - parameter structure", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the program: repox generate-workspace", () => {
+  test("should be correct for the program: name generate-workspace", (): void => {
     const result = runTest(["generate-workspace"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -145,7 +146,7 @@ describe("BuildParamDtoAppService - parameter structure", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the program: repox generate=true", () => {
+  test("should be incorrect for the program: name generate=true", (): void => {
     const result = runTest(["generate=true"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -164,7 +165,7 @@ describe("BuildParamDtoAppService - parameter structure", () => {
     expect(paramValues).toEqual(["true"]);
   });
 
-  test("should be correct for the program: repox generate workspace", () => {
+  test("should be correct for the program: name generate workspace", (): void => {
     const result = runTest(["generate", "workspace"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -183,7 +184,7 @@ describe("BuildParamDtoAppService - parameter structure", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the program: repox generate work$$sp&&*ace", () => {
+  test("should be incorrect for the program: name generate work$$sp&&*ace", (): void => {
     const result = runTest(["generate", "work$$sp&&*ace"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -202,7 +203,7 @@ describe("BuildParamDtoAppService - parameter structure", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the program: repox generate workspace-node", () => {
+  test("should be correct for the program: name generate workspace-node", (): void => {
     const result = runTest(["generate", "workspace-node"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -221,7 +222,7 @@ describe("BuildParamDtoAppService - parameter structure", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test('should be correct for the program: repox generate workspace=true', () => {
+  test('should be correct for the program: name generate workspace=true', (): void => {
     const result = runTest(["generate", "workspace=true"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -241,8 +242,8 @@ describe("BuildParamDtoAppService - parameter structure", () => {
   });
 });
 
-describe("BuildParamDtoAppService - parameter structure for arguments", () => {
-  test("should be correct for the program: repox generate --name", () => {
+describe("BuildParamDtoAppService - parameter structure for arguments", (): void => {
+  test("should be correct for the program: name generate --name", (): void => {
     const result = runTest(["generate", "--name"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -261,7 +262,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the program: repox generate --n$$a%^me", () => {
+  test("should be incorrect for the program: name generate --n$$a%^me", (): void => {
     const result = runTest(["generate", "--n$$a%^me"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -270,7 +271,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --n$$a%^me are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --n$$a%^me are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual("--n$$a%^me");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -280,7 +281,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the program: repox generate --name=test", () => {
+  test("should be correct for the program: name generate --name=test", (): void => {
     const result = runTest(["generate", "--name=test"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -299,7 +300,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test('should be correct for the program: repox generate --name="test"', () => {
+  test('should be correct for the program: name generate --name="test"', (): void => {
     const result = runTest(["generate", '--name="test"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -318,7 +319,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the program: repox generate --name='test'", () => {
+  test("should be correct for the program: name generate --name='test'", (): void => {
     const result = runTest(["generate", "--name='test'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -337,7 +338,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the program: repox generate --name=`test`", () => {
+  test("should be correct for the program: name generate --name=`test`", (): void => {
     const result = runTest(["generate", "--name=`test`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -356,7 +357,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be incorrect for the program: repox generate --name=te$$s&&t", () => {
+  test("should be incorrect for the program: name generate --name=te$$s&&t", (): void => {
     const result = runTest(["generate", "--name=te$$s&&t"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -365,7 +366,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=te$$s&&t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=te$$s&&t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual("--name=te$$s&&t");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -375,7 +376,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
-  test('should be incorrect for the program: repox generate --name="te$$s&&t"', () => {
+  test('should be incorrect for the program: name generate --name="te$$s&&t"', (): void => {
     const result = runTest(["generate", '--name="te$$s&&t"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -384,7 +385,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=\"te$$s&&t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=\"te$$s&&t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual('--name="te$$s&&t"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -394,7 +395,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
-  test("should be incorrect for the program: repox generate --name='te$$s&&t'", () => {
+  test("should be incorrect for the program: name generate --name='te$$s&&t'", (): void => {
     const result = runTest(["generate", "--name='te$$s&&t'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -403,7 +404,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name='te$$s&&t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name='te$$s&&t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual("--name='te$$s&&t'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -413,7 +414,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
-  test("should be incorrect for the program: repox generate --name=`te$$s&&t`", () => {
+  test("should be incorrect for the program: name generate --name=`te$$s&&t`", (): void => {
     const result = runTest(["generate", "--name=`te$$s&&t`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -422,7 +423,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=`te$$s&&t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=`te$$s&&t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual("--name=`te$$s&&t`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
@@ -432,7 +433,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
-  test("should be correct for the program: repox generate --name=test1,test2,test3", () => {
+  test("should be correct for the program: name generate --name=test1,test2,test3", (): void => {
     const result = runTest(["generate", "--name=test1,test2,test3"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -451,7 +452,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test('should be correct for the program: repox generate --name="test1,test2,test3"', () => {
+  test('should be correct for the program: name generate --name="test1,test2,test3"', (): void => {
     const result = runTest(["generate", '--name="test1,test2,test3"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -470,7 +471,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test("should be correct for the program: repox generate --name='test1,test2,test3'", () => {
+  test("should be correct for the program: name generate --name='test1,test2,test3'", (): void => {
     const result = runTest(["generate", "--name='test1,test2,test3'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -489,7 +490,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test("should be correct for the program: repox generate --name=`test1,test2,test3`", () => {
+  test("should be correct for the program: name generate --name=`test1,test2,test3`", (): void => {
     const result = runTest(["generate", "--name=`test1,test2,test3`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -509,8 +510,8 @@ describe("BuildParamDtoAppService - parameter structure for arguments", () => {
   });
 });
 
-describe("BuildParamDtoAppService - parameter structure for aliases", () => {
-  test("should be correct for the program: repox generate -i", () => {
+describe("BuildParamDtoAppService - parameter structure for aliases", (): void => {
+  test("should be correct for the program: name generate -i", (): void => {
     const result = runTest(["generate", "-i"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -529,7 +530,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the program: repox generate -%", () => {
+  test("should be incorrect for the program: name generate -%", (): void => {
     const result = runTest(["generate", "-%"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -538,7 +539,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -% are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -% are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual("-%");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -548,7 +549,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be incorrect for the program: repox generate -name", () => {
+  test("should be incorrect for the program: name generate -name", (): void => {
     const result = runTest(["generate", "-name"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -567,7 +568,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual([]);
   });
 
-  test("should be correct for the program: repox generate -n=test", () => {
+  test("should be correct for the program: name generate -n=test", (): void => {
     const result = runTest(["generate", "-n=test"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -586,7 +587,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test('should be correct for the program: repox generate -n="test"', () => {
+  test('should be correct for the program: name generate -n="test"', (): void => {
     const result = runTest(["generate", '-n="test"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -605,7 +606,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the program: repox generate -n='test'", () => {
+  test("should be correct for the program: name generate -n='test'", (): void => {
     const result = runTest(["generate", "-n='test'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -624,7 +625,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be correct for the program: repox generate -n=`test`", () => {
+  test("should be correct for the program: name generate -n=`test`", (): void => {
     const result = runTest(["generate", "-n=`test`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -643,7 +644,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test"]);
   });
 
-  test("should be incorrect for the program: repox generate -n=te%%s$$t", () => {
+  test("should be incorrect for the program: name generate -n=te%%s$$t", (): void => {
     const result = runTest(["generate", "-n=te%%s$$t"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -652,7 +653,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=te%%s$$t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=te%%s$$t are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual("-n=te%%s$$t");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -662,7 +663,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
-  test('should be incorrect for the program: repox generate -n="te%%s$$t"', () => {
+  test('should be incorrect for the program: name generate -n="te%%s$$t"', (): void => {
     const result = runTest(["generate", '-n="te%%s$$t"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -671,7 +672,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=\"te%%s$$t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=\"te%%s$$t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual('-n="te%%s$$t"');
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -681,7 +682,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
-  test("should be incorrect for the program: repox generate -n='te%%s$$t'", () => {
+  test("should be incorrect for the program: name generate -n='te%%s$$t'", (): void => {
     const result = runTest(["generate", "-n='te%%s$$t'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -690,7 +691,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n='te%%s$$t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n='te%%s$$t' are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual("-n='te%%s$$t'");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -700,7 +701,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
-  test("should be incorrect for the program: repox generate -n=`te%%s$$t`", () => {
+  test("should be incorrect for the program: name generate -n=`te%%s$$t`", (): void => {
     const result = runTest(["generate", "-n=`te%%s$$t`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -709,7 +710,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(result.paramDtoValidation.success).toBeFalsy();
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
-    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=`te%%s$$t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [space]"]);
+    expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=`te%%s$$t` are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
     expect(paramBaseValue).toEqual("-n=`te%%s$$t`");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
@@ -719,7 +720,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
-  test("should be correct for the program: repox generate -n=test1,test2,test3", () => {
+  test("should be correct for the program: name generate -n=test1,test2,test3", (): void => {
     const result = runTest(["generate", "-n=test1,test2,test3"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -738,7 +739,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test('should be correct for the program: repox generate -n="test1,test2,test3"', () => {
+  test('should be correct for the program: name generate -n="test1,test2,test3"', (): void => {
     const result = runTest(["generate", '-n="test1,test2,test3"']);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -757,7 +758,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test("should be correct for the program: repox generate -n='test1,test2,test3'", () => {
+  test("should be correct for the program: name generate -n='test1,test2,test3'", (): void => {
     const result = runTest(["generate", "-n='test1,test2,test3'"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -776,7 +777,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test("should be correct for the program: repox generate -n=`test1,test2,test3`", () => {
+  test("should be correct for the program: name generate -n=`test1,test2,test3`", (): void => {
     const result = runTest(["generate", "-n=`test1,test2,test3`"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -795,4 +796,3 @@ describe("BuildParamDtoAppService - parameter structure for aliases", () => {
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 });
-// todo: refactor

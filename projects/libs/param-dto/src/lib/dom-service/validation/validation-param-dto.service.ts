@@ -16,8 +16,8 @@ import {
   ParamDtoStoreService
 } from "../store/param-dto-store.service";
 import {
-  MaxOneCommandValidatorService
-} from "../validator/max-one-command-validator.service";
+  ValidatorMaxOneCommandService
+} from "../validator/validator-max-one-command.service";
 import {
   ValidatorCorrectOrderService
 } from "../validator/validator-correct-order.service";
@@ -62,9 +62,8 @@ export class ValidationParamDtoService {
       ValidatorOnlySupportedSignService,
       ValidatorCorrectPatternService,
       ValidatorMaxOneProgramService,
-      MaxOneCommandValidatorService,
+      ValidatorMaxOneCommandService,
       ValidatorCorrectOrderService
     ].map(service => container.resolve<ValidatorDtoModel>(service));
   }
 }
-// todo: refactor

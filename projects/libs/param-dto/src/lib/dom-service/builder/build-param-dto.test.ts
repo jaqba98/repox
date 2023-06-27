@@ -23,14 +23,14 @@ class MockReadArgvService {
   }
 }
 
-describe("BuildParamDtoService", () => {
+describe("BuildParamDtoService", (): void => {
   const service = container.resolve(BuildParamDtoService);
   const argv = container.resolve(MockReadArgvService).getArgv();
   const store = container.resolve(ParamDtoStoreService);
 
   afterAll(() => container.clearInstances());
 
-  test("Should correctly build param DTO model", () => {
+  test("Should correctly build param DTO model", (): void => {
     service.buildParamDto(argv);
     expect(store.getParamDto()).toEqual<ParamDtoModel>({
       params: [
@@ -128,4 +128,3 @@ describe("BuildParamDtoService", () => {
     });
   });
 });
-// todo: refactor

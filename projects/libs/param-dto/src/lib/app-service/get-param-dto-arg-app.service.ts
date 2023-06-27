@@ -33,4 +33,3 @@ export class GetParamDtoArgAppService {
     return this.findParamDtoEntity.findCommandArgs(commandIndex);
   }
 }
-// todo: refactor

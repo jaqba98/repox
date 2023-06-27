@@ -1,6 +1,6 @@
 /**
  * The enum file contains all kinds of parameter type
- * directly for the command line. It is responsible for
+ * directly from the command line. It is responsible for
  * identifies all parts of command.
  */
 
@@ -12,4 +12,3 @@ export enum ParamTypeEnum {
   argument = "argument",
   alias = "alias"
 }
-// todo: refactor
