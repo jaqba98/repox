@@ -22,6 +22,9 @@
       "@lib/logger": [
         "projects/libs/logger/src/index.ts"
       ],
+      "@lib/param-domain": [
+        "projects/libs/param-domain/src/index.ts"
+      ],
       "@lib/param-dto": [
         "projects/libs/param-dto/src/index.ts"
       ],
@@ -30,9 +33,6 @@
       ],
       "@lib/main": [
         "projects/libs/repox/main/src/index.ts"
-      ],
-      "@lib/param-domain": [
-        "projects/libs/repox/param-domain/src/index.ts"
       ],
       "@lib/program": [
         "projects/libs/repox/program/src/index.ts"

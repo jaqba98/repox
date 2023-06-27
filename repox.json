@@ -38,6 +38,15 @@
         "type": "typescript"
       }
     },
+    "param-domain": {
+      "name": "param-domain",
+      "type": "lib",
+      "path": "projects/libs/param-domain",
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
+    },
     "param-dto": {
       "name": "param-dto",
       "type": "lib",
@@ -60,15 +69,6 @@
       "name": "main",
       "type": "lib",
       "path": "projects/libs/repox/main",
-      "assets": [],
-      "scheme": {
-        "type": "typescript"
-      }
-    },
-    "param-domain": {
-      "name": "param-domain",
-      "type": "lib",
-      "path": "projects/libs/repox/param-domain",
       "assets": [],
       "scheme": {
         "type": "typescript"
