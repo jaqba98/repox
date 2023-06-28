@@ -26,3 +26,4 @@ export interface ParamDomainModel<TProgramArgModel, TCommandArgModel> {
   program: ParamDomainEntityModel<TProgramArgModel>;
   command: ParamDomainEntityModel<TCommandArgModel>;
 }
+// todo: refactor

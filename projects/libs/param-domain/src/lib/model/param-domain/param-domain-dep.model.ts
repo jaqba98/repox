@@ -28,3 +28,4 @@ export interface ParamDomainDepModel<TProgram, TCommand, TArgument> {
   commands: ParamDomainDepCommandsModel<TCommand, TArgument>;
   args: ParamDomainDepArgsModel<TArgument>;
 }
+// todo: refactor
