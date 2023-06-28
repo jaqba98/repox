@@ -1,24 +1,20 @@
 import { singleton } from "tsyringe";
-import { ProgramEnum } from "../../enum/program.enum";
 import {
-  ParamDomainArgModel
-} from "../../model/param-domain/param-domain.model";
-import {
-  DefaultDefaultProgramArgDomainModel,
-  EmptyProgramArgDomainModel,
-  ProgramArgDomainModel
-} from "../../model/arg-domain/program-arg-domain.model";
-import { CommandEnum } from "../../enum/command.enum";
-import {
+  ArgumentEnum,
   BuildLinkProjectCommandArgDomainModel,
   BuildProjectCommandArgDomainModel,
   CommandArgDomainModel,
+  CommandEnum,
+  DefaultDefaultProgramArgDomainModel,
   EmptyCommandArgDomainModel,
+  EmptyProgramArgDomainModel,
   GenerateProjectCommandArgModel,
-  GenerateWorkspaceCommandArgDomainModel
-} from "../../model/arg-domain/command-arg-domain.model";
-import { ArgumentEnum } from "../../enum/argument.enum";
+  GenerateWorkspaceCommandArgDomainModel,
+  ProgramArgDomainModel,
+  ProgramEnum
+} from "@lib/workspace";
 import { EMPTY_STRING } from "@lib/const";
+
 
 @singleton()
 /**
@@ -28,7 +24,7 @@ import { EMPTY_STRING } from "@lib/const";
 export class BuildParamArgDomainService {
   buildProgramModel(
     programName: ProgramEnum,
-    model: Array<ParamDomainArgModel>
+    model: Array<any>
   ): ProgramArgDomainModel {
     switch (programName) {
       case ProgramEnum.default:
@@ -41,7 +37,7 @@ export class BuildParamArgDomainService {
   buildCommandModel(
     programName: ProgramEnum,
     commandName: CommandEnum,
-    model: Array<ParamDomainArgModel>
+    model: Array<any>
   ): CommandArgDomainModel {
     const fullName = `${programName}-${commandName}`;
     switch (fullName) {
@@ -61,7 +57,7 @@ export class BuildParamArgDomainService {
   }
 
   private buildDefaultDefaultProgram(
-    model: Array<ParamDomainArgModel>
+    model: Array<any>
   ): DefaultDefaultProgramArgDomainModel {
     return {
       version: this.getValue(model, ArgumentEnum.version, false)
@@ -69,7 +65,7 @@ export class BuildParamArgDomainService {
   }
 
   private buildGenerateWorkspaceCommand(
-    model: Array<ParamDomainArgModel>
+    model: Array<any>
   ): GenerateWorkspaceCommandArgDomainModel {
     return {
       workspaceName: this.getValue(model, ArgumentEnum.name)
@@ -77,7 +73,7 @@ export class BuildParamArgDomainService {
   }
 
   private buildGenerateProjectCommand(
-    model: Array<ParamDomainArgModel>
+    model: Array<any>
   ): GenerateProjectCommandArgModel {
     return {
       name: this.getValue(model, ArgumentEnum.name),
@@ -88,7 +84,7 @@ export class BuildParamArgDomainService {
   }
 
   private buildBuildProjectCommand(
-    model: Array<ParamDomainArgModel>
+    model: Array<any>
   ): BuildProjectCommandArgDomainModel {
     return {
       projectName: this.getValue(model, ArgumentEnum.name)
@@ -96,7 +92,7 @@ export class BuildParamArgDomainService {
   }
 
   private buildLinkProjectCommand(
-    model: Array<ParamDomainArgModel>
+    model: Array<any>
   ): BuildLinkProjectCommandArgDomainModel {
     return {
       projectName: this.getValue(model, ArgumentEnum.name)
@@ -104,7 +100,7 @@ export class BuildParamArgDomainService {
   }
 
   private buildUnlinkProjectCommand(
-    model: Array<ParamDomainArgModel>
+    model: Array<any>
   ): BuildLinkProjectCommandArgDomainModel {
     return {
       projectName: this.getValue(model, ArgumentEnum.name)
@@ -112,7 +108,7 @@ export class BuildParamArgDomainService {
   }
 
   private getValue<TValue>(
-    model: Array<ParamDomainArgModel>,
+    model: Array<any>,
     argumentName: ArgumentEnum,
     defaultValue: TValue = <TValue>EMPTY_STRING
   ): TValue {

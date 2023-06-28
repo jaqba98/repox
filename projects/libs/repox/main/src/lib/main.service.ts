@@ -13,9 +13,9 @@ import { ParamErrorMessageAppService } from "@lib/logger";
 import {
   AliasEnum,
   ArgumentEnum,
-  CommandAliasEnum,
+  CommandAliasEnum, CommandArgDomainModel,
   CommandEnum,
-  ProgramAliasEnum,
+  ProgramAliasEnum, ProgramArgDomainModel,
   ProgramEnum,
   REPOX_LOGO
 } from "@lib/workspace";
@@ -68,7 +68,7 @@ export class MainService {
       key: key, value: AliasEnum[key as keyof typeof AliasEnum]
     }));
 
-    this.buildParamDomain.build(
+    this.buildParamDomain.build<ProgramArgDomainModel, CommandArgDomainModel>(
       programEnum,
       programAliasEnum,
       commandEnum,

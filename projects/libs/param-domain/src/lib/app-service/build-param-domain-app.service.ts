@@ -16,7 +16,7 @@ export class BuildParamDomainAppService {
   ) {
   }
 
-  build(
+  build<TProjectModel, TCommandModel>(
     programEnum: Array<KeyValueModel>,
     programAliasEnum: Array<KeyValueModel>,
     commandEnum: Array<KeyValueModel>,
@@ -24,7 +24,7 @@ export class BuildParamDomainAppService {
     argumentEnum: Array<KeyValueModel>,
     aliasEnum: Array<KeyValueModel>
   ): void {
-    this.buildParamDomain.build(
+    this.buildParamDomain.build<TProjectModel, TCommandModel>(
       programEnum, programAliasEnum,
       commandEnum, commandAliasEnum,
       argumentEnum, aliasEnum

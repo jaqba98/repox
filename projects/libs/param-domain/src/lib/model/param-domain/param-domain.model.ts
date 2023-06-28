@@ -3,29 +3,26 @@
  * prepared with param DTO model.
  */
 
-export interface ParamDomainBaseEntityModel<TParamName> {
+export interface ParamDomainBaseEntityModel {
   baseName: string;
-  name: TParamName;
+  name: string;
   index: number;
 }
 
-export interface ParamDomainArgModel<TParamArgument>
-  extends ParamDomainBaseEntityModel<TParamArgument> {
+export interface ParamDomainArgModel
+  extends ParamDomainBaseEntityModel {
   values: Array<string>;
   hasValue: boolean;
   hasManyValues: boolean;
 }
 
-export interface ParamDomainEntityModel<
-  TParamName, TParamArgument, TParamModel
-> extends ParamDomainBaseEntityModel<TParamName> {
-  args: Array<ParamDomainArgModel<TParamArgument>>;
+export interface ParamDomainEntityModel<TParamModel>
+  extends ParamDomainBaseEntityModel {
+  args: Array<ParamDomainArgModel>;
   model: TParamModel;
 }
 
-export interface ParamDomainModel<
-  TProgram, TCommand, TArgument, TProgramModel, TCommandModel
-> {
-  program: ParamDomainEntityModel<TProgram, TArgument, TProgramModel>;
-  command: ParamDomainEntityModel<TCommand, TArgument, TCommandModel>;
+export interface ParamDomainModel<TProgramArgModel, TCommandArgModel> {
+  program: ParamDomainEntityModel<TProgramArgModel>;
+  command: ParamDomainEntityModel<TCommandArgModel>;
 }

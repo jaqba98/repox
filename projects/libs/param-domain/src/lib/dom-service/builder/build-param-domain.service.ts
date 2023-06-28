@@ -6,6 +6,9 @@ import {
 } from "@lib/param-dto";
 import { EMPTY_STRING } from "@lib/const";
 import { KeyValueModel } from "@lib/model";
+import {
+  ParamDomainArgModel, ParamDomainModel
+} from "../../model/param-domain/param-domain.model";
 
 @singleton()
 /**
@@ -15,14 +18,14 @@ export class BuildParamDomainService {
   constructor(
     private readonly getParamDtoNameApp: GetParamDtoNameAppService,
     private readonly getParamDtoIndexApp: GetParamDtoIndexAppService,
-    private readonly getParamDtoArgApp: GetParamDtoArgAppService
+    private readonly getParamDtoArgApp: GetParamDtoArgAppService,
     // private readonly buildParamArgDomain: BuildParamArgDomainService,
     // private readonly getParamDtoDataApp: GetParamDtoDataAppService,
     // private readonly paramDomainStore: ParamDomainStoreService,
   ) {
   }
 
-  build(
+  build<TProjectModel, TCommandModel>(
     programEnum: Array<KeyValueModel>,
     programAliasEnum: Array<KeyValueModel>,
     commandEnum: Array<KeyValueModel>,
@@ -50,55 +53,56 @@ export class BuildParamDomainService {
     const commandArgs = this.getParamDtoArgApp.getCommandArgs(
       commandIndex
     );
-    console.log(
-      programIndex, commandIndex, programName, commandName,
-      programArgs, commandArgs
-    );
-
-    // const programFullArgs = programArgs.map(arg => (
-    //   <ParamDomainArgModel>{
-    //     baseName: arg.paramBaseValue,
-    //     name: this.getArgumentName(arg.paramType, arg.paramName),
-    //     index: arg.paramIndex,
-    //     values: arg.paramValues,
-    //     hasValue: arg.paramHasValue,
-    //     hasManyValues: arg.paramHasManyValues
-    //   }));
-    // const commandFullArgs = commandArgs.map(arg => (
-    //   <ParamDomainArgModel>{
-    //     baseName: arg.paramBaseValue,
-    //     name: this.getArgumentName(arg.paramType, arg.paramName),
-    //     index: arg.paramIndex,
-    //     values: arg.paramValues,
-    //     hasValue: arg.paramHasValue,
-    //     hasManyValues: arg.paramHasManyValues
-    //   }));
-    // const paramDomain: ParamDomainModel = {
-    //   program: {
-    //     baseName: programBaseName,
-    //     name: programName,
-    //     index: programIndex,
-    //     args: programFullArgs,
-    //     model: this.buildParamArgDomain.buildProgramModel(
-    //       programName,
-    //       programFullArgs
-    //     )
-    //   },
-    //   command: {
-    //     baseName: commandBaseName,
-    //     name: commandName,
-    //     index: commandIndex,
-    //     args: commandFullArgs,
-    //     model: this.buildParamArgDomain.buildCommandModel(
-    //       programName,
-    //       commandName,
-    //       commandFullArgs
-    //     )
-    //   }
-    // };
+    const programFullArgs = programArgs.map(arg => (
+      <ParamDomainArgModel>{
+        baseName: arg.paramBaseValue,
+        // name: this.getArgumentName(arg.paramType, arg.paramName),
+        name: "",
+        index: arg.paramIndex,
+        values: arg.paramValues,
+        hasValue: arg.paramHasValue,
+        hasManyValues: arg.paramHasManyValues
+      }));
+    const commandFullArgs = commandArgs.map(arg => (
+      <ParamDomainArgModel>{
+        baseName: arg.paramBaseValue,
+        // name: this.getArgumentName(arg.paramType, arg.paramName),
+        name: "",
+        index: arg.paramIndex,
+        values: arg.paramValues,
+        hasValue: arg.paramHasValue,
+        hasManyValues: arg.paramHasManyValues
+      }));
+    const domain: ParamDomainModel<TProjectModel, TCommandModel> = {
+      program: {
+        baseName: programBaseName,
+        name: programName,
+        index: programIndex,
+        args: programFullArgs,
+        model: <any>{}
+        // model: this.buildParamArgDomain.buildProgramModel(
+        //   programName,
+        //   programFullArgs
+        // )
+      },
+      command: {
+        baseName: commandBaseName,
+        name: commandName,
+        index: commandIndex,
+        args: commandFullArgs,
+        model: <any>{}
+        // model: this.buildParamArgDomain.buildCommandModel(
+        //   programName,
+        //   commandName,
+        //   commandFullArgs
+        // )
+      }
+    };
+    console.log(domain);
     // this.paramDomainStore.setParamDomain(paramDomain);
   }
 
+  // todo: refactor this method
   private getProgramCommandName(
     baseName: string,
     fullEnums: Array<KeyValueModel>,
@@ -131,7 +135,6 @@ export class BuildParamDomainService {
       }
       return fullEnum.key;
     }
-
     const fullEnum = fullEnums.find(fullItem => {
       return fullItem.value === baseName
     });
