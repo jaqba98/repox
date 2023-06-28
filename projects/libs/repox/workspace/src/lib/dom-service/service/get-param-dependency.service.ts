@@ -1,18 +1,17 @@
-import { singleton } from "tsyringe";
-import { ProgramEnum } from "../../enum/program.enum";
 import {
-  ParamDomainDepModel
-} from "../../model/param-domain/param-domain-dep.model";
-import { CommandEnum } from "../../enum/command.enum";
-import { ArgumentEnum } from "../../enum/argument.enum";
-import { ProjectSchemeEnum } from "@lib/workspace";
+  ArgumentEnum,
+  CommandEnum,
+  ProgramEnum,
+  ProjectSchemeEnum
+} from "@lib/workspace";
+import { singleton } from "tsyringe";
 
 @singleton()
 /**
  * Get dependency between programs, commands and arguments.
  */
 export class GetParamDependencyService {
-  getDependency(program: ProgramEnum): ParamDomainDepModel {
+  getDependency(program: ProgramEnum): any {
     switch (program) {
       case ProgramEnum.default:
         return {
