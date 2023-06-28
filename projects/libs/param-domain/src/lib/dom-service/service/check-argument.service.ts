@@ -3,8 +3,8 @@ import {
   ParamDomainArgModel
 } from "../../model/param-domain/param-domain.model";
 import {
-  ParamDependencyArgsModel
-} from "../../model/param-domain/param-dependency.model";
+  ParamDomainDepArgsModel
+} from "../../model/param-domain/param-domain-dep.model";
 
 @singleton()
 /**
@@ -14,7 +14,7 @@ import {
 export class CheckArgumentService {
   valueMode(
     domainArg: ParamDomainArgModel,
-    dependencyArgs: ParamDependencyArgsModel
+    dependencyArgs: ParamDomainDepArgsModel
   ): { success: boolean; error: string; index: number } {
     const arg = dependencyArgs[domainArg.name];
     const { valueMode } = arg;
@@ -44,7 +44,7 @@ export class CheckArgumentService {
 
   argumentValue(
     domainArgs: ParamDomainArgModel,
-    dependencyArgs: ParamDependencyArgsModel
+    dependencyArgs: ParamDomainDepArgsModel
   ): { success: boolean; error: string; index: number } {
     const arg = dependencyArgs[domainArgs.name];
     if (arg.values.length === 0) {

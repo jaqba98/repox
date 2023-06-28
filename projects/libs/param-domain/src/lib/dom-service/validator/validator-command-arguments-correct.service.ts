@@ -17,8 +17,8 @@ import {
 import { ProgramEnum } from "../../enum/program.enum";
 import { CommandEnum } from "../../enum/command.enum";
 import {
-  ParamDependencyModel
-} from "../../model/param-domain/param-dependency.model";
+  ParamDomainDepModel
+} from "../../model/param-domain/param-domain-dep.model";
 import { ArgumentEnum } from "../../enum/argument.enum";
 import {
   CheckArgumentService
@@ -46,7 +46,7 @@ export class ValidatorCommandArgumentsCorrectService
     const paramDomain = this.paramDomainStore.getParamDomain();
     const programName: ProgramEnum = paramDomain.program.name;
     const commandName: CommandEnum = paramDomain.command.name;
-    const programDep: ParamDependencyModel = this.getParamDependency
+    const programDep: ParamDomainDepModel = this.getParamDependency
       .getDependency(programName);
     const commandArgs = programDep.commands[commandName].args;
     const wrongArgs = paramDomain.command.args

@@ -9,8 +9,8 @@ import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import {
-  ParamDependencyModel
-} from "../../model/param-domain/param-dependency.model";
+  ParamDomainDepModel
+} from "../../model/param-domain/param-domain-dep.model";
 import { ProgramEnum } from "../../enum/program.enum";
 import { CommandEnum } from "../../enum/command.enum";
 import {
@@ -38,7 +38,7 @@ export class CommandNotWrongArgumentsService
     const paramDomain = this.paramDomainStore.getParamDomain();
     const programName: ProgramEnum = paramDomain.program.name;
     const commandName: CommandEnum = paramDomain.command.name;
-    const programDep: ParamDependencyModel = this.getParamDependency
+    const programDep: ParamDomainDepModel = this.getParamDependency
       .getDependency(programName);
     const command = programDep.commands[commandName];
     const commandArgs = Object.values(command.args);

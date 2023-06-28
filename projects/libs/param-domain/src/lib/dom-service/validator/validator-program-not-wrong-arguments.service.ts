@@ -9,8 +9,8 @@ import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import {
-  ParamDependencyModel
-} from "../../model/param-domain/param-dependency.model";
+  ParamDomainDepModel
+} from "../../model/param-domain/param-domain-dep.model";
 import { ProgramEnum } from "../../enum/program.enum";
 import {
   GetParamDependencyService
@@ -36,7 +36,7 @@ export class ValidatorProgramNotWrongArgumentsService
   runValidator(): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
     const programName: ProgramEnum = paramDomain.program.name;
-    const programDep: ParamDependencyModel = this.getParamDependency
+    const programDep: ParamDomainDepModel = this.getParamDependency
       .getDependency(programName);
     const programArgs = Object.values(programDep.args);
     const wrongArgs = paramDomain.program.args.filter(arg =>

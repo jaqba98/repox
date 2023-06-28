@@ -7,4 +7,3 @@ export interface ParamDomainValidationModel {
   errors: Array<string>;
   tips: Array<string>;
 }
-// todo: refactor
