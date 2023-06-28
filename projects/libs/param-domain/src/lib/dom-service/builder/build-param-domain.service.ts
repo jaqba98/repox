@@ -56,8 +56,9 @@ export class BuildParamDomainService {
     const programFullArgs = programArgs.map(arg => (
       <ParamDomainArgModel>{
         baseName: arg.paramBaseValue,
-        // name: this.getArgumentName(arg.paramType, arg.paramName),
-        name: "",
+        name: this.getArgumentName(
+          arg.paramType, arg.paramName, argumentEnum, aliasEnum
+        ),
         index: arg.paramIndex,
         values: arg.paramValues,
         hasValue: arg.paramHasValue,
@@ -66,8 +67,9 @@ export class BuildParamDomainService {
     const commandFullArgs = commandArgs.map(arg => (
       <ParamDomainArgModel>{
         baseName: arg.paramBaseValue,
-        // name: this.getArgumentName(arg.paramType, arg.paramName),
-        name: "",
+        name: this.getArgumentName(
+          arg.paramType, arg.paramName, argumentEnum, aliasEnum
+        ),
         index: arg.paramIndex,
         values: arg.paramValues,
         hasValue: arg.paramHasValue,
@@ -144,27 +146,30 @@ export class BuildParamDomainService {
     return "unknown";
   }
 
-  // private getArgumentName(
-  //   paramType: string, paramName: string
-  // ): ArgumentEnum {
-  //   if (paramType === "argument") {
-  //     const argument = Object.keys(ArgumentEnum).find(key =>
-  //       ArgumentEnum[key as keyof typeof ArgumentEnum] === paramName
-  //     );
-  //     return argument ?
-  //       ArgumentEnum[argument as keyof typeof ArgumentEnum] :
-  //       ArgumentEnum.unknown;
-  //   }
-  //   if (paramType === "alias") {
-  //     const alias = Object.keys(AliasEnum).find(key =>
-  //       AliasEnum[key as keyof typeof AliasEnum] === paramName
-  //     );
-  //     return alias ?
-  //       ArgumentEnum[alias as keyof typeof ArgumentEnum] :
-  //       ArgumentEnum.unknown;
-  //   }
-  //   return ArgumentEnum.unknown;
-  // }
+  // todo: refactor this method
+  private getArgumentName(
+    paramType: string,
+    paramName: string,
+    argumentEnum: Array<KeyValueModel>,
+    aliasEnum: Array<KeyValueModel>
+  ): string {
+    if (!argumentEnum.some(argument => argument.key === "unknown")) {
+      throw new Error("Not defined unknown key in enum!");
+    }
+    if (paramType === "argument") {
+      const argument = argumentEnum.find(argumentKey => {
+        return argumentKey.value === paramName
+      });
+      return argument ? argument.key : "unknown";
+    }
+    if (paramType === "alias") {
+      const alias = aliasEnum.find(aliasKey => {
+        return aliasKey.value === paramName
+      });
+      return alias ? alias.key : "unknown";
+    }
+    return "unknown";
+  }
 }
 
 // todo: refactor

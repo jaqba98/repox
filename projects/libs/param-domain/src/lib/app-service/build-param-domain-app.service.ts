@@ -25,9 +25,12 @@ export class BuildParamDomainAppService {
     aliasEnum: Array<KeyValueModel>
   ): void {
     this.buildParamDomain.build<TProjectModel, TCommandModel>(
-      programEnum, programAliasEnum,
-      commandEnum, commandAliasEnum,
-      argumentEnum, aliasEnum
+      programEnum,
+      programAliasEnum,
+      commandEnum,
+      commandAliasEnum,
+      argumentEnum,
+      aliasEnum
     );
     // this.valParamDomain.runValidation();
   }
