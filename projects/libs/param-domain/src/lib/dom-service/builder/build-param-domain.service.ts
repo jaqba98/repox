@@ -1,5 +1,6 @@
 import { singleton } from "tsyringe";
 import {
+  GetParamDtoArgAppService,
   GetParamDtoIndexAppService,
   GetParamDtoNameAppService
 } from "@lib/param-dto";
@@ -13,11 +14,11 @@ import { KeyValueModel } from "@lib/model";
 export class BuildParamDomainService {
   constructor(
     private readonly getParamDtoNameApp: GetParamDtoNameAppService,
-    private readonly getParamDtoIndexApp: GetParamDtoIndexAppService
+    private readonly getParamDtoIndexApp: GetParamDtoIndexAppService,
+    private readonly getParamDtoArgApp: GetParamDtoArgAppService
     // private readonly buildParamArgDomain: BuildParamArgDomainService,
     // private readonly getParamDtoDataApp: GetParamDtoDataAppService,
     // private readonly paramDomainStore: ParamDomainStoreService,
-    // private readonly getParamDtoArgApp: GetParamDtoArgAppService
   ) {
   }
 
@@ -43,12 +44,17 @@ export class BuildParamDomainService {
     const commandName = this.getProgramCommandName(
       commandBaseName, commandEnum, commandAliasEnum
     );
-    console.log(programIndex, commandIndex, programName, commandName);
+    const programArgs = this.getParamDtoArgApp.getProgramArgs(
+      programIndex, commandIndex
+    );
+    const commandArgs = this.getParamDtoArgApp.getCommandArgs(
+      commandIndex
+    );
+    console.log(
+      programIndex, commandIndex, programName, commandName,
+      programArgs, commandArgs
+    );
 
-    // const programArgs = this.getParamDtoArgApp
-    //   .getProgramArgs(programIndex, commandIndex);
-    // const commandArgs = this.getParamDtoArgApp
-    //   .getCommandArgs(commandIndex);
     // const programFullArgs = programArgs.map(arg => (
     //   <ParamDomainArgModel>{
     //     baseName: arg.paramBaseValue,
@@ -135,26 +141,6 @@ export class BuildParamDomainService {
     return "unknown";
   }
 
-  // private getCommandName<TC>(commandName: string): TC {
-  //   if (commandName === CommandEnum.default) {
-  //     return CommandEnum.default;
-  //   }
-  //   const commandAlias = Object.keys(CommandAliasEnum).find(key => {
-  //     const commandAliasKey = key as keyof typeof CommandAliasEnum;
-  //     return CommandAliasEnum[commandAliasKey] === commandName
-  //   });
-  //   if (commandAlias) {
-  //     return CommandEnum[commandAlias as keyof typeof CommandEnum];
-  //   }
-  //   const commandNameFull = Object.keys(CommandEnum).find(key =>
-  //     CommandEnum[key as keyof typeof CommandEnum] === commandName
-  //   );
-  //   if (commandNameFull) {
-  //     return CommandEnum[commandNameFull as keyof typeof CommandEnum];
-  //   }
-  //   return CommandEnum.unknown;
-  // }
-  //
   // private getArgumentName(
   //   paramType: string, paramName: string
   // ): ArgumentEnum {
