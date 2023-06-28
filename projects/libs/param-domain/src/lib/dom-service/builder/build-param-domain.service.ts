@@ -31,7 +31,8 @@ export class BuildParamDomainService {
     commandEnum: Array<KeyValueModel>,
     commandAliasEnum: Array<KeyValueModel>,
     argumentEnum: Array<KeyValueModel>,
-    aliasEnum: Array<KeyValueModel>
+    aliasEnum: Array<KeyValueModel>,
+    buildParamArgDomain: any
   ): void {
     const programBaseName = this.getParamDtoNameApp.getProgramName();
     const commandBaseName = this.getParamDtoNameApp.getCommandName();
@@ -81,23 +82,21 @@ export class BuildParamDomainService {
         name: programName,
         index: programIndex,
         args: programFullArgs,
-        model: <any>{}
-        // model: this.buildParamArgDomain.buildProgramModel(
-        //   programName,
-        //   programFullArgs
-        // )
+        model: buildParamArgDomain.buildProgramModel(
+          programName,
+          programFullArgs
+        )
       },
       command: {
         baseName: commandBaseName,
         name: commandName,
         index: commandIndex,
         args: commandFullArgs,
-        model: <any>{}
-        // model: this.buildParamArgDomain.buildCommandModel(
-        //   programName,
-        //   commandName,
-        //   commandFullArgs
-        // )
+        model: buildParamArgDomain.buildCommandModel(
+          programName,
+          commandName,
+          commandFullArgs
+        )
       }
     };
     console.log(domain);

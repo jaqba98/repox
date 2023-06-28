@@ -8,4 +8,5 @@ export * from "./lib/model/command-arg-domain.model";
 export * from "./lib/enum/param-program/argument.enum";
 export * from "./lib/enum/param-program/command.enum";
 export * from "./lib/enum/param-program/program.enum";
+export * from "./lib/dom-service/builder/build-param-arg-domain.service";
 // todo: refactor

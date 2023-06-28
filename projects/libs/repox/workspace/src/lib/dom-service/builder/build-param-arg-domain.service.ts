@@ -23,7 +23,7 @@ import { EMPTY_STRING } from "@lib/const";
  */
 export class BuildParamArgDomainService {
   buildProgramModel(
-    programName: ProgramEnum,
+    programName: string,
     model: Array<any>
   ): ProgramArgDomainModel {
     switch (programName) {
@@ -35,8 +35,8 @@ export class BuildParamArgDomainService {
   }
 
   buildCommandModel(
-    programName: ProgramEnum,
-    commandName: CommandEnum,
+    programName: string,
+    commandName: string,
     model: Array<any>
   ): CommandArgDomainModel {
     const fullName = `${programName}-${commandName}`;
