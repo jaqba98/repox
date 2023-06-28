@@ -1,3 +1,4 @@
+import { TUnknownType } from "@lib/model";
 /**
  * Domain parameter model for all parameters
  * prepared with param DTO model.
@@ -16,14 +17,14 @@ export interface ParamDomainArgModel
   hasManyValues: boolean;
 }
 
-export interface ParamDomainEntityModel<TParamModel>
+export interface ParamDomainEntityModel
   extends ParamDomainBaseEntityModel {
   args: Array<ParamDomainArgModel>;
-  model: TParamModel;
+  model: TUnknownType;
 }
 
-export interface ParamDomainModel<TProgramArgModel, TCommandArgModel> {
-  program: ParamDomainEntityModel<TProgramArgModel>;
-  command: ParamDomainEntityModel<TCommandArgModel>;
+export interface ParamDomainModel {
+  program: ParamDomainEntityModel;
+  command: ParamDomainEntityModel;
 }
 // todo: refactor
