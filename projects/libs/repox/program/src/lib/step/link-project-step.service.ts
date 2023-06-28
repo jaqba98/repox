@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
+// import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
 import {
   LinkProjectAppService
 } from "../app-service/link-project-app.service";
@@ -25,7 +25,7 @@ export class LinkProjectStepService {
   ) {
   }
 
-  runSteps(model: BuildProjectCommandArgDomainModel): void {
+  runSteps(model: any): void {
     this.loggerMessageApp.writeInfo(
       "Link project", REPOX_LOGO
     );

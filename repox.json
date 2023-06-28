@@ -100,6 +100,15 @@
       "scheme": {
         "type": "typescript"
       }
+    },
+    "model": {
+      "name": "model",
+      "type": "lib",
+      "path": "projects/libs/model",
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     }
   }
 }

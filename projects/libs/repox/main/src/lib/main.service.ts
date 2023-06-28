@@ -10,7 +10,15 @@ import {
 } from "@lib/param-domain";
 import { SelectProgramAppService } from "@lib/launcher";
 import { ParamErrorMessageAppService } from "@lib/logger";
-import { REPOX_LOGO } from "@lib/workspace";
+import {
+  AliasEnum,
+  ArgumentEnum,
+  CommandAliasEnum,
+  CommandEnum,
+  ProgramAliasEnum,
+  ProgramEnum,
+  REPOX_LOGO
+} from "@lib/workspace";
 
 @singleton()
 /**
@@ -40,7 +48,34 @@ export class MainService {
       );
       return;
     }
-    this.buildParamDomain.build();
+
+    const programEnum = Object.keys(ProgramEnum).map(key => ({
+      key: key, value: ProgramEnum[key as keyof typeof ProgramEnum]
+    }));
+    const programAliasEnum = Object.keys(ProgramAliasEnum).map(key => ({
+      key: key, value: ProgramAliasEnum[key as keyof typeof ProgramAliasEnum]
+    }));
+    const commandEnum = Object.keys(CommandEnum).map(key => ({
+      key: key, value: CommandEnum[key as keyof typeof CommandEnum]
+    }));
+    const commandAliasEnum = Object.keys(CommandAliasEnum).map(key => ({
+      key: key, value: CommandAliasEnum[key as keyof typeof CommandAliasEnum]
+    }));
+    const argumentEnum = Object.keys(ArgumentEnum).map(key => ({
+      key: key, value: ArgumentEnum[key as keyof typeof ArgumentEnum]
+    }));
+    const aliasEnum = Object.keys(AliasEnum).map(key => ({
+      key: key, value: AliasEnum[key as keyof typeof AliasEnum]
+    }));
+
+    this.buildParamDomain.build(
+      programEnum,
+      programAliasEnum,
+      commandEnum,
+      commandAliasEnum,
+      argumentEnum,
+      aliasEnum
+    );
     const paramDomain = this.getParamDomainData
       .getParamDomainValidation();
     if (!paramDomain.success) {

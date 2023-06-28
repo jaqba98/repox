@@ -3,9 +3,9 @@ import {
   GenerateWorkspaceAppService
 } from "../app-service/generate-workspace-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
-import {
-  GenerateWorkspaceCommandArgDomainModel
-} from "@lib/param-domain";
+// import {
+//   GenerateWorkspaceCommandArgDomainModel
+// } from "@lib/param-domain";
 import { REPOX_LOGO } from "@lib/workspace";
 
 @singleton()
@@ -19,7 +19,7 @@ export class GenerateWorkspaceStepService {
   ) {
   }
 
-  runSteps(model: GenerateWorkspaceCommandArgDomainModel): void {
+  runSteps(model: any): void {
     // Display the command header
     this.simpleMessage.writeInfo(
       "Workspace generation", REPOX_LOGO

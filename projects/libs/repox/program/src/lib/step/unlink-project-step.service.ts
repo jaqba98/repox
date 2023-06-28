@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
+// import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
 import {
   CheckWorkspaceAppService
 } from "../app-service/check-workspace-app.service";
@@ -25,7 +25,7 @@ export class UnlinkProjectStepService {
   ) {
   }
 
-  runSteps(model: BuildProjectCommandArgDomainModel): void {
+  runSteps(model: any): void {
     this.loggerMessageApp.writeInfo(
       "Unlink project", REPOX_LOGO
     );

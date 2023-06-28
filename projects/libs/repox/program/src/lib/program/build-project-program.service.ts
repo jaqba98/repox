@@ -3,7 +3,7 @@ import {
   BuildProjectStepService
 } from "../step/build-project-step.service";
 import {
-  BuildProjectCommandArgDomainModel,
+  // BuildProjectCommandArgDomainModel,
   ParamDomainAppService
 } from "@lib/param-domain";
 
@@ -19,7 +19,7 @@ export class BuildProjectProgramService {
   }
 
   run(): void {
-    const commandModel = <BuildProjectCommandArgDomainModel>
+    const commandModel = <any>
       this.getParamDomainData.getParamDomain().command.model;
     this.step.runSteps(commandModel);
   }

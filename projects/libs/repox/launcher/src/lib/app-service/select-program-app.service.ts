@@ -2,7 +2,6 @@ import { container, singleton } from "tsyringe";
 import {
   BuildRunProgramNameService
 } from "../dom-service/build-run-program-name.service";
-import { CommandEnum, ProgramEnum } from "@lib/param-domain";
 import {
   BuildProjectProgramService,
   DefaultDefaultProgramService,
@@ -11,6 +10,7 @@ import {
   LinkProjectProgramService,
   UnlinkProjectProgramService
 } from "@lib/program";
+import { CommandEnum, ProgramEnum } from "@lib/workspace";
 
 @singleton()
 /**

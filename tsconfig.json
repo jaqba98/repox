@@ -42,6 +42,9 @@
       ],
       "@lib/utils": [
         "projects/libs/utils/src/index.ts"
+      ],
+      "@lib/model": [
+        "projects/libs/model/src/index.ts"
       ]
     }
   },

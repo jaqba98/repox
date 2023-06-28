@@ -12,15 +12,15 @@ import {
  * and validation domain result.
  */
 export class ParamDomainStoreService {
-  private paramDomain: ParamDomainModel | undefined;
+  private paramDomain: any | undefined;
   private paramDomainValidation:
     ParamDomainValidationModel | undefined;
 
-  setParamDomain(paramDomain: ParamDomainModel): void {
+  setParamDomain(paramDomain: any): void {
     this.paramDomain = paramDomain;
   }
 
-  getParamDomain(): ParamDomainModel {
+  getParamDomain(): any {
     if (this.paramDomain === undefined) {
       throw new Error("The param domain store is undefined!");
     }

@@ -2,9 +2,9 @@ import { singleton } from "tsyringe";
 import {
   GetProgramVersionAppService
 } from "../app-service/get-program-version-app.service";
-import {
-  DefaultDefaultProgramArgDomainModel
-} from "@lib/param-domain";
+// import {
+//   DefaultDefaultProgramArgDomainModel
+// } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -16,7 +16,7 @@ export class DefaultDefaultStepService {
   ) {
   }
 
-  runSteps(programModel: DefaultDefaultProgramArgDomainModel): void {
+  runSteps(programModel: any): void {
     if (programModel.version) {
       // Display the program version
       this.getProgramVersion.getProgramVersion();

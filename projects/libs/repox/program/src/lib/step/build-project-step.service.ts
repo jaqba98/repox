@@ -3,7 +3,7 @@ import {
   BuildProjectAppService
 } from "../app-service/build-project-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
-import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
+// import { BuildProjectCommandArgDomainModel } from "@lib/param-domain";
 import {
   CheckWorkspaceAppService
 } from "../app-service/check-workspace-app.service";
@@ -25,7 +25,7 @@ export class BuildProjectStepService {
   ) {
   }
 
-  runSteps(model: BuildProjectCommandArgDomainModel): void {
+  runSteps(model: any): void {
     this.loggerMessageApp.writeInfo(
       "Build project", REPOX_LOGO
     );

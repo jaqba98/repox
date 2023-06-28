@@ -3,7 +3,7 @@ import {
   GenerateWorkspaceStepService
 } from "../step/generate-workspace-step.service";
 import {
-  GenerateWorkspaceCommandArgDomainModel,
+  // GenerateWorkspaceCommandArgDomainModel,
   ParamDomainAppService
 } from "@lib/param-domain";
 
@@ -19,7 +19,7 @@ export class GenerateWorkspaceProgramService {
   }
 
   run(): void {
-    const commandModel = <GenerateWorkspaceCommandArgDomainModel>
+    const commandModel = <any>
       this.getParamDomainData.getParamDomain().command.model;
     this.step.runSteps(commandModel);
   }

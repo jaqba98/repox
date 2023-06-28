@@ -2,9 +2,7 @@ import { singleton } from "tsyringe";
 import {
   BuildParamDomainService
 } from "../dom-service/builder/build-param-domain.service";
-import {
-  ValidationParamDomainService
-} from "../dom-service/validation/validation-param-domain.service";
+import { KeyValueModel } from "@lib/model";
 
 @singleton()
 /**
@@ -14,13 +12,23 @@ import {
 export class BuildParamDomainAppService {
   constructor(
     private readonly buildParamDomain: BuildParamDomainService,
-    private readonly paramDomain: ValidationParamDomainService
+    // private readonly valParamDomain: ValidationParamDomainService
   ) {
   }
 
-  build(): void {
-    this.buildParamDomain.build();
-    this.paramDomain.runValidation();
+  build(
+    programEnum: Array<KeyValueModel>,
+    programAliasEnum: Array<KeyValueModel>,
+    commandEnum: Array<KeyValueModel>,
+    commandAliasEnum: Array<KeyValueModel>,
+    argumentEnum: Array<KeyValueModel>,
+    aliasEnum: Array<KeyValueModel>
+  ): void {
+    this.buildParamDomain.build(
+      programEnum, programAliasEnum,
+      commandEnum, commandAliasEnum,
+      argumentEnum, aliasEnum
+    );
+    // this.valParamDomain.runValidation();
   }
 }
-// todo: refactor

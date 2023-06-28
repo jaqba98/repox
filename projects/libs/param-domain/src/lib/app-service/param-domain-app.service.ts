@@ -20,7 +20,7 @@ export class ParamDomainAppService {
   ) {
   }
 
-  getParamDomain(): ParamDomainModel {
+  getParamDomain(): any {
     return this.paramDomainStore.getParamDomain();
   }
 

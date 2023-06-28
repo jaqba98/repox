@@ -24,7 +24,7 @@ export interface ParamDomainEntityModel<
 }
 
 export interface ParamDomainModel<
-  TProgram, TCommand, TArgument, TProgramModel, TCommandModel,
+  TProgram, TCommand, TArgument, TProgramModel, TCommandModel
 > {
   program: ParamDomainEntityModel<TProgram, TArgument, TProgramModel>;
   command: ParamDomainEntityModel<TCommand, TArgument, TCommandModel>;

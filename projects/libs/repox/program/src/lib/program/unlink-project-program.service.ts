@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  BuildUnlinkProjectCommandArgDomainModel,
+  // BuildUnlinkProjectCommandArgDomainModel,
   ParamDomainAppService
 } from "@lib/param-domain";
 import {
@@ -19,7 +19,7 @@ export class UnlinkProjectProgramService {
   }
 
   run(): void {
-    const commandModel = <BuildUnlinkProjectCommandArgDomainModel>
+    const commandModel = <any>
       this.getParamDomainData.getParamDomain().command.model;
     this.step.runSteps(commandModel);
   }

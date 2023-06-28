@@ -3,7 +3,7 @@ import {
   GenerateProjectStepService
 } from "../step/generate-project-step.service";
 import {
-  GenerateProjectCommandArgModel,
+  // GenerateProjectCommandArgModel,
   ParamDomainAppService
 } from "@lib/param-domain";
 import {
@@ -30,7 +30,7 @@ export class GenerateProjectProgramService {
   }
 
   private prepareStepData(): GenerateProjectProgramModel {
-    const commandArg = <GenerateProjectCommandArgModel>
+    const commandArg = <any>
       this.paramDomain.getParamDomain().command.model;
     const { name, type, path, scheme } = commandArg;
     return {

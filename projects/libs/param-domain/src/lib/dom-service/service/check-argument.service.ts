@@ -13,8 +13,8 @@ import {
  */
 export class CheckArgumentService {
   valueMode(
-    domainArg: ParamDomainArgModel,
-    dependencyArgs: ParamDomainDepArgsModel
+    domainArg: any,
+    dependencyArgs: any
   ): { success: boolean; error: string; index: number } {
     const arg = dependencyArgs[domainArg.name];
     const { valueMode } = arg;
@@ -43,15 +43,15 @@ export class CheckArgumentService {
   }
 
   argumentValue(
-    domainArgs: ParamDomainArgModel,
-    dependencyArgs: ParamDomainDepArgsModel
+    domainArgs: any,
+    dependencyArgs: any
   ): { success: boolean; error: string; index: number } {
     const arg = dependencyArgs[domainArgs.name];
     if (arg.values.length === 0) {
       return { success: true, error: "", index: domainArgs.index }
     }
     const wrongValues = domainArgs.values
-      .filter(paramArg => !arg.values.includes(paramArg));
+      .filter((paramArg: any) => !arg.values.includes(paramArg));
     if (wrongValues.length === 0) {
       return { success: true, error: "", index: domainArgs.index }
     }

@@ -3,7 +3,7 @@ import {
   DefaultDefaultStepService
 } from "../step/default-default-step.service";
 import {
-  DefaultDefaultProgramArgDomainModel,
+  // DefaultDefaultProgramArgDomainModel,
   ParamDomainAppService
 } from "@lib/param-domain";
 
@@ -19,7 +19,7 @@ export class DefaultDefaultProgramService {
   }
 
   run(): void {
-    const programModel = <DefaultDefaultProgramArgDomainModel>
+    const programModel = <any>
       this.getParamDomainData.getParamDomain().program.model;
     this.defaultDefaultStep.runSteps(programModel);
   }

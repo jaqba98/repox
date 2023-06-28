@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  BuildLinkProjectCommandArgDomainModel,
+  // BuildLinkProjectCommandArgDomainModel,
   ParamDomainAppService
 } from "@lib/param-domain";
 import {
@@ -19,7 +19,7 @@ export class LinkProjectProgramService {
   }
 
   run(): void {
-    const commandModel = <BuildLinkProjectCommandArgDomainModel>
+    const commandModel = <any>
       this.getParamDomainData.getParamDomain().command.model;
     this.step.runSteps(commandModel);
   }
