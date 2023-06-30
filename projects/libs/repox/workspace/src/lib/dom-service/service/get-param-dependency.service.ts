@@ -5,13 +5,14 @@ import {
   ProjectSchemeEnum
 } from "@lib/workspace";
 import { singleton } from "tsyringe";
+import { BaseGetParamDependencyModel } from "@lib/model";
 
 @singleton()
 /**
  * Get dependency between programs, commands and arguments.
  */
-export class GetParamDependencyService {
-  getDependency(program: ProgramEnum): any {
+export class GetParamDependencyService implements BaseGetParamDependencyModel {
+  getDependency(program: string): any {
     switch (program) {
       case ProgramEnum.default:
         return {

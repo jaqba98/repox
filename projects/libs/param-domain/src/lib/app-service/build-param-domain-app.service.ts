@@ -2,7 +2,13 @@ import { singleton } from "tsyringe";
 import {
   BuildParamDomainService
 } from "../dom-service/builder/build-param-domain.service";
-import { KeyValueModel } from "@lib/model";
+import {
+  BaseGetParamDependencyModel,
+  KeyValueModel
+} from "@lib/model";
+import {
+  ValidationParamDomainService
+} from "../dom-service/validation/validation-param-domain.service";
 
 @singleton()
 /**
@@ -11,7 +17,8 @@ import { KeyValueModel } from "@lib/model";
  */
 export class BuildParamDomainAppService {
   constructor(
-    private readonly buildParamDomain: BuildParamDomainService
+    private readonly buildParamDomain: BuildParamDomainService,
+    private readonly validation: ValidationParamDomainService
   ) {
   }
 
@@ -21,7 +28,8 @@ export class BuildParamDomainAppService {
     commandEnums: Array<KeyValueModel>,
     commandAliasEnums: Array<KeyValueModel>,
     argumentEnums: Array<KeyValueModel>,
-    aliasEnums: Array<KeyValueModel>
+    aliasEnums: Array<KeyValueModel>,
+    getParamDependency: BaseGetParamDependencyModel
   ): void {
     this.buildParamDomain.build<TProgramArgDm, TCommandArgDm>(
       programEnums,
@@ -31,6 +39,6 @@ export class BuildParamDomainAppService {
       argumentEnums,
       aliasEnums
     );
-    // todo: add validation of param domain
+    this.validation.runValidation(getParamDependency);
   }
 }

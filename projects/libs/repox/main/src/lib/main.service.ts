@@ -15,7 +15,7 @@ import {
   ArgumentEnum,
   CommandAliasEnum,
   CommandArgDomainModel,
-  CommandEnum,
+  CommandEnum, GetParamDependencyService,
   ProgramAliasEnum,
   ProgramArgDomainModel,
   ProgramEnum,
@@ -70,7 +70,7 @@ export class MainService {
       key: key, value: AliasEnum[key as keyof typeof AliasEnum]
     }));
 
-    // const aaa = container.resolve(BuildParamArgDomainService);
+    const getParamDependency = container.resolve(GetParamDependencyService);
 
     this.buildParamDomain.build<ProgramArgDomainModel, CommandArgDomainModel>(
       programEnum,
@@ -78,7 +78,8 @@ export class MainService {
       commandEnum,
       commandAliasEnum,
       argumentEnum,
-      aliasEnum
+      aliasEnum,
+      getParamDependency
     );
     const paramDomain = this.getParamDomainData
       .getParamDomainValidation();

@@ -2,9 +2,7 @@ import { singleton } from "tsyringe";
 import {
   ParamDomainArgModel
 } from "../../model/param-domain/param-domain.model";
-import {
-  ParamDomainDepArgsModel
-} from "../../model/param-domain/param-domain-dep.model";
+import { ParamDomainDepArgsModel } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -13,8 +11,8 @@ import {
  */
 export class CheckArgumentService {
   valueMode(
-    domainArg: any,
-    dependencyArgs: any
+    domainArg: ParamDomainArgModel,
+    dependencyArgs: ParamDomainDepArgsModel
   ): { success: boolean; error: string; index: number } {
     const arg = dependencyArgs[domainArg.name];
     const { valueMode } = arg;
@@ -43,8 +41,8 @@ export class CheckArgumentService {
   }
 
   argumentValue(
-    domainArgs: any,
-    dependencyArgs: any
+    domainArgs: ParamDomainArgModel,
+    dependencyArgs: ParamDomainDepArgsModel
   ): { success: boolean; error: string; index: number } {
     const arg = dependencyArgs[domainArgs.name];
     if (arg.values.length === 0) {
@@ -65,4 +63,3 @@ export class CheckArgumentService {
     }
   }
 }
-// todo: refactor

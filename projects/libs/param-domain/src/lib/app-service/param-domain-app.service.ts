@@ -20,12 +20,19 @@ export class ParamDomainAppService {
   ) {
   }
 
-  getParamDomain(): any {
+  getParamDomain(): ParamDomainModel {
     return this.paramDomainStore.getParamDomain();
   }
 
   getParamDomainValidation(): ParamDomainValidationModel {
     return this.paramDomainStore.getParamDomainValidation();
   }
+
+  getProgramName(): string {
+    return this.paramDomainStore.getParamDomain().program.name;
+  }
+
+  getCommandName(): string {
+    return this.paramDomainStore.getParamDomain().command.name;
+  }
 }
-// todo: refactor

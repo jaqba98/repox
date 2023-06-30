@@ -1,5 +1,8 @@
 import { singleton } from "tsyringe";
-import { KeyValueModel } from "@lib/model";
+import {
+  BaseGetParamDependencyModel,
+  KeyValueModel
+} from "@lib/model";
 import {
   GetParamDtoArgAppService,
   GetParamDtoIndexAppService,
