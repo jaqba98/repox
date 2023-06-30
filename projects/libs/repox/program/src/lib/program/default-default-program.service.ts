@@ -19,8 +19,8 @@ export class DefaultDefaultProgramService {
   }
 
   run(): void {
-    const programModel = <any>
-      this.getParamDomainData.getParamDomain().program.model;
+    const programModel = <any>undefined;
+      // this.getParamDomainData.getParamDomain().program.model;
     this.defaultDefaultStep.runSteps(programModel);
   }
 }

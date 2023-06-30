@@ -30,8 +30,8 @@ export class GenerateProjectProgramService {
   }
 
   private prepareStepData(): GenerateProjectProgramModel {
-    const commandArg = <any>
-      this.paramDomain.getParamDomain().command.model;
+    const commandArg = <any>undefined;
+      // this.paramDomain.getParamDomain().command.model;
     const { name, type, path, scheme } = commandArg;
     return {
       projectName: name,

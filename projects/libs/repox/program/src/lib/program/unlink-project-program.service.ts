@@ -19,8 +19,8 @@ export class UnlinkProjectProgramService {
   }
 
   run(): void {
-    const commandModel = <any>
-      this.getParamDomainData.getParamDomain().command.model;
+    const commandModel = <any>undefined;
+      // this.getParamDomainData.getParamDomain().command.model;
     this.step.runSteps(commandModel);
   }
 }

@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { GetDomainDataAppService } from "@lib/param-domain";
+// import { GetDomainDataAppService } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -8,14 +8,15 @@ import { GetDomainDataAppService } from "@lib/param-domain";
  */
 export class BuildRunProgramNameService {
   constructor(
-    private readonly getDomainDataApp: GetDomainDataAppService
+    // private readonly getDomainDataApp: GetDomainDataAppService
   ) {
   }
 
   getProgramName(): string {
-    const programName = this.getDomainDataApp.getProgramName();
-    const commandName = this.getDomainDataApp.getCommandName();
-    return `${programName}-${commandName}`;
+    // const programName = this.getDomainDataApp.getProgramName();
+    // const commandName = this.getDomainDataApp.getCommandName();
+    // return `${programName}-${commandName}`;
+    return "";
   }
 }
 // todo: refactor
