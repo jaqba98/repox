@@ -65,10 +65,10 @@
         "type": "typescript"
       }
     },
-    "main": {
-      "name": "main",
+    "repox-main": {
+      "name": "repox-main",
       "type": "lib",
-      "path": "projects/libs/repox/main",
+      "path": "projects/libs/repox/repox-main",
       "assets": [],
       "scheme": {
         "type": "typescript"

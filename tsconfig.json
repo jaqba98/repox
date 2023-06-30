@@ -31,8 +31,8 @@
       "@lib/launcher": [
         "projects/libs/repox/launcher/src/index.ts"
       ],
-      "@lib/main": [
-        "projects/libs/repox/main/src/index.ts"
+      "@lib/repox-main": [
+        "projects/libs/repox/repox-main/src/index.ts"
       ],
       "@lib/program": [
         "projects/libs/repox/program/src/index.ts"

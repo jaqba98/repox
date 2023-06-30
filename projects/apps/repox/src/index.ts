@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-import "@lib/main";
+import "@lib/repox-main";
