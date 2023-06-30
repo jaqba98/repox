@@ -1,14 +1,18 @@
 import { singleton } from "tsyringe";
+import { KeyValueModel } from "@lib/model";
 import {
   GetParamDtoArgAppService,
   GetParamDtoIndexAppService,
   GetParamDtoNameAppService
 } from "@lib/param-dto";
-import { EMPTY_STRING } from "@lib/const";
-import { KeyValueModel } from "@lib/model";
 import {
-  ParamDomainArgModel, ParamDomainModel
+  ParamDomainArgModel,
+  ParamDomainModel
 } from "../../model/param-domain/param-domain.model";
+import { EMPTY_STRING } from "@lib/const";
+import {
+  ParamDomainStoreService
+} from "../store/param-domain-store.service";
 
 @singleton()
 /**
@@ -16,30 +20,27 @@ import {
  */
 export class BuildParamDomainService {
   constructor(
-    private readonly getParamDtoNameApp: GetParamDtoNameAppService,
-    private readonly getParamDtoIndexApp: GetParamDtoIndexAppService,
-    private readonly getParamDtoArgApp: GetParamDtoArgAppService,
-    // private readonly buildParamArgDomain: BuildParamArgDomainService,
-    // private readonly getParamDtoDataApp: GetParamDtoDataAppService,
-    // private readonly paramDomainStore: ParamDomainStoreService,
+    private readonly getParamDtoName: GetParamDtoNameAppService,
+    private readonly getParamDtoIndex: GetParamDtoIndexAppService,
+    private readonly getParamDtoArg: GetParamDtoArgAppService,
+    private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  build<TProjectModel, TCommandModel>(
+  build<TProgramArgDm, TCommandModel>(
     programEnum: Array<KeyValueModel>,
     programAliasEnum: Array<KeyValueModel>,
     commandEnum: Array<KeyValueModel>,
     commandAliasEnum: Array<KeyValueModel>,
     argumentEnum: Array<KeyValueModel>,
-    aliasEnum: Array<KeyValueModel>,
-    buildParamArgDomain: any
+    aliasEnum: Array<KeyValueModel>
   ): void {
-    const programBaseName = this.getParamDtoNameApp.getProgramName();
-    const commandBaseName = this.getParamDtoNameApp.getCommandName();
-    const programIndex = this.getParamDtoIndexApp.getProgramIndex(
+    const programBaseName = this.getParamDtoName.getProgramName();
+    const commandBaseName = this.getParamDtoName.getCommandName();
+    const programIndex = this.getParamDtoIndex.getProgramIndex(
       programBaseName
     );
-    const commandIndex = this.getParamDtoIndexApp.getCommandIndex(
+    const commandIndex = this.getParamDtoIndex.getCommandIndex(
       commandBaseName
     );
     const programName = this.getProgramCommandName(
@@ -48,14 +49,14 @@ export class BuildParamDomainService {
     const commandName = this.getProgramCommandName(
       commandBaseName, commandEnum, commandAliasEnum
     );
-    const programArgs = this.getParamDtoArgApp.getProgramArgs(
+    const programArgs = this.getParamDtoArg.getProgramArgs(
       programIndex, commandIndex
     );
-    const commandArgs = this.getParamDtoArgApp.getCommandArgs(
+    const commandArgs = this.getParamDtoArg.getCommandArgs(
       commandIndex
     );
-    const programFullArgs = programArgs.map(arg => (
-      <ParamDomainArgModel>{
+    const programDomainArgs = programArgs
+      .map<ParamDomainArgModel>(arg => ({
         baseName: arg.paramBaseValue,
         name: this.getArgumentName(
           arg.paramType, arg.paramName, argumentEnum, aliasEnum
@@ -65,8 +66,8 @@ export class BuildParamDomainService {
         hasValue: arg.paramHasValue,
         hasManyValues: arg.paramHasManyValues
       }));
-    const commandFullArgs = commandArgs.map(arg => (
-      <ParamDomainArgModel>{
+    const commandDomainArgs = commandArgs
+      .map<ParamDomainArgModel>(arg => ({
         baseName: arg.paramBaseValue,
         name: this.getArgumentName(
           arg.paramType, arg.paramName, argumentEnum, aliasEnum
@@ -76,91 +77,83 @@ export class BuildParamDomainService {
         hasValue: arg.paramHasValue,
         hasManyValues: arg.paramHasManyValues
       }));
-    const domain: ParamDomainModel<TProjectModel, TCommandModel> = {
+    const paramDomain: ParamDomainModel = {
       program: {
         baseName: programBaseName,
         name: programName,
         index: programIndex,
-        args: programFullArgs,
-        model: buildParamArgDomain.buildProgramModel(
-          programName,
-          programFullArgs
-        )
+        args: programDomainArgs
       },
       command: {
         baseName: commandBaseName,
         name: commandName,
         index: commandIndex,
-        args: commandFullArgs,
-        model: buildParamArgDomain.buildCommandModel(
-          programName,
-          commandName,
-          commandFullArgs
-        )
+        args: commandDomainArgs
       }
     };
-    console.log(domain);
-    // this.paramDomainStore.setParamDomain(paramDomain);
+    this.paramDomainStore.setParamDomain(paramDomain);
   }
 
-  // todo: refactor this method
   private getProgramCommandName(
     baseName: string,
-    fullEnums: Array<KeyValueModel>,
+    enums: Array<KeyValueModel>,
     aliasEnums: Array<KeyValueModel>
   ): string {
-    if (!fullEnums.some(fullEnum => fullEnum.key === "default")) {
-      throw new Error("Not defined default key in enum!");
+    // Verification the enums and alias enums
+    if (!enums.some(enumItem => enumItem.key === "default")) {
+      throw new Error("Not defined default key in the enum");
     }
-    if (!fullEnums.some(fullEnum => fullEnum.key === "unknown")) {
-      throw new Error("Not defined unknown key in enum!");
+    if (!enums.some(enumItem => enumItem.key === "unknown")) {
+      throw new Error("Not defined unknown key in the enum");
     }
+    // Return empty string then baseName is empty string
     if (baseName === EMPTY_STRING) {
-      const defaultEnum = fullEnums.find(
-        fullEnum => fullEnum.value === EMPTY_STRING
+      const defaultEnum = enums.find(enumItem =>
+        enumItem.key === "default" &&
+        enumItem.value === EMPTY_STRING
       );
       if (!defaultEnum) {
-        throw new Error("Not defined default key in enum!");
+        throw new Error("Not defined default key in the enum");
       }
       return defaultEnum.key;
     }
-    const aliasEnum = aliasEnums.find(aliasItem => {
-      return aliasItem.value === baseName
-    });
-    if (aliasEnum) {
-      const fullEnum = fullEnums.find(fullItem => {
-        return fullItem.key === aliasEnum.key
-      });
-      if (!fullEnum) {
-        throw new Error("For given enum alias not found full enum!");
+    // Find name by alias enums
+    const alias = aliasEnums.find(alias => alias.value === baseName);
+    if (alias) {
+      const mainEnum = enums.find(
+        enumItem => enumItem.key === alias.key
+      );
+      if (!mainEnum) {
+        throw new Error("Not defined main enum for given alias enum");
       }
-      return fullEnum.key;
+      return mainEnum.key;
     }
-    const fullEnum = fullEnums.find(fullItem => {
-      return fullItem.value === baseName
-    });
-    if (fullEnum) {
-      return fullEnum.key;
+    // Find name by enums
+    const main = enums.find(enumItem => enumItem.value === baseName);
+    if (main) {
+      return main.key;
     }
     return "unknown";
   }
 
-  // todo: refactor this method
   private getArgumentName(
     paramType: string,
     paramName: string,
     argumentEnum: Array<KeyValueModel>,
     aliasEnum: Array<KeyValueModel>
   ): string {
-    if (!argumentEnum.some(argument => argument.key === "unknown")) {
-      throw new Error("Not defined unknown key in enum!");
+    // Verification the argument enum and alias enum
+    if (!argumentEnum.some(enumItem => enumItem.key === "unknown")) {
+      throw new Error("Not defined unknown key in the enum");
     }
+    // Find by argument name
     if (paramType === "argument") {
-      const argument = argumentEnum.find(argumentKey => {
-        return argumentKey.value === paramName
+      const argument = argumentEnum.find(argumentItem => {
+        return argumentItem.value === paramName
       });
       return argument ? argument.key : "unknown";
     }
+    // Find by alias name
     if (paramType === "alias") {
       const alias = aliasEnum.find(aliasKey => {
         return aliasKey.value === paramName
@@ -170,5 +163,3 @@ export class BuildParamDomainService {
     return "unknown";
   }
 }
-
-// todo: refactor

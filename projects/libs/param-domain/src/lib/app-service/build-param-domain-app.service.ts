@@ -11,30 +11,26 @@ import { KeyValueModel } from "@lib/model";
  */
 export class BuildParamDomainAppService {
   constructor(
-    private readonly buildParamDomain: BuildParamDomainService,
-    // private readonly valParamDomain: ValidationParamDomainService
+    private readonly buildParamDomain: BuildParamDomainService
   ) {
   }
 
-  build<TProjectModel, TCommandModel>(
-    programEnum: Array<KeyValueModel>,
-    programAliasEnum: Array<KeyValueModel>,
-    commandEnum: Array<KeyValueModel>,
-    commandAliasEnum: Array<KeyValueModel>,
-    argumentEnum: Array<KeyValueModel>,
-    aliasEnum: Array<KeyValueModel>,
-    buildParamArgDomain: any
+  build<TProgramArgDm, TCommandArgDm>(
+    programEnums: Array<KeyValueModel>,
+    programAliasEnums: Array<KeyValueModel>,
+    commandEnums: Array<KeyValueModel>,
+    commandAliasEnums: Array<KeyValueModel>,
+    argumentEnums: Array<KeyValueModel>,
+    aliasEnums: Array<KeyValueModel>
   ): void {
-    this.buildParamDomain.build<TProjectModel, TCommandModel>(
-      programEnum,
-      programAliasEnum,
-      commandEnum,
-      commandAliasEnum,
-      argumentEnum,
-      aliasEnum,
-      buildParamArgDomain
+    this.buildParamDomain.build<TProgramArgDm, TCommandArgDm>(
+      programEnums,
+      programAliasEnums,
+      commandEnums,
+      commandAliasEnums,
+      argumentEnums,
+      aliasEnums
     );
-    // this.valParamDomain.runValidation();
+    // todo: add validation of param domain
   }
 }
-// todo: refactor

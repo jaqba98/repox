@@ -31,4 +31,3 @@ export class BuildParamDomainResultService {
     };
   }
 }
-// todo: refactor

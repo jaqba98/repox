@@ -1,4 +1,3 @@
-import { TUnknownType } from "@lib/model";
 /**
  * Domain parameter model for all parameters
  * prepared with param DTO model.
@@ -20,11 +19,9 @@ export interface ParamDomainArgModel
 export interface ParamDomainEntityModel
   extends ParamDomainBaseEntityModel {
   args: Array<ParamDomainArgModel>;
-  model: TUnknownType;
 }
 
 export interface ParamDomainModel {
   program: ParamDomainEntityModel;
   command: ParamDomainEntityModel;
 }
-// todo: refactor

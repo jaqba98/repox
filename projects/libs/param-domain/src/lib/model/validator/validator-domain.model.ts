@@ -9,4 +9,3 @@ import {
 export interface ValidatorDomainModel {
   runValidator(): ParamDomainValidationModel;
 }
-// todo: refactor

@@ -12,10 +12,12 @@ import { SelectProgramAppService } from "@lib/launcher";
 import { ParamErrorMessageAppService } from "@lib/logger";
 import {
   AliasEnum,
-  ArgumentEnum, BuildParamArgDomainService,
-  CommandAliasEnum, CommandArgDomainModel,
+  ArgumentEnum,
+  CommandAliasEnum,
+  CommandArgDomainModel,
   CommandEnum,
-  ProgramAliasEnum, ProgramArgDomainModel,
+  ProgramAliasEnum,
+  ProgramArgDomainModel,
   ProgramEnum,
   REPOX_LOGO
 } from "@lib/workspace";
@@ -68,7 +70,7 @@ export class MainService {
       key: key, value: AliasEnum[key as keyof typeof AliasEnum]
     }));
 
-    const aaa = container.resolve(BuildParamArgDomainService);
+    // const aaa = container.resolve(BuildParamArgDomainService);
 
     this.buildParamDomain.build<ProgramArgDomainModel, CommandArgDomainModel>(
       programEnum,
@@ -76,8 +78,7 @@ export class MainService {
       commandEnum,
       commandAliasEnum,
       argumentEnum,
-      aliasEnum,
-      aaa
+      aliasEnum
     );
     const paramDomain = this.getParamDomainData
       .getParamDomainValidation();

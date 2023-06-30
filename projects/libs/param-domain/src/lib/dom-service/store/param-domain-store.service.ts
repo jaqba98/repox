@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDomainModel
-} from "../../model/param-domain/param-domain.model";
-import {
   ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
+import {
+  ParamDomainModel
+} from "../../model/param-domain/param-domain.model";
 
 @singleton()
 /**
@@ -12,15 +12,15 @@ import {
  * and validation domain result.
  */
 export class ParamDomainStoreService {
-  private paramDomain: any | undefined;
+  private paramDomain: ParamDomainModel | undefined;
   private paramDomainValidation:
     ParamDomainValidationModel | undefined;
 
-  setParamDomain(paramDomain: any): void {
+  setParamDomain(paramDomain: ParamDomainModel): void {
     this.paramDomain = paramDomain;
   }
 
-  getParamDomain(): any {
+  getParamDomain(): ParamDomainModel {
     if (this.paramDomain === undefined) {
       throw new Error("The param domain store is undefined!");
     }
@@ -42,4 +42,3 @@ export class ParamDomainStoreService {
     return this.paramDomainValidation;
   }
 }
-// todo: refactor
