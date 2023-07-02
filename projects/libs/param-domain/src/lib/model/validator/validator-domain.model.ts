@@ -12,3 +12,4 @@ export interface ValidatorDomainModel {
     getParamDependency: BaseGetParamDependencyModel
   ): ParamDomainValidationModel;
 }
+// todo: refactor

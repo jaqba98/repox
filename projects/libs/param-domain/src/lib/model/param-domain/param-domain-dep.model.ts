@@ -28,3 +28,4 @@ export interface ParamDomainDepModel {
   commands: ParamDomainDepCommandsModel;
   args: ParamDomainDepArgsModel;
 }
+// todo: refactor

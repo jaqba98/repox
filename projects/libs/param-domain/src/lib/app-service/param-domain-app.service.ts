@@ -36,3 +36,4 @@ export class ParamDomainAppService {
     return this.paramDomainStore.getParamDomain().command.name;
   }
 }
+// todo: refactor
