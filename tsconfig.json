@@ -13,9 +13,6 @@
     "baseUrl": ".",
     "sourceMap": true,
     "paths": {
-      "@app/repox": [
-        "projects/apps/repox/src/index.ts"
-      ],
       "@lib/const": [
         "projects/libs/const/src/index.ts"
       ],
