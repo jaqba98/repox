@@ -30,7 +30,7 @@ export class BuildParamDomainService {
   ) {
   }
 
-  build<TProgramArgDm, TCommandModel>(
+  build(
     programEnum: Array<KeyValueModel>,
     programAliasEnum: Array<KeyValueModel>,
     commandEnum: Array<KeyValueModel>,

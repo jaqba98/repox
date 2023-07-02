@@ -62,7 +62,7 @@ export class MainService {
     //
     //   const getParamDependency = container.resolve(GetParamDependencyService);
     //
-    //   this.buildParamDomain.build<ProgramArgDomainModel, CommandArgDomainModel>(
+    //   this.buildParamDomain.build(
     //     programEnum,
     //     programAliasEnum,
     //     commandEnum,
