@@ -5,7 +5,7 @@ import {
 
 @singleton()
 /**
- * Build the result of the param domain validation
+ * Build result of the param domain validation
  * for success and error.
  */
 export class BuildParamDomainResultService {
@@ -31,4 +31,3 @@ export class BuildParamDomainResultService {
     };
   }
 }
-// todo: refactor

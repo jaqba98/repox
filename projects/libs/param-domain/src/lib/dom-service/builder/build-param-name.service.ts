@@ -1,52 +1,55 @@
 import { singleton } from "tsyringe";
 import { KeyValueModel } from "@lib/model";
 import { EMPTY_STRING } from "@lib/const";
+import { BaseParamTypeEnum } from "../../enum/base-param-type.enum";
+import { ParamTypeEnum } from "@lib/param-dto";
 
 @singleton()
+/**
+ * The builder service is responsible for build name of
+ * program, command and argument.
+ */
 export class BuildParamNameService {
   buildProgramName(
-    baseName: string,
-    enums: Array<KeyValueModel>,
-    aliasEnums: Array<KeyValueModel>
+    programBaseName: string,
+    programEnums: Array<KeyValueModel>,
+    programAliasEnums: Array<KeyValueModel>
   ): string {
-    return this.baseBuildName(baseName, enums, aliasEnums);
+    return this.baseBuildName(
+      programBaseName, programEnums, programAliasEnums
+    );
   }
 
   buildCommandName(
-    baseName: string,
-    enums: Array<KeyValueModel>,
-    aliasEnums: Array<KeyValueModel>
+    commandBaseName: string,
+    commandEnums: Array<KeyValueModel>,
+    commandAliasEnums: Array<KeyValueModel>
   ): string {
-    return this.baseBuildName(baseName, enums, aliasEnums);
+    return this.baseBuildName(
+      commandBaseName, commandEnums, commandAliasEnums
+    );
   }
 
   buildArgumentName(
     paramType: string,
     paramName: string,
-    argumentEnum: Array<KeyValueModel>,
-    aliasEnum: Array<KeyValueModel>
+    argumentEnums: Array<KeyValueModel>,
+    aliasEnums: Array<KeyValueModel>
   ): string {
-    // Verification the argument enum and alias enum
-    if (!argumentEnum.some(enumItem => enumItem.key === "unknown")) {
-      throw new Error("Not defined unknown key in the enum");
+    if (paramType === ParamTypeEnum.argument) {
+      const argument = argumentEnums
+        .find(argumentItem => argumentItem.value === paramName);
+      return argument ? argument.key : BaseParamTypeEnum.unknown;
     }
-    // Find by argument name
-    if (paramType === "argument") {
-      const argument = argumentEnum.find(argumentItem => {
-        return argumentItem.value === paramName
-      });
-      return argument ? argument.key : "unknown";
+    if (paramType === ParamTypeEnum.alias) {
+      const alias = aliasEnums
+        .find(aliasItem => aliasItem.value === paramName);
+      return alias ? alias.key : BaseParamTypeEnum.unknown;
     }
-    // Find by alias name
-    if (paramType === "alias") {
-      const alias = aliasEnum.find(aliasKey => {
-        return aliasKey.value === paramName
-      });
-      return alias ? alias.key : "unknown";
-    }
-    return "unknown";
+    throw new Error(`Not supported param type: ${paramType}`);
   }
 
+  // todo: refactor the method
   private baseBuildName(
     baseName: string,
     enums: Array<KeyValueModel>,
