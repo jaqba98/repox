@@ -1,7 +1,7 @@
+import { BaseGetParamDepModel } from "@lib/model";
 import {
   ParamDomainValidationModel
 } from "../param-domain/param-domain-validation.model";
-import { BaseGetParamDependencyModel } from "@lib/model";
 
 /**
  * The model which is implemented for each parameter domain validator.
@@ -9,7 +9,6 @@ import { BaseGetParamDependencyModel } from "@lib/model";
  */
 export interface ValidatorDomainModel {
   runValidator(
-    getParamDependency: BaseGetParamDependencyModel
+    getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel;
 }
-// todo: refactor

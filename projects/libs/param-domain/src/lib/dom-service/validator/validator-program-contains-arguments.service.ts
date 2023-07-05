@@ -14,7 +14,7 @@ import {
 import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
-import { BaseGetParamDependencyModel } from "@lib/model";
+import { BaseGetParamDepModel } from "@lib/model";
 
 @singleton()
 /**
@@ -30,7 +30,7 @@ export class ValidatorProgramContainsArgumentsService
   }
 
   runValidator(
-    getParamDependency: BaseGetParamDependencyModel
+    getParamDependency: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
     const programName = paramDomain.program.name;

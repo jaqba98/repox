@@ -3,12 +3,9 @@ import {
   BuildParamDomainService
 } from "../dom-service/builder/build-param-domain.service";
 import {
-  BaseGetParamDependencyModel,
-  KeyValueModel
-} from "@lib/model";
-import {
   ValidationParamDomainService
 } from "../dom-service/validation/validation-param-domain.service";
+import { BaseGetParamDepModel, KeyValueModel } from "@lib/model";
 
 @singleton()
 /**
@@ -18,7 +15,7 @@ import {
 export class BuildParamDomainAppService {
   constructor(
     private readonly buildParamDomain: BuildParamDomainService,
-    private readonly validation: ValidationParamDomainService
+    private readonly validationParamDom: ValidationParamDomainService
   ) {
   }
 
@@ -29,7 +26,7 @@ export class BuildParamDomainAppService {
     commandAliasEnums: Array<KeyValueModel>,
     argumentEnums: Array<KeyValueModel>,
     aliasEnums: Array<KeyValueModel>,
-    getParamDependency: BaseGetParamDependencyModel
+    getParamDepService: BaseGetParamDepModel
   ): void {
     this.buildParamDomain.build(
       programEnums,
@@ -39,7 +36,6 @@ export class BuildParamDomainAppService {
       argumentEnums,
       aliasEnums
     );
-    this.validation.runValidation(getParamDependency);
+    this.validationParamDom.runValidation(getParamDepService);
   }
 }
-// todo: refactor

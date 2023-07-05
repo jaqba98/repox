@@ -11,7 +11,7 @@ import {
 import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
-import { BaseGetParamDependencyModel } from "@lib/model";
+import { BaseGetParamDepModel } from "@lib/model";
 
 @singleton()
 /**
@@ -27,7 +27,7 @@ export class ValidatorProgramExistService
   }
 
   runValidator(
-    getParamDependency: BaseGetParamDependencyModel
+    getParamDependency: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
     if (paramDomain.program.name === "unknown") {

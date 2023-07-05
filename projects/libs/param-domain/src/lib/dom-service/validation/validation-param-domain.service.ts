@@ -20,7 +20,7 @@ import {
 import {
   ValidatorArgumentExistService
 } from "../validator/validator-argument-exist.service";
-import { BaseGetParamDependencyModel } from "@lib/model";
+import { BaseGetParamDepModel } from "@lib/model";
 import {
   ValidatorProgramContainsArgumentsService
 } from "../validator/validator-program-contains-arguments.service";
@@ -72,7 +72,7 @@ export class ValidationParamDomainService {
   }
 
   runValidation(
-    getParamDependency: BaseGetParamDependencyModel
+    getParamDependency: BaseGetParamDepModel
   ): void {
     for (const service of this.getValidators()) {
       const result = service.runValidator(getParamDependency);

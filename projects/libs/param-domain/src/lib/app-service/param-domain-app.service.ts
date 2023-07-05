@@ -3,15 +3,15 @@ import {
   ParamDomainStoreService
 } from "../dom-service/store/param-domain-store.service";
 import {
-  ParamDomainValidationModel
-} from "../model/param-domain/param-domain-validation.model";
-import {
   ParamDomainModel
 } from "../model/param-domain/param-domain.model";
+import {
+  ParamDomainValidationModel
+} from "../model/param-domain/param-domain-validation.model";
 
 @singleton()
 /**
- * The service is responsible for give param domain data
+ * The app service is responsible for give param domain data
  * for other projects.
  */
 export class ParamDomainAppService {
@@ -36,4 +36,3 @@ export class ParamDomainAppService {
     return this.paramDomainStore.getParamDomain().command.name;
   }
 }
-// todo: refactor
