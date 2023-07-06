@@ -6,12 +6,13 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
-import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
 import { BaseGetParamDepModel } from "@lib/model";
+import {
+  ParamDomainValidationModel
+} from "../../model/param-domain/param-domain-validation.model";
+import { BaseParamTypeEnum } from "../../enum/base-param-type.enum";
 
 @singleton()
 /**
@@ -27,14 +28,14 @@ export class ValidatorArgumentExistService
   }
 
   runValidator(
-    getParamDependency: BaseGetParamDepModel
+    getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
     const programArgs = paramDomain.program.args;
     const commandArgs = paramDomain.command.args;
     const args = [...programArgs, ...commandArgs];
     const wrongArgs = args
-      .filter(arg => arg.name === "unknown");
+      .filter(arg => arg.name === BaseParamTypeEnum.unknown);
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess();
     }
@@ -48,4 +49,3 @@ export class ValidatorArgumentExistService
     );
   }
 }
-// todo: refactor

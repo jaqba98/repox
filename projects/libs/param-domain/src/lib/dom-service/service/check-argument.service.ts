@@ -6,52 +6,52 @@ import { ParamDomainDepArgsModel } from "@lib/param-domain";
 
 @singleton()
 /**
- * The service is responsible for check value mode
+ * The service is responsible for checking value mode
  * for given argument.
  */
 export class CheckArgumentService {
   valueMode(
-    domainArg: ParamDomainArgModel,
-    dependencyArgs: ParamDomainDepArgsModel
-  ): { success: boolean; error: string; index: number } {
-    const arg = dependencyArgs[domainArg.name];
+    paramArg: ParamDomainArgModel,
+    paramDomainDepArgs: ParamDomainDepArgsModel
+  ): { success: boolean; error: string; index: number; } {
+    const arg = paramDomainDepArgs[paramArg.name];
     const { valueMode } = arg;
-    if (valueMode === "empty" && domainArg.values.length !== 0) {
+    if (valueMode === "empty" && paramArg.values.length !== 0) {
       return {
         success: false,
         error: `The ${arg.name} argument has to empty!`,
-        index: domainArg.index
-      }
+        index: paramArg.index
+      };
     }
-    if (valueMode === "single" && domainArg.values.length !== 1) {
+    if (valueMode === "single" && paramArg.values.length !== 1) {
       return {
         success: false,
         error: `The ${arg.name} argument has to single value!`,
-        index: domainArg.index
-      }
+        index: paramArg.index
+      };
     }
-    if (valueMode === "many" && domainArg.values.length <= 1) {
+    if (valueMode === "many" && paramArg.values.length === 0) {
       return {
         success: false,
         error: `The ${arg.name} argument has to multiple value!`,
-        index: domainArg.index
-      }
+        index: paramArg.index
+      };
     }
-    return { success: true, error: "", index: domainArg.index }
+    return { success: true, error: "", index: paramArg.index };
   }
 
   argumentValue(
-    domainArgs: ParamDomainArgModel,
-    dependencyArgs: ParamDomainDepArgsModel
-  ): { success: boolean; error: string; index: number } {
-    const arg = dependencyArgs[domainArgs.name];
+    paramArg: ParamDomainArgModel,
+    paramDomainDepArgs: ParamDomainDepArgsModel
+  ): { success: boolean; error: string; index: number; } {
+    const arg = paramDomainDepArgs[paramArg.name];
     if (arg.values.length === 0) {
-      return { success: true, error: "", index: domainArgs.index }
+      return { success: true, error: "", index: paramArg.index };
     }
-    const wrongValues = domainArgs.values
+    const wrongValues = paramArg.values
       .filter((paramArg: any) => !arg.values.includes(paramArg));
     if (wrongValues.length === 0) {
-      return { success: true, error: "", index: domainArgs.index }
+      return { success: true, error: "", index: paramArg.index };
     }
     const errorValues = wrongValues.join(',');
     const supportedValues = arg.values.join(',');
@@ -59,8 +59,7 @@ export class CheckArgumentService {
       success: false,
       error: `The argument cannot contain values: ${errorValues},`
         .concat(`supported values are: ${supportedValues}`),
-      index: domainArgs.index
-    }
+      index: paramArg.index
+    };
   }
 }
-// todo: refactor

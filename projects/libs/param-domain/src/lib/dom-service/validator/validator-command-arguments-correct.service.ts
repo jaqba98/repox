@@ -6,18 +6,17 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
-import {
-  ParamDomainDepModel
-} from "../../model/param-domain/param-domain-dep.model";
-import {
   CheckArgumentService
 } from "../service/check-argument.service";
 import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
 import { BaseGetParamDepModel } from "@lib/model";
+import {
+  ParamDomainValidationModel
+} from "../../model/param-domain/param-domain-validation.model";
+import { ParamDomainDepModel } from "@lib/param-domain";
+import { BaseParamTypeEnum } from "../../enum/base-param-type.enum";
 
 @singleton()
 /**
@@ -34,16 +33,16 @@ export class ValidatorCommandArgumentsCorrectService
   }
 
   runValidator(
-    getParamDependency: BaseGetParamDepModel
+    getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
     const programName = paramDomain.program.name;
     const commandName = paramDomain.command.name;
-    const programDep: ParamDomainDepModel = getParamDependency
+    const programDep: ParamDomainDepModel = getParamDepService
       .getDependency(programName);
     const commandArgs = programDep.commands[commandName].args;
     const wrongArgs = paramDomain.command.args
-      .filter(arg => arg.name !== "unknown")
+      .filter(arg => arg.name !== BaseParamTypeEnum.unknown)
       .map(arg => this.checkArgument.valueMode(arg, commandArgs))
       .filter(arg => !arg.success);
     if (wrongArgs.length === 0) {
@@ -58,4 +57,3 @@ export class ValidatorCommandArgumentsCorrectService
     );
   }
 }
-// todo: refactor

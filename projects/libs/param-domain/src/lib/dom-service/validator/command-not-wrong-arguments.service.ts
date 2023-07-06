@@ -6,15 +6,13 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
-import {
-  ParamDomainDepModel
-} from "../../model/param-domain/param-domain-dep.model";
-import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
 import { BaseGetParamDepModel } from "@lib/model";
+import {
+  ParamDomainValidationModel
+} from "../../model/param-domain/param-domain-validation.model";
+import { ParamDomainDepModel } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -30,12 +28,12 @@ export class CommandNotWrongArgumentsService
   }
 
   runValidator(
-    getParamDependency: BaseGetParamDepModel
+    getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
     const programName = paramDomain.program.name;
     const commandName = paramDomain.command.name;
-    const programDep: ParamDomainDepModel = getParamDependency
+    const programDep: ParamDomainDepModel = getParamDepService
       .getDependency(programName);
     const command = programDep.commands[commandName];
     const commandArgs = Object.values(command.args);
@@ -55,4 +53,3 @@ export class CommandNotWrongArgumentsService
     );
   }
 }
-// todo: refactor

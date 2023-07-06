@@ -6,12 +6,13 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
-import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
 import { BaseGetParamDepModel } from "@lib/model";
+import {
+  ParamDomainValidationModel
+} from "../../model/param-domain/param-domain-validation.model";
+import { BaseParamTypeEnum } from "../../enum/base-param-type.enum";
 
 @singleton()
 /**
@@ -27,10 +28,10 @@ export class ValidatorProgramExistService
   }
 
   runValidator(
-    getParamDependency: BaseGetParamDepModel
+    getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
-    if (paramDomain.program.name === "unknown") {
+    if (paramDomain.program.name === BaseParamTypeEnum.unknown) {
       return this.buildParamDomain.buildError(
         [paramDomain.program.index],
         ["You have specified not existed program!"],
@@ -43,4 +44,3 @@ export class ValidatorProgramExistService
     return this.buildParamDomain.buildSuccess();
   }
 }
-// todo: refactor

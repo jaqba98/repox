@@ -3,11 +3,12 @@ import {
   BuildParamDomainResultService
 } from "../builder/build-param-domain-result.service";
 import {
-  ValidatorDomainModel
-} from "../../model/validator/validator-domain.model";
-import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
+import { BaseGetParamDepModel } from "@lib/model";
+import {
+  ValidatorDomainModel
+} from "../../model/validator/validator-domain.model";
 import {
   ValidatorProgramExistService
 } from "../validator/validator-program-exist.service";
@@ -20,7 +21,6 @@ import {
 import {
   ValidatorArgumentExistService
 } from "../validator/validator-argument-exist.service";
-import { BaseGetParamDepModel } from "@lib/model";
 import {
   ValidatorProgramContainsArgumentsService
 } from "../validator/validator-program-contains-arguments.service";
@@ -72,10 +72,10 @@ export class ValidationParamDomainService {
   }
 
   runValidation(
-    getParamDependency: BaseGetParamDepModel
+    getParamDepService: BaseGetParamDepModel
   ): void {
     for (const service of this.getValidators()) {
-      const result = service.runValidator(getParamDependency);
+      const result = service.runValidator(getParamDepService);
       if (!result.success) {
         this.paramDomainStore.setParamDomainValidation(result);
         return;
@@ -104,4 +104,3 @@ export class ValidationParamDomainService {
     });
   }
 }
-// todo: refactor
