@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDomainValidationModel
-} from "../../model/param-domain/param-domain-validation.model";
-import {
   ParamDomainModel
 } from "../../model/param-domain/param-domain.model";
+import {
+  ParamDomainValidationModel
+} from "../../model/param-domain/param-domain-validation.model";
 
 @singleton()
 /**
@@ -12,34 +12,30 @@ import {
  * and validation domain result.
  */
 export class ParamDomainStoreService {
-  private paramDomain: ParamDomainModel | undefined;
-  private paramDomainValidation:
-    ParamDomainValidationModel | undefined;
+  private domain: ParamDomainModel | undefined;
+  private validation: ParamDomainValidationModel | undefined;
 
-  setParamDomain(paramDomain: ParamDomainModel): void {
-    this.paramDomain = paramDomain;
-  }
-
-  getParamDomain(): ParamDomainModel {
-    if (this.paramDomain === undefined) {
-      throw new Error("The param domain store is undefined!");
-    }
-    return this.paramDomain;
+  setParamDomain(domain: ParamDomainModel): void {
+    this.domain = domain;
   }
 
   setParamDomainValidation(
-    paramDomainValidation: ParamDomainValidationModel
+    validation: ParamDomainValidationModel
   ): void {
-    this.paramDomainValidation = paramDomainValidation;
+    this.validation = validation;
+  }
+
+  getParamDomain(): ParamDomainModel {
+    if (this.domain === undefined) {
+      throw new Error("The domain store is undefined!");
+    }
+    return this.domain;
   }
 
   getParamDomainValidation(): ParamDomainValidationModel {
-    if (this.paramDomainValidation === undefined) {
-      throw new Error(
-        "The param domain validation store is undefined!"
-      );
+    if (this.validation === undefined) {
+      throw new Error("The validation store is undefined!");
     }
-    return this.paramDomainValidation;
+    return this.validation;
   }
 }
-// todo: refactor

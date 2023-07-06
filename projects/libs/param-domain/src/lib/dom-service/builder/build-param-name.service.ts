@@ -53,44 +53,13 @@ export class BuildParamNameService {
     enums: Array<KeyValueModel>,
     aliasEnums: Array<KeyValueModel>
   ): string {
-    // todo: I am here
-    return "";
-    // // Verification the enums and alias enums
-    // if (!enums.some(enumItem => enumItem.key === "default")) {
-    //   throw new Error("Not defined default key in the enum");
-    // }
-    // if (!enums.some(enumItem => enumItem.key === "unknown")) {
-    //   throw new Error("Not defined unknown key in the enum");
-    // }
-    // // Return empty string then baseName is empty string
-    // if (baseName === EMPTY_STRING) {
-    //   const defaultEnum = enums.find(enumItem =>
-    //     enumItem.key === "default" &&
-    //     enumItem.value === EMPTY_STRING
-    //   );
-    //   if (!defaultEnum) {
-    //     throw new Error("Not defined default key in the enum");
-    //   }
-    //   return defaultEnum.key;
-    // }
-    // // Find name by alias enums
-    // const alias = aliasEnums.find(alias => alias.value === baseName);
-    // if (alias) {
-    //   const mainEnum = enums.find(
-    //     enumItem => enumItem.key === alias.key
-    //   );
-    //   if (!mainEnum) {
-    //     throw new Error("Not defined main enum for given alias enum");
-    //   }
-    //   return mainEnum.key;
-    // }
-    // // Find name by enums
-    // const main = enums.find(enumItem => enumItem.value === baseName);
-    // if (main) {
-    //   return main.key;
-    // }
-    // return "unknown";
+    const argument = enums
+      .find(argumentItem => argumentItem.value === baseName);
+    if (argument) {
+      return argument.key;
+    }
+    const alias = aliasEnums
+      .find(aliasItem => aliasItem.value === baseName);
+    return alias ? alias.key : BaseParamTypeEnum.unknown;
   }
 }
-
-// todo: refactor
