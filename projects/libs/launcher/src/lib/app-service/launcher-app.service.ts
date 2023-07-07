@@ -18,9 +18,9 @@ export class LauncherAppService {
       program.programName === programName &&
       program.commandName === commandName
     );
-    if (programToRun) {
-      programToRun.service.runProgram();
+    if (programToRun === undefined) {
+      throw new Error("Not found implementation for given program!");
     }
-    throw new Error("Not found implementation for given program!");
+    programToRun.service.runProgram();
   }
 }
