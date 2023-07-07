@@ -109,6 +109,12 @@
       "scheme": {
         "type": "typescript"
       }
+    },
+    "repox-const": {
+      "name": "repox-const",
+      "type": "lib",
+      "path": "projects/libs/repox/repox-const",
+      "assets": []
     }
   }
 }

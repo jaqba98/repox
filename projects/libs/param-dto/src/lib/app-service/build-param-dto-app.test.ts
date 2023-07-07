@@ -17,7 +17,7 @@ const runTest = (argv: Array<string>): {
   const store = container.resolve(ParamDtoStoreService);
   const service = container.resolve(BuildParamDtoAppService);
   process.argv = ["executor", "application", ...argv];
-  service.read();
+  service.build();
   return {
     paramDto: store.getParamDto(),
     paramDtoValidation: store.getParamDtoValidation()

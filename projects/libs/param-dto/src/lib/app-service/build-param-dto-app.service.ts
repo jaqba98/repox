@@ -20,7 +20,7 @@ export class BuildParamDtoAppService {
   ) {
   }
 
-  read(): void {
+  build(): void {
     const argv = this.readArgv.getArgv();
     this.buildParamDto.buildParamDto(argv);
     this.validationParamDto.runValidation();

@@ -42,6 +42,9 @@
       ],
       "@lib/model": [
         "projects/libs/model/src/index.ts"
+      ],
+      "@lib/repox-const": [
+        "projects/libs/repox/repox-const/src/index.ts"
       ]
     }
   },
