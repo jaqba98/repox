@@ -114,7 +114,19 @@
       "name": "repox-const",
       "type": "lib",
       "path": "projects/libs/repox/repox-const",
-      "assets": []
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
+    },
+    "repox-domain": {
+      "name": "repox-domain",
+      "type": "tool",
+      "path": "projects/libs/repox/repox-domain",
+      "assets": [],
+      "scheme": {
+        "type": "typescript"
+      }
     }
   }
 }

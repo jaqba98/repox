@@ -45,6 +45,9 @@
       ],
       "@lib/repox-const": [
         "projects/libs/repox/repox-const/src/index.ts"
+      ],
+      "@tool/repox-domain": [
+        "projects/libs/repox/repox-domain/src/index.ts"
       ]
     }
   },
