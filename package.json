@@ -12,7 +12,7 @@
     "test": "jest --silent",
     "up": "npm run test && npm run build && npm run link",
     "down": "npm run unlink && npm run remove",
-    "serve": "node dist/repox/apps/repox/src/index.js g p -n=dog -t=tool -s=typescript"
+    "generate": "node dist/repox/apps/repox/src/main.js generate project --name=dog --type=tool --scheme=typescript"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
