@@ -5,7 +5,11 @@ import {
 import {
   ValidationParamDomainService
 } from "../dom-service/validation/validation-param-domain.service";
-import { BaseGetParamDepModel, KeyValueModel } from "@lib/model";
+import {
+  BaseGetParamDepModel,
+  EnumModel,
+  KeyValueModel
+} from "@lib/model";
 
 @singleton()
 /**
@@ -19,15 +23,27 @@ export class BuildParamDomainAppService {
   ) {
   }
 
-  build(
-    programEnums: Array<KeyValueModel>,
-    programAliasEnums: Array<KeyValueModel>,
-    commandEnums: Array<KeyValueModel>,
-    commandAliasEnums: Array<KeyValueModel>,
-    argumentEnums: Array<KeyValueModel>,
-    aliasEnums: Array<KeyValueModel>,
+  build<T>(
+    programEnumModel: EnumModel,
+    programAliasEnumModel: EnumModel,
+    commandEnumModel: EnumModel,
+    commandAliasEnumModel: EnumModel,
+    argumentEnumModel: EnumModel,
+    aliasEnumModel: EnumModel,
     getParamDepService: BaseGetParamDepModel
   ): void {
+    const programEnums = Object.entries(programEnumModel)
+      .map(([key, value]): KeyValueModel => ({ key, value }));
+    const programAliasEnums = Object.entries(programAliasEnumModel)
+      .map(([key, value]): KeyValueModel => ({ key, value }));
+    const commandEnums = Object.entries(commandEnumModel)
+      .map(([key, value]): KeyValueModel => ({ key, value }));
+    const commandAliasEnums = Object.entries(commandAliasEnumModel)
+      .map(([key, value]): KeyValueModel => ({ key, value }));
+    const argumentEnums = Object.entries(argumentEnumModel)
+      .map(([key, value]): KeyValueModel => ({ key, value }));
+    const aliasEnums = Object.entries(aliasEnumModel)
+      .map(([key, value]): KeyValueModel => ({ key, value }));
     this.buildParamDomain.build(
       programEnums,
       programAliasEnums,
