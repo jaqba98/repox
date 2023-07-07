@@ -15,17 +15,11 @@ import {
   AliasRepoxEnum,
   ArgumentRepoxEnum,
   CommandAliasRepoxEnum,
-  CommandRepoxEnum,
+  CommandRepoxEnum, GetParamDepService,
   ProgramAliasRepoxEnum,
-  ProgramRepoxEnum, RepoxLaunchProgramService
+  ProgramRepoxEnum,
+  RepoxLaunchProgramService
 } from "@tool/repox-domain";
-import { GetParamDepService } from "@lib/repox-workspace";
-import {
-  BuildProjectProgramService,
-  DefaultDefaultProgramService,
-  GenerateProjectProgramService,
-  GenerateWorkspaceProgramService
-} from "@lib/repox-program";
 
 @singleton()
 /**

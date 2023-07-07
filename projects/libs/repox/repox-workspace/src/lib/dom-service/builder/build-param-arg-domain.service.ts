@@ -1,21 +1,16 @@
 import { singleton } from "tsyringe";
 import { EMPTY_STRING } from "@lib/const";
 import {
-  DefaultDefaultProgramArgDomainModel,
-  EmptyProgramArgDomainModel,
-  ProgramArgDomainModel
-} from "../../model/program-arg-domain.model";
-import {
-  BuildLinkProjectCommandArgDomainModel,
-  BuildProjectCommandArgDomainModel,
-  CommandArgDomainModel,
-  EmptyCommandArgDomainModel,
-  GenerateProjectCommandArgModel,
-  GenerateWorkspaceCommandArgDomainModel
-} from "../../model/command-arg-domain.model";
-import {
   ArgumentRepoxEnum,
+  BuildProjectCommandArgRepoxModel,
+  CommandArgRepoxModel,
   CommandRepoxEnum,
+  DefaultDefaultProgramArgRepoxModel,
+  EmptyCommandArgRepoxModel,
+  EmptyProgramArgRepoxModel,
+  GenerateProjectCommandArgRepoxModel,
+  GenerateWorkspaceCommandArgRepoxModel,
+  ProgramArgRepoxModel,
   ProgramRepoxEnum
 } from "@tool/repox-domain";
 
@@ -29,12 +24,12 @@ export class BuildParamArgDomainService {
   buildProgramModel(
     programName: string,
     model: Array<any>
-  ): ProgramArgDomainModel {
+  ): ProgramArgRepoxModel {
     switch (programName) {
       case ProgramRepoxEnum.default:
         return this.buildDefaultDefaultProgram(model);
       default:
-        return <EmptyProgramArgDomainModel>{};
+        return <EmptyProgramArgRepoxModel>{};
     }
   }
 
@@ -42,7 +37,7 @@ export class BuildParamArgDomainService {
     programName: string,
     commandName: string,
     model: Array<any>
-  ): CommandArgDomainModel {
+  ): CommandArgRepoxModel {
     const fullName = `${programName}-${commandName}`;
     switch (fullName) {
       case `${ProgramRepoxEnum.generate}-${CommandRepoxEnum.workspace}`:
@@ -52,13 +47,13 @@ export class BuildParamArgDomainService {
       case `${ProgramRepoxEnum.build}-${CommandRepoxEnum.project}`:
         return this.buildBuildProjectCommand(model);
       default:
-        return <EmptyCommandArgDomainModel>{};
+        return <EmptyCommandArgRepoxModel>{};
     }
   }
 
   private buildDefaultDefaultProgram(
     model: Array<any>
-  ): DefaultDefaultProgramArgDomainModel {
+  ): DefaultDefaultProgramArgRepoxModel {
     return {
       version: this.getValue(model, ArgumentRepoxEnum.version, false)
     }
@@ -66,7 +61,7 @@ export class BuildParamArgDomainService {
 
   private buildGenerateWorkspaceCommand(
     model: Array<any>
-  ): GenerateWorkspaceCommandArgDomainModel {
+  ): GenerateWorkspaceCommandArgRepoxModel {
     return {
       workspaceName: this.getValue(model, ArgumentRepoxEnum.name)
     };
@@ -74,7 +69,7 @@ export class BuildParamArgDomainService {
 
   private buildGenerateProjectCommand(
     model: Array<any>
-  ): GenerateProjectCommandArgModel {
+  ): GenerateProjectCommandArgRepoxModel {
     return {
       name: this.getValue(model, ArgumentRepoxEnum.name),
       type: this.getValue(model, ArgumentRepoxEnum.type),
@@ -85,7 +80,7 @@ export class BuildParamArgDomainService {
 
   private buildBuildProjectCommand(
     model: Array<any>
-  ): BuildProjectCommandArgDomainModel {
+  ): BuildProjectCommandArgRepoxModel {
     return {
       projectName: this.getValue(model, ArgumentRepoxEnum.name)
     };

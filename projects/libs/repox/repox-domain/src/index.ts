@@ -4,3 +4,4 @@ export * from "./lib/enum/argument-repox.enum";
 export * from "./lib/model/command-arg-repox.model";
 export * from "./lib/model/program-arg-repox.model";
 export * from "./lib/service/repox-launch-program.service";
+export * from "./lib/service/get-param-dep.service";

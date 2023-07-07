@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
 import { BaseGetParamDepModel } from "@lib/model";
-import {
-  ProjectSchemeEnum
-} from "../../enum/project/project-scheme.enum";
+// import {
+//   ProjectSchemeEnum
+// } from "../../enum/project/project-scheme.enum";
 import {
   ArgumentRepoxEnum,
   CommandRepoxEnum,
@@ -76,7 +76,8 @@ export class GetParamDepService implements BaseGetParamDepModel {
                 },
                 [ArgumentRepoxEnum.scheme]: {
                   name: ArgumentRepoxEnum.scheme,
-                  values: Object.values(ProjectSchemeEnum),
+                  // values: Object.values(ProjectSchemeEnum),
+                  values: [],
                   valueMode: "single",
                   required: true
                 }
