@@ -6,19 +6,20 @@ import {
   // GenerateWorkspaceCommandArgDomainModel,
   ParamDomainAppService
 } from "@lib/param-domain";
+import { RunProgramModel } from "@lib/model";
 
 @singleton()
 /**
  * The start point of the generate workspace program.
  */
-export class GenerateWorkspaceProgramService {
+export class GenerateWorkspaceProgramService implements RunProgramModel {
   constructor(
     private readonly step: GenerateWorkspaceStepService,
     private readonly getParamDomainData: ParamDomainAppService
   ) {
   }
 
-  run(): void {
+  runProgram(): void {
     const commandModel = <any>undefined;
       // this.getParamDomainData.getParamDomain().command.model;
     this.step.runSteps(commandModel);

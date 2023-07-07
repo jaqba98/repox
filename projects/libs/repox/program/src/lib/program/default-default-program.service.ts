@@ -6,19 +6,20 @@ import {
   // DefaultDefaultProgramArgDomainModel,
   ParamDomainAppService
 } from "@lib/param-domain";
+import { RunProgramModel } from "@lib/model";
 
 @singleton()
 /**
  * The start point of the program default.
  */
-export class DefaultDefaultProgramService {
+export class DefaultDefaultProgramService implements RunProgramModel {
   constructor(
     private readonly defaultDefaultStep: DefaultDefaultStepService,
     private readonly getParamDomainData: ParamDomainAppService
   ) {
   }
 
-  run(): void {
+  runProgram(): void {
     const programModel = <any>undefined;
       // this.getParamDomainData.getParamDomain().program.model;
     this.defaultDefaultStep.runSteps(programModel);

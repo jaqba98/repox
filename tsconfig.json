@@ -26,7 +26,7 @@
         "projects/libs/param-dto/src/index.ts"
       ],
       "@lib/launcher": [
-        "projects/libs/repox/launcher/src/index.ts"
+        "projects/libs/launcher/src/index.ts"
       ],
       "@lib/repox-main": [
         "projects/libs/repox/repox-main/src/index.ts"

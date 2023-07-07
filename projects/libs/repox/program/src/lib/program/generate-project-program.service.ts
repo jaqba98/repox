@@ -10,13 +10,14 @@ import {
   GenerateProjectProgramModel
 } from "../model/program/generate-project-program.model";
 import { ProjectAppService } from "@lib/workspace";
+import { RunProgramModel } from "@lib/model";
 
 @singleton()
 /**
  * The program service is responsible for starting the process
  * of generating a new project.
  */
-export class GenerateProjectProgramService {
+export class GenerateProjectProgramService implements RunProgramModel {
   constructor(
     private readonly generateProjectStep: GenerateProjectStepService,
     private readonly paramDomain: ParamDomainAppService,

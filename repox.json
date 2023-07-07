@@ -59,7 +59,7 @@
     "launcher": {
       "name": "launcher",
       "type": "lib",
-      "path": "projects/libs/repox/launcher",
+      "path": "projects/libs/launcher",
       "assets": [],
       "scheme": {
         "type": "typescript"
