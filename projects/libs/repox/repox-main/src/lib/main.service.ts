@@ -19,6 +19,7 @@ import {
   ProgramAliasEnum,
   ProgramEnum
 } from "@lib/workspace";
+import { LauncherAppService } from "@lib/launcher";
 
 @singleton()
 /**
@@ -30,8 +31,8 @@ export class MainService {
     private readonly getParamDtoData: GetParamDtoDataAppService,
     private readonly paramErrorMessage: ParamErrorMessageAppService,
     private readonly buildParamDomain: BuildParamDomainAppService,
-    private readonly paramDomain: ParamDomainAppService
-    // private readonly selectProgram: SelectProgramAppService,
+    private readonly paramDomain: ParamDomainAppService,
+    private readonly launcher: LauncherAppService
   ) {
   }
 
@@ -68,10 +69,8 @@ export class MainService {
       );
       return;
     }
-    // todo: I am here
-    // this.selectProgram.selectProgram();
+    this.launcher.launchProgram({ programs: [] });
   }
 }
 
 container.resolve(MainService).run();
-// todo: refactor
