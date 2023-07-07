@@ -13,7 +13,7 @@ import {
 /**
  * Get dependency between programs, commands and arguments.
  */
-export class GetParamDepService implements BaseGetParamDepModel {
+export class RepoxGetParamDepService implements BaseGetParamDepModel {
   getDependency(program: string): any {
     switch (program) {
       case ProgramRepoxEnum.default:

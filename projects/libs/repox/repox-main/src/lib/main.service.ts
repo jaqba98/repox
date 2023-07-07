@@ -15,9 +15,10 @@ import {
   AliasRepoxEnum,
   ArgumentRepoxEnum,
   CommandAliasRepoxEnum,
-  CommandRepoxEnum, GetParamDepService,
+  CommandRepoxEnum,
   ProgramAliasRepoxEnum,
   ProgramRepoxEnum,
+  RepoxGetParamDepService,
   RepoxLaunchProgramService
 } from "@tool/repox-domain";
 
@@ -57,7 +58,7 @@ export class MainService {
       CommandAliasRepoxEnum,
       ArgumentRepoxEnum,
       AliasRepoxEnum,
-      container.resolve(GetParamDepService)
+      container.resolve(RepoxGetParamDepService)
     );
     const paramDomain = this.paramDomain.getParamDomainValidation();
     if (!paramDomain.success) {
