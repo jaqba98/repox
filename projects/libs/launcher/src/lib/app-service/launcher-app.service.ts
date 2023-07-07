@@ -19,7 +19,7 @@ export class LauncherAppService {
       program.commandName === commandName
     );
     if (programToRun) {
-      programToRun.runProgramService.runProgram();
+      programToRun.service.runProgram();
     }
     throw new Error("Not found implementation for given program!");
   }

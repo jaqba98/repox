@@ -20,9 +20,10 @@ export class DefaultDefaultProgramService implements RunProgramModel {
   }
 
   runProgram(): void {
-    const programModel = <any>undefined;
-      // this.getParamDomainData.getParamDomain().program.model;
-    this.defaultDefaultStep.runSteps(programModel);
+    console.log("DefaultDefaultProgramService");
+    // const programModel = <any>undefined;
+    //   // this.getParamDomainData.getParamDomain().program.model;
+    // this.defaultDefaultStep.runSteps(programModel);
   }
 }
 // todo: refactor

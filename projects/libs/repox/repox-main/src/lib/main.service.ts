@@ -12,14 +12,20 @@ import {
 } from "@lib/param-domain";
 import { LauncherAppService } from "@lib/launcher";
 import {
-  AliasEnum,
-  ArgumentEnum,
-  CommandAliasEnum,
-  CommandEnum,
-  GetParamDepService,
-  ProgramAliasEnum,
-  ProgramEnum
-} from "@lib/repox-workspace";
+  AliasRepoxEnum,
+  ArgumentRepoxEnum,
+  CommandAliasRepoxEnum,
+  CommandRepoxEnum,
+  ProgramAliasRepoxEnum,
+  ProgramRepoxEnum, RepoxLaunchProgramService
+} from "@tool/repox-domain";
+import { GetParamDepService } from "@lib/repox-workspace";
+import {
+  BuildProjectProgramService,
+  DefaultDefaultProgramService,
+  GenerateProjectProgramService,
+  GenerateWorkspaceProgramService
+} from "@lib/repox-program";
 
 @singleton()
 /**
@@ -32,7 +38,8 @@ export class MainService {
     private readonly paramErrorMessage: ParamErrorMessageAppService,
     private readonly buildParamDomain: BuildParamDomainAppService,
     private readonly paramDomain: ParamDomainAppService,
-    private readonly launcher: LauncherAppService
+    private readonly launcher: LauncherAppService,
+    private readonly repoxLaunchProgram: RepoxLaunchProgramService
   ) {
   }
 
@@ -50,12 +57,12 @@ export class MainService {
       return;
     }
     this.buildParamDomain.build(
-      ProgramEnum,
-      ProgramAliasEnum,
-      CommandEnum,
-      CommandAliasEnum,
-      ArgumentEnum,
-      AliasEnum,
+      ProgramRepoxEnum,
+      ProgramAliasRepoxEnum,
+      CommandRepoxEnum,
+      CommandAliasRepoxEnum,
+      ArgumentRepoxEnum,
+      AliasRepoxEnum,
       container.resolve(GetParamDepService)
     );
     const paramDomain = this.paramDomain.getParamDomainValidation();
@@ -69,7 +76,8 @@ export class MainService {
       );
       return;
     }
-    this.launcher.launchProgram({ programs: [] });
+    const programs = this.repoxLaunchProgram.getPrograms();
+    this.launcher.launchProgram(programs);
   }
 }
 

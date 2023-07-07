@@ -3,10 +3,10 @@ import {
   GenerateWorkspaceAppService
 } from "../app-service/generate-workspace-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
+import { REPOX_LOGO } from "@lib/repox-const";
 // import {
 //   GenerateWorkspaceCommandArgDomainModel
 // } from "@lib/param-domain";
-import { REPOX_LOGO } from "@lib/workspace";
 
 @singleton()
 /**

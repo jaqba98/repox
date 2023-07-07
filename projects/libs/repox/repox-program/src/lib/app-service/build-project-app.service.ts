@@ -9,7 +9,7 @@ import {
   FolderUtilsService,
   RunCommandUtilsService
 } from "@lib/utils";
-import { REPOX_LOGO } from "@lib/workspace";
+import { REPOX_LOGO } from "@lib/repox-const";
 
 @singleton()
 /**

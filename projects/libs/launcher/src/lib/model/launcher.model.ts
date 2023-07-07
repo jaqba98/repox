@@ -8,7 +8,7 @@ import { RunProgramModel } from "@lib/model";
 export interface LauncherProgramModel {
   programName: string;
   commandName: string;
-  runProgramService: RunProgramModel;
+  service: RunProgramModel;
 }
 
 export interface LauncherModel {

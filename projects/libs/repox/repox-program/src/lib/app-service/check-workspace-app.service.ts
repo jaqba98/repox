@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
-import { ConfigFileEnum } from "@lib/workspace";
 import { SimpleMessageAppService } from "@lib/logger";
 import { PathUtilsService } from "@lib/utils";
+import { ConfigFileEnum } from "@lib/repox-workspace";
 
 @singleton()
 /**

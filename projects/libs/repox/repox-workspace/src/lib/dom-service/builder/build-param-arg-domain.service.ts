@@ -5,7 +5,6 @@ import {
   EmptyProgramArgDomainModel,
   ProgramArgDomainModel
 } from "../../model/program-arg-domain.model";
-import { ProgramEnum } from "../../enum/param-program/program.enum";
 import {
   BuildLinkProjectCommandArgDomainModel,
   BuildProjectCommandArgDomainModel,
@@ -14,8 +13,11 @@ import {
   GenerateProjectCommandArgModel,
   GenerateWorkspaceCommandArgDomainModel
 } from "../../model/command-arg-domain.model";
-import { CommandEnum } from "../../enum/param-program/command.enum";
-import { ArgumentEnum } from "../../enum/param-program/argument.enum";
+import {
+  ArgumentRepoxEnum,
+  CommandRepoxEnum,
+  ProgramRepoxEnum
+} from "@tool/repox-domain";
 
 
 @singleton()
@@ -29,7 +31,7 @@ export class BuildParamArgDomainService {
     model: Array<any>
   ): ProgramArgDomainModel {
     switch (programName) {
-      case ProgramEnum.default:
+      case ProgramRepoxEnum.default:
         return this.buildDefaultDefaultProgram(model);
       default:
         return <EmptyProgramArgDomainModel>{};
@@ -43,16 +45,12 @@ export class BuildParamArgDomainService {
   ): CommandArgDomainModel {
     const fullName = `${programName}-${commandName}`;
     switch (fullName) {
-      case `${ProgramEnum.generate}-${CommandEnum.workspace}`:
+      case `${ProgramRepoxEnum.generate}-${CommandRepoxEnum.workspace}`:
         return this.buildGenerateWorkspaceCommand(model);
-      case `${ProgramEnum.generate}-${CommandEnum.project}`:
+      case `${ProgramRepoxEnum.generate}-${CommandRepoxEnum.project}`:
         return this.buildGenerateProjectCommand(model);
-      case `${ProgramEnum.build}-${CommandEnum.project}`:
+      case `${ProgramRepoxEnum.build}-${CommandRepoxEnum.project}`:
         return this.buildBuildProjectCommand(model);
-      case `${ProgramEnum.link}-${CommandEnum.project}`:
-        return this.buildLinkProjectCommand(model);
-      case `${ProgramEnum.unlink}-${CommandEnum.project}`:
-        return this.buildUnlinkProjectCommand(model);
       default:
         return <EmptyCommandArgDomainModel>{};
     }
@@ -62,7 +60,7 @@ export class BuildParamArgDomainService {
     model: Array<any>
   ): DefaultDefaultProgramArgDomainModel {
     return {
-      version: this.getValue(model, ArgumentEnum.version, false)
+      version: this.getValue(model, ArgumentRepoxEnum.version, false)
     }
   }
 
@@ -70,7 +68,7 @@ export class BuildParamArgDomainService {
     model: Array<any>
   ): GenerateWorkspaceCommandArgDomainModel {
     return {
-      workspaceName: this.getValue(model, ArgumentEnum.name)
+      workspaceName: this.getValue(model, ArgumentRepoxEnum.name)
     };
   }
 
@@ -78,10 +76,10 @@ export class BuildParamArgDomainService {
     model: Array<any>
   ): GenerateProjectCommandArgModel {
     return {
-      name: this.getValue(model, ArgumentEnum.name),
-      type: this.getValue(model, ArgumentEnum.type),
-      path: this.getValue(model, ArgumentEnum.path),
-      scheme: this.getValue(model, ArgumentEnum.scheme)
+      name: this.getValue(model, ArgumentRepoxEnum.name),
+      type: this.getValue(model, ArgumentRepoxEnum.type),
+      path: this.getValue(model, ArgumentRepoxEnum.path),
+      scheme: this.getValue(model, ArgumentRepoxEnum.scheme)
     };
   }
 
@@ -89,29 +87,13 @@ export class BuildParamArgDomainService {
     model: Array<any>
   ): BuildProjectCommandArgDomainModel {
     return {
-      projectName: this.getValue(model, ArgumentEnum.name)
-    };
-  }
-
-  private buildLinkProjectCommand(
-    model: Array<any>
-  ): BuildLinkProjectCommandArgDomainModel {
-    return {
-      projectName: this.getValue(model, ArgumentEnum.name)
-    };
-  }
-
-  private buildUnlinkProjectCommand(
-    model: Array<any>
-  ): BuildLinkProjectCommandArgDomainModel {
-    return {
-      projectName: this.getValue(model, ArgumentEnum.name)
+      projectName: this.getValue(model, ArgumentRepoxEnum.name)
     };
   }
 
   private getValue<TValue>(
     model: Array<any>,
-    argumentName: ArgumentEnum,
+    argumentName: ArgumentRepoxEnum,
     defaultValue: TValue = <TValue>EMPTY_STRING
   ): TValue {
     const arg = model.find(arg => arg.name === argumentName);

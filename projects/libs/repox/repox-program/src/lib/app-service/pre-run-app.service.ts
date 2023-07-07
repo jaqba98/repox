@@ -3,7 +3,7 @@ import { path } from "app-root-path";
 import { PathUtilsService, SystemUtilsService } from "@lib/utils";
 import { SimpleMessageAppService } from "@lib/logger";
 import { ProgramSystemEnum } from "../enum/program-system.enum";
-import { REPOX_LOGO } from "@lib/workspace";
+import { REPOX_LOGO } from "@lib/repox-const";
 
 @singleton()
 /**

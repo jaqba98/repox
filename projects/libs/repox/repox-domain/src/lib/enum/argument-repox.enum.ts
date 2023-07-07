@@ -1,22 +1,20 @@
 /**
  * The enum contains all arguments and aliases
- * available in the system.
+ * available in the repox project.
  */
 
-export enum ArgumentEnum {
+export enum ArgumentRepoxEnum {
   version = "version",
   name = "name",
   type = "type",
   path = "path",
-  scheme = "scheme",
-  unknown = "unknown"
+  scheme = "scheme"
 }
 
-export enum AliasEnum {
+export enum AliasRepoxEnum {
   version = "v",
   name = "n",
   type = "t",
   path = "p",
   scheme = "s"
 }
-// todo: refactor

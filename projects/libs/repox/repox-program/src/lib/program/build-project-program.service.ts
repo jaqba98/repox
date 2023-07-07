@@ -20,9 +20,10 @@ export class BuildProjectProgramService implements RunProgramModel {
   }
 
   runProgram(): void {
-    const commandModel = <any>undefined;
-      // this.getParamDomainData.getParamDomain().command.model;
-    this.step.runSteps(commandModel);
+    console.log("BuildProjectProgramService");
+    // const commandModel = <any>undefined;
+    //   // this.getParamDomainData.getParamDomain().command.model;
+    // this.step.runSteps(commandModel);
   }
 }
 // todo: refactor

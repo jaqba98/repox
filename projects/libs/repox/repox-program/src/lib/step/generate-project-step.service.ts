@@ -7,7 +7,7 @@ import { SimpleMessageAppService } from "@lib/logger";
 import {
   CheckWorkspaceAppService
 } from "../app-service/check-workspace-app.service";
-import { REPOX_LOGO } from "@lib/workspace";
+import { REPOX_LOGO } from "@lib/repox-const";
 
 @singleton()
 /**

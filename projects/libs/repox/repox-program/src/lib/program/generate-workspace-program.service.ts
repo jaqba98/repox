@@ -20,9 +20,10 @@ export class GenerateWorkspaceProgramService implements RunProgramModel {
   }
 
   runProgram(): void {
-    const commandModel = <any>undefined;
-      // this.getParamDomainData.getParamDomain().command.model;
-    this.step.runSteps(commandModel);
+    console.log("GenerateWorkspaceProgramService");
+    // const commandModel = <any>undefined;
+    //   // this.getParamDomainData.getParamDomain().command.model;
+    // this.step.runSteps(commandModel);
   }
 }
 // todo: refactor
