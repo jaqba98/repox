@@ -31,11 +31,11 @@
       "@lib/repox-main": [
         "projects/libs/repox/repox-main/src/index.ts"
       ],
-      "@lib/program": [
-        "projects/libs/repox/program/src/index.ts"
+      "@lib/repox-program": [
+        "projects/libs/repox/repox-program/src/index.ts"
       ],
-      "@lib/workspace": [
-        "projects/libs/repox/workspace/src/index.ts"
+      "@lib/repox-workspace": [
+        "projects/libs/repox/repox-workspace/src/index.ts"
       ],
       "@lib/utils": [
         "projects/libs/utils/src/index.ts"

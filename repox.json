@@ -74,19 +74,19 @@
         "type": "typescript"
       }
     },
-    "program": {
-      "name": "program",
+    "repox-program": {
+      "name": "repox-program",
       "type": "lib",
-      "path": "projects/libs/repox/program",
+      "path": "projects/libs/repox/repox-program",
       "assets": [],
       "scheme": {
         "type": "typescript"
       }
     },
-    "workspace": {
-      "name": "workspace",
+    "repox-workspace": {
+      "name": "repox-workspace",
       "type": "lib",
-      "path": "projects/libs/repox/workspace",
+      "path": "projects/libs/repox/repox-workspace",
       "assets": [],
       "scheme": {
         "type": "typescript"

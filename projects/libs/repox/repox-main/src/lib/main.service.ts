@@ -10,6 +10,7 @@ import {
   BuildParamDomainAppService,
   ParamDomainAppService
 } from "@lib/param-domain";
+import { LauncherAppService } from "@lib/launcher";
 import {
   AliasEnum,
   ArgumentEnum,
@@ -18,8 +19,7 @@ import {
   GetParamDepService,
   ProgramAliasEnum,
   ProgramEnum
-} from "@lib/workspace";
-import { LauncherAppService } from "@lib/launcher";
+} from "@lib/repox-workspace";
 
 @singleton()
 /**
