@@ -10,7 +10,7 @@ import {
 import {
   UnlinkProjectAppService
 } from "../app-service/unlink-project-app.service";
-import { REPOX_LOGO } from "@lib/workspace";
+import { REPOX_LOGO } from "@lib/repox-const";
 
 @singleton()
 /**

@@ -10,7 +10,7 @@ import {
 import {
   LoadConfigFileAppService
 } from "../app-service/load-config-file-app.service";
-import { REPOX_LOGO } from "@lib/workspace";
+import { REPOX_LOGO } from "@lib/repox-const";
 
 @singleton()
 /**
