@@ -1,2 +1,1 @@
-export * from "./lib/main.service";
-// todo: refactor
+export * from "./lib/repox-main.service";

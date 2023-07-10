@@ -2,14 +2,13 @@
  * The enum contains all commands available in the repox program.
  */
 
-export enum CommandRepoxEnum {
+export enum RepoxCommandEnum {
   default = "",
   workspace = "workspace",
   project = "project"
 }
 
-export enum CommandAliasRepoxEnum {
+export enum RepoxCommandAliasEnum {
   workspace = "w",
   project = "p"
 }
-// todo: refactor

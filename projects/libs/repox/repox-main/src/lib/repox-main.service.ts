@@ -5,28 +5,28 @@ import {
   GetParamDtoDataAppService
 } from "@lib/param-dto";
 import { ParamErrorMessageAppService } from "@lib/logger";
-import { REPOX_LOGO } from "@lib/repox-const";
 import {
   BuildParamDomainAppService,
   ParamDomainAppService
 } from "@lib/param-domain";
 import { LauncherAppService } from "@lib/launcher";
+import { REPOX_LOGO } from "@lib/repox-const";
 import {
-  AliasRepoxEnum,
-  ArgumentRepoxEnum,
-  CommandAliasRepoxEnum,
-  CommandRepoxEnum,
-  ProgramAliasRepoxEnum,
-  ProgramRepoxEnum,
+  RepoxAliasEnum,
+  RepoxArgumentEnum,
+  RepoxCommandAliasEnum,
+  RepoxCommandEnum,
   RepoxGetParamDepService,
-  RepoxLaunchProgramService
-} from "@tool/repox-domain";
+  RepoxLaunchProgramService,
+  RepoxProgramAliasEnum,
+  RepoxProgramEnum
+} from "@lib/repox-domain";
 
 @singleton()
 /**
- * Main launch point of the repox program.
+ * The main service is responsible for run repox program.
  */
-export class MainService {
+export class RepoxMainService {
   constructor(
     private readonly buildParamDto: BuildParamDtoAppService,
     private readonly getParamDtoData: GetParamDtoDataAppService,
@@ -52,12 +52,12 @@ export class MainService {
       return;
     }
     this.buildParamDomain.build(
-      ProgramRepoxEnum,
-      ProgramAliasRepoxEnum,
-      CommandRepoxEnum,
-      CommandAliasRepoxEnum,
-      ArgumentRepoxEnum,
-      AliasRepoxEnum,
+      RepoxProgramEnum,
+      RepoxProgramAliasEnum,
+      RepoxCommandEnum,
+      RepoxCommandAliasEnum,
+      RepoxArgumentEnum,
+      RepoxAliasEnum,
       container.resolve(RepoxGetParamDepService)
     );
     const paramDomain = this.paramDomain.getParamDomainValidation();
@@ -71,10 +71,9 @@ export class MainService {
       );
       return;
     }
-    const programs = this.repoxLaunchProgram.getPrograms();
-    this.launcher.launchProgram(programs);
+    const repoxPrograms = this.repoxLaunchProgram.getPrograms();
+    this.launcher.launchProgram(repoxPrograms);
   }
 }
 
-container.resolve(MainService).run();
-// todo: refactor
+container.resolve(RepoxMainService).run();

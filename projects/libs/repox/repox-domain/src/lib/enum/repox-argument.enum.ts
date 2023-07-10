@@ -3,7 +3,7 @@
  * available in the repox project.
  */
 
-export enum ArgumentRepoxEnum {
+export enum RepoxArgumentEnum {
   version = "version",
   name = "name",
   type = "type",
@@ -11,11 +11,10 @@ export enum ArgumentRepoxEnum {
   scheme = "scheme"
 }
 
-export enum AliasRepoxEnum {
+export enum RepoxAliasEnum {
   version = "v",
   name = "n",
   type = "t",
   path = "p",
   scheme = "s"
 }
-// todo: refactor

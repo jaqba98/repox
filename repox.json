@@ -121,7 +121,7 @@
     },
     "repox-domain": {
       "name": "repox-domain",
-      "type": "tool",
+      "type": "lib",
       "path": "projects/libs/repox/repox-domain",
       "assets": [],
       "scheme": {

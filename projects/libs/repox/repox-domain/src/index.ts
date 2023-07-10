@@ -1,8 +1,7 @@
-export * from "./lib/enum/program-repox.enum";
-export * from "./lib/enum/command-repox.enum";
-export * from "./lib/enum/argument-repox.enum";
-export * from "./lib/model/command-arg-repox.model";
-export * from "./lib/model/program-arg-repox.model";
-export * from "./lib/service/repox-launch-program.service";
+export * from "./lib/enum/repox-argument.enum";
+export * from "./lib/enum/repox-command.enum";
+export * from "./lib/enum/repox-program.enum";
+export * from "./lib/model/repox-command-domain.model";
+export * from "./lib/model/repox-program-domain.model";
 export * from "./lib/service/repox-get-param-dep.service";
-// todo: refactor
+export * from "./lib/service/repox-launch-program.service";

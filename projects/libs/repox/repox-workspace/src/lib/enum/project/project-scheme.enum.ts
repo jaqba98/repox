@@ -2,6 +2,6 @@
  * All kinds of project scheme.
  */
 export enum ProjectSchemeEnum {
-  schemeTypescript = "typescript"
+  typescript = "typescript"
 }
 // todo: refactor

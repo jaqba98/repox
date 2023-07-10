@@ -1,104 +1,103 @@
 import { singleton } from "tsyringe";
 import { BaseGetParamDepModel } from "@lib/model";
-// import {
-//   ProjectSchemeEnum
-// } from "../../enum/project/project-scheme.enum";
+import { RepoxProgramEnum } from "../enum/repox-program.enum";
+import { RepoxCommandEnum } from "../enum/repox-command.enum";
+import { RepoxArgumentEnum } from "../enum/repox-argument.enum";
+import { ParamDomainDepModel } from "@lib/param-domain";
 import {
-  ArgumentRepoxEnum,
-  CommandRepoxEnum,
-  ProgramRepoxEnum
-} from "@tool/repox-domain";
+  ProjectSchemeEnum,
+  ProjectTypeEnum
+} from "@lib/repox-workspace";
 
 @singleton()
 /**
  * Get dependency between programs, commands and arguments.
  */
 export class RepoxGetParamDepService implements BaseGetParamDepModel {
-  getDependency(program: string): any {
+  getDependency(program: string): ParamDomainDepModel {
     switch (program) {
-      case ProgramRepoxEnum.default:
+      case RepoxProgramEnum.default:
         return {
-          program: ProgramRepoxEnum.default,
+          program: RepoxProgramEnum.default,
           commands: {
-            [CommandRepoxEnum.default]: {
-              command: CommandRepoxEnum.default,
+            [RepoxCommandEnum.default]: {
+              command: RepoxCommandEnum.default,
               args: {}
             }
           },
           args: {
-            [ArgumentRepoxEnum.version]: {
-              name: ArgumentRepoxEnum.version,
+            [RepoxArgumentEnum.version]: {
+              name: RepoxArgumentEnum.version,
               values: [],
               valueMode: "empty",
               required: false
             }
           }
         };
-      case ProgramRepoxEnum.generate:
+      case RepoxProgramEnum.generate:
         return {
-          program: ProgramRepoxEnum.generate,
+          program: RepoxProgramEnum.generate,
           commands: {
-            [CommandRepoxEnum.default]: {
-              command: CommandRepoxEnum.default,
+            [RepoxCommandEnum.default]: {
+              command: RepoxCommandEnum.default,
               args: {}
             },
-            [CommandRepoxEnum.workspace]: {
-              command: CommandRepoxEnum.workspace,
+            [RepoxCommandEnum.workspace]: {
+              command: RepoxCommandEnum.workspace,
               args: {
-                [ArgumentRepoxEnum.name]: {
-                  name: ArgumentRepoxEnum.name,
+                [RepoxArgumentEnum.name]: {
+                  name: RepoxArgumentEnum.name,
                   values: [],
                   valueMode: "single",
                   required: true
                 }
               }
             },
-            [CommandRepoxEnum.project]: {
-              command: CommandRepoxEnum.project,
+            [RepoxCommandEnum.project]: {
+              command: RepoxCommandEnum.project,
               args: {
-                [ArgumentRepoxEnum.name]: {
-                  name: ArgumentRepoxEnum.name,
+                [RepoxArgumentEnum.name]: {
+                  name: RepoxArgumentEnum.name,
                   values: [],
                   valueMode: "single",
                   required: true
                 },
-                [ArgumentRepoxEnum.type]: {
-                  name: ArgumentRepoxEnum.type,
-                  values: ["app", "lib", "tool"],
+                [RepoxArgumentEnum.type]: {
+                  name: RepoxArgumentEnum.type,
+                  values: Object.values(ProjectTypeEnum),
                   valueMode: "single",
                   required: true
                 },
-                [ArgumentRepoxEnum.path]: {
-                  name: ArgumentRepoxEnum.path,
+                [RepoxArgumentEnum.scheme]: {
+                  name: RepoxArgumentEnum.scheme,
+                  values: Object.values(ProjectSchemeEnum),
+                  valueMode: "single",
+                  required: true
+                },
+                [RepoxArgumentEnum.path]: {
+                  name: RepoxArgumentEnum.path,
                   values: [],
                   valueMode: "single",
                   required: false
-                },
-                [ArgumentRepoxEnum.scheme]: {
-                  name: ArgumentRepoxEnum.scheme,
-                  // values: Object.values(ProjectSchemeEnum),
-                  values: [],
-                  valueMode: "single",
-                  required: true
                 }
               }
             }
           },
           args: {}
         };
-      case ProgramRepoxEnum.build:
+      case RepoxProgramEnum.build:
         return {
-          program: ProgramRepoxEnum.default,
+          program: RepoxProgramEnum.build,
           commands: {
-            [CommandRepoxEnum.default]: {
-              command: CommandRepoxEnum.default,
+            [RepoxCommandEnum.default]: {
+              command: RepoxCommandEnum.default,
               args: {}
             },
-            [CommandRepoxEnum.project]: {
-              command: CommandRepoxEnum.project,
+            [RepoxCommandEnum.project]: {
+              command: RepoxCommandEnum.project,
               args: {
-                [ArgumentRepoxEnum.name]: {
-                  name: ArgumentRepoxEnum.name,
+                [RepoxArgumentEnum.name]: {
+                  name: RepoxArgumentEnum.name,
                   values: [],
                   valueMode: "single",
                   required: true
@@ -109,9 +108,9 @@ export class RepoxGetParamDepService implements BaseGetParamDepModel {
           args: {}
         };
       default:
-        throw new Error("No dependencies found for the program!");
+        throw new Error(
+          `No found dependency for ${program} program!`
+        );
     }
   }
 }
-
-// todo: refactor

@@ -1,46 +1,44 @@
-import { LauncherModel } from "@lib/launcher";
-import {
-  CommandRepoxEnum,
-  ProgramRepoxEnum
-} from "@tool/repox-domain";
 import { container, singleton } from "tsyringe";
+import { LauncherModel } from "@lib/launcher";
+import { RepoxProgramEnum } from "../enum/repox-program.enum";
+import { RepoxCommandEnum } from "../enum/repox-command.enum";
 import {
   BuildProjectProgramService,
-  DefaultDefaultProgramService, GenerateProjectProgramService,
+  DefaultDefaultProgramService,
+  GenerateProjectProgramService,
   GenerateWorkspaceProgramService
 } from "@lib/repox-program";
 
 @singleton()
 /**
- * The service is responsible for
- * give all programs for repox project.
+ * The service is responsible for giving all programs
+ * for repox project.
  */
 export class RepoxLaunchProgramService {
   getPrograms(): LauncherModel {
     return {
       programs: [
         {
-          programName: ProgramRepoxEnum.default,
-          commandName: CommandRepoxEnum.default,
+          programName: RepoxProgramEnum.default,
+          commandName: RepoxCommandEnum.default,
           service: container.resolve(DefaultDefaultProgramService)
         },
         {
-          programName: ProgramRepoxEnum.generate,
-          commandName: CommandRepoxEnum.workspace,
+          programName: RepoxProgramEnum.generate,
+          commandName: RepoxCommandEnum.workspace,
           service: container.resolve(GenerateWorkspaceProgramService)
         },
         {
-          programName: ProgramRepoxEnum.generate,
-          commandName: CommandRepoxEnum.project,
+          programName: RepoxProgramEnum.generate,
+          commandName: RepoxCommandEnum.project,
           service: container.resolve(GenerateProjectProgramService)
         },
         {
-          programName: ProgramRepoxEnum.build,
-          commandName: CommandRepoxEnum.project,
+          programName: RepoxProgramEnum.build,
+          commandName: RepoxCommandEnum.project,
           service: container.resolve(BuildProjectProgramService)
         }
       ]
     };
   }
 }
-// todo: refactor
