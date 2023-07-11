@@ -36,6 +36,7 @@ export class GenerateProjectStepService {
     this.simpleMessage.writeInfo("Project generation", REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.systemVerification.run()) return;
+    // todo: I am here
     // if (!this.preRun.run()) return;
     // if (!this.checkWorkspace.run()) return;
     // // Loading configuration
