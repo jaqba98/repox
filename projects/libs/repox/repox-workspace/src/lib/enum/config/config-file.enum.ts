@@ -4,5 +4,6 @@
 export enum ConfigFileEnum {
   gitignoreTextFile = ".gitignore",
   repoxJsonFile = "repox.json",
-  tsconfigJsonFile = "tsconfig.json"
+  tsconfigJsonFile = "tsconfig.json",
+  jestTsFile = "jest.config.ts"
 }

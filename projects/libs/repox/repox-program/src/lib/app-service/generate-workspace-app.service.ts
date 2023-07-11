@@ -1,5 +1,8 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
+import {
+  NewlineAppService,
+  SimpleMessageAppService
+} from "@lib/logger";
 import {
   FileUtilsService,
   FolderUtilsService,
@@ -26,7 +29,8 @@ export class GenerateWorkspaceAppService {
     private readonly fileUtils: FileUtilsService,
     private readonly runCommandUtils: RunCommandUtilsService,
     private readonly writeFile: FileUtilsService,
-    private readonly buildConfigFile: BuildConfigFileAppService
+    private readonly buildConfigFile: BuildConfigFileAppService,
+    private readonly newline: NewlineAppService
   ) {
   }
 
@@ -75,19 +79,26 @@ export class GenerateWorkspaceAppService {
       ConfigFileEnum.repoxJsonFile,
       this.buildConfigFile.buildDefaultRepoxJsonFile()
     );
-    // Create .gitignore file
-    this.simpleMessage.writePlain("Create .gitignore file");
+    // Create jest configuration
+    this.simpleMessage.writePlain("Create jest configuration");
+    this.writeFile.writeTextFile(
+      ConfigFileEnum.jestTsFile,
+      this.buildConfigFile.buildDefaultRootJestTsFile()
+    );
+    // Create gitignore file
+    this.simpleMessage.writePlain("Create gitignore file");
     this.writeFile.writeTextFile(
       ConfigFileEnum.gitignoreTextFile,
       this.buildConfigFile.buildDefaultGitignoreTextFile()
     );
-    // // Init git repository
-    // this.runCommand.runCommand("git init");
-    // this.runCommand.runCommand("git config --local core.autocrlf false");
-    // this.runCommand.runCommand("git add .");
-    // this.runCommand.runCommand(`git commit -m "init commit"`);
-    // // Write success message
-    // // this.simpleMessage.writeNewline();
+    // Init git repository
+    this.simpleMessage.writePlain("Init git repository");
+    this.runCommandUtils.runCommand("git init");
+    this.runCommandUtils.runCommand("git config --local core.autocrlf false");
+    this.runCommandUtils.runCommand("git add .");
+    this.runCommandUtils.runCommand(`git commit -m "init commit"`);
+    // Write success message
+    this.newline.writeNewline();
     this.simpleMessage.writeSuccess("Workspace created correctly!");
     return true;
   }
