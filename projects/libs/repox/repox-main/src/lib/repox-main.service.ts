@@ -73,12 +73,12 @@ export class RepoxMainService {
       );
       return;
     }
-    const programs = this.repoxLaunchProgram.getPrograms();
+    const repoxPrograms = this.repoxLaunchProgram.getPrograms();
     const programDomain = this.buildDomainModel
       .buildProgramDomainModel();
     const commandDomain = this.buildDomainModel
       .buildCommandDomainModel();
-    this.launcher.launchProgram(programs).runProgram(
+    this.launcher.launchProgram(repoxPrograms).runProgram(
       programDomain, commandDomain
     );
   }
