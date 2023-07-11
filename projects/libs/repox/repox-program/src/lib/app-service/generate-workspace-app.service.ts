@@ -67,8 +67,8 @@ export class GenerateWorkspaceAppService {
     this.runCommandUtils.runCommand("npm install typescript --save-dev");
     this.runCommandUtils.runCommand("npm install tsc-alias --save-dev");
     this.runCommandUtils.runCommand("npm install jest --save-dev");
-    // Create typescript configuration
-    this.simpleMessage.writePlain("Create typescript configuration");
+    // Create tsconfig configuration
+    this.simpleMessage.writePlain("Create tsconfig configuration");
     this.writeFile.writeJsonFile(
       ConfigFileEnum.tsconfigJsonFile,
       this.buildConfigFile.buildDefaultTsconfigJsonFile()
@@ -103,5 +103,3 @@ export class GenerateWorkspaceAppService {
     return true;
   }
 }
-
-// todo: refactor

@@ -28,7 +28,7 @@ export class GenerateProjectStepService {
   ) {
   }
 
-  runSteps(programModel: GenerateProjectProgramModel): void {
+  runSteps(): void {
     this.simpleMessage.writeInfo("Project generation", REPOX_LOGO);
     if (!this.preRun.run()) return;
     if (!this.checkWorkspace.run()) return;

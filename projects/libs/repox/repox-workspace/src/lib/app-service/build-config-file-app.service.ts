@@ -51,8 +51,7 @@ dist/
 node_modules/
 
 # Temporary files and directories
-tmp/
-`;
+tmp/`;
   }
 
   buildDefaultRootJestTsFile(): string {
@@ -66,7 +65,6 @@ const config: Config = {
   testEnvironment: "jest-environment-node"
 };
 
-export default config;
-`;
+export default config;`;
   }
 }
