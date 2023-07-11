@@ -3,7 +3,7 @@
  */
 
 export enum RepoxProgramEnum {
-  default = "",
+  default = "default",
   generate = "generate",
   build = "build"
 }

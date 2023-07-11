@@ -1,12 +1,11 @@
 import { singleton } from "tsyringe";
+import { RunProgramModel } from "@lib/model";
+import {
+  DefaultDefaultRepoxProgramDomainModel
+} from "@lib/repox-domain";
 import {
   DefaultDefaultStepService
 } from "../step/default-default-step.service";
-import {
-  // DefaultDefaultProgramArgDomainModel,
-  ParamDomainAppService
-} from "@lib/param-domain";
-import { RunProgramModel } from "@lib/model";
 
 @singleton()
 /**
@@ -14,16 +13,13 @@ import { RunProgramModel } from "@lib/model";
  */
 export class DefaultDefaultProgramService implements RunProgramModel {
   constructor(
-    private readonly defaultDefaultStep: DefaultDefaultStepService,
-    private readonly getParamDomainData: ParamDomainAppService
+    private readonly defaultDefaultStep: DefaultDefaultStepService
   ) {
   }
 
-  runProgram(): void {
-    console.log("DefaultDefaultProgramService");
-    // const programModel = <any>undefined;
-    //   // this.getParamDomainData.getParamDomain().program.model;
-    // this.defaultDefaultStep.runSteps(programModel);
+  runProgram(programDomain: unknown, commandDomain: unknown): void {
+    const programModel = <DefaultDefaultRepoxProgramDomainModel>
+      programDomain;
+    this.defaultDefaultStep.runSteps(programModel);
   }
 }
-// todo: refactor

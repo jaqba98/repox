@@ -3,5 +3,5 @@
  * for each program services.
  */
 export interface RunProgramModel {
-  runProgram(): void;
+  runProgram(programDomain: unknown, commandDomain: unknown): void;
 }

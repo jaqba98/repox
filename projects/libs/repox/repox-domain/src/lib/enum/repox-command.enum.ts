@@ -3,7 +3,7 @@
  */
 
 export enum RepoxCommandEnum {
-  default = "",
+  default = "default",
   workspace = "workspace",
   project = "project"
 }

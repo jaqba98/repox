@@ -1,6 +1,7 @@
 import { singleton } from "tsyringe";
 import { ParamDomainAppService } from "@lib/param-domain";
 import { LauncherModel } from "../model/launcher.model";
+import { RunProgramModel } from "@lib/model";
 
 @singleton()
 /**
@@ -11,7 +12,7 @@ export class LauncherAppService {
   constructor(private readonly paramDomain: ParamDomainAppService) {
   }
 
-  launchProgram(launcher: LauncherModel): void {
+  launchProgram(launcher: LauncherModel): RunProgramModel {
     const programName = this.paramDomain.getProgramName();
     const commandName = this.paramDomain.getCommandName();
     const programToRun = launcher.programs.find(program =>
@@ -21,6 +22,6 @@ export class LauncherAppService {
     if (programToRun === undefined) {
       throw new Error("Not found implementation for given program!");
     }
-    programToRun.service.runProgram();
+    return programToRun.service;
   }
 }

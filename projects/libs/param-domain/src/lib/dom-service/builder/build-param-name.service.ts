@@ -2,6 +2,7 @@ import { singleton } from "tsyringe";
 import { KeyValueModel } from "@lib/model";
 import { BaseParamTypeEnum } from "../../enum/base-param-type.enum";
 import { ParamTypeEnum } from "@lib/param-dto";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -53,6 +54,7 @@ export class BuildParamNameService {
     enums: Array<KeyValueModel>,
     aliasEnums: Array<KeyValueModel>
   ): string {
+    if (baseName === EMPTY_STRING) return "default";
     const argument = enums
       .find(argumentItem => argumentItem.value === baseName);
     if (argument) {

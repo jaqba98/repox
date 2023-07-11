@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import {
-  GetProgramVersionAppService
-} from "../app-service/get-program-version-app.service";
-// import {
-//   DefaultDefaultProgramArgDomainModel
-// } from "@lib/param-domain";
+  ProgramVersionAppService
+} from "../app-service/program-version-app.service";
+import {
+  DefaultDefaultRepoxProgramDomainModel
+} from "@lib/repox-domain";
 
 @singleton()
 /**
@@ -12,15 +12,13 @@ import {
  */
 export class DefaultDefaultStepService {
   constructor(
-    private readonly getProgramVersion: GetProgramVersionAppService
+    private readonly programVersion: ProgramVersionAppService
   ) {
   }
 
-  runSteps(programModel: any): void {
-    if (programModel.version) {
-      // Display the program version
-      this.getProgramVersion.getProgramVersion();
+  runSteps(programModel: DefaultDefaultRepoxProgramDomainModel): void {
+    if (programModel.showVersion) {
+      this.programVersion.showProgramVersion();
     }
   }
 }
-// todo: refactor
