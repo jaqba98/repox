@@ -1,10 +1,11 @@
 import { singleton } from "tsyringe";
+import { RunProgramModel } from "@lib/model";
+import {
+  GenerateProjectRepoxCommandDomainModel
+} from "@lib/repox-domain";
 import {
   GenerateProjectStepService
 } from "../step/generate-project-step.service";
-import { ParamDomainAppService } from "@lib/param-domain";
-// import { ProjectAppService } from "@lib/workspace";
-import { RunProgramModel } from "@lib/model";
 
 @singleton()
 /**
@@ -13,29 +14,13 @@ import { RunProgramModel } from "@lib/model";
  */
 export class GenerateProjectProgramService implements RunProgramModel {
   constructor(
-    private readonly generateProjectStep: GenerateProjectStepService,
-    private readonly paramDomain: ParamDomainAppService
-    // private readonly project: ProjectAppService
+    private readonly generateProjectStep: GenerateProjectStepService
   ) {
   }
 
-  runProgram(): void {
-    console.log("GenerateProjectProgramService");
-    // const stepData = this.prepareStepData();
-    // this.generateProjectStep.runSteps(stepData);
+  runProgram(programDomain: unknown, commandDomain: unknown): void {
+    const commandModel = <GenerateProjectRepoxCommandDomainModel>
+      commandDomain;
+    this.generateProjectStep.runSteps(commandModel);
   }
-
-  // private prepareStepData(): GenerateProjectProgramModel {
-  //   const commandArg = <any>undefined;
-  //     // this.paramDomain.getParamDomain().command.model;
-  //   const { name, type, path, scheme } = commandArg;
-  //   return {
-  //     projectName: name,
-  //     projectType: this.project.getProjectType(type),
-  //     projectPath: this.project.getProjectPath(name, type, path),
-  //     projectAlias: this.project.getProjectAlias(name, type),
-  //     projectScheme: this.project.getProjectScheme(scheme)
-  //   }
-  // }
 }
-// todo: refactor

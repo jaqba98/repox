@@ -10,6 +10,9 @@ import {
 import {
   GenerateWorkspaceAppService
 } from "../app-service/generate-workspace-app.service";
+import {
+  SystemVerificationAppService
+} from "../app-service/system-verification-app.service";
 
 @singleton()
 /**
@@ -18,6 +21,7 @@ import {
 export class GenerateWorkspaceStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
+    private readonly systemVerification: SystemVerificationAppService,
     private readonly newline: NewlineAppService,
     private readonly generateWorkspace: GenerateWorkspaceAppService
   ) {
@@ -28,6 +32,7 @@ export class GenerateWorkspaceStepService {
       "Workspace generation", REPOX_LOGO
     );
     this.newline.writeNewline();
+    if (!this.systemVerification.run()) return;
     this.generateWorkspace.generateWorkspace(commandModel);
   }
 }

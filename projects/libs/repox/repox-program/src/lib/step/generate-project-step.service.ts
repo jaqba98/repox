@@ -1,10 +1,15 @@
 import { singleton } from "tsyringe";
-import { PreRunAppService } from "../app-service/pre-run-app.service";
-import { SimpleMessageAppService } from "@lib/logger";
 import {
-  CheckWorkspaceAppService
-} from "../app-service/check-workspace-app.service";
+  NewlineAppService,
+  SimpleMessageAppService
+} from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
+import {
+  GenerateProjectRepoxCommandDomainModel
+} from "@lib/repox-domain";
+import {
+  SystemVerificationAppService
+} from "../app-service/system-verification-app.service";
 
 @singleton()
 /**
@@ -13,8 +18,10 @@ import { REPOX_LOGO } from "@lib/repox-const";
 export class GenerateProjectStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly preRun: PreRunAppService,
-    private readonly checkWorkspace: CheckWorkspaceAppService
+    private readonly systemVerification: SystemVerificationAppService,
+    private readonly newline: NewlineAppService,
+    // private readonly preRun: PreRunAppService,
+    // private readonly checkWorkspace: CheckWorkspaceAppService
     // private readonly goToProjectRoot: GoToProjectRootAppService,
     // private readonly projectApp: ProjectAppService,
     // private readonly systemVerification: SystemVerificationAppService,
@@ -25,10 +32,12 @@ export class GenerateProjectStepService {
   ) {
   }
 
-  runSteps(): void {
+  runSteps(commandModel: GenerateProjectRepoxCommandDomainModel): void {
     this.simpleMessage.writeInfo("Project generation", REPOX_LOGO);
-    if (!this.preRun.run()) return;
-    if (!this.checkWorkspace.run()) return;
+    this.newline.writeNewline();
+    if (!this.systemVerification.run()) return;
+    // if (!this.preRun.run()) return;
+    // if (!this.checkWorkspace.run()) return;
     // // Loading configuration
     // if (!this.loadConfigFileApp.loadConfig()) return;
     // // Check that the project does not exist

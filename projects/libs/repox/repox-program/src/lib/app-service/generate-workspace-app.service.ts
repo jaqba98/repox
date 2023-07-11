@@ -14,7 +14,7 @@ import {
 } from "@lib/repox-domain";
 import {
   BuildConfigFileAppService,
-  ConfigFileEnum
+  ConfigFileEnum, WorkspaceFolderEnum
 } from "@lib/repox-workspace";
 
 @singleton()
@@ -52,13 +52,20 @@ export class GenerateWorkspaceAppService {
     this.simpleMessage.writePlain("Create empty workspace structure");
     this.folderUtils.createFolder(workspaceName);
     this.pathUtils.changePath(workspaceName);
-    this.folderUtils.createFolder("projects");
-    this.folderUtils.createFolder("projects/apps");
-    this.folderUtils.createFolder("projects/libs");
-    this.folderUtils.createFolder("projects/tools");
-    this.fileUtils.createEmptyFile("projects/apps/.gitkeep");
-    this.fileUtils.createEmptyFile("projects/libs/.gitkeep");
-    this.fileUtils.createEmptyFile("projects/tools/.gitkeep");
+    this.folderUtils.createFolder(WorkspaceFolderEnum.projects);
+    this.pathUtils.changePath(WorkspaceFolderEnum.projects);
+    this.folderUtils.createFolder(WorkspaceFolderEnum.apps);
+    this.folderUtils.createFolder(WorkspaceFolderEnum.libs);
+    this.folderUtils.createFolder(WorkspaceFolderEnum.tools);
+    this.pathUtils.changePath(WorkspaceFolderEnum.apps);
+    this.fileUtils.createEmptyFile(ConfigFileEnum.gitkeepTextFile);
+    this.pathUtils.changePath("../");
+    this.pathUtils.changePath(WorkspaceFolderEnum.libs);
+    this.fileUtils.createEmptyFile(ConfigFileEnum.gitkeepTextFile);
+    this.pathUtils.changePath("../");
+    this.pathUtils.changePath(WorkspaceFolderEnum.tools);
+    this.fileUtils.createEmptyFile(ConfigFileEnum.gitkeepTextFile);
+    this.pathUtils.changePath("../../");
     // Init npm project
     this.simpleMessage.writePlain("Init npm project");
     this.runCommandUtils.runCommand("npm init -y");

@@ -7,7 +7,8 @@
   "scripts": {
     "link": "npm link ./dist/repox",
     "unlink": "npm unlink ./dist/repox && npm uninstall repox -g",
-    "generate:workspace": "node dist/repox/apps/repox/src/main.js generate workspace --name=dog"
+    "generate:workspace": "node dist/repox/apps/repox/src/main.js generate workspace --name=dog",
+    "generate:project": "node dist/repox/apps/repox/src/main.js generate project --name=dog --type=tool --scheme=typescript"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
