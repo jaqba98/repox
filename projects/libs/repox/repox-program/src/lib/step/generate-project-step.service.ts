@@ -1,7 +1,4 @@
 import { singleton } from "tsyringe";
-import {
-  GenerateProjectProgramModel
-} from "../model/program/generate-project-program.model";
 import { PreRunAppService } from "../app-service/pre-run-app.service";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
