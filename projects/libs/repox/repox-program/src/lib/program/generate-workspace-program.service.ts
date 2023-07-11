@@ -1,29 +1,25 @@
 import { singleton } from "tsyringe";
+import { RunProgramModel } from "@lib/model";
+import {
+  GenerateWorkspaceRepoxCommandDomainModel
+} from "@lib/repox-domain";
 import {
   GenerateWorkspaceStepService
 } from "../step/generate-workspace-step.service";
-import {
-  // GenerateWorkspaceCommandArgDomainModel,
-  ParamDomainAppService
-} from "@lib/param-domain";
-import { RunProgramModel } from "@lib/model";
 
 @singleton()
 /**
- * The start point of the generate workspace program.
+ * The start point of the program generate workspace.
  */
 export class GenerateWorkspaceProgramService implements RunProgramModel {
   constructor(
-    private readonly step: GenerateWorkspaceStepService,
-    private readonly getParamDomainData: ParamDomainAppService
+    private readonly generateWorkspaceStep: GenerateWorkspaceStepService
   ) {
   }
 
-  runProgram(): void {
-    console.log("GenerateWorkspaceProgramService");
-    // const commandModel = <any>undefined;
-    //   // this.getParamDomainData.getParamDomain().command.model;
-    // this.step.runSteps(commandModel);
+  runProgram(programDomain: unknown, commandDomain: unknown): void {
+    const commandModel = <GenerateWorkspaceRepoxCommandDomainModel>
+      commandDomain;
+    this.generateWorkspaceStep.runSteps(commandModel);
   }
 }
-// todo: refactor

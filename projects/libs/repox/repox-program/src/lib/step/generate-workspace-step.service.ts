@@ -1,12 +1,15 @@
 import { singleton } from "tsyringe";
 import {
+  NewlineAppService,
+  SimpleMessageAppService
+} from "@lib/logger";
+import { REPOX_LOGO } from "@lib/repox-const";
+import {
+  GenerateWorkspaceRepoxCommandDomainModel
+} from "@lib/repox-domain";
+import {
   GenerateWorkspaceAppService
 } from "../app-service/generate-workspace-app.service";
-import { SimpleMessageAppService } from "@lib/logger";
-import { REPOX_LOGO } from "@lib/repox-const";
-// import {
-//   GenerateWorkspaceCommandArgDomainModel
-// } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -15,17 +18,16 @@ import { REPOX_LOGO } from "@lib/repox-const";
 export class GenerateWorkspaceStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly generate: GenerateWorkspaceAppService
+    private readonly newline: NewlineAppService,
+    private readonly generateWorkspace: GenerateWorkspaceAppService
   ) {
   }
 
-  runSteps(model: any): void {
-    // Display the command header
+  runSteps(commandModel: GenerateWorkspaceRepoxCommandDomainModel): void {
     this.simpleMessage.writeInfo(
       "Workspace generation", REPOX_LOGO
     );
-    // Generate workspace
-    if (!this.generate.generateWorkspace(model.workspaceName)) return;
+    this.newline.writeNewline();
+    this.generateWorkspace.generateWorkspace(commandModel);
   }
 }
-// todo: refactor

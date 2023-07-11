@@ -1,9 +1,9 @@
 import { singleton } from "tsyringe";
 import { DomainModel } from "../../model/domain.model";
-import { TsconfigModel } from "../../model/tsconfig.model";
 import { FileModel } from "../../model/file.model";
 import { FileUtilsService } from "@lib/utils";
 import { ConfigFileEnum } from "../../enum/config/config-file.enum";
+import { TsconfigModel } from "../../model/config/tsconfig.model";
 
 @singleton()
 /**
@@ -25,11 +25,11 @@ export class DomainStoreService {
   loadDomain(): void {
     // Read domain configuration file
     this.domain = this.fileUtils.readJsonFile<DomainModel>(
-      ConfigFileEnum.domainJson
+      ConfigFileEnum.repoxJsonFile
     );
     // Read tsconfig configuration file
     this.tsconfig = this.fileUtils.readJsonFile<TsconfigModel>(
-      ConfigFileEnum.tsconfigJson
+      ConfigFileEnum.tsconfigJsonFile
     );
     // Read all files for all projects
     this.file = Object.values(this.domain.projects)

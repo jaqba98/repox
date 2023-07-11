@@ -6,7 +6,8 @@
   "license": "ISC",
   "scripts": {
     "link": "npm link ./dist/repox",
-    "unlink": "npm unlink ./dist/repox && npm uninstall repox -g"
+    "unlink": "npm unlink ./dist/repox && npm uninstall repox -g",
+    "generate:workspace": "node dist/repox/apps/repox/src/main.js generate workspace --name=dog"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",

@@ -1,12 +1,18 @@
 import { singleton } from "tsyringe";
+import { SimpleMessageAppService } from "@lib/logger";
 import {
   FileUtilsService,
   FolderUtilsService,
   PathUtilsService,
   RunCommandUtilsService
 } from "@lib/utils";
-import { SimpleMessageAppService } from "@lib/logger";
-// import { BuildDefaultDomainAppService } from "@lib/domain";
+import {
+  GenerateWorkspaceRepoxCommandDomainModel
+} from "@lib/repox-domain";
+import {
+  BuildConfigFileAppService,
+  ConfigFileEnum
+} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -15,65 +21,75 @@ import { SimpleMessageAppService } from "@lib/logger";
 export class GenerateWorkspaceAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly folderNotExist: FolderUtilsService,
-    private readonly createFolder: FolderUtilsService,
-    private readonly goInto: PathUtilsService,
-    private readonly createEmptyFile: FileUtilsService,
-    private readonly runCommand: RunCommandUtilsService,
+    private readonly folderUtils: FolderUtilsService,
+    private readonly pathUtils: PathUtilsService,
+    private readonly fileUtils: FileUtilsService,
+    private readonly runCommandUtils: RunCommandUtilsService,
     private readonly writeFile: FileUtilsService,
-    // private readonly buildDefaultDomain: BuildDefaultDomainAppService
+    private readonly buildConfigFile: BuildConfigFileAppService
   ) {
   }
 
-  generateWorkspace(workspaceName: string): boolean {
-    return true;
-    // // Check whether the workspace folder not exist
-    // if (!this.folderNotExist.checkNotExist(workspaceName)) {
-    //   return false;
-    // }
-    // // Create empty workspace structure
-    // this.createFolder.createFolder(workspaceName);
-    // this.goInto.changePath(workspaceName);
-    // this.createFolder.createFolder("projects");
-    // this.createFolder.createFolder("projects/apps");
-    // this.createFolder.createFolder("projects/libs");
-    // this.createFolder.createFolder("projects/tools");
-    // this.createEmptyFile.createEmptyFile("projects/apps/.gitkeep");
-    // this.createEmptyFile.createEmptyFile("projects/libs/.gitkeep");
-    // this.createEmptyFile.createEmptyFile("projects/tools/.gitkeep");
-    // // Init npm project
-    // this.runCommand.runCommand("npm init -y");
-    // // Install all required npm
-    // this.runCommand.runCommand("npm i typescript --save-dev");
-    // this.runCommand.runCommand("npm i tsc-alias --save-dev");
-    // // Init typescript configuration
-    // this.runCommand.runCommand("tsc --init");
-    // this.writeFile.writeJsonFile(
-    //   DomainFileEnum.tsconfigJson,
-    //   this.buildDefaultDomain.buildTsconfig()
-    // );
-    // // Create the repox configuration
-    // this.createEmptyFile.createEmptyFile(DomainFileEnum.domainJson);
-    // this.writeFile.writeJsonFile(
-    //   DomainFileEnum.domainJson,
-    //   this.buildDefaultDomain.buildRepoxConfig()
-    // );
+  generateWorkspace(
+    commandModel: GenerateWorkspaceRepoxCommandDomainModel
+  ): boolean {
+    const { workspaceName } = commandModel;
+    // Check whether the workspace folder not exist
+    if (!this.folderUtils.checkNotExist(workspaceName)) {
+      this.simpleMessage.writeError(
+        `Workspace name ${workspaceName} is already taken!`
+      );
+      this.simpleMessage.writeWarning(
+        "Choose another name and run process again."
+      );
+      return false;
+    }
+    // Create empty workspace structure
+    this.simpleMessage.writePlain("Create empty workspace structure");
+    this.folderUtils.createFolder(workspaceName);
+    this.pathUtils.changePath(workspaceName);
+    this.folderUtils.createFolder("projects");
+    this.folderUtils.createFolder("projects/apps");
+    this.folderUtils.createFolder("projects/libs");
+    this.folderUtils.createFolder("projects/tools");
+    this.fileUtils.createEmptyFile("projects/apps/.gitkeep");
+    this.fileUtils.createEmptyFile("projects/libs/.gitkeep");
+    this.fileUtils.createEmptyFile("projects/tools/.gitkeep");
+    // Init npm project
+    this.simpleMessage.writePlain("Init npm project");
+    this.runCommandUtils.runCommand("npm init -y");
+    // Install dependencies
+    this.simpleMessage.writePlain("Install dependencies");
+    this.runCommandUtils.runCommand("npm install typescript --save-dev");
+    this.runCommandUtils.runCommand("npm install tsc-alias --save-dev");
+    this.runCommandUtils.runCommand("npm install jest --save-dev");
+    // Create typescript configuration
+    this.simpleMessage.writePlain("Create typescript configuration");
+    this.writeFile.writeJsonFile(
+      ConfigFileEnum.tsconfigJsonFile,
+      this.buildConfigFile.buildDefaultTsconfigJsonFile()
+    );
+    // Create repox configuration
+    this.simpleMessage.writePlain("Create repox configuration");
+    this.writeFile.writeJsonFile(
+      ConfigFileEnum.repoxJsonFile,
+      this.buildConfigFile.buildDefaultRepoxJsonFile()
+    );
+    // Create .gitignore file
+    this.simpleMessage.writePlain("Create .gitignore file");
+    this.writeFile.writeTextFile(
+      ConfigFileEnum.gitignoreTextFile,
+      this.buildConfigFile.buildDefaultGitignoreTextFile()
+    );
     // // Init git repository
     // this.runCommand.runCommand("git init");
     // this.runCommand.runCommand("git config --local core.autocrlf false");
-    // this.createEmptyFile.createEmptyFile(DomainFileEnum.gitignoreFile);
-    // this.writeFile.writeTextFile(
-    //   DomainFileEnum.gitignoreFile,
-    //   this.buildDefaultDomain.buildGitIgnore()
-    // );
     // this.runCommand.runCommand("git add .");
     // this.runCommand.runCommand(`git commit -m "init commit"`);
     // // Write success message
     // // this.simpleMessage.writeNewline();
-    // this.simpleMessage.writeSuccess(
-    //   "Workspace created correctly!", REPOX_LOGO
-    // );
-    // return true;
+    this.simpleMessage.writeSuccess("Workspace created correctly!");
+    return true;
   }
 }
 

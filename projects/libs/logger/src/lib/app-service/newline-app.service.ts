@@ -2,9 +2,7 @@ import { singleton } from "tsyringe";
 import {
   WriteMessageService
 } from "../infrastructure/write-message.service";
-import {
-  buildNewLine
-} from "../dom-service/builder/build-message-piece.service";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -15,7 +13,7 @@ export class NewlineAppService {
   constructor(private readonly writeMessage: WriteMessageService) {
   }
 
-  writeNewline(quantity: number = 1): void {
-    this.writeMessage.write(buildNewLine(quantity));
+  writeNewline(): void {
+    this.writeMessage.write(EMPTY_STRING);
   }
 }

@@ -2,7 +2,7 @@
  * All kinds of configuration file in the workspace.
  */
 export enum ConfigFileEnum {
-  domainJson = "repox.json",
-  tsconfigJson = "tsconfig.json"
+  gitignoreTextFile = ".gitignore",
+  repoxJsonFile = "repox.json",
+  tsconfigJsonFile = "tsconfig.json"
 }
-// todo: refactor

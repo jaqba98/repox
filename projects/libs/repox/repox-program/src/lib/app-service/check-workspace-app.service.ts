@@ -16,12 +16,12 @@ export class CheckWorkspaceAppService {
   }
 
   run(): boolean {
-    if (this.pathUtils.notExistPath(ConfigFileEnum.domainJson)) {
-      this.writeConfigExistError(ConfigFileEnum.domainJson);
+    if (this.pathUtils.notExistPath(ConfigFileEnum.repoxJsonFile)) {
+      this.writeConfigExistError(ConfigFileEnum.repoxJsonFile);
       return false;
     }
-    if (this.pathUtils.notExistPath(ConfigFileEnum.tsconfigJson)) {
-      this.writeConfigExistError(ConfigFileEnum.tsconfigJson);
+    if (this.pathUtils.notExistPath(ConfigFileEnum.tsconfigJsonFile)) {
+      this.writeConfigExistError(ConfigFileEnum.tsconfigJsonFile);
       return false;
     }
     return true;
