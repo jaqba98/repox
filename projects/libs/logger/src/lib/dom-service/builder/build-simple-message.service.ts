@@ -28,11 +28,15 @@ export class BuildSimpleMessageService {
   }
 
   buildPlain(message: string): string {
-    return this.baseBuildMsg(
-      message,
-      EMPTY_STRING,
-      LoggerModeEnum.plain
-    );
+    return this.buildMessage.build({
+      lines: [{
+        mode: LoggerModeEnum.plain,
+        logo: { visible: false, content: EMPTY_STRING },
+        header: { visible: false, content: EMPTY_STRING },
+        words: [{ content: message, underscore: false }],
+        newline: 0
+      }]
+    });
   }
 
   private baseBuildMsg(
