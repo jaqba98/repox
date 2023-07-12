@@ -13,11 +13,11 @@ import { LauncherAppService } from "@lib/launcher";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
   RepoxAliasEnum,
-  RepoxArgumentEnum, RepoxBuildDomainModelService,
+  RepoxArgumentEnum,
+  RepoxBuildParamModelService, RepoxBuildParamModelAppService,
   RepoxCommandAliasEnum,
-  RepoxCommandEnum,
-  RepoxGetParamDepService,
-  RepoxLaunchProgramService,
+  RepoxCommandEnum, RepoxGetParamDepAppService,
+  RepoxLaunchProgramAppService,
   RepoxProgramAliasEnum,
   RepoxProgramEnum
 } from "@lib/repox-domain";
@@ -34,8 +34,9 @@ export class RepoxMainService {
     private readonly buildParamDomain: BuildParamDomainAppService,
     private readonly paramDomain: ParamDomainAppService,
     private readonly launcher: LauncherAppService,
-    private readonly repoxLaunchProgram: RepoxLaunchProgramService,
-    private readonly buildDomainModel: RepoxBuildDomainModelService
+    private readonly repoxLaunchProgram: RepoxLaunchProgramAppService,
+    private readonly buildDomainModel: RepoxBuildParamModelService,
+    private readonly repoxBuildParamModel: RepoxBuildParamModelAppService
   ) {
   }
 
@@ -59,7 +60,7 @@ export class RepoxMainService {
       RepoxCommandAliasEnum,
       RepoxArgumentEnum,
       RepoxAliasEnum,
-      container.resolve(RepoxGetParamDepService)
+      container.resolve(RepoxGetParamDepAppService)
     );
     const paramDomainValidation = this.paramDomain
       .getParamDomainValidation();
@@ -74,10 +75,10 @@ export class RepoxMainService {
       return;
     }
     const repoxPrograms = this.repoxLaunchProgram.getPrograms();
-    const programDomain = this.buildDomainModel
-      .buildProgramDomainModel();
-    const commandDomain = this.buildDomainModel
-      .buildCommandDomainModel();
+    const programDomain = this.repoxBuildParamModel
+      .buildProgramParamModel();
+    const commandDomain = this.repoxBuildParamModel
+      .buildCommandParamModel();
     this.launcher.launchProgram(repoxPrograms).runProgram(
       programDomain, commandDomain
     );

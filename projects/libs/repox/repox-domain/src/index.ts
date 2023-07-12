@@ -3,7 +3,8 @@ export * from "./lib/enum/repox-command.enum";
 export * from "./lib/enum/repox-program.enum";
 export * from "./lib/model/repox-command.model";
 export * from "./lib/model/repox-program.model";
-export * from "./lib/service/repox-get-param-dep.service";
-export * from "./lib/service/repox-launch-program.service";
-export * from "./lib/service/repox-build-domain-model.service";
+export * from "./lib/app-service/repox-get-param-dep-app.service";
+export * from "./lib/app-service/repox-launch-program-app.service";
+export * from "./lib/app-service/repox-build-param-model-app.service";
+export * from "./lib/dom-service/repox-build-param-model.service";
 // todo: refactor
