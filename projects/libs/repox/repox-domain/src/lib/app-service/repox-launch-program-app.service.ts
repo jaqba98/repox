@@ -1,7 +1,9 @@
 import { container, singleton } from "tsyringe";
 import { LauncherModel } from "@lib/launcher";
-import { RepoxProgramEnum } from "../enum/repox-program.enum";
-import { RepoxCommandEnum } from "../enum/repox-command.enum";
+import {
+  RepoxCommandEnum,
+  RepoxProgramEnum
+} from "@lib/repox-domain";
 import {
   BuildProjectProgramService,
   DefaultDefaultProgramService,
@@ -11,10 +13,10 @@ import {
 
 @singleton()
 /**
- * The service is responsible for giving all programs
+ * The app service is responsible for giving all programs
  * for repox project.
  */
-export class RepoxLaunchProgramService {
+export class RepoxLaunchProgramAppService {
   getPrograms(): LauncherModel {
     return {
       programs: [
@@ -42,4 +44,3 @@ export class RepoxLaunchProgramService {
     };
   }
 }
-// todo: refactor

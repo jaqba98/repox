@@ -6,7 +6,7 @@ import {
 import {
   DefaultDefaultRepoxProgramModel,
   EmptyRepoxProgramModel,
-  RepoxProgramModel
+  TRepoxProgramModel
 } from "../model/repox-program.model";
 import { RepoxProgramEnum } from "../enum/repox-program.enum";
 import {
@@ -14,7 +14,7 @@ import {
   EmptyRepoxCommandModel,
   GenerateProjectRepoxCommandModel,
   GenerateWorkspaceRepoxCommandModel,
-  RepoxCommandModel
+  TRepoxCommandModel
 } from "../model/repox-command.model";
 import { RepoxCommandEnum } from "../enum/repox-command.enum";
 import { RepoxArgumentEnum } from "../enum/repox-argument.enum";
@@ -33,7 +33,7 @@ export class RepoxBuildDomainModelService {
   constructor(private readonly paramDomain: ParamDomainAppService) {
   }
 
-  buildProgramDomainModel(): RepoxProgramModel {
+  buildProgramDomainModel(): TRepoxProgramModel {
     const programName = this.paramDomain.getProgramName();
     if (programName === RepoxProgramEnum.default) {
       return this.buildDefaultDefaultProgram();
@@ -41,7 +41,7 @@ export class RepoxBuildDomainModelService {
     return <EmptyRepoxProgramModel>{};
   }
 
-  buildCommandDomainModel(): RepoxCommandModel {
+  buildCommandDomainModel(): TRepoxCommandModel {
     const programName = this.paramDomain.getProgramName();
     const commandName = this.paramDomain.getCommandName();
     if (programName === RepoxProgramEnum.generate) {
@@ -138,4 +138,5 @@ export class RepoxBuildDomainModelService {
     return <TValue>paramDomain.values;
   }
 }
+
 // todo: refactor
