@@ -1,6 +1,6 @@
 /**
- * The enum contains all arguments and aliases
- * available in the repox project.
+ * The enum contains all arguments and aliases available
+ * in the repox program.
  */
 
 export enum RepoxArgumentEnum {
@@ -18,4 +18,3 @@ export enum RepoxAliasEnum {
   path = "p",
   scheme = "s"
 }
-// todo: refactor

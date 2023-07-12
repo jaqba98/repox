@@ -10,7 +10,7 @@ import {
   RunCommandUtilsService
 } from "@lib/utils";
 import {
-  GenerateWorkspaceRepoxCommandDomainModel
+  GenerateWorkspaceRepoxCommandModel
 } from "@lib/repox-domain";
 import {
   BuildConfigFileAppService,
@@ -35,7 +35,7 @@ export class GenerateWorkspaceAppService {
   }
 
   generateWorkspace(
-    commandModel: GenerateWorkspaceRepoxCommandDomainModel
+    commandModel: GenerateWorkspaceRepoxCommandModel
   ): boolean {
     const { workspaceName } = commandModel;
     // Check whether the workspace folder not exist

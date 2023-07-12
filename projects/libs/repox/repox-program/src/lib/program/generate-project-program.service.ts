@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { RunProgramModel } from "@lib/model";
 import {
-  GenerateProjectRepoxCommandDomainModel
+  GenerateProjectRepoxCommandModel
 } from "@lib/repox-domain";
 import {
   GenerateProjectStepService
@@ -19,7 +19,7 @@ export class GenerateProjectProgramService implements RunProgramModel {
   }
 
   runProgram(programDomain: unknown, commandDomain: unknown): void {
-    const commandModel = <GenerateProjectRepoxCommandDomainModel>
+    const commandModel = <GenerateProjectRepoxCommandModel>
       commandDomain;
     this.generateProjectStep.runSteps(commandModel);
   }

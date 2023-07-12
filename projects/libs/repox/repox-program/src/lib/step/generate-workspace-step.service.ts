@@ -5,7 +5,7 @@ import {
 } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
-  GenerateWorkspaceRepoxCommandDomainModel
+  GenerateWorkspaceRepoxCommandModel
 } from "@lib/repox-domain";
 import {
   GenerateWorkspaceAppService
@@ -27,7 +27,7 @@ export class GenerateWorkspaceStepService {
   ) {
   }
 
-  runSteps(commandModel: GenerateWorkspaceRepoxCommandDomainModel): void {
+  runSteps(commandModel: GenerateWorkspaceRepoxCommandModel): void {
     this.simpleMessage.writeInfo("Workspace generation", REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.systemVerification.run()) return;

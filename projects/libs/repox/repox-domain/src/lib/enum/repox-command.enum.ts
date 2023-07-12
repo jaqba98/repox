@@ -12,4 +12,3 @@ export enum RepoxCommandAliasEnum {
   workspace = "w",
   project = "p"
 }
-// todo: refactor

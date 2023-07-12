@@ -5,7 +5,7 @@ import {
 } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
-  GenerateProjectRepoxCommandDomainModel
+  GenerateProjectRepoxCommandModel
 } from "@lib/repox-domain";
 import {
   SystemVerificationAppService
@@ -41,7 +41,7 @@ export class GenerateProjectStepService {
   ) {
   }
 
-  runSteps(commandModel: GenerateProjectRepoxCommandDomainModel): void {
+  runSteps(commandModel: GenerateProjectRepoxCommandModel): void {
     this.simpleMessage.writeInfo("Project generation", REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.systemVerification.run()) return;

@@ -3,7 +3,7 @@ import {
   ProgramVersionAppService
 } from "../app-service/program-version-app.service";
 import {
-  DefaultDefaultRepoxProgramDomainModel
+  DefaultDefaultRepoxProgramModel
 } from "@lib/repox-domain";
 import {
   SystemVerificationAppService
@@ -20,7 +20,7 @@ export class DefaultDefaultStepService {
   ) {
   }
 
-  runSteps(programModel: DefaultDefaultRepoxProgramDomainModel): void {
+  runSteps(programModel: DefaultDefaultRepoxProgramModel): void {
     if (!this.systemVerification.run()) return;
     if (programModel.showVersion) {
       this.programVersion.showProgramVersion();

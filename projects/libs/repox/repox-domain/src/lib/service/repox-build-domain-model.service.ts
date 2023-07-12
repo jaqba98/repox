@@ -4,18 +4,18 @@ import {
   ParamDomainArgModel,
 } from "@lib/param-domain";
 import {
-  DefaultDefaultRepoxProgramDomainModel,
-  EmptyRepoxProgramDomainModel,
-  RepoxProgramDomainModel
-} from "../model/repox-program-domain.model";
+  DefaultDefaultRepoxProgramModel,
+  EmptyRepoxProgramModel,
+  RepoxProgramModel
+} from "../model/repox-program.model";
 import { RepoxProgramEnum } from "../enum/repox-program.enum";
 import {
-  BuildProjectRepoxCommandDomainModel,
-  EmptyRepoxCommandDomainModel,
-  GenerateProjectRepoxCommandDomainModel,
-  GenerateWorkspaceRepoxCommandDomainModel,
-  RepoxCommandDomainModel
-} from "../model/repox-command-domain.model";
+  BuildProjectRepoxCommandModel,
+  EmptyRepoxCommandModel,
+  GenerateProjectRepoxCommandModel,
+  GenerateWorkspaceRepoxCommandModel,
+  RepoxCommandModel
+} from "../model/repox-command.model";
 import { RepoxCommandEnum } from "../enum/repox-command.enum";
 import { RepoxArgumentEnum } from "../enum/repox-argument.enum";
 import { EMPTY_STRING } from "@lib/const";
@@ -33,15 +33,15 @@ export class RepoxBuildDomainModelService {
   constructor(private readonly paramDomain: ParamDomainAppService) {
   }
 
-  buildProgramDomainModel(): RepoxProgramDomainModel {
+  buildProgramDomainModel(): RepoxProgramModel {
     const programName = this.paramDomain.getProgramName();
     if (programName === RepoxProgramEnum.default) {
       return this.buildDefaultDefaultProgram();
     }
-    return <EmptyRepoxProgramDomainModel>{};
+    return <EmptyRepoxProgramModel>{};
   }
 
-  buildCommandDomainModel(): RepoxCommandDomainModel {
+  buildCommandDomainModel(): RepoxCommandModel {
     const programName = this.paramDomain.getProgramName();
     const commandName = this.paramDomain.getCommandName();
     if (programName === RepoxProgramEnum.generate) {
@@ -57,10 +57,10 @@ export class RepoxBuildDomainModelService {
         return this.buildBuildProjectCommand();
       }
     }
-    return <EmptyRepoxCommandDomainModel>{};
+    return <EmptyRepoxCommandModel>{};
   }
 
-  private buildDefaultDefaultProgram(): DefaultDefaultRepoxProgramDomainModel {
+  private buildDefaultDefaultProgram(): DefaultDefaultRepoxProgramModel {
     return {
       showVersion: this.getProgramDomainModelValue<boolean>(
         RepoxArgumentEnum.version, false
@@ -68,7 +68,7 @@ export class RepoxBuildDomainModelService {
     }
   }
 
-  private buildGenerateWorkspaceCommand(): GenerateWorkspaceRepoxCommandDomainModel {
+  private buildGenerateWorkspaceCommand(): GenerateWorkspaceRepoxCommandModel {
     return {
       workspaceName: this.getCommandDomainModelValue<string>(
         RepoxArgumentEnum.name, EMPTY_STRING
@@ -76,7 +76,7 @@ export class RepoxBuildDomainModelService {
     };
   }
 
-  private buildGenerateProjectCommand(): GenerateProjectRepoxCommandDomainModel {
+  private buildGenerateProjectCommand(): GenerateProjectRepoxCommandModel {
     return {
       projectName: this.getCommandDomainModelValue<string>(
         RepoxArgumentEnum.name, EMPTY_STRING
@@ -93,7 +93,7 @@ export class RepoxBuildDomainModelService {
     };
   }
 
-  private buildBuildProjectCommand(): BuildProjectRepoxCommandDomainModel {
+  private buildBuildProjectCommand(): BuildProjectRepoxCommandModel {
     return {
       projectName: this.getCommandDomainModelValue<string>(
         RepoxArgumentEnum.name, EMPTY_STRING
