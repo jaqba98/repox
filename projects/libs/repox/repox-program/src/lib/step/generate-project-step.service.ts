@@ -10,6 +10,15 @@ import {
 import {
   SystemVerificationAppService
 } from "../app-service/system-verification-app.service";
+import {
+  GoToRootProjectAppService
+} from "../app-service/go-to-root-project-app.service";
+import {
+  CheckWorkspaceAppService
+} from "../app-service/check-workspace-app.service";
+import {
+  LoadConfigFileAppService
+} from "../app-service/load-config-file-app.service";
 
 @singleton()
 /**
@@ -20,9 +29,9 @@ export class GenerateProjectStepService {
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly systemVerification: SystemVerificationAppService,
     private readonly newline: NewlineAppService,
-    // private readonly preRun: PreRunAppService,
-    // private readonly checkWorkspace: CheckWorkspaceAppService
-    // private readonly goToProjectRoot: GoToProjectRootAppService,
+    private readonly goToRootProject: GoToRootProjectAppService,
+    private readonly checkWorkspace: CheckWorkspaceAppService,
+    private readonly loadConfigFile: LoadConfigFileAppService
     // private readonly projectApp: ProjectAppService,
     // private readonly systemVerification: SystemVerificationAppService,
     // private readonly workspaceCheck: WorkspaceCheckAppService,
@@ -36,11 +45,9 @@ export class GenerateProjectStepService {
     this.simpleMessage.writeInfo("Project generation", REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.systemVerification.run()) return;
-    // todo: I am here
-    // if (!this.preRun.run()) return;
-    // if (!this.checkWorkspace.run()) return;
-    // // Loading configuration
-    // if (!this.loadConfigFileApp.loadConfig()) return;
+    if (!this.goToRootProject.run()) return;
+    if (!this.checkWorkspace.run()) return;
+    if (!this.loadConfigFile.run()) return;
     // // Check that the project does not exist
     // if (!this.projectNotExist.check(
     //   model.projectName, model.projectType, model.projectPath

@@ -1,7 +1,6 @@
-// Refactored file
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-// import { DomainConfigStoreService } from "@lib/domain";
+import { RepoxWorkspaceStoreService } from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -10,14 +9,13 @@ import { SimpleMessageAppService } from "@lib/logger";
 export class LoadConfigFileAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    // private readonly domainConfigStore: DomainConfigStoreService
+    private readonly repoxWorkspaceStore: RepoxWorkspaceStoreService
   ) {
   }
 
-  loadConfig(): boolean {
+  run(): boolean {
     this.simpleMessage.writePlain("Loading configuration");
-    // this.domainConfigStore.loadConfig();
+    this.repoxWorkspaceStore.loadWorkspace();
     return true;
   }
 }
-// todo: refactor

@@ -30,7 +30,7 @@ export class BuildProjectStepService {
       "Build project", REPOX_LOGO
     );
     if (!this.folderIsWorkspace.run()) return;
-    if (!this.loadConfigFileApp.loadConfig()) return;
+    if (!this.loadConfigFileApp.run()) return;
     const { projectName } = model;
     if (!this.buildProjectApp.buildProject(projectName)) return;
   }

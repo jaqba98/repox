@@ -28,9 +28,7 @@ export class GenerateWorkspaceStepService {
   }
 
   runSteps(commandModel: GenerateWorkspaceRepoxCommandDomainModel): void {
-    this.simpleMessage.writeInfo(
-      "Workspace generation", REPOX_LOGO
-    );
+    this.simpleMessage.writeInfo("Workspace generation", REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.systemVerification.run()) return;
     this.generateWorkspace.generateWorkspace(commandModel);

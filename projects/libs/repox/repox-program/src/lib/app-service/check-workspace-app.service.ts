@@ -11,19 +11,20 @@ import { ConfigFileEnum } from "@lib/repox-workspace";
 export class CheckWorkspaceAppService {
   constructor(
     private readonly simple: SimpleMessageAppService,
-    private readonly pathUtils: PathUtilsService
+    private readonly path: PathUtilsService
   ) {
   }
 
   run(): boolean {
-    if (this.pathUtils.notExistPath(ConfigFileEnum.repoxJsonFile)) {
+    if (this.path.notExistPath(ConfigFileEnum.repoxJsonFile)) {
       this.writeConfigExistError(ConfigFileEnum.repoxJsonFile);
       return false;
     }
-    if (this.pathUtils.notExistPath(ConfigFileEnum.tsconfigJsonFile)) {
+    if (this.path.notExistPath(ConfigFileEnum.tsconfigJsonFile)) {
       this.writeConfigExistError(ConfigFileEnum.tsconfigJsonFile);
       return false;
     }
+    // todo: Create a config content verification
     return true;
   }
 
@@ -31,5 +32,3 @@ export class CheckWorkspaceAppService {
     this.simple.writeError(`Not exist ${configFile} config file!`);
   }
 }
-
-// todo: refactor
