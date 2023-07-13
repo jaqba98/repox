@@ -18,6 +18,9 @@ import {
 import {
   CreateWsStructureAppService
 } from "../app-service/create-ws-structure-app.service";
+import {
+  InitWsProjectAppService
+} from "../app-service/init-ws-project-app.service";
 
 @singleton()
 /**
@@ -29,9 +32,8 @@ export class GenerateWorkspaceStepService {
     private readonly newline: NewlineAppService,
     private readonly programInstalled: ProgramInstalledAppService,
     private readonly folderNotExist: FolderNotExistAppService,
-    private readonly createWsStructure: CreateWsStructureAppService
-    // private readonly systemVerification: SystemVerificationAppService,
-    // private readonly generateWorkspace: GenerateWorkspaceAppService
+    private readonly createWsStructure: CreateWsStructureAppService,
+    private readonly initWsProject: InitWsProjectAppService
   ) {
   }
 
@@ -47,8 +49,10 @@ export class GenerateWorkspaceStepService {
     if (!this.programInstalled.run(ProgramSystemEnum.npm)) return;
     if (!this.folderNotExist.run(workspaceName)) return;
     if (!this.createWsStructure.run(workspaceName)) return;
-    // todo: I am here
-    // this.generateWorkspace.generateWorkspace(commandModel);
+    if (!this.initWsProject.run()) return;
+    this.newline.writeNewline();
+    this.simpleMessage.writeSuccess(
+      "Workspace generated successfully!"
+    );
   }
 }
-// todo: refactor
