@@ -1,13 +1,11 @@
 import { singleton } from "tsyringe";
 import {
-  ProgramVersionAppService
-} from "../app-service/program-version-app.service";
+  RepoxVersionAppService
+} from "../app-service/repox-version-app.service";
 import {
-  DefaultDefaultRepoxProgramModel
+  DefaultDefaultRepoxProgramModel,
+  EmptyRepoxCommandModel
 } from "@lib/repox-domain";
-import {
-  SystemVerificationAppService
-} from "../app-service/system-verification-app.service";
 
 @singleton()
 /**
@@ -15,16 +13,17 @@ import {
  */
 export class DefaultDefaultStepService {
   constructor(
-    private readonly systemVerification: SystemVerificationAppService,
-    private readonly programVersion: ProgramVersionAppService
+    private readonly programVersion: RepoxVersionAppService
   ) {
   }
 
-  runSteps(programModel: DefaultDefaultRepoxProgramModel): void {
-    if (!this.systemVerification.run()) return;
-    if (programModel.showVersion) {
-      this.programVersion.showProgramVersion();
+  runSteps(
+    programModel: DefaultDefaultRepoxProgramModel,
+    commandModel: EmptyRepoxCommandModel
+  ): void {
+    const { showVersion } = programModel;
+    if (showVersion) {
+      this.programVersion.displayRepoxVersion();
     }
   }
 }
-// todo: refactor

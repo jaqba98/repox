@@ -3,6 +3,10 @@ import { RunProgramModel } from "@lib/model";
 import {
   DefaultDefaultStepService
 } from "../step/default-default-step.service";
+import {
+  DefaultDefaultRepoxProgramModel,
+  EmptyRepoxCommandModel
+} from "@lib/repox-domain";
 
 @singleton()
 /**
@@ -15,10 +19,9 @@ export class DefaultDefaultProgramService implements RunProgramModel {
   }
 
   runProgram(programDomain: unknown, commandDomain: unknown): void {
-    console.log("DefaultDefaultProgramService")
-    // const programModel = <DefaultDefaultRepoxProgramModel>
-    //   programDomain;
-    // this.defaultDefaultStep.runSteps(programModel);
+    const programModel = <DefaultDefaultRepoxProgramModel>
+      programDomain;
+    const commandModel = <EmptyRepoxCommandModel>commandDomain;
+    this.defaultDefaultStep.runSteps(programModel, commandModel);
   }
 }
-// todo: refactor

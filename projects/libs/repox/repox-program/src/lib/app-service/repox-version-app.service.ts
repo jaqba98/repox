@@ -4,16 +4,15 @@ import { REPOX_VERSION } from "@lib/repox-const";
 
 @singleton()
 /**
- * The app service is responsible for manage a program version.
+ * The app service is responsible for manage a repox version.
  */
-export class ProgramVersionAppService {
+export class RepoxVersionAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
 
-  showProgramVersion(): void {
+  displayRepoxVersion(): void {
     this.simpleMessage.writeInfo(REPOX_VERSION);
   }
 }
-// todo: refactor
