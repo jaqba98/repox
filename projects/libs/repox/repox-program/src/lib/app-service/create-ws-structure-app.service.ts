@@ -1,8 +1,5 @@
 import { singleton } from "tsyringe";
-import {
-  NewlineAppService,
-  SimpleMessageAppService
-} from "@lib/logger";
+import { SimpleMessageAppService } from "@lib/logger";
 import {
   FileUtilsService,
   FolderUtilsService,
@@ -28,7 +25,6 @@ export class CreateWsStructureAppService {
     private readonly fileUtils: FileUtilsService,
     private readonly runCommandUtils: RunCommandUtilsService,
     private readonly writeFile: FileUtilsService,
-    private readonly newline: NewlineAppService,
     private readonly createWsFile: CreateWsFileAppService
   ) {
   }
@@ -37,7 +33,6 @@ export class CreateWsStructureAppService {
     this.simpleMessage.writePlain(
       `Creating a ${workspaceName} workspace structure`
     );
-    this.newline.writeNewline();
     // Generate a root folder
     this.simpleMessage.writePlain("Generate a root folder");
     this.folderUtils.createFolder(workspaceName);
