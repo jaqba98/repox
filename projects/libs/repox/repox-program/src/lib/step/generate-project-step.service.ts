@@ -4,12 +4,7 @@ import {
   SimpleMessageAppService
 } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
-import {
-  GenerateProjectRepoxCommandModel
-} from "@lib/repox-domain";
-import {
-  ProgramExistOnSystemAppService
-} from "../app-service/program-installed-app.service";
+import { GenerateProjectRepoxCommandModel } from "@lib/repox-domain";
 import {
   GoToRootProjectAppService
 } from "../app-service/go-to-root-project-app.service";
@@ -27,7 +22,7 @@ import {
 export class GenerateProjectStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly systemVerification: ProgramExistOnSystemAppService,
+    // private readonly systemVerification: ProgramExistOnSystemAppService,
     private readonly newline: NewlineAppService,
     private readonly goToRootProject: GoToRootProjectAppService,
     private readonly checkWorkspace: CheckWorkspaceAppService,
@@ -44,7 +39,7 @@ export class GenerateProjectStepService {
   runSteps(commandModel: GenerateProjectRepoxCommandModel): void {
     this.simpleMessage.writeInfo("Project generation", REPOX_LOGO);
     this.newline.writeNewline();
-    if (!this.systemVerification.run()) return;
+    // if (!this.systemVerification.run()) return;
     if (!this.goToRootProject.run()) return;
     if (!this.checkWorkspace.run()) return;
     if (!this.loadConfigFile.run()) return;
