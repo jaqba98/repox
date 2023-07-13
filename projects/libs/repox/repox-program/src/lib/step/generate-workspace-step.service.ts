@@ -34,9 +34,9 @@ export class GenerateWorkspaceStepService {
     const { workspaceName } = commandModel;
     this.simpleMessage.writeInfo("Generate workspace", REPOX_LOGO);
     this.newline.writeNewline();
-    this.programInstalled.run(ProgramSystemEnum.git);
-    this.programInstalled.run(ProgramSystemEnum.node);
-    this.programInstalled.run(ProgramSystemEnum.npm);
+    if (!this.programInstalled.run(ProgramSystemEnum.git)) return;
+    if (!this.programInstalled.run(ProgramSystemEnum.node)) return;
+    if (!this.programInstalled.run(ProgramSystemEnum.npm)) return;
     // if (!this.systemVerification.run()) return;
     // this.generateWorkspace.generateWorkspace(commandModel);
   }
