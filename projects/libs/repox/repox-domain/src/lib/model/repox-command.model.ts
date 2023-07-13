@@ -17,8 +17,8 @@ export interface GenerateWorkspaceRepoxCommandModel {
 export interface GenerateProjectRepoxCommandModel {
   projectName: string;
   projectType: ProjectTypeEnum;
-  projectPath: string;
   projectScheme: ProjectSchemeEnum;
+  projectPath: string;
 }
 
 export interface BuildProjectRepoxCommandModel {

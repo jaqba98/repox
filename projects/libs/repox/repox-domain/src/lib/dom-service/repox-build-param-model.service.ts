@@ -1,10 +1,18 @@
 import { singleton } from "tsyringe";
 import {
+  BuildProjectRepoxCommandModel,
   DefaultDefaultRepoxProgramModel,
+  EmptyRepoxCommandModel,
   EmptyRepoxProgramModel,
+  GenerateProjectRepoxCommandModel,
+  GenerateWorkspaceRepoxCommandModel,
   RepoxArgumentEnum
 } from "@lib/repox-domain";
 import { ParamDomainAppService } from "@lib/param-domain";
+import {
+  ProjectSchemeEnum,
+  ProjectTypeEnum
+} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -12,129 +20,57 @@ import { ParamDomainAppService } from "@lib/param-domain";
  * model for all kinds of programs and commends.
  */
 export class RepoxBuildParamModelService {
-  constructor(private readonly paramDo: ParamDomainAppService) {
+  constructor(private readonly paramDomain: ParamDomainAppService) {
   }
 
-  buildEmptyProgramParamModel(): EmptyRepoxProgramModel {
+  emptyProgram(): EmptyRepoxProgramModel {
     return {};
   }
 
-  buildDefaultProgramParamModel(): DefaultDefaultRepoxProgramModel {
-    // todo: I am here
+  emptyCommand(): EmptyRepoxCommandModel {
+    return {};
+  }
+
+  defaultProgram(): DefaultDefaultRepoxProgramModel {
     return {
-      showVersion: this.getBooleanValue(RepoxArgumentEnum.version)
-    }
+      showVersion: this.paramDomain.getProgramBooleanValue(
+        RepoxArgumentEnum.version
+      )
+    };
   }
 
-  private getBooleanValue(argument: RepoxArgumentEnum): boolean {
-    return this.paramDo.getParamDomain().program.args
-      .some(param => param.name === argument);
+  generateWorkspaceCommand(): GenerateWorkspaceRepoxCommandModel {
+    return {
+      workspaceName: this.paramDomain.getCommandStringValue(
+        RepoxArgumentEnum.name
+      )
+    };
   }
 
-  // buildProgramDomainModel(): TRepoxProgramModel {
-  //   const programName = this.paramDomain.getProgramName();
-  //   if (programName === RepoxProgramEnum.default) {
-  //     return this.buildDefaultDefaultProgram();
-  //   }
-  //   return <EmptyRepoxProgramModel>{};
-  // }
+  generateProjectCommand(): GenerateProjectRepoxCommandModel {
+    return {
+      projectName: this.paramDomain.getCommandStringValue(
+        RepoxArgumentEnum.name
+      ),
+      projectType: <ProjectTypeEnum>this.paramDomain
+        .getCommandStringValue(
+          RepoxArgumentEnum.type, ProjectTypeEnum.app
+        ),
+      projectScheme: <ProjectSchemeEnum>this.paramDomain
+        .getCommandStringValue(
+          RepoxArgumentEnum.scheme, ProjectSchemeEnum.typescript
+        ),
+      projectPath: this.paramDomain.getCommandStringValue(
+        RepoxArgumentEnum.path
+      )
+    };
+  }
 
-  // buildCommandDomainModel(): TRepoxCommandModel {
-  //   const programName = this.paramDomain.getProgramName();
-  //   const commandName = this.paramDomain.getCommandName();
-  //   if (programName === RepoxProgramEnum.generate) {
-  //     if (commandName === RepoxCommandEnum.workspace) {
-  //       return this.buildGenerateWorkspaceCommand();
-  //     }
-  //     if (commandName === RepoxCommandEnum.project) {
-  //       return this.buildGenerateProjectCommand();
-  //     }
-  //   }
-  //   if (programName === RepoxProgramEnum.build) {
-  //     if (commandName === RepoxCommandEnum.project) {
-  //       return this.buildBuildProjectCommand();
-  //     }
-  //   }
-  //   return <EmptyRepoxCommandModel>{};
-  // }
-
-  // private buildDefaultDefaultProgram(): DefaultDefaultRepoxProgramModel {
-  //   return {
-  //     showVersion: this.getProgramDomainModelValue<boolean>(
-  //       RepoxArgumentEnum.version, false
-  //     )
-  //   }
-  // }
-
-  // private buildGenerateWorkspaceCommand(): GenerateWorkspaceRepoxCommandModel {
-  //   return {
-  //     workspaceName: this.getCommandDomainModelValue<string>(
-  //       RepoxArgumentEnum.name, EMPTY_STRING
-  //     )
-  //   };
-  // }
-
-  // private buildGenerateProjectCommand(): GenerateProjectRepoxCommandModel {
-  //   return {
-  //     projectName: this.getCommandDomainModelValue<string>(
-  //       RepoxArgumentEnum.name, EMPTY_STRING
-  //     ),
-  //     projectType: this.getCommandDomainModelValue<ProjectTypeEnum>(
-  //       RepoxArgumentEnum.type, ProjectTypeEnum.app
-  //     ),
-  //     projectScheme: this.getCommandDomainModelValue<ProjectSchemeEnum>(
-  //       RepoxArgumentEnum.scheme, ProjectSchemeEnum.typescript
-  //     ),
-  //     projectPath: this.getCommandDomainModelValue<string>(
-  //       RepoxArgumentEnum.path, EMPTY_STRING
-  //     )
-  //   };
-  // }
-
-  // private buildBuildProjectCommand(): BuildProjectRepoxCommandModel {
-  //   return {
-  //     projectName: this.getCommandDomainModelValue<string>(
-  //       RepoxArgumentEnum.name, EMPTY_STRING
-  //     ),
-  //   };
-  // }
-
-  // private getProgramDomainModelValue<TValue>(
-  //   argumentEnum: RepoxArgumentEnum,
-  //   defaultValue: TValue
-  // ): TValue {
-  //   const programArgument = this.paramDomain.getParamDomain()
-  //     .program
-  //     .args
-  //     .find(arg => arg.name === argumentEnum);
-  //   if (!programArgument) return defaultValue;
-  //   return this.baseGetDomainModelValue(programArgument);
-  // }
-
-  // private getCommandDomainModelValue<TValue>(
-  //   argumentEnum: RepoxArgumentEnum,
-  //   defaultValue: TValue
-  // ): TValue {
-  //   const commandArgument = this.paramDomain.getParamDomain()
-  //     .command
-  //     .args
-  //     .find(arg => arg.name === argumentEnum);
-  //   if (!commandArgument) return defaultValue;
-  //   return this.baseGetDomainModelValue(commandArgument);
-  // }
-
-  // private baseGetDomainModelValue<TValue>(
-  //   paramDomain: ParamDomainArgModel
-  // ): TValue {
-  //   const { hasValue, hasManyValues } = paramDomain;
-  //   if (!hasValue) {
-  //     return <TValue>true;
-  //   }
-  //   if (hasValue && !hasManyValues) {
-  //     return <TValue>paramDomain.values.at(0);
-  //   }
-  //   return <TValue>paramDomain.values;
-  // }
+  buildProjectCommand(): BuildProjectRepoxCommandModel {
+    return {
+      projectName: this.paramDomain.getCommandStringValue(
+        RepoxArgumentEnum.name
+      )
+    };
+  }
 }
-
-// todo: refactor

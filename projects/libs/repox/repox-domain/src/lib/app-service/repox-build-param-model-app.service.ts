@@ -1,5 +1,6 @@
 import { singleton } from "tsyringe";
 import {
+  RepoxCommandEnum,
   RepoxProgramEnum,
   TRepoxCommandModel,
   TRepoxProgramModel
@@ -23,17 +24,28 @@ export class RepoxBuildParamModelAppService {
 
   buildProgramParamModel(): TRepoxProgramModel {
     const programName = this.paramDom.getParamDomain().program.name;
-    switch (programName) {
-      case RepoxProgramEnum.default:
-        return this.buildParamModel.buildDefaultProgramParamModel();
-      default:
-        return this.buildParamModel.buildEmptyProgramParamModel();
+    if (programName === RepoxProgramEnum.default) {
+      return this.buildParamModel.defaultProgram();
     }
+    return this.buildParamModel.emptyProgram();
   }
 
   buildCommandParamModel(): TRepoxCommandModel {
-    return {};
+    const programName = this.paramDom.getParamDomain().program.name;
+    const commandName = this.paramDom.getParamDomain().command.name;
+    if (programName === RepoxProgramEnum.generate) {
+      if (commandName === RepoxCommandEnum.workspace) {
+        return this.buildParamModel.generateWorkspaceCommand();
+      }
+      if (commandName === RepoxCommandEnum.project) {
+        return this.buildParamModel.generateProjectCommand();
+      }
+    }
+    if (programName === RepoxProgramEnum.build) {
+      if (commandName === RepoxCommandEnum.project) {
+        return this.buildParamModel.buildProjectCommand();
+      }
+    }
+    return this.buildParamModel.emptyCommand();
   }
 }
-
-// todo: refactor

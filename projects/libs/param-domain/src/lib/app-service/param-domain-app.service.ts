@@ -8,6 +8,7 @@ import {
 import {
   ParamDomainValidationModel
 } from "../model/param-domain/param-domain-validation.model";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -34,5 +35,22 @@ export class ParamDomainAppService {
 
   getCommandName(): string {
     return this.paramDomainStore.getParamDomain().command.name;
+  }
+
+  getProgramBooleanValue(argument: string): boolean {
+    return this.paramDomainStore.getParamDomain().program.args
+      .some(param => param.name === argument);
+  }
+
+  getCommandStringValue(
+    argument: string, defaultValue: string = EMPTY_STRING
+  ): string {
+    const argumentValue = this.paramDomainStore.getParamDomain()
+      .command.args.find(param => param.name === argument);
+    if (argumentValue === undefined) {
+      return defaultValue;
+    }
+    const value = argumentValue.values.at(0);
+    return value ? value : defaultValue;
   }
 }

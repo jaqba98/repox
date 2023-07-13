@@ -9,18 +9,19 @@ import {
   BuildParamDomainAppService,
   ParamDomainAppService
 } from "@lib/param-domain";
-import { LauncherAppService } from "@lib/launcher";
 import { REPOX_LOGO } from "@lib/repox-const";
-import {
-  RepoxAliasEnum,
-  RepoxArgumentEnum,
-  RepoxBuildParamModelService, RepoxBuildParamModelAppService,
-  RepoxCommandAliasEnum,
-  RepoxCommandEnum, RepoxGetParamDepAppService,
-  RepoxLaunchProgramAppService,
-  RepoxProgramAliasEnum,
-  RepoxProgramEnum
-} from "@lib/repox-domain";
+// import {
+//   RepoxAliasEnum,
+//   RepoxArgumentEnum,
+//   RepoxBuildParamModelAppService,
+//   RepoxBuildParamModelService,
+//   RepoxCommandAliasEnum,
+//   RepoxCommandEnum,
+//   RepoxGetParamDepAppService,
+//   RepoxLaunchProgramAppService,
+//   RepoxProgramAliasEnum,
+//   RepoxProgramEnum
+// } from "@lib/repox-domain";
 
 @singleton()
 /**
@@ -33,10 +34,10 @@ export class RepoxMainService {
     private readonly paramErrorMessage: ParamErrorMessageAppService,
     private readonly buildParamDomain: BuildParamDomainAppService,
     private readonly paramDomain: ParamDomainAppService,
-    private readonly launcher: LauncherAppService,
-    private readonly repoxLaunchProgram: RepoxLaunchProgramAppService,
-    private readonly buildDomainModel: RepoxBuildParamModelService,
-    private readonly repoxBuildParamModel: RepoxBuildParamModelAppService
+    // private readonly launcher: LauncherAppService
+    // private readonly repoxLaunchProgram: RepoxLaunchProgramAppService,
+    // private readonly buildDomainModel: RepoxBuildParamModelService,
+    // private readonly repoxBuildParamModel: RepoxBuildParamModelAppService
   ) {
   }
 
@@ -53,15 +54,15 @@ export class RepoxMainService {
       );
       return;
     }
-    this.buildParamDomain.build(
-      RepoxProgramEnum,
-      RepoxProgramAliasEnum,
-      RepoxCommandEnum,
-      RepoxCommandAliasEnum,
-      RepoxArgumentEnum,
-      RepoxAliasEnum,
-      container.resolve(RepoxGetParamDepAppService)
-    );
+    // this.buildParamDomain.build(
+    //   RepoxProgramEnum,
+    //   RepoxProgramAliasEnum,
+    //   RepoxCommandEnum,
+    //   RepoxCommandAliasEnum,
+    //   RepoxArgumentEnum,
+    //   RepoxAliasEnum,
+    //   container.resolve(RepoxGetParamDepAppService)
+    // );
     const paramDomainValidation = this.paramDomain
       .getParamDomainValidation();
     if (!paramDomainValidation.success) {
@@ -74,14 +75,14 @@ export class RepoxMainService {
       );
       return;
     }
-    const repoxPrograms = this.repoxLaunchProgram.getPrograms();
-    const programDomain = this.repoxBuildParamModel
-      .buildProgramParamModel();
-    const commandDomain = this.repoxBuildParamModel
-      .buildCommandParamModel();
-    this.launcher.launchProgram(repoxPrograms).runProgram(
-      programDomain, commandDomain
-    );
+    // const repoxPrograms = this.repoxLaunchProgram.getPrograms();
+    // const programDomain = this.repoxBuildParamModel
+    //   .buildProgramParamModel();
+    // const commandDomain = this.repoxBuildParamModel
+    //   .buildCommandParamModel();
+    // this.launcher.launchProgram(repoxPrograms).runProgram(
+    //   programDomain, commandDomain
+    // );
   }
 }
 
