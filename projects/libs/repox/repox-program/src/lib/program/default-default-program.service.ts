@@ -13,15 +13,13 @@ import {
  * The start point of the program default.
  */
 export class DefaultDefaultProgramService implements RunProgramModel {
-  constructor(
-    private readonly defaultDefaultStep: DefaultDefaultStepService
-  ) {
+  constructor(private readonly step: DefaultDefaultStepService) {
   }
 
   runProgram(programDomain: unknown, commandDomain: unknown): void {
     const programModel = <DefaultDefaultRepoxProgramModel>
       programDomain;
     const commandModel = <EmptyRepoxCommandModel>commandDomain;
-    this.defaultDefaultStep.runSteps(programModel, commandModel);
+    this.step.runSteps(programModel, commandModel);
   }
 }

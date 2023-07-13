@@ -8,8 +8,8 @@ import {
   GenerateProjectRepoxCommandModel
 } from "@lib/repox-domain";
 import {
-  SystemVerificationAppService
-} from "../app-service/system-verification-app.service";
+  ProgramExistOnSystemAppService
+} from "../app-service/program-installed-app.service";
 import {
   GoToRootProjectAppService
 } from "../app-service/go-to-root-project-app.service";
@@ -27,7 +27,7 @@ import {
 export class GenerateProjectStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly systemVerification: SystemVerificationAppService,
+    private readonly systemVerification: ProgramExistOnSystemAppService,
     private readonly newline: NewlineAppService,
     private readonly goToRootProject: GoToRootProjectAppService,
     private readonly checkWorkspace: CheckWorkspaceAppService,
