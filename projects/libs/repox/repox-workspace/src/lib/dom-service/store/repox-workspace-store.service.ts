@@ -3,7 +3,7 @@ import { TsconfigModel } from "../../model/config/tsconfig.model";
 import { FileModel } from "../../model/file/file.model";
 import { FileUtilsService } from "@lib/utils";
 import { RepoxModel } from "../../model/config/repox.model";
-import { ConfigFileEnum } from "../../enum/config/config-file.enum";
+import { WorkspaceFileEnum } from "../../enum/workspace/workspace-file.enum";
 import { basename, extname } from "path";
 
 @singleton()
@@ -25,10 +25,10 @@ export class RepoxWorkspaceStoreService {
 
   loadWorkspace(): void {
     this.repox = this.file.readJsonFile<RepoxModel>(
-      ConfigFileEnum.repoxJsonFile
+      WorkspaceFileEnum.repoxJsonFile
     );
     this.tsconfig = this.file.readJsonFile<TsconfigModel>(
-      ConfigFileEnum.tsconfigJsonFile
+      WorkspaceFileEnum.tsconfigJsonFile
     );
     this.files = Object.values(this.repox.projects).map(project => ({
       name: project.name,

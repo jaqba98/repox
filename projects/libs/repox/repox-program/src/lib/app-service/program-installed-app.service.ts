@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-import { PathUtilsService, SystemUtilsService } from "@lib/utils";
+import { SystemUtilsService } from "@lib/utils";
 import { ProgramSystemEnum } from "../enum/program-system.enum";
 import {
   ConvertProgramToLinkService
@@ -14,7 +14,6 @@ import {
 export class ProgramInstalledAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly pathUtils: PathUtilsService,
     private readonly systemUtils: SystemUtilsService,
     private readonly convertProgramToLink: ConvertProgramToLinkService
   ) {

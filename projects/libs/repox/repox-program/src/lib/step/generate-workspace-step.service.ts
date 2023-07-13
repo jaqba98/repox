@@ -12,6 +12,12 @@ import {
   ProgramInstalledAppService
 } from "../app-service/program-installed-app.service";
 import { ProgramSystemEnum } from "../enum/program-system.enum";
+import {
+  FolderNotExistAppService
+} from "../app-service/folder-not-exist-app.service";
+import {
+  CreateWsStructureAppService
+} from "../app-service/create-ws-structure-app.service";
 
 @singleton()
 /**
@@ -21,7 +27,9 @@ export class GenerateWorkspaceStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
-    private readonly programInstalled: ProgramInstalledAppService
+    private readonly programInstalled: ProgramInstalledAppService,
+    private readonly folderNotExist: FolderNotExistAppService,
+    private readonly createWsStructure: CreateWsStructureAppService
     // private readonly systemVerification: SystemVerificationAppService,
     // private readonly generateWorkspace: GenerateWorkspaceAppService
   ) {
@@ -37,7 +45,9 @@ export class GenerateWorkspaceStepService {
     if (!this.programInstalled.run(ProgramSystemEnum.git)) return;
     if (!this.programInstalled.run(ProgramSystemEnum.node)) return;
     if (!this.programInstalled.run(ProgramSystemEnum.npm)) return;
-    // if (!this.systemVerification.run()) return;
+    if (!this.folderNotExist.run(workspaceName)) return;
+    if (!this.createWsStructure.run(workspaceName)) return;
+    // todo: I am here
     // this.generateWorkspace.generateWorkspace(commandModel);
   }
 }

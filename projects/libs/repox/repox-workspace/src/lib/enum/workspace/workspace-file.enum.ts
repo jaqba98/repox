@@ -1,11 +1,10 @@
 /**
- * All kinds of configuration file in the workspace.
+ * All kind of files in the workspace.
  */
-export enum ConfigFileEnum {
+export enum WorkspaceFileEnum {
   gitignoreTextFile = ".gitignore",
   repoxJsonFile = "repox.json",
   tsconfigJsonFile = "tsconfig.json",
-  jestTsFile = "jest.config.ts",
+  jestConfigTsFile = "jest.config.ts",
   gitkeepTextFile = ".gitkeep"
 }
-// todo: refactor

@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import { PathUtilsService } from "@lib/utils";
-import { ConfigFileEnum } from "@lib/repox-workspace";
+import { WorkspaceFileEnum } from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -16,19 +16,19 @@ export class CheckWorkspaceAppService {
   }
 
   run(): boolean {
-    if (this.path.notExistPath(ConfigFileEnum.repoxJsonFile)) {
-      this.writeConfigExistError(ConfigFileEnum.repoxJsonFile);
+    if (this.path.notExistPath(WorkspaceFileEnum.repoxJsonFile)) {
+      this.writeConfigExistError(WorkspaceFileEnum.repoxJsonFile);
       return false;
     }
-    if (this.path.notExistPath(ConfigFileEnum.tsconfigJsonFile)) {
-      this.writeConfigExistError(ConfigFileEnum.tsconfigJsonFile);
+    if (this.path.notExistPath(WorkspaceFileEnum.tsconfigJsonFile)) {
+      this.writeConfigExistError(WorkspaceFileEnum.tsconfigJsonFile);
       return false;
     }
     // todo: Create a config content verification
     return true;
   }
 
-  private writeConfigExistError(configFile: ConfigFileEnum): void {
+  private writeConfigExistError(configFile: WorkspaceFileEnum): void {
     this.simple.writeError(`Not exist ${configFile} config file!`);
   }
 }

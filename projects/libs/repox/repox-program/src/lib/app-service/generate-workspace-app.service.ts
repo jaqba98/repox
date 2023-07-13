@@ -13,8 +13,8 @@ import {
   GenerateWorkspaceRepoxCommandModel
 } from "@lib/repox-domain";
 import {
-  BuildConfigFileAppService,
-  ConfigFileEnum, WorkspaceFolderEnum
+  CreateWsFileAppService,
+  WorkspaceFileEnum, WorkspaceFolderEnum
 } from "@lib/repox-workspace";
 
 @singleton()
@@ -29,7 +29,7 @@ export class GenerateWorkspaceAppService {
     private readonly fileUtils: FileUtilsService,
     private readonly runCommandUtils: RunCommandUtilsService,
     private readonly writeFile: FileUtilsService,
-    private readonly buildConfigFile: BuildConfigFileAppService,
+    private readonly buildConfigFile: CreateWsFileAppService,
     private readonly newline: NewlineAppService
   ) {
   }
@@ -58,13 +58,13 @@ export class GenerateWorkspaceAppService {
     this.folderUtils.createFolder(WorkspaceFolderEnum.libs);
     this.folderUtils.createFolder(WorkspaceFolderEnum.tools);
     this.pathUtils.changePath(WorkspaceFolderEnum.apps);
-    this.fileUtils.createEmptyFile(ConfigFileEnum.gitkeepTextFile);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepTextFile);
     this.pathUtils.changePath("../");
     this.pathUtils.changePath(WorkspaceFolderEnum.libs);
-    this.fileUtils.createEmptyFile(ConfigFileEnum.gitkeepTextFile);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepTextFile);
     this.pathUtils.changePath("../");
     this.pathUtils.changePath(WorkspaceFolderEnum.tools);
-    this.fileUtils.createEmptyFile(ConfigFileEnum.gitkeepTextFile);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepTextFile);
     this.pathUtils.changePath("../../");
     // Init npm project
     this.simpleMessage.writePlain("Init npm project");
@@ -77,26 +77,26 @@ export class GenerateWorkspaceAppService {
     // Create tsconfig configuration
     this.simpleMessage.writePlain("Create tsconfig configuration");
     this.writeFile.writeJsonFile(
-      ConfigFileEnum.tsconfigJsonFile,
+      WorkspaceFileEnum.tsconfigJsonFile,
       this.buildConfigFile.buildDefaultTsconfigJsonFile()
     );
     // Create repox configuration
     this.simpleMessage.writePlain("Create repox configuration");
     this.writeFile.writeJsonFile(
-      ConfigFileEnum.repoxJsonFile,
+      WorkspaceFileEnum.repoxJsonFile,
       this.buildConfigFile.buildDefaultRepoxJsonFile()
     );
     // Create jest configuration
     this.simpleMessage.writePlain("Create jest configuration");
     this.writeFile.writeTextFile(
-      ConfigFileEnum.jestTsFile,
+      WorkspaceFileEnum.jestTsFile,
       this.buildConfigFile.buildDefaultRootJestTsFile()
     );
     // Create gitignore file
     this.simpleMessage.writePlain("Create gitignore file");
     this.writeFile.writeTextFile(
-      ConfigFileEnum.gitignoreTextFile,
-      this.buildConfigFile.buildDefaultGitignoreTextFile()
+      WorkspaceFileEnum.gitignoreTextFile,
+      this.buildConfigFile.buildDefaultGitignoreContentFile()
     );
     // Init git repository
     this.simpleMessage.writePlain("Init git repository");
