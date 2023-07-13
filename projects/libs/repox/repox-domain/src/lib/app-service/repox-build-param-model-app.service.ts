@@ -2,13 +2,13 @@ import { singleton } from "tsyringe";
 import {
   RepoxCommandEnum,
   RepoxProgramEnum,
-  TRepoxCommandModel,
-  TRepoxProgramModel
 } from "@lib/repox-domain";
 import {
   RepoxBuildParamModelService
 } from "../dom-service/repox-build-param-model.service";
 import { ParamDomainAppService } from "@lib/param-domain";
+import { TRepoxProgramModel } from "../model/repox-program.model";
+import { TRepoxCommandModel } from "../model/repox-command.model";
 
 @singleton()
 /**
