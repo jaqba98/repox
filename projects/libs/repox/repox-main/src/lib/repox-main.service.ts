@@ -1,3 +1,4 @@
+import "core-js/features/reflect";
 import { container, singleton } from "tsyringe";
 import {
   BuildParamDtoAppService,
