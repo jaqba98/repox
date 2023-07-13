@@ -1,32 +1,35 @@
 import { singleton } from "tsyringe";
 import {
+  EmptyRepoxProgramModel,
+  GenerateProjectRepoxCommandModel
+} from "@lib/repox-domain";
+import {
   NewlineAppService,
   SimpleMessageAppService
 } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
-import { GenerateProjectRepoxCommandModel } from "@lib/repox-domain";
+import { ProgramSystemEnum } from "../enum/program-system.enum";
 import {
-  GoToRootProjectAppService
-} from "../app-service/go-to-root-project-app.service";
+  ProgramInstalledAppService
+} from "../app-service/program-installed-app.service";
 import {
-  CheckWorkspaceAppService
-} from "../app-service/check-workspace-app.service";
-import {
-  LoadConfigFileAppService
-} from "../app-service/load-config-file-app.service";
+  GoToProjectRootAppService
+} from "../app-service/go-to-project-root-app.service";
 
 @singleton()
 /**
- * The list of steps for the generate project program.
+ * The list of steps for the program generate project.
  */
 export class GenerateProjectStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    // private readonly systemVerification: ProgramExistOnSystemAppService,
     private readonly newline: NewlineAppService,
-    private readonly goToRootProject: GoToRootProjectAppService,
-    private readonly checkWorkspace: CheckWorkspaceAppService,
-    private readonly loadConfigFile: LoadConfigFileAppService
+    private readonly programInstalled: ProgramInstalledAppService,
+    private readonly goToProjectRoot: GoToProjectRootAppService
+    // private readonly systemVerification: ProgramExistOnSystemAppService,
+    // private readonly goToRootProject: GoToRootProjectAppService,
+    // private readonly checkWorkspace: CheckWorkspaceAppService,
+    // private readonly loadConfigFile: LoadConfigFileAppService
     // private readonly projectApp: ProjectAppService,
     // private readonly systemVerification: SystemVerificationAppService,
     // private readonly workspaceCheck: WorkspaceCheckAppService,
@@ -36,13 +39,21 @@ export class GenerateProjectStepService {
   ) {
   }
 
-  runSteps(commandModel: GenerateProjectRepoxCommandModel): void {
-    this.simpleMessage.writeInfo("Project generation", REPOX_LOGO);
+  runSteps(
+    programModel: EmptyRepoxProgramModel,
+    commandModel: GenerateProjectRepoxCommandModel
+  ): void {
+    this.simpleMessage.writeInfo("Generate project", REPOX_LOGO);
     this.newline.writeNewline();
-    // if (!this.systemVerification.run()) return;
-    if (!this.goToRootProject.run()) return;
-    if (!this.checkWorkspace.run()) return;
-    if (!this.loadConfigFile.run()) return;
+    if (!this.programInstalled.run(ProgramSystemEnum.git)) return;
+    if (!this.programInstalled.run(ProgramSystemEnum.node)) return;
+    if (!this.programInstalled.run(ProgramSystemEnum.npm)) return;
+    if (!this.goToProjectRoot.run()) return;
+    // todo: I am here
+    // // if (!this.systemVerification.run()) return;
+    // if (!this.goToRootProject.run()) return;
+    // if (!this.checkWorkspace.run()) return;
+    // if (!this.loadConfigFile.run()) return;
     // // Check that the project does not exist
     // if (!this.projectNotExist.check(
     //   model.projectName, model.projectType, model.projectPath

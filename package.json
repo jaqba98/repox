@@ -24,7 +24,6 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "app-root-path": "^3.1.0",
     "command-exists": "^1.2.9",
     "core-js": "^3.31.1",
     "glob": "^10.3.3",

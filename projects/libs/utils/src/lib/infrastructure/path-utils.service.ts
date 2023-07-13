@@ -1,7 +1,8 @@
 import { singleton } from "tsyringe";
 import { existsSync } from "fs";
 import { chdir } from "process";
-import { join } from "path";
+import { join, sep } from "path";
+import process from "process";
 
 @singleton()
 /**
@@ -26,5 +27,17 @@ export class PathUtilsService {
 
   normalizePath(path: string): string {
     return path.replace(/\\/g, "/");
+  }
+
+  getCurrentPath(): string {
+    return process.cwd();
+  }
+
+  getPathSep(): string {
+    return sep;
+  }
+
+  getPackageJsonPath(currentPath: string): string {
+    return "";
   }
 }

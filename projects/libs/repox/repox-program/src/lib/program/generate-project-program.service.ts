@@ -1,27 +1,28 @@
 import { singleton } from "tsyringe";
 import { RunProgramModel } from "@lib/model";
 import {
-  GenerateProjectRepoxCommandModel
-} from "@lib/repox-domain";
-import {
   GenerateProjectStepService
 } from "../step/generate-project-step.service";
+import {
+  EmptyRepoxProgramModel,
+  GenerateProjectRepoxCommandModel
+} from "@lib/repox-domain";
 
 @singleton()
 /**
- * The program service is responsible for starting the process
- * of generating a new project.
+ * The start point of the program generate project.
  */
-export class GenerateProjectProgramService implements RunProgramModel {
+export class GenerateProjectProgramService
+  implements RunProgramModel {
   constructor(
-    private readonly generateProjectStep: GenerateProjectStepService
+    private readonly step: GenerateProjectStepService
   ) {
   }
 
   runProgram(programDomain: unknown, commandDomain: unknown): void {
+    const programModel = <EmptyRepoxProgramModel>programDomain;
     const commandModel = <GenerateProjectRepoxCommandModel>
       commandDomain;
-    this.generateProjectStep.runSteps(commandModel);
+    this.step.runSteps(programModel, commandModel);
   }
 }
-// todo: refactor
