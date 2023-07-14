@@ -1,8 +1,9 @@
 import { singleton } from "tsyringe";
 import { existsSync } from "fs";
-import { chdir } from "process";
-import { join, sep } from "path";
-import process from "process";
+import process, { chdir } from "process";
+import { join, parse } from "path";
+import { WorkspaceFileEnum } from "@lib/repox-workspace";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -33,11 +34,22 @@ export class PathUtilsService {
     return process.cwd();
   }
 
-  getPathSep(): string {
-    return sep;
+  isRootPath(path: string): boolean {
+    const parsedPath = parse(path);
+    return parsedPath.root === parsedPath.dir;
   }
 
   getPackageJsonPath(currentPath: string): string {
-    return "";
+    if (this.isRootPath(currentPath)) {
+      return EMPTY_STRING;
+    }
+    const packageJsonPath = join(
+      currentPath, WorkspaceFileEnum.packageJsonFile
+    );
+    if (this.existPath(packageJsonPath)) {
+      return currentPath;
+    }
+    const nextPath = join(currentPath, "../");
+    return this.getPackageJsonPath(nextPath);
   }
 }
