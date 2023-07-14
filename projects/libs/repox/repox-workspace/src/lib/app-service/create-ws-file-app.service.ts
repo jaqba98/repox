@@ -1,6 +1,10 @@
 import { singleton } from "tsyringe";
-import { TsconfigModel } from "../model/config/tsconfig.model";
-import { RepoxModel } from "../model/config/repox.model";
+import {
+  WsRepoxDtoModel
+} from "../model/ws-file-dto/ws-repox-dto.model";
+import {
+  WsTsconfigDtoModel
+} from "../model/ws-file-dto/ws-tsconfig-dto.model";
 
 @singleton()
 /**
@@ -38,13 +42,13 @@ export default config;
 `;
   }
 
-  buildDefaultRepoxJsonContentFile(): RepoxModel {
+  buildDefaultRepoxJsonContentFile(): WsRepoxDtoModel {
     return {
       projects: {}
     };
   }
 
-  buildDefaultTsconfigJsonContentFile(): TsconfigModel {
+  buildDefaultTsconfigJsonContentFile(): WsTsconfigDtoModel {
     return {
       compilerOptions: {
         target: "ES2022",
