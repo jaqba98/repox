@@ -20,7 +20,7 @@ export class LoadWsConfigAppService {
   }
 
   run(): boolean {
-    this.simpleMessage.writePlain("Load repox configuration");
+    this.simpleMessage.writePlain("Load workspace configuration");
     if (this.path.notExistPath(WorkspaceFileEnum.repoxJsonFile)) {
       this.notExistPathError(WorkspaceFileEnum.repoxJsonFile);
       return false;
@@ -30,6 +30,7 @@ export class LoadWsConfigAppService {
       return false;
     }
     this.wsDtoStore.loadWsDto();
+    // todo: Create verification of configuration files
     return true;
   }
 
