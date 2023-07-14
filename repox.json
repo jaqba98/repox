@@ -4,128 +4,104 @@
       "name": "repox",
       "type": "app",
       "path": "projects/apps/repox",
-      "assets": [
-        {
-          "inputDir": "projects/apps/repox",
-          "fileName": "package.json",
-          "outputDir": "dist/repox"
-        },
-        {
-          "inputDir": "projects/apps/repox/doc",
-          "fileName": "README.md",
-          "outputDir": "dist/repox"
-        }
-      ],
       "scheme": {
-        "type": "typescript"
+        "type": "@app/ts"
       }
     },
     "const": {
       "name": "const",
       "type": "lib",
       "path": "projects/libs/const",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "logger": {
       "name": "logger",
       "type": "lib",
       "path": "projects/libs/logger",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "param-domain": {
       "name": "param-domain",
       "type": "lib",
       "path": "projects/libs/param-domain",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "param-dto": {
       "name": "param-dto",
       "type": "lib",
       "path": "projects/libs/param-dto",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "launcher": {
       "name": "launcher",
       "type": "lib",
       "path": "projects/libs/launcher",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "repox-main": {
       "name": "repox-main",
       "type": "lib",
       "path": "projects/libs/repox/repox-main",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "repox-program": {
       "name": "repox-program",
       "type": "lib",
       "path": "projects/libs/repox/repox-program",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "repox-workspace": {
       "name": "repox-workspace",
       "type": "lib",
       "path": "projects/libs/repox/repox-workspace",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "utils": {
       "name": "utils",
       "type": "lib",
       "path": "projects/libs/utils",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "model": {
       "name": "model",
       "type": "lib",
       "path": "projects/libs/model",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "repox-const": {
       "name": "repox-const",
       "type": "lib",
       "path": "projects/libs/repox/repox-const",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     },
     "repox-domain": {
       "name": "repox-domain",
       "type": "lib",
       "path": "projects/libs/repox/repox-domain",
-      "assets": [],
       "scheme": {
-        "type": "typescript"
+        "type": "@lib/ts"
       }
     }
   }

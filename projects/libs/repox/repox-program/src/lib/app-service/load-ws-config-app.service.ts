@@ -30,6 +30,7 @@ export class LoadWsConfigAppService {
       return false;
     }
     this.wsDtoStore.loadWsDto();
+    if (!this.wsDtoStore.validationWsRepoxDto()) return false;
     // todo: Create verification of configuration files
     return true;
   }
