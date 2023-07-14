@@ -8,8 +8,8 @@ import {
   CheckWorkspaceAppService
 } from "../app-service/check-workspace-app.service";
 import {
-  LoadConfigFileAppService
-} from "../app-service/load-config-file-app.service";
+  LoadWsConfigAppService
+} from "../app-service/load-ws-config-app.service";
 import { REPOX_LOGO } from "@lib/repox-const";
 
 @singleton()
@@ -21,7 +21,7 @@ export class BuildProjectStepService {
     private readonly loggerMessageApp: SimpleMessageAppService,
     private readonly buildProjectApp: BuildProjectAppService,
     private readonly folderIsWorkspace: CheckWorkspaceAppService,
-    private readonly loadConfigFileApp: LoadConfigFileAppService
+    private readonly loadConfigFileApp: LoadWsConfigAppService
   ) {
   }
 

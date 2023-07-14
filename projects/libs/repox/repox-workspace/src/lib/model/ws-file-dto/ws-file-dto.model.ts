@@ -9,15 +9,7 @@ export interface WsFileProjectFileDtoModel {
   fileExtname: string;
 }
 
-export interface WsFileProjectDtoModel {
+export interface WsFileDtoModel {
   projectName: string;
   projectFiles: Array<WsFileProjectFileDtoModel>;
-}
-
-export interface WsFileProjectsDtoModel {
-  [projectName: string]: WsFileProjectDtoModel;
-}
-
-export interface WsFileDtoModel {
-  projects: WsFileProjectsDtoModel;
 }

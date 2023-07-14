@@ -15,6 +15,9 @@ import {
 import {
   GoToProjectRootAppService
 } from "../app-service/go-to-project-root-app.service";
+import {
+  LoadWsConfigAppService
+} from "../app-service/load-ws-config-app.service";
 
 @singleton()
 /**
@@ -25,7 +28,8 @@ export class GenerateProjectStepService {
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly programInstalled: ProgramInstalledAppService,
-    private readonly goToProjectRoot: GoToProjectRootAppService
+    private readonly goToProjectRoot: GoToProjectRootAppService,
+    private readonly loadWsConfig: LoadWsConfigAppService
     // private readonly systemVerification: ProgramExistOnSystemAppService,
     // private readonly goToRootProject: GoToRootProjectAppService,
     // private readonly checkWorkspace: CheckWorkspaceAppService,
@@ -49,6 +53,7 @@ export class GenerateProjectStepService {
     if (!this.programInstalled.run(ProgramSystemEnum.node)) return;
     if (!this.programInstalled.run(ProgramSystemEnum.npm)) return;
     if (!this.goToProjectRoot.run()) return;
+    if (!this.loadWsConfig.run()) return;
     // if (!this.checkWorkspace.run()) return;
     // if (!this.loadConfigFile.run()) return;
     // // Check that the project does not exist

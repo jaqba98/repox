@@ -58,7 +58,7 @@ export class RepoxBuildParamModelService {
         ),
       projectScheme: <ProjectSchemeEnum>this.paramDomain
         .getCommandStringValue(
-          RepoxArgumentEnum.scheme, ProjectSchemeEnum.typescript
+          RepoxArgumentEnum.scheme, ProjectSchemeEnum.appTypeScript
         ),
       projectPath: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.path
