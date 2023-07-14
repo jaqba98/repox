@@ -40,14 +40,14 @@ export class PathUtilsService {
   }
 
   getPackageJsonPath(currentPath: string): string {
-    if (this.isRootPath(currentPath)) {
-      return EMPTY_STRING;
-    }
     const packageJsonPath = join(
       currentPath, WorkspaceFileEnum.packageJsonFile
     );
     if (this.existPath(packageJsonPath)) {
       return currentPath;
+    }
+    if (this.isRootPath(currentPath)) {
+      return EMPTY_STRING;
     }
     const nextPath = join(currentPath, "../");
     return this.getPackageJsonPath(nextPath);

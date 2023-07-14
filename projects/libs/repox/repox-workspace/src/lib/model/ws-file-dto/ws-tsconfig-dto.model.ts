@@ -1,14 +1,13 @@
 /**
- * The real model of the tsconfig configuration file on the disc
+ * The real dto model of the tsconfig configuration file on the disc
  * with all required properties.
  */
-
 
 export interface TsconfigPathsModel {
   [alias: string]: Array<string>;
 }
 
-export interface TsconfigModel {
+export interface WsTsconfigDtoModel {
   compilerOptions: {
     target: string;
     experimentalDecorators: boolean;
@@ -26,4 +25,3 @@ export interface TsconfigModel {
   },
   exclude: Array<string>;
 }
-// todo: refactor

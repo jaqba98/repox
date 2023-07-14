@@ -1,9 +1,8 @@
 /**
- * The enum of the project types.
+ * All kinds of project type.
  */
 export enum ProjectTypeEnum {
   app = "app",
   lib = "lib",
   tool = "tool"
 }
-// todo: refactor

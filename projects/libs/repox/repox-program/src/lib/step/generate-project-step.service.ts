@@ -49,9 +49,6 @@ export class GenerateProjectStepService {
     if (!this.programInstalled.run(ProgramSystemEnum.node)) return;
     if (!this.programInstalled.run(ProgramSystemEnum.npm)) return;
     if (!this.goToProjectRoot.run()) return;
-    // todo: I am here
-    // // if (!this.systemVerification.run()) return;
-    // if (!this.goToRootProject.run()) return;
     // if (!this.checkWorkspace.run()) return;
     // if (!this.loadConfigFile.run()) return;
     // // Check that the project does not exist
