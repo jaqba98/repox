@@ -9,7 +9,7 @@
     "unlink": "npm unlink ./dist/repox && npm uninstall repox -g",
     "repox:version": "node dist/repox/apps/repox/src/main.js --version",
     "generate:workspace": "node dist/repox/apps/repox/src/main.js generate workspace --name=dog",
-    "generate:project": "node dist/repox/apps/repox/src/main.js generate project --name=dog --type=lib --scheme=@app/ts"
+    "generate:project": "node dist/repox/apps/repox/src/main.js generate project --name=dog --type=lib --scheme=@lib/ts"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
