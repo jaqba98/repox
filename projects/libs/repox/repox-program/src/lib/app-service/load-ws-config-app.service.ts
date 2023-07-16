@@ -5,6 +5,7 @@ import {
   WsDtoStoreService
 } from "@lib/repox-workspace";
 import { PathUtilsService } from "@lib/utils";
+import { ValidationError } from "jsonschema";
 
 @singleton()
 /**
@@ -30,8 +31,22 @@ export class LoadWsConfigAppService {
       return false;
     }
     this.wsDtoStore.loadWsDto();
-    if (!this.wsDtoStore.validationWsRepoxDto()) return false;
-    // todo: Create verification of configuration files
+    const wsRepoxDtoVerifyResult = this.wsDtoStore.verifyWsRepoxDto();
+    if (wsRepoxDtoVerifyResult.errors.length > 0) {
+      this.verifyErrorError(
+        WorkspaceFileEnum.repoxJsonFile, wsRepoxDtoVerifyResult.errors
+      );
+      return false;
+    }
+    const wsTsconfigDtoVerifyResult = this.wsDtoStore
+      .verifyWsTsconfigDto();
+    if (wsTsconfigDtoVerifyResult.errors.length > 0) {
+      this.verifyErrorError(
+        WorkspaceFileEnum.tsconfigJsonFile,
+        wsTsconfigDtoVerifyResult.errors
+      );
+      return false;
+    }
     return true;
   }
 
@@ -40,6 +55,17 @@ export class LoadWsConfigAppService {
     this.simpleMessage.writeError(
       `The ${workspaceFile} file does not exist`
     );
+  }
+
+  private verifyErrorError(
+    workspaceFile: WorkspaceFileEnum, errors: Array<ValidationError>
+  ): void {
+    this.simpleMessage.writeError(
+      `Incorrect content of ${workspaceFile} file`
+    );
+    errors.forEach(error => {
+      this.simpleMessage.writeError(error.toString());
+    });
   }
 }
 

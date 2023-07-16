@@ -12,23 +12,18 @@ export interface WsRepoxAssetsDtoModel {
   output: string;
 }
 
-export interface WsRepoxBuildTypeScriptDtoModel {
+export interface WsRepoxBuildAppTsDtoModel {
   output: string;
   main: string;
-  packageJson: boolean;
   assets: Array<WsRepoxAssetsDtoModel>;
-}
-
-export interface WsRepoxSchemeDtoModel {
-  type: ProjectSchemeEnum;
-  build: WsRepoxBuildTypeScriptDtoModel;
 }
 
 export interface WsRepoxProjectDtoModel {
   name: string;
   type: ProjectTypeEnum;
-  root: string;
-  scheme: WsRepoxSchemeDtoModel;
+  path: string;
+  scheme: ProjectSchemeEnum;
+  build: WsRepoxBuildAppTsDtoModel;
 }
 
 export interface WsRepoxProjectsDtoModel {
