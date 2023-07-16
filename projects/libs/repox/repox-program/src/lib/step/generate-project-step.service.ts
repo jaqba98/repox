@@ -41,7 +41,7 @@ export class GenerateProjectStepService {
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadWsDto: LoadWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
-    // private readonly projectNotExist: ProjectNotExistAppService,
+    private readonly projectNotExist: ProjectNotExistAppService,
     // private readonly addProjectToDomain: AddProjectToDomainAppService,
     // private readonly wsDomainStore: WsDomainStoreService
     // private readonly systemVerification: ProgramExistOnSystemAppService,
@@ -66,12 +66,10 @@ export class GenerateProjectStepService {
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return;
     if (!this.loadWsDomain.run()) return;
-    // todo: I am here
-    console.log("Hello");
-    // const {
-    //   projectName, projectType, projectPath, projectScheme
-    // } = commandModel;
-    // if (!this.projectNotExist.run(projectName)) return;
+    const {
+      projectName, projectType, projectPath, projectScheme
+    } = commandModel;
+    if (!this.projectNotExist.run(projectName)) return;
     // this.addProjectToDomain.run(
     //   projectName, projectType, projectPath, projectScheme
     // );

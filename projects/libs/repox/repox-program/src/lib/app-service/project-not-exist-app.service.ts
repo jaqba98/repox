@@ -18,8 +18,7 @@ export class ProjectNotExistAppService {
     this.simpleMessage.writePlain(
       `Check that project ${projectName} does not exist`
     );
-    // const project = this.wsDomainStore.getProjectBeName(projectName);
-    const project = "";
+    const project = this.wsDomainStore.getProjectBeName(projectName);
     if (project === undefined) {
       return true;
     }

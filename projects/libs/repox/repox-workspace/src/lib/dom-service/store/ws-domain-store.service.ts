@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   ProjectSchemeEnum,
   ProjectTypeEnum,
-  WsDtoStoreService
+  WsDtoStoreService, WsProjectDomainModel
 } from "@lib/repox-workspace";
 import { WsDomainModel } from "../../model/ws-domain/ws-domain.model";
 import {
@@ -56,6 +56,21 @@ export class WsDomainStoreService {
     };
   }
 
+  getWsDomain(): WsDomainModel {
+    if (this.wsDomain === undefined) {
+      throw new Error("The store is undefined!");
+    }
+    return this.wsDomain;
+  }
+
+  getProjectBeName(
+    projectName: string
+  ): WsProjectDomainModel | undefined {
+    return this.getWsDomain().projects.find(
+      project => project.name === projectName
+    );
+  }
+
   // saveWsDomain(): void {
   //   if (this.wsDomain === undefined) {
   //     throw new Error("The store is undefined!");
@@ -70,20 +85,6 @@ export class WsDomainStoreService {
   //       name, type, path, scheme, build, alias, indexPath
   //     )
   //   });
-  // }
-
-  // getWsDomain(): WsDomainModel {
-  //   if (this.wsDomain === undefined) {
-  //     throw new Error("The store is undefined!");
-  //   }
-  //   return this.wsDomain;
-  // }
-
-  // getProjectBeName(
-  //   projectName: string
-  // ): WsProjectDomainModel | undefined {
-  //   return this.getWsDomain().projects
-  //     .find(project => project.name === projectName);
   // }
 
   // addProject(
