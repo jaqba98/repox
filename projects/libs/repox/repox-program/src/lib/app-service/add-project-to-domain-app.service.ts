@@ -23,8 +23,7 @@ export class AddProjectToDomainAppService {
     private readonly buildProjectAlias: BuildProjectAliasService,
     private readonly buildProjectPath: BuildProjectPathService,
     private readonly pathUtils: PathUtilsService,
-    private readonly wsDomainStore: WsDomainStoreService,
-    private readonly wsDtoStore: WsDtoStoreService
+    private readonly wsDomainStore: WsDomainStoreService
   ) {
   }
 
