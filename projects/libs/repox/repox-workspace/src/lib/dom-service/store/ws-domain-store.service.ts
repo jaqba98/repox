@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import {
   ProjectSchemeEnum,
-  ProjectTypeEnum,
+  ProjectTypeEnum, WsAssetsDomainModel,
   WsDtoStoreService
 } from "@lib/repox-workspace";
 import {
@@ -11,6 +11,7 @@ import {
 import {
   BuildProjectAliasService
 } from "../builder/build-project-alias.service";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -36,7 +37,9 @@ export class WsDomainStoreService {
           path: project.path,
           scheme: project.scheme,
           build: {
-            ...project.build
+            output: project.build.output || EMPTY_STRING,
+            main: project.build.main || EMPTY_STRING,
+            assets: project.build.assets || []
           },
           alias: this.buildProjectAlias.buildAlias(
             project.name, project.type
