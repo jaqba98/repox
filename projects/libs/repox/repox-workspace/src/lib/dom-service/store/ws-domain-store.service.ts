@@ -96,7 +96,7 @@ export class WsDomainStoreService {
         projectScheme, projectPath, projectName
       ),
       alias: projectAlias,
-      indexPath: this.getProjectIndexPath(projectScheme, projectPath),
+      indexPath: this.getProjectIndexPath(projectType, projectPath),
       changed: true
     });
   }
@@ -131,14 +131,14 @@ export class WsDomainStoreService {
   }
 
   private getProjectIndexPath(
-    projectScheme: ProjectSchemeEnum,
+    projectType: ProjectTypeEnum,
     projectPath: string
   ): Array<string> {
-    switch (projectScheme) {
-      case ProjectSchemeEnum.appTypeScript:
+    switch (projectType) {
+      case ProjectTypeEnum.app:
         return [];
-      case ProjectSchemeEnum.libTypeScript:
-      case ProjectSchemeEnum.toolTypeScript:
+      case ProjectTypeEnum.lib:
+      case ProjectTypeEnum.tool:
         return [
           this.pathUtils.createPath([
             projectPath, WorkspaceFolderEnum.src,
@@ -146,7 +146,7 @@ export class WsDomainStoreService {
           ])
         ];
       default:
-        throw new Error("Not supported project scheme");
+        throw new Error("Not supported project type");
     }
   }
 }
