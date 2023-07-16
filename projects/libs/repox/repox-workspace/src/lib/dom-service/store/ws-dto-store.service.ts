@@ -9,11 +9,18 @@ import {
   tsconfigJsonFileSchema
 } from "../../const/schema.const";
 import {
-  WsRepoxDtoModel
+  WsRepoxDtoModel,
+  WsRepoxProjectBuildDtoModel
 } from "../../model/ws-dto/ws-repox-dto.model";
 import {
   WsTsconfigDtoModel
 } from "../../model/ws-dto/ws-tsconfig-dto.model";
+import {
+  ProjectTypeEnum
+} from "../../enum/project/project-type.enum";
+import {
+  ProjectSchemeEnum
+} from "../../enum/project/project-scheme.enum";
 
 @singleton()
 /**
@@ -39,6 +46,15 @@ export class WsDtoStoreService {
     );
   }
 
+  saveWsDto(): void {
+    this.file.writeJsonFile<WsRepoxDtoModel>(
+      WorkspaceFileEnum.repoxJsonFile, this.getWsRepoxDto()
+    );
+    this.file.writeJsonFile<WsTsconfigDtoModel>(
+      WorkspaceFileEnum.tsconfigJsonFile, this.getWsTsconfigDto()
+    );
+  }
+
   getWsRepoxDto(): WsRepoxDtoModel {
     if (this.wsRepoxDto === undefined) {
       throw new Error("The store is undefined!");
@@ -51,6 +67,28 @@ export class WsDtoStoreService {
       throw new Error("The store is undefined!");
     }
     return this.wsTsconfigDto;
+  }
+
+  addProjectDto(
+    projectName: string, projectType: ProjectTypeEnum,
+    projectPath: string, projectScheme: ProjectSchemeEnum,
+    projectBuild: WsRepoxProjectBuildDtoModel, alias: string,
+    indexPath: Array<string>
+  ): void {
+    if (this.wsRepoxDto === undefined) {
+      throw new Error("The store is undefined!");
+    }
+    if (this.wsTsconfigDto === undefined) {
+      throw new Error("The store is undefined!");
+    }
+    this.wsRepoxDto.projects[projectName] = {
+      name: projectName,
+      type: projectType,
+      path: projectPath,
+      scheme: projectScheme,
+      build: projectBuild
+    };
+    this.wsTsconfigDto.compilerOptions.paths[alias] = indexPath;
   }
 
   getProjectIndexPath(projectAlias: string): Array<string> {

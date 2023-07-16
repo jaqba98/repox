@@ -22,8 +22,8 @@ import {
   ProjectNotExistAppService
 } from "../app-service/project-not-exist-app.service";
 import {
-  AddProjectAppService
-} from "../app-service/add-project-app.service";
+  GenerateProjectAppService
+} from "../app-service/generate-project-app.service";
 
 @singleton()
 /**
@@ -37,7 +37,7 @@ export class GenerateProjectStepService {
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadWsConfig: LoadWsConfigAppService,
     private readonly projectNotExist: ProjectNotExistAppService,
-    private readonly addProject: AddProjectAppService
+    private readonly generateProject: GenerateProjectAppService
     // private readonly systemVerification: ProgramExistOnSystemAppService,
     // private readonly goToRootProject: GoToRootProjectAppService,
     // private readonly loadConfigFile: LoadConfigFileAppService
@@ -63,7 +63,7 @@ export class GenerateProjectStepService {
       projectName, projectType, projectPath, projectScheme
     } = commandModel;
     if (!this.projectNotExist.check(projectName)) return;
-    this.addProject.add(
+    this.generateProject.add(
       projectName, projectType, projectPath, projectScheme
     );
     console.log("Hello");

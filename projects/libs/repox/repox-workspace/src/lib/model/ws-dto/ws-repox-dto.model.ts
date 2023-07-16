@@ -18,12 +18,16 @@ export interface WsRepoxBuildAppTsDtoModel {
   assets: Array<WsRepoxAssetsDtoModel>;
 }
 
+export interface WsRepoxProjectBuildDtoModel
+  extends WsRepoxBuildAppTsDtoModel {
+}
+
 export interface WsRepoxProjectDtoModel {
   name: string;
   type: ProjectTypeEnum;
   path: string;
   scheme: ProjectSchemeEnum;
-  build: WsRepoxBuildAppTsDtoModel;
+  build: WsRepoxProjectBuildDtoModel;
 }
 
 export interface WsRepoxProjectsDtoModel {

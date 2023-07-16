@@ -7,7 +7,7 @@ import {
   ProjectTypeEnum,
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
-  WsDomainStoreService,
+  WsDomainStoreService, WsDtoStoreService,
   WsProjectBuildDomainModel
 } from "@lib/repox-workspace";
 import { EMPTY_STRING } from "@lib/const";
@@ -17,13 +17,14 @@ import { PathUtilsService } from "@lib/utils";
 /**
  * The app service is responsible for add new project to the store.
  */
-export class AddProjectAppService {
+export class GenerateProjectAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly buildProjectAlias: BuildProjectAliasService,
     private readonly buildProjectPath: BuildProjectPathService,
     private readonly pathUtils: PathUtilsService,
-    private readonly wsDomainStore: WsDomainStoreService
+    private readonly wsDomainStore: WsDomainStoreService,
+    private readonly wsDtoStore: WsDtoStoreService
   ) {
   }
 
@@ -48,6 +49,8 @@ export class AddProjectAppService {
       projectName, type, path, scheme, projectAlias, indexPath,
       projectBuild
     );
+    this.wsDomainStore.saveWsDomain();
+    this.wsDtoStore.saveWsDto();
     return true;
   }
 
