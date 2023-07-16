@@ -12,18 +12,21 @@ export interface WsAssetsDomainModel {
   output: string;
 }
 
+export interface WsProjectBuildDomainModel {
+  output: string;
+  main: string;
+  assets: Array<WsAssetsDomainModel>;
+}
+
 export interface WsProjectDomainModel {
   name: string;
   type: ProjectTypeEnum;
   path: string;
   scheme: ProjectSchemeEnum;
-  build: {
-    output: string;
-    main: string;
-    assets: Array<WsAssetsDomainModel>;
-  };
+  build: WsProjectBuildDomainModel;
   alias: string;
   indexPath: Array<string>;
+  changed: boolean;
 }
 
 export interface WsDomainModel {
