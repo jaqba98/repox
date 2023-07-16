@@ -13,9 +13,9 @@ export interface WsAssetsDomainModel {
 }
 
 export interface WsProjectBuildDomainModel {
-  output: string;
-  main: string;
-  assets: Array<WsAssetsDomainModel>;
+  output?: string;
+  main?: string;
+  assets?: Array<WsAssetsDomainModel>;
 }
 
 export interface WsProjectDomainModel {

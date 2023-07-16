@@ -14,7 +14,7 @@ export class ProjectNotExistAppService {
   ) {
   }
 
-  check(projectName: string): boolean {
+  run(projectName: string): boolean {
     this.simpleMessage.writePlain(
       `Check that project ${projectName} does not exist`
     );

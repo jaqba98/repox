@@ -62,11 +62,10 @@ export class GenerateProjectStepService {
     const {
       projectName, projectType, projectPath, projectScheme
     } = commandModel;
-    if (!this.projectNotExist.check(projectName)) return;
-    this.generateProject.add(
+    if (!this.projectNotExist.run(projectName)) return;
+    this.generateProject.run(
       projectName, projectType, projectPath, projectScheme
     );
-    console.log("Hello");
     // // Display a success message
     // this.simple.writeNewline();
     // this.simple.writeSuccess("Project created", 1, false, true);

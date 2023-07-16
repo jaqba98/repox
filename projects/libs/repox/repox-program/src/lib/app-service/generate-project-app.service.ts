@@ -28,11 +28,12 @@ export class GenerateProjectAppService {
   ) {
   }
 
-  add(
+  run(
     projectName: string, projectType: string, projectPath: string,
     projectScheme: string
   ): boolean {
-    this.simpleMessage.writePlain("Add project to the store");
+    this.simpleMessage.writePlain("Generate project");
+    // Prepare data to generate project
     const type = <ProjectTypeEnum>projectType;
     const path = this.buildProjectPath.buildPath(
       projectName, projectType, projectPath
@@ -45,11 +46,13 @@ export class GenerateProjectAppService {
     const projectBuild = this.buildProjectBuild(
       projectName, path, scheme
     );
+    // Add project to domain store and save domain
     this.wsDomainStore.addProject(
       projectName, type, path, scheme, projectAlias, indexPath,
       projectBuild
     );
     this.wsDomainStore.saveWsDomain();
+    // Save ws dto model
     this.wsDtoStore.saveWsDto();
     return true;
   }
@@ -74,9 +77,9 @@ export class GenerateProjectAppService {
       case ProjectSchemeEnum.libTypeScript:
       case ProjectSchemeEnum.toolTypeScript:
         return {
-          output: EMPTY_STRING,
-          main: EMPTY_STRING,
-          assets: []
+          output: undefined,
+          main: undefined,
+          assets: undefined
         };
       default:
         throw new Error("Not supported scheme type!");

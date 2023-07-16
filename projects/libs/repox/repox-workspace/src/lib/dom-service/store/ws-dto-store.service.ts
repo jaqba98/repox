@@ -89,9 +89,9 @@ export class WsDtoStoreService {
       path: projectPath,
       scheme: projectScheme,
       build: {
-        output: output === EMPTY_STRING ? undefined : output,
-        main: main === EMPTY_STRING ? undefined : main,
-        assets: assets ? assets : undefined
+        output: output,
+        main: main,
+        assets: assets
       }
     };
     this.wsTsconfigDto.compilerOptions.paths[alias] = indexPath;
