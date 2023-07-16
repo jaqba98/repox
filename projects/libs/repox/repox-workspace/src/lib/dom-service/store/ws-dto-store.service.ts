@@ -83,17 +83,17 @@ export class WsDtoStoreService {
       throw new Error("The store is undefined!");
     }
     const { output, main, assets } = projectBuild;
-    this.wsRepoxDto.projects[projectName] = {
-      name: projectName,
-      type: projectType,
-      path: projectPath,
-      scheme: projectScheme,
-      build: {
-        output: output,
-        main: main,
-        assets: assets
-      }
-    };
+    // this.wsRepoxDto.projects[projectName] = {
+    //   name: projectName,
+    //   type: projectType,
+    //   path: projectPath,
+    //   scheme: projectScheme,
+    //   build: {
+    //     output: output,
+    //     main: main,
+    //     assets: assets
+    //   }
+    // };
     this.wsTsconfigDto.compilerOptions.paths[alias] = indexPath;
   }
 

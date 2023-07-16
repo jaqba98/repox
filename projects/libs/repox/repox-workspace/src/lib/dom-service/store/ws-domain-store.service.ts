@@ -28,31 +28,31 @@ export class WsDomainStoreService {
   }
 
   createWsDomain(): void {
-    this.wsDomain = {
-      projects: Object
-        .values(this.wsDtoStore.getWsRepoxDto().projects)
-        .map(project => ({
-          name: project.name,
-          type: project.type,
-          path: project.path,
-          scheme: project.scheme,
-          build: {
-            output: project.build.output || undefined,
-            main: project.build.main || undefined,
-            assets: project.build.assets || undefined
-          },
-          alias: this.buildProjectAlias.buildAlias(
-            project.name, project.type
-          )
-        }))
-        .map(project => ({
-          ...project,
-          indexPath: this.wsDtoStore.getProjectIndexPath(
-            project.alias
-          ),
-          changed: false
-        }))
-    };
+    // this.wsDomain = {
+    //   projects: Object
+    //     .values(this.wsDtoStore.getWsRepoxDto().projects)
+    //     .map(project => ({
+    //       name: project.name,
+    //       type: project.type,
+    //       path: project.path,
+    //       scheme: project.scheme,
+    //       build: {
+    //         output: project.build.output || undefined,
+    //         main: project.build.main || undefined,
+    //         assets: project.build.assets || undefined
+    //       },
+    //       alias: this.buildProjectAlias.buildAlias(
+    //         project.name, project.type
+    //       )
+    //     }))
+    //     .map(project => ({
+    //       ...project,
+    //       indexPath: this.wsDtoStore.getProjectIndexPath(
+    //         project.alias
+    //       ),
+    //       changed: false
+    //     }))
+    // };
   }
 
   saveWsDomain(): void {
