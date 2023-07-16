@@ -38,11 +38,21 @@ export class WsDomainStoreService {
               main: project.build?.main ?? EMPTY_STRING,
               assets: project.build?.assets ?? []
             },
-            alias: "",
-            indexPath: [],
             changed: false
           };
         })
+        .map(project => ({
+          ...project,
+          alias: this.buildProjectAlias.buildAlias(
+            project.name, project.type
+          )
+        }))
+        .map(project => ({
+          ...project,
+          indexPath: this.wsDtoStore.getProjectIndexPath(
+            project.alias
+          )
+        }))
     };
   }
 
