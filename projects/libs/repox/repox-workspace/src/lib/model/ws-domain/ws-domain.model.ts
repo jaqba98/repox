@@ -13,16 +13,16 @@ export interface WsAssetsDomainModel {
 }
 
 export interface WsProjectBuildDomainModel {
-  output?: string;
-  main?: string;
-  assets?: Array<WsAssetsDomainModel>;
+  output: string;
+  main: string;
+  assets: Array<WsAssetsDomainModel>;
 }
 
 export interface WsProjectDomainModel {
   name: string;
-  type: ProjectTypeEnum;
+  type: ProjectTypeEnum | string;
   path: string;
-  scheme: ProjectSchemeEnum;
+  scheme: ProjectSchemeEnum | string;
   build: WsProjectBuildDomainModel;
   alias: string;
   indexPath: Array<string>;

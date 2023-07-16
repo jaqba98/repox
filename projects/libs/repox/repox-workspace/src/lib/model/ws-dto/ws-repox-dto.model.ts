@@ -8,8 +8,8 @@ import {
  */
 
 export interface WsRepoxAssetsDtoModel {
-  input?: string;
-  output?: string;
+  input: string;
+  output: string;
 }
 
 export interface WsRepoxBuildAppTsDtoModel {

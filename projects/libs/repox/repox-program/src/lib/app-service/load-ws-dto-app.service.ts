@@ -2,7 +2,6 @@ import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
   WorkspaceFileEnum,
-  WsDomainStoreService,
   WsDtoStoreService
 } from "@lib/repox-workspace";
 import { PathUtilsService } from "@lib/utils";
@@ -17,8 +16,7 @@ export class LoadWsDtoAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly path: PathUtilsService,
-    private readonly wsDtoStore: WsDtoStoreService,
-    private readonly wsDomainStore: WsDomainStoreService
+    private readonly wsDtoStore: WsDtoStoreService
   ) {
   }
 

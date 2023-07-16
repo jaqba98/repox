@@ -46,10 +46,10 @@ export class AddProjectToDomainAppService {
       projectName, path, scheme
     );
     // Add project to domain store
-    this.wsDomainStore.addProject(
-      projectName, type, path, scheme, projectAlias, indexPath,
-      projectBuild
-    );
+    // this.wsDomainStore.addProject(
+    //   projectName, type, path, scheme, projectAlias, indexPath,
+    //   projectBuild
+    // );
     return true;
   }
 
@@ -68,14 +68,14 @@ export class AddProjectToDomainAppService {
             path, WorkspaceFolderEnum.src,
             WorkspaceFileEnum.mainTsFile
           ]),
-          assets: undefined
+          assets: []
         };
       case ProjectSchemeEnum.libTypeScript:
       case ProjectSchemeEnum.toolTypeScript:
         return {
-          output: undefined,
-          main: undefined,
-          assets: undefined
+          output: "",
+          main: "",
+          assets: []
         };
       default:
         throw new Error("Not supported scheme type!");
