@@ -14,6 +14,7 @@ export class BuildProjectAliasService {
   }
 
   buildAlias(name: string, type: string): string {
+    if (type === "app") return "";
     const projectType = this.convertProjectType.toProjectType(type);
     return `@${projectType}/${name}`;
   }

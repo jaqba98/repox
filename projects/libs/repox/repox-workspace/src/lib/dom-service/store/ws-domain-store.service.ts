@@ -50,7 +50,7 @@ export class WsDomainStoreService {
         .map(project => ({
           ...project,
           indexPath: this.wsDtoStore.getProjectIndexPath(
-            project.alias
+            project.alias, project.type
           )
         }))
     };

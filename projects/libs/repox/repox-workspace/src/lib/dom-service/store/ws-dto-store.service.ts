@@ -105,7 +105,10 @@ export class WsDtoStoreService {
   //   this.wsTsconfigDto.compilerOptions.paths[alias] = indexPath;
   // }
 
-  getProjectIndexPath(projectAlias: string): Array<string> {
+  getProjectIndexPath(
+    projectAlias: string, projectType: string
+  ): Array<string> {
+    if (projectType === EMPTY_STRING) return [];
     const tsconfigDto = this.getWsTsconfigDto();
     const indexPath = tsconfigDto.compilerOptions.paths[projectAlias];
     return indexPath ? indexPath : [];
