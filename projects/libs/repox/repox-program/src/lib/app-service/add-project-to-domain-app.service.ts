@@ -7,17 +7,17 @@ import {
   ProjectTypeEnum,
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
-  WsDomainStoreService, WsDtoStoreService,
+  WsDomainStoreService,
+  WsDtoStoreService,
   WsProjectBuildDomainModel
 } from "@lib/repox-workspace";
-import { EMPTY_STRING } from "@lib/const";
 import { PathUtilsService } from "@lib/utils";
 
 @singleton()
 /**
- * The app service is responsible for add new project to the store.
+ * The app service is responsible for add new project to the domain.
  */
-export class GenerateProjectAppService {
+export class AddProjectToDomainAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly buildProjectAlias: BuildProjectAliasService,
@@ -32,7 +32,7 @@ export class GenerateProjectAppService {
     projectName: string, projectType: string, projectPath: string,
     projectScheme: string
   ): boolean {
-    this.simpleMessage.writePlain("Generate project");
+    this.simpleMessage.writePlain("Add project to domain");
     // Prepare data to generate project
     const type = <ProjectTypeEnum>projectType;
     const path = this.buildProjectPath.buildPath(
@@ -46,14 +46,11 @@ export class GenerateProjectAppService {
     const projectBuild = this.buildProjectBuild(
       projectName, path, scheme
     );
-    // Add project to domain store and save domain
+    // Add project to domain store
     this.wsDomainStore.addProject(
       projectName, type, path, scheme, projectAlias, indexPath,
       projectBuild
     );
-    this.wsDomainStore.saveWsDomain();
-    // Save ws dto model
-    this.wsDtoStore.saveWsDto();
     return true;
   }
 
@@ -72,7 +69,7 @@ export class GenerateProjectAppService {
             path, WorkspaceFolderEnum.src,
             WorkspaceFileEnum.mainTsFile
           ]),
-          assets: []
+          assets: undefined
         };
       case ProjectSchemeEnum.libTypeScript:
       case ProjectSchemeEnum.toolTypeScript:
