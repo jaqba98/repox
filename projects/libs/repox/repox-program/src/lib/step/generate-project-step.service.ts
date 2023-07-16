@@ -24,10 +24,16 @@ import {
 import {
   AddProjectToDomainAppService
 } from "../app-service/add-project-to-domain-app.service";
-import { WsDomainStoreService } from "@lib/repox-workspace";
+import {
+  WsDomainStoreService,
+  WsDtoStoreService
+} from "@lib/repox-workspace";
 import {
   LoadWsDomainAppService
 } from "../app-service/load-ws-domain-app.service";
+import {
+  SaveWsDomainAppService
+} from "../app-service/save-ws-domain-app.service";
 
 @singleton()
 /**
@@ -43,6 +49,8 @@ export class GenerateProjectStepService {
     private readonly loadWsDomain: LoadWsDomainAppService,
     private readonly projectNotExist: ProjectNotExistAppService,
     private readonly addProjectToDomain: AddProjectToDomainAppService,
+    private readonly saveWsDomain: SaveWsDomainAppService,
+    private readonly wsDtoStore: WsDtoStoreService
     // private readonly wsDomainStore: WsDomainStoreService
     // private readonly systemVerification: ProgramExistOnSystemAppService,
     // private readonly goToRootProject: GoToRootProjectAppService,
@@ -73,7 +81,8 @@ export class GenerateProjectStepService {
     this.addProjectToDomain.run(
       projectName, projectType, projectPath, projectScheme
     );
-    console.log("Hello");
+    if (!this.saveWsDomain.run()) return;
+    console.log(this.wsDtoStore);
     // console.log(this.wsDomainStore);
     // // Display a success message
     // this.simple.writeNewline();

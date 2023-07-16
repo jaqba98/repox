@@ -72,32 +72,24 @@ export class WsDtoStoreService {
     return Object.values(projects);
   }
 
-  // addProjectDto(
-  //   projectName: string, projectType: ProjectTypeEnum,
-  //   projectPath: string, projectScheme: ProjectSchemeEnum,
-  //   projectBuild: WsRepoxProjectBuildDtoModel, alias: string,
-  //   indexPath: Array<string>
-  // ): void {
-  //   if (this.wsRepoxDto === undefined) {
-  //     throw new Error("The store is undefined!");
-  //   }
-  //   if (this.wsTsconfigDto === undefined) {
-  //     throw new Error("The store is undefined!");
-  //   }
-  //   const { output, main, assets } = projectBuild;
-  //   // this.wsRepoxDto.projects[projectName] = {
-  //   //   name: projectName,
-  //   //   type: projectType,
-  //   //   path: projectPath,
-  //   //   scheme: projectScheme,
-  //   //   build: {
-  //   //     output: output,
-  //   //     main: main,
-  //   //     assets: assets
-  //   //   }
-  //   // };
-  //   this.wsTsconfigDto.compilerOptions.paths[alias] = indexPath;
-  // }
+  addProjectDto(projectName: string): void {
+    if (this.wsRepoxDto === undefined) {
+      throw new Error("The repox store is undefined!");
+    }
+    if (this.wsRepoxDto.projects === undefined) {
+      throw new Error("The repox store is undefined!");
+    }
+    if (this.wsTsconfigDto === undefined) {
+      throw new Error("The tsconfig store is undefined!");
+    }
+    this.wsRepoxDto.projects[projectName] = {
+      name: projectName,
+      type: undefined,
+      path: undefined,
+      scheme: undefined,
+      build: undefined
+    };
+  }
 
   getProjectIndexPath(
     projectAlias: string, projectType: string

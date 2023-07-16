@@ -62,6 +62,14 @@ export class WsDomainStoreService {
     };
   }
 
+  saveWsDomain(): void {
+    this.getWsDomain().projects
+      .filter(project => project.changed)
+      .forEach(project => {
+        this.wsDtoStore.addProjectDto(project.name);
+      });
+  }
+
   getWsDomain(): WsDomainModel {
     if (this.wsDomain === undefined) {
       throw new Error("The store is undefined!");
