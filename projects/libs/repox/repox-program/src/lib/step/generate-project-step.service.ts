@@ -60,16 +60,17 @@ export class GenerateProjectStepService {
     if (!this.programInstalled.run(ProgramSystemEnum.node)) return;
     if (!this.programInstalled.run(ProgramSystemEnum.npm)) return;
     if (!this.goToProjectRoot.run()) return;
-    if (!this.loadWsConfig.run()) return;
-    const {
-      projectName, projectType, projectPath, projectScheme
-    } = commandModel;
-    if (!this.projectNotExist.run(projectName)) return;
-    this.addProjectToDomain.run(
-      projectName, projectType, projectPath, projectScheme
-    );
     // todo: I am here
-    console.log(this.wsDomainStore);
+    console.log("Hello");
+    // if (!this.loadWsConfig.run()) return;
+    // const {
+    //   projectName, projectType, projectPath, projectScheme
+    // } = commandModel;
+    // if (!this.projectNotExist.run(projectName)) return;
+    // this.addProjectToDomain.run(
+    //   projectName, projectType, projectPath, projectScheme
+    // );
+    // console.log(this.wsDomainStore);
     // // Display a success message
     // this.simple.writeNewline();
     // this.simple.writeSuccess("Project created", 1, false, true);

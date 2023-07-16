@@ -37,9 +37,9 @@ export class WsDomainStoreService {
           path: project.path,
           scheme: project.scheme,
           build: {
-            output: project.build.output,
-            main: project.build.main,
-            assets: project.build.assets
+            output: project.build.output || undefined,
+            main: project.build.main || undefined,
+            assets: project.build.assets || undefined
           },
           alias: this.buildProjectAlias.buildAlias(
             project.name, project.type
