@@ -2,13 +2,18 @@ import { singleton } from "tsyringe";
 import {
   ProjectSchemeEnum,
   ProjectTypeEnum,
-  WsDtoStoreService, WsProjectDomainModel
+  WorkspaceFileEnum,
+  WorkspaceFolderEnum,
+  WsDtoStoreService,
+  WsProjectBuildDomainModel,
+  WsProjectDomainModel
 } from "@lib/repox-workspace";
 import { WsDomainModel } from "../../model/ws-domain/ws-domain.model";
 import {
   BuildProjectAliasService
 } from "../builder/build-project-alias.service";
 import { EMPTY_STRING } from "@lib/const";
+import { PathUtilsService } from "@lib/utils";
 
 @singleton()
 /**
@@ -20,7 +25,8 @@ export class WsDomainStoreService {
 
   constructor(
     private readonly wsDtoStore: WsDtoStoreService,
-    private readonly buildProjectAlias: BuildProjectAliasService
+    private readonly buildProjectAlias: BuildProjectAliasService,
+    private readonly pathUtils: PathUtilsService
   ) {
   }
 
@@ -71,40 +77,76 @@ export class WsDomainStoreService {
     );
   }
 
-  // saveWsDomain(): void {
-  //   if (this.wsDomain === undefined) {
-  //     throw new Error("The store is undefined!");
-  //   }
-  //   const changedProjects = this.wsDomain.projects
-  //     .filter(project => project.changed);
-  //   changedProjects.forEach(project => {
-  //     const {
-  //       name, type, path, scheme, build, alias, indexPath
-  //     } = project;
-  //     this.wsDtoStore.addProjectDto(
-  //       name, type, path, scheme, build, alias, indexPath
-  //     )
-  //   });
-  // }
+  addProject(
+    projectName: string, projectType: ProjectTypeEnum,
+    projectPath: string, projectScheme: ProjectSchemeEnum
+  ): void {
+    if (this.wsDomain === undefined) {
+      throw new Error("The store is undefined!");
+    }
+    const projectAlias = this.buildProjectAlias.buildAlias(
+      projectName, projectType
+    );
+    this.wsDomain.projects.push({
+      name: projectName,
+      type: projectType,
+      path: projectPath,
+      scheme: projectScheme,
+      build: this.getProjectBuild(
+        projectScheme, projectPath, projectName
+      ),
+      alias: projectAlias,
+      indexPath: this.getProjectIndexPath(projectScheme, projectPath),
+      changed: true
+    });
+  }
 
-  // addProject(
-  //   projectName: string, projectType: ProjectTypeEnum,
-  //   projectPath: string, projectScheme: ProjectSchemeEnum,
-  //   projectAlias: string, projectIndexPath: Array<string>,
-  //   build: WsProjectBuildDomainModel
-  // ): void {
-  //   if (this.wsDomain === undefined) {
-  //     throw new Error("The store is undefined!");
-  //   }
-  //   this.wsDomain.projects.push({
-  //     name: projectName,
-  //     type: projectType,
-  //     path: projectPath,
-  //     scheme: projectScheme,
-  //     build: build,
-  //     alias: projectAlias,
-  //     indexPath: projectIndexPath,
-  //     changed: true
-  //   });
-  // }
+  private getProjectBuild(
+    projectScheme: ProjectSchemeEnum,
+    projectPath: string,
+    projectName: string
+  ): WsProjectBuildDomainModel {
+    switch (projectScheme) {
+      case ProjectSchemeEnum.appTypeScript:
+        return {
+          output: this.pathUtils.createPath([
+            WorkspaceFolderEnum.dist, projectName
+          ]),
+          main: this.pathUtils.createPath([
+            projectPath, WorkspaceFolderEnum.src,
+            WorkspaceFileEnum.mainTsFile
+          ]),
+          assets: []
+        };
+      case ProjectSchemeEnum.libTypeScript:
+      case ProjectSchemeEnum.toolTypeScript:
+        return {
+          output: EMPTY_STRING,
+          main: EMPTY_STRING,
+          assets: []
+        };
+      default:
+        throw new Error("Not supported project scheme");
+    }
+  }
+
+  private getProjectIndexPath(
+    projectScheme: ProjectSchemeEnum,
+    projectPath: string
+  ): Array<string> {
+    switch (projectScheme) {
+      case ProjectSchemeEnum.appTypeScript:
+        return [];
+      case ProjectSchemeEnum.libTypeScript:
+      case ProjectSchemeEnum.toolTypeScript:
+        return [
+          this.pathUtils.createPath([
+            projectPath, WorkspaceFolderEnum.src,
+            WorkspaceFileEnum.indexTsFile
+          ])
+        ];
+      default:
+        throw new Error("Not supported project scheme");
+    }
+  }
 }

@@ -42,7 +42,7 @@ export class GenerateProjectStepService {
     private readonly loadWsDto: LoadWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
     private readonly projectNotExist: ProjectNotExistAppService,
-    // private readonly addProjectToDomain: AddProjectToDomainAppService,
+    private readonly addProjectToDomain: AddProjectToDomainAppService,
     // private readonly wsDomainStore: WsDomainStoreService
     // private readonly systemVerification: ProgramExistOnSystemAppService,
     // private readonly goToRootProject: GoToRootProjectAppService,
@@ -70,9 +70,10 @@ export class GenerateProjectStepService {
       projectName, projectType, projectPath, projectScheme
     } = commandModel;
     if (!this.projectNotExist.run(projectName)) return;
-    // this.addProjectToDomain.run(
-    //   projectName, projectType, projectPath, projectScheme
-    // );
+    this.addProjectToDomain.run(
+      projectName, projectType, projectPath, projectScheme
+    );
+    console.log("Hello");
     // console.log(this.wsDomainStore);
     // // Display a success message
     // this.simple.writeNewline();

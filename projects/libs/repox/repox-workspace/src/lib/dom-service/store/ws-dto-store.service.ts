@@ -10,17 +10,11 @@ import {
 } from "../../const/schema.const";
 import {
   WsRepoxDtoModel,
-  WsRepoxProjectBuildDtoModel, WsRepoxProjectDtoModel
+  WsRepoxProjectDtoModel
 } from "../../model/ws-dto/ws-repox-dto.model";
 import {
   WsTsconfigDtoModel
 } from "../../model/ws-dto/ws-tsconfig-dto.model";
-import {
-  ProjectTypeEnum
-} from "../../enum/project/project-type.enum";
-import {
-  ProjectSchemeEnum
-} from "../../enum/project/project-scheme.enum";
 import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
