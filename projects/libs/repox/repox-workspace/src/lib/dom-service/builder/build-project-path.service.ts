@@ -36,7 +36,7 @@ export class BuildProjectPathService {
   }
 
   buildIndexPath(path: string): Array<string> {
-    return [this.pathUtils.createPath([path, WorkspaceFileEnum.indexTsFile])];
+    return [this.pathUtils.createPath([path, WorkspaceFolderEnum.src, WorkspaceFileEnum.indexTsFile])];
   }
 }
 // todo: refactor

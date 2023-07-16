@@ -21,6 +21,7 @@ import {
 import {
   ProjectSchemeEnum
 } from "../../enum/project/project-scheme.enum";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -81,12 +82,17 @@ export class WsDtoStoreService {
     if (this.wsTsconfigDto === undefined) {
       throw new Error("The store is undefined!");
     }
+    const { output, main, assets } = projectBuild;
     this.wsRepoxDto.projects[projectName] = {
       name: projectName,
       type: projectType,
       path: projectPath,
       scheme: projectScheme,
-      build: projectBuild
+      build: {
+        output: output === EMPTY_STRING ? undefined : output,
+        main: main === EMPTY_STRING ? undefined : main,
+        assets: assets ? assets : undefined
+      }
     };
     this.wsTsconfigDto.compilerOptions.paths[alias] = indexPath;
   }

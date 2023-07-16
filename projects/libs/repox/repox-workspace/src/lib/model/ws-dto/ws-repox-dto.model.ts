@@ -13,9 +13,9 @@ export interface WsRepoxAssetsDtoModel {
 }
 
 export interface WsRepoxBuildAppTsDtoModel {
-  output: string;
-  main: string;
-  assets: Array<WsRepoxAssetsDtoModel>;
+  output?: string;
+  main?: string;
+  assets?: Array<WsRepoxAssetsDtoModel>;
 }
 
 export interface WsRepoxProjectBuildDtoModel
