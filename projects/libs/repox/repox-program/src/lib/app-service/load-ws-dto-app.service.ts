@@ -10,10 +10,10 @@ import { ValidationError } from "jsonschema";
 
 @singleton()
 /**
- * The app service is responsible for load all workspace
- * configuration.
+ * The app service is responsible for load workspace dto model
+ * and verify it.
  */
-export class LoadWsConfigAppService {
+export class LoadWsDtoAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly path: PathUtilsService,
@@ -23,7 +23,7 @@ export class LoadWsConfigAppService {
   }
 
   run(): boolean {
-    this.simpleMessage.writePlain("Load workspace configuration");
+    this.simpleMessage.writePlain("Load workspace dto model");
     // Check if workspace files exist
     if (this.path.notExistPath(WorkspaceFileEnum.repoxJsonFile)) {
       this.notExistPathError(WorkspaceFileEnum.repoxJsonFile);
@@ -52,8 +52,6 @@ export class LoadWsConfigAppService {
       );
       return false;
     }
-    // Create the workspace domain model
-    this.wsDomainStore.createWsDomain();
     return true;
   }
 

@@ -16,8 +16,8 @@ import {
   GoToProjectRootAppService
 } from "../app-service/go-to-project-root-app.service";
 import {
-  LoadWsConfigAppService
-} from "../app-service/load-ws-config-app.service";
+  LoadWsDtoAppService
+} from "../app-service/load-ws-dto-app.service";
 import {
   ProjectNotExistAppService
 } from "../app-service/project-not-exist-app.service";
@@ -36,10 +36,10 @@ export class GenerateProjectStepService {
     private readonly newline: NewlineAppService,
     private readonly programInstalled: ProgramInstalledAppService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
-    private readonly loadWsConfig: LoadWsConfigAppService,
-    private readonly projectNotExist: ProjectNotExistAppService,
-    private readonly addProjectToDomain: AddProjectToDomainAppService,
-    private readonly wsDomainStore: WsDomainStoreService
+    private readonly loadWsDto: LoadWsDtoAppService,
+    // private readonly projectNotExist: ProjectNotExistAppService,
+    // private readonly addProjectToDomain: AddProjectToDomainAppService,
+    // private readonly wsDomainStore: WsDomainStoreService
     // private readonly systemVerification: ProgramExistOnSystemAppService,
     // private readonly goToRootProject: GoToRootProjectAppService,
     // private readonly loadConfigFile: LoadConfigFileAppService
@@ -60,9 +60,9 @@ export class GenerateProjectStepService {
     if (!this.programInstalled.run(ProgramSystemEnum.node)) return;
     if (!this.programInstalled.run(ProgramSystemEnum.npm)) return;
     if (!this.goToProjectRoot.run()) return;
+    if (!this.loadWsDto.run()) return;
     // todo: I am here
     console.log("Hello");
-    // if (!this.loadWsConfig.run()) return;
     // const {
     //   projectName, projectType, projectPath, projectScheme
     // } = commandModel;
