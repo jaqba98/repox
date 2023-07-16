@@ -2,6 +2,7 @@ import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
   WorkspaceFileEnum,
+  WsDomainStoreService,
   WsDtoStoreService
 } from "@lib/repox-workspace";
 import { PathUtilsService } from "@lib/utils";
@@ -16,12 +17,14 @@ export class LoadWsConfigAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly path: PathUtilsService,
-    private readonly wsDtoStore: WsDtoStoreService
+    private readonly wsDtoStore: WsDtoStoreService,
+    private readonly wsDomainStore: WsDomainStoreService
   ) {
   }
 
   run(): boolean {
     this.simpleMessage.writePlain("Load workspace configuration");
+    // Check if workspace files exist
     if (this.path.notExistPath(WorkspaceFileEnum.repoxJsonFile)) {
       this.notExistPathError(WorkspaceFileEnum.repoxJsonFile);
       return false;
@@ -30,7 +33,9 @@ export class LoadWsConfigAppService {
       this.notExistPathError(WorkspaceFileEnum.tsconfigJsonFile);
       return false;
     }
+    // Load the workspace dto model
     this.wsDtoStore.loadWsDto();
+    // Verification the workspace dto model
     const wsRepoxDtoVerifyResult = this.wsDtoStore.verifyWsRepoxDto();
     if (wsRepoxDtoVerifyResult.errors.length > 0) {
       this.verifyErrorError(
@@ -47,6 +52,8 @@ export class LoadWsConfigAppService {
       );
       return false;
     }
+    // Create the workspace domain model
+    this.wsDomainStore.createWsDomain();
     return true;
   }
 
@@ -68,5 +75,3 @@ export class LoadWsConfigAppService {
     });
   }
 }
-
-// todo: refactor

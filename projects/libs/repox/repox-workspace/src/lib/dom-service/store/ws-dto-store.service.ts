@@ -1,10 +1,4 @@
 import { singleton } from "tsyringe";
-import {
-  WsRepoxDtoModel
-} from "../../model/ws-file-dto/ws-repox-dto.model";
-import {
-  WsTsconfigDtoModel
-} from "../../model/ws-file-dto/ws-tsconfig-dto.model";
 import { FileUtilsService } from "@lib/utils";
 import {
   WorkspaceFileEnum
@@ -14,6 +8,12 @@ import {
   repoxJsonFileSchema,
   tsconfigJsonFileSchema
 } from "../../const/schema.const";
+import {
+  WsRepoxDtoModel
+} from "../../model/ws-dto/ws-repox-dto.model";
+import {
+  WsTsconfigDtoModel
+} from "../../model/ws-dto/ws-tsconfig-dto.model";
 
 @singleton()
 /**
@@ -37,6 +37,26 @@ export class WsDtoStoreService {
     this.wsTsconfigDto = this.file.readJsonFile<WsTsconfigDtoModel>(
       WorkspaceFileEnum.tsconfigJsonFile
     );
+  }
+
+  getWsRepoxDto(): WsRepoxDtoModel {
+    if (this.wsRepoxDto === undefined) {
+      throw new Error("The store is undefined!");
+    }
+    return this.wsRepoxDto;
+  }
+
+  getWsTsconfigDto(): WsTsconfigDtoModel {
+    if (this.wsTsconfigDto === undefined) {
+      throw new Error("The store is undefined!");
+    }
+    return this.wsTsconfigDto;
+  }
+
+  getProjectIndexPath(projectAlias: string): Array<string> {
+    const tsconfigDto = this.getWsTsconfigDto();
+    const indexPath = tsconfigDto.compilerOptions.paths[projectAlias];
+    return indexPath ? indexPath : [];
   }
 
   verifyWsRepoxDto(): ValidatorResult {

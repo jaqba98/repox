@@ -1,10 +1,8 @@
 import { singleton } from "tsyringe";
-import {
-  WsRepoxDtoModel
-} from "../model/ws-file-dto/ws-repox-dto.model";
+import { WsRepoxDtoModel } from "../model/ws-dto/ws-repox-dto.model";
 import {
   WsTsconfigDtoModel
-} from "../model/ws-file-dto/ws-tsconfig-dto.model";
+} from "../model/ws-dto/ws-tsconfig-dto.model";
 
 @singleton()
 /**
