@@ -8,6 +8,9 @@ import {
   WorkspaceFileEnum
 } from "../enum/workspace/workspace-file.enum";
 import { PathUtilsService } from "@lib/utils";
+import {
+  WorkspaceImportEnum
+} from "../enum/workspace/workspace-import.enum";
 
 @singleton()
 /**
@@ -93,7 +96,7 @@ export default config;
 
   buildProjectJestConfigTsContentFile(projectPath: string): string {
     const jestRootPath = this.pathUtils.getRootPath(
-      projectPath, WorkspaceFileEnum.jestConfigTsFile
+      projectPath, WorkspaceImportEnum.importJestConfigTs
     );
         return `import config from "${jestRootPath}";
 
