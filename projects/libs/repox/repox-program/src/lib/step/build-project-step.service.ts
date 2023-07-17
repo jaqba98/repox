@@ -1,34 +1,31 @@
 import { singleton } from "tsyringe";
 import {
-  BuildProjectAppService
-} from "../app-service/build-project-app.service";
-import { SimpleMessageAppService } from "@lib/logger";
-import {
-  LoadWsDtoAppService
-} from "../app-service/load-ws-dto-app.service";
+  NewlineAppService,
+  SimpleMessageAppService
+} from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
+import {
+  BuildProjectRepoxCommandModel,
+  EmptyRepoxProgramModel
+} from "@lib/repox-domain";
 
 @singleton()
 /**
- * The list of steps for the build project program.
+ * The list of steps for the program build project.
  */
 export class BuildProjectStepService {
   constructor(
-    private readonly loggerMessageApp: SimpleMessageAppService,
-    private readonly buildProjectApp: BuildProjectAppService,
-    // private readonly folderIsWorkspace: CheckWorkspaceAppService,
-    private readonly loadConfigFileApp: LoadWsDtoAppService
+    private readonly simpleMessage: SimpleMessageAppService,
+    private readonly newline: NewlineAppService
   ) {
   }
 
-  runSteps(model: any): void {
-    this.loggerMessageApp.writeInfo(
-      "Build project", REPOX_LOGO
-    );
-    // if (!this.folderIsWorkspace.run()) return;
-    if (!this.loadConfigFileApp.run()) return;
-    const { projectName } = model;
-    if (!this.buildProjectApp.buildProject(projectName)) return;
+  runSteps(
+    programModel: EmptyRepoxProgramModel,
+    commandModel: BuildProjectRepoxCommandModel
+  ): void {
+    this.simpleMessage.writeInfo("Build project", REPOX_LOGO);
+    this.newline.writeNewline();
   }
 }
 // todo: refactor

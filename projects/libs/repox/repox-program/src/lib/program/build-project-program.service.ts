@@ -1,29 +1,27 @@
 import { singleton } from "tsyringe";
+import { RunProgramModel } from "@lib/model";
 import {
   BuildProjectStepService
 } from "../step/build-project-step.service";
 import {
-  // BuildProjectCommandArgDomainModel,
-  ParamDomainAppService
-} from "@lib/param-domain";
-import { RunProgramModel } from "@lib/model";
+  BuildProjectRepoxCommandModel,
+  EmptyRepoxProgramModel
+} from "@lib/repox-domain";
 
 @singleton()
 /**
- * The start point of the build project program.
+ * The start point of the program build project.
  */
 export class BuildProjectProgramService implements RunProgramModel {
   constructor(
-    private readonly step: BuildProjectStepService,
-    private readonly getParamDomainData: ParamDomainAppService
+    private readonly step: BuildProjectStepService
   ) {
   }
 
-  runProgram(): void {
-    console.log("BuildProjectProgramService");
-    // const commandModel = <any>undefined;
-    //   // this.getParamDomainData.getParamDomain().command.model;
-    // this.step.runSteps(commandModel);
+  runProgram(programDomain: unknown, commandDomain: unknown): void {
+    const programModel = <EmptyRepoxProgramModel>programDomain;
+    const commandModel = <BuildProjectRepoxCommandModel>
+      commandDomain;
+    this.step.runSteps(programModel, commandModel);
   }
 }
-// todo: refactor
