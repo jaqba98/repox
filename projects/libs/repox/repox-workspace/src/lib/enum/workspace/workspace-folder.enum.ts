@@ -7,5 +7,6 @@ export enum WorkspaceFolderEnum {
   libs = "libs",
   tools = "tools",
   dist = "dist",
-  src = "src"
+  src = "src",
+  lib = "lib"
 }

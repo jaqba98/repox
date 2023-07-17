@@ -1,7 +1,14 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-import { WsDomainStoreService } from "@lib/repox-workspace";
-import { FolderUtilsService, PathUtilsService } from "@lib/utils";
+import {
+  ProjectTypeEnum, WorkspaceFileEnum, WorkspaceFolderEnum,
+  WsDomainStoreService
+} from "@lib/repox-workspace";
+import {
+  FileUtilsService,
+  FolderUtilsService,
+  PathUtilsService, RunCommandUtilsService
+} from "@lib/utils";
 
 @singleton()
 /**
@@ -13,7 +20,9 @@ export class CreateProjectStructureAppService {
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDomainStore: WsDomainStoreService,
     private readonly pathUtils: PathUtilsService,
-    private readonly folderUtils: FolderUtilsService
+    private readonly folderUtils: FolderUtilsService,
+    private readonly fileUtils: FileUtilsService,
+    private readonly runCommandUtils: RunCommandUtilsService
   ) {
   }
 
@@ -29,7 +38,41 @@ export class CreateProjectStructureAppService {
       return false;
     }
     const currentPath = this.pathUtils.getCurrentPath();
-    this.folderUtils.createFolder(project.path);
+    switch (project.type) {
+      case ProjectTypeEnum.app:
+        this.createAppTsProjectStructure(project.path);
+        break;
+      case ProjectTypeEnum.lib:
+      case ProjectTypeEnum.tool:
+        this.createLibToolTsProjectStructure(project.path);
+        break;
+      default:
+        throw new Error("Not supported project type!");
+    }
+    this.pathUtils.changePath(currentPath);
     return true;
+  }
+
+  private createAppTsProjectStructure(projectPath: string): void {
+    this.folderUtils.createFolder(projectPath);
+    this.pathUtils.changePath(projectPath);
+    this.folderUtils.createFolder(WorkspaceFolderEnum.src);
+    this.pathUtils.changePath(WorkspaceFolderEnum.src);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.mainTsFile);
+    this.pathUtils.changePath("../");
+    this.runCommandUtils.runCommand("npm init -y");
+  }
+
+  private createLibToolTsProjectStructure(projectPath: string): void {
+    this.folderUtils.createFolder(projectPath);
+    this.pathUtils.changePath(projectPath);
+    this.folderUtils.createFolder(WorkspaceFolderEnum.src);
+    this.pathUtils.changePath(WorkspaceFolderEnum.src);
+    this.folderUtils.createFolder(WorkspaceFolderEnum.lib);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.indexTsFile);
+    this.pathUtils.changePath(WorkspaceFolderEnum.lib);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepTextFile);
+    this.pathUtils.changePath("../../");
+    this.runCommandUtils.runCommand("npm init -y");
   }
 }
