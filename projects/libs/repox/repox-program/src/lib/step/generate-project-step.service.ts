@@ -25,10 +25,6 @@ import {
   AddProjectToDomainAppService
 } from "../app-service/add-project-to-domain-app.service";
 import {
-  WsDomainStoreService,
-  WsDtoStoreService
-} from "@lib/repox-workspace";
-import {
   LoadWsDomainAppService
 } from "../app-service/load-ws-domain-app.service";
 import {
@@ -37,6 +33,9 @@ import {
 import {
   SaveWsDtoAppService
 } from "../app-service/save-ws-dto-app.service";
+import {
+  CreateProjectStructureAppService
+} from "../app-service/create-project-structure-app.service";
 
 @singleton()
 /**
@@ -53,15 +52,8 @@ export class GenerateProjectStepService {
     private readonly projectNotExist: ProjectNotExistAppService,
     private readonly addProjectToDomain: AddProjectToDomainAppService,
     private readonly saveWsDomain: SaveWsDomainAppService,
-    private readonly saveWsDto: SaveWsDtoAppService
-    // private readonly wsDomainStore: WsDomainStoreService
-    // private readonly systemVerification: ProgramExistOnSystemAppService,
-    // private readonly goToRootProject: GoToRootProjectAppService,
-    // private readonly loadConfigFile: LoadConfigFileAppService
-    // private readonly projectApp: ProjectAppService,
-    // private readonly systemVerification: SystemVerificationAppService,
-    // private readonly workspaceCheck: WorkspaceCheckAppService,
-    // private readonly loadConfigFileApp: LoadConfigFileAppService,
+    private readonly saveWsDto: SaveWsDtoAppService,
+    private readonly createProjectStructure: CreateProjectStructureAppService
   ) {
   }
 
@@ -86,10 +78,8 @@ export class GenerateProjectStepService {
     );
     if (!this.saveWsDomain.run()) return;
     if (!this.saveWsDto.run()) return;
-    // // Display a success message
-    // this.simple.writeNewline();
-    // this.simple.writeSuccess("Project created", 1, false, true);
+    if (!this.createProjectStructure.run()) return;
+    this.newline.writeNewline();
+    this.simpleMessage.writeSuccess("Project generated correctly");
   }
 }
-
-// todo: refactor
