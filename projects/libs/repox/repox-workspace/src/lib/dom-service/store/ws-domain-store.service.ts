@@ -109,6 +109,11 @@ export class WsDomainStoreService {
     });
   }
 
+  getProject(projectName: string): WsProjectDomainModel | undefined {
+    return this.getWsDomain().projects
+      .find(project => project.name == projectName);
+  }
+
   private getProjectBuild(
     projectScheme: ProjectSchemeEnum,
     projectPath: string,

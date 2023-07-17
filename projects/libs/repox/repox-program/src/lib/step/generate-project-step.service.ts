@@ -36,6 +36,9 @@ import {
 import {
   CreateProjectStructureAppService
 } from "../app-service/create-project-structure-app.service";
+import {
+  FolderNotExistAppService
+} from "../app-service/folder-not-exist-app.service";
 
 @singleton()
 /**
@@ -49,6 +52,7 @@ export class GenerateProjectStepService {
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadWsDto: LoadWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
+    private readonly folderNotExist: FolderNotExistAppService,
     private readonly projectNotExist: ProjectNotExistAppService,
     private readonly addProjectToDomain: AddProjectToDomainAppService,
     private readonly saveWsDomain: SaveWsDomainAppService,
@@ -72,13 +76,14 @@ export class GenerateProjectStepService {
     const {
       projectName, projectType, projectPath, projectScheme
     } = commandModel;
+    if (!this.folderNotExist.run(projectPath)) return;
     if (!this.projectNotExist.run(projectName)) return;
     this.addProjectToDomain.run(
       projectName, projectType, projectPath, projectScheme
     );
     if (!this.saveWsDomain.run()) return;
     if (!this.saveWsDto.run()) return;
-    if (!this.createProjectStructure.run()) return;
+    if (!this.createProjectStructure.run(projectName)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess("Project generated correctly");
   }

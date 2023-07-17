@@ -1,5 +1,7 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
+import { WsDomainStoreService } from "@lib/repox-workspace";
+import { FolderUtilsService, PathUtilsService } from "@lib/utils";
 
 @singleton()
 /**
@@ -8,14 +10,26 @@ import { SimpleMessageAppService } from "@lib/logger";
  */
 export class CreateProjectStructureAppService {
   constructor(
-    private readonly simpleMessage: SimpleMessageAppService
+    private readonly simpleMessage: SimpleMessageAppService,
+    private readonly wsDomainStore: WsDomainStoreService,
+    private readonly pathUtils: PathUtilsService,
+    private readonly folderUtils: FolderUtilsService
   ) {
   }
 
-  run(): boolean {
+  run(projectName: string): boolean {
     this.simpleMessage.writePlain(
       `Creating a project workspace structure`
     );
+    const project = this.wsDomainStore.getProject(projectName);
+    if (!project) {
+      this.simpleMessage.writeError(
+        `Project ${projectName} does not exist in the store!`
+      );
+      return false;
+    }
+    const currentPath = this.pathUtils.getCurrentPath();
+    this.folderUtils.createFolder(project.path);
     return true;
   }
 }
