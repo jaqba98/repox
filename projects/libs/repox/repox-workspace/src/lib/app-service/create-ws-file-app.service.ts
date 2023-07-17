@@ -1,6 +1,7 @@
 import { singleton } from "tsyringe";
 import { WsRepoxDtoModel } from "../model/ws-dto/ws-repox-dto.model";
 import {
+  WsProjectTsconfigDtoModel,
   WsTsconfigDtoModel
 } from "../model/ws-dto/ws-tsconfig-dto.model";
 
@@ -70,5 +71,18 @@ export default config;
         "**/jest.config.ts"
       ]
     };
+  }
+
+  buildProjectTsconfigJsonContentFile(): WsProjectTsconfigDtoModel {
+    return {
+      extends: "../../../../tsconfig.json"
+    }
+  }
+
+  buildProjectJestConfigTsContentFile(): string {
+    return `import config from "../../../../jest.config";
+
+export default { ...config };
+`;
   }
 }

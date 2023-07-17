@@ -25,3 +25,7 @@ export interface WsTsconfigDtoModel {
   },
   exclude: Array<string>;
 }
+
+export interface WsProjectTsconfigDtoModel {
+  extends: string;
+}
