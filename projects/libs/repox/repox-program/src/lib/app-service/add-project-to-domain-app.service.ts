@@ -22,16 +22,17 @@ export class AddProjectToDomainAppService {
   }
 
   run(
-    projectName: string, projectType: string, projectPath: string,
-    projectScheme: string
+    name: string, type: string, path: string, scheme: string
   ): boolean {
     this.simpleMessage.writePlain("Add project to domain");
-    const type = <ProjectTypeEnum>projectType;
-    const path = this.buildProjectPath.buildPath(
-      projectName, projectType, projectPath
+    const projectType = <ProjectTypeEnum>type;
+    const projectPath = this.buildProjectPath.buildPath(
+      name, projectType, path
     );
-    const scheme = <ProjectSchemeEnum>projectScheme;
-    this.wsDomainStore.addProject(projectName, type, path, scheme);
+    const projectScheme = <ProjectSchemeEnum>scheme;
+    this.wsDomainStore.addProject(
+      name, projectType, projectPath, projectScheme
+    );
     return true;
   }
 }

@@ -66,10 +66,7 @@ export class WsDomainStoreService {
     this.getWsDomain().projects
       .filter(project => project.changed)
       .forEach(project => {
-        this.wsDtoStore.addProjectDto(
-          project.name, project.type, project.path, project.scheme,
-          project.build
-        );
+        this.wsDtoStore.addProjectDto(project);
       });
   }
 

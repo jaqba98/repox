@@ -20,10 +20,7 @@ import {
   ProjectTypeEnum
 } from "../../enum/project/project-type.enum";
 import {
-  ProjectSchemeEnum
-} from "../../enum/project/project-scheme.enum";
-import {
-  WsProjectBuildDomainModel
+  WsProjectDomainModel
 } from "../../model/ws-domain/ws-domain.model";
 
 @singleton()
@@ -50,14 +47,20 @@ export class WsDtoStoreService {
     );
   }
 
-  // saveWsDto(): void {
-  //   this.file.writeJsonFile<WsRepoxDtoModel>(
-  //     WorkspaceFileEnum.repoxJsonFile, this.getWsRepoxDto()
-  //   );
-  //   this.file.writeJsonFile<WsTsconfigDtoModel>(
-  //     WorkspaceFileEnum.tsconfigJsonFile, this.getWsTsconfigDto()
-  //   );
-  // }
+  saveWsDto(): void {
+    if (this.wsRepoxDto === undefined) {
+      throw new Error("The repox store is undefined!");
+    }
+    if (this.wsTsconfigDto === undefined) {
+      throw new Error("The tsconfig store is undefined!");
+    }
+    this.file.writeJsonFile<WsRepoxDtoModel>(
+      WorkspaceFileEnum.repoxJsonFile, this.wsRepoxDto
+    );
+    this.file.writeJsonFile<WsTsconfigDtoModel>(
+      WorkspaceFileEnum.tsconfigJsonFile, this.wsTsconfigDto
+    );
+  }
 
   getWsRepoxDto(): WsRepoxDtoModel {
     if (this.wsRepoxDto === undefined) {
@@ -81,27 +84,27 @@ export class WsDtoStoreService {
     return Object.values(projects);
   }
 
-  addProjectDto(
-    projectName: string, projectType: ProjectTypeEnum | undefined,
-    projectPath: string, projectScheme: ProjectSchemeEnum | undefined,
-    projectBuild: WsProjectBuildDomainModel
-  ): void {
-    if (this.wsRepoxDto === undefined) {
-      throw new Error("The repox store is undefined!");
-    }
-    if (this.wsRepoxDto.projects === undefined) {
+  addProjectDto(project: WsProjectDomainModel): void {
+    if (
+      this.wsRepoxDto === undefined ||
+      this.wsRepoxDto.projects === undefined
+    ) {
       throw new Error("The repox store is undefined!");
     }
     if (this.wsTsconfigDto === undefined) {
       throw new Error("The tsconfig store is undefined!");
     }
-    this.wsRepoxDto.projects[projectName] = {
-      name: projectName,
-      type: projectType,
-      path: projectPath,
-      scheme: projectScheme,
-      build: projectBuild
+    this.wsRepoxDto.projects[project.name] = {
+      name: project.name,
+      type: project.type,
+      path: project.path,
+      scheme: project.scheme,
+      build: project.build
     };
+    if (project.type === ProjectTypeEnum.app) return;
+    this.wsTsconfigDto
+      .compilerOptions
+      .paths[project.alias] = project.indexPath;
   }
 
   getProjectIndexPath(

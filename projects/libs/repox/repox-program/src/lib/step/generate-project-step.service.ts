@@ -34,6 +34,9 @@ import {
 import {
   SaveWsDomainAppService
 } from "../app-service/save-ws-domain-app.service";
+import {
+  SaveWsDtoAppService
+} from "../app-service/save-ws-dto-app.service";
 
 @singleton()
 /**
@@ -50,7 +53,7 @@ export class GenerateProjectStepService {
     private readonly projectNotExist: ProjectNotExistAppService,
     private readonly addProjectToDomain: AddProjectToDomainAppService,
     private readonly saveWsDomain: SaveWsDomainAppService,
-    private readonly wsDtoStore: WsDtoStoreService
+    private readonly saveWsDto: SaveWsDtoAppService
     // private readonly wsDomainStore: WsDomainStoreService
     // private readonly systemVerification: ProgramExistOnSystemAppService,
     // private readonly goToRootProject: GoToRootProjectAppService,
@@ -82,8 +85,7 @@ export class GenerateProjectStepService {
       projectName, projectType, projectPath, projectScheme
     );
     if (!this.saveWsDomain.run()) return;
-    console.log(this.wsDtoStore);
-    // console.log(this.wsDomainStore);
+    if (!this.saveWsDto.run()) return;
     // // Display a success message
     // this.simple.writeNewline();
     // this.simple.writeSuccess("Project created", 1, false, true);
