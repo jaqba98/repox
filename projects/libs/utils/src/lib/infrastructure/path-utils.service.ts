@@ -13,7 +13,8 @@ export class PathUtilsService {
   getRootPath(path: string, file: WorkspaceFileEnum): string {
     return this.normalizePath(path)
       .split("/")
-      .join("..")
+      .map(item => "..")
+      .join("/")
       .concat(file);
   }
 
