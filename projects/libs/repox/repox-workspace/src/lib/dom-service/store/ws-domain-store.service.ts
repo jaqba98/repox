@@ -36,9 +36,9 @@ export class WsDomainStoreService {
         .map(project => {
           return {
             name: project.name ?? EMPTY_STRING,
-            type: project.type ?? EMPTY_STRING,
+            type: project.type ?? undefined,
             path: project.path ?? EMPTY_STRING,
-            scheme: project.scheme ?? EMPTY_STRING,
+            scheme: project.scheme ?? undefined,
             build: {
               output: project.build?.output ?? EMPTY_STRING,
               main: project.build?.main ?? EMPTY_STRING,
@@ -66,7 +66,10 @@ export class WsDomainStoreService {
     this.getWsDomain().projects
       .filter(project => project.changed)
       .forEach(project => {
-        this.wsDtoStore.addProjectDto(project.name);
+        this.wsDtoStore.addProjectDto(
+          project.name, project.type, project.path, project.scheme,
+          project.build
+        );
       });
   }
 

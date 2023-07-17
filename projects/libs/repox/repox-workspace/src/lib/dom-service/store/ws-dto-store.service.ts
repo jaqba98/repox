@@ -16,6 +16,15 @@ import {
   WsTsconfigDtoModel
 } from "../../model/ws-dto/ws-tsconfig-dto.model";
 import { EMPTY_STRING } from "@lib/const";
+import {
+  ProjectTypeEnum
+} from "../../enum/project/project-type.enum";
+import {
+  ProjectSchemeEnum
+} from "../../enum/project/project-scheme.enum";
+import {
+  WsProjectBuildDomainModel
+} from "../../model/ws-domain/ws-domain.model";
 
 @singleton()
 /**
@@ -72,7 +81,11 @@ export class WsDtoStoreService {
     return Object.values(projects);
   }
 
-  addProjectDto(projectName: string): void {
+  addProjectDto(
+    projectName: string, projectType: ProjectTypeEnum | undefined,
+    projectPath: string, projectScheme: ProjectSchemeEnum | undefined,
+    projectBuild: WsProjectBuildDomainModel
+  ): void {
     if (this.wsRepoxDto === undefined) {
       throw new Error("The repox store is undefined!");
     }
@@ -84,17 +97,19 @@ export class WsDtoStoreService {
     }
     this.wsRepoxDto.projects[projectName] = {
       name: projectName,
-      type: undefined,
-      path: undefined,
-      scheme: undefined,
-      build: undefined
+      type: projectType,
+      path: projectPath,
+      scheme: projectScheme,
+      build: projectBuild
     };
   }
 
   getProjectIndexPath(
-    projectAlias: string, projectType: string
+    projectAlias: string, projectType: string | undefined
   ): Array<string> {
-    if (projectType === EMPTY_STRING) return [];
+    if (projectType === EMPTY_STRING || projectType === undefined) {
+      return [];
+    }
     const tsconfigDto = this.getWsTsconfigDto();
     const indexPath = tsconfigDto.compilerOptions.paths[projectAlias];
     return indexPath ? indexPath : [];

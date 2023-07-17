@@ -13,8 +13,8 @@ export class BuildProjectAliasService {
   ) {
   }
 
-  buildAlias(name: string, type: string): string {
-    if (type === "app") return "";
+  buildAlias(name: string, type: string | undefined): string {
+    if (type === "app" || type === undefined) return "";
     const projectType = this.convertProjectType.toProjectType(type);
     return `@${projectType}/${name}`;
   }
