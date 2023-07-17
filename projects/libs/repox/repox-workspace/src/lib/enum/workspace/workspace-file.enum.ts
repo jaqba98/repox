@@ -6,6 +6,7 @@ export enum WorkspaceFileEnum {
   repoxJsonFile = "repox.json",
   tsconfigJsonFile = "tsconfig.json",
   jestConfigTsFile = "jest.config.ts",
+  importJestConfigTsFile = "jest.config",
   gitkeepTextFile = ".gitkeep",
   packageJsonFile = "package.json",
   indexTsFile = "index.ts",
