@@ -5,11 +5,11 @@
   "author": "Jakub Olejarczyk",
   "license": "ISC",
   "scripts": {
-    "link": "npm link ./dist/repox",
-    "unlink": "npm unlink ./dist/repox && npm uninstall repox -g",
+    "repox:build": "repox build project --name=repox",
     "repox:version": "node dist/repox/apps/repox/src/main.js --version",
     "generate:workspace": "node dist/repox/apps/repox/src/main.js generate workspace --name=dog",
-    "generate:project": "node dist/repox/apps/repox/src/main.js generate project --name=dog --type=lib --scheme=@lib/ts"
+    "generate:project": "node dist/repox/apps/repox/src/main.js generate project --name=dog --type=lib --scheme=@lib/ts",
+    "build:project": "node dist/repox/apps/repox/src/main.js build project --name=dog"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
