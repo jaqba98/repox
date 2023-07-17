@@ -4,6 +4,10 @@ import {
   WsProjectTsconfigDtoModel,
   WsTsconfigDtoModel
 } from "../model/ws-dto/ws-tsconfig-dto.model";
+import {
+  WorkspaceFileEnum
+} from "../enum/workspace/workspace-file.enum";
+import { PathUtilsService } from "@lib/utils";
 
 @singleton()
 /**
@@ -11,6 +15,9 @@ import {
  * for all workspace files.
  */
 export class CreateWsFileAppService {
+  constructor(private readonly pathUtils: PathUtilsService) {
+  }
+
   buildDefaultGitignoreContentFile(): string {
     return `# Webstorm
 .idea/
@@ -73,14 +80,22 @@ export default config;
     };
   }
 
-  buildProjectTsconfigJsonContentFile(): WsProjectTsconfigDtoModel {
+  buildProjectTsconfigJsonContentFile(
+    projectPath: string
+  ): WsProjectTsconfigDtoModel {
+    const tsconfigRootPath = this.pathUtils.getRootPath(
+      projectPath, WorkspaceFileEnum.tsconfigJsonFile
+    );
     return {
-      extends: "../../../../tsconfig.json"
+      extends: tsconfigRootPath
     }
   }
 
-  buildProjectJestConfigTsContentFile(): string {
-    return `import config from "../../../../jest.config";
+  buildProjectJestConfigTsContentFile(projectPath: string): string {
+    const jestRootPath = this.pathUtils.getRootPath(
+      projectPath, WorkspaceFileEnum.jestConfigTsFile
+    );
+        return `import config from "${jestRootPath}";
 
 export default { ...config };
 `;

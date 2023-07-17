@@ -10,6 +10,13 @@ import { EMPTY_STRING } from "@lib/const";
  * The service contains a group of utils to path manage.
  */
 export class PathUtilsService {
+  getRootPath(path: string, file: WorkspaceFileEnum): string {
+    return this.normalizePath(path)
+      .split("/")
+      .join("..")
+      .concat(file);
+  }
+
   existPath(path: string): boolean {
     return existsSync(path);
   }
