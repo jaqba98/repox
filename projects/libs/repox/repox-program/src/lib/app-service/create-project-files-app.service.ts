@@ -1,4 +1,3 @@
-// todo: I am here
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
