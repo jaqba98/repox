@@ -32,6 +32,9 @@ import {
 import {
   SaveWsDomainAppService
 } from "../app-service/save-ws-domain-app.service";
+import {
+  SaveWsDtoAppService
+} from "../app-service/save-ws-dto-app.service";
 
 @singleton()
 /**
@@ -49,7 +52,7 @@ export class GenerateProjectStepService {
     private readonly projectNotExist: ProjectNotExistAppService,
     private readonly addProjectToDomain: AddProjectToDomainAppService,
     private readonly saveWsDomain: SaveWsDomainAppService,
-    // private readonly saveWsDto: SaveWsDtoAppService,
+    private readonly saveWsDto: SaveWsDtoAppService,
     // private readonly createProjectStructure: CreateProjectStructureAppService
   ) {
   }
@@ -73,8 +76,7 @@ export class GenerateProjectStepService {
       projectName, projectType, projectPath, projectScheme
     );
     if (!this.saveWsDomain.run()) return;
-    // todo: I am here
-    // if (!this.saveWsDto.run()) return;
+    if (!this.saveWsDto.run()) return;
     // if (!this.createProjectStructure.run(projectName)) return;
     // this.newline.writeNewline();
     // this.simpleMessage.writeSuccess("Project generated correctly");
