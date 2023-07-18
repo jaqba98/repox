@@ -9,10 +9,6 @@ import {
 } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
-  ProgramInstalledAppService
-} from "../app-service/program-installed-app.service";
-import { ProgramSystemEnum } from "../enum/program-system.enum";
-import {
   FolderNotExistAppService
 } from "../app-service/folder-not-exist-app.service";
 import {
@@ -21,6 +17,9 @@ import {
 import {
   InitWsProjectAppService
 } from "../app-service/init-ws-project-app.service";
+import {
+  AllProgramInstalledService
+} from "../compose/all-program-installed.service";
 
 @singleton()
 /**
@@ -30,7 +29,7 @@ export class GenerateWorkspaceStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
-    private readonly programInstalled: ProgramInstalledAppService,
+    private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly folderNotExist: FolderNotExistAppService,
     private readonly createWsStructure: CreateWsStructureAppService,
     private readonly initWsProject: InitWsProjectAppService
@@ -44,9 +43,7 @@ export class GenerateWorkspaceStepService {
     const { workspaceName } = commandModel;
     this.simpleMessage.writeInfo("Generate workspace", REPOX_LOGO);
     this.newline.writeNewline();
-    if (!this.programInstalled.run(ProgramSystemEnum.git)) return;
-    if (!this.programInstalled.run(ProgramSystemEnum.node)) return;
-    if (!this.programInstalled.run(ProgramSystemEnum.npm)) return;
+    if (!this.allProgramInstalled.run()) return;
     if (!this.folderNotExist.run(workspaceName)) return;
     if (!this.createWsStructure.run(workspaceName)) return;
     if (!this.initWsProject.run()) return;
