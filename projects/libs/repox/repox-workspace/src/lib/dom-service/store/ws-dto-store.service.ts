@@ -85,25 +85,31 @@ export class WsDtoStoreService {
   }
 
   addProjectDto(project: WsProjectDomainModel): void {
-    if (
-      this.wsRepoxDto === undefined ||
-      this.wsRepoxDto.projects === undefined
-    ) {
+    if (this.wsRepoxDto === undefined) {
       throw new Error("The repox store is undefined!");
+    }
+    if (this.wsRepoxDto.projects === undefined) {
+      throw new Error("The projects in repox store is undefined!");
     }
     if (this.wsTsconfigDto === undefined) {
       throw new Error("The tsconfig store is undefined!");
     }
     this.wsRepoxDto.projects[project.name] = {
-      name: project.name,
+      name: project.name === EMPTY_STRING ? undefined : project.name,
       type: project.type,
-      path: project.path,
+      path: project.path === EMPTY_STRING ? undefined : project.path,
       scheme: project.scheme,
-      build: project.build
+      build: {
+        output: project.build.output === EMPTY_STRING ?
+          undefined : project.build.output,
+        main: project.build.main === EMPTY_STRING ?
+          undefined : project.build.main,
+        assets: project.build.assets.length === 0 ?
+          undefined : project.build.assets
+      }
     };
-    if (project.type === ProjectTypeEnum.app) return;
-    this.wsTsconfigDto
-      .compilerOptions
+    if (project.alias === EMPTY_STRING) return;
+    this.wsTsconfigDto.compilerOptions
       .paths[project.alias] = project.indexPath;
   }
 

@@ -65,9 +65,7 @@ export class WsDomainStoreService {
   saveWsDomain(): void {
     this.getWsDomain().projects
       .filter(project => project.changed)
-      .forEach(project => {
-        this.wsDtoStore.addProjectDto(project);
-      });
+      .forEach(project => this.wsDtoStore.addProjectDto(project));
   }
 
   getWsDomain(): WsDomainModel {
@@ -85,6 +83,11 @@ export class WsDomainStoreService {
     );
   }
 
+  getProject(projectName: string): WsProjectDomainModel | undefined {
+    return this.getWsDomain().projects
+      .find(project => project.name == projectName);
+  }
+
   addProject(
     projectName: string, projectType: ProjectTypeEnum,
     projectPath: string, projectScheme: ProjectSchemeEnum
@@ -92,9 +95,6 @@ export class WsDomainStoreService {
     if (this.wsDomain === undefined) {
       throw new Error("The store is undefined!");
     }
-    const projectAlias = this.buildProjectAlias.buildAlias(
-      projectName, projectType
-    );
     this.wsDomain.projects.push({
       name: projectName,
       type: projectType,
@@ -103,15 +103,10 @@ export class WsDomainStoreService {
       build: this.getProjectBuild(
         projectScheme, projectPath, projectName
       ),
-      alias: projectAlias,
+      alias: this.getProjectAlias(projectName, projectType),
       indexPath: this.getProjectIndexPath(projectType, projectPath),
       changed: true
     });
-  }
-
-  getProject(projectName: string): WsProjectDomainModel | undefined {
-    return this.getWsDomain().projects
-      .find(project => project.name == projectName);
   }
 
   private getProjectBuild(
@@ -143,6 +138,23 @@ export class WsDomainStoreService {
     }
   }
 
+  private getProjectAlias(
+    projectName: string,
+    projectType: ProjectTypeEnum
+  ): string {
+    switch (projectType) {
+      case ProjectTypeEnum.app:
+        return EMPTY_STRING;
+      case ProjectTypeEnum.lib:
+      case ProjectTypeEnum.tool:
+        return this.buildProjectAlias.buildAlias(
+          projectName, projectType
+        )
+      default:
+        throw new Error("Not supported project scheme");
+    }
+  }
+
   private getProjectIndexPath(
     projectType: ProjectTypeEnum,
     projectPath: string
@@ -159,7 +171,7 @@ export class WsDomainStoreService {
           ])
         ];
       default:
-        throw new Error("Not supported project type");
+        throw new Error("Not supported project scheme");
     }
   }
 }

@@ -26,6 +26,12 @@ import {
 import {
   ProjectNotExistAppService
 } from "../app-service/project-not-exist-app.service";
+import {
+  AddProjectToDomainAppService
+} from "../app-service/add-project-to-domain-app.service";
+import {
+  SaveWsDomainAppService
+} from "../app-service/save-ws-domain-app.service";
 
 @singleton()
 /**
@@ -40,9 +46,9 @@ export class GenerateProjectStepService {
     private readonly loadWsDto: LoadWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
     private readonly folderNotExist: FolderNotExistAppService,
-    private readonly projectNotExist: ProjectNotExistAppService
-    // private readonly addProjectToDomain: AddProjectToDomainAppService,
-    // private readonly saveWsDomain: SaveWsDomainAppService,
+    private readonly projectNotExist: ProjectNotExistAppService,
+    private readonly addProjectToDomain: AddProjectToDomainAppService,
+    private readonly saveWsDomain: SaveWsDomainAppService,
     // private readonly saveWsDto: SaveWsDtoAppService,
     // private readonly createProjectStructure: CreateProjectStructureAppService
   ) {
@@ -63,12 +69,11 @@ export class GenerateProjectStepService {
     } = commandModel;
     if (!this.folderNotExist.run(projectPath)) return;
     if (!this.projectNotExist.run(projectName)) return;
-    console.log("Hello world");
+    this.addProjectToDomain.run(
+      projectName, projectType, projectPath, projectScheme
+    );
+    if (!this.saveWsDomain.run()) return;
     // todo: I am here
-    // this.addProjectToDomain.run(
-    //   projectName, projectType, projectPath, projectScheme
-    // );
-    // if (!this.saveWsDomain.run()) return;
     // if (!this.saveWsDto.run()) return;
     // if (!this.createProjectStructure.run(projectName)) return;
     // this.newline.writeNewline();

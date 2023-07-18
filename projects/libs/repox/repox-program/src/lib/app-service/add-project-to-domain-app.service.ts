@@ -2,14 +2,17 @@ import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
   BuildProjectAliasService,
-  BuildProjectPathService, ProjectSchemeEnum, ProjectTypeEnum,
+  BuildProjectPathService,
+  ProjectSchemeEnum,
+  ProjectTypeEnum,
   WsDomainStoreService
 } from "@lib/repox-workspace";
 import { PathUtilsService } from "@lib/utils";
 
 @singleton()
 /**
- * The app service is responsible for add new project to the domain.
+ * The app service is responsible for add new project
+ * to the domain model.
  */
 export class AddProjectToDomainAppService {
   constructor(
@@ -22,17 +25,19 @@ export class AddProjectToDomainAppService {
   }
 
   run(
-    name: string, type: string, path: string, scheme: string
+    projectName: string, projectType: string, projectPath: string,
+    projectScheme: string
   ): boolean {
     this.simpleMessage.writePlain("Add project to domain");
-    const projectType = <ProjectTypeEnum>type;
-    const projectPath = this.buildProjectPath.buildPath(
-      name, projectType, path
+    // Prepare data
+    const name = projectName;
+    const type = <ProjectTypeEnum>projectType;
+    const path = this.buildProjectPath.buildPath(
+      projectName, projectType, projectPath
     );
-    const projectScheme = <ProjectSchemeEnum>scheme;
-    this.wsDomainStore.addProject(
-      name, projectType, projectPath, projectScheme
-    );
+    const scheme = <ProjectSchemeEnum>projectScheme;
+    // Add project to the domain store
+    this.wsDomainStore.addProject(name, type, path, scheme);
     return true;
   }
 }
