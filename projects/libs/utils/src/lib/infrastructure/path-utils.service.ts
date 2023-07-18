@@ -50,7 +50,7 @@ export class PathUtilsService {
 
   getPackageJsonPath(currentPath: string): string {
     const packageJsonPath = join(
-      currentPath, WorkspaceFileEnum.packageJsonFile
+      currentPath, WorkspaceFileEnum.packageJson
     );
     if (this.existPath(packageJsonPath)) {
       return currentPath;

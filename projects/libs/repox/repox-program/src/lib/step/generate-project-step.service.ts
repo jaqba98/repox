@@ -14,6 +14,18 @@ import {
 import {
   GoToProjectRootAppService
 } from "../app-service/go-to-project-root-app.service";
+import {
+  LoadWsDtoAppService
+} from "../app-service/load-ws-dto-app.service";
+import {
+  LoadWsDomainAppService
+} from "../app-service/load-ws-domain-app.service";
+import {
+  FolderNotExistAppService
+} from "../app-service/folder-not-exist-app.service";
+import {
+  ProjectNotExistAppService
+} from "../app-service/project-not-exist-app.service";
 
 @singleton()
 /**
@@ -24,11 +36,11 @@ export class GenerateProjectStepService {
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
-    private readonly goToProjectRoot: GoToProjectRootAppService
-    // private readonly loadWsDto: LoadWsDtoAppService,
-    // private readonly loadWsDomain: LoadWsDomainAppService,
-    // private readonly folderNotExist: FolderNotExistAppService,
-    // private readonly projectNotExist: ProjectNotExistAppService,
+    private readonly goToProjectRoot: GoToProjectRootAppService,
+    private readonly loadWsDto: LoadWsDtoAppService,
+    private readonly loadWsDomain: LoadWsDomainAppService,
+    private readonly folderNotExist: FolderNotExistAppService,
+    private readonly projectNotExist: ProjectNotExistAppService
     // private readonly addProjectToDomain: AddProjectToDomainAppService,
     // private readonly saveWsDomain: SaveWsDomainAppService,
     // private readonly saveWsDto: SaveWsDtoAppService,
@@ -44,14 +56,15 @@ export class GenerateProjectStepService {
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
+    if (!this.loadWsDto.run()) return;
+    if (!this.loadWsDomain.run()) return;
+    const {
+      projectName, projectType, projectPath, projectScheme
+    } = commandModel;
+    if (!this.folderNotExist.run(projectPath)) return;
+    if (!this.projectNotExist.run(projectName)) return;
+    console.log("Hello world");
     // todo: I am here
-    // if (!this.loadWsDto.run()) return;
-    // if (!this.loadWsDomain.run()) return;
-    // const {
-    //   projectName, projectType, projectPath, projectScheme
-    // } = commandModel;
-    // if (!this.folderNotExist.run(projectPath)) return;
-    // if (!this.projectNotExist.run(projectName)) return;
     // this.addProjectToDomain.run(
     //   projectName, projectType, projectPath, projectScheme
     // );

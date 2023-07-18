@@ -127,7 +127,7 @@ export class WsDomainStoreService {
           ]),
           main: this.pathUtils.createPath([
             projectPath, WorkspaceFolderEnum.src,
-            WorkspaceFileEnum.mainTsFile
+            WorkspaceFileEnum.mainTs
           ]),
           assets: []
         };
@@ -155,7 +155,7 @@ export class WsDomainStoreService {
         return [
           this.pathUtils.createPath([
             projectPath, WorkspaceFolderEnum.src,
-            WorkspaceFileEnum.indexTsFile
+            WorkspaceFileEnum.indexTs
           ])
         ];
       default:

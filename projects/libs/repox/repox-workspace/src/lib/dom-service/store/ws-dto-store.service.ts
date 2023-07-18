@@ -40,10 +40,10 @@ export class WsDtoStoreService {
 
   loadWsDto(): void {
     this.wsRepoxDto = this.file.readJsonFile<WsRepoxDtoModel>(
-      WorkspaceFileEnum.repoxJsonFile
+      WorkspaceFileEnum.repoxJson
     );
     this.wsTsconfigDto = this.file.readJsonFile<WsTsconfigDtoModel>(
-      WorkspaceFileEnum.tsconfigJsonFile
+      WorkspaceFileEnum.tsconfigJson
     );
   }
 
@@ -55,10 +55,10 @@ export class WsDtoStoreService {
       throw new Error("The tsconfig store is undefined!");
     }
     this.file.writeJsonFile<WsRepoxDtoModel>(
-      WorkspaceFileEnum.repoxJsonFile, this.wsRepoxDto
+      WorkspaceFileEnum.repoxJson, this.wsRepoxDto
     );
     this.file.writeJsonFile<WsTsconfigDtoModel>(
-      WorkspaceFileEnum.tsconfigJsonFile, this.wsTsconfigDto
+      WorkspaceFileEnum.tsconfigJson, this.wsTsconfigDto
     );
   }
 

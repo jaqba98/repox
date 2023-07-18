@@ -1,11 +1,10 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
+import { PathUtilsService } from "@lib/utils";
 import {
   WorkspaceFileEnum,
   WsDtoStoreService
 } from "@lib/repox-workspace";
-import { PathUtilsService } from "@lib/utils";
-import { ValidationError } from "jsonschema";
 
 @singleton()
 /**
@@ -15,7 +14,7 @@ import { ValidationError } from "jsonschema";
 export class LoadWsDtoAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly path: PathUtilsService,
+    private readonly pathUtils: PathUtilsService,
     private readonly wsDtoStore: WsDtoStoreService
   ) {
   }
@@ -23,51 +22,43 @@ export class LoadWsDtoAppService {
   run(): boolean {
     this.simpleMessage.writePlain("Load workspace dto model");
     // Check if workspace files exist
-    if (this.path.notExistPath(WorkspaceFileEnum.repoxJsonFile)) {
-      this.notExistPathError(WorkspaceFileEnum.repoxJsonFile);
+    if (this.pathUtils.notExistPath(WorkspaceFileEnum.repoxJson)) {
+      this.simpleMessage.writeError("Incorrect workspace structure");
+      this.simpleMessage.writeError(
+        `The ${WorkspaceFileEnum.repoxJson} file does not exist`
+      );
       return false;
     }
-    if (this.path.notExistPath(WorkspaceFileEnum.tsconfigJsonFile)) {
-      this.notExistPathError(WorkspaceFileEnum.tsconfigJsonFile);
+    if (this.pathUtils.notExistPath(WorkspaceFileEnum.tsconfigJson)) {
+      this.simpleMessage.writeError("Incorrect workspace structure");
+      this.simpleMessage.writeError(
+        `The ${WorkspaceFileEnum.tsconfigJson} file does not exist`
+      );
       return false;
     }
     // Load the workspace dto model
     this.wsDtoStore.loadWsDto();
     // Verification the workspace dto model
-    const wsRepoxDtoVerifyResult = this.wsDtoStore.verifyWsRepoxDto();
-    if (wsRepoxDtoVerifyResult.errors.length > 0) {
-      this.verifyErrorError(
-        WorkspaceFileEnum.repoxJsonFile, wsRepoxDtoVerifyResult.errors
+    const verifyRepoxDto = this.wsDtoStore.verifyWsRepoxDto();
+    if (verifyRepoxDto.errors.length > 0) {
+      this.simpleMessage.writeError(
+        `Incorrect content of ${WorkspaceFileEnum.repoxJson} file`
       );
+      verifyRepoxDto.errors.forEach(error => {
+        this.simpleMessage.writeError(error.toString());
+      });
       return false;
     }
-    const wsTsconfigDtoVerifyResult = this.wsDtoStore
-      .verifyWsTsconfigDto();
-    if (wsTsconfigDtoVerifyResult.errors.length > 0) {
-      this.verifyErrorError(
-        WorkspaceFileEnum.tsconfigJsonFile,
-        wsTsconfigDtoVerifyResult.errors
+    const verifyTsconfigDto = this.wsDtoStore.verifyWsTsconfigDto();
+    if (verifyTsconfigDto.errors.length > 0) {
+      this.simpleMessage.writeError(
+        `Incorrect content of ${WorkspaceFileEnum.tsconfigJson} file`
       );
+      verifyTsconfigDto.errors.forEach(error => {
+        this.simpleMessage.writeError(error.toString());
+      });
       return false;
     }
     return true;
-  }
-
-  private notExistPathError(workspaceFile: WorkspaceFileEnum): void {
-    this.simpleMessage.writeError("Incorrect workspace structure");
-    this.simpleMessage.writeError(
-      `The ${workspaceFile} file does not exist`
-    );
-  }
-
-  private verifyErrorError(
-    workspaceFile: WorkspaceFileEnum, errors: Array<ValidationError>
-  ): void {
-    this.simpleMessage.writeError(
-      `Incorrect content of ${workspaceFile} file`
-    );
-    errors.forEach(error => {
-      this.simpleMessage.writeError(error.toString());
-    });
   }
 }

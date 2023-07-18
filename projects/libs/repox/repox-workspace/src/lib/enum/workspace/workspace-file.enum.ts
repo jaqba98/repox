@@ -2,13 +2,13 @@
  * All kind of files in the workspace.
  */
 export enum WorkspaceFileEnum {
-  gitignoreTextFile = ".gitignore",
-  repoxJsonFile = "repox.json",
-  tsconfigJsonFile = "tsconfig.json",
-  jestConfigTsFile = "jest.config.ts",
-  importJestConfigTsFile = "jest.config",
-  gitkeepTextFile = ".gitkeep",
-  packageJsonFile = "package.json",
-  indexTsFile = "index.ts",
-  mainTsFile = "main.ts"
+  gitignoreText = ".gitignore",
+  repoxJson = "repox.json",
+  tsconfigJson = "tsconfig.json",
+  jestConfigTs = "jest.config.ts",
+  importJestConfigTs = "jest.config",
+  gitkeepText = ".gitkeep",
+  packageJson = "package.json",
+  indexTs = "index.ts",
+  mainTs = "main.ts"
 }

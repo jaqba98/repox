@@ -47,7 +47,7 @@ export class CreateWsStructureAppService {
     );
     this.folderUtils.createFolder(WorkspaceFolderEnum.apps);
     this.pathUtils.changePath(WorkspaceFolderEnum.apps);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepTextFile);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
     this.pathUtils.changePath("../");
     // Generate a libraries folder with content
     this.simpleMessage.writePlain(
@@ -55,7 +55,7 @@ export class CreateWsStructureAppService {
     );
     this.folderUtils.createFolder(WorkspaceFolderEnum.libs);
     this.pathUtils.changePath(WorkspaceFolderEnum.libs);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepTextFile);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
     this.pathUtils.changePath("../");
     // Generate a tools folder with content
     this.simpleMessage.writePlain(
@@ -63,30 +63,30 @@ export class CreateWsStructureAppService {
     );
     this.folderUtils.createFolder(WorkspaceFolderEnum.tools);
     this.pathUtils.changePath(WorkspaceFolderEnum.tools);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepTextFile);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
     this.pathUtils.changePath("../../");
     // Generate the .gitignore file
     this.simpleMessage.writePlain("Generate the .gitignore file");
     this.writeFile.writeTextFile(
-      WorkspaceFileEnum.gitignoreTextFile,
+      WorkspaceFileEnum.gitignoreText,
       this.createWsFile.buildDefaultGitignoreContentFile()
     );
     // Generate the jest.config.ts file
     this.simpleMessage.writePlain("Generate the jest.config.ts file");
     this.writeFile.writeTextFile(
-      WorkspaceFileEnum.jestConfigTsFile,
+      WorkspaceFileEnum.jestConfigTs,
       this.createWsFile.buildDefaultRootJestConfigTsContentFile()
     );
     // Generate the repox.json file
     this.simpleMessage.writePlain("Generate the repox.json file");
     this.writeFile.writeJsonFile(
-      WorkspaceFileEnum.repoxJsonFile,
+      WorkspaceFileEnum.repoxJson,
       this.createWsFile.buildDefaultRepoxJsonContentFile()
     );
     // Generate the tsconfig.json file
     this.simpleMessage.writePlain("Generate the tsconfig.json file");
     this.writeFile.writeJsonFile(
-      WorkspaceFileEnum.tsconfigJsonFile,
+      WorkspaceFileEnum.tsconfigJson,
       this.createWsFile.buildDefaultTsconfigJsonContentFile()
     );
     return true;

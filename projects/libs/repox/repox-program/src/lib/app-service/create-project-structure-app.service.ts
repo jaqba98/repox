@@ -63,15 +63,15 @@ export class CreateProjectStructureAppService {
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     this.pathUtils.changePath(WorkspaceFolderEnum.src);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.mainTsFile);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.mainTs);
     this.pathUtils.changePath("../");
     this.runCommandUtils.runCommand("npm init -y");
     this.fileUtils.writeTextFile(
-      WorkspaceFileEnum.jestConfigTsFile,
+      WorkspaceFileEnum.jestConfigTs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
     );
     this.fileUtils.writeJsonFile(
-      WorkspaceFileEnum.tsconfigJsonFile,
+      WorkspaceFileEnum.tsconfigJson,
       this.createWsFile.buildProjectTsconfigJsonContentFile(projectPath)
     );
   }
@@ -82,17 +82,17 @@ export class CreateProjectStructureAppService {
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     this.pathUtils.changePath(WorkspaceFolderEnum.src);
     this.folderUtils.createFolder(WorkspaceFolderEnum.lib);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.indexTsFile);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.indexTs);
     this.pathUtils.changePath(WorkspaceFolderEnum.lib);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepTextFile);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
     this.pathUtils.changePath("../../");
     this.runCommandUtils.runCommand("npm init -y");
     this.fileUtils.writeTextFile(
-      WorkspaceFileEnum.jestConfigTsFile,
+      WorkspaceFileEnum.jestConfigTs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
     );
     this.fileUtils.writeJsonFile(
-      WorkspaceFileEnum.tsconfigJsonFile,
+      WorkspaceFileEnum.tsconfigJson,
       this.createWsFile.buildProjectTsconfigJsonContentFile(projectPath)
     );
   }

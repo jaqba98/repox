@@ -87,7 +87,7 @@ export default config;
     projectPath: string
   ): WsProjectTsconfigDtoModel {
     const tsconfigRootPath = this.pathUtils.getRootPath(
-      projectPath, WorkspaceFileEnum.tsconfigJsonFile
+      projectPath, WorkspaceFileEnum.tsconfigJson
     );
     return {
       extends: tsconfigRootPath
