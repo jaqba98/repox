@@ -35,6 +35,9 @@ import {
 import {
   SaveWsDtoAppService
 } from "../app-service/save-ws-dto-app.service";
+import {
+  CreateProjectFilesAppService
+} from "../app-service/create-project-files-app.service";
 
 @singleton()
 /**
@@ -53,7 +56,7 @@ export class GenerateProjectStepService {
     private readonly addProjectToDomain: AddProjectToDomainAppService,
     private readonly saveWsDomain: SaveWsDomainAppService,
     private readonly saveWsDto: SaveWsDtoAppService,
-    // private readonly createProjectStructure: CreateProjectStructureAppService
+    private readonly createProjectFiles: CreateProjectFilesAppService
   ) {
   }
 
@@ -77,8 +80,8 @@ export class GenerateProjectStepService {
     );
     if (!this.saveWsDomain.run()) return;
     if (!this.saveWsDto.run()) return;
-    // if (!this.createProjectStructure.run(projectName)) return;
-    // this.newline.writeNewline();
-    // this.simpleMessage.writeSuccess("Project generated correctly");
+    if (!this.createProjectFiles.run(projectName)) return;
+    this.newline.writeNewline();
+    this.simpleMessage.writeSuccess("Project generated correctly");
   }
 }

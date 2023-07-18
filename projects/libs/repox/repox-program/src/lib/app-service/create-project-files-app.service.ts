@@ -1,3 +1,4 @@
+// todo: I am here
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
@@ -19,7 +20,7 @@ import {
  * The app service is responsible for generate project structure
  * of files and folders.
  */
-export class CreateProjectStructureAppService {
+export class CreateProjectFilesAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDomainStore: WsDomainStoreService,
