@@ -72,6 +72,9 @@ export class BuildProjectAppService {
     const projectArg = `--project ${projectTsconfig}`;
     const distArg = `--outDir ${project.build.output}`;
     this.runCommandUtils.runNpxCommand(
+      `tsc ${projectArg} ${distArg} --noEmit`, true
+    );
+    this.runCommandUtils.runNpxCommand(
       `tsc ${projectArg} ${distArg}`, true
     );
     this.runCommandUtils.runNpxCommand(
