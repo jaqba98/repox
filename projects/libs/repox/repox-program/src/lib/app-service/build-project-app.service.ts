@@ -4,10 +4,15 @@ import {
   ProjectSchemeEnum,
   ProjectTypeEnum,
   WorkspaceFileEnum,
+  WsAssetsDomainModel,
   WsDomainStoreService,
   WsProjectDomainModel
 } from "@lib/repox-workspace";
-import { PathUtilsService, RunCommandUtilsService } from "@lib/utils";
+import {
+  FileUtilsService,
+  PathUtilsService,
+  RunCommandUtilsService
+} from "@lib/utils";
 
 @singleton()
 /**
@@ -19,7 +24,8 @@ export class BuildProjectAppService {
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDomainStore: WsDomainStoreService,
     private readonly pathUtils: PathUtilsService,
-    private readonly runCommandUtils: RunCommandUtilsService
+    private readonly runCommandUtils: RunCommandUtilsService,
+    private readonly fileUtils: FileUtilsService
   ) {
   }
 
@@ -80,13 +86,12 @@ export class BuildProjectAppService {
     this.runCommandUtils.runNpxCommand(
       `tsc-alias ${distArg}`, true
     );
-    // todo: I am here
-    // project.assets.forEach((asset: any) => {
-    //   this.fileUtils.copyFile(
-    //     `${asset.inputDir}/${asset.fileName}`,
-    //     `${asset.outputDir}/${asset.fileName}`
-    //   );
-    // })
+    if (project.build.assets.length > 0) {
+      project.build.assets
+        .forEach((asset: WsAssetsDomainModel): void => {
+          this.fileUtils.copyFile(asset.input, asset.output);
+        })
+    }
     return true;
   }
 }
