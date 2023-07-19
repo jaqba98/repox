@@ -1,15 +1,13 @@
 import { singleton } from "tsyringe";
-// import {
-//   DomainConfigStoreService,
-//   ProjectAppService
-// } from "@lib/domain";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
-  FileUtilsService,
-  FolderUtilsService,
-  RunCommandUtilsService
-} from "@lib/utils";
-import { REPOX_LOGO } from "@lib/repox-const";
+  ProjectSchemeEnum,
+  ProjectTypeEnum,
+  WorkspaceFileEnum,
+  WsDomainStoreService,
+  WsProjectDomainModel
+} from "@lib/repox-workspace";
+import { PathUtilsService, RunCommandUtilsService } from "@lib/utils";
 
 @singleton()
 /**
@@ -18,39 +16,67 @@ import { REPOX_LOGO } from "@lib/repox-const";
  */
 export class BuildProjectAppService {
   constructor(
-    private readonly fileExist: FileUtilsService,
-    private readonly folderDoesNotExist: FolderUtilsService,
-    // private readonly domainConfigStore: DomainConfigStoreService,
-    private readonly runCommand: RunCommandUtilsService,
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly fileUtils: FileUtilsService,
-    // private readonly projectApp: ProjectAppService
+    private readonly wsDomainStore: WsDomainStoreService,
+    private readonly pathUtils: PathUtilsService,
+    private readonly runCommandUtils: RunCommandUtilsService
   ) {
   }
 
-  buildProject(projectName: string): boolean {
-    // Check whether the project exist
-    this.simpleMessage.writePlain(
-      "Check whether the project exist"
+  run(projectName: string): boolean {
+    this.simpleMessage.writePlain("Build the project");
+    const project = this.wsDomainStore.getProject(projectName);
+    if (project === undefined) {
+      this.simpleMessage.writeError(
+        `The ${projectName} project does not exist!`
+      );
+      this.simpleMessage.writeWarning(
+        `Specify a different project name and restart the program`
+      );
+      return false;
+    }
+    if (project.type !== ProjectTypeEnum.app) {
+      this.simpleMessage.writeError(
+        `Could not build a project of type ${project.type}.`
+      );
+      this.simpleMessage.writeError(
+        "It it only possible to build applications!"
+      );
+      this.simpleMessage.writeError(
+        "Other types of projects will be build as dependencies!"
+      );
+      return false;
+    }
+    switch (project.scheme) {
+      case ProjectSchemeEnum.appTypeScript:
+        if (!this.buildProjectAppTypescript(project)) return false;
+        break;
+      default:
+        throw new Error("Not supported project scheme");
+    }
+    return true;
+  }
+
+  private buildProjectAppTypescript(
+    project: WsProjectDomainModel
+  ): boolean {
+    const projectTsconfig = this.pathUtils.createPath([
+      project.path, WorkspaceFileEnum.tsconfigJson
+    ]);
+    if (!this.pathUtils.existPath(projectTsconfig)) {
+      this.simpleMessage.writeError(
+        `There is no tsconfig.json file for the project.`
+      );
+      return false;
+    }
+    const projectArg = `--project ${projectTsconfig}`;
+    const distArg = `--outDir ${project.build.output}`;
+    this.runCommandUtils.runNpxCommand(
+      `tsc ${projectArg} ${distArg}`, true
     );
-    // if (!this.domainConfigStore.existProject(projectName)) {
-    //   this.simpleMessage.writeError(
-    //     `The ${projectName} not exist!`, REPOX_LOGO
-    //   );
-    //   return false;
-    // }
-    // Get project data
-    this.simpleMessage.writePlain("Get project data");
-    // const project = this.domainConfigStore.getProject(projectName);
-    // const files = this.projectApp.getProjectFiles(project.path);
-    // console.log(files);
-    // Compile the project
-    this.simpleMessage.writePlain("Compile the project");
-    // const projectDir = `--project ${project.path}/tsconfig.json`;
-    // const distFolder = `./dist/${project.name}`;
-    // const outDir = `--outDir ${distFolder}`;
-    // this.runCommand.runCommand(`tsc ${projectDir} ${outDir}`);
-    // this.runCommand.runCommand(`tsc-alias ${outDir}`);
+    this.runCommandUtils.runNpxCommand(
+      `tsc-alias ${distArg}`, true
+    );
     // Copy assets
     // project.assets.forEach((asset: any) => {
     //   this.fileUtils.copyFile(
@@ -58,13 +84,6 @@ export class BuildProjectAppService {
     //     `${asset.outputDir}/${asset.fileName}`
     //   );
     // })
-    // Write a success message
-    // this.simpleMessage.writeNewline();
-    this.simpleMessage.writeSuccess(
-      "Project created correctly!", REPOX_LOGO
-    );
     return true;
   }
 }
-
-// todo: refactor

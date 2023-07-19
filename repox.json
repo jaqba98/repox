@@ -4,7 +4,7 @@
       "name": "repox",
       "type": "app",
       "path": "projects/apps/repox",
-      "scheme": "@apps/ts",
+      "scheme": "@app/ts",
       "build": {
         "output": "dist/repox",
         "main": "projects/apps/repox/src/main.ts",

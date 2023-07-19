@@ -1,9 +1,8 @@
 /**
- * The enum contains all enums which it has to verify.
+ * The enum contains all the program names required by the system.
  */
 export enum ProgramSystemEnum {
   git = "git",
   node = "node",
   npm = "npm"
 }
-// todo: refactor
