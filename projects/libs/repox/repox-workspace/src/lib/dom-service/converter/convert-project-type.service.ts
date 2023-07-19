@@ -1,10 +1,8 @@
 import { singleton } from "tsyringe";
 import {
-  ProjectTypeEnum
-} from "../../enum/project/project-type.enum";
-import {
+  ProjectTypeEnum,
   WorkspaceFolderEnum
-} from "../../enum/workspace/workspace-folder.enum";
+} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -39,4 +37,3 @@ export class ConvertProjectTypeService {
     }
   }
 }
-// todo: refactor

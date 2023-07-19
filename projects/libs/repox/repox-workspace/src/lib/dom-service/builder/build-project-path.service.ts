@@ -1,4 +1,5 @@
 import { singleton } from "tsyringe";
+import { PathUtilsService } from "@lib/utils";
 import {
   ConvertProjectTypeService
 } from "../converter/convert-project-type.service";
@@ -6,10 +7,6 @@ import { EMPTY_STRING } from "@lib/const";
 import {
   WorkspaceFolderEnum
 } from "../../enum/workspace/workspace-folder.enum";
-import { PathUtilsService } from "@lib/utils";
-import {
-  WorkspaceFileEnum
-} from "../../enum/workspace/workspace-file.enum";
 
 @singleton()
 /**
@@ -34,9 +31,4 @@ export class BuildProjectPathService {
     }
     return this.pathUtils.createPath([path, name]);
   }
-
-  buildIndexPath(path: string): Array<string> {
-    return [this.pathUtils.createPath([path, WorkspaceFolderEnum.src, WorkspaceFileEnum.indexTs])];
-  }
 }
-// todo: refactor
