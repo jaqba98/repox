@@ -80,7 +80,7 @@ export class BuildProjectAppService {
     this.runCommandUtils.runNpxCommand(
       `tsc-alias ${distArg}`, true
     );
-    // Copy assets
+    // todo: I am here
     // project.assets.forEach((asset: any) => {
     //   this.fileUtils.copyFile(
     //     `${asset.inputDir}/${asset.fileName}`,
