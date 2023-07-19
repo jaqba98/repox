@@ -14,7 +14,9 @@ export class FileUtilsService {
   }
 
   copyFile(input: string, output: string): void {
-    copyFileSync(input, output);
+    const fileName = this.getFileName(input);
+    const outputPath = this.pathUtils.createPath([output, fileName]);
+    copyFileSync(input, outputPath);
   }
 
   getFileName(path: string): string {
