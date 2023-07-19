@@ -1,43 +1,43 @@
 # Repox
 
+Repox is a full integrated TypeScript monorepo system. It provides
+full support for multiple typescript projects.
+
+---
+
 ## Contents
 
-1) Repox monorepo commands
-
-   [Check version](#check-version)
-   
-   [Create workspace](#create-workspace)
-   
-   [Create project](#create-project)
-   
-   [Build project](#build-project)
+1) Commands
+    - [Check version](#check-version)
+    - [Create workspace](#create-workspace)
+    - [Create project](#create-project)
+    - [Build project](#build-project)
 
 2) Configurations
+    - [repox.json file](#repox-configuration)
 
-   [Repox configuration](#repox-configuration)
+---
 
-3) Repox style framework
+## Check version
 
-   [Repox style framework](#repox-style-framework)
-
-<br>
-
-## <span id="check-version">Check version</span>
-
+To check the current version use the command below.
 
 ```shell
 repox --version
 ```
 
-#### You can use alias instead of argument.
+You can use alias instead of argument.
 
 ```shell
 repox -v
 ```
 
-<br>
+---
 
-## <span id="create-workspace">Create workspace</span>
+// todo: I am here
+
+
+## Create workspace
 
 
 ```shell
@@ -53,7 +53,6 @@ repox generate workspace --name="example-workspace"
 <br>
 
 ## <span id="create-project">Create project</span>
-
 
 ```shell
 repox generate project --name="example-project" --type="app" --scheme="typescript"
@@ -87,7 +86,6 @@ repox generate project --name="example-project" --type="app" --scheme="typescrip
 
 ## <span id="build-project">Build project</span>
 
-
 ```shell
 repox build project --name="example-project"
 ```
@@ -104,33 +102,33 @@ repox build project --name="example-project"
 
 ```json5
 {
-   // List of all projects in monorepo
-   "projects": {
-      // An example project in monorepo
-      "example-project": {
-         // The name of the project
-         "name": "example-project",
-         // The type of the project
-         "type": "app",
-         // The path localization of the project
-         "path": "projects/apps/example-project",
-         // Additional assets to the project
-         "assets": [
-            {
-               // The path to the location where asset exist
-               "inputDir": "projects/apps/example-project",
-               // File name of asset
-               "fileName": "package.json",
-               // The path to the target location
-               "outputDir": "dist/example-project"
-            }
-         ],
-         // The scheme according to which the project will be build
-         "scheme": {
-            // Type of scheme
-            "type": "typescript"
-         }
+  // List of all projects in monorepo
+  "projects": {
+    // An example project in monorepo
+    "example-project": {
+      // The name of the project
+      "name": "example-project",
+      // The type of the project
+      "type": "app",
+      // The path localization of the project
+      "path": "projects/apps/example-project",
+      // Additional assets to the project
+      "assets": [
+        {
+          // The path to the location where asset exist
+          "inputDir": "projects/apps/example-project",
+          // File name of asset
+          "fileName": "package.json",
+          // The path to the target location
+          "outputDir": "dist/example-project"
+        }
+      ],
+      // The scheme according to which the project will be build
+      "scheme": {
+        // Type of scheme
+        "type": "typescript"
       }
-   }
+    }
+  }
 }
 ```
