@@ -50,7 +50,9 @@ export const repoxJsonFileSchema: Schema = {
             build: {
               required: ["output"]
             }
-          },
+          }
+        },
+        else: {
           if: {
             properties: {
               scheme: {
@@ -64,7 +66,7 @@ export const repoxJsonFileSchema: Schema = {
                 required: ["output", "main"]
               }
             }
-          },
+          }
         },
         additionalProperties: false,
         required: ["name", "type", "path", "scheme"]
