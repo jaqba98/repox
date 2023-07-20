@@ -126,6 +126,7 @@ export class WsDomainStoreService {
           ]),
           assets: []
         };
+      case ProjectSchemeEnum.blank:
       case ProjectSchemeEnum.libTypeScript:
       case ProjectSchemeEnum.toolTypeScript:
         return {

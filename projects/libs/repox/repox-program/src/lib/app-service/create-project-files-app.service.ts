@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
-  CreateWsFileAppService,
+  CreateWsFileAppService, ProjectSchemeEnum,
   ProjectTypeEnum,
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
@@ -43,19 +43,36 @@ export class CreateProjectFilesAppService {
       return false;
     }
     const currentPath = this.pathUtils.getCurrentPath();
-    switch (project.type) {
-      case ProjectTypeEnum.app:
+    switch (project.scheme) {
+      case ProjectSchemeEnum.blank:
+        this.createBlankProjectStructure(project.path);
+        break;
+      case ProjectSchemeEnum.appTypeScript:
         this.createAppTsProjectStructure(project.path);
         break;
-      case ProjectTypeEnum.lib:
-      case ProjectTypeEnum.tool:
+      case ProjectSchemeEnum.libTypeScript:
+      case ProjectSchemeEnum.toolTypeScript:
         this.createLibToolTsProjectStructure(project.path);
         break;
       default:
-        throw new Error("Not supported project type!");
+        throw new Error("Not supported project scheme!");
     }
     this.pathUtils.changePath(currentPath);
     return true;
+  }
+
+  private createBlankProjectStructure(projectPath: string): void {
+    this.folderUtils.createFolder(projectPath);
+    this.pathUtils.changePath(projectPath);
+    this.folderUtils.createFolder(WorkspaceFolderEnum.src);
+    this.pathUtils.changePath(WorkspaceFolderEnum.src);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
+    this.pathUtils.changePath("../");
+    this.runCommandUtils.runCommand("npm init -y");
+    this.fileUtils.writeTextFile(
+      WorkspaceFileEnum.jestConfigTs,
+      this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
+    );
   }
 
   private createAppTsProjectStructure(projectPath: string): void {

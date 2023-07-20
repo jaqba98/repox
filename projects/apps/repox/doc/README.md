@@ -85,6 +85,7 @@ Project scheme (--scheme argument) values
 
 | Project scheme | Description            |
 |----------------|------------------------|
+| @blank         | Blank project          |
 | @app/ts        | TypeScript application |
 | @lib/ts        | TypeScript library     |
 | @tool/ts       | TypeScript tool        |

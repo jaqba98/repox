@@ -54,11 +54,26 @@ export class BuildProjectAppService {
       return false;
     }
     switch (project.scheme) {
+      case ProjectSchemeEnum.blank:
+        if (!this.buildProjectBlank(project)) return false;
+        break;
       case ProjectSchemeEnum.appTypeScript:
         if (!this.buildProjectAppTypescript(project)) return false;
         break;
       default:
         throw new Error("Not supported project scheme");
+    }
+    return true;
+  }
+
+  private buildProjectBlank(
+    project: WsProjectDomainModel
+  ): boolean {
+    if (project.build.assets.length > 0) {
+      project.build.assets
+        .forEach((asset: WsAssetsDomainModel): void => {
+          this.fileUtils.copyFile(asset.input, asset.output);
+        })
     }
     return true;
   }
