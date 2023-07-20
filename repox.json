@@ -91,6 +91,21 @@
       "type": "lib",
       "path": "projects/libs/repox/repox-domain",
       "scheme": "@lib/ts"
+    },
+    "repox-website": {
+      "name": "repox-website",
+      "type": "app",
+      "path": "projects/apps/repox-website",
+      "scheme": "@blank",
+      "build": {
+        "output": "dist/repox-website",
+        "assets": [
+          {
+            "input": "projects/apps/repox-website/src/index.html",
+            "output": "dist/repox-website"
+          }
+        ]
+      }
     }
   }
 }
