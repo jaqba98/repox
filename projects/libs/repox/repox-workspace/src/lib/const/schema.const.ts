@@ -41,16 +41,30 @@ export const repoxJsonFileSchema: Schema = {
         if: {
           properties: {
             scheme: {
-              const: "@app/ts"
+              const: "@blank"
             }
           }
         },
         then: {
           properties: {
             build: {
-              required: ["output", "main"]
+              required: ["output"]
             }
-          }
+          },
+          if: {
+            properties: {
+              scheme: {
+                const: "@app/ts"
+              }
+            }
+          },
+          then: {
+            properties: {
+              build: {
+                required: ["output", "main"]
+              }
+            }
+          },
         },
         additionalProperties: false,
         required: ["name", "type", "path", "scheme"]

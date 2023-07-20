@@ -10,6 +10,7 @@ import {
 } from "@lib/repox-workspace";
 import {
   FileUtilsService,
+  FolderUtilsService,
   PathUtilsService,
   RunCommandUtilsService
 } from "@lib/utils";
@@ -25,7 +26,8 @@ export class BuildProjectAppService {
     private readonly wsDomainStore: WsDomainStoreService,
     private readonly pathUtils: PathUtilsService,
     private readonly runCommandUtils: RunCommandUtilsService,
-    private readonly fileUtils: FileUtilsService
+    private readonly fileUtils: FileUtilsService,
+    private readonly folderUtils: FolderUtilsService
   ) {
   }
 
@@ -69,6 +71,9 @@ export class BuildProjectAppService {
   private buildProjectBlank(
     project: WsProjectDomainModel
   ): boolean {
+    if (!this.pathUtils.existPath(project.build.output)) {
+      this.folderUtils.createFolder(project.build.output);
+    }
     if (project.build.assets.length > 0) {
       project.build.assets
         .forEach((asset: WsAssetsDomainModel): void => {
