@@ -47,7 +47,7 @@ body {
 }
 
 .menu {
-    position: absolute;
+    position: fixed;
     top: 50px;
     width: 100%;
     height: calc(100vh - 50px);
@@ -56,8 +56,27 @@ body {
     transition: all 0.2s ease-in-out;
 }
 
-.menu-open {
+.menu-open .menu {
     left: 0;
+}
+
+.hamburger-line {
+    transition: transform 0.25s ease-in-out;
+}
+
+.menu-open .hamburger-line-top {
+    position: relative;
+    transform: translateY(12px) rotate(45deg);
+}
+
+.menu-open .hamburger-line-middle {
+    position: relative;
+    transform: translateX(50px);
+}
+
+.menu-open .hamburger-line-bottom {
+    position: relative;
+    transform: translateY(-12px) rotate(-45deg);
 }
 
 .menu-list {
