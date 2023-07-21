@@ -1,12 +1,19 @@
+/* reset styles */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* general */
+
 body {
     font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
 }
+
+/* mobile */
 
 .nav {
     display: flex;
@@ -23,12 +30,35 @@ body {
     border: 1px solid blue;
 }
 
-.hamburger {
+#hamburger {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
     padding: 10px;
+    width: 50px;
+    height: 50px;
     border: 1px solid brown;
 }
 
+.hamburger-line {
+    width: 100%;
+    height: 5px;
+    border-radius: 10px;
+    background-color: white;
+}
+
 .menu {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: calc(100vh - 50px);
+    background-color: red;
     padding: 10px;
-    border: 1px solid green;
+    left: 100%;
+    transition: all 0.2s ease-in-out;
+}
+
+.menu-open {
+    left: 0;
 }

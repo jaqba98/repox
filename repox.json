@@ -107,6 +107,10 @@
           {
             "input": "projects/apps/repox-website/src/style.css",
             "output": "dist/repox-website"
+          },
+          {
+            "input": "projects/apps/repox-website/src/script.js",
+            "output": "dist/repox-website"
           }
         ]
       }
