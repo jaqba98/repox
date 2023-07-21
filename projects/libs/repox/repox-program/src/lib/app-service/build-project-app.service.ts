@@ -1,5 +1,8 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
+import {
+  NewlineAppService,
+  SimpleMessageAppService
+} from "@lib/logger";
 import {
   ProjectSchemeEnum,
   ProjectTypeEnum,
@@ -14,6 +17,7 @@ import {
   PathUtilsService,
   RunCommandUtilsService
 } from "@lib/utils";
+import { watch } from "fs";
 
 @singleton()
 /**
@@ -27,11 +31,12 @@ export class BuildProjectAppService {
     private readonly pathUtils: PathUtilsService,
     private readonly runCommandUtils: RunCommandUtilsService,
     private readonly fileUtils: FileUtilsService,
-    private readonly folderUtils: FolderUtilsService
+    private readonly folderUtils: FolderUtilsService,
+    private readonly newline: NewlineAppService
   ) {
   }
 
-  run(projectName: string): boolean {
+  run(projectName: string, buildWatch: boolean): boolean {
     this.simpleMessage.writePlain("Build the project");
     const project = this.wsDomainStore.getProject(projectName);
     if (project === undefined) {
@@ -55,17 +60,42 @@ export class BuildProjectAppService {
       );
       return false;
     }
+    if (buildWatch) {
+      this.buildWatch(project);
+      return true;
+    }
+    this.buildImmediately(project);
+    this.newline.writeNewline();
+    this.simpleMessage.writeSuccess("Project built correctly");
+    return true;
+  }
+
+  private buildWatch(project: WsProjectDomainModel): void {
+    let timerId: any = null;
+    const DEBOUNCE_DELAY = 1000;
+    const watcher = watch(project.path, { recursive: true });
+    watcher.on("change", (): void => {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+      this.buildImmediately(project);
+      timerId = setTimeout((): void => {
+        this.simpleMessage.writeSuccess("Project built correctly");
+      }, DEBOUNCE_DELAY);
+    })
+  }
+
+  private buildImmediately(project: WsProjectDomainModel): void {
     switch (project.scheme) {
       case ProjectSchemeEnum.blank:
-        if (!this.buildProjectBlank(project)) return false;
+        this.buildProjectBlank(project);
         break;
       case ProjectSchemeEnum.appTypeScript:
-        if (!this.buildProjectAppTypescript(project)) return false;
+        this.buildProjectAppTypescript(project);
         break;
       default:
         throw new Error("Not supported project scheme");
     }
-    return true;
   }
 
   private buildProjectBlank(

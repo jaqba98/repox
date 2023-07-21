@@ -54,10 +54,8 @@ export class BuildProjectStepService {
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return;
     if (!this.loadWsDomain.run()) return;
-    const { projectName } = commandModel;
+    const { projectName,buildWatch } = commandModel;
     if (!this.projectExist.run(projectName)) return;
-    if (!this.buildProject.run(projectName)) return;
-    this.newline.writeNewline();
-    this.simpleMessage.writeSuccess("Project built correctly");
+    if (!this.buildProject.run(projectName, buildWatch)) return;
   }
 }

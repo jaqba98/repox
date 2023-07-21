@@ -21,7 +21,6 @@ export class BuildProjectProgramService implements RunProgramModel {
   runProgram(programDomain: unknown, commandDomain: unknown): void {
     const programModel = <EmptyRepoxProgramModel>programDomain;
     const commandModel = <BuildProjectRepoxCommandModel>
-      commandDomain;
-    this.step.runSteps(programModel, commandModel);
+      commandDomain;this.step.runSteps(programModel, commandModel);
   }
 }

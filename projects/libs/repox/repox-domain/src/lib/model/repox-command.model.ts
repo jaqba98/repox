@@ -23,6 +23,7 @@ export interface GenerateProjectRepoxCommandModel {
 
 export interface BuildProjectRepoxCommandModel {
   projectName: string;
+  buildWatch: boolean;
 }
 
 export type TRepoxCommandModel = EmptyRepoxCommandModel |

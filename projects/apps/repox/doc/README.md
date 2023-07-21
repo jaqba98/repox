@@ -3,8 +3,6 @@
 Repox is a full integrated TypeScript monorepo system. It provides
 full support for multiple typescript projects.
 
----
-
 ## Contents
 
 1) Commands
@@ -16,9 +14,9 @@ full support for multiple typescript projects.
 2) Configurations
     - [repox.json file](#repox-json-file)
 
-3) [List of programs](#list-of-programs)
-
-4) [List of commands](#list-of-commands)
+3) Other
+   - [List of programs](#list-of-programs)
+   - [List of commands](#list-of-commands)
 
 # Commands
 
@@ -102,9 +100,10 @@ repox build project --name="example-project"
 
 Arguments of build project
 
-| Argument | Alias | Description            | Required |
-|----------|-------|------------------------|----------|
-| --name   | -n    | Specify a project name | True     |
+| Argument | Alias | Description                                     | Required |
+|----------|-------|-------------------------------------------------|----------|
+| --name   | -n    | Specify a project name                          | True     |
+| --watch  | -w    | Build the project as soon as something changes  | False    |
 
 ---
 

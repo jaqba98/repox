@@ -20,15 +20,15 @@ body {
 
 .nav-logo {
     padding: 10px;
-    border: 1px solid red;
+    border: 1px solid blue;
 }
 
 .hamburger {
     padding: 10px;
-    border: 1px solid red;
+    border: 1px solid brown;
 }
 
 .menu {
     padding: 10px;
-    border: 1px solid red;
+    border: 1px solid green;
 }

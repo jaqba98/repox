@@ -105,6 +105,12 @@ export class RepoxGetParamDepService {
               values: [],
               valueMode: "single",
               required: true
+            },
+            [RepoxArgumentEnum.watch]: {
+              name: RepoxArgumentEnum.watch,
+              values: [],
+              valueMode: "empty",
+              required: false
             }
           }
         }

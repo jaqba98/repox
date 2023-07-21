@@ -70,6 +70,9 @@ export class RepoxBuildParamModelService {
     return {
       projectName: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.name
+      ),
+      buildWatch: this.paramDomain.getCommandBooleanValue(
+        RepoxArgumentEnum.watch
       )
     };
   }

@@ -53,4 +53,9 @@ export class ParamDomainAppService {
     const value = argumentValue.values.at(0);
     return value ? value : defaultValue;
   }
+
+  getCommandBooleanValue(argument: string): boolean {
+    return this.paramDomainStore.getParamDomain().command.args
+      .some(param => param.name === argument);
+  }
 }
