@@ -7,6 +7,7 @@ import {
   ProjectSchemeEnum,
   ProjectTypeEnum,
   WorkspaceFileEnum,
+  WorkspaceFolderEnum,
   WsAssetsDomainModel,
   WsDomainStoreService,
   WsProjectDomainModel
@@ -32,7 +33,7 @@ export class BuildProjectAppService {
     private readonly runCommandUtils: RunCommandUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly folderUtils: FolderUtilsService,
-    private readonly newline: NewlineAppService
+    private readonly newline: NewlineAppService,
   ) {
   }
 
@@ -71,18 +72,18 @@ export class BuildProjectAppService {
   }
 
   private buildWatch(project: WsProjectDomainModel): void {
-    let timerId: any = null;
-    const DEBOUNCE_DELAY = 1000;
-    const watcher = watch(project.path, { recursive: true });
-    watcher.on("change", (): void => {
-      if (timerId) {
-        clearTimeout(timerId);
+    const watcher = watch(
+      WorkspaceFolderEnum.projects, { recursive: true }
+    );
+    watcher.on("change", (_, filename): void => {
+      if (this.folderUtils.isFolder(filename.toString())) {
+        this.simpleMessage.writePlain("Rebuilding the project");
       }
       this.buildImmediately(project);
-      timerId = setTimeout((): void => {
+      if (this.folderUtils.isFolder(filename.toString())) {
         this.simpleMessage.writeSuccess("Project built correctly");
-      }, DEBOUNCE_DELAY);
-    })
+      }
+    });
   }
 
   private buildImmediately(project: WsProjectDomainModel): void {
