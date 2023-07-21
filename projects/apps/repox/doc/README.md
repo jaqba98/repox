@@ -20,8 +20,6 @@ full support for multiple typescript projects.
 
 # Commands
 
----
-
 ## <span id="check-version">Check version</span>
 
 To check the current version use the command below.
@@ -36,8 +34,6 @@ You can use alias instead of argument.
 repox -v
 ```
 
----
-
 ## <span id="create-workspace">Create workspace</span>
 
 To create workspace use the command below.
@@ -51,8 +47,6 @@ Arguments of generate workspace
 | Argument | Alias | Description              | Required |
 |----------|-------|--------------------------|----------|
 | --name   | -n    | Specify a workspace name | True     |
-
----
 
 ## <span id="create-project">Create project</span>
 
@@ -88,8 +82,6 @@ Project scheme (--scheme argument) values
 | @lib/ts        | TypeScript library     |
 | @tool/ts       | TypeScript tool        |
 
----
-
 ## <span id="build-project">Build project</span>
 
 To build project use the command below.
@@ -104,8 +96,6 @@ Arguments of build project
 |----------|-------|-------------------------------------------------|----------|
 | --name   | -n    | Specify a project name                          | True     |
 | --watch  | -w    | Build the project as soon as something changes  | False    |
-
----
 
 # Configurations
 
@@ -168,17 +158,12 @@ Arguments of build project
 }
 ```
 
----
-
 # <span id="list-of-programs">List of programs</span>
 
 | Program  | Program alias |
 |----------|---------------|
 | generate | g             |
 | build    | b             |
-
----
-
 
 # <span id="list-of-commands">List of commands</span>
 
