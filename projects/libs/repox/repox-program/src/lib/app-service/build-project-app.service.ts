@@ -62,6 +62,7 @@ export class BuildProjectAppService {
       return false;
     }
     if (buildWatch) {
+      this.buildImmediately(project);
       this.buildWatch(project);
       return true;
     }
