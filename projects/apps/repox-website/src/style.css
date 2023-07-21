@@ -27,10 +27,9 @@ body {
 
 .nav-logo {
     padding: 10px;
-    border: 1px solid blue;
 }
 
-#hamburger {
+.hamburger {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -38,7 +37,6 @@ body {
     padding: 10px;
     width: 50px;
     height: 50px;
-    border: 1px solid brown;
 }
 
 .hamburger-line {
@@ -54,11 +52,22 @@ body {
     width: 100%;
     height: calc(100vh - 50px);
     background-color: red;
-    padding: 10px;
     left: 100%;
     transition: all 0.2s ease-in-out;
 }
 
 .menu-open {
     left: 0;
+}
+
+.menu-list {
+    list-style: none;
+}
+
+.menu-list a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    background-color: blue;
+    color: white;
 }
