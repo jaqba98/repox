@@ -31,6 +31,9 @@ import { EMPTY_STRING } from "@lib/const";
 import {
   ChangePathAppService
 } from "../app-service/change-path-app.service";
+import {
+  NpmPublishAppService
+} from "../app-service/npm-publish-app.service";
 
 @singleton()
 /**
@@ -47,7 +50,8 @@ export class PublishNpmStepService {
     private readonly projectExist: ProjectExistAppService,
     private readonly wsDomainStore: WsDomainStoreService,
     private readonly folderExist: FolderExistAppService,
-    private readonly changePath: ChangePathAppService
+    private readonly changePath: ChangePathAppService,
+    private readonly npmPublish: NpmPublishAppService
   ) {
   }
 
@@ -67,7 +71,10 @@ export class PublishNpmStepService {
     const output = project?.build.output ?? EMPTY_STRING;
     if (!this.folderExist.run(output)) return;
     if (!this.changePath.run(output)) return;
-    // todo: Add step to publish npm
-    console.log(project?.path);
+    if (!this.npmPublish.run()) return;
+    this.newline.writeNewline();
+    this.simpleMessage.writeSuccess(
+      "Npm published successfully!"
+    );
   }
 }
