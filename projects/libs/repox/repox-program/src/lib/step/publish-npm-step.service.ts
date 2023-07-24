@@ -23,6 +23,14 @@ import { REPOX_LOGO } from "@lib/repox-const";
 import {
   ProjectExistAppService
 } from "../app-service/project-exist-app.service";
+import { WsDomainStoreService } from "@lib/repox-workspace";
+import {
+  FolderExistAppService
+} from "../app-service/folder-exist-app.service";
+import { EMPTY_STRING } from "@lib/const";
+import {
+  ChangePathAppService
+} from "../app-service/change-path-app.service";
 
 @singleton()
 /**
@@ -36,7 +44,10 @@ export class PublishNpmStepService {
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadWsDto: LoadWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
-    private readonly projectExist: ProjectExistAppService
+    private readonly projectExist: ProjectExistAppService,
+    private readonly wsDomainStore: WsDomainStoreService,
+    private readonly folderExist: FolderExistAppService,
+    private readonly changePath: ChangePathAppService
   ) {
   }
 
@@ -52,7 +63,11 @@ export class PublishNpmStepService {
     if (!this.loadWsDomain.run()) return;
     const { projectName } = commandModel;
     if (!this.projectExist.run(projectName)) return;
+    const project = this.wsDomainStore.getProject(projectName);
+    const output = project?.build.output ?? EMPTY_STRING;
+    if (!this.folderExist.run(output)) return;
+    if (!this.changePath.run(output)) return;
     // todo: Add step to publish npm
-    console.log(projectName);
+    console.log(project?.path);
   }
 }

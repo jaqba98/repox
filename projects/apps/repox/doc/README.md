@@ -10,6 +10,7 @@ full support for multiple typescript projects.
     - [Create workspace](#create-workspace)
     - [Create project](#create-project)
     - [Build project](#build-project)
+    - [Publish npm](#publish-npm)
 
 2) Configurations
     - [repox.json file](#repox-json-file)
@@ -97,6 +98,20 @@ Arguments of build project
 | --name   | -n    | Specify a project name                          | True     |
 | --watch  | -w    | Build the project as soon as something changes  | False    |
 
+## <span id="publish-npm">Publish npm</span>
+
+To publish npm use the command below.
+
+```shell
+repox publish npm --name="example-project"
+```
+
+Arguments of publish npm
+
+| Argument | Alias | Description            | Required |
+|----------|-------|------------------------|----------|
+| --name   | -n    | Specify a project name | True     |
+
 # Configurations
 
 ### <span id="repox-json-file">repox.json file</span>
@@ -164,6 +179,7 @@ Arguments of build project
 |----------|---------------|
 | generate | g             |
 | build    | b             |
+| publish  | p             |
 
 # <span id="list-of-commands">List of commands</span>
 
@@ -171,3 +187,4 @@ Arguments of build project
 |-----------|---------------|
 | workspace | w             |
 | project   | p             |
+| npm       | n             |
