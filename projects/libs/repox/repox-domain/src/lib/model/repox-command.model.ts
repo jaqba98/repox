@@ -26,7 +26,12 @@ export interface BuildProjectRepoxCommandModel {
   buildWatch: boolean;
 }
 
+export interface PublishNpmRepoxCommandModel {
+  projectName: string;
+}
+
 export type TRepoxCommandModel = EmptyRepoxCommandModel |
   GenerateWorkspaceRepoxCommandModel |
   GenerateProjectRepoxCommandModel |
-  BuildProjectRepoxCommandModel;
+  BuildProjectRepoxCommandModel |
+  PublishNpmRepoxCommandModel;

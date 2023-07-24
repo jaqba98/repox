@@ -5,7 +5,7 @@ import {
   EmptyRepoxCommandModel,
   EmptyRepoxProgramModel,
   GenerateProjectRepoxCommandModel,
-  GenerateWorkspaceRepoxCommandModel,
+  GenerateWorkspaceRepoxCommandModel, PublishNpmRepoxCommandModel,
   RepoxArgumentEnum
 } from "@lib/repox-domain";
 import { ParamDomainAppService } from "@lib/param-domain";
@@ -73,6 +73,14 @@ export class RepoxBuildParamModelService {
       ),
       buildWatch: this.paramDomain.getCommandBooleanValue(
         RepoxArgumentEnum.watch
+      )
+    };
+  }
+
+  publishNpmCommand(): PublishNpmRepoxCommandModel {
+    return {
+      projectName: this.paramDomain.getCommandStringValue(
+        RepoxArgumentEnum.name
       )
     };
   }

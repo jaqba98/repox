@@ -26,6 +26,8 @@ export class RepoxGetParamDepAppService
         return this.repoxGetParamDep.getProgramGenerate();
       case RepoxProgramEnum.build:
         return this.repoxGetParamDep.getProgramBuild();
+      case RepoxProgramEnum.publish:
+        return this.repoxGetParamDep.getProgramPublish();
       default:
         throw new Error(`No dependencies for ${program} program!`);
     }

@@ -118,4 +118,28 @@ export class RepoxGetParamDepService {
       args: {}
     };
   }
+
+  getProgramPublish(): ParamDomainDepModel {
+    return {
+      program: RepoxProgramEnum.publish,
+      commands: {
+        [RepoxCommandEnum.default]: {
+          command: RepoxCommandEnum.default,
+          args: {}
+        },
+        [RepoxCommandEnum.npm]: {
+          command: RepoxCommandEnum.npm,
+          args: {
+            [RepoxArgumentEnum.name]: {
+              name: RepoxArgumentEnum.name,
+              values: [],
+              valueMode: "single",
+              required: true
+            }
+          }
+        }
+      },
+      args: {}
+    };
+  }
 }
