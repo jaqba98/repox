@@ -1,6 +1,6 @@
 # Repox
 
-<img src="repox-logo.png" width="240">
+<img src="https://raw.githubusercontent.com/jaqba98/repox/feat/website/projects/apps/repox-website/src/repox-logo.png" width="240">
 
 Repox is a full integrated TypeScript monorepo system. It provides
 full support for multiple typescript projects.
