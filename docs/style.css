@@ -81,6 +81,7 @@ body {
     height: calc(100vh - 5em);
     background-color: var(--primary-color-dark);
     transition: left 0.25s ease-in-out;
+    overflow-y: auto;
 }
 
 .menu-open .menu {
@@ -98,13 +99,14 @@ body {
     border-bottom: 1px solid var(--primary-color-darker);
     color: var(--secondary-color);
     font-weight: bold;
+    font-size: 1.25em;
 }
 
 .menu-link > a:focus {
     background-color: var(--primary-color-darker);
 }
 
-/* todo: I am here */
+/* temporary */
 
 .top {
     padding-top: 5em;
