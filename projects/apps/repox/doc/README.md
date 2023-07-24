@@ -3,6 +3,8 @@
 Repox is a full integrated TypeScript monorepo system. It provides
 full support for multiple typescript projects.
 
+<br>
+
 ## Contents
 
 1) Commands
@@ -19,7 +21,11 @@ full support for multiple typescript projects.
    - [List of programs](#list-of-programs)
    - [List of commands](#list-of-commands)
 
+<br>
+
 # Commands
+
+<br>
 
 ## <span id="check-version">Check version</span>
 
@@ -35,6 +41,8 @@ You can use alias instead of argument.
 repox -v
 ```
 
+<br>
+
 ## <span id="create-workspace">Create workspace</span>
 
 To create workspace use the command below.
@@ -48,6 +56,8 @@ Arguments of generate workspace
 | Argument | Alias | Description              | Required |
 |----------|-------|--------------------------|----------|
 | --name   | -n    | Specify a workspace name | True     |
+
+<br>
 
 ## <span id="create-project">Create project</span>
 
@@ -83,6 +93,8 @@ Project scheme (--scheme argument) values
 | @lib/ts        | TypeScript library     |
 | @tool/ts       | TypeScript tool        |
 
+<br>
+
 ## <span id="build-project">Build project</span>
 
 To build project use the command below.
@@ -98,6 +110,8 @@ Arguments of build project
 | --name   | -n    | Specify a project name                          | True     |
 | --watch  | -w    | Build the project as soon as something changes  | False    |
 
+<br>
+
 ## <span id="publish-npm">Publish npm</span>
 
 To publish npm use the command below.
@@ -111,6 +125,8 @@ Arguments of publish npm
 | Argument | Alias | Description            | Required |
 |----------|-------|------------------------|----------|
 | --name   | -n    | Specify a project name | True     |
+
+<br>
 
 # Configurations
 
@@ -173,6 +189,8 @@ Arguments of publish npm
 }
 ```
 
+<br>
+
 # <span id="list-of-programs">List of programs</span>
 
 | Program  | Program alias |
@@ -180,6 +198,8 @@ Arguments of publish npm
 | generate | g             |
 | build    | b             |
 | publish  | p             |
+
+<br>
 
 # <span id="list-of-commands">List of commands</span>
 
