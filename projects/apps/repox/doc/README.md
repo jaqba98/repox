@@ -1,5 +1,7 @@
 # Repox
 
+<img src="repox-logo.png" width="240">
+
 Repox is a full integrated TypeScript monorepo system. It provides
 full support for multiple typescript projects.
 
