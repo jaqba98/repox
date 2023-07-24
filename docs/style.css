@@ -2,6 +2,7 @@
 :root {
     --primary-color-light: #8C52FF;
     --primary-color-dark: #7444d2;
+    --primary-color-darker: #683dbd;
     --secondary-color: #F0EFF4;
 }
 
@@ -86,15 +87,34 @@ body {
     left: 0;
 }
 
+.menu-link {
+    list-style: none;
+}
+
+.menu-link > a {
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary-color-darker);
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.menu-link > a:focus {
+    background-color: var(--primary-color-darker);
+}
+
 /* todo: I am here */
 
-.menu a {
-    display: block;
-    text-decoration: none;
-    padding: 10px;
-    color: #F0EFF4;
+.top {
+    padding-top: 5em;
 }
 
 p {
-    padding-top: 5em;
+    padding: 2em;
+    text-align: justify;
+}
+
+p:nth-child(odd) {
+    background-color: red;
 }
