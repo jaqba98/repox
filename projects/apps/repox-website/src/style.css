@@ -16,21 +16,19 @@ body {
 
 /* mobile */
 
+.nav-logo {
+    display: block;
+    width: 65px;
+}
+
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 50px;
+    height: 75px;
     background-color: #016FB9;
     color: #F0EFF4;
-}
-
-.nav-logo {
-    padding: 10px;
-    font-size: 1.5em;
-    text-transform: uppercase;
-    letter-spacing: -3px;
 }
 
 .hamburger {
@@ -39,8 +37,8 @@ body {
     align-content: center;
     justify-content: space-between;
     padding: 10px;
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
 }
 
 .hamburger-line {
@@ -52,10 +50,11 @@ body {
 
 .menu {
     position: fixed;
-    top: 50px;
+    top: 75px;
     width: 100%;
     height: calc(100vh - 50px);
     background-color: #0265a8;
+    list-style: none;
     left: 100%;
     transition: all 0.2s ease-in-out;
 }
@@ -83,11 +82,7 @@ body {
     transform: translateY(-12px) rotate(-45deg);
 }
 
-.menu-list {
-    list-style: none;
-}
-
-.menu-list a {
+.menu a {
     display: block;
     text-decoration: none;
     padding: 10px;
