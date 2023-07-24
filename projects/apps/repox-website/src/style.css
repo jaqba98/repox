@@ -1,7 +1,7 @@
-/* todo: refactor the code */
-
 /* variables */
 :root {
+    --primary-color: #8C52FF;
+    --secondary-color: #F0EFF4;
 }
 
 /* reset styles */
@@ -22,37 +22,54 @@ body {
 
 /* mobile */
 
-.nav-logo {
-    display: block;
-    width: 65px;
-}
-
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    height: 75px;
-    background-color: rgb(140, 82, 255);
-    color: #F0EFF4;
+    height: 5em;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.nav-logo {
+    display: block;
+    width: 5em;
+    height: 5em;
+    padding: 0.5em;
 }
 
 .hamburger {
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: space-between;
-    padding: 10px;
-    width: 75px;
-    height: 75px;
+    justify-content: space-around;
+    width: 5em;
+    height: 5em;
+    padding: 1em;
 }
 
 .hamburger-line {
+    position: relative;
     width: 100%;
-    height: 5px;
-    border-radius: 10px;
-    background-color: #F0EFF4;
+    height: 0.5em;
+    border-radius: 1em;
+    background-color: var(--secondary-color);
+    transition: transform 0.25s ease-in-out;
 }
+
+.menu-open .hamburger-line-top {
+    transform: translateY(1em) rotate(45deg);
+}
+
+.menu-open .hamburger-line-middle {
+    transform: translateX(100vw);
+}
+
+.menu-open .hamburger-line-bottom {
+    transform: translateY(-1em) rotate(-45deg);
+}
+
+/* todo: I am here */
 
 .menu {
     position: fixed;
@@ -67,25 +84,6 @@ body {
 
 .menu-open .menu {
     left: 0;
-}
-
-.hamburger-line {
-    transition: transform 0.25s ease-in-out;
-}
-
-.menu-open .hamburger-line-top {
-    position: relative;
-    transform: translateY(12px) rotate(45deg);
-}
-
-.menu-open .hamburger-line-middle {
-    position: relative;
-    transform: translateX(50px);
-}
-
-.menu-open .hamburger-line-bottom {
-    position: relative;
-    transform: translateY(-12px) rotate(-45deg);
 }
 
 .menu a {
