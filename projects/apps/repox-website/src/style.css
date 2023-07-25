@@ -16,8 +16,7 @@
 
 body {
     font-family: 'Lato', sans-serif;
-    overflow-x: hidden;
-    background-color: #F0EFF4;
+    background-color: var(--text-white-color);
 }
 
 @media only screen and (min-width: 200px) and (max-width: 400px) {
@@ -43,6 +42,7 @@ body {
 /* nav */
 
 .nav {
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -91,7 +91,7 @@ body {
 }
 
 .menu {
-    position: absolute;
+    position: fixed;
     top: 5em;
     left: 100%;
     width: 100%;
