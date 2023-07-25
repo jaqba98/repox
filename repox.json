@@ -119,6 +119,10 @@
           {
             "input": "projects/apps/repox-website/src/repox-logo.png",
             "output": "dist/repox-website"
+          },
+          {
+            "input": "projects/apps/repox-website/src/repox-favicon.png",
+            "output": "dist/repox-website"
           }
         ]
       }
