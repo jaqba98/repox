@@ -152,7 +152,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5em 2.5em;
+    padding: 10em 2.5em;
     background-color: var(--primary-color);
     color: var(--text-white-color);
 }
@@ -192,4 +192,25 @@ body {
         display: flex;
         gap: 0.25em;
     }
+}
+
+/* statistics */
+
+.statistics {
+    background-color: #E8E9F3;
+    padding: 4em 2em;
+    text-align: center;
+}
+
+.statistics > h2 {
+    font-size: 1.5em;
+    color: grey;
+    font-weight: lighter;
+    margin-bottom: 1em;
+}
+
+#weekly-downloads {
+    font-size: 3em;
+    font-weight: bold;
+    color: var(--primary-color);
 }
