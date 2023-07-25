@@ -1,9 +1,7 @@
 /* variables */
 :root {
-    --primary-color-light: #8C52FF;
-    --primary-color-dark: #7444d2;
-    --primary-color-darker: #683dbd;
-    --secondary-color: #F0EFF4;
+    --primary-color: #6320EE;
+    --text-white-color: #FFFFFF;
 }
 
 /* reset styles */
@@ -24,6 +22,8 @@ body {
 
 /* mobile */
 
+/* nav */
+
 .nav {
     position: fixed;
     display: flex;
@@ -31,8 +31,8 @@ body {
     justify-content: space-between;
     width: 100%;
     height: 5em;
-    background-color: var(--primary-color-light);
-    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--text-white-color);
 }
 
 .nav-logo {
@@ -55,9 +55,9 @@ body {
 .hamburger-line {
     position: relative;
     width: 100%;
-    height: 0.5em;
-    border-radius: 1em;
-    background-color: var(--secondary-color);
+    height: 0.4em;
+    border-radius: 2px;
+    background-color: var(--text-white-color);
     transition: transform 0.25s ease-in-out;
 }
 
@@ -79,7 +79,7 @@ body {
     left: 100%;
     width: 100%;
     height: calc(100vh - 5em);
-    background-color: var(--primary-color-dark);
+    background-color: var(--primary-color);
     transition: left 0.25s ease-in-out;
     overflow-y: auto;
 }
@@ -96,27 +96,44 @@ body {
     display: block;
     padding: 1em;
     text-decoration: none;
-    border-bottom: 1px solid var(--primary-color-darker);
-    color: var(--secondary-color);
+    color: var(--text-white-color);
     font-weight: bold;
     font-size: 1.25em;
 }
 
-.menu-link > a:focus {
-    background-color: var(--primary-color-darker);
+@media only screen and (min-width: 768px) {
+    body {
+        font-size: 80%;
+    }
+
+    .nav {
+        justify-content: space-between;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: auto;
+        background-color: inherit;
+        transition: none;
+    }
 }
 
-/* temporary */
-
-.top {
-    padding-top: 5em;
+@media only screen and (min-width: 1024px) {
+    .nav {
+        justify-content: space-around;
+    }
 }
 
-p {
-    padding: 2em;
-    text-align: justify;
-}
-
-p:nth-child(odd) {
-    background-color: red;
+@media only screen and (min-width: 2560px) {
+    body {
+        font-size: 110%;
+    }
 }
