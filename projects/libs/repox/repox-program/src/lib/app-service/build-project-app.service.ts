@@ -106,12 +106,7 @@ export class BuildProjectAppService {
     if (!this.pathUtils.existPath(project.build.output)) {
       this.folderUtils.createFolder(project.build.output);
     }
-    if (project.build.assets.length > 0) {
-      project.build.assets
-        .forEach((asset: WsAssetsDomainModel): void => {
-          this.fileUtils.copyFile(asset.input, asset.output);
-        })
-    }
+    this.copyAssets(project.build.assets);
     return true;
   }
 
@@ -138,12 +133,22 @@ export class BuildProjectAppService {
     this.runCommandUtils.runNpxCommand(
       `tsc-alias ${distArg}`, true
     );
-    if (project.build.assets.length > 0) {
-      project.build.assets
-        .forEach((asset: WsAssetsDomainModel): void => {
-          this.fileUtils.copyFile(asset.input, asset.output);
-        })
-    }
+    this.copyAssets(project.build.assets);
     return true;
+  }
+
+  private copyAssets(assets: Array<WsAssetsDomainModel>): void {
+    assets
+      .map(asset => ({
+        output: asset.output,
+        files: this.fileUtils.readProjectFiles(asset.input)
+      }))
+      .map(asset => asset.files.map(file => ({
+        file, output: asset.output
+      })))
+      .flat()
+      .forEach(asset =>
+        this.fileUtils.copyFile(asset.file, asset.output)
+      );
   }
 }

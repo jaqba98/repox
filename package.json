@@ -9,7 +9,7 @@
     "repox:version": "node dist/repox/apps/repox/src/main.js --version",
     "generate:workspace": "node dist/repox/apps/repox/src/main.js generate workspace --name=dog",
     "generate:project": "node dist/repox/apps/repox/src/main.js generate project --name=dog --type=lib --scheme=@lib/ts",
-    "build:project": "node dist/repox/apps/repox/src/main.js build project --name=repox --watch",
+    "build:project": "node dist/repox/apps/repox/src/main.js build project --name=repox-website",
     "publish:npm": "node dist/repox/apps/repox/src/main.js publish npm --name=repox"
   },
   "devDependencies": {
