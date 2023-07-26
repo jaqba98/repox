@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { existsSync } from "fs";
 import process, { chdir } from "process";
-import { join, parse } from "path";
+import { dirname, join, parse } from "path";
 import { WorkspaceFileEnum } from "@lib/repox-workspace";
 import { EMPTY_STRING } from "@lib/const";
 
@@ -46,6 +46,10 @@ export class PathUtilsService {
   isRootPath(path: string): boolean {
     const parsedPath = parse(path);
     return parsedPath.root === parsedPath.dir;
+  }
+
+  getDirname(path: string): string {
+    return dirname(path);
   }
 
   getPackageJsonPath(currentPath: string): string {
