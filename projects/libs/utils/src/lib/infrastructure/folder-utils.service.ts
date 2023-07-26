@@ -1,7 +1,6 @@
 import { singleton } from "tsyringe";
 import { mkdirSync } from "fs";
 import { EMPTY_STRING } from "@lib/const";
-import { FileUtilsService } from "./file-utils.service";
 import { extname } from "path";
 
 @singleton()
