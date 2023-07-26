@@ -39,6 +39,19 @@ body {
 
 /* mobile */
 
+/* current version */
+.current-version {
+    background-color: #645DD7;
+}
+
+.current-version > p {
+    padding: 1em;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    color: var(--text-white-color);
+}
+
 /* nav */
 
 .nav {
@@ -167,24 +180,18 @@ body {
 }
 
 .header-logo {
-    width: 20em;
+    width: 15em;
     margin: 2em;
 }
 
-.install {
+#install {
     padding: 1em 2em;
     border-radius: 10px;
     font-weight: bold;
+    font-size: 1.5em;
+    border: none;
     background-color: var(--text-white-color);
     color: var(--primary-color);
-}
-
-.install > p {
-    font-size: 1.5em;
-}
-
-.install > p::before {
-    content: "> "
 }
 
 @media only screen and (min-width: 1024px) {
@@ -213,4 +220,59 @@ body {
     font-size: 3em;
     font-weight: bold;
     color: var(--primary-color);
+}
+
+/* what is */
+
+.what-is {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 4em 2em;
+    background-color: #FBFEF9;
+    color: #4D4847;
+}
+
+.what-is > h2 {
+    font-size: 2em;
+}
+
+.what-is-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.what-is-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex: 1;
+}
+
+.what-is-content > h3 {
+    font-size: 1.5em;
+}
+
+.what-is-content > p {
+    font-size: 1.2em;
+    line-height: 1.5em;
+}
+
+@media only screen and (min-width: 768px) {
+    .what-is {
+        align-items: center;
+        gap: 4em;
+    }
+
+    .what-is-container {
+        flex-direction: row;
+        gap: 2em;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .what-is-container {
+        width: 960px;
+    }
 }
