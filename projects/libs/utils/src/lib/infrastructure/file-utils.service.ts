@@ -31,10 +31,6 @@ export class FileUtilsService {
     return basename(path);
   }
 
-  getFileExtname(path: string): string {
-    return extname(path);
-  }
-
   createEmptyFile(filePath: string): void {
     this.writeTextFile(filePath, EMPTY_STRING);
   }
@@ -46,8 +42,7 @@ export class FileUtilsService {
     return <T>JSON.parse(readFileSync(filePath, "utf-8"));
   }
 
-  readProjectFiles(projectRoot: string): Array<string> {
-    const pattern = `${projectRoot}/**/*.*`;
+  readProjectFiles(pattern: string): Array<string> {
     const options = { cwd: "./", ignore: ['**/node_modules/**'] };
     return globSync(pattern, options)
       .map(path => this.pathUtils.normalizePath(path));
