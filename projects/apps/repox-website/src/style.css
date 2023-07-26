@@ -81,6 +81,7 @@ body {
     width: 100%;
     background-color: var(--primary-color);
     transition: left var(--animation-speed) ease-in-out;
+    overflow-y: auto;
 }
 
 .main-nav-open .main-nav-menu {
@@ -95,6 +96,8 @@ body {
     background-color: var(--secondary-color);
     border-bottom: 1px solid var(--third-color);
 }
+
+/* todo: I am here */
 
 /*.menu-link {*/
 /*    list-style: none;*/
