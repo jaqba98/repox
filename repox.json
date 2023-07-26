@@ -109,15 +109,15 @@
             "output": "dist/repox-website"
           },
           {
-            "input": "projects/apps/repox-website/src/images/**",
+            "input": "projects/apps/repox-website/src/images/**/*",
             "output": "dist/repox-website/images"
           },
           {
-            "input": "projects/apps/repox-website/src/scripts/**",
+            "input": "projects/apps/repox-website/src/scripts/**/*",
             "output": "dist/repox-website/scripts"
           },
           {
-            "input": "projects/apps/repox-website/src/styles/**",
+            "input": "projects/apps/repox-website/src/styles/**/*",
             "output": "dist/repox-website/styles"
           }
         ]
