@@ -1,11 +1,11 @@
 // HTML Elements
 const hamburgers = document.getElementsByClassName("hamburger");
-const navigations = document.getElementsByClassName("nav");
+const navigations = document.getElementsByClassName("main-nav");
 
 // Functions
 const toggleNavigation = () => {
     Array.from(navigations).forEach(nav => {
-        nav.classList.toggle("menu-open");
+        nav.classList.toggle("main-nav-open");
     });
 };
 
