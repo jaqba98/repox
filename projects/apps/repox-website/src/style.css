@@ -64,6 +64,10 @@ body {
     }
 }
 
+main {
+    padding-top: 4em;
+}
+
 /* MAIN NAV */
 
 .main-nav {
@@ -195,7 +199,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 2em;
-    padding: 8em 2em 4em 2em;
+    padding: 4em 2em;
     background-color: var(--primary-color);
     color: var(--font-white-color);
 }
@@ -353,9 +357,12 @@ body {
 }
 
 @media only screen and (min-width: 1024px) {
-    .what-is,
-    .what-is-diagram {
+    .what-is {
         width: 960px;
+    }
+
+    .what-is-diagram {
+        width: 640px;
     }
 }
 
@@ -390,7 +397,7 @@ body {
 
 .support-content > p {
     font-size: 1.5em;
-    color: var(--dark-color);
+    color: var(--gray-color);
 }
 
 @media only screen and (min-width: 768px) {
