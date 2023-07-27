@@ -333,6 +333,10 @@ body {
     line-height: 1.5em;
 }
 
+.what-is-diagram {
+    width: 100%;
+}
+
 @media only screen and (min-width: 768px) {
     .what-is {
         flex-direction: row;
@@ -342,10 +346,15 @@ body {
     .what-is-content {
         flex: 1;
     }
+
+    .what-is-diagram {
+        padding: 5em;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
-    .what-is {
+    .what-is,
+    .what-is-diagram {
         width: 960px;
     }
 }
