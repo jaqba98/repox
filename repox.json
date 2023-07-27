@@ -138,6 +138,13 @@
           }
         ]
       }
+    },
+    "htmlpro-main": {
+      "name": "htmlpro-main",
+      "type": "lib",
+      "path": "projects/libs/htmlpro/htmlpro-main",
+      "scheme": "@lib/ts",
+      "build": {}
     }
   }
 }

@@ -48,6 +48,9 @@
       ],
       "@lib/repox-domain": [
         "projects/libs/repox/repox-domain/src/index.ts"
+      ],
+      "@lib/htmlpro-main": [
+        "projects/libs/htmlpro/htmlpro-main/src/index.ts"
       ]
     }
   },
