@@ -11,18 +11,13 @@ import { REPOX_LOGO } from "@lib/repox-const";
 import {
   AllProgramInstalledService
 } from "../compose/all-program-installed.service";
-import {
-  GoToProjectRootAppService
-} from "../app-service/go-to-project-root-app.service";
+import { GoToProjectRootAppService } from "@lib/program-step";
 import {
   LoadWsDtoAppService
 } from "../app-service/load-ws-dto-app.service";
 import {
   LoadWsDomainAppService
 } from "../app-service/load-ws-domain-app.service";
-import {
-  FolderNotExistAppService
-} from "../app-service/folder-not-exist-app.service";
 import {
   ProjectNotExistAppService
 } from "../app-service/project-not-exist-app.service";
@@ -51,7 +46,6 @@ export class GenerateProjectStepService {
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadWsDto: LoadWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
-    private readonly folderNotExist: FolderNotExistAppService,
     private readonly projectNotExist: ProjectNotExistAppService,
     private readonly addProjectToDomain: AddProjectToDomainAppService,
     private readonly saveWsDomain: SaveWsDomainAppService,

@@ -59,6 +59,9 @@
       ],
       "@lib/htmlpro-const": [
         "projects/libs/htmlpro/htmlpro-const/src/index.ts"
+      ],
+      "@lib/program-step": [
+        "projects/libs/program-step/src/index.ts"
       ]
     }
   },

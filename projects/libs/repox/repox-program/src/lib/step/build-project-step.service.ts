@@ -6,9 +6,7 @@ import {
 import {
   AllProgramInstalledService
 } from "../compose/all-program-installed.service";
-import {
-  GoToProjectRootAppService
-} from "../app-service/go-to-project-root-app.service";
+import { GoToProjectRootAppService } from "@lib/program-step";
 import {
   LoadWsDtoAppService
 } from "../app-service/load-ws-dto-app.service";
@@ -54,7 +52,7 @@ export class BuildProjectStepService {
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return;
     if (!this.loadWsDomain.run()) return;
-    const { projectName,buildWatch } = commandModel;
+    const { projectName, buildWatch } = commandModel;
     if (!this.projectExist.run(projectName)) return;
     if (!this.buildProject.run(projectName, buildWatch)) return;
   }

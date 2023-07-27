@@ -6,9 +6,7 @@ import {
 import {
   AllProgramInstalledService
 } from "../compose/all-program-installed.service";
-import {
-  GoToProjectRootAppService
-} from "../app-service/go-to-project-root-app.service";
+import { GoToProjectRootAppService } from "@lib/program-step";
 import {
   LoadWsDtoAppService
 } from "../app-service/load-ws-dto-app.service";

@@ -5,6 +5,7 @@ import {
   BuildHtmlHtmlproCommandModel,
   EmptyHtmlproProgramModel
 } from "@lib/htmlpro-domain";
+import { GoToProjectRootAppService } from "@lib/program-step";
 
 @singleton()
 /**
@@ -12,7 +13,8 @@ import {
  */
 export class BuildHtmlStepService {
   constructor(
-    private readonly simpleMessage: SimpleMessageAppService
+    private readonly simpleMessage: SimpleMessageAppService,
+    private readonly goToProjectRoot: GoToProjectRootAppService
   ) {
   }
 
@@ -21,6 +23,7 @@ export class BuildHtmlStepService {
     commandModel: BuildHtmlHtmlproCommandModel
   ): void {
     this.simpleMessage.writeInfo("Build html", HTMLPRO_LOGO);
+    if (!this.goToProjectRoot.run()) return;
     console.log(commandModel.filePath);
   }
 }
