@@ -8,10 +8,7 @@ import {
   BuildHtmlHtmlproCommandModel,
   EmptyHtmlproProgramModel
 } from "@lib/htmlpro-domain";
-import {
-  ChangePathAppService,
-  GoToProjectRootAppService
-} from "@lib/program-step";
+import { GoToProjectRootAppService } from "@lib/program-step";
 import {
   BuildHtmlAppService
 } from "../app-service/build-html-app.service";
@@ -25,7 +22,6 @@ export class BuildHtmlStepService {
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
-    private readonly changePath: ChangePathAppService,
     private readonly buildHtml: BuildHtmlAppService
   ) {
   }
@@ -37,7 +33,6 @@ export class BuildHtmlStepService {
     this.simpleMessage.writeInfo("Build html", HTMLPRO_LOGO);
     if (!this.goToProjectRoot.run()) return;
     const { filePath } = commandModel;
-    if (!this.changePath.run(filePath)) return;
     if (!this.buildHtml.run(filePath)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
