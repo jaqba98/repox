@@ -2,7 +2,6 @@ import { singleton } from "tsyringe";
 import { existsSync } from "fs";
 import process, { chdir } from "process";
 import { dirname, join, parse } from "path";
-import { WorkspaceFileEnum } from "@lib/repox-workspace";
 import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
@@ -53,9 +52,7 @@ export class PathUtilsService {
   }
 
   getPackageJsonPath(currentPath: string): string {
-    const packageJsonPath = join(
-      currentPath, WorkspaceFileEnum.packageJson
-    );
+    const packageJsonPath = join(currentPath, "package.json");
     if (this.existPath(packageJsonPath)) {
       return currentPath;
     }
