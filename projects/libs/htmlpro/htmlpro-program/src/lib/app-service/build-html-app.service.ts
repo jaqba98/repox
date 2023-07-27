@@ -11,9 +11,10 @@ export class BuildHtmlAppService {
   constructor(private readonly fileUtils: FileUtilsService) {
   }
 
+  // todo: refactor the method
   run(filePath: string): boolean {
     const htmlResultFile = this.processTheHtmlFile(filePath);
-    this.fileUtils.writeTextFile(`${filePath}/${htmlResultFile}`, htmlResultFile);
+    this.fileUtils.writeTextFile(`projects/apps/repox-website/src/output.html`, htmlResultFile);
     return true;
   }
 
