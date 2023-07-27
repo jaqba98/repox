@@ -73,7 +73,6 @@ export class GenerateProjectStepService {
     const {
       projectName, projectType, projectPath, projectScheme
     } = commandModel;
-    if (!this.folderNotExist.run(projectPath)) return;
     if (!this.projectNotExist.run(projectName)) return;
     this.addProjectToDomain.run(
       projectName, projectType, projectPath, projectScheme
