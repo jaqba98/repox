@@ -36,8 +36,14 @@ export class HtmlproGetParamDepService {
         [HtmlproCommandEnum.html]: {
           command: HtmlproCommandEnum.html,
           args: {
-            [HtmlproArgumentEnum.path]: {
-              name: HtmlproArgumentEnum.path,
+            [HtmlproArgumentEnum.input]: {
+              name: HtmlproArgumentEnum.input,
+              values: [],
+              valueMode: "single",
+              required: true
+            },
+            [HtmlproArgumentEnum.output]: {
+              name: HtmlproArgumentEnum.output,
               values: [],
               valueMode: "single",
               required: true

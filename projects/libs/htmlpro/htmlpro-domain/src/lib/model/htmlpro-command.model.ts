@@ -6,7 +6,8 @@ export interface EmptyHtmlproCommandModel {
 }
 
 export interface BuildHtmlHtmlproCommandModel {
-  filePath: string;
+  inputPath: string;
+  outputPath: string;
 }
 
 export type THtmlproCommandModel = EmptyHtmlproCommandModel |

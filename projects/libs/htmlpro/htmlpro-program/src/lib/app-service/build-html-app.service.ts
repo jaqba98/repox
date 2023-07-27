@@ -12,9 +12,9 @@ export class BuildHtmlAppService {
   }
 
   // todo: refactor the method
-  run(filePath: string): boolean {
-    const htmlResultFile = this.processTheHtmlFile(filePath);
-    this.fileUtils.writeTextFile(`projects/apps/repox-website/src/output.html`, htmlResultFile);
+  run(inputPath: string, outputPath: string): boolean {
+    const htmlResultFile = this.processTheHtmlFile(inputPath);
+    this.fileUtils.writeTextFile(outputPath, htmlResultFile);
     return true;
   }
 

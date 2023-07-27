@@ -34,9 +34,9 @@ export class BuildHtmlStepService {
   ): void {
     this.simpleMessage.writeInfo("Build html", HTMLPRO_LOGO);
     if (!this.goToProjectRoot.run()) return;
-    const { filePath } = commandModel;
-    if (!this.pathUtils.existPath(filePath)) return;
-    if (!this.buildHtml.run(filePath)) return;
+    const { inputPath, outputPath } = commandModel;
+    if (!this.pathUtils.existPath(inputPath)) return;
+    if (!this.buildHtml.run(inputPath, outputPath)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
       "Html file builded successfully!"

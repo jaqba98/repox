@@ -28,8 +28,11 @@ export class HtmlproBuildParamModelService {
 
   buildHtmlCommand(): BuildHtmlHtmlproCommandModel {
     return {
-      filePath: this.paramDomain.getCommandStringValue(
-        HtmlproArgumentEnum.path
+      inputPath: this.paramDomain.getCommandStringValue(
+        HtmlproArgumentEnum.input
+      ),
+      outputPath: this.paramDomain.getCommandStringValue(
+        HtmlproArgumentEnum.output
       )
     };
   }

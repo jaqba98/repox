@@ -4,9 +4,11 @@
  */
 
 export enum HtmlproArgumentEnum {
-  path = "path"
+  input = "input",
+  output = "output"
 }
 
 export enum HtmlproAliasEnum {
-  path = "p"
+  input = "i",
+  output = "o"
 }
