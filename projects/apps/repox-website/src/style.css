@@ -4,7 +4,9 @@
     --primary-color: #6320EE;
     --secondary-color: #571CD2;
     --third-color: #4A18B2;
+    --gray-color: #808080;
     --dark-color: #313638;
+    --light-color: #FCFAFA;
     --font-white-color: #FCFFFD;
     --animation-speed: 0.25s;
 }
@@ -255,42 +257,32 @@ body {
     }
 }
 
-/* current version */
+/* statistics */
 
-.current-version {
-    background-color: var(--dark-color);
+.statistics {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4em;
+    background-color: var(--light-color);
+    padding: 5em 0;
+    text-align: center;
 }
 
-.current-version > p {
-    padding: 1em;
+.statistics-element > h2 {
+    font-weight: lighter;
+    color: var(--gray-color);
+    margin-bottom: 1em;
+}
+
+.statistics-element > p {
+    font-size: 3em;
     font-weight: bold;
-    font-size: 1.2em;
-    text-align: center;
-    color: var(--font-white-color);
+    color: var(--primary-color);
 }
 
 /* todo: I am here */
-
-/*!* statistics *!*/
-
-/*.statistics {*/
-/*    background-color: #E8E9F3;*/
-/*    padding: 4em 2em;*/
-/*    text-align: center;*/
-/*}*/
-
-/*.statistics > h2 {*/
-/*    font-size: 1.5em;*/
-/*    color: grey;*/
-/*    font-weight: lighter;*/
-/*    margin-bottom: 1em;*/
-/*}*/
-
-/*#weekly-downloads {*/
-/*    font-size: 3em;*/
-/*    font-weight: bold;*/
-/*    color: var(--primary-color);*/
-/*}*/
 
 /*!* what is *!*/
 
