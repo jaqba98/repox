@@ -145,6 +145,13 @@
       "path": "projects/libs/htmlpro/htmlpro-main",
       "scheme": "@lib/ts",
       "build": {}
+    },
+    "htmlpro-domain": {
+      "name": "htmlpro-domain",
+      "type": "lib",
+      "path": "projects/libs/htmlpro/htmlpro-domain",
+      "scheme": "@lib/ts",
+      "build": {}
     }
   }
 }

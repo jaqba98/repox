@@ -50,6 +50,9 @@
       ],
       "@lib/htmlpro-main": [
         "projects/libs/htmlpro/htmlpro-main/src/index.ts"
+      ],
+      "@lib/htmlpro-domain": [
+        "projects/libs/htmlpro/htmlpro-domain/src/index.ts"
       ]
     }
   },
