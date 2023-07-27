@@ -20,6 +20,7 @@ import {
   ParamDomainAppService
 } from "@lib/param-domain";
 import { HtmlproLaunchProgramAppService } from "@lib/htmlpro-domain";
+import { LauncherAppService } from "@lib/launcher";
 
 @singleton()
 /**
@@ -34,7 +35,7 @@ export class HtmlproMainService {
     private readonly paramDomain: ParamDomainAppService,
     private readonly launchProgram: HtmlproLaunchProgramAppService,
     // private readonly buildParamModel: RepoxBuildParamModelAppService,
-    // private readonly launcher: LauncherAppService
+    private readonly launcher: LauncherAppService
   ) {
   }
 
@@ -78,9 +79,9 @@ export class HtmlproMainService {
     //   .buildProgramParamModel();
     // const commandDomain = this.buildParamModel
     //   .buildCommandParamModel();
-    // this.launcher.launchProgram(programs).runProgram(
-    //   programDomain, commandDomain
-    // );
+    this.launcher.launchProgram(programs).runProgram(
+      undefined, undefined
+    );
   }
 }
 

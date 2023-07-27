@@ -53,6 +53,9 @@
       ],
       "@lib/htmlpro-domain": [
         "projects/libs/htmlpro/htmlpro-domain/src/index.ts"
+      ],
+      "@lib/htmlpro-program": [
+        "projects/libs/htmlpro/htmlpro-program/src/index.ts"
       ]
     }
   },
