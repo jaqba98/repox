@@ -1,6 +1,7 @@
 import { singleton } from "tsyringe";
 import { FileUtilsService } from "@lib/utils";
-import { XMLParser } from "fast-xml-parser";
+import { Parser } from "htmlparser2";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -10,10 +11,43 @@ export class BuildHtmlAppService {
   constructor(private readonly fileUtils: FileUtilsService) {
   }
 
-  async run(filePath: string): Promise<boolean> {
-    const htmlFileContent = this.fileUtils.readTextFile(filePath);
-    const parser = new XMLParser();
-    const htmlFileJson = parser.parse(htmlFileContent);
+  run(filePath: string): boolean {
+    const htmlResultFile = this.processTheHtmlFile(filePath);
+    this.fileUtils.writeTextFile("output.html", htmlResultFile);
     return true;
+  }
+
+  // todo: refactor the method
+  private processTheHtmlFile(filePath: string): string {
+    const htmlFileContent = this.fileUtils.readTextFile(filePath);
+    let htmlFileResult = EMPTY_STRING;
+    let currentTag = EMPTY_STRING;
+    const parser = new Parser({
+      onopentag: (name, attributes) => {
+        currentTag = name;
+        if (name === "import" && attributes.from !== EMPTY_STRING) {
+          htmlFileResult += this.processTheHtmlFile(attributes.from);
+        } else {
+          htmlFileResult += `<${name}`;
+          for (const attr in attributes) {
+            htmlFileResult += ` ${attr}="${attributes[attr]}"`;
+          }
+          htmlFileResult += '>';
+        }
+      },
+      ontext: (text) => {
+        if (currentTag !== "import") {
+          htmlFileResult += text;
+        }
+      },
+      onclosetag: (name) => {
+        if (currentTag !== "import") {
+          htmlFileResult += `</${name}>`;
+        }
+      }
+    });
+    parser.write(htmlFileContent);
+    parser.end();
+    return htmlFileResult;
   }
 }

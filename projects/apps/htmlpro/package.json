@@ -1,6 +1,6 @@
 {
   "name": "htmlpro",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "./apps/htmlpro/src/main.js",
   "bin": "./apps/htmlpro/src/main.js",
@@ -11,6 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fast-xml-parser": "^4.2.6"
+    "htmlparser2": "^9.0.0"
   }
 }
