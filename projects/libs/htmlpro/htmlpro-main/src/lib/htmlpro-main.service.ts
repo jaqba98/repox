@@ -12,7 +12,7 @@ import {
 } from "@lib/param-domain";
 import {
   HtmlproAliasEnum,
-  HtmlproArgumentEnum,
+  HtmlproArgumentEnum, HtmlproBuildParamModelAppService,
   HtmlproCommandAliasEnum,
   HtmlproCommandEnum, HtmlproGetParamDepAppService,
   HtmlproLaunchProgramAppService,
@@ -34,7 +34,7 @@ export class HtmlproMainService {
     private readonly buildParamDomain: BuildParamDomainAppService,
     private readonly paramDomain: ParamDomainAppService,
     private readonly launchProgram: HtmlproLaunchProgramAppService,
-    // private readonly buildParamModel: RepoxBuildParamModelAppService,
+    private readonly htmlproBuild: HtmlproBuildParamModelAppService,
     private readonly launcher: LauncherAppService
   ) {
   }
@@ -75,12 +75,10 @@ export class HtmlproMainService {
       return;
     }
     const programs = this.launchProgram.getPrograms();
-    // const programDomain = this.buildParamModel
-    //   .buildProgramParamModel();
-    // const commandDomain = this.buildParamModel
-    //   .buildCommandParamModel();
+    const programDomain = this.htmlproBuild.buildProgramParamModel();
+    const commandDomain = this.htmlproBuild.buildCommandParamModel();
     this.launcher.launchProgram(programs).runProgram(
-      undefined, undefined
+      programDomain, commandDomain
     );
   }
 }
