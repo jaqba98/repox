@@ -14,7 +14,7 @@ import {
   HtmlproAliasEnum,
   HtmlproArgumentEnum,
   HtmlproCommandAliasEnum,
-  HtmlproCommandEnum,
+  HtmlproCommandEnum, HtmlproGetParamDepAppService,
   HtmlproLaunchProgramAppService,
   HtmlproProgramAliasEnum,
   HtmlproProgramEnum
@@ -60,7 +60,7 @@ export class HtmlproMainService {
       HtmlproCommandAliasEnum,
       HtmlproArgumentEnum,
       HtmlproAliasEnum,
-      container.resolve(RepoxGetParamDepAppService)
+      container.resolve(HtmlproGetParamDepAppService)
     );
     const paramDomainValidation = this.paramDomain
       .getParamDomainValidation();
