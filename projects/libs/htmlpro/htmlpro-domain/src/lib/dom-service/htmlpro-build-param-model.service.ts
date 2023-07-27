@@ -1,11 +1,9 @@
 import { singleton } from "tsyringe";
-import {
-  EmptyRepoxCommandModel,
-  EmptyRepoxProgramModel
-} from "@lib/repox-domain";
 import { ParamDomainAppService } from "@lib/param-domain";
 import {
   BuildHtmlHtmlproCommandModel,
+  EmptyHtmlproCommandModel,
+  EmptyHtmlproProgramModel,
   HtmlproArgumentEnum
 } from "@lib/htmlpro-domain";
 
@@ -18,11 +16,11 @@ export class HtmlproBuildParamModelService {
   constructor(private readonly paramDomain: ParamDomainAppService) {
   }
 
-  emptyProgram(): EmptyRepoxProgramModel {
+  emptyProgram(): EmptyHtmlproProgramModel {
     return {};
   }
 
-  emptyCommand(): EmptyRepoxCommandModel {
+  emptyCommand(): EmptyHtmlproCommandModel {
     return {};
   }
 
