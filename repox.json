@@ -122,6 +122,22 @@
           }
         ]
       }
+    },
+    "htmlpro": {
+      "name": "htmlpro",
+      "type": "app",
+      "path": "projects/apps/htmlpro",
+      "scheme": "@app/ts",
+      "build": {
+        "output": "dist/htmlpro",
+        "main": "projects/apps/htmlpro/src/main.ts",
+        "assets": [
+          {
+            "input": "projects/apps/htmlpro/package.json",
+            "output": "dist/htmlpro"
+          }
+        ]
+      }
     }
   }
 }
