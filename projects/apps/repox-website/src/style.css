@@ -7,7 +7,7 @@
     --gray-color: #808080;
     --dark-color: #313638;
     --light-color: #FCFAFA;
-    --font-white-color: #FCFFFD;
+    --font-white-color: #FFFFFF;
     --animation-speed: 0.25s;
 }
 
@@ -259,14 +259,17 @@ body {
 
 /* statistics */
 
+.statistics-container {
+    background-color: var(--light-color);
+}
+
 .statistics {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 4em;
-    background-color: var(--light-color);
-    padding: 5em 0;
+    padding: 5em;
     text-align: center;
 }
 
@@ -282,59 +285,67 @@ body {
     color: var(--primary-color);
 }
 
-/* todo: I am here */
+@media only screen and (min-width: 768px) {
+    .statistics {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
 
-/*!* what is *!*/
+@media only screen and (min-width: 1024px) {
+    .statistics {
+        margin: auto;
+        width: 960px;
+        justify-content: space-around;
+    }
+}
 
-/*.what-is {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    gap: 2em;*/
-/*    padding: 4em 2em;*/
-/*    background-color: #FBFEF9;*/
-/*    color: #4D4847;*/
-/*}*/
+/* what is */
 
-/*.what-is > h2 {*/
-/*    font-size: 2em;*/
-/*}*/
+.what-is-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
+    padding: 4em 2em;
+    background-color: var(--primary-color);
+    color: var(--font-white-color);
+}
 
-/*.what-is-container {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    gap: 2em;*/
-/*}*/
+.what-is-container > h2 {
+    font-size: 2em;
+}
 
-/*.what-is-content {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    gap: 1em;*/
-/*    flex: 1;*/
-/*}*/
+.what-is {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
 
-/*.what-is-content > h3 {*/
-/*    font-size: 1.5em;*/
-/*}*/
+.what-is-content > h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
 
-/*.what-is-content > p {*/
-/*    font-size: 1.2em;*/
-/*    line-height: 1.5em;*/
-/*}*/
+.what-is-content > p {
+    font-size: 1.25em;
+    line-height: 1.5em;
+}
 
-/*@media only screen and (min-width: 768px) {*/
-/*    .what-is {*/
-/*        align-items: center;*/
-/*        gap: 4em;*/
-/*    }*/
+@media only screen and (min-width: 768px) {
+    .what-is {
+        flex-direction: row;
+        justify-content: space-around;
+    }
 
-/*    .what-is-container {*/
-/*        flex-direction: row;*/
-/*        gap: 2em;*/
-/*    }*/
-/*}*/
+    .what-is-content {
+        flex: 1;
+    }
+}
 
-/*@media only screen and (min-width: 1024px) {*/
-/*    .what-is-container {*/
-/*        width: 960px;*/
-/*    }*/
-/*}*/
+@media only screen and (min-width: 1024px) {
+    .what-is {
+        width: 960px;
+    }
+}
