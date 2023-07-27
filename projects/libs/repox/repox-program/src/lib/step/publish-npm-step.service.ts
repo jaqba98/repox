@@ -6,7 +6,10 @@ import {
 import {
   AllProgramInstalledService
 } from "../compose/all-program-installed.service";
-import { GoToProjectRootAppService } from "@lib/program-step";
+import {
+  ChangePathAppService,
+  GoToProjectRootAppService
+} from "@lib/program-step";
 import {
   LoadWsDtoAppService
 } from "../app-service/load-ws-dto-app.service";
@@ -26,9 +29,6 @@ import {
   FolderExistAppService
 } from "../app-service/folder-exist-app.service";
 import { EMPTY_STRING } from "@lib/const";
-import {
-  ChangePathAppService
-} from "../app-service/change-path-app.service";
 import {
   NpmPublishAppService
 } from "../app-service/npm-publish-app.service";

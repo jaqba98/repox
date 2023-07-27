@@ -1,11 +1,20 @@
 import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
+import {
+  NewlineAppService,
+  SimpleMessageAppService
+} from "@lib/logger";
 import { HTMLPRO_LOGO } from "@lib/htmlpro-const";
 import {
   BuildHtmlHtmlproCommandModel,
   EmptyHtmlproProgramModel
 } from "@lib/htmlpro-domain";
-import { GoToProjectRootAppService } from "@lib/program-step";
+import {
+  ChangePathAppService,
+  GoToProjectRootAppService
+} from "@lib/program-step";
+import {
+  BuildHtmlAppService
+} from "../app-service/build-html-app.service";
 
 @singleton()
 /**
@@ -14,7 +23,10 @@ import { GoToProjectRootAppService } from "@lib/program-step";
 export class BuildHtmlStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly goToProjectRoot: GoToProjectRootAppService
+    private readonly newline: NewlineAppService,
+    private readonly goToProjectRoot: GoToProjectRootAppService,
+    private readonly changePath: ChangePathAppService,
+    private readonly buildHtml: BuildHtmlAppService
   ) {
   }
 
@@ -24,6 +36,12 @@ export class BuildHtmlStepService {
   ): void {
     this.simpleMessage.writeInfo("Build html", HTMLPRO_LOGO);
     if (!this.goToProjectRoot.run()) return;
-    console.log(commandModel.filePath);
+    const { filePath } = commandModel;
+    if (!this.changePath.run(filePath)) return;
+    if (!this.buildHtml.run(filePath)) return;
+    this.newline.writeNewline();
+    this.simpleMessage.writeSuccess(
+      "Html file builded successfully!"
+    );
   }
 }
