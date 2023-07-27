@@ -6,7 +6,7 @@
     --third-color: #4A18B2;
     --gray-color: #808080;
     --dark-color: #313638;
-    --light-color: #FCFAFA;
+    --light-color: #FBFFFE;
     --font-white-color: #FFFFFF;
     --animation-speed: 0.25s;
 }
@@ -347,6 +347,45 @@ body {
 @media only screen and (min-width: 1024px) {
     .what-is {
         width: 960px;
+    }
+}
+
+/* support */
+
+.support {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
+    padding: 4em 2em;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+.support > h2 {
+    font-size: 2em;
+}
+
+.support-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4em;
+}
+
+.support-content > img {
+    width: 50%;
+}
+
+@media only screen and (min-width: 768px) {
+    .support-content {
+        flex-direction: row;
+    }
+
+    .support-content > img {
+        width: 10em;
     }
 }
 
