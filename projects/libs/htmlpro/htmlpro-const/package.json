@@ -1,9 +1,8 @@
 {
-  "name": "htmlpro",
-  "version": "1.0.4",
+  "name": "htmlpro-const",
+  "version": "1.0.0",
   "description": "",
-  "main": "./apps/htmlpro/src/main.js",
-  "bin": "./apps/htmlpro/src/main.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

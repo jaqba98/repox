@@ -159,6 +159,13 @@
       "path": "projects/libs/htmlpro/htmlpro-program",
       "scheme": "@lib/ts",
       "build": {}
+    },
+    "htmlpro-const": {
+      "name": "htmlpro-const",
+      "type": "lib",
+      "path": "projects/libs/htmlpro/htmlpro-const",
+      "scheme": "@lib/ts",
+      "build": {}
     }
   }
 }

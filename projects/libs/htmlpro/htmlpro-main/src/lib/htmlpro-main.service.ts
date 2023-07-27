@@ -1,15 +1,6 @@
 import "core-js/features/reflect";
 import { container, singleton } from "tsyringe";
-import { REPOX_LOGO } from "@lib/repox-const";
-import {
-  RepoxAliasEnum,
-  RepoxArgumentEnum,
-  RepoxCommandAliasEnum,
-  RepoxCommandEnum,
-  RepoxGetParamDepAppService,
-  RepoxProgramAliasEnum,
-  RepoxProgramEnum
-} from "@lib/repox-domain";
+import { RepoxGetParamDepAppService } from "@lib/repox-domain";
 import {
   BuildParamDtoAppService,
   GetParamDtoDataAppService
@@ -19,8 +10,17 @@ import {
   BuildParamDomainAppService,
   ParamDomainAppService
 } from "@lib/param-domain";
-import { HtmlproLaunchProgramAppService } from "@lib/htmlpro-domain";
+import {
+  HtmlproAliasEnum,
+  HtmlproArgumentEnum,
+  HtmlproCommandAliasEnum,
+  HtmlproCommandEnum,
+  HtmlproLaunchProgramAppService,
+  HtmlproProgramAliasEnum,
+  HtmlproProgramEnum
+} from "@lib/htmlpro-domain";
 import { LauncherAppService } from "@lib/launcher";
+import { HTMLPRO_LOGO } from "@lib/htmlpro-const";
 
 @singleton()
 /**
@@ -49,17 +49,17 @@ export class HtmlproMainService {
         paramDtoValidation.baseValues,
         paramDtoValidation.errors,
         paramDtoValidation.tips,
-        REPOX_LOGO
+        HTMLPRO_LOGO
       );
       return;
     }
     this.buildParamDomain.build(
-      RepoxProgramEnum,
-      RepoxProgramAliasEnum,
-      RepoxCommandEnum,
-      RepoxCommandAliasEnum,
-      RepoxArgumentEnum,
-      RepoxAliasEnum,
+      HtmlproProgramEnum,
+      HtmlproProgramAliasEnum,
+      HtmlproCommandEnum,
+      HtmlproCommandAliasEnum,
+      HtmlproArgumentEnum,
+      HtmlproAliasEnum,
       container.resolve(RepoxGetParamDepAppService)
     );
     const paramDomainValidation = this.paramDomain
@@ -70,7 +70,7 @@ export class HtmlproMainService {
         paramDtoValidation.baseValues,
         paramDomainValidation.errors,
         paramDomainValidation.tips,
-        REPOX_LOGO
+        HTMLPRO_LOGO
       );
       return;
     }
