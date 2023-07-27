@@ -44,6 +44,8 @@ export class BuildHtmlAppService {
       onclosetag: (name) => {
         if (currentTag !== "import") {
           htmlFileResult += `</${name}>`;
+        } else {
+          currentTag = "";
         }
       }
     });

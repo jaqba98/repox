@@ -5,7 +5,7 @@
   "author": "Jakub Olejarczyk",
   "license": "ISC",
   "scripts": {
-    "htmlpro:build": "node dist/htmlpro/apps/htmlpro/src/main.js build html --path=projects/apps/repox-website/src/test/index.html"
+    "htmlpro:build": "node dist/htmlpro/apps/htmlpro/src/main.js build html --path=projects/apps/repox-website/src/index.html"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
