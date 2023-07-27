@@ -109,7 +109,7 @@
             "output": "dist/repox-website"
           },
           {
-            "input": "projects/apps/repox-website/src/**/*",
+            "input": "projects/apps/repox-website/src/styles/**/*",
             "output": "dist/repox-website/styles"
           },
           {
