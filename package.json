@@ -5,12 +5,7 @@
   "author": "Jakub Olejarczyk",
   "license": "ISC",
   "scripts": {
-    "repox:build": "repox build project --name=repox",
-    "repox:version": "node dist/repox/apps/repox/src/main.js --version",
-    "generate:workspace": "node dist/repox/apps/repox/src/main.js generate workspace --name=dog",
-    "generate:project": "node dist/repox/apps/repox/src/main.js generate project --name=dog --type=lib --scheme=@lib/ts",
-    "build:project": "node dist/repox/apps/repox/src/main.js build project --name=repox-website",
-    "publish:npm": "node dist/repox/apps/repox/src/main.js publish npm --name=repox"
+    "htmlpro:build": "node dist/htmlpro/apps/htmlpro/src/main.js build html --path=projects/apps/repox-website/src/index.html"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
@@ -28,6 +23,7 @@
   "dependencies": {
     "command-exists": "^1.2.9",
     "core-js": "^3.31.1",
+    "fast-xml-parser": "^4.2.6",
     "glob": "^10.3.3",
     "jsonschema": "^1.4.1",
     "tsyringe": "^4.8.0"

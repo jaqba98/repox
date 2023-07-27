@@ -35,6 +35,13 @@ export class FileUtilsService {
     this.writeTextFile(filePath, EMPTY_STRING);
   }
 
+  readTextFile(filePath: string): string {
+    if (!this.pathUtils.existPath(filePath)) {
+      throw new Error("The specified file does not exist!");
+    }
+    return readFileSync(filePath, "utf-8");
+  }
+
   readJsonFile<T>(filePath: string): T {
     if (!this.pathUtils.existPath(filePath)) {
       throw new Error("The specified file does not exist!");
