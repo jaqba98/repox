@@ -13,7 +13,7 @@ export class BuildHtmlAppService {
 
   run(filePath: string): boolean {
     const htmlResultFile = this.processTheHtmlFile(filePath);
-    this.fileUtils.writeTextFile("output.html", `${filePath}/${htmlResultFile}`);
+    this.fileUtils.writeTextFile(`${filePath}/${htmlResultFile}`, htmlResultFile);
     return true;
   }
 
