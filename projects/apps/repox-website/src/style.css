@@ -379,6 +379,11 @@ body {
     width: 50%;
 }
 
+.support-content > p {
+    font-size: 1.2em;
+    color: var(--dark-color);
+}
+
 @media only screen and (min-width: 768px) {
     .support-content {
         flex-direction: row;
