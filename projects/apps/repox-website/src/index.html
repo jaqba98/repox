@@ -1,131 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- meta -->
-    <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <!-- font links -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com"
-          crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap"
-          rel="stylesheet">
-    <!-- icon links -->
-    <link rel="icon" type="image/png" href="images/repox-favicon.png">
-    <!-- style links -->
-    <link rel="stylesheet" href="styles/style.css">
-    <!-- scripts -->
-    <script src="scripts/hamburger.js" defer></script>
-    <script src="scripts/downloads.js" defer></script>
-    <!-- title -->
-    <title>Repox: Lightweight Monorepo</title>
-</head>
+<import from="projects/apps/repox-website/src/components/head.html"></import>
 <body>
-<nav class="main-nav">
-    <img src="images/repox-logo-small.png" alt="Angular logo"
-         class="main-nav-logo">
-    <div class="hamburger">
-        <div class="hamburger-line hamburger-line-top"></div>
-        <div class="hamburger-line hamburger-line-middle"></div>
-        <div class="hamburger-line hamburger-line-bottom"></div>
-    </div>
-    <ul class="main-nav-menu">
-        <li>
-            <a href="index.html" class="main-nav-menu-link">
-                Home
-            </a>
-        </li>
-        <li>
-            <a href="getting-started.html" class="main-nav-menu-link">
-                Getting started
-            </a>
-        </li>
-        <li>
-            <a href="docs.html" class="main-nav-menu-link">
-                Docs
-            </a>
-        </li>
-        <li>
-            <a href="support-us.html" class="main-nav-menu-link">
-                Support us
-            </a>
-        </li>
-        <li>
-            <a href="blog.html" class="main-nav-menu-link">
-                Blog
-            </a>
-        </li>
-    </ul>
-</nav>
 <main>
-    <header class="header">
-        <div class="motto">
-            <p>Reuse code.</p>
-            <p>Develop faster.</p>
-        </div>
-        <img src="images/repox-logo.png" alt="Angular logo"
-             class="header-logo">
-        <p>Develop all your products with our lightweight monorepo.</p>
-        <a href="#" class="header-link">Getting started</a>
-    </header>
-    <section class="statistics-container">
-        <div class="statistics">
-            <div class="statistics-element">
-                <h2>Current version</h2>
-                <p class="current-version">1.3.4</p>
-            </div>
-            <div class="statistics-element">
-                <h2>Weekly Downloads</h2>
-                <p id="weekly-downloads">∞</p>
-            </div>
-            <div class="statistics-element">
-                <h2>Total Downloads</h2>
-                <p id="total-downloads">∞</p>
-            </div>
-        </div>
-    </section>
-    <section class="what-is-container">
-        <h2>What is Repox?</h2>
-        <div class="what-is">
-            <div class="what-is-content">
-                <h3>Don't repeat yourself</h3>
-                <p>
-                    Repox gives you the opportunity to write code once
-                    and then reuse it in all projects. With Repox, you
-                    are able to build code with correct, tested, and
-                    ready-to-use blocks of code.
-                </p>
-            </div>
-            <div class="what-is-content">
-                <h3>Create a web application</h3>
-                <p>
-                    With Repox, you are able to create a comprehensive
-                    web application in Front-end and Back-end
-                    technology. Repox supports major popular
-                    frameworks such as Angular, React, and Vue.
-                </p>
-            </div>
-            <div class="what-is-content">
-                <h3>Automate your work</h3>
-                <p>
-                    Repox provides you with many tools for project
-                    development and project deployment processes.
-                </p>
-            </div>
-        </div>
-        <img src="images/repox-diagram.png" alt="Repox diagram"
-             class="what-is-diagram">
-    </section>
-    <section class="support">
-        <h2>Supporting</h2>
-        <div class="support-content">
-            <p>Nobody supports yet.</p>
-        </div>
-    </section>
+    <import from="projects/apps/repox-website/src/components/nav.html"></import>
+    <import from="projects/apps/repox-website/src/components/header.html"></import>
+    <import from="projects/apps/repox-website/src/components/statistics.html"></import>
+    <import from="projects/apps/repox-website/src/components/what-is.html"></import>
+    <import from="projects/apps/repox-website/src/components/support.html"></import>
 </main>
-<footer class="footer">
-    <p>Copyright &copy; 2023 Repox by Jakub Olejarczyk</p>
-</footer>
+<import from="projects/apps/repox-website/src/components/footer.html"></import>
 </body>
 </html>
