@@ -20,8 +20,10 @@ export class HtmlproGetParamDepAppService
 
   getDependency(program: string): ParamDomainDepModel {
     switch (program) {
+      case HtmlproProgramEnum.default:
+        return this.htmlproGetParamDep.getProgramDefault();
       case HtmlproProgramEnum.build:
-        return this.htmlproGetParamDep.getProgramBuild()
+        return this.htmlproGetParamDep.getProgramBuild();
       default:
         throw new Error(`No dependencies for ${program} program!`);
     }

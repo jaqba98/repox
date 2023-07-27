@@ -12,6 +12,19 @@ import {
  * for given program.
  */
 export class HtmlproGetParamDepService {
+  getProgramDefault(): ParamDomainDepModel {
+    return {
+      program: HtmlproProgramEnum.default,
+      commands: {
+        [HtmlproCommandEnum.default]: {
+          command: HtmlproCommandEnum.default,
+          args: {}
+        }
+      },
+      args: {}
+    };
+  }
+
   getProgramBuild(): ParamDomainDepModel {
     return {
       program: HtmlproProgramEnum.build,
