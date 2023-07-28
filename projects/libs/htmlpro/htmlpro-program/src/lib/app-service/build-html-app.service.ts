@@ -16,16 +16,15 @@ export class BuildHtmlAppService {
   }
 
   run(inputPath: string, outputPath: string): boolean {
-    const htmlProDomain = this.htmlproDomainStore.getHtmlProDomain();
-    console.log(htmlProDomain);
-    // todo: I am here
     const htmlResultFile = this.processTheHtmlFile(inputPath);
     this.fileUtils.writeTextFile(outputPath, htmlResultFile);
     return true;
   }
 
-  // todo: refactor the method
   private processTheHtmlFile(filePath: string): string {
+    // todo: I am here
+    const htmlProDomain = this.htmlproDomainStore.getHtmlProDomain();
+    console.log(htmlProDomain);
     const htmlFileContent = this.fileUtils.readTextFile(filePath);
     let htmlFileResult = EMPTY_STRING;
     let currentTag = EMPTY_STRING;
