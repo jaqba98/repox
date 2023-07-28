@@ -103,7 +103,9 @@ export class WsDomainStoreService {
       build: this.getProjectBuild(
         projectType, projectScheme, projectPath, projectName
       ),
-      alias: this.getProjectAlias(projectName, projectScheme),
+      alias: this.getProjectAlias(
+        projectName, projectScheme, projectType
+      ),
       indexPath: this.getProjectIndexPath(projectScheme, projectPath),
       changed: true
     });
@@ -156,7 +158,8 @@ export class WsDomainStoreService {
 
   private getProjectAlias(
     projectName: string,
-    projectScheme: ProjectSchemeEnum
+    projectScheme: ProjectSchemeEnum,
+    projectType: ProjectTypeEnum
   ): string {
     switch (projectScheme) {
       case ProjectSchemeEnum.blank:
@@ -165,7 +168,7 @@ export class WsDomainStoreService {
       case ProjectSchemeEnum.libTypeScript:
       case ProjectSchemeEnum.toolTypeScript:
         return this.buildProjectAlias.buildAlias(
-          projectName, projectScheme
+          projectName, projectType
         )
       default:
         throw new Error("Not supported project scheme");
