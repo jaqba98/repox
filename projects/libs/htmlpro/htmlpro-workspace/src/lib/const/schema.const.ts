@@ -10,22 +10,27 @@ export const htmlProJsonFileSchema: Schema = {
   properties: {
     components: {
       type: "object",
-      properties: {
-        alias: {
-          type: "string"
-        },
-        templateUrl: {
-          type: "string"
-        },
-        styleUrls: {
-          type: "array",
-          items: {
+      additionalProperties: {
+        type: "object",
+        properties: {
+          alias: {
             type: "string"
+          },
+          templateUrl: {
+            type: "string"
+          },
+          styleUrls: {
+            type: "array",
+            items: {
+              type: "string"
+            }
           }
-        }
-      },
-      required: ["alias", "templateUrl", "styleUrls"]
+        },
+        additionalProperties: false,
+        required: ["alias", "templateUrl", "styleUrls"]
+      }
     }
   },
+  additionalProperties: false,
   required: ["components"]
 };
