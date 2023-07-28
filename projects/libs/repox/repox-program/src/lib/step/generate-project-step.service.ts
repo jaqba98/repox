@@ -9,9 +9,9 @@ import {
 } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
-  AllProgramInstalledService
-} from "../compose/all-program-installed.service";
-import { GoToProjectRootAppService } from "@lib/program-step";
+  AllProgramInstalledService,
+  GoToProjectRootAppService
+} from "@lib/program-step";
 import {
   LoadWsDtoAppService
 } from "../app-service/load-ws-dto-app.service";

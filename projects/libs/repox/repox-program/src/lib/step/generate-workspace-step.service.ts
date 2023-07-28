@@ -17,9 +17,7 @@ import {
 import {
   InitWsProjectAppService
 } from "../app-service/init-ws-project-app.service";
-import {
-  AllProgramInstalledService
-} from "../compose/all-program-installed.service";
+import { AllProgramInstalledService } from "@lib/program-step";
 
 @singleton()
 /**

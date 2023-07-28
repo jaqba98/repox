@@ -8,7 +8,10 @@ import {
   BuildHtmlHtmlproCommandModel,
   EmptyHtmlproProgramModel
 } from "@lib/htmlpro-domain";
-import { GoToProjectRootAppService } from "@lib/program-step";
+import {
+  AllProgramInstalledService,
+  GoToProjectRootAppService
+} from "@lib/program-step";
 import {
   BuildHtmlAppService
 } from "../app-service/build-html-app.service";
@@ -26,6 +29,7 @@ export class BuildHtmlStepService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
+    private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly pathUtils: PathUtilsService,
     private readonly loadHtmlproDomain: LoadHtmlproDomainAppService,
@@ -39,12 +43,15 @@ export class BuildHtmlStepService {
     commandModel: BuildHtmlHtmlproCommandModel
   ): void {
     this.simpleMessage.writeInfo("Build html", HTMLPRO_LOGO);
+    this.newline.writeNewline();
+    if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
-    const { inputPath, outputPath } = commandModel;
-    if (!this.pathUtils.existPath(inputPath)) return;
-    if (!this.loadHtmlproDomain.run()) return;
-    console.log(this.htmlproDomainStore.getDomain());
-    if (!this.buildHtml.run(inputPath, outputPath)) return;
+    // todo: I am here
+    // const { inputPath, outputPath } = commandModel;
+    // if (!this.pathUtils.existPath(inputPath)) return;
+    // if (!this.loadHtmlproDomain.run()) return;
+    // console.log(this.htmlproDomainStore.getDomain());
+    // if (!this.buildHtml.run(inputPath, outputPath)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
       "Html file builded successfully!"

@@ -4,9 +4,7 @@ import {
   SimpleMessageAppService
 } from "@lib/logger";
 import {
-  AllProgramInstalledService
-} from "../compose/all-program-installed.service";
-import {
+  AllProgramInstalledService,
   ChangePathAppService,
   GoToProjectRootAppService
 } from "@lib/program-step";
