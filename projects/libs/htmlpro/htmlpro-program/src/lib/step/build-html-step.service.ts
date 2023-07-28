@@ -9,7 +9,7 @@ import {
   EmptyHtmlproProgramModel
 } from "@lib/htmlpro-domain";
 import {
-  AllProgramInstalledService,
+  AllProgramInstalledService, FileExistAppService,
   GoToProjectRootAppService
 } from "@lib/program-step";
 import {
@@ -19,7 +19,10 @@ import { PathUtilsService } from "@lib/utils";
 import {
   LoadHtmlproDomainAppService
 } from "../app-service/load-htmlpro-domain-app.service";
-import { HtmlproDomainStoreService } from "@lib/htmlpro-workspace";
+import {
+  HtmlproDomainStoreService,
+  HtmlproFileEnum
+} from "@lib/htmlpro-workspace";
 
 @singleton()
 /**
@@ -31,6 +34,7 @@ export class BuildHtmlStepService {
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
+    private readonly fileExist: FileExistAppService,
     private readonly pathUtils: PathUtilsService,
     private readonly loadHtmlproDomain: LoadHtmlproDomainAppService,
     private readonly buildHtml: BuildHtmlAppService,
@@ -46,6 +50,7 @@ export class BuildHtmlStepService {
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
+    if (!this.fileExist.run(HtmlproFileEnum.htmlproJson)) return;
     // todo: I am here
     // const { inputPath, outputPath } = commandModel;
     // if (!this.pathUtils.existPath(inputPath)) return;
