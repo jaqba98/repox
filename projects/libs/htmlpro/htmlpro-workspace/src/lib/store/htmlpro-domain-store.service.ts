@@ -2,6 +2,8 @@ import { singleton } from "tsyringe";
 import { FileUtilsService } from "@lib/utils";
 import { HtmlproDomainModel } from "../model/htmlpro-domain.model";
 import { HtmlproFileEnum } from "../enum/htmlpro-file.enum";
+import { Validator, ValidatorResult } from "jsonschema";
+import { htmlProJsonFileSchema } from "../const/schema.const";
 
 @singleton()
 /**
@@ -11,7 +13,10 @@ import { HtmlproFileEnum } from "../enum/htmlpro-file.enum";
 export class HtmlproDomainStoreService {
   private htmlproDomain: HtmlproDomainModel | undefined;
 
-  constructor(private readonly fileUtils: FileUtilsService) {
+  constructor(
+    private readonly fileUtils: FileUtilsService,
+    private readonly validator: Validator
+  ) {
   }
 
   loadHtmlproDomain(): void {
@@ -19,10 +24,12 @@ export class HtmlproDomainStoreService {
       .readJsonFile<HtmlproDomainModel>(HtmlproFileEnum.htmlproJson);
   }
 
-  getDomain(): HtmlproDomainModel {
-    if (this.htmlproDomain === undefined) {
-      throw new Error("The store is undefined!");
-    }
-    return this.htmlproDomain;
+  verifyHtmlproDomain(): ValidatorResult {
+    this.validator.addSchema(
+      htmlProJsonFileSchema, "/HtmlProJsonFileSchema"
+    );
+    return this.validator.validate(
+      this.htmlproDomain, htmlProJsonFileSchema
+    );
   }
 }
