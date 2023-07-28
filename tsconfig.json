@@ -62,6 +62,9 @@
       ],
       "@lib/program-step": [
         "projects/libs/program-step/src/index.ts"
+      ],
+      "@lib/htmlpro-workspace": [
+        "projects/libs/htmlpro/htmlpro-workspace/src/index.ts"
       ]
     }
   },

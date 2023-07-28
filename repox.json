@@ -180,6 +180,13 @@
       "path": "projects/libs/components/footer",
       "scheme": "@blank",
       "build": {}
+    },
+    "htmlpro-workspace": {
+      "name": "htmlpro-workspace",
+      "type": "lib",
+      "path": "projects/libs/htmlpro/htmlpro-workspace",
+      "scheme": "@lib/ts",
+      "build": {}
     }
   }
 }
