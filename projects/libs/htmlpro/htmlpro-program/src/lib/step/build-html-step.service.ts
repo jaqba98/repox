@@ -10,15 +10,12 @@ import {
 } from "@lib/htmlpro-domain";
 import {
   AllProgramInstalledService,
+  FileExistAppService,
   GoToProjectRootAppService
 } from "@lib/program-step";
 import {
-  BuildHtmlAppService
-} from "../app-service/build-html-app.service";
-import {
   LoadHtmlproDomainAppService
 } from "../app-service/load-htmlpro-domain-app.service";
-import { HtmlproDomainStoreService } from "@lib/htmlpro-workspace";
 
 @singleton()
 /**
@@ -31,8 +28,9 @@ export class BuildHtmlStepService {
     private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadHtmlproDomain: LoadHtmlproDomainAppService,
-    private readonly buildHtml: BuildHtmlAppService,
-    private readonly htmlproDomainStore: HtmlproDomainStoreService
+    private readonly fileExist: FileExistAppService,
+    // private readonly buildHtml: BuildHtmlAppService,
+    // private readonly htmlproDomainStore: HtmlproDomainStoreService
   ) {
   }
 
@@ -45,8 +43,8 @@ export class BuildHtmlStepService {
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadHtmlproDomain.run()) return;
-    // todo: I am here
-    // const { inputPath, outputPath } = commandModel;
+    const { inputPath, outputPath } = commandModel;
+    if (!this.fileExist.run(inputPath)) return;
     // console.log(this.htmlproDomainStore.getDomain());
     // if (!this.buildHtml.run(inputPath, outputPath)) return;
     this.newline.writeNewline();
