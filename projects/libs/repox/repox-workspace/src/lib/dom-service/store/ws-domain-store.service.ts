@@ -101,7 +101,7 @@ export class WsDomainStoreService {
       path: projectPath,
       scheme: projectScheme,
       build: this.getProjectBuild(
-        projectScheme, projectPath, projectName
+        projectType, projectScheme, projectPath, projectName
       ),
       alias: this.getProjectAlias(projectName, projectScheme),
       indexPath: this.getProjectIndexPath(projectScheme, projectPath),
@@ -110,10 +110,18 @@ export class WsDomainStoreService {
   }
 
   private getProjectBuild(
+    projectType: ProjectTypeEnum,
     projectScheme: ProjectSchemeEnum,
     projectPath: string,
     projectName: string
   ): WsProjectBuildDomainModel {
+    if (projectType !== ProjectTypeEnum.app) {
+      return {
+        output: EMPTY_STRING,
+        main: EMPTY_STRING,
+        assets: []
+      };
+    }
     switch (projectScheme) {
       case ProjectSchemeEnum.blank:
         return {

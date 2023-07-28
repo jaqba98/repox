@@ -173,6 +173,13 @@
       "path": "projects/libs/program-step",
       "scheme": "@lib/ts",
       "build": {}
+    },
+    "footer": {
+      "name": "footer",
+      "type": "lib",
+      "path": "projects/libs/components/footer",
+      "scheme": "@blank",
+      "build": {}
     }
   }
 }

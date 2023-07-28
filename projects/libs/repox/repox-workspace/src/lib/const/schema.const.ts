@@ -40,6 +40,9 @@ export const repoxJsonFileSchema: Schema = {
         },
         if: {
           properties: {
+            type: {
+              const: "app"
+            },
             scheme: {
               const: "@blank"
             }
