@@ -1,11 +1,39 @@
 {
   "components": {
+    "@component/head": {
+      "alias": "@component/head",
+      "templateUrl": "projects/libs/components/head/src/head.html",
+      "styleUrls": []
+    },
+    "@component/nav": {
+      "alias": "@component/nav",
+      "templateUrl": "projects/libs/components/nav/src/nav.html",
+      "styleUrls": []
+    },
+    "@component/header": {
+      "alias": "@component/header",
+      "templateUrl": "projects/libs/components/header/src/header.html",
+      "styleUrls": []
+    },
+    "@component/statistics": {
+      "alias": "@component/statistics",
+      "templateUrl": "projects/libs/components/statistics/src/statistics.html",
+      "styleUrls": []
+    },
+    "@component/what-is": {
+      "alias": "@component/what-is",
+      "templateUrl": "projects/libs/components/what-is/src/what-is.html",
+      "styleUrls": []
+    },
+    "@component/support": {
+      "alias": "@component/support",
+      "templateUrl": "projects/libs/components/support/src/support.html",
+      "styleUrls": []
+    },
     "@component/footer": {
       "alias": "@component/footer",
       "templateUrl": "projects/libs/components/footer/src/footer.html",
-      "styleUrls": [
-        "projects/libs/components/footer/src/footer.css"
-      ]
+      "styleUrls": []
     }
   }
 }

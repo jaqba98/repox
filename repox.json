@@ -187,6 +187,48 @@
       "path": "projects/libs/htmlpro/htmlpro-workspace",
       "scheme": "@lib/ts",
       "build": {}
+    },
+    "head": {
+      "name": "head",
+      "type": "lib",
+      "path": "projects/libs/components/head",
+      "scheme": "@blank",
+      "build": {}
+    },
+    "nav": {
+      "name": "nav",
+      "type": "lib",
+      "path": "projects/libs/components/nav",
+      "scheme": "@blank",
+      "build": {}
+    },
+    "header": {
+      "name": "header",
+      "type": "lib",
+      "path": "projects/libs/components/header",
+      "scheme": "@blank",
+      "build": {}
+    },
+    "statistics": {
+      "name": "statistics",
+      "type": "lib",
+      "path": "projects/libs/components/statistics",
+      "scheme": "@blank",
+      "build": {}
+    },
+    "what-is": {
+      "name": "what-is",
+      "type": "lib",
+      "path": "projects/libs/components/what-is",
+      "scheme": "@blank",
+      "build": {}
+    },
+    "support": {
+      "name": "support",
+      "type": "lib",
+      "path": "projects/libs/components/support",
+      "scheme": "@blank",
+      "build": {}
     }
   }
 }
