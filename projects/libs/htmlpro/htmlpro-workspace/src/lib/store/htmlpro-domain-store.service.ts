@@ -4,6 +4,7 @@ import { HtmlproDomainModel } from "../model/htmlpro-domain.model";
 import { HtmlproFileEnum } from "../enum/htmlpro-file.enum";
 import { Validator, ValidatorResult } from "jsonschema";
 import { htmlProJsonFileSchema } from "../const/schema.const";
+import { WsDomainModel } from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -31,5 +32,12 @@ export class HtmlproDomainStoreService {
     return this.validator.validate(
       this.htmlproDomain, htmlProJsonFileSchema
     );
+  }
+
+  getHtmlProDomain(): HtmlproDomainModel {
+    if (this.htmlproDomain === undefined) {
+      throw new Error("The store is undefined!");
+    }
+    return this.htmlproDomain;
   }
 }

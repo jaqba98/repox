@@ -16,6 +16,9 @@ import {
 import {
   LoadHtmlproDomainAppService
 } from "../app-service/load-htmlpro-domain-app.service";
+import {
+  BuildHtmlAppService
+} from "../app-service/build-html-app.service";
 
 @singleton()
 /**
@@ -29,8 +32,7 @@ export class BuildHtmlStepService {
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadHtmlproDomain: LoadHtmlproDomainAppService,
     private readonly fileExist: FileExistAppService,
-    // private readonly buildHtml: BuildHtmlAppService,
-    // private readonly htmlproDomainStore: HtmlproDomainStoreService
+    private readonly buildHtml: BuildHtmlAppService
   ) {
   }
 
@@ -45,8 +47,7 @@ export class BuildHtmlStepService {
     if (!this.loadHtmlproDomain.run()) return;
     const { inputPath, outputPath } = commandModel;
     if (!this.fileExist.run(inputPath)) return;
-    // console.log(this.htmlproDomainStore.getDomain());
-    // if (!this.buildHtml.run(inputPath, outputPath)) return;
+    if (!this.buildHtml.run(inputPath, outputPath)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
       "Html file builded successfully!"

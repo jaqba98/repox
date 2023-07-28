@@ -2,17 +2,23 @@ import { singleton } from "tsyringe";
 import { FileUtilsService } from "@lib/utils";
 import { Parser } from "htmlparser2";
 import { EMPTY_STRING } from "@lib/const";
+import { HtmlproDomainStoreService } from "@lib/htmlpro-workspace";
 
 @singleton()
 /**
  * The app service is responsible for build html file.
  */
 export class BuildHtmlAppService {
-  constructor(private readonly fileUtils: FileUtilsService) {
+  constructor(
+    private readonly fileUtils: FileUtilsService,
+    private readonly htmlproDomainStore: HtmlproDomainStoreService
+  ) {
   }
 
-  // todo: refactor the method
   run(inputPath: string, outputPath: string): boolean {
+    const htmlProDomain = this.htmlproDomainStore.getHtmlProDomain();
+    console.log(htmlProDomain);
+    // todo: I am here
     const htmlResultFile = this.processTheHtmlFile(inputPath);
     this.fileUtils.writeTextFile(outputPath, htmlResultFile);
     return true;
