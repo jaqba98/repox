@@ -4,7 +4,6 @@ import { HtmlproDomainModel } from "../model/htmlpro-domain.model";
 import { HtmlproFileEnum } from "../enum/htmlpro-file.enum";
 import { Validator, ValidatorResult } from "jsonschema";
 import { htmlProJsonFileSchema } from "../const/schema.const";
-import { WsDomainModel } from "@lib/repox-workspace";
 
 @singleton()
 /**

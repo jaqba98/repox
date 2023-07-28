@@ -1,10 +1,6 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
-  WorkspaceFileEnum,
-  WsDomainStoreService
-} from "@lib/repox-workspace";
-import {
   HtmlproDomainStoreService,
   HtmlproFileEnum
 } from "@lib/htmlpro-workspace";
