@@ -16,6 +16,7 @@ import { PathUtilsService } from "@lib/utils";
 import {
   LoadHtmlproDomainAppService
 } from "../app-service/load-htmlpro-domain-app.service";
+import { HtmlproDomainStoreService } from "@lib/htmlpro-workspace";
 
 @singleton()
 /**
@@ -28,7 +29,8 @@ export class BuildHtmlStepService {
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly pathUtils: PathUtilsService,
     private readonly loadHtmlproDomain: LoadHtmlproDomainAppService,
-    private readonly buildHtml: BuildHtmlAppService
+    private readonly buildHtml: BuildHtmlAppService,
+    private readonly htmlproDomainStore: HtmlproDomainStoreService
   ) {
   }
 
@@ -41,6 +43,7 @@ export class BuildHtmlStepService {
     const { inputPath, outputPath } = commandModel;
     if (!this.pathUtils.existPath(inputPath)) return;
     if (!this.loadHtmlproDomain.run()) return;
+    console.log(this.htmlproDomainStore.getDomain());
     if (!this.buildHtml.run(inputPath, outputPath)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(

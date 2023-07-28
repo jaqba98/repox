@@ -18,4 +18,11 @@ export class HtmlproDomainStoreService {
     this.htmlproDomain = this.fileUtils
       .readJsonFile<HtmlproDomainModel>(HtmlproFileEnum.htmlproJson);
   }
+
+  getDomain(): HtmlproDomainModel {
+    if (this.htmlproDomain === undefined) {
+      throw new Error("The store is undefined!");
+    }
+    return this.htmlproDomain;
+  }
 }
