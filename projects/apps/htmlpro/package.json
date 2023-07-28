@@ -1,6 +1,6 @@
 {
   "name": "htmlpro",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "",
   "main": "./apps/htmlpro/src/main.js",
   "bin": "./apps/htmlpro/src/main.js",
