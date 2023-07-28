@@ -21,36 +21,42 @@ export class BuildHtmlAppService {
     return true;
   }
 
+  // todo: refactor the method
   private processTheHtmlFile(filePath: string): string {
-    // todo: I am here
     const htmlProDomain = this.htmlproDomainStore.getHtmlProDomain();
-    console.log(htmlProDomain);
     const htmlFileContent = this.fileUtils.readTextFile(filePath);
     let htmlFileResult = EMPTY_STRING;
-    let currentTag = EMPTY_STRING;
+    let dataFrom = EMPTY_STRING;
     const parser = new Parser({
-      onopentag: (name, attributes) => {
-        currentTag = name;
-        if (name === "import" && attributes.from !== EMPTY_STRING) {
-          htmlFileResult += this.processTheHtmlFile(attributes.from);
+      onopentag: (name, attributes): void => {
+        dataFrom = attributes["data-from"] ?? EMPTY_STRING;
+        if (dataFrom !== EMPTY_STRING) {
+          const component = Object.values(htmlProDomain.components)
+            .find(component => component.alias === dataFrom)
+          if (component === undefined) {
+            throw new Error(`Not found ${dataFrom} component`);
+          }
+          htmlFileResult += this.processTheHtmlFile(
+            component.templateUrl
+          );
         } else {
           htmlFileResult += `<${name}`;
           for (const attr in attributes) {
             htmlFileResult += ` ${attr}="${attributes[attr]}"`;
           }
-          htmlFileResult += '>';
+          htmlFileResult += ">";
         }
       },
-      ontext: (text) => {
-        if (currentTag !== "import") {
+      ontext: (text): void => {
+        if (dataFrom === EMPTY_STRING) {
           htmlFileResult += text;
         }
       },
-      onclosetag: (name) => {
-        if (currentTag !== "import") {
+      onclosetag: (name): void => {
+        if (dataFrom === EMPTY_STRING) {
           htmlFileResult += `</${name}>`;
         } else {
-          currentTag = "";
+          dataFrom = EMPTY_STRING;
         }
       }
     });

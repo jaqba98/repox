@@ -1,6 +1,6 @@
 {
   "components": {
-    "footer": {
+    "@component/footer": {
       "alias": "@component/footer",
       "templateUrl": "projects/libs/components/footer/src/footer.html",
       "styleUrls": [
