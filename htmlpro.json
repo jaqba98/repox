@@ -1,0 +1,11 @@
+{
+  "components": {
+    "footer": {
+      "alias": "@component/footer",
+      "templateUrl": "projects/libs/components/footer/src/footer.html",
+      "styleUrls": [
+        "projects/libs/components/footer/src/footer.css"
+      ]
+    }
+  }
+}
