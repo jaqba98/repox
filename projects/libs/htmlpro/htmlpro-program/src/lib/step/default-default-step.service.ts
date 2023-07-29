@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import { DisplayVersionAppService } from "@lib/program-step";
 import {
-  DefaultDefaultRepoxProgramModel,
-  EmptyRepoxCommandModel
-} from "@lib/repox-domain";
-import { REPOX_VERSION } from "@lib/repox-const";
+  DefaultDefaultHtmlproProgramModel,
+  EmptyHtmlproCommandModel
+} from "@lib/htmlpro-domain";
+import { HTMLPRO_VERSION } from "@lib/htmlpro-const";
 
 @singleton()
 /**
@@ -17,12 +17,12 @@ export class DefaultDefaultStepService {
   }
 
   runSteps(
-    programModel: DefaultDefaultRepoxProgramModel,
-    commandModel: EmptyRepoxCommandModel
+    programModel: DefaultDefaultHtmlproProgramModel,
+    commandModel: EmptyHtmlproCommandModel
   ): void {
     const { showVersion } = programModel;
     if (showVersion) {
-      this.displayVersion.displayRepoxVersion(REPOX_VERSION);
+      this.displayVersion.displayRepoxVersion(HTMLPRO_VERSION);
     }
   }
 }
