@@ -25,7 +25,7 @@ export class HtmlproBuildParamModelService {
     return {};
   }
 
-  defauldProgram(): DefaultDefaultHtmlproProgramModel {
+  defaultProgram(): DefaultDefaultHtmlproProgramModel {
     return {
       showVersion: this.paramDomain.getProgramBooleanValue(
         HtmlproArgumentEnum.version

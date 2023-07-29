@@ -18,17 +18,17 @@ export class HtmlproGetParamDepService {
       commands: {
         [HtmlproCommandEnum.default]: {
           command: HtmlproCommandEnum.default,
-          args: {
-            [HtmlproArgumentEnum.version]: {
-              name: HtmlproArgumentEnum.version,
-              values: [],
-              valueMode: "empty",
-              required: false
-            }
-          }
+          args: {}
         }
       },
-      args: {}
+      args: {
+        [HtmlproArgumentEnum.version]: {
+          name: HtmlproArgumentEnum.version,
+          values: [],
+          valueMode: "empty",
+          required: false
+        }
+      }
     };
   }
 

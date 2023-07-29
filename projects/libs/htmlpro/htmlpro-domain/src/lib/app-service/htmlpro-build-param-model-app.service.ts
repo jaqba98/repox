@@ -25,7 +25,7 @@ export class HtmlproBuildParamModelAppService {
   buildProgramParamModel(): THtmlproProgramModel {
     const programName = this.paramDom.getParamDomain().program.name;
     if (programName === HtmlproProgramEnum.default) {
-      return this.htmlproBuildParam.emptyProgram();
+      return this.htmlproBuildParam.defaultProgram();
     }
     return this.htmlproBuildParam.emptyProgram();
   }
