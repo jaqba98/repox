@@ -2,6 +2,7 @@ import { singleton } from "tsyringe";
 import { ParamDomainAppService } from "@lib/param-domain";
 import {
   BuildHtmlHtmlproCommandModel,
+  DefaultDefaultHtmlproProgramModel,
   EmptyHtmlproCommandModel,
   EmptyHtmlproProgramModel,
   HtmlproArgumentEnum
@@ -22,6 +23,14 @@ export class HtmlproBuildParamModelService {
 
   emptyCommand(): EmptyHtmlproCommandModel {
     return {};
+  }
+
+  defauldProgram(): DefaultDefaultHtmlproProgramModel {
+    return {
+      showVersion: this.paramDomain.getProgramBooleanValue(
+        HtmlproArgumentEnum.version
+      )
+    };
   }
 
   buildHtmlCommand(): BuildHtmlHtmlproCommandModel {

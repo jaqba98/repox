@@ -4,11 +4,13 @@
  */
 
 export enum HtmlproArgumentEnum {
+  version = "version",
   input = "input",
   output = "output"
 }
 
 export enum HtmlproAliasEnum {
+  version = "v",
   input = "i",
   output = "o"
 }

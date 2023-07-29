@@ -1,5 +1,9 @@
 import { singleton } from "tsyringe";
 import { RunProgramModel } from "@lib/model";
+import {
+  DefaultDefaultHtmlproProgramModel,
+  EmptyHtmlproCommandModel
+} from "@lib/htmlpro-domain";
 
 @singleton()
 /**
@@ -7,5 +11,9 @@ import { RunProgramModel } from "@lib/model";
  */
 export class DefaultDefaultProgramService implements RunProgramModel {
   runProgram(programDomain: unknown, commandDomain: unknown): void {
+    const programModel = <DefaultDefaultHtmlproProgramModel>
+      programDomain;
+    const commandModel = <EmptyHtmlproCommandModel>commandDomain;
+    console.log(programModel.showVersion);
   }
 }

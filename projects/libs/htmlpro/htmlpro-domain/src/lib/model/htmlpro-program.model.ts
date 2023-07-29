@@ -5,4 +5,8 @@
 export interface EmptyHtmlproProgramModel {
 }
 
+export interface DefaultDefaultHtmlproProgramModel {
+  showVersion: boolean;
+}
+
 export type THtmlproProgramModel = EmptyHtmlproProgramModel;
