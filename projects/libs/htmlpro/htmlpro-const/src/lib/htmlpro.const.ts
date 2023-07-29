@@ -3,4 +3,4 @@
  */
 
 export const HTMLPRO_LOGO: string = "HTMLPRO";
-export const HTMLPRO_VERSION: string = "1.0.20";
+export const HTMLPRO_VERSION: string = "1.1.0";
