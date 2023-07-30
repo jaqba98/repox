@@ -1,11 +1,11 @@
 import { singleton } from "tsyringe";
 import { ParamDomainAppService } from "@lib/param-domain";
 import {
-  BuildHtmlHtmlproCommandModel,
-  DefaultDefaultHtmlproProgramModel,
-  EmptyHtmlproCommandModel,
-  EmptyHtmlproProgramModel,
-  HtmlproArgumentEnum
+  BuildHtmlHtmlProCommandModel,
+  DefaultDefaultHtmlProProgramModel,
+  EmptyHtmlProCommandModel,
+  EmptyHtmlProProgramModel,
+  HtmlProArgumentEnum
 } from "@lib/htmlpro-domain";
 
 @singleton()
@@ -13,33 +13,33 @@ import {
  * The service is responsible for building correct and complete
  * model for all kinds of programs and commends.
  */
-export class HtmlproBuildParamModelService {
+export class HtmlProBuildParamModelService {
   constructor(private readonly paramDomain: ParamDomainAppService) {
   }
 
-  emptyProgram(): EmptyHtmlproProgramModel {
+  emptyProgram(): EmptyHtmlProProgramModel {
     return {};
   }
 
-  emptyCommand(): EmptyHtmlproCommandModel {
+  emptyCommand(): EmptyHtmlProCommandModel {
     return {};
   }
 
-  defaultProgram(): DefaultDefaultHtmlproProgramModel {
+  defaultProgram(): DefaultDefaultHtmlProProgramModel {
     return {
       showVersion: this.paramDomain.getProgramBooleanValue(
-        HtmlproArgumentEnum.version
+        HtmlProArgumentEnum.version
       )
     };
   }
 
-  buildHtmlCommand(): BuildHtmlHtmlproCommandModel {
+  buildHtmlCommand(): BuildHtmlHtmlProCommandModel {
     return {
       inputPath: this.paramDomain.getCommandStringValue(
-        HtmlproArgumentEnum.input
+        HtmlProArgumentEnum.input
       ),
       outputPath: this.paramDomain.getCommandStringValue(
-        HtmlproArgumentEnum.output
+        HtmlProArgumentEnum.output
       )
     };
   }

@@ -1,6 +1,6 @@
 /**
- * The file contains all constants of htmlpro project.
+ * The file contains all constants of HtmlPro project.
  */
 
-export const HTMLPRO_LOGO: string = "HTMLPRO";
-export const HTMLPRO_VERSION: string = "1.1.0";
+export const HTML_PRO_LOGO: string = "HTMLPRO";
+export const HTML_PRO_VERSION: string = "1.1.0";

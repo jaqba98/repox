@@ -2,8 +2,8 @@ import { singleton } from "tsyringe";
 import { ParamDomainDepModel } from "@lib/param-domain";
 import { BaseGetParamDepModel } from "@lib/model";
 import {
-  HtmlproGetParamDepService
-} from "../dom-service/htmlpro-get-param-dep.service";
+  HtmlProGetParamDepService
+} from "../dom-service/html-pro-get-param-dep.service";
 import { HtmlProProgramEnum } from "../enum/html-pro-program.enum";
 
 @singleton()
@@ -11,19 +11,19 @@ import { HtmlProProgramEnum } from "../enum/html-pro-program.enum";
  * The app service is responsible for getting dependency between
  * programs, commands, and arguments.
  */
-export class HtmlproGetParamDepAppService
+export class HtmlProGetParamDepAppService
   implements BaseGetParamDepModel {
   constructor(
-    private readonly htmlproGetParamDep: HtmlproGetParamDepService
+    private readonly htmlProGetParamDep: HtmlProGetParamDepService
   ) {
   }
 
   getDependency(program: string): ParamDomainDepModel {
     switch (program) {
       case HtmlProProgramEnum.default:
-        return this.htmlproGetParamDep.getProgramDefault();
+        return this.htmlProGetParamDep.getProgramDefault();
       case HtmlProProgramEnum.build:
-        return this.htmlproGetParamDep.getProgramBuild();
+        return this.htmlProGetParamDep.getProgramBuild();
       default:
         throw new Error(`No dependencies for ${program} program!`);
     }

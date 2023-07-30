@@ -1,5 +1,5 @@
 /**
- * The enum contains all programs available in the HTMLPro program.
+ * The enum contains all programs available in the HtmlPro program.
  */
 
 export enum HtmlProProgramEnum {

@@ -1,12 +1,13 @@
 /**
- * The program models for htmlpro program.
+ * The program models for HtmlPro program.
  */
 
-export interface EmptyHtmlproProgramModel {
+export interface EmptyHtmlProProgramModel {
 }
 
-export interface DefaultDefaultHtmlproProgramModel {
+export interface DefaultDefaultHtmlProProgramModel {
   showVersion: boolean;
 }
 
-export type THtmlproProgramModel = EmptyHtmlproProgramModel;
+export type THtmlProProgramModel = EmptyHtmlProProgramModel |
+  DefaultDefaultHtmlProProgramModel;

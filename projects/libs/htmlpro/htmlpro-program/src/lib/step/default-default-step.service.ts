@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import { DisplayVersionAppService } from "@lib/program-step";
 import {
-  DefaultDefaultHtmlproProgramModel,
-  EmptyHtmlproCommandModel
+  DefaultDefaultHtmlProProgramModel,
+  EmptyHtmlProCommandModel
 } from "@lib/htmlpro-domain";
-import { HTMLPRO_VERSION } from "@lib/htmlpro-const";
+import { HTML_PRO_VERSION } from "@lib/htmlpro-const";
 
 @singleton()
 /**
@@ -17,12 +17,12 @@ export class DefaultDefaultStepService {
   }
 
   runSteps(
-    programModel: DefaultDefaultHtmlproProgramModel,
-    commandModel: EmptyHtmlproCommandModel
+    programModel: DefaultDefaultHtmlProProgramModel,
+    _commandModel: EmptyHtmlProCommandModel
   ): void {
     const { showVersion } = programModel;
     if (showVersion) {
-      this.displayVersion.displayRepoxVersion(HTMLPRO_VERSION);
+      this.displayVersion.displayRepoxVersion(HTML_PRO_VERSION);
     }
   }
 }

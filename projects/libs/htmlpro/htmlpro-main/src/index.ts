@@ -1,1 +1,1 @@
-export * from "./lib/htmlpro-main.service";
+export * from "./lib/html-pro-main.service";

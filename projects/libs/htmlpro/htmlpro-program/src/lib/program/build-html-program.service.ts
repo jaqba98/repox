@@ -4,8 +4,8 @@ import {
   BuildHtmlStepService
 } from "../step/build-html-step.service";
 import {
-  BuildHtmlHtmlproCommandModel,
-  EmptyHtmlproProgramModel
+  BuildHtmlHtmlProCommandModel,
+  EmptyHtmlProProgramModel
 } from "@lib/htmlpro-domain";
 
 @singleton()
@@ -17,8 +17,8 @@ export class BuildHtmlProgramService implements RunProgramModel {
   }
 
   runProgram(programDomain: unknown, commandDomain: unknown): void {
-    const programModel = <EmptyHtmlproProgramModel>programDomain;
-    const commandModel = <BuildHtmlHtmlproCommandModel>
+    const programModel = <EmptyHtmlProProgramModel>programDomain;
+    const commandModel = <BuildHtmlHtmlProCommandModel>
       commandDomain;
     this.step.runSteps(programModel, commandModel);
   }

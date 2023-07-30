@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
 import { ParamDomainDepModel } from "@lib/param-domain";
 import {
-  HtmlproArgumentEnum,
-  HtmlproCommandEnum,
+  HtmlProArgumentEnum,
+  HtmlProCommandEnum,
   HtmlProProgramEnum
 } from "@lib/htmlpro-domain";
 
@@ -11,19 +11,19 @@ import {
  * The service is responsible for getting dependency
  * for given program.
  */
-export class HtmlproGetParamDepService {
+export class HtmlProGetParamDepService {
   getProgramDefault(): ParamDomainDepModel {
     return {
       program: HtmlProProgramEnum.default,
       commands: {
-        [HtmlproCommandEnum.default]: {
-          command: HtmlproCommandEnum.default,
+        [HtmlProCommandEnum.default]: {
+          command: HtmlProCommandEnum.default,
           args: {}
         }
       },
       args: {
-        [HtmlproArgumentEnum.version]: {
-          name: HtmlproArgumentEnum.version,
+        [HtmlProArgumentEnum.version]: {
+          name: HtmlProArgumentEnum.version,
           values: [],
           valueMode: "empty",
           required: false
@@ -36,21 +36,21 @@ export class HtmlproGetParamDepService {
     return {
       program: HtmlProProgramEnum.build,
       commands: {
-        [HtmlproCommandEnum.default]: {
-          command: HtmlproCommandEnum.default,
+        [HtmlProCommandEnum.default]: {
+          command: HtmlProCommandEnum.default,
           args: {}
         },
-        [HtmlproCommandEnum.html]: {
-          command: HtmlproCommandEnum.html,
+        [HtmlProCommandEnum.html]: {
+          command: HtmlProCommandEnum.html,
           args: {
-            [HtmlproArgumentEnum.input]: {
-              name: HtmlproArgumentEnum.input,
+            [HtmlProArgumentEnum.input]: {
+              name: HtmlProArgumentEnum.input,
               values: [],
               valueMode: "single",
               required: true
             },
-            [HtmlproArgumentEnum.output]: {
-              name: HtmlproArgumentEnum.output,
+            [HtmlProArgumentEnum.output]: {
+              name: HtmlProArgumentEnum.output,
               values: [],
               valueMode: "single",
               required: true

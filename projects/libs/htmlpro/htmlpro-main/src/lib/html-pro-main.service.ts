@@ -10,32 +10,32 @@ import {
   ParamDomainAppService
 } from "@lib/param-domain";
 import {
-  HtmlproAliasEnum,
-  HtmlproArgumentEnum,
-  HtmlproBuildParamModelAppService,
-  HtmlproCommandAliasEnum,
-  HtmlproCommandEnum,
-  HtmlproGetParamDepAppService,
-  HtmlproLaunchProgramAppService,
+  HtmlProAliasEnum,
+  HtmlProArgumentEnum,
+  HtmlProBuildParamModelAppService,
+  HtmlProCommandAliasEnum,
+  HtmlProCommandEnum,
+  HtmlProGetParamDepAppService,
+  HtmlProLaunchProgramAppService,
   HtmlProProgramAliasEnum,
   HtmlProProgramEnum
 } from "@lib/htmlpro-domain";
 import { LauncherAppService } from "@lib/launcher";
-import { HTMLPRO_LOGO } from "@lib/htmlpro-const";
+import { HTML_PRO_LOGO } from "@lib/htmlpro-const";
 
 @singleton()
 /**
- * The main service is responsible for run htmlpro program.
+ * The main service is responsible for run HtmlPro program.
  */
-export class HtmlproMainService {
+export class HtmlProMainService {
   constructor(
     private readonly buildParamDto: BuildParamDtoAppService,
     private readonly getParamDtoData: GetParamDtoDataAppService,
     private readonly paramErrorMessage: ParamErrorMessageAppService,
     private readonly buildParamDomain: BuildParamDomainAppService,
     private readonly paramDomain: ParamDomainAppService,
-    private readonly launchProgram: HtmlproLaunchProgramAppService,
-    private readonly htmlproBuild: HtmlproBuildParamModelAppService,
+    private readonly launchProgram: HtmlProLaunchProgramAppService,
+    private readonly htmlProBuild: HtmlProBuildParamModelAppService,
     private readonly launcher: LauncherAppService
   ) {
   }
@@ -50,18 +50,18 @@ export class HtmlproMainService {
         paramDtoValidation.baseValues,
         paramDtoValidation.errors,
         paramDtoValidation.tips,
-        HTMLPRO_LOGO
+        HTML_PRO_LOGO
       );
       return;
     }
     this.buildParamDomain.build(
       HtmlProProgramEnum,
       HtmlProProgramAliasEnum,
-      HtmlproCommandEnum,
-      HtmlproCommandAliasEnum,
-      HtmlproArgumentEnum,
-      HtmlproAliasEnum,
-      container.resolve(HtmlproGetParamDepAppService)
+      HtmlProCommandEnum,
+      HtmlProCommandAliasEnum,
+      HtmlProArgumentEnum,
+      HtmlProAliasEnum,
+      container.resolve(HtmlProGetParamDepAppService)
     );
     const paramDomainValidation = this.paramDomain
       .getParamDomainValidation();
@@ -71,17 +71,17 @@ export class HtmlproMainService {
         paramDtoValidation.baseValues,
         paramDomainValidation.errors,
         paramDomainValidation.tips,
-        HTMLPRO_LOGO
+        HTML_PRO_LOGO
       );
       return;
     }
     const programs = this.launchProgram.getPrograms();
-    const programDomain = this.htmlproBuild.buildProgramParamModel();
-    const commandDomain = this.htmlproBuild.buildCommandParamModel();
+    const programDomain = this.htmlProBuild.buildProgramParamModel();
+    const commandDomain = this.htmlProBuild.buildCommandParamModel();
     this.launcher.launchProgram(programs).runProgram(
       programDomain, commandDomain
     );
   }
 }
 
-container.resolve(HtmlproMainService).run();
+container.resolve(HtmlProMainService).run();

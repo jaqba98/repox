@@ -1,43 +1,43 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
-  HtmlproDomainStoreService,
-  HtmlproFileEnum
+  HtmlProDomainStoreService,
+  HtmlProFileEnum
 } from "@lib/htmlpro-workspace";
 import { PathUtilsService } from "@lib/utils";
 
 @singleton()
 /**
- * The app service is responsible for load htmlpro domain model.
+ * The app service is responsible for load HtmlPro domain model.
  */
-export class LoadHtmlproDomainAppService {
+export class LoadHtmlProDomainAppService {
   constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly pathUtils: PathUtilsService,
-    private readonly htmlproDomainStore: HtmlproDomainStoreService
+    private readonly htmlProDomainStore: HtmlProDomainStoreService
   ) {
   }
 
   run(): boolean {
     this.simpleMessage.writePlain("Load HTMLPRO domain model");
     // Check if workspace files exist
-    if (this.pathUtils.notExistPath(HtmlproFileEnum.htmlproJson)) {
+    if (this.pathUtils.notExistPath(HtmlProFileEnum.htmlProJson)) {
       this.simpleMessage.writeError("Incorrect workspace structure");
       this.simpleMessage.writeError(
-        `The ${HtmlproFileEnum.htmlproJson} file does not exist`
+        `The ${HtmlProFileEnum.htmlProJson} file does not exist`
       );
       return false;
     }
     // Load the workspace dto model
-    this.htmlproDomainStore.loadHtmlproDomain();
+    this.htmlProDomainStore.loadHtmlProDomain();
     // Verification the workspace dto model
-    const verifyHtmlproDomain = this.htmlproDomainStore
-      .verifyHtmlproDomain();
-    if (verifyHtmlproDomain.errors.length > 0) {
+    const verifyHtmlProDomain = this.htmlProDomainStore
+      .verifyHtmlProDomain();
+    if (verifyHtmlProDomain.errors.length > 0) {
       this.simpleMessage.writeError(
-        `Incorrect content of ${HtmlproFileEnum.htmlproJson} file`
+        `Incorrect content of ${HtmlProFileEnum.htmlProJson} file`
       );
-      verifyHtmlproDomain.errors.forEach(error => {
+      verifyHtmlProDomain.errors.forEach(error => {
         this.simpleMessage.writeError(error.toString());
       });
       return false;

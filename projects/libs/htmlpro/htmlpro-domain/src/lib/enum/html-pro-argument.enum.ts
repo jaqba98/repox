@@ -1,15 +1,15 @@
 /**
  * The enum contains all arguments and aliases available
- * in the htmlpro program.
+ * in the HtmlPro program.
  */
 
-export enum HtmlproArgumentEnum {
+export enum HtmlProArgumentEnum {
   version = "version",
   input = "input",
   output = "output"
 }
 
-export enum HtmlproAliasEnum {
+export enum HtmlProAliasEnum {
   version = "v",
   input = "i",
   output = "o"

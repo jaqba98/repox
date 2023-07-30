@@ -1,14 +1,14 @@
 /**
- * The command models for htmlpro program.
+ * The command models for HtmlPro program.
  */
 
-export interface EmptyHtmlproCommandModel {
+export interface EmptyHtmlProCommandModel {
 }
 
-export interface BuildHtmlHtmlproCommandModel {
+export interface BuildHtmlHtmlProCommandModel {
   inputPath: string;
   outputPath: string;
 }
 
-export type THtmlproCommandModel = EmptyHtmlproCommandModel |
-  BuildHtmlHtmlproCommandModel;
+export type THtmlProCommandModel = EmptyHtmlProCommandModel |
+  BuildHtmlHtmlProCommandModel;

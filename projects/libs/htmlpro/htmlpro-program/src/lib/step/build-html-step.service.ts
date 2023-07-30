@@ -3,10 +3,10 @@ import {
   NewlineAppService,
   SimpleMessageAppService
 } from "@lib/logger";
-import { HTMLPRO_LOGO } from "@lib/htmlpro-const";
+import { HTML_PRO_LOGO } from "@lib/htmlpro-const";
 import {
-  BuildHtmlHtmlproCommandModel,
-  EmptyHtmlproProgramModel
+  BuildHtmlHtmlProCommandModel,
+  EmptyHtmlProProgramModel
 } from "@lib/htmlpro-domain";
 import {
   AllProgramInstalledService,
@@ -14,8 +14,8 @@ import {
   GoToProjectRootAppService
 } from "@lib/program-step";
 import {
-  LoadHtmlproDomainAppService
-} from "../app-service/load-htmlpro-domain-app.service";
+  LoadHtmlProDomainAppService
+} from "../app-service/load-html-pro-domain-app.service";
 import {
   BuildHtmlAppService
 } from "../app-service/build-html-app.service";
@@ -30,27 +30,27 @@ export class BuildHtmlStepService {
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
-    private readonly loadHtmlproDomain: LoadHtmlproDomainAppService,
+    private readonly loadHtmlProDomain: LoadHtmlProDomainAppService,
     private readonly fileExist: FileExistAppService,
     private readonly buildHtml: BuildHtmlAppService
   ) {
   }
 
   runSteps(
-    programModel: EmptyHtmlproProgramModel,
-    commandModel: BuildHtmlHtmlproCommandModel
+    programModel: EmptyHtmlProProgramModel,
+    commandModel: BuildHtmlHtmlProCommandModel
   ): void {
-    this.simpleMessage.writeInfo("Build html", HTMLPRO_LOGO);
+    this.simpleMessage.writeInfo("Build html", HTML_PRO_LOGO);
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
-    if (!this.loadHtmlproDomain.run()) return;
+    if (!this.loadHtmlProDomain.run()) return;
     const { inputPath, outputPath } = commandModel;
     if (!this.fileExist.run(inputPath)) return;
     if (!this.buildHtml.run(inputPath, outputPath)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
-      "Html file builded successfully!"
+      "Html file built successfully!"
     );
   }
 }

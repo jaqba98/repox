@@ -1,2 +1,2 @@
-export * from "./lib/store/htmlpro-domain-store.service";
-export * from "./lib/enum/htmlpro-file.enum";
+export * from "./lib/store/html-pro-domain-store.service";
+export * from "./lib/enum/html-pro-file.enum";

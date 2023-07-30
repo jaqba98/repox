@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import { FileUtilsService } from "@lib/utils";
 import { Parser } from "htmlparser2";
 import { EMPTY_STRING } from "@lib/const";
-import { HtmlproDomainStoreService } from "@lib/htmlpro-workspace";
+import { HtmlProDomainStoreService } from "@lib/htmlpro-workspace";
 
 @singleton()
 /**
@@ -11,7 +11,7 @@ import { HtmlproDomainStoreService } from "@lib/htmlpro-workspace";
 export class BuildHtmlAppService {
   constructor(
     private readonly fileUtils: FileUtilsService,
-    private readonly htmlproDomainStore: HtmlproDomainStoreService
+    private readonly htmlProDomainStore: HtmlProDomainStoreService
   ) {
   }
 
@@ -23,7 +23,7 @@ export class BuildHtmlAppService {
 
   // todo: refactor the method
   private processTheHtmlFile(filePath: string): string {
-    const htmlProDomain = this.htmlproDomainStore.getHtmlProDomain();
+    const htmlProDomain = this.htmlProDomainStore.getHtmlProDomain();
     const htmlFileContent = this.fileUtils.readTextFile(filePath);
     let htmlFileResult = EMPTY_STRING;
     let dataFrom = EMPTY_STRING;
