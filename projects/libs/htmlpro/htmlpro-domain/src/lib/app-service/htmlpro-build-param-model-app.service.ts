@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import { ParamDomainAppService } from "@lib/param-domain";
 import {
   HtmlproCommandEnum,
-  HtmlproProgramEnum,
+  HtmlProProgramEnum,
   THtmlproCommandModel,
   THtmlproProgramModel
 } from "@lib/htmlpro-domain";
@@ -24,7 +24,7 @@ export class HtmlproBuildParamModelAppService {
 
   buildProgramParamModel(): THtmlproProgramModel {
     const programName = this.paramDom.getParamDomain().program.name;
-    if (programName === HtmlproProgramEnum.default) {
+    if (programName === HtmlProProgramEnum.default) {
       return this.htmlproBuildParam.defaultProgram();
     }
     return this.htmlproBuildParam.emptyProgram();
@@ -33,7 +33,7 @@ export class HtmlproBuildParamModelAppService {
   buildCommandParamModel(): THtmlproCommandModel {
     const programName = this.paramDom.getParamDomain().program.name;
     const commandName = this.paramDom.getParamDomain().command.name;
-    if (programName === HtmlproProgramEnum.build) {
+    if (programName === HtmlProProgramEnum.build) {
       if (commandName === HtmlproCommandEnum.html) {
         return this.htmlproBuildParam.buildHtmlCommand();
       }

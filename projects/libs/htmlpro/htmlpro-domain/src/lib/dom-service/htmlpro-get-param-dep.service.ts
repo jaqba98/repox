@@ -3,7 +3,7 @@ import { ParamDomainDepModel } from "@lib/param-domain";
 import {
   HtmlproArgumentEnum,
   HtmlproCommandEnum,
-  HtmlproProgramEnum
+  HtmlProProgramEnum
 } from "@lib/htmlpro-domain";
 
 @singleton()
@@ -14,7 +14,7 @@ import {
 export class HtmlproGetParamDepService {
   getProgramDefault(): ParamDomainDepModel {
     return {
-      program: HtmlproProgramEnum.default,
+      program: HtmlProProgramEnum.default,
       commands: {
         [HtmlproCommandEnum.default]: {
           command: HtmlproCommandEnum.default,
@@ -34,7 +34,7 @@ export class HtmlproGetParamDepService {
 
   getProgramBuild(): ParamDomainDepModel {
     return {
-      program: HtmlproProgramEnum.build,
+      program: HtmlProProgramEnum.build,
       commands: {
         [HtmlproCommandEnum.default]: {
           command: HtmlproCommandEnum.default,

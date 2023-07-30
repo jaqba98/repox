@@ -17,8 +17,8 @@ import {
   HtmlproCommandEnum,
   HtmlproGetParamDepAppService,
   HtmlproLaunchProgramAppService,
-  HtmlproProgramAliasEnum,
-  HtmlproProgramEnum
+  HtmlProProgramAliasEnum,
+  HtmlProProgramEnum
 } from "@lib/htmlpro-domain";
 import { LauncherAppService } from "@lib/launcher";
 import { HTMLPRO_LOGO } from "@lib/htmlpro-const";
@@ -55,8 +55,8 @@ export class HtmlproMainService {
       return;
     }
     this.buildParamDomain.build(
-      HtmlproProgramEnum,
-      HtmlproProgramAliasEnum,
+      HtmlProProgramEnum,
+      HtmlProProgramAliasEnum,
       HtmlproCommandEnum,
       HtmlproCommandAliasEnum,
       HtmlproArgumentEnum,

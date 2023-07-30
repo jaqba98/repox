@@ -1,6 +1,6 @@
 import { container, singleton } from "tsyringe";
 import { LauncherModel } from "@lib/launcher";
-import { HtmlproProgramEnum } from "../enum/htmlpro-program.enum";
+import { HtmlProProgramEnum } from "../enum/html-pro-program.enum";
 import { HtmlproCommandEnum } from "../enum/htmlpro-command.enum";
 import {
   BuildHtmlProgramService,
@@ -17,12 +17,12 @@ export class HtmlproLaunchProgramAppService {
     return {
       programs: [
         {
-          programName: HtmlproProgramEnum.default,
+          programName: HtmlProProgramEnum.default,
           commandName: HtmlproCommandEnum.default,
           service: container.resolve(DefaultDefaultProgramService)
         },
         {
-          programName: HtmlproProgramEnum.build,
+          programName: HtmlProProgramEnum.build,
           commandName: HtmlproCommandEnum.html,
           service: container.resolve(BuildHtmlProgramService)
         }

@@ -4,7 +4,7 @@ import { BaseGetParamDepModel } from "@lib/model";
 import {
   HtmlproGetParamDepService
 } from "../dom-service/htmlpro-get-param-dep.service";
-import { HtmlproProgramEnum } from "../enum/htmlpro-program.enum";
+import { HtmlProProgramEnum } from "../enum/html-pro-program.enum";
 
 @singleton()
 /**
@@ -20,9 +20,9 @@ export class HtmlproGetParamDepAppService
 
   getDependency(program: string): ParamDomainDepModel {
     switch (program) {
-      case HtmlproProgramEnum.default:
+      case HtmlProProgramEnum.default:
         return this.htmlproGetParamDep.getProgramDefault();
-      case HtmlproProgramEnum.build:
+      case HtmlProProgramEnum.build:
         return this.htmlproGetParamDep.getProgramBuild();
       default:
         throw new Error(`No dependencies for ${program} program!`);
