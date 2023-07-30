@@ -10,11 +10,7 @@
         "main": "projects/apps/repox/src/main.ts",
         "assets": [
           {
-            "input": "projects/apps/repox/doc/README.md",
-            "output": "dist/repox"
-          },
-          {
-            "input": "projects/apps/repox/doc/repox-logo.png",
+            "input": "projects/apps/repox/docs/README.md",
             "output": "dist/repox"
           },
           {
