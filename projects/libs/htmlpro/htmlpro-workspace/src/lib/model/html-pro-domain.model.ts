@@ -1,5 +1,5 @@
 /**
- * abc
+ * The domain model of HtmlPro program.
  */
 
 export interface HtmProComponentDomainModel {

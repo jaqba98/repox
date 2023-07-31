@@ -15,6 +15,11 @@ import {
 import {
   HtmlProConfigNotExistAppService
 } from "../app-service/html-pro-config-not-exist-app.service";
+import { FileUtilsService } from "@lib/utils";
+import {
+  CreateHtmlProFileAppService,
+  HtmlProFileEnum
+} from "@lib/htmlpro-workspace";
 
 @singleton()
 /**
@@ -26,7 +31,9 @@ export class InitDefaultStepService {
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
-    private readonly htmlProConfigNotExist: HtmlProConfigNotExistAppService
+    private readonly htmlProConfigNotExist: HtmlProConfigNotExistAppService,
+    private readonly fileUtils: FileUtilsService,
+    private readonly createHtmlProFile: CreateHtmlProFileAppService
   ) {
   }
 
@@ -40,5 +47,14 @@ export class InitDefaultStepService {
     if (!this.goToProjectRoot.run()) return;
     const { isForce } = programModel;
     if (!this.htmlProConfigNotExist.run(isForce)) return;
+    this.simpleMessage.writePlain("Generate the htmlpro.json file");
+    this.fileUtils.writeJsonFile(
+      HtmlProFileEnum.htmlProJson,
+      this.createHtmlProFile.buildDefaultHtmlProContentFile()
+    );
+    this.newline.writeNewline();
+    this.simpleMessage.writeSuccess(
+      "HTMLPRO initialized successfully!"
+    );
   }
 }
