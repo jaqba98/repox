@@ -25,12 +25,12 @@ export class HtmlProLaunchProgramAppService {
         {
           programName: HtmlProProgramEnum.init,
           commandName: HtmlProCommandEnum.default,
-          service: container.resolve(BuildHtmlProgramService)
+          service: container.resolve(InitDefaultProgramService)
         },
         {
           programName: HtmlProProgramEnum.build,
           commandName: HtmlProCommandEnum.html,
-          service: container.resolve(InitDefaultProgramService)
+          service: container.resolve(BuildHtmlProgramService)
         }
       ]
     };
