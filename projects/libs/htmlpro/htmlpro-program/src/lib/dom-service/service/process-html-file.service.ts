@@ -77,10 +77,12 @@ export class ProcessHtmlFileService {
     let htmlFileContent = this.fileUtils.readTextFile(inputPath);
     attributes
       .map(attribute => ({
-        key: `{{.*${attribute.key}.*}}`, value: attribute.value
+        regex: `{{\s*${attribute.key}\s*}}`, value: attribute.value
       }))
       .forEach(attribute => {
-        htmlFileContent.replaceAll(attribute.key, attribute.value)
+        htmlFileContent = htmlFileContent.replace(
+          new RegExp(attribute.regex, "g"), attribute.value
+        )
       });
     return htmlFileContent;
   }
