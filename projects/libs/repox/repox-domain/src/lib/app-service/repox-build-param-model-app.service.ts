@@ -27,6 +27,9 @@ export class RepoxBuildParamModelAppService {
     if (programName === RepoxProgramEnum.default) {
       return this.buildParamModel.defaultProgram();
     }
+    if (programName === RepoxProgramEnum.build) {
+      return this.buildParamModel.buildProjectProgram();
+    }
     return this.buildParamModel.emptyProgram();
   }
 

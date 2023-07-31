@@ -5,7 +5,7 @@ import {
 } from "../step/build-project-step.service";
 import {
   BuildProjectRepoxCommandModel,
-  EmptyRepoxProgramModel
+  BuildProjectRepoxProgramModel
 } from "@lib/repox-domain";
 
 @singleton()
@@ -19,7 +19,7 @@ export class BuildProjectProgramService implements RunProgramModel {
   }
 
   runProgram(programDomain: unknown, commandDomain: unknown): void {
-    const programModel = <EmptyRepoxProgramModel>programDomain;
+    const programModel = <BuildProjectRepoxProgramModel>programDomain;
     const commandModel = <BuildProjectRepoxCommandModel>
       commandDomain;
     this.step.runSteps(programModel, commandModel);

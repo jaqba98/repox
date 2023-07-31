@@ -9,5 +9,9 @@ export interface DefaultDefaultRepoxProgramModel {
   showVersion: boolean;
 }
 
+export interface BuildProjectRepoxProgramModel {
+  productionMode: boolean;
+}
+
 export type TRepoxProgramModel = EmptyRepoxProgramModel |
-  DefaultDefaultRepoxProgramModel;
+  DefaultDefaultRepoxProgramModel | BuildProjectRepoxProgramModel;

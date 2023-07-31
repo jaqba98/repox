@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  BuildProjectRepoxCommandModel,
+  BuildProjectRepoxCommandModel, BuildProjectRepoxProgramModel,
   DefaultDefaultRepoxProgramModel,
   EmptyRepoxCommandModel,
   EmptyRepoxProgramModel,
@@ -62,6 +62,14 @@ export class RepoxBuildParamModelService {
         ),
       projectPath: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.path
+      )
+    };
+  }
+
+  buildProjectProgram(): BuildProjectRepoxProgramModel {
+    return {
+      productionMode: this.paramDomain.getProgramBooleanValue(
+        RepoxArgumentEnum.production
       )
     };
   }

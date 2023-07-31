@@ -18,8 +18,8 @@ full support for multiple typescript projects.
     - [repox.json file](#repox-json-file)
 
 3) Other
-   - [List of programs](#list-of-programs)
-   - [List of commands](#list-of-commands)
+    - [List of programs](#list-of-programs)
+    - [List of commands](#list-of-commands)
 
 <br>
 
@@ -89,6 +89,7 @@ Project scheme (--scheme argument) values
 | Project scheme | Description            |
 |----------------|------------------------|
 | @blank         | Blank project          |
+| @htmlpro       | HTMLPRO project        |
 | @app/ts        | TypeScript application |
 | @lib/ts        | TypeScript library     |
 | @tool/ts       | TypeScript tool        |
@@ -105,10 +106,11 @@ repox build project --name="example-project"
 
 Arguments of build project
 
-| Argument | Alias | Description                                     | Required |
-|----------|-------|-------------------------------------------------|----------|
-| --name   | -n    | Specify a project name                          | True     |
-| --watch  | -w    | Build the project as soon as something changes  | False    |
+| Argument     | Alias | Description                                    | Required |
+|--------------|-------|------------------------------------------------|----------|
+| --name       | -n    | Specify a project name                         | True     |
+| --watch      | -w    | Build the project as soon as something changes | False    |
+| --production | -P    | Turn on production build mode                  | False    |
 
 <br>
 

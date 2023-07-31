@@ -9,7 +9,8 @@ export enum RepoxArgumentEnum {
   type = "type",
   path = "path",
   scheme = "scheme",
-  watch = "watch"
+  watch = "watch",
+  production = "production"
 }
 
 export enum RepoxAliasEnum {
@@ -18,5 +19,6 @@ export enum RepoxAliasEnum {
   type = "t",
   path = "p",
   scheme = "s",
-  watch = "w"
+  watch = "w",
+  production = "P"
 }

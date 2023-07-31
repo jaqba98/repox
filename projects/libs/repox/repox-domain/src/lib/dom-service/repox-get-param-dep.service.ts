@@ -115,7 +115,14 @@ export class RepoxGetParamDepService {
           }
         }
       },
-      args: {}
+      args: {
+        [RepoxArgumentEnum.production]: {
+          name: RepoxArgumentEnum.production,
+          values: [],
+          valueMode: "empty",
+          required: false
+        }
+      }
     };
   }
 

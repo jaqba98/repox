@@ -14,7 +14,7 @@ import {
   LoadWsDomainAppService
 } from "../app-service/load-ws-domain-app.service";
 import {
-  BuildProjectRepoxCommandModel,
+  BuildProjectRepoxCommandModel, BuildProjectRepoxProgramModel,
   EmptyRepoxProgramModel
 } from "@lib/repox-domain";
 import { REPOX_LOGO } from "@lib/repox-const";
@@ -24,6 +24,9 @@ import {
 import {
   ProjectExistAppService
 } from "../app-service/project-exist-app.service";
+import {
+  VerificationWsDtoAppService
+} from "../app-service/verification-ws-dto-app.service";
 
 @singleton()
 /**
@@ -35,6 +38,7 @@ export class BuildProjectStepService {
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
+    private readonly verificationWsDto: VerificationWsDtoAppService,
     private readonly loadWsDto: LoadWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
     private readonly projectExist: ProjectExistAppService,
@@ -43,7 +47,7 @@ export class BuildProjectStepService {
   }
 
   runSteps(
-    programModel: EmptyRepoxProgramModel,
+    programModel: BuildProjectRepoxProgramModel,
     commandModel: BuildProjectRepoxCommandModel
   ): void {
     this.simpleMessage.writeInfo("Build project", REPOX_LOGO);
@@ -51,6 +55,8 @@ export class BuildProjectStepService {
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return;
+    const { productionMode } = programModel;
+    if (!this.verificationWsDto.run(productionMode)) return;
     if (!this.loadWsDomain.run()) return;
     const { projectName, buildWatch } = commandModel;
     if (!this.projectExist.run(projectName)) return;
