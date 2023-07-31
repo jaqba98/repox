@@ -32,7 +32,7 @@ export class ProcessHtmlFileService {
           EMPTY_STRING;
         if (dataImport === EMPTY_STRING) {
           htmlContentResult += `<${name}`;
-          for (const attr in attributes) {
+          for (const attr in attribs) {
             htmlContentResult += ` ${attr}="${attribs[attr]}"`;
           }
           htmlContentResult += ">";
