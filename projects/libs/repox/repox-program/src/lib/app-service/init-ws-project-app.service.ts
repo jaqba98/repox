@@ -21,6 +21,7 @@ export class InitWsProjectAppService {
     this.runCommand.runCommand("npm init -y");
     // Install dependencies
     this.simpleMessage.writePlain("Install dependencies");
+    this.runCommand.runCommand("npm i htmlpro -D");
     this.runCommand.runCommand("npm i typescript -D");
     this.runCommand.runCommand("npm i tsc-alias -D");
     this.runCommand.runCommand("npm i jest -D");
