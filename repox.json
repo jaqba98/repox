@@ -102,23 +102,23 @@
         "pages": [
           {
             "input": "projects/apps/repox-website/src/index.html",
-            "output": "dist/repox-website"
+            "output": "dist/repox-website/index.html"
           },
           {
             "input": "projects/apps/repox-website/src/getting-started.html",
-            "output": "dist/repox-website"
+            "output": "dist/repox-website/getting-started.html"
           },
           {
             "input": "projects/apps/repox-website/src/docs.html",
-            "output": "dist/repox-website"
+            "output": "dist/repox-website/docs.html"
           },
           {
             "input": "projects/apps/repox-website/src/support-us.html",
-            "output": "dist/repox-website"
+            "output": "dist/repox-website/support-us.html"
           },
           {
             "input": "projects/apps/repox-website/src/blog.html",
-            "output": "dist/repox-website"
+            "output": "dist/repox-website/blog.html"
           }
         ],
         "assets": [
