@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { RunProgramModel } from "@lib/model";
 import {
-  DefaultDefaultHtmlProProgramModel,
+  EmptyHtmlProCommandModel,
   InitDefaultHtmlProProgramModel
 } from "@lib/htmlpro-domain";
 import {
@@ -19,8 +19,7 @@ export class InitDefaultProgramService implements RunProgramModel {
   runProgram(programDomain: unknown, commandDomain: unknown): void {
     const programModel = <InitDefaultHtmlProProgramModel>
       programDomain;
-    const commandModel = <DefaultDefaultHtmlProProgramModel>
-      commandDomain;
+    const commandModel = <EmptyHtmlProCommandModel>commandDomain;
     this.step.runSteps(programModel, commandModel);
   }
 }
