@@ -96,7 +96,7 @@
       "name": "repox-website",
       "type": "app",
       "path": "projects/apps/repox-website",
-      "scheme": "@blank",
+      "scheme": "@htmlpro",
       "build": {
         "output": "dist/repox-website",
         "assets": [
@@ -174,7 +174,7 @@
       "name": "footer",
       "type": "lib",
       "path": "projects/libs/components/footer",
-      "scheme": "@blank",
+      "scheme": "@htmlpro",
       "build": {}
     },
     "htmlpro-workspace": {
@@ -188,42 +188,42 @@
       "name": "head",
       "type": "lib",
       "path": "projects/libs/components/head",
-      "scheme": "@blank",
+      "scheme": "@htmlpro",
       "build": {}
     },
     "nav": {
       "name": "nav",
       "type": "lib",
       "path": "projects/libs/components/nav",
-      "scheme": "@blank",
+      "scheme": "@htmlpro",
       "build": {}
     },
     "header": {
       "name": "header",
       "type": "lib",
       "path": "projects/libs/components/header",
-      "scheme": "@blank",
+      "scheme": "@htmlpro",
       "build": {}
     },
     "statistics": {
       "name": "statistics",
       "type": "lib",
       "path": "projects/libs/components/statistics",
-      "scheme": "@blank",
+      "scheme": "@htmlpro",
       "build": {}
     },
     "what-is": {
       "name": "what-is",
       "type": "lib",
       "path": "projects/libs/components/what-is",
-      "scheme": "@blank",
+      "scheme": "@htmlpro",
       "build": {}
     },
     "support": {
       "name": "support",
       "type": "lib",
       "path": "projects/libs/components/support",
-      "scheme": "@blank",
+      "scheme": "@htmlpro",
       "build": {}
     }
   }
