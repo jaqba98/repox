@@ -3,6 +3,9 @@ import { FileUtilsService } from "@lib/utils";
 import {
   ProcessHtmlFileService
 } from "../dom-service/service/process-html-file.service";
+import {
+  ProcessCssFileService
+} from "../dom-service/service/process-css-file.service";
 
 @singleton()
 /**
@@ -11,20 +14,20 @@ import {
 export class BuildHtmlAppService {
   constructor(
     private readonly fileUtils: FileUtilsService,
-    private readonly processHtmlFile: ProcessHtmlFileService
+    private readonly processHtmlFile: ProcessHtmlFileService,
+    private readonly processCssFile: ProcessCssFileService
   ) {
   }
 
   run(inputPath: string, outputPath: string): boolean {
-    const resultFile = this.processHtmlFile.process(
+    const htmlResultFile = this.processHtmlFile.process(
       inputPath, []
     );
-    this.fileUtils.writeTextFile(
-      outputPath, resultFile.htmlContentResult
+    const cssResultFile = this.processCssFile.process(
+      inputPath, []
     );
-    this.fileUtils.writeTextFile(
-      "output.css", resultFile.cssContentResult
-    );
+    this.fileUtils.writeTextFile(outputPath, htmlResultFile);
+    this.fileUtils.writeTextFile("output.css", cssResultFile);
     return true;
   }
 }
