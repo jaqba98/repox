@@ -77,7 +77,7 @@ export class ProcessHtmlFileService {
     let htmlFileContent = this.fileUtils.readTextFile(inputPath);
     attributes
       .map(attribute => ({
-        key: `{{${attribute.key}}`, value: attribute.value
+        key: `{{.*${attribute.key}.*}}`, value: attribute.value
       }))
       .forEach(attribute => {
         htmlFileContent.replaceAll(attribute.key, attribute.value)
