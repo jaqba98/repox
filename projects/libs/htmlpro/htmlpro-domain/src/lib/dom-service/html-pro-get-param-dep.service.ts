@@ -32,6 +32,26 @@ export class HtmlProGetParamDepService {
     };
   }
 
+  getProgramInit(): ParamDomainDepModel {
+    return {
+      program: HtmlProProgramEnum.init,
+      commands: {
+        [HtmlProCommandEnum.default]: {
+          command: HtmlProCommandEnum.default,
+          args: {}
+        }
+      },
+      args: {
+        [HtmlProArgumentEnum.force]: {
+          name: HtmlProArgumentEnum.force,
+          values: [],
+          valueMode: "empty",
+          required: false
+        }
+      }
+    };
+  }
+
   getProgramBuild(): ParamDomainDepModel {
     return {
       program: HtmlProProgramEnum.build,

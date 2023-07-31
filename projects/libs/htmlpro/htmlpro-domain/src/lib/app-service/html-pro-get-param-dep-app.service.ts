@@ -22,6 +22,8 @@ export class HtmlProGetParamDepAppService
     switch (program) {
       case HtmlProProgramEnum.default:
         return this.htmlProGetParamDep.getProgramDefault();
+      case HtmlProProgramEnum.init:
+        return this.htmlProGetParamDep.getProgramInit();
       case HtmlProProgramEnum.build:
         return this.htmlProGetParamDep.getProgramBuild();
       default:

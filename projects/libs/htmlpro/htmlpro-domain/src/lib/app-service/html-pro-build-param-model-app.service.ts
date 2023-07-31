@@ -27,6 +27,9 @@ export class HtmlProBuildParamModelAppService {
     if (programName === HtmlProProgramEnum.default) {
       return this.htmlProBuild.defaultProgram();
     }
+    if (programName === HtmlProProgramEnum.init) {
+      return this.htmlProBuild.initDefaultProgram();
+    }
     return this.htmlProBuild.emptyProgram();
   }
 

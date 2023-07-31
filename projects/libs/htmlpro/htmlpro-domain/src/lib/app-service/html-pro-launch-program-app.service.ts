@@ -4,7 +4,8 @@ import { HtmlProProgramEnum } from "../enum/html-pro-program.enum";
 import { HtmlProCommandEnum } from "../enum/html-pro-command.enum";
 import {
   BuildHtmlProgramService,
-  DefaultDefaultProgramService
+  DefaultDefaultProgramService,
+  InitDefaultProgramService
 } from "@lib/htmlpro-program";
 
 @singleton()
@@ -22,9 +23,14 @@ export class HtmlProLaunchProgramAppService {
           service: container.resolve(DefaultDefaultProgramService)
         },
         {
+          programName: HtmlProProgramEnum.init,
+          commandName: HtmlProCommandEnum.default,
+          service: container.resolve(BuildHtmlProgramService)
+        },
+        {
           programName: HtmlProProgramEnum.build,
           commandName: HtmlProCommandEnum.html,
-          service: container.resolve(BuildHtmlProgramService)
+          service: container.resolve(InitDefaultProgramService)
         }
       ]
     };

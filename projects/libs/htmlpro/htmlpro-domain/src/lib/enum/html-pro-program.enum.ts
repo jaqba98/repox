@@ -4,9 +4,11 @@
 
 export enum HtmlProProgramEnum {
   default = "default",
+  init = "init",
   build = "build"
 }
 
 export enum HtmlProProgramAliasEnum {
+  init = "i",
   build = "b"
 }

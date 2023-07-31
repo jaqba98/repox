@@ -5,7 +5,7 @@ import {
   DefaultDefaultHtmlProProgramModel,
   EmptyHtmlProCommandModel,
   EmptyHtmlProProgramModel,
-  HtmlProArgumentEnum
+  HtmlProArgumentEnum, InitDefaultHtmlProProgramModel
 } from "@lib/htmlpro-domain";
 
 @singleton()
@@ -29,6 +29,14 @@ export class HtmlProBuildParamModelService {
     return {
       showVersion: this.paramDomain.getProgramBooleanValue(
         HtmlProArgumentEnum.version
+      )
+    };
+  }
+
+  initDefaultProgram(): InitDefaultHtmlProProgramModel {
+    return {
+      isForce: this.paramDomain.getProgramBooleanValue(
+        HtmlProArgumentEnum.force
       )
     };
   }
