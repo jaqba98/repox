@@ -30,7 +30,7 @@ export class HtmlProBuildParamModelAppService {
       return this.htmlProBuild.initDefaultProgram();
     }
     if (programName === HtmlProProgramEnum.build) {
-      return this.htmlProBuild.initDefaultProgram();
+      return this.htmlProBuild.buildDefaultProgram();
     }
     return this.htmlProBuild.emptyProgram();
   }

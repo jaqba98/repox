@@ -17,9 +17,9 @@ export class BuildDefaultProgramService implements RunProgramModel {
   }
 
   runProgram(programDomain: unknown, commandDomain: unknown): void {
-    const programModel = <BuildDefaultHtmlProProgramModel>programDomain;
-    const commandModel = <EmptyHtmlProCommandModel>
-      commandDomain;
+    const programModel = <BuildDefaultHtmlProProgramModel>
+      programDomain;
+    const commandModel = <EmptyHtmlProCommandModel>commandDomain;
     this.step.runSteps(programModel, commandModel);
   }
 }
