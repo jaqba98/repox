@@ -7,6 +7,11 @@ import {
  * The workspace domain model.
  */
 
+export interface WsPagesDomainModel {
+  input: string;
+  output: string;
+}
+
 export interface WsAssetsDomainModel {
   input: string;
   output: string;
@@ -15,6 +20,7 @@ export interface WsAssetsDomainModel {
 export interface WsProjectBuildDomainModel {
   output: string;
   main: string;
+  pages: Array<WsPagesDomainModel>;
   assets: Array<WsAssetsDomainModel>;
 }
 

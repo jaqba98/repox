@@ -22,6 +22,18 @@ export const repoxJsonFileSchema: Schema = {
             properties: {
               output: { type: "string" },
               main: { type: "string" },
+              pages: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    input: { type: "string" },
+                    output: { type: "string" }
+                  },
+                  additionalProperties: false,
+                  required: ["input", "output"]
+                }
+              },
               assets: {
                 type: "array",
                 items: {
@@ -58,15 +70,34 @@ export const repoxJsonFileSchema: Schema = {
         else: {
           if: {
             properties: {
+              type: {
+                const: "app"
+              },
               scheme: {
-                const: "@app/ts"
+                const: "@htmlpro"
               }
             }
           },
           then: {
             properties: {
               build: {
-                required: ["output", "main"]
+                required: ["pages"]
+              }
+            }
+          },
+          else: {
+            if: {
+              properties: {
+                scheme: {
+                  const: "@app/ts"
+                }
+              }
+            },
+            then: {
+              properties: {
+                build: {
+                  required: ["output", "main"]
+                }
               }
             }
           }

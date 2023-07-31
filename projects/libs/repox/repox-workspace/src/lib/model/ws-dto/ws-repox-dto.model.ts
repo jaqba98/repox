@@ -7,6 +7,11 @@ import {
  * The dto model of real repox.json file on disc.
  */
 
+export interface WsRepoxPagesDtoModel {
+  input: string;
+  output: string;
+}
+
 export interface WsRepoxAssetsDtoModel {
   input: string;
   output: string;
@@ -15,6 +20,7 @@ export interface WsRepoxAssetsDtoModel {
 export interface WsRepoxBuildAppTsDtoModel {
   output?: string;
   main?: string;
+  pages?: Array<WsRepoxPagesDtoModel>;
   assets?: Array<WsRepoxAssetsDtoModel>;
 }
 

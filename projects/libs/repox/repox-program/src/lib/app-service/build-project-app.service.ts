@@ -33,7 +33,7 @@ export class BuildProjectAppService {
     private readonly runCommandUtils: RunCommandUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly folderUtils: FolderUtilsService,
-    private readonly newline: NewlineAppService,
+    private readonly newline: NewlineAppService
   ) {
   }
 
@@ -120,6 +120,11 @@ export class BuildProjectAppService {
       this.folderUtils.createFolder(project.build.output);
     }
     this.copyAssets(project.build.assets);
+    project.build.pages.forEach(page => {
+      this.runCommandUtils.runNpxCommand(
+        `htmlpro build --input=${page.input} --output=${page.output}`
+      )
+    });
     return true;
   }
 
