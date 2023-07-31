@@ -92,6 +92,9 @@ export class BuildProjectAppService {
       case ProjectSchemeEnum.blank:
         this.buildProjectBlank(project);
         break;
+      case ProjectSchemeEnum.htmlPro:
+        this.buildProjectHtmlPro(project);
+        break;
       case ProjectSchemeEnum.appTypeScript:
         this.buildProjectAppTypescript(project);
         break;
@@ -101,6 +104,16 @@ export class BuildProjectAppService {
   }
 
   private buildProjectBlank(
+    project: WsProjectDomainModel
+  ): boolean {
+    if (!this.pathUtils.existPath(project.build.output)) {
+      this.folderUtils.createFolder(project.build.output);
+    }
+    this.copyAssets(project.build.assets);
+    return true;
+  }
+
+  private buildProjectHtmlPro(
     project: WsProjectDomainModel
   ): boolean {
     if (!this.pathUtils.existPath(project.build.output)) {

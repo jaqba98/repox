@@ -47,8 +47,11 @@ export class CreateProjectFilesAppService {
       case ProjectSchemeEnum.blank:
         this.createBlankProjectStructure(project.path);
         break;
+      case ProjectSchemeEnum.htmlPro:
+        this.createBlankProjectStructure(project.path);
+        break;
       case ProjectSchemeEnum.appTypeScript:
-        this.createAppTsProjectStructure(project.path);
+        this.createHtmlProProjectStructure(project.path);
         break;
       case ProjectSchemeEnum.libTypeScript:
       case ProjectSchemeEnum.toolTypeScript:
@@ -62,6 +65,20 @@ export class CreateProjectFilesAppService {
   }
 
   private createBlankProjectStructure(projectPath: string): void {
+    this.folderUtils.createFolder(projectPath);
+    this.pathUtils.changePath(projectPath);
+    this.folderUtils.createFolder(WorkspaceFolderEnum.src);
+    this.pathUtils.changePath(WorkspaceFolderEnum.src);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
+    this.pathUtils.changePath("../");
+    this.runCommandUtils.runCommand("npm init -y");
+    this.fileUtils.writeTextFile(
+      WorkspaceFileEnum.jestConfigTs,
+      this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
+    );
+  }
+
+  private createHtmlProProjectStructure(projectPath: string): void {
     this.folderUtils.createFolder(projectPath);
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);

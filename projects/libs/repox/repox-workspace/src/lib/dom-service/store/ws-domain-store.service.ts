@@ -126,6 +126,7 @@ export class WsDomainStoreService {
     }
     switch (projectScheme) {
       case ProjectSchemeEnum.blank:
+      case ProjectSchemeEnum.htmlPro:
         return {
           output: this.pathUtils.createPath([
             WorkspaceFolderEnum.dist, projectName
@@ -163,6 +164,7 @@ export class WsDomainStoreService {
   ): string {
     switch (projectScheme) {
       case ProjectSchemeEnum.blank:
+      case ProjectSchemeEnum.htmlPro:
       case ProjectSchemeEnum.appTypeScript:
         return EMPTY_STRING;
       case ProjectSchemeEnum.libTypeScript:
@@ -181,6 +183,7 @@ export class WsDomainStoreService {
   ): Array<string> {
     switch (projectScheme) {
       case ProjectSchemeEnum.blank:
+      case ProjectSchemeEnum.htmlPro:
       case ProjectSchemeEnum.appTypeScript:
         return [];
       case ProjectSchemeEnum.libTypeScript:
