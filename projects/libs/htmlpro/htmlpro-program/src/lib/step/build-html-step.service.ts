@@ -40,7 +40,7 @@ export class BuildHtmlStepService {
     programModel: BuildDefaultHtmlProProgramModel,
     commandModel: EmptyHtmlProCommandModel
   ): void {
-    this.simpleMessage.writeInfo("Build html", HTML_PRO_LOGO);
+    this.simpleMessage.writeInfo("Build", HTML_PRO_LOGO);
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
@@ -50,7 +50,7 @@ export class BuildHtmlStepService {
     if (!this.buildHtml.run(inputPath, outputPath)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
-      "Html file built successfully!"
+      "HTML file built successfully!"
     );
   }
 }
