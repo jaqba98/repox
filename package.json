@@ -5,6 +5,7 @@
   "author": "Jakub Olejarczyk",
   "license": "ISC",
   "scripts": {
+    "repox:build": "repox build project --name=htmlpro",
     "dist:repox:build": "node dist/repox/apps/repox/src/main.js build project --name=htmlpro",
     "dist:htmlpro:build": "node dist/htmlpro/apps/htmlpro/src/main.js build html --input=projects/apps/repox-website/src/index.html --output=projects/apps/repox-website/src/output.html"
   },
