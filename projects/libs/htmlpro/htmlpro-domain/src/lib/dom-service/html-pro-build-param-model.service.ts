@@ -1,11 +1,12 @@
 import { singleton } from "tsyringe";
 import { ParamDomainAppService } from "@lib/param-domain";
 import {
-  BuildHtmlHtmlProCommandModel,
+  BuildDefaultHtmlProProgramModel,
   DefaultDefaultHtmlProProgramModel,
   EmptyHtmlProCommandModel,
   EmptyHtmlProProgramModel,
-  HtmlProArgumentEnum, InitDefaultHtmlProProgramModel
+  HtmlProArgumentEnum,
+  InitDefaultHtmlProProgramModel
 } from "@lib/htmlpro-domain";
 
 @singleton()
@@ -41,12 +42,12 @@ export class HtmlProBuildParamModelService {
     };
   }
 
-  buildHtmlCommand(): BuildHtmlHtmlProCommandModel {
+  buildDefaultProgram(): BuildDefaultHtmlProProgramModel {
     return {
-      inputPath: this.paramDomain.getCommandStringValue(
+      inputPath: this.paramDomain.getProgramStringValue(
         HtmlProArgumentEnum.input
       ),
-      outputPath: this.paramDomain.getCommandStringValue(
+      outputPath: this.paramDomain.getProgramStringValue(
         HtmlProArgumentEnum.output
       )
     };

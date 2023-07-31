@@ -13,5 +13,11 @@ export interface InitDefaultHtmlProProgramModel {
   isForce: boolean;
 }
 
+export interface BuildDefaultHtmlProProgramModel {
+  inputPath: string;
+  outputPath: string;
+}
+
 export type THtmlProProgramModel = EmptyHtmlProProgramModel |
-  DefaultDefaultHtmlProProgramModel | InitDefaultHtmlProProgramModel;
+  DefaultDefaultHtmlProProgramModel | InitDefaultHtmlProProgramModel |
+  BuildDefaultHtmlProProgramModel;

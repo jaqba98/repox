@@ -58,4 +58,16 @@ export class ParamDomainAppService {
     return this.paramDomainStore.getParamDomain().command.args
       .some(param => param.name === argument);
   }
+
+  getProgramStringValue(
+    argument: string, defaultValue: string = EMPTY_STRING
+  ): string {
+    const argumentValue = this.paramDomainStore.getParamDomain()
+      .program.args.find(param => param.name === argument);
+    if (argumentValue === undefined) {
+      return defaultValue;
+    }
+    const value = argumentValue.values.at(0);
+    return value ? value : defaultValue;
+  }
 }

@@ -3,7 +3,7 @@ import { LauncherModel } from "@lib/launcher";
 import { HtmlProProgramEnum } from "../enum/html-pro-program.enum";
 import { HtmlProCommandEnum } from "../enum/html-pro-command.enum";
 import {
-  BuildHtmlProgramService,
+  BuildDefaultProgramService,
   DefaultDefaultProgramService,
   InitDefaultProgramService
 } from "@lib/htmlpro-program";
@@ -29,8 +29,8 @@ export class HtmlProLaunchProgramAppService {
         },
         {
           programName: HtmlProProgramEnum.build,
-          commandName: HtmlProCommandEnum.html,
-          service: container.resolve(BuildHtmlProgramService)
+          commandName: HtmlProCommandEnum.default,
+          service: container.resolve(BuildDefaultProgramService)
         }
       ]
     };

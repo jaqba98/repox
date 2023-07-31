@@ -5,8 +5,8 @@ import {
 } from "@lib/logger";
 import { HTML_PRO_LOGO } from "@lib/htmlpro-const";
 import {
-  BuildHtmlHtmlProCommandModel,
-  EmptyHtmlProProgramModel
+  BuildDefaultHtmlProProgramModel,
+  EmptyHtmlProCommandModel
 } from "@lib/htmlpro-domain";
 import {
   AllProgramInstalledService,
@@ -37,15 +37,15 @@ export class BuildHtmlStepService {
   }
 
   runSteps(
-    programModel: EmptyHtmlProProgramModel,
-    commandModel: BuildHtmlHtmlProCommandModel
+    programModel: BuildDefaultHtmlProProgramModel,
+    commandModel: EmptyHtmlProCommandModel
   ): void {
     this.simpleMessage.writeInfo("Build html", HTML_PRO_LOGO);
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadHtmlProDomain.run()) return;
-    const { inputPath, outputPath } = commandModel;
+    const { inputPath, outputPath } = programModel;
     if (!this.fileExist.run(inputPath)) return;
     if (!this.buildHtml.run(inputPath, outputPath)) return;
     this.newline.writeNewline();

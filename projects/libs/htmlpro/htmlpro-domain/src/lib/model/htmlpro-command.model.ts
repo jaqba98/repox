@@ -5,10 +5,4 @@
 export interface EmptyHtmlProCommandModel {
 }
 
-export interface BuildHtmlHtmlProCommandModel {
-  inputPath: string;
-  outputPath: string;
-}
-
-export type THtmlProCommandModel = EmptyHtmlProCommandModel |
-  BuildHtmlHtmlProCommandModel;
+export type THtmlProCommandModel = EmptyHtmlProCommandModel;

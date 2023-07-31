@@ -3,10 +3,8 @@
  */
 
 export enum HtmlProCommandEnum {
-  default = "default",
-  html = "html"
+  default = "default"
 }
 
 export enum HtmlProCommandAliasEnum {
-  html = "h"
 }

@@ -1,7 +1,6 @@
 import { singleton } from "tsyringe";
 import { ParamDomainAppService } from "@lib/param-domain";
 import {
-  HtmlProCommandEnum,
   HtmlProProgramEnum,
   THtmlProCommandModel,
   THtmlProProgramModel
@@ -30,17 +29,13 @@ export class HtmlProBuildParamModelAppService {
     if (programName === HtmlProProgramEnum.init) {
       return this.htmlProBuild.initDefaultProgram();
     }
+    if (programName === HtmlProProgramEnum.build) {
+      return this.htmlProBuild.initDefaultProgram();
+    }
     return this.htmlProBuild.emptyProgram();
   }
 
   buildCommandParamModel(): THtmlProCommandModel {
-    const programName = this.paramDom.getParamDomain().program.name;
-    const commandName = this.paramDom.getParamDomain().command.name;
-    if (programName === HtmlProProgramEnum.build) {
-      if (commandName === HtmlProCommandEnum.html) {
-        return this.htmlProBuild.buildHtmlCommand();
-      }
-    }
     return this.htmlProBuild.emptyCommand();
   }
 }
