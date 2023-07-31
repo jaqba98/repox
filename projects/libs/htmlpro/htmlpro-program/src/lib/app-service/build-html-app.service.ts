@@ -16,10 +16,15 @@ export class BuildHtmlAppService {
   }
 
   run(inputPath: string, outputPath: string): boolean {
-    const htmlResultFile = this.processHtmlFile.process(
+    const resultFile = this.processHtmlFile.process(
       inputPath, []
     );
-    this.fileUtils.writeTextFile(outputPath, htmlResultFile);
+    this.fileUtils.writeTextFile(
+      outputPath, resultFile.htmlContentResult
+    );
+    this.fileUtils.writeTextFile(
+      "output.css", resultFile.cssContentResult
+    );
     return true;
   }
 }

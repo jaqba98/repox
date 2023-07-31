@@ -1,0 +1,69 @@
+/* header */
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    padding: 4em 2em;
+    background-color: var(--primary-color);
+    color: var(--font-white-color);
+}
+
+.motto {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.motto > p {
+    text-align: center;
+    font-size: 2em;
+    letter-spacing: -1px;
+    word-spacing: 1px;
+}
+
+.motto > p:first-child {
+    font-weight: bold;
+}
+
+.header > img {
+    width: 50%;
+}
+
+.header > p {
+    text-align: center;
+    font-size: 1.25em;
+    letter-spacing: -1px;
+    word-spacing: 1px;
+    font-weight: bold;
+    margin-bottom: 2em;
+}
+
+.header-link {
+    display: block;
+    font-size: 1.25em;
+    font-weight: bold;
+    padding: 0.5em;
+    border-radius: 10px;
+    color: var(--font-white-color);
+    border: 0.2em solid var(--font-white-color);
+    transition: all var(--animation-speed) ease-in-out;
+}
+
+.header-link:hover,
+.header-link:focus {
+    color: var(--primary-color);
+    background-color: var(--font-white-color);
+}
+
+@media only screen and (min-width: 768px) {
+    .motto {
+        flex-direction: row;
+    }
+
+    .header > img {
+        width: 15em;
+    }
+}

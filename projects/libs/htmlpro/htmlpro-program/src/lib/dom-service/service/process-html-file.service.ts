@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING, NEW_LINE } from "@lib/const";
 import { Parser } from "htmlparser2";
 import { HtmlProDomainStoreService } from "@lib/htmlpro-workspace";
 import { FileUtilsService } from "@lib/utils";
@@ -19,11 +19,15 @@ export class ProcessHtmlFileService {
   process(
     inputPath: string,
     attributes: Array<{ key: string, value: string }>
-  ): string {
+  ): {
+    htmlContentResult: string,
+    cssContentResult: string
+  } {
     const htmlFileContent = this.preBuildHtmlContent(
       inputPath, attributes
     );
     let htmlContentResult: string = EMPTY_STRING;
+    let cssContentResult: string = EMPTY_STRING;
     let dataImport: string = EMPTY_STRING;
     const parser = new Parser({
       onopentag: (
@@ -43,6 +47,9 @@ export class ProcessHtmlFileService {
         const component = this.htmlProDomainStore.getComponent(
           dataImport
         );
+        cssContentResult += component.styleUrls
+          .map(styleUrl => this.fileUtils.readTextFile(styleUrl))
+          .join(NEW_LINE);
         const attribsArray = Object.keys(attribs)
           .map(attribKey => ({
             key: attribKey,
@@ -67,7 +74,7 @@ export class ProcessHtmlFileService {
     });
     parser.write(htmlFileContent);
     parser.end();
-    return htmlContentResult;
+    return { htmlContentResult, cssContentResult };
   }
 
   private preBuildHtmlContent(
