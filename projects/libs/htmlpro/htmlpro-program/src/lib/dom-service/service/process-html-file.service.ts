@@ -20,7 +20,9 @@ export class ProcessHtmlFileService {
     inputPath: string,
     attributes: Array<{ key: string, value: string }>
   ): string {
-    const htmlFileContent = this.fileUtils.readTextFile(inputPath);
+    const htmlFileContent = this.preBuildHtmlContent(
+      inputPath, attributes
+    );
     let htmlContentResult: string = EMPTY_STRING;
     let dataImport: string = EMPTY_STRING;
     const parser = new Parser({
@@ -66,5 +68,20 @@ export class ProcessHtmlFileService {
     parser.write(htmlFileContent);
     parser.end();
     return htmlContentResult;
+  }
+
+  private preBuildHtmlContent(
+    inputPath: string,
+    attributes: Array<{ key: string, value: string }>
+  ): string {
+    let htmlFileContent = this.fileUtils.readTextFile(inputPath);
+    attributes
+      .map(attribute => ({
+        key: `{{${attribute.key}}`, value: attribute.value
+      }))
+      .forEach(attribute => {
+        htmlFileContent.replaceAll(attribute.key, attribute.value)
+      });
+    return htmlFileContent;
   }
 }
