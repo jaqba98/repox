@@ -101,16 +101,12 @@
         "output": "dist/repox-website",
         "assets": [
           {
-            "input": "projects/apps/repox-website/src/*.html",
-            "output": "dist/repox-website"
+            "input": "projects/apps/repox-website/src/images/**/*",
+            "output": "dist/repox-website/images"
           },
           {
             "input": "projects/apps/repox-website/src/styles/**/*",
             "output": "dist/repox-website/styles"
-          },
-          {
-            "input": "projects/apps/repox-website/src/images/**/*",
-            "output": "dist/repox-website/images"
           },
           {
             "input": "projects/apps/repox-website/src/scripts/**/*",
