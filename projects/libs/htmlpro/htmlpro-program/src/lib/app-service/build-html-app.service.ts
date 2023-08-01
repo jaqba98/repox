@@ -24,7 +24,7 @@ export class BuildHtmlAppService {
       inputPath, []
     );
     const cssResultFile = this.processCssFile.process(
-      inputPath, []
+      inputPath
     );
     this.fileUtils.writeTextFile(outputPath, htmlResultFile);
     this.fileUtils.writeTextFile("output.css", cssResultFile);

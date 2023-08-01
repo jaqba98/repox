@@ -1,63 +1,45 @@
 import { singleton } from "tsyringe";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING, NEW_LINE } from "@lib/const";
+import { Parser } from "htmlparser2";
+import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
+import { FileUtilsService } from "@lib/utils";
+import { HtmlProDomainStoreService } from "@lib/htmlpro-workspace";
 
 @singleton()
 /**
  * The service is responsible for process css file.
  */
 export class ProcessCssFileService {
-  process(
-    inputPath: string,
-    attributes: Array<{ key: string, value: string }>
-  ): string {
-    // const htmlFileContent = this.preBuildHtmlContent(
-    //   inputPath, attributes
-    // );
-    // let htmlContentResult: string = EMPTY_STRING;
-    // let dataImport: string = EMPTY_STRING;
-    // const parser = new Parser({
-    //   onopentag: (
-    //     name: string,
-    //     attribs: { [s: string]: string; }
-    //   ): void => {
-    //     dataImport = attribs[HtmlAttributesEnum.dataImport] ??
-    //       EMPTY_STRING;
-    //     if (dataImport === EMPTY_STRING) {
-    //       htmlContentResult += `<${name}`;
-    //       for (const attr in attribs) {
-    //         htmlContentResult += ` ${attr}="${attribs[attr]}"`;
-    //       }
-    //       htmlContentResult += ">";
-    //       return;
-    //     }
-    //     const component = this.htmlProDomainStore.getComponent(
-    //       dataImport
-    //     );
-    //     const attribsArray = Object.keys(attribs)
-    //       .map(attribKey => ({
-    //         key: attribKey,
-    //         value: attribs[attribKey]
-    //       }))
-    //     htmlContentResult += this.process(
-    //       component.templateUrl, attribsArray
-    //     );
-    //   },
-    //   ontext: (text: string): void => {
-    //     if (dataImport === EMPTY_STRING) {
-    //       htmlContentResult += text;
-    //     }
-    //   },
-    //   onclosetag: (name: string): void => {
-    //     if (dataImport === EMPTY_STRING) {
-    //       htmlContentResult += `</${name}>`;
-    //       return;
-    //     }
-    //     dataImport = EMPTY_STRING;
-    //   }
-    // });
-    // parser.write(htmlFileContent);
-    // parser.end();
-    // return htmlContentResult;
-    return EMPTY_STRING;
+  constructor(
+    private readonly htmlProDomainStore: HtmlProDomainStoreService,
+    private readonly fileUtils: FileUtilsService
+  ) {
+  }
+
+  process(inputPath: string): string {
+    let cssFileContent = this.fileUtils.readTextFile(inputPath);
+    let cssContentResult: string = EMPTY_STRING;
+    const parser = new Parser({
+      onopentag: (
+        name: string,
+        attribs: { [s: string]: string; }
+      ): void => {
+        const dataImport = attribs[HtmlAttributesEnum.dataImport] ??
+          EMPTY_STRING;
+        if (dataImport === EMPTY_STRING) {
+          return;
+        }
+        const component = this.htmlProDomainStore.getComponent(
+          dataImport
+        );
+        cssContentResult += component.styleUrls
+          .map(url => this.fileUtils.readTextFile(url))
+          .join(NEW_LINE);
+        this.process(component.templateUrl);
+      }
+    });
+    parser.write(cssFileContent);
+    parser.end();
+    return cssContentResult;
   }
 }
