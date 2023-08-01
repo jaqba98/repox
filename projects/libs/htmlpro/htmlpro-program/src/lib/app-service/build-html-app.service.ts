@@ -30,7 +30,7 @@ export class BuildHtmlAppService {
       inputPath
     );
     const cssPath = this.pathUtils.createPath(
-      [outputPath, "./style.css"]
+      [outputPath, "../style.css"]
     );
     this.fileUtils.writeTextFile(outputPath, htmlResultFile);
     this.fileUtils.writeTextFile(cssPath, cssResultFile);
