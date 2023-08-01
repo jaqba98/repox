@@ -29,8 +29,9 @@ export class BuildHtmlAppService {
     const cssResultFile = this.processCssFile.process(
       inputPath
     );
+    const cssFile = this.fileUtils.changeExtname(inputPath, ".css");
     const cssPath = this.pathUtils.createPath(
-      [outputPath, "../style.css"]
+      [outputPath, cssFile]
     );
     this.fileUtils.writeTextFile(outputPath, htmlResultFile);
     this.fileUtils.writeTextFile(cssPath, cssResultFile);

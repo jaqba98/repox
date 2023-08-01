@@ -64,4 +64,8 @@ export class FileUtilsService {
   writeJsonFile<T>(path: string, content: T): void {
     writeFileSync(path, JSON.stringify(content, null, 2));
   }
+
+  changeExtname(filePath: string, newExtname: string): string {
+    return basename(filePath, extname(filePath)).concat(newExtname);
+  }
 }
