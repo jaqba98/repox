@@ -127,10 +127,6 @@
             "output": "dist/repox-website/images"
           },
           {
-            "input": "projects/apps/repox-website/src/styles/**/*",
-            "output": "dist/repox-website/styles"
-          },
-          {
             "input": "projects/apps/repox-website/src/scripts/**/*",
             "output": "dist/repox-website/scripts"
           }

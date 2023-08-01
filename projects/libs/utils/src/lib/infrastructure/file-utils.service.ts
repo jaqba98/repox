@@ -37,7 +37,9 @@ export class FileUtilsService {
 
   readTextFile(filePath: string): string {
     if (!this.pathUtils.existPath(filePath)) {
-      throw new Error("The specified file does not exist!");
+      throw new Error(
+        `The specified file does not exist! Path: ${filePath}`
+      );
     }
     return readFileSync(filePath, "utf-8");
   }
