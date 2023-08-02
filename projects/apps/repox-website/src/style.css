@@ -26,6 +26,6 @@ body {
     /* FOOTER COPYRIGHT COMPONENT */
     --footer-copyright-background: #6320EE;
     --footer-copyright-font-color: #FFFFFF;
-    --footer-copyright-padding: 1rem;
+    --footer-copyright-padding: 1em;
     --footer-copyright-text-align: center;
 }

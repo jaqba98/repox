@@ -7,3 +7,9 @@
     padding: var(--footer-copyright-padding);
     text-align: var(--footer-copyright-text-align);
 }
+
+@media screen and (max-width: 300px) {
+    .footer-copyright > p {
+        font-size: 5vw;
+    }
+}
