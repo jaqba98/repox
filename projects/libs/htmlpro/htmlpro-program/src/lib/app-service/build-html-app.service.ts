@@ -6,6 +6,9 @@ import {
 import {
   ProcessCssFileService
 } from "../dom-service/service/process-css-file.service";
+import {
+  GetHtmlDependenciesService
+} from "../dom-service/service/get-html-dependencies.service";
 
 @singleton()
 /**
@@ -15,6 +18,7 @@ export class BuildHtmlAppService {
   constructor(
     private readonly fileUtils: FileUtilsService,
     private readonly processHtmlFile: ProcessHtmlFileService,
+    private readonly getHtmlDependencies: GetHtmlDependenciesService,
     private readonly processCssFile: ProcessCssFileService,
     private readonly pathUtils: PathUtilsService
   ) {
@@ -23,18 +27,25 @@ export class BuildHtmlAppService {
   run(
     inputPath: string, outputPath: string
   ): boolean {
-    const htmlResultFile = this.processHtmlFile.process(
-      inputPath, []
-    );
-    const cssResultFile = this.processCssFile.process(
-      inputPath
-    );
-    const cssFile = this.fileUtils.changeExtname(inputPath, ".css");
-    const cssPath = this.pathUtils.createPath(
-      [outputPath, `../${cssFile}`]
-    );
-    this.fileUtils.writeTextFile(outputPath, htmlResultFile);
-    this.fileUtils.writeTextFile(cssPath, cssResultFile);
+    const allHtmlFiles = this.fileUtils.readAllHtmlFiles(inputPath);
+    const allHtmlResults = allHtmlFiles
+      .map(htmlFilePath => ({
+        htmlFilePath,
+        htmlFileResult: this.processHtmlFile.process(htmlFilePath, []),
+        htmlFileDependencies: this.getHtmlDependencies.getDependencies(
+          htmlFilePath
+        ),
+        htmlFileName: this.fileUtils.getFileName(htmlFilePath)
+      }))
+      .map(htmlFile => ({
+        ...htmlFile,
+        htmlFileOutput: this.pathUtils.createPath(
+          [outputPath, htmlFile.htmlFileName]
+        )
+      }));
+    allHtmlResults.forEach(htmlResult => this.fileUtils.writeTextFile(
+      htmlResult.htmlFileOutput, htmlResult.htmlFileOutput
+    ));
     return true;
   }
 }

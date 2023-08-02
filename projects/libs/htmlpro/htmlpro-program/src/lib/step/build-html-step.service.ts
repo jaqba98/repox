@@ -19,6 +19,7 @@ import {
 import {
   BuildHtmlAppService
 } from "../app-service/build-html-app.service";
+import { FileUtilsService } from "@lib/utils";
 
 @singleton()
 /**

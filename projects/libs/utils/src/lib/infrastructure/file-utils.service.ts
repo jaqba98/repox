@@ -57,6 +57,13 @@ export class FileUtilsService {
       .map(path => this.pathUtils.normalizePath(path));
   }
 
+  readAllHtmlFiles(cwd: string): Array<string> {
+    const options = { cwd, ignore: ['**/node_modules/**'] };
+    return globSync("*.html", options)
+      .map(path => this.pathUtils.createPath([cwd, path]))
+      .map(path => this.pathUtils.normalizePath(path));
+  }
+
   writeTextFile(path: string, content: string): void {
     writeFileSync(path, content);
   }
