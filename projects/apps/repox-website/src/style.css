@@ -1,12 +1,31 @@
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* GENERAL */
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
 /* VARIABLES */
 
 :root {
-    /* GLOBAL */
-    --primary-color: #6320EE;
-    --font-white-color: #FFFFFF;
-    /* COMPONENTS */
-    --footer-copyright-background: var(--primary-color);
-    --footer-copyright-font-color: var(--font-white-color);
+    /* FOOTER COPYRIGHT COMPONENT */
+    --footer-copyright-background: #6320EE;
+    --footer-copyright-font-color: #FFFFFF;
     --footer-copyright-padding: 1rem;
     --footer-copyright-text-align: center;
 }
