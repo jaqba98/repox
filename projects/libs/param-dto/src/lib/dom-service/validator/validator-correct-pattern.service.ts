@@ -66,7 +66,7 @@ export class ValidatorCorrectPatternService
     baseValue: string
   ): boolean {
     return paramHasValue ?
-      /^--[a-zA-Z0-9-]+=[a-zA-Z0-9-"'/`,.\s@]+$/gm.test(baseValue) :
+      /^--[a-zA-Z0-9-]+=[a-zA-Z0-9-"'/`,.\s@*]+$/gm.test(baseValue) :
       /^--[a-zA-Z0-9-/]+$/gm.test(baseValue);
   }
 
@@ -75,7 +75,7 @@ export class ValidatorCorrectPatternService
     paramBaseValue: string
   ): boolean {
     return paramHasValue ?
-      /^-[a-zA-Z0-9-]=[a-zA-Z0-9-"'`,.\s@]+$/gm.test(paramBaseValue) :
+      /^-[a-zA-Z0-9-]=[a-zA-Z0-9-"'`,.\s@*]+$/gm.test(paramBaseValue) :
       /^-[a-zA-Z0-9-]$/gm.test(paramBaseValue);
   }
 
