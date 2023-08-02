@@ -1,0 +1,10 @@
+/* footer-copyright styles */
+
+.footer-copyright {
+    background-color: var(--footer-copyright-background);
+}
+
+.footer-copyright > p {
+    text-align: center;
+    color: white;
+}

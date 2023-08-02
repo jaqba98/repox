@@ -1,0 +1,16 @@
+/* Variables section */
+
+:root {
+    /* constants  */
+    --primary-color: #6320EE;
+    /* components */
+    --footer-copyright-background: var(--primary-color);
+}
+
+/* General section */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

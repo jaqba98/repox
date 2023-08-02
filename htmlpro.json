@@ -42,11 +42,11 @@
         "projects/libs/components/support/src/support.css"
       ]
     },
-    "@component/footer": {
-      "alias": "@component/footer",
-      "templateUrl": "projects/libs/components/footer/src/footer.html",
+    "@component/footer-copyright": {
+      "alias": "@component/footer-copyright",
+      "templateUrl": "projects/libs/components/footer-copyright/src/footer-copyright.html",
       "styleUrls": [
-        "projects/libs/components/footer/src/footer.css"
+        "projects/libs/components/footer-copyright/src/footer-copyright.css"
       ]
     }
   }
