@@ -5,6 +5,6 @@
 }
 
 .footer-copyright > p {
+    color: var(--font-white-color);
     text-align: center;
-    color: white;
 }
