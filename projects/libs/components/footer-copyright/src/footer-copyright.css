@@ -1,10 +1,9 @@
-/* footer-copyright styles */
-
 .footer-copyright {
     background-color: var(--footer-copyright-background);
 }
 
 .footer-copyright > p {
-    color: var(--font-white-color);
-    text-align: center;
+    color: var(--footer-copyright-font-color);
+    padding: var(--footer-copyright-padding);
+    text-align: var(--footer-copyright-text-align);
 }

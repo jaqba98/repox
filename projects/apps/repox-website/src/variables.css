@@ -1,0 +1,12 @@
+/* VARIABLES */
+
+:root {
+    /* GLOBAL */
+    --primary-color: #6320EE;
+    --font-white-color: #FFFFFF;
+    /* COMPONENTS */
+    --footer-copyright-background: var(--primary-color);
+    --footer-copyright-font-color: var(--font-white-color);
+    --footer-copyright-padding: 1rem;
+    --footer-copyright-text-align: center;
+}
