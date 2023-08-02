@@ -16,30 +16,10 @@ export class ProcessCssFileService {
   ) {
   }
 
-  process(inputPath: string): string {
-    let cssFileContent = this.fileUtils.readTextFile(inputPath);
-    let cssContentResult: string = EMPTY_STRING;
-    const parser = new Parser({
-      onopentag: (
-        name: string,
-        attribs: { [s: string]: string; }
-      ): void => {
-        const dataImport = attribs[HtmlAttributesEnum.dataImport] ??
-          EMPTY_STRING;
-        if (dataImport === EMPTY_STRING) {
-          return;
-        }
-        const component = this.htmlProDomainStore.getComponent(
-          dataImport
-        );
-        cssContentResult += component.styleUrls
-          .map(url => this.fileUtils.readTextFile(url))
-          .join(NEW_LINE);
-        this.process(component.templateUrl);
-      }
-    });
-    parser.write(cssFileContent);
-    parser.end();
-    return cssContentResult;
+  process(alias: string): string {
+    const component = this.htmlProDomainStore.getComponent(alias);
+    return component.styleUrls
+      .map(styleUrl => this.fileUtils.readTextFile(styleUrl))
+      .join(NEW_LINE);
   }
 }
