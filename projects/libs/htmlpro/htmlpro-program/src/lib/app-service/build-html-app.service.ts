@@ -34,6 +34,7 @@ export class BuildHtmlAppService {
     inputPath: string, outputPath: string
   ): boolean {
     this.folderUtils.createFolder(outputPath);
+    // Build html
     const allHtmlFiles = this.fileUtils.readAllHtmlFiles(inputPath);
     const allHtmlResults = allHtmlFiles
       .map(htmlFilePath => ({
@@ -50,6 +51,11 @@ export class BuildHtmlAppService {
           [outputPath, htmlFile.htmlFileName]
         )
       }));
+    allHtmlResults.forEach(htmlResult => this.fileUtils.writeTextFile(
+      htmlResult.htmlFileOutput, htmlResult.htmlFileResult
+    ));
+    // Build css
+    const allCssFiles = this.fileUtils.readAllCssFiles(inputPath);
     const allCssResults = allHtmlResults
       .map(htmlResult => htmlResult.htmlFileDependencies)
       .flat()
@@ -57,13 +63,14 @@ export class BuildHtmlAppService {
         acc.includes(curr) ? acc : [...acc, curr], [])
       .map(alias => this.processCssFile.process(alias))
       .join(NEW_LINE);
-    allHtmlResults.forEach(htmlResult => this.fileUtils.writeTextFile(
-      htmlResult.htmlFileOutput, htmlResult.htmlFileResult
-    ));
+    const cssResult = allCssFiles
+      .map(cssFile => this.fileUtils.readTextFile(cssFile))
+      .join(NEW_LINE)
+      .concat(allCssResults);
     const cssOutputPath: string = this.pathUtils.createPath([
       outputPath, "style.css"
     ]);
-    this.fileUtils.writeTextFile(cssOutputPath, allCssResults);
+    this.fileUtils.writeTextFile(cssOutputPath, cssResult);
     return true;
   }
 }
