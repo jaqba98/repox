@@ -32,6 +32,7 @@ export class ConvertModeToColorService {
       case LoggerModeEnum.plain:
         return FG_TEXT_GRAY;
       default:
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`The ${mode} is not supported logger type!`);
     }
   }
@@ -49,6 +50,7 @@ export class ConvertModeToColorService {
       case LoggerModeEnum.plain:
         return BG_TEXT_GRAY;
       default:
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`The ${mode} is not supported logger type!`);
     }
   }

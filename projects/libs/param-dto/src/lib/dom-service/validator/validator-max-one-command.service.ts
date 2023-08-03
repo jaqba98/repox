@@ -30,7 +30,7 @@ implements ValidatorDtoModel {
   runValidator (): ParamDtoValidationModel {
     const program = this.findParamDtoEntity.findPrograms()[0];
     const commands = this.findParamDtoEntity.findCommands();
-    if (!program && commands.length > 0) {
+    if (program === undefined && commands.length > 0) {
       return this.buildParamDtoResult.buildError(
         commands,
         ["You have specified the command without any program!"],

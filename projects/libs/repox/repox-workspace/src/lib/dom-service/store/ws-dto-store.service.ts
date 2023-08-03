@@ -120,8 +120,7 @@ export class WsDtoStoreService {
       return [];
     }
     const tsconfigDto = this.getWsTsconfigDto();
-    const indexPath = tsconfigDto.compilerOptions.paths[projectAlias];
-    return indexPath || [];
+    return tsconfigDto.compilerOptions.paths[projectAlias] ?? [];
   }
 
   verifyWsRepoxDto (): ValidatorResult {

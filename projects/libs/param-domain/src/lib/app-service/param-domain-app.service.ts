@@ -50,7 +50,7 @@ export class ParamDomainAppService {
     if (argumentValue === undefined) {
       return defaultValue;
     }
-    return argumentValue.values.at(0) || defaultValue;
+    return argumentValue.values.at(0) ?? defaultValue;
   }
 
   getCommandBooleanValue (argument: string): boolean {
@@ -66,7 +66,6 @@ export class ParamDomainAppService {
     if (argumentValue === undefined) {
       return defaultValue;
     }
-    const value = argumentValue.values.at(0);
-    return value || defaultValue;
+    return argumentValue.values.at(0) ?? defaultValue;
   }
 }

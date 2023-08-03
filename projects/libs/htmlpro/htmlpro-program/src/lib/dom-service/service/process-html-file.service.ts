@@ -77,6 +77,7 @@ export class ProcessHtmlFileService {
     let htmlFileContent = this.fileUtils.readTextFile(inputPath);
     attributes
       .map(attribute => ({
+        // eslint-disable-next-line no-useless-escape
         regex: `{{\s*${attribute.key}\s*}}`, value: attribute.value
       }))
       .forEach(attribute => {

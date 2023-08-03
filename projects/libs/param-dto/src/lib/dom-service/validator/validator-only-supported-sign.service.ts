@@ -61,7 +61,7 @@ implements ValidatorDtoModel {
   }
 
   private checkArgumentAndAlias (paramBaseValue: string): boolean {
-    return /^[a-zA-Z0-9-="'`,\/.\s@*]+$/gm.test(paramBaseValue);
+    return /^[a-zA-Z0-9-="'`,/.\s@*]+$/gm.test(paramBaseValue);
   }
 
   private getParamTip (paramDto: ParamDtoEntityModel): string {
