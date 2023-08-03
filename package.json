@@ -4,6 +4,9 @@
   "description": "Lightweight monorepo for many huge projects.",
   "author": "Jakub Olejarczyk",
   "license": "ISC",
+  "scripts": {
+    "repox:build:repox-website::local": "node dist/repox/projects/apps/repox/src/main.js build project --name=repox-website"
+  },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
     "@types/core-js": "^2.5.5",

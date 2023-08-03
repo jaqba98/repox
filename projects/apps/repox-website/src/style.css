@@ -29,3 +29,9 @@ body {
     --footer-copyright-padding: 1em;
     --footer-copyright-text-align: center;
 }
+
+@media only screen and (min-width: 2560px) {
+    body {
+        font-size: 125%;
+    }
+}
