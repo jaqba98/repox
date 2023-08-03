@@ -4,10 +4,6 @@
   "description": "Lightweight monorepo for many huge projects.",
   "author": "Jakub Olejarczyk",
   "license": "ISC",
-  "scripts": {
-    "build:htmlpro": "repox build project --name=htmlpro",
-    "run:htmlpro": "node dist/htmlpro/apps/htmlpro/src/main.js build --input=projects/apps/repox-website/src --output=dist/repox-website"
-  },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
     "@types/core-js": "^2.5.5",

@@ -4,6 +4,7 @@
       "name": "repox",
       "type": "app",
       "path": "projects/apps/repox",
+      "src": "projects/apps/repox/src",
       "scheme": "@app/ts",
       "build": {
         "output": "dist/repox",
@@ -24,78 +25,91 @@
       "name": "const",
       "type": "lib",
       "path": "projects/libs/const",
+      "src": "projects/libs/const/src",
       "scheme": "@lib/ts"
     },
     "logger": {
       "name": "logger",
       "type": "lib",
       "path": "projects/libs/logger",
+      "src": "projects/libs/logger/src",
       "scheme": "@lib/ts"
     },
     "param-domain": {
       "name": "param-domain",
       "type": "lib",
       "path": "projects/libs/param-domain",
+      "src": "projects/libs/param-domain/src",
       "scheme": "@lib/ts"
     },
     "param-dto": {
       "name": "param-dto",
       "type": "lib",
       "path": "projects/libs/param-dto",
+      "src": "projects/libs/param-dto/src",
       "scheme": "@lib/ts"
     },
     "launcher": {
       "name": "launcher",
       "type": "lib",
       "path": "projects/libs/launcher",
+      "src": "projects/libs/launcher/src",
       "scheme": "@lib/ts"
     },
     "repox-main": {
       "name": "repox-main",
       "type": "lib",
       "path": "projects/libs/repox/repox-main",
+      "src": "projects/libs/repox/repox-main/src",
       "scheme": "@lib/ts"
     },
     "repox-program": {
       "name": "repox-program",
       "type": "lib",
       "path": "projects/libs/repox/repox-program",
+      "src": "projects/libs/repox/repox-program/src",
       "scheme": "@lib/ts"
     },
     "repox-workspace": {
       "name": "repox-workspace",
       "type": "lib",
       "path": "projects/libs/repox/repox-workspace",
+      "src": "projects/libs/repox/repox-workspace/src",
       "scheme": "@lib/ts"
     },
     "utils": {
       "name": "utils",
       "type": "lib",
       "path": "projects/libs/utils",
+      "src": "projects/libs/utils/src",
       "scheme": "@lib/ts"
     },
     "model": {
       "name": "model",
       "type": "lib",
       "path": "projects/libs/model",
+      "src": "projects/libs/model/src",
       "scheme": "@lib/ts"
     },
     "repox-const": {
       "name": "repox-const",
       "type": "lib",
       "path": "projects/libs/repox/repox-const",
+      "src": "projects/libs/repox/repox-const/src",
       "scheme": "@lib/ts"
     },
     "repox-domain": {
       "name": "repox-domain",
       "type": "lib",
       "path": "projects/libs/repox/repox-domain",
+      "src": "projects/libs/repox/repox-domain/src",
       "scheme": "@lib/ts"
     },
     "repox-website": {
       "name": "repox-website",
       "type": "app",
       "path": "projects/apps/repox-website",
+      "src": "projects/apps/repox-website/src",
       "scheme": "@htmlpro",
       "build": {
         "output": "dist/repox-website",
@@ -115,6 +129,7 @@
       "name": "htmlpro",
       "type": "app",
       "path": "projects/apps/htmlpro",
+      "src": "projects/apps/htmlpro/src",
       "scheme": "@app/ts",
       "build": {
         "output": "dist/htmlpro",
@@ -131,6 +146,7 @@
       "name": "htmlpro-main",
       "type": "lib",
       "path": "projects/libs/htmlpro/htmlpro-main",
+      "src": "projects/libs/htmlpro/htmlpro-main/src",
       "scheme": "@lib/ts",
       "build": {}
     },
@@ -138,6 +154,7 @@
       "name": "htmlpro-domain",
       "type": "lib",
       "path": "projects/libs/htmlpro/htmlpro-domain",
+      "src": "projects/libs/htmlpro/htmlpro-domain/src",
       "scheme": "@lib/ts",
       "build": {}
     },
@@ -145,6 +162,7 @@
       "name": "htmlpro-program",
       "type": "lib",
       "path": "projects/libs/htmlpro/htmlpro-program",
+      "src": "projects/libs/htmlpro/htmlpro-program/src",
       "scheme": "@lib/ts",
       "build": {}
     },
@@ -152,6 +170,7 @@
       "name": "htmlpro-const",
       "type": "lib",
       "path": "projects/libs/htmlpro/htmlpro-const",
+      "src": "projects/libs/htmlpro/htmlpro-const/src",
       "scheme": "@lib/ts",
       "build": {}
     },
@@ -159,6 +178,7 @@
       "name": "program-step",
       "type": "lib",
       "path": "projects/libs/program-step",
+      "src": "projects/libs/program-step/src",
       "scheme": "@lib/ts",
       "build": {}
     },
@@ -166,6 +186,7 @@
       "name": "footer",
       "type": "lib",
       "path": "projects/libs/components/footer",
+      "src": "projects/libs/components/footer/src",
       "scheme": "@htmlpro",
       "build": {}
     },
@@ -173,6 +194,7 @@
       "name": "htmlpro-workspace",
       "type": "lib",
       "path": "projects/libs/htmlpro/htmlpro-workspace",
+      "src": "projects/libs/htmlpro/htmlpro-workspace/src",
       "scheme": "@lib/ts",
       "build": {}
     },
@@ -180,6 +202,7 @@
       "name": "head",
       "type": "lib",
       "path": "projects/libs/components/head",
+      "src": "projects/libs/components/head/src",
       "scheme": "@htmlpro",
       "build": {}
     },
@@ -187,6 +210,7 @@
       "name": "nav",
       "type": "lib",
       "path": "projects/libs/components/nav",
+      "src": "projects/libs/components/nav/src",
       "scheme": "@htmlpro",
       "build": {}
     },
@@ -194,6 +218,7 @@
       "name": "header",
       "type": "lib",
       "path": "projects/libs/components/header",
+      "src": "projects/libs/components/header/src",
       "scheme": "@htmlpro",
       "build": {}
     },
@@ -201,6 +226,7 @@
       "name": "statistics",
       "type": "lib",
       "path": "projects/libs/components/statistics",
+      "src": "projects/libs/components/statistics/src",
       "scheme": "@htmlpro",
       "build": {}
     },
@@ -208,6 +234,7 @@
       "name": "what-is",
       "type": "lib",
       "path": "projects/libs/components/what-is",
+      "src": "projects/libs/components/what-is/src",
       "scheme": "@htmlpro",
       "build": {}
     },
@@ -215,6 +242,7 @@
       "name": "support",
       "type": "lib",
       "path": "projects/libs/components/support",
+      "src": "projects/libs/components/support/src",
       "scheme": "@htmlpro",
       "build": {}
     }

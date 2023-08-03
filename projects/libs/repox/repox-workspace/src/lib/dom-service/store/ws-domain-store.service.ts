@@ -38,6 +38,7 @@ export class WsDomainStoreService {
             name: project.name ?? EMPTY_STRING,
             type: project.type ?? undefined,
             path: project.path ?? EMPTY_STRING,
+            src: project.src ?? EMPTY_STRING,
             scheme: project.scheme ?? undefined,
             build: {
               output: project.build?.output ?? EMPTY_STRING,
@@ -99,6 +100,9 @@ export class WsDomainStoreService {
       name: projectName,
       type: projectType,
       path: projectPath,
+      src: this.pathUtils.createPath(
+        [projectPath, WorkspaceFolderEnum.src]
+      ),
       scheme: projectScheme,
       build: this.getProjectBuild(
         projectType, projectScheme, projectPath, projectName

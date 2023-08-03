@@ -16,6 +16,7 @@ export const repoxJsonFileSchema: Schema = {
           name: { type: "string" },
           type: { type: "string" },
           path: { type: "string" },
+          src: { type: "string" },
           scheme: { type: "string" },
           build: {
             type: "object",
@@ -84,7 +85,7 @@ export const repoxJsonFileSchema: Schema = {
           }
         },
         additionalProperties: false,
-        required: ["name", "type", "path", "scheme"]
+        required: ["name", "type", "path", "src", "scheme"]
       }
     }
   },

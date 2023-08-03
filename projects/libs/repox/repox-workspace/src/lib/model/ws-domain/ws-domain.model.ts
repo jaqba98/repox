@@ -22,6 +22,7 @@ export interface WsProjectDomainModel {
   name: string;
   type: ProjectTypeEnum | undefined;
   path: string;
+  src: string;
   scheme: ProjectSchemeEnum | undefined;
   build: WsProjectBuildDomainModel;
   alias: string;

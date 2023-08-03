@@ -26,6 +26,7 @@ export interface WsRepoxProjectDtoModel {
   name?: string;
   type?: ProjectTypeEnum;
   path?: string;
+  src?: string;
   scheme?: ProjectSchemeEnum;
   build?: WsRepoxProjectBuildDtoModel;
 }
