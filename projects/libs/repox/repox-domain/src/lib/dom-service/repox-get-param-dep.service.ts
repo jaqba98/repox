@@ -157,6 +157,10 @@ export class RepoxGetParamDepService {
         [RepoxCommandEnum.default]: {
           command: RepoxCommandEnum.default,
           args: {}
+        },
+        [RepoxCommandEnum.project]: {
+          command: RepoxCommandEnum.project,
+          args: {}
         }
       },
       args: {}

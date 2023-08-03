@@ -8,7 +8,7 @@ import {
   BuildProjectProgramService,
   DefaultDefaultProgramService,
   GenerateProjectProgramService,
-  GenerateWorkspaceProgramService,
+  GenerateWorkspaceProgramService, LintProjectProgramService,
   PublishNpmProgramService
 } from "@lib/repox-program";
 
@@ -49,7 +49,7 @@ export class RepoxLaunchProgramAppService {
         {
           programName: RepoxProgramEnum.lint,
           commandName: RepoxCommandEnum.project,
-          service: container.resolve(PublishNpmProgramService)
+          service: container.resolve(LintProjectProgramService)
         }
       ]
     };
