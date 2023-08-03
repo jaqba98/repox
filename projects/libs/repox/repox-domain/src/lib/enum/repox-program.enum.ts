@@ -6,11 +6,13 @@ export enum RepoxProgramEnum {
   default = "default",
   generate = "generate",
   build = "build",
-  publish = "publish"
+  publish = "publish",
+  lint = "lint"
 }
 
 export enum RepoxProgramAliasEnum {
   generate = "g",
   build = "b",
-  publish = "p"
+  publish = "p",
+  lint = "l"
 }

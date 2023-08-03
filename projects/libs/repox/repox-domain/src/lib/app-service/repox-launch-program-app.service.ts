@@ -45,6 +45,11 @@ export class RepoxLaunchProgramAppService {
           programName: RepoxProgramEnum.publish,
           commandName: RepoxCommandEnum.npm,
           service: container.resolve(PublishNpmProgramService)
+        },
+        {
+          programName: RepoxProgramEnum.lint,
+          commandName: RepoxCommandEnum.project,
+          service: container.resolve(PublishNpmProgramService)
         }
       ]
     };

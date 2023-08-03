@@ -149,4 +149,17 @@ export class RepoxGetParamDepService {
       args: {}
     };
   }
+
+  getProgramLint (): ParamDomainDepModel {
+    return {
+      program: RepoxProgramEnum.lint,
+      commands: {
+        [RepoxCommandEnum.default]: {
+          command: RepoxCommandEnum.default,
+          args: {}
+        }
+      },
+      args: {}
+    };
+  }
 }

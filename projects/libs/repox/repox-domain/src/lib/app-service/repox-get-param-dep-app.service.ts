@@ -28,6 +28,8 @@ implements BaseGetParamDepModel {
         return this.repoxGetParamDep.getProgramBuild();
       case RepoxProgramEnum.publish:
         return this.repoxGetParamDep.getProgramPublish();
+      case RepoxProgramEnum.lint:
+        return this.repoxGetParamDep.getProgramLint();
       default:
         throw new Error(`No dependencies for ${program} program!`);
     }
