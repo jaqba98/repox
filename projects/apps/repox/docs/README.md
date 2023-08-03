@@ -146,6 +146,8 @@ Arguments of publish npm
       "type": "app",
       // Project path
       "path": "projects/apps/example-project-app",
+       // Project src path
+       "src": "projects/apps/example-project-app/src",
       // Project scheme
       "scheme": "@app/ts",
       // Build settings for project
@@ -173,6 +175,8 @@ Arguments of publish npm
       "type": "lib",
       // Project path
       "path": "projects/libs/example-project-lib",
+       // Project src path
+      "src": "projects/libs/example-project-lib/src",
       // Project scheme
       "scheme": "@lib/ts"
     },
@@ -184,6 +188,8 @@ Arguments of publish npm
       "type": "tool",
       // Project path
       "path": "projects/tool/example-project-tool",
+      // Project path
+      "src": "projects/tool/example-project-tool/src",
       // Project scheme
       "scheme": "@tool/ts"
     }
