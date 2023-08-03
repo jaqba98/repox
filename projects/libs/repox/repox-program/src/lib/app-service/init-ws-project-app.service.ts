@@ -37,7 +37,7 @@ export class InitWsProjectAppService {
     this.runCommand.runCommand("npm i tsc-alias@1.8.7 -D");
     this.runCommand.runCommand("npm i typescript@5.1.6 -D");
     // Init Eslint
-    this.runCommand.runNpxCommand("eslint --init --ext .ts");
+    this.runCommand.runNpxCommand("npm init @eslint/config");
     // Init git repository
     this.simpleMessage.writePlain("Init git repository");
     this.runCommand.runCommand("git config --global core.autocrlf false");
