@@ -2,8 +2,8 @@
   "name": "htmlpro",
   "version": "1.1.4",
   "description": "",
-  "main": "./apps/projects/htmlpro/src/main.js",
-  "bin": "./apps/projects/htmlpro/src/main.js",
+  "main": "./projects/apps/htmlpro/src/main.js",
+  "bin": "./projects/apps/htmlpro/src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
