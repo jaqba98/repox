@@ -14,6 +14,7 @@
     "semi": "off",
     "quotes": "off",
     "@typescript-eslint/semi": ["error", "always"],
-    "@typescript-eslint/quotes": ["error", "double"]
+    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/member-delimiter-style": "off"
   }
 }

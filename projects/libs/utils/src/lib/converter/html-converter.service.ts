@@ -1,5 +1,6 @@
 import { singleton } from "tsyringe";
 import { EMPTY_STRING } from "@lib/const";
+import type { HtmlJsonModel } from "../model/html-json.model";
 
 @singleton()
 /**
@@ -7,8 +8,8 @@ import { EMPTY_STRING } from "@lib/const";
  * json to html.
  */
 export class HtmlConverterService {
-  htmlToJson (html: string): any {
-    const result = html
+  htmlToJson (html: string): HtmlJsonModel[] {
+    return html
       .split(/>\s*</g)
       .filter(item => item !== EMPTY_STRING)
       .map(item => item.at(0) === "<" ? item : `<${item}`)
@@ -25,8 +26,23 @@ export class HtmlConverterService {
       .map(item => ({
         ...item,
         attributes: this.getAttributes(item.tagBase)
-      }));
-    console.log(result);
+      }))
+      .reduce((
+        acc: HtmlJsonModel[], curr: Omit<HtmlJsonModel, "children">
+      ): HtmlJsonModel[] => {
+        if (curr.tagType === "openTag") {
+          const newTag: HtmlJsonModel = { ...curr, children: [] };
+          if (acc.length > 0) {
+            acc[acc.length - 1].children.push(newTag);
+          } else {
+            acc.push(newTag);
+          }
+          return [...acc, newTag];
+        } else if (curr.tagType === "closeTag") {
+          acc.pop();
+        }
+        return acc;
+      }, []);
   }
 
   private getTagType (htmlItem: string): "openTag" | "closeTag" {
@@ -44,7 +60,9 @@ export class HtmlConverterService {
     return matches.map((match) => match.replace(/[</>]/g, ""))[0];
   }
 
-  private getAttributes (tagBase: string): any {
+  private getAttributes (
+    tagBase: string
+  ): HtmlJsonModel["attributes"] {
     const pattern = /(\S+)=([`'"])(.*?)\2/g;
     const attributes: Array<Record<string, string>> = [];
     let match;

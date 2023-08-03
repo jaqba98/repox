@@ -13,6 +13,7 @@
     "@types/core-js": "^2.5.5",
     "@types/jest": "^29.5.3",
     "@types/node": "^20.4.6",
+    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "eslint": "^8.46.0",
     "eslint-config-standard-with-typescript": "^37.0.0",
