@@ -120,11 +120,9 @@ export class BuildProjectAppService {
       this.folderUtils.createFolder(project.build.output);
     }
     this.copyAssets(project.build.assets);
-    project.build.pages.forEach(page => {
-      this.runCommandUtils.runNpxCommand(
-        `htmlpro build --input=${page.input} --output=${page.output}`
-      )
-    });
+    this.runCommandUtils.runNpxCommand(
+      `htmlpro build --input=${project.path} --output=${project.build.output}`
+    )
     return true;
   }
 

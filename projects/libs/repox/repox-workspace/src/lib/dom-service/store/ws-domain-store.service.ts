@@ -42,7 +42,6 @@ export class WsDomainStoreService {
             build: {
               output: project.build?.output ?? EMPTY_STRING,
               main: project.build?.main ?? EMPTY_STRING,
-              pages: project.build?.pages ?? [],
               assets: project.build?.assets ?? []
             },
             changed: false
@@ -122,7 +121,6 @@ export class WsDomainStoreService {
       return {
         output: EMPTY_STRING,
         main: EMPTY_STRING,
-        pages: [],
         assets: []
       };
     }
@@ -134,7 +132,6 @@ export class WsDomainStoreService {
             WorkspaceFolderEnum.dist, projectName
           ]),
           main: EMPTY_STRING,
-          pages: [],
           assets: []
         };
       case ProjectSchemeEnum.appTypeScript:
@@ -146,7 +143,6 @@ export class WsDomainStoreService {
             projectPath, WorkspaceFolderEnum.src,
             WorkspaceFileEnum.mainTs
           ]),
-          pages: [],
           assets: []
         };
       case ProjectSchemeEnum.libTypeScript:
@@ -154,7 +150,6 @@ export class WsDomainStoreService {
         return {
           output: EMPTY_STRING,
           main: EMPTY_STRING,
-          pages: [],
           assets: []
         };
       default:

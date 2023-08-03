@@ -14,8 +14,8 @@ import {
   LoadWsDomainAppService
 } from "../app-service/load-ws-domain-app.service";
 import {
-  BuildProjectRepoxCommandModel, BuildProjectRepoxProgramModel,
-  EmptyRepoxProgramModel
+  BuildProjectRepoxCommandModel,
+  BuildProjectRepoxProgramModel
 } from "@lib/repox-domain";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {

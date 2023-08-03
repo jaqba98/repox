@@ -70,34 +70,15 @@ export const repoxJsonFileSchema: Schema = {
         else: {
           if: {
             properties: {
-              type: {
-                const: "app"
-              },
               scheme: {
-                const: "@htmlpro"
+                const: "@app/ts"
               }
             }
           },
           then: {
             properties: {
               build: {
-                required: ["pages"]
-              }
-            }
-          },
-          else: {
-            if: {
-              properties: {
-                scheme: {
-                  const: "@app/ts"
-                }
-              }
-            },
-            then: {
-              properties: {
-                build: {
-                  required: ["output", "main"]
-                }
+                required: ["output", "main"]
               }
             }
           }
