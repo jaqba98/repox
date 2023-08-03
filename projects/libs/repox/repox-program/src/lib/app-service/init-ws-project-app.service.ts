@@ -21,10 +21,22 @@ export class InitWsProjectAppService {
     this.runCommand.runCommand("npm init -y");
     // Install dependencies
     this.simpleMessage.writePlain("Install dependencies");
+    this.runCommand.runCommand("npm i @types/jest -D");
+    this.runCommand.runCommand("npm i @types/node -D");
+    this.runCommand.runCommand("npm i @typescript-eslint/eslint-plugin -D");
+    this.runCommand.runCommand("npm i eslint -D");
+    this.runCommand.runCommand("npm i eslint-config-standard-with-typescript -D");
+    this.runCommand.runCommand("npm i eslint-plugin-import -D");
+    this.runCommand.runCommand("npm i eslint-plugin-n -D");
+    this.runCommand.runCommand("npm i eslint-plugin-promise -D");
     this.runCommand.runCommand("npm i htmlpro -D");
-    this.runCommand.runCommand("npm i typescript -D");
-    this.runCommand.runCommand("npm i tsc-alias -D");
     this.runCommand.runCommand("npm i jest -D");
+    this.runCommand.runCommand("npm i repox -D");
+    this.runCommand.runCommand("npm i ts-jest -D");
+    this.runCommand.runCommand("npm i tsc-alias -D");
+    this.runCommand.runCommand("npm i typescript -D");
+    // Init Eslint
+    this.runCommand.runNpxCommand("eslint --init --ext .ts");
     // Init git repository
     this.simpleMessage.writePlain("Init git repository");
     this.runCommand.runCommand("git init");
