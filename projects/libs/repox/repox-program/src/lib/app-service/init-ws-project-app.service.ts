@@ -31,7 +31,7 @@ export class InitWsProjectAppService {
     this.runCommand.runCommand("npm i eslint-plugin-promise@6.1.1 -D");
     this.runCommand.runCommand("npm i htmlpro@1.1.5 -D");
     this.runCommand.runCommand("npm i jest@29.6.2 -D");
-    this.runCommand.runCommand("npm i repox@1.4.5 -D");
+    this.runCommand.runCommand("npm i repox@1.4.6 -D");
     this.runCommand.runCommand("npm i ts-jest@29.1.1 -D");
     this.runCommand.runCommand("npm i ts-node@10.9.1 -D");
     this.runCommand.runCommand("npm i tsc-alias@1.8.7 -D");
@@ -40,6 +40,7 @@ export class InitWsProjectAppService {
     this.runCommand.runNpxCommand("eslint --init --ext .ts");
     // Init git repository
     this.simpleMessage.writePlain("Init git repository");
+    this.runCommand.runCommand("git config --global core.autocrlf false");
     this.runCommand.runCommand("git init");
     this.runCommand.runCommand("git add .");
     this.runCommand.runCommand("git commit -q -m \"init commit\"");
