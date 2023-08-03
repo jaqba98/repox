@@ -1,6 +1,8 @@
 .footer-menu {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color: var(--footer-menu-background);
 }
 
@@ -18,14 +20,13 @@
 
 @media only screen and (min-width: 768px) {
     .footer-menu {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        background-color: var(--footer-menu-background);
+        flex-direction: row;
+        justify-content: space-around;
     }
 }
 
 @media only screen and (min-width: 1024px) {
     .footer-menu {
-
+        justify-content: center;
     }
 }
