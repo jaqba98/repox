@@ -21,20 +21,21 @@ export class InitWsProjectAppService {
     this.runCommand.runCommand("npm init -y");
     // Install dependencies
     this.simpleMessage.writePlain("Install dependencies");
-    this.runCommand.runCommand("npm i @types/jest -D --force");
-    this.runCommand.runCommand("npm i @types/node -D --force");
-    this.runCommand.runCommand("npm i @typescript-eslint/eslint-plugin -D --force");
-    this.runCommand.runCommand("npm i eslint -D --force");
-    this.runCommand.runCommand("npm i eslint-config-standard-with-typescript -D --force");
-    this.runCommand.runCommand("npm i eslint-plugin-import -D --force");
-    this.runCommand.runCommand("npm i eslint-plugin-n -D --force");
-    this.runCommand.runCommand("npm i eslint-plugin-promise -D --force");
-    this.runCommand.runCommand("npm i htmlpro -D --force");
-    this.runCommand.runCommand("npm i jest -D --force");
-    this.runCommand.runCommand("npm i repox -D --force");
-    this.runCommand.runCommand("npm i ts-jest -D --force");
-    this.runCommand.runCommand("npm i tsc-alias -D --force");
-    this.runCommand.runCommand("npm i typescript -D --force");
+    this.runCommand.runCommand("npm i @types/jest@29.5.3 -D");
+    this.runCommand.runCommand("npm i @types/node@20.4.6 -D");
+    this.runCommand.runCommand("npm i @typescript-eslint/eslint-plugin@5.62.0 -D");
+    this.runCommand.runCommand("npm i eslint@8.46.0 -D");
+    this.runCommand.runCommand("npm i eslint-config-standard-with-typescript@37.0.0 -D");
+    this.runCommand.runCommand("npm i eslint-plugin-import@2.28.0 -D");
+    this.runCommand.runCommand("npm i eslint-plugin-n@16.0.1 -D");
+    this.runCommand.runCommand("npm i eslint-plugin-promise@6.1.1 -D");
+    this.runCommand.runCommand("npm i htmlpro@1.1.5 -D");
+    this.runCommand.runCommand("npm i jest@29.6.2 -D");
+    this.runCommand.runCommand("npm i repox@1.4.5 -D");
+    this.runCommand.runCommand("npm i ts-jest@29.1.1 -D");
+    this.runCommand.runCommand("npm i ts-node@10.9.1 -D");
+    this.runCommand.runCommand("npm i tsc-alias@1.8.7 -D");
+    this.runCommand.runCommand("npm i typescript@5.1.6 -D");
     // Init Eslint
     this.runCommand.runNpxCommand("eslint --init --ext .ts");
     // Init git repository
