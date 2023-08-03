@@ -48,6 +48,13 @@
       "styleUrls": [
         "projects/libs/components/footer-copyright/src/footer-copyright.css"
       ]
+    },
+    "@component/footer-menu": {
+      "alias": "@component/footer-menu",
+      "templateUrl": "projects/libs/components/footer-menu/src/footer-menu.html",
+      "styleUrls": [
+        "projects/libs/components/footer-menu/src/footer-menu.css"
+      ]
     }
   }
 }
