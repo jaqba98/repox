@@ -13,6 +13,7 @@ full support for multiple typescript projects.
     - [Create project](#create-project)
     - [Build project](#build-project)
     - [Publish npm](#publish-npm)
+    - [Lint project](#lint-project)
 
 2) Configurations
     - [repox.json file](#repox-json-file)
@@ -127,6 +128,16 @@ Arguments of publish npm
 | Argument | Alias | Description            | Required |
 |----------|-------|------------------------|----------|
 | --name   | -n    | Specify a project name | True     |
+
+<br>
+
+## <span id="lint-project">Lint project</span>
+
+To lint project use the command below.
+
+```shell
+repox lint project
+```
 
 <br>
 
