@@ -5,9 +5,9 @@ import {
 import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
-import { BaseGetParamDepModel } from "@lib/model";
+import { type BaseGetParamDepModel } from "@lib/model";
 import {
-  ValidatorDomainModel
+  type ValidatorDomainModel
 } from "../../model/validator/validator-domain.model";
 import {
   ValidatorProgramExistService
@@ -65,13 +65,13 @@ import {
  * 12.Verify that command arguments have correct value.
  */
 export class ValidationParamDomainService {
-  constructor(
+  constructor (
     private readonly buildParamDomain: BuildParamDomainResultService,
     private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidation(
+  runValidation (
     getParamDepService: BaseGetParamDepModel
   ): void {
     for (const service of this.getValidators()) {
@@ -85,7 +85,7 @@ export class ValidationParamDomainService {
     this.paramDomainStore.setParamDomainValidation(success);
   }
 
-  private getValidators(): Array<ValidatorDomainModel> {
+  private getValidators (): ValidatorDomainModel[] {
     return [
       ValidatorProgramExistService,
       ValidatorCommandExistService,

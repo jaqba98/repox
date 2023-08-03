@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { ParamDomainDepModel } from "@lib/param-domain";
-import { BaseGetParamDepModel } from "@lib/model";
+import { type ParamDomainDepModel } from "@lib/param-domain";
+import { type BaseGetParamDepModel } from "@lib/model";
 import {
   RepoxGetParamDepService
 } from "../dom-service/repox-get-param-dep.service";
@@ -12,13 +12,13 @@ import { RepoxProgramEnum } from "@lib/repox-domain";
  * programs, commands, and arguments.
  */
 export class RepoxGetParamDepAppService
-  implements BaseGetParamDepModel {
-  constructor(
+implements BaseGetParamDepModel {
+  constructor (
     private readonly repoxGetParamDep: RepoxGetParamDepService
   ) {
   }
 
-  getDependency(program: string): ParamDomainDepModel {
+  getDependency (program: string): ParamDomainDepModel {
     switch (program) {
       case RepoxProgramEnum.default:
         return this.repoxGetParamDep.getProgramDefault();

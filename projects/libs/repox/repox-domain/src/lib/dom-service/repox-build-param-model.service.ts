@@ -1,11 +1,11 @@
 import { singleton } from "tsyringe";
 import {
-  BuildProjectRepoxCommandModel, BuildProjectRepoxProgramModel,
-  DefaultDefaultRepoxProgramModel,
-  EmptyRepoxCommandModel,
-  EmptyRepoxProgramModel,
-  GenerateProjectRepoxCommandModel,
-  GenerateWorkspaceRepoxCommandModel, PublishNpmRepoxCommandModel,
+  type BuildProjectRepoxCommandModel, type BuildProjectRepoxProgramModel,
+  type DefaultDefaultRepoxProgramModel,
+  type EmptyRepoxCommandModel,
+  type EmptyRepoxProgramModel,
+  type GenerateProjectRepoxCommandModel,
+  type GenerateWorkspaceRepoxCommandModel, type PublishNpmRepoxCommandModel,
   RepoxArgumentEnum
 } from "@lib/repox-domain";
 import { ParamDomainAppService } from "@lib/param-domain";
@@ -20,18 +20,18 @@ import {
  * model for all kinds of programs and commends.
  */
 export class RepoxBuildParamModelService {
-  constructor(private readonly paramDomain: ParamDomainAppService) {
+  constructor (private readonly paramDomain: ParamDomainAppService) {
   }
 
-  emptyProgram(): EmptyRepoxProgramModel {
+  emptyProgram (): EmptyRepoxProgramModel {
     return {};
   }
 
-  emptyCommand(): EmptyRepoxCommandModel {
+  emptyCommand (): EmptyRepoxCommandModel {
     return {};
   }
 
-  defaultProgram(): DefaultDefaultRepoxProgramModel {
+  defaultProgram (): DefaultDefaultRepoxProgramModel {
     return {
       showVersion: this.paramDomain.getProgramBooleanValue(
         RepoxArgumentEnum.version
@@ -39,7 +39,7 @@ export class RepoxBuildParamModelService {
     };
   }
 
-  generateWorkspaceCommand(): GenerateWorkspaceRepoxCommandModel {
+  generateWorkspaceCommand (): GenerateWorkspaceRepoxCommandModel {
     return {
       workspaceName: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.name
@@ -47,26 +47,26 @@ export class RepoxBuildParamModelService {
     };
   }
 
-  generateProjectCommand(): GenerateProjectRepoxCommandModel {
+  generateProjectCommand (): GenerateProjectRepoxCommandModel {
     return {
       projectName: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.name
       ),
-      projectType: <ProjectTypeEnum>this.paramDomain
+      projectType: this.paramDomain
         .getCommandStringValue(
           RepoxArgumentEnum.type, ProjectTypeEnum.app
-        ),
-      projectScheme: <ProjectSchemeEnum>this.paramDomain
+        ) as ProjectTypeEnum,
+      projectScheme: this.paramDomain
         .getCommandStringValue(
           RepoxArgumentEnum.scheme, ProjectSchemeEnum.appTypeScript
-        ),
+        ) as ProjectSchemeEnum,
       projectPath: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.path
       )
     };
   }
 
-  buildProjectProgram(): BuildProjectRepoxProgramModel {
+  buildProjectProgram (): BuildProjectRepoxProgramModel {
     return {
       productionMode: this.paramDomain.getProgramBooleanValue(
         RepoxArgumentEnum.production
@@ -74,7 +74,7 @@ export class RepoxBuildParamModelService {
     };
   }
 
-  buildProjectCommand(): BuildProjectRepoxCommandModel {
+  buildProjectCommand (): BuildProjectRepoxCommandModel {
     return {
       projectName: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.name
@@ -85,7 +85,7 @@ export class RepoxBuildParamModelService {
     };
   }
 
-  publishNpmCommand(): PublishNpmRepoxCommandModel {
+  publishNpmCommand (): PublishNpmRepoxCommandModel {
     return {
       projectName: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.name

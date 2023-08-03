@@ -1,6 +1,6 @@
-import { BaseGetParamDepModel } from "@lib/model";
+import { type BaseGetParamDepModel } from "@lib/model";
 import {
-  ParamDomainValidationModel
+  type ParamDomainValidationModel
 } from "../param-domain/param-domain-validation.model";
 
 /**
@@ -8,7 +8,7 @@ import {
  * It defines the implementation of it.
  */
 export interface ValidatorDomainModel {
-  runValidator(
+  runValidator: (
     getParamDepService: BaseGetParamDepModel
-  ): ParamDomainValidationModel;
+  ) => ParamDomainValidationModel
 }

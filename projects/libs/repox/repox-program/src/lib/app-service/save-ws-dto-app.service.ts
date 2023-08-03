@@ -8,13 +8,13 @@ import { WsDtoStoreService } from "@lib/repox-workspace";
  * to the real files.
  */
 export class SaveWsDtoAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDtoStore: WsDtoStoreService
   ) {
   }
 
-  run(): boolean {
+  run (): boolean {
     this.simpleMessage.writePlain("Save workspace dto model");
     this.wsDtoStore.saveWsDto();
     return true;

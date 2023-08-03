@@ -1,4 +1,4 @@
-import { LoggerModeEnum } from "../enum/logger-mode.enum";
+import { type LoggerModeEnum } from "../enum/logger-mode.enum";
 
 /**
  * The logger domain model that stores data.
@@ -7,23 +7,23 @@ import { LoggerModeEnum } from "../enum/logger-mode.enum";
  */
 
 export interface LoggerWordModel {
-  content: string;
-  underscore: boolean;
+  content: string
+  underscore: boolean
 }
 
 export interface LoggerHeaderModel {
-  content: string;
-  visible: boolean;
+  content: string
+  visible: boolean
 }
 
 export interface LoggerLineModel {
-  mode: LoggerModeEnum;
-  logo: LoggerHeaderModel;
-  header: LoggerHeaderModel;
-  words: Array<LoggerWordModel>;
+  mode: LoggerModeEnum
+  logo: LoggerHeaderModel
+  header: LoggerHeaderModel
+  words: LoggerWordModel[]
   newline: number
 }
 
 export interface LoggerDomainModel {
-  lines: Array<LoggerLineModel>;
+  lines: LoggerLineModel[]
 }

@@ -9,15 +9,15 @@ import { PathUtilsService } from "@lib/utils";
  * is not exist.
  */
 export class HtmlProConfigNotExistAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly pathUtils: PathUtilsService
   ) {
   }
 
-  run(isForce: boolean): boolean {
+  run (isForce: boolean): boolean {
     this.simpleMessage.writePlain(
-      `Checking if HTMLPRO config file exist`
+      "Checking if HTMLPRO config file exist"
     );
     if (this.pathUtils.notExistPath(HtmlProFileEnum.htmlProJson)) {
       return true;

@@ -8,9 +8,9 @@ import {
   ProjectTypeEnum,
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
-  WsAssetsDomainModel,
+  type WsAssetsDomainModel,
   WsDomainStoreService,
-  WsProjectDomainModel
+  type WsProjectDomainModel
 } from "@lib/repox-workspace";
 import {
   FileUtilsService,
@@ -26,7 +26,7 @@ import { watch } from "fs";
  * to the dist folder.
  */
 export class BuildProjectAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDomainStore: WsDomainStoreService,
     private readonly pathUtils: PathUtilsService,
@@ -37,7 +37,7 @@ export class BuildProjectAppService {
   ) {
   }
 
-  run(projectName: string, buildWatch: boolean): boolean {
+  run (projectName: string, buildWatch: boolean): boolean {
     this.simpleMessage.writePlain("Build the project");
     const project = this.wsDomainStore.getProject(projectName);
     if (project === undefined) {
@@ -45,7 +45,7 @@ export class BuildProjectAppService {
         `The ${projectName} project does not exist!`
       );
       this.simpleMessage.writeWarning(
-        `Specify a different project name and restart the program`
+        "Specify a different project name and restart the program"
       );
       return false;
     }
@@ -72,7 +72,7 @@ export class BuildProjectAppService {
     return true;
   }
 
-  private buildWatch(project: WsProjectDomainModel): void {
+  private buildWatch (project: WsProjectDomainModel): void {
     const watcher = watch(
       WorkspaceFolderEnum.projects, { recursive: true }
     );
@@ -87,7 +87,7 @@ export class BuildProjectAppService {
     });
   }
 
-  private buildImmediately(project: WsProjectDomainModel): void {
+  private buildImmediately (project: WsProjectDomainModel): void {
     switch (project.scheme) {
       case ProjectSchemeEnum.blank:
         this.buildProjectBlank(project);
@@ -103,7 +103,7 @@ export class BuildProjectAppService {
     }
   }
 
-  private buildProjectBlank(
+  private buildProjectBlank (
     project: WsProjectDomainModel
   ): boolean {
     if (!this.pathUtils.existPath(project.build.output)) {
@@ -113,7 +113,7 @@ export class BuildProjectAppService {
     return true;
   }
 
-  private buildProjectHtmlPro(
+  private buildProjectHtmlPro (
     project: WsProjectDomainModel
   ): boolean {
     if (!this.pathUtils.existPath(project.build.output)) {
@@ -122,11 +122,11 @@ export class BuildProjectAppService {
     this.copyAssets(project.build.assets);
     this.runCommandUtils.runNpxCommand(
       `htmlpro build --input=${project.src} --output=${project.build.output}`
-    )
+    );
     return true;
   }
 
-  private buildProjectAppTypescript(
+  private buildProjectAppTypescript (
     project: WsProjectDomainModel
   ): boolean {
     const projectTsconfig = this.pathUtils.createPath([
@@ -134,7 +134,7 @@ export class BuildProjectAppService {
     ]);
     if (!this.pathUtils.existPath(projectTsconfig)) {
       this.simpleMessage.writeError(
-        `There is no tsconfig.json file for the project.`
+        "There is no tsconfig.json file for the project."
       );
       return false;
     }
@@ -153,7 +153,7 @@ export class BuildProjectAppService {
     return true;
   }
 
-  private copyAssets(assets: Array<WsAssetsDomainModel>): void {
+  private copyAssets (assets: WsAssetsDomainModel[]): void {
     assets
       .map(asset => ({
         output: asset.output,
@@ -163,8 +163,7 @@ export class BuildProjectAppService {
         file, output: asset.output
       })))
       .flat()
-      .forEach(asset =>
-        this.fileUtils.copyFile(asset.file, asset.output)
+      .forEach(asset => { this.fileUtils.copyFile(asset.file, asset.output); }
       );
   }
 }

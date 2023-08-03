@@ -2,7 +2,7 @@ import { container, singleton } from "tsyringe";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
-import { ValidatorDtoModel } from "../../model/validator-dto.model";
+import { type ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
   ValidatorOnlySupportedSignService
 } from "../validator/validator-only-supported-sign.service";
@@ -39,13 +39,13 @@ import {
  * 5.Verify that each part of the command are in correct order.
  */
 export class ValidationParamDtoService {
-  constructor(
+  constructor (
     private readonly paramDtoStore: ParamDtoStoreService,
     private readonly buildParamDtoResult: BuildParamDtoResultService
   ) {
   }
 
-  runValidation(): void {
+  runValidation (): void {
     for (const service of this.getValidators()) {
       const result = service.runValidator();
       if (!result.success) {
@@ -57,7 +57,7 @@ export class ValidationParamDtoService {
     this.paramDtoStore.setParamDtoValidation(success);
   }
 
-  private getValidators(): Array<ValidatorDtoModel> {
+  private getValidators (): ValidatorDtoModel[] {
     return [
       ValidatorOnlySupportedSignService,
       ValidatorCorrectPatternService,

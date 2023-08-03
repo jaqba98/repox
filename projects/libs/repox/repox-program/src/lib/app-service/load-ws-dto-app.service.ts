@@ -12,14 +12,14 @@ import {
  * and verify it.
  */
 export class LoadWsDtoAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly pathUtils: PathUtilsService,
     private readonly wsDtoStore: WsDtoStoreService
   ) {
   }
 
-  run(): boolean {
+  run (): boolean {
     this.simpleMessage.writePlain("Load workspace dto model");
     // Check if workspace files exist
     if (this.pathUtils.notExistPath(WorkspaceFileEnum.repoxJson)) {

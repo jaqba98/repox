@@ -7,13 +7,13 @@ import { WsDomainStoreService } from "@lib/repox-workspace";
  * The app service is responsible for load workspace domain model.
  */
 export class LoadWsDomainAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDomainStore: WsDomainStoreService
   ) {
   }
 
-  run(): boolean {
+  run (): boolean {
     this.simpleMessage.writePlain("Load workspace domain model");
     this.wsDomainStore.loadWsDomain();
     return true;

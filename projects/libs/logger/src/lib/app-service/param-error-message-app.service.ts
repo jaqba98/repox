@@ -23,7 +23,7 @@ import { EMPTY_STRING } from "@lib/const";
  * param error message on the console screen.
  */
 export class ParamErrorMessageAppService {
-  constructor(
+  constructor (
     private readonly buildMessage: BuildMessageService,
     private readonly buildLines: BuildLineService,
     private readonly buildParamError: BuildParamErrorMessageService,
@@ -32,11 +32,11 @@ export class ParamErrorMessageAppService {
   ) {
   }
 
-  writeParamError(
-    wrongParamIndexes: Array<number>,
-    baseValues: Array<string>,
-    errors: Array<string>,
-    tips: Array<string>,
+  writeParamError (
+    wrongParamIndexes: number[],
+    baseValues: string[],
+    errors: string[],
+    tips: string[],
     logo: string
   ): void {
     const outputMessage = this.buildMessage.build({

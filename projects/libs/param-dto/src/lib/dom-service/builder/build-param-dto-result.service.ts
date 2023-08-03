@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDtoEntityModel,
-  ParamDtoModel
+  type ParamDtoEntityModel,
+  type ParamDtoModel
 } from "../../model/param-dto.model";
 import {
-  ParamDtoValidationModel
+  type ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
 import {
   ParamDtoStoreService
@@ -16,10 +16,10 @@ import {
  * for success and error.
  */
 export class BuildParamDtoResultService {
-  constructor(private readonly paramDtoStore: ParamDtoStoreService) {
+  constructor (private readonly paramDtoStore: ParamDtoStoreService) {
   }
 
-  buildSuccess(): ParamDtoValidationModel {
+  buildSuccess (): ParamDtoValidationModel {
     const paramDto = this.paramDtoStore.getParamDto();
     return {
       success: true,
@@ -30,10 +30,10 @@ export class BuildParamDtoResultService {
     };
   }
 
-  buildError(
-    wrongParamsDto: Array<ParamDtoEntityModel>,
-    errors: Array<string>,
-    tips: Array<string>
+  buildError (
+    wrongParamsDto: ParamDtoEntityModel[],
+    errors: string[],
+    tips: string[]
   ): ParamDtoValidationModel {
     const paramDto = this.paramDtoStore.getParamDto();
     return {
@@ -45,7 +45,7 @@ export class BuildParamDtoResultService {
     };
   }
 
-  private getBaseValues(paramDto: ParamDtoModel): Array<string> {
+  private getBaseValues (paramDto: ParamDtoModel): string[] {
     return paramDto.params.map(param => param.paramBaseValue);
   }
 }

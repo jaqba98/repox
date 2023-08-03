@@ -1,11 +1,11 @@
 import { singleton } from "tsyringe";
-import { ValidatorDtoModel } from "../../model/validator-dto.model";
+import { type ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
-import { ParamDtoEntityModel } from "../../model/param-dto.model";
+import { type ParamDtoEntityModel } from "../../model/param-dto.model";
 import {
-  ParamDtoValidationModel
+  type ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 import {
@@ -17,14 +17,14 @@ import {
  * Check the given DTO parameters have correct pattern.
  */
 export class ValidatorCorrectPatternService
-  implements ValidatorDtoModel {
-  constructor(
+implements ValidatorDtoModel {
+  constructor (
     private readonly paramDtoStore: ParamDtoStoreService,
     private readonly buildParamDtoResult: BuildParamDtoResultService
   ) {
   }
 
-  runValidator(): ParamDtoValidationModel {
+  runValidator (): ParamDtoValidationModel {
     const paramDto = this.paramDtoStore.getParamDto();
     const wrongParamsDto = paramDto.params.filter(
       param => !this.checkParamPattern(param)
@@ -39,7 +39,7 @@ export class ValidatorCorrectPatternService
     );
   }
 
-  private checkParamPattern(paramDto: ParamDtoEntityModel): boolean {
+  private checkParamPattern (paramDto: ParamDtoEntityModel): boolean {
     const { paramBaseValue, paramType, paramHasValue } = paramDto;
     switch (paramType) {
       case ParamTypeEnum.executor:
@@ -57,29 +57,29 @@ export class ValidatorCorrectPatternService
     }
   }
 
-  private checkProgramAndCommand(paramBaseValue: string): boolean {
+  private checkProgramAndCommand (paramBaseValue: string): boolean {
     return /^.*$/gm.test(paramBaseValue);
   }
 
-  private checkArgument(
+  private checkArgument (
     paramHasValue: boolean,
     baseValue: string
   ): boolean {
-    return paramHasValue ?
-      /^--[a-zA-Z0-9-]+=[a-zA-Z0-9-"'/`,.\s@*]+$/gm.test(baseValue) :
-      /^--[a-zA-Z0-9-/]+$/gm.test(baseValue);
+    return paramHasValue
+      ? /^--[a-zA-Z0-9-]+=[a-zA-Z0-9-"'/`,.\s@*]+$/gm.test(baseValue)
+      : /^--[a-zA-Z0-9-/]+$/gm.test(baseValue);
   }
 
-  private checkAlias(
+  private checkAlias (
     paramHasValue: boolean,
     paramBaseValue: string
   ): boolean {
-    return paramHasValue ?
-      /^-[a-zA-Z0-9-]=[a-zA-Z0-9-"'`,.\s@*]+$/gm.test(paramBaseValue) :
-      /^-[a-zA-Z0-9-]$/gm.test(paramBaseValue);
+    return paramHasValue
+      ? /^-[a-zA-Z0-9-]=[a-zA-Z0-9-"'`,.\s@*]+$/gm.test(paramBaseValue)
+      : /^-[a-zA-Z0-9-]$/gm.test(paramBaseValue);
   }
 
-  private getParamTip(paramDto: ParamDtoEntityModel): string {
+  private getParamTip (paramDto: ParamDtoEntityModel): string {
     const { paramType, paramBaseValue } = paramDto;
     switch (paramType) {
       case ParamTypeEnum.program:
@@ -103,7 +103,7 @@ export class ValidatorCorrectPatternService
     }
   }
 
-  private buildCorrectPatternMessage(
+  private buildCorrectPatternMessage (
     paramBaseValue: string,
     pattern: string
   ): string {

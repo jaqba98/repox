@@ -1,11 +1,11 @@
 import { singleton } from "tsyringe";
-import { RunProgramModel } from "@lib/model";
+import { type RunProgramModel } from "@lib/model";
 import {
   BuildHtmlStepService
 } from "../step/build-html-step.service";
 import {
-  BuildDefaultHtmlProProgramModel,
-  EmptyHtmlProCommandModel
+  type BuildDefaultHtmlProProgramModel,
+  type EmptyHtmlProCommandModel
 } from "@lib/htmlpro-domain";
 
 @singleton()
@@ -13,13 +13,12 @@ import {
  * The start point of the program build html.
  */
 export class BuildDefaultProgramService implements RunProgramModel {
-  constructor(private readonly step: BuildHtmlStepService) {
+  constructor (private readonly step: BuildHtmlStepService) {
   }
 
-  runProgram(programDomain: unknown, commandDomain: unknown): void {
-    const programModel = <BuildDefaultHtmlProProgramModel>
-      programDomain;
-    const commandModel = <EmptyHtmlProCommandModel>commandDomain;
+  runProgram (programDomain: unknown, commandDomain: unknown): void {
+    const programModel = programDomain as BuildDefaultHtmlProProgramModel;
+    const commandModel = commandDomain as EmptyHtmlProCommandModel;
     this.step.runSteps(programModel, commandModel);
   }
 }

@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
 import { DisplayVersionAppService } from "@lib/program-step";
 import {
-  DefaultDefaultRepoxProgramModel,
-  EmptyRepoxCommandModel
+  type DefaultDefaultRepoxProgramModel,
+  type EmptyRepoxCommandModel
 } from "@lib/repox-domain";
 import { REPOX_VERSION } from "@lib/repox-const";
 
@@ -11,12 +11,12 @@ import { REPOX_VERSION } from "@lib/repox-const";
  * The list of steps for the program default.
  */
 export class DefaultDefaultStepService {
-  constructor(
+  constructor (
     private readonly displayVersion: DisplayVersionAppService
   ) {
   }
 
-  runSteps(
+  runSteps (
     programModel: DefaultDefaultRepoxProgramModel,
     commandModel: EmptyRepoxCommandModel
   ): void {

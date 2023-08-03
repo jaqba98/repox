@@ -1,11 +1,11 @@
 import { singleton } from "tsyringe";
 import { FileUtilsService } from "@lib/utils";
 import {
-  HtmlProComponentsDomainModel,
-  HtmlProDomainModel, HtmProComponentDomainModel
+  type HtmlProDomainModel,
+  type HtmProComponentDomainModel
 } from "../model/html-pro-domain.model";
 import { HtmlProFileEnum } from "../enum/html-pro-file.enum";
-import { Validator, ValidatorResult } from "jsonschema";
+import { Validator, type ValidatorResult } from "jsonschema";
 import { htmlProJsonFileSchema } from "../const/schema.const";
 
 @singleton()
@@ -16,18 +16,18 @@ import { htmlProJsonFileSchema } from "../const/schema.const";
 export class HtmlProDomainStoreService {
   private htmlProDomain: HtmlProDomainModel | undefined;
 
-  constructor(
+  constructor (
     private readonly fileUtils: FileUtilsService,
     private readonly validator: Validator
   ) {
   }
 
-  loadHtmlProDomain(): void {
+  loadHtmlProDomain (): void {
     this.htmlProDomain = this.fileUtils
       .readJsonFile<HtmlProDomainModel>(HtmlProFileEnum.htmlProJson);
   }
 
-  verifyHtmlProDomain(): ValidatorResult {
+  verifyHtmlProDomain (): ValidatorResult {
     this.validator.addSchema(
       htmlProJsonFileSchema, "/HtmlProJsonFileSchema"
     );
@@ -36,14 +36,14 @@ export class HtmlProDomainStoreService {
     );
   }
 
-  getHtmlProDomain(): HtmlProDomainModel {
+  getHtmlProDomain (): HtmlProDomainModel {
     if (this.htmlProDomain === undefined) {
       throw new Error("The store is undefined!");
     }
     return this.htmlProDomain;
   }
 
-  getComponent(componentAlias: string): HtmProComponentDomainModel {
+  getComponent (componentAlias: string): HtmProComponentDomainModel {
     const comp = Object.values(this.getHtmlProDomain().components)
       .find(component => component.alias === componentAlias);
     if (comp === undefined) {

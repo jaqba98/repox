@@ -19,7 +19,7 @@ import {
  * the logger mode to the color value.
  */
 export class ConvertModeToColorService {
-  convertToFg(mode: LoggerModeEnum): string {
+  convertToFg (mode: LoggerModeEnum): string {
     switch (mode) {
       case LoggerModeEnum.success:
         return FG_TEXT_GREEN;
@@ -36,7 +36,7 @@ export class ConvertModeToColorService {
     }
   }
 
-  convertToBg(mode: LoggerModeEnum): string {
+  convertToBg (mode: LoggerModeEnum): string {
     switch (mode) {
       case LoggerModeEnum.success:
         return BG_TEXT_GREEN;

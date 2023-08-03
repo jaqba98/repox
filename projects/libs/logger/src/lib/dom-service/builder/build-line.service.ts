@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { LoggerLineModel } from "../../model/logger-domain.model";
+import { type LoggerLineModel } from "../../model/logger-domain.model";
 import { LoggerModeEnum } from "../../enum/logger-mode.enum";
 import { ERR, TIP } from "../../const/logger.const";
 import { EMPTY_STRING } from "@lib/const";
@@ -10,18 +10,18 @@ import { EMPTY_STRING } from "@lib/const";
  * lines of errors and tips.
  */
 export class BuildLineService {
-  buildErrorLines(errors: Array<string>): Array<LoggerLineModel> {
+  buildErrorLines (errors: string[]): LoggerLineModel[] {
     return this.baseBuildLine(errors, LoggerModeEnum.error);
   }
 
-  buildTipLines(tips: Array<string>): Array<LoggerLineModel> {
+  buildTipLines (tips: string[]): LoggerLineModel[] {
     return this.baseBuildLine(tips, LoggerModeEnum.warning);
   }
 
-  private baseBuildLine(
-    lines: Array<string>,
+  private baseBuildLine (
+    lines: string[],
     mode: LoggerModeEnum
-  ): Array<LoggerLineModel> {
+  ): LoggerLineModel[] {
     const headerContent = this.getLineHeader(mode);
     return lines.map(line => ({
       mode,
@@ -32,7 +32,7 @@ export class BuildLineService {
     }));
   }
 
-  private getLineHeader(mode: LoggerModeEnum): string {
+  private getLineHeader (mode: LoggerModeEnum): string {
     switch (mode) {
       case LoggerModeEnum.error:
         return ERR;

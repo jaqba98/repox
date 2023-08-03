@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDomainArgModel
+  type ParamDomainArgModel
 } from "../../model/param-domain/param-domain.model";
-import { ParamDomainDepArgsModel } from "@lib/param-domain";
+import { type ParamDomainDepArgsModel } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -10,10 +10,10 @@ import { ParamDomainDepArgsModel } from "@lib/param-domain";
  * for given argument.
  */
 export class CheckArgumentService {
-  valueMode(
+  valueMode (
     paramArg: ParamDomainArgModel,
     paramDomainDepArgs: ParamDomainDepArgsModel
-  ): { success: boolean; error: string; index: number; } {
+  ): { success: boolean, error: string, index: number } {
     const arg = paramDomainDepArgs[paramArg.name];
     const { valueMode } = arg;
     if (valueMode === "empty" && paramArg.values.length !== 0) {
@@ -40,10 +40,10 @@ export class CheckArgumentService {
     return { success: true, error: "", index: paramArg.index };
   }
 
-  argumentValue(
+  argumentValue (
     paramArg: ParamDomainArgModel,
     paramDomainDepArgs: ParamDomainDepArgsModel
-  ): { success: boolean; error: string; index: number; } {
+  ): { success: boolean, error: string, index: number } {
     const arg = paramDomainDepArgs[paramArg.name];
     if (arg.values.length === 0) {
       return { success: true, error: "", index: paramArg.index };
@@ -53,8 +53,8 @@ export class CheckArgumentService {
     if (wrongValues.length === 0) {
       return { success: true, error: "", index: paramArg.index };
     }
-    const errorValues = wrongValues.join(',');
-    const supportedValues = arg.values.join(',');
+    const errorValues = wrongValues.join(",");
+    const supportedValues = arg.values.join(",");
     return {
       success: false,
       error: `The argument cannot contain values: ${errorValues},`

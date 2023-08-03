@@ -8,13 +8,13 @@ import { RunCommandUtilsService } from "@lib/utils";
  * with all required dependencies.
  */
 export class InitWsProjectAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly runCommand: RunCommandUtilsService
   ) {
   }
 
-  run(): boolean {
+  run (): boolean {
     this.simpleMessage.writePlain("Init workspace project");
     // Init npm project
     this.simpleMessage.writePlain("Init npm project");
@@ -29,7 +29,7 @@ export class InitWsProjectAppService {
     this.simpleMessage.writePlain("Init git repository");
     this.runCommand.runCommand("git init");
     this.runCommand.runCommand("git add .");
-    this.runCommand.runCommand('git commit -q -m "init commit"');
+    this.runCommand.runCommand("git commit -q -m \"init commit\"");
     return true;
   }
 }

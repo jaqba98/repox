@@ -3,15 +3,13 @@
  */
 
 export interface HtmProComponentDomainModel {
-  alias: string;
-  templateUrl: string;
-  styleUrls: Array<string>;
+  alias: string
+  templateUrl: string
+  styleUrls: string[]
 }
 
-export interface HtmlProComponentsDomainModel {
-  [component: string]: HtmProComponentDomainModel;
-}
+export type HtmlProComponentsDomainModel = Record<string, HtmProComponentDomainModel>;
 
 export interface HtmlProDomainModel {
-  components: HtmlProComponentsDomainModel;
+  components: HtmlProComponentsDomainModel
 }

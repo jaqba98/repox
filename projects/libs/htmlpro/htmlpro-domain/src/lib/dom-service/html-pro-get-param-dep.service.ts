@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { ParamDomainDepModel } from "@lib/param-domain";
+import { type ParamDomainDepModel } from "@lib/param-domain";
 import {
   HtmlProArgumentEnum,
   HtmlProCommandEnum,
@@ -12,7 +12,7 @@ import {
  * for given program.
  */
 export class HtmlProGetParamDepService {
-  getProgramDefault(): ParamDomainDepModel {
+  getProgramDefault (): ParamDomainDepModel {
     return {
       program: HtmlProProgramEnum.default,
       commands: {
@@ -32,7 +32,7 @@ export class HtmlProGetParamDepService {
     };
   }
 
-  getProgramInit(): ParamDomainDepModel {
+  getProgramInit (): ParamDomainDepModel {
     return {
       program: HtmlProProgramEnum.init,
       commands: {
@@ -52,7 +52,7 @@ export class HtmlProGetParamDepService {
     };
   }
 
-  getProgramBuild(): ParamDomainDepModel {
+  getProgramBuild (): ParamDomainDepModel {
     return {
       program: HtmlProProgramEnum.build,
       commands: {

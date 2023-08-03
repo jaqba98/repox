@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  ValidatorDomainModel
+  type ValidatorDomainModel
 } from "../../model/validator/validator-domain.model";
 import {
   BuildParamDomainResultService
@@ -11,11 +11,11 @@ import {
 import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
-import { BaseGetParamDepModel } from "@lib/model";
+import { type BaseGetParamDepModel } from "@lib/model";
 import {
-  ParamDomainValidationModel
+  type ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
-import { ParamDomainDepModel } from "@lib/param-domain";
+import { type ParamDomainDepModel } from "@lib/param-domain";
 import { BaseParamTypeEnum } from "../../enum/base-param-type.enum";
 
 @singleton()
@@ -24,15 +24,15 @@ import { BaseParamTypeEnum } from "../../enum/base-param-type.enum";
  * arguments have correct value.
  */
 export class ValidatorProgramArgIsCorrectValueService
-  implements ValidatorDomainModel {
-  constructor(
+implements ValidatorDomainModel {
+  constructor (
     private readonly buildParamDomain: BuildParamDomainResultService,
     private readonly checkArgument: CheckArgumentService,
     private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
+  runValidator (
     getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();

@@ -6,12 +6,12 @@ import { SimpleMessageAppService } from "@lib/logger";
  * The app service is responsible for display a version.
  */
 export class DisplayVersionAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
 
-  displayRepoxVersion(version: string): void {
+  displayRepoxVersion (version: string): void {
     this.simpleMessage.writeInfo(version);
   }
 }

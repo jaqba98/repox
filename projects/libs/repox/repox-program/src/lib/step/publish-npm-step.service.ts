@@ -15,8 +15,8 @@ import {
   LoadWsDomainAppService
 } from "../app-service/load-ws-domain-app.service";
 import {
-  EmptyRepoxProgramModel,
-  PublishNpmRepoxCommandModel
+  type EmptyRepoxProgramModel,
+  type PublishNpmRepoxCommandModel
 } from "@lib/repox-domain";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
@@ -36,7 +36,7 @@ import {
  * The list of steps for the program publish npm.
  */
 export class PublishNpmStepService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
@@ -51,7 +51,7 @@ export class PublishNpmStepService {
   ) {
   }
 
-  runSteps(
+  runSteps (
     programModel: EmptyRepoxProgramModel,
     commandModel: PublishNpmRepoxCommandModel
   ): void {

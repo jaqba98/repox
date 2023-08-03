@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
-import { ParamDtoModel } from "../../model/param-dto.model";
+import { type ParamDtoModel } from "../../model/param-dto.model";
 import {
-  ParamDtoValidationModel
+  type ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
 
 @singleton()
@@ -13,24 +13,24 @@ export class ParamDtoStoreService {
   private paramDto: ParamDtoModel | undefined;
   private paramDtoValidation: ParamDtoValidationModel | undefined;
 
-  setParamDto(paramDto: ParamDtoModel): void {
+  setParamDto (paramDto: ParamDtoModel): void {
     this.paramDto = paramDto;
   }
 
-  getParamDto(): ParamDtoModel {
+  getParamDto (): ParamDtoModel {
     if (this.paramDto === undefined) {
       throw new Error("The param dto store is undefined!");
     }
     return this.paramDto;
   }
 
-  setParamDtoValidation(
+  setParamDtoValidation (
     paramDtoValidation: ParamDtoValidationModel
   ): void {
     this.paramDtoValidation = paramDtoValidation;
   }
 
-  getParamDtoValidation(): ParamDtoValidationModel {
+  getParamDtoValidation (): ParamDtoValidationModel {
     if (this.paramDtoValidation === undefined) {
       throw new Error("The param dto validation store is undefined!");
     }

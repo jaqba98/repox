@@ -13,19 +13,19 @@ import { EMPTY_STRING } from "@lib/const";
  * for other projects.
  */
 export class GetParamDtoNameAppService {
-  constructor(
+  constructor (
     private readonly paramDtoStore: ParamDtoStoreService,
     private readonly findParamDtoEntity: FindParamDtoEntityService
   ) {
   }
 
-  getProgramName(): string {
+  getProgramName (): string {
     const program = this.findParamDtoEntity.findPrograms().at(0);
-    return program ? program.paramName : EMPTY_STRING;
+    return (program != null) ? program.paramName : EMPTY_STRING;
   }
 
-  getCommandName(): string {
+  getCommandName (): string {
     const command = this.findParamDtoEntity.findCommands().at(0);
-    return command ? command.paramName : EMPTY_STRING;
+    return (command != null) ? command.paramName : EMPTY_STRING;
   }
 }

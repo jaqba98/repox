@@ -3,9 +3,9 @@ import {
   ConvertModeToColorService
 } from "../converter/convert-mode-to-color.service";
 import {
-  LoggerDomainModel,
-  LoggerLineModel,
-  LoggerWordModel
+  type LoggerDomainModel,
+  type LoggerLineModel,
+  type LoggerWordModel
 } from "../../model/logger-domain.model";
 import { EMPTY_STRING, NEW_LINE, SPACE } from "@lib/const";
 import {
@@ -23,27 +23,27 @@ import {
  * ready to be displayed on the console screen.
  */
 export class BuildMessageService {
-  constructor(
+  constructor (
     private readonly convertModeToColor: ConvertModeToColorService
   ) {
   }
 
-  build(loggerDomain: LoggerDomainModel): string {
+  build (loggerDomain: LoggerDomainModel): string {
     return loggerDomain.lines
       .map(line => this.buildLine(line))
       .join(NEW_LINE);
   }
 
-  private buildLine(loggerLine: LoggerLineModel): string {
+  private buildLine (loggerLine: LoggerLineModel): string {
     const { mode, logo, header, words } = loggerLine;
     const fgColor = this.convertModeToColor.convertToFg(mode);
     const bgColor = this.convertModeToColor.convertToBg(mode);
-    const logoContent = logo.visible ?
-      buildLogo(bgColor, logo.content) :
-      buildEmptyMessage();
-    const headerContent = header.visible ?
-      buildHeader(bgColor, header.content) :
-      buildEmptyMessage();
+    const logoContent = logo.visible
+      ? buildLogo(bgColor, logo.content)
+      : buildEmptyMessage();
+    const headerContent = header.visible
+      ? buildHeader(bgColor, header.content)
+      : buildEmptyMessage();
     const message = this.buildMessage(words, fgColor);
     const newline = buildNewLine(loggerLine.newline);
     return [logoContent, headerContent, message, newline]
@@ -52,7 +52,7 @@ export class BuildMessageService {
       .join(SPACE);
   }
 
-  private buildMessage(
+  private buildMessage (
     words: LoggerLineModel["words"],
     fgColor: string
   ): string {
@@ -62,13 +62,13 @@ export class BuildMessageService {
       .join(SPACE);
   }
 
-  private buildMessageWord(
+  private buildMessageWord (
     word: LoggerWordModel,
     fgColor: string
   ): string {
     const { content, underscore } = word;
-    return underscore ?
-      buildUnderscoreWord(fgColor, content) :
-      buildWord(fgColor, content);
+    return underscore
+      ? buildUnderscoreWord(fgColor, content)
+      : buildWord(fgColor, content);
   }
 }

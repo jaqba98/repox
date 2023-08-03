@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  ValidatorDomainModel
+  type ValidatorDomainModel
 } from "../../model/validator/validator-domain.model";
 import {
   BuildParamDomainResultService
@@ -8,11 +8,11 @@ import {
 import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
-import { BaseGetParamDepModel } from "@lib/model";
+import { type BaseGetParamDepModel } from "@lib/model";
 import {
-  ParamDomainValidationModel
+  type ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
-import { ParamDomainDepModel } from "@lib/param-domain";
+import { type ParamDomainDepModel } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -20,14 +20,14 @@ import { ParamDomainDepModel } from "@lib/param-domain";
  * does not contain wrong arguments.
  */
 export class ValidatorProgramNotWrongArgumentsService
-  implements ValidatorDomainModel {
-  constructor(
+implements ValidatorDomainModel {
+  constructor (
     private readonly buildParamDomain: BuildParamDomainResultService,
     private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
+  runValidator (
     getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
@@ -36,12 +36,12 @@ export class ValidatorProgramNotWrongArgumentsService
       .getDependency(programName);
     const programArgs = Object.values(programDep.args);
     const wrongArgs = paramDomain.program.args.filter(arg =>
-      !programArgs.find(programArg => programArg.name === arg.name)
+      programArgs.find(programArg => programArg.name === arg.name) == null
     );
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess();
     }
-    const notExistedArgs = wrongArgs.map(arg => arg.name).join(',');
+    const notExistedArgs = wrongArgs.map(arg => arg.name).join(",");
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
       ["You have specified not existed arguments for program!"],

@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  ValidatorDomainModel
+  type ValidatorDomainModel
 } from "../../model/validator/validator-domain.model";
 import {
   BuildParamDomainResultService
@@ -8,11 +8,11 @@ import {
 import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
-import { BaseGetParamDepModel } from "@lib/model";
+import { type BaseGetParamDepModel } from "@lib/model";
 import {
-  ParamDomainValidationModel
+  type ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
-import { ParamDomainDepModel } from "@lib/param-domain";
+import { type ParamDomainDepModel } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -20,14 +20,14 @@ import { ParamDomainDepModel } from "@lib/param-domain";
  * that given program contain given command.
  */
 export class ValidatorProgramContainsCommandService
-  implements ValidatorDomainModel {
-  constructor(
+implements ValidatorDomainModel {
+  constructor (
     private readonly buildParamDomain: BuildParamDomainResultService,
     private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
+  runValidator (
     getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
@@ -35,7 +35,7 @@ export class ValidatorProgramContainsCommandService
     const commandName = paramDomain.command.name;
     const programDep: ParamDomainDepModel = getParamDepService
       .getDependency(programName);
-    if (programDep.commands[commandName]) {
+    if (programDep.commands[commandName] !== undefined) {
       return this.buildParamDomain.buildSuccess();
     }
     return this.buildParamDomain.buildError(

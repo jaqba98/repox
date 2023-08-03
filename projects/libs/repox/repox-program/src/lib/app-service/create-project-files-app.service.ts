@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
-  CreateWsFileAppService, ProjectSchemeEnum,
-  ProjectTypeEnum,
+  CreateWsFileAppService,
+  ProjectSchemeEnum,
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
   WsDomainStoreService
@@ -20,7 +20,7 @@ import {
  * of files and folders.
  */
 export class CreateProjectFilesAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDomainStore: WsDomainStoreService,
     private readonly pathUtils: PathUtilsService,
@@ -31,12 +31,12 @@ export class CreateProjectFilesAppService {
   ) {
   }
 
-  run(projectName: string): boolean {
+  run (projectName: string): boolean {
     this.simpleMessage.writePlain(
-      `Creating a project workspace structure`
+      "Creating a project workspace structure"
     );
     const project = this.wsDomainStore.getProject(projectName);
-    if (!project) {
+    if (project == null) {
       this.simpleMessage.writeError(
         `Project ${projectName} does not exist in the store!`
       );
@@ -64,7 +64,7 @@ export class CreateProjectFilesAppService {
     return true;
   }
 
-  private createBlankProjectStructure(projectPath: string): void {
+  private createBlankProjectStructure (projectPath: string): void {
     this.folderUtils.createFolder(projectPath);
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
@@ -78,7 +78,7 @@ export class CreateProjectFilesAppService {
     );
   }
 
-  private createHtmlProProjectStructure(projectPath: string): void {
+  private createHtmlProProjectStructure (projectPath: string): void {
     this.folderUtils.createFolder(projectPath);
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
@@ -92,7 +92,7 @@ export class CreateProjectFilesAppService {
     );
   }
 
-  private createAppTsProjectStructure(projectPath: string): void {
+  private createAppTsProjectStructure (projectPath: string): void {
     this.folderUtils.createFolder(projectPath);
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
@@ -110,7 +110,7 @@ export class CreateProjectFilesAppService {
     );
   }
 
-  private createLibToolTsProjectStructure(projectPath: string): void {
+  private createLibToolTsProjectStructure (projectPath: string): void {
     this.folderUtils.createFolder(projectPath);
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);

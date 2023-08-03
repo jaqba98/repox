@@ -5,8 +5,8 @@ import {
 } from "@lib/logger";
 import { HTML_PRO_LOGO } from "@lib/htmlpro-const";
 import {
-  BuildDefaultHtmlProProgramModel,
-  EmptyHtmlProCommandModel
+  type BuildDefaultHtmlProProgramModel,
+  type EmptyHtmlProCommandModel
 } from "@lib/htmlpro-domain";
 import {
   AllProgramInstalledService,
@@ -19,14 +19,13 @@ import {
 import {
   BuildHtmlAppService
 } from "../app-service/build-html-app.service";
-import { FileUtilsService } from "@lib/utils";
 
 @singleton()
 /**
  * The list of steps for the program build html.
  */
 export class BuildHtmlStepService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
@@ -37,7 +36,7 @@ export class BuildHtmlStepService {
   ) {
   }
 
-  runSteps(
+  runSteps (
     programModel: BuildDefaultHtmlProProgramModel,
     commandModel: EmptyHtmlProCommandModel
   ): void {

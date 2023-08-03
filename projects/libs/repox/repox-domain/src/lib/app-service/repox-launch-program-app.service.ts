@@ -1,5 +1,5 @@
 import { container, singleton } from "tsyringe";
-import { LauncherModel } from "@lib/launcher";
+import { type LauncherModel } from "@lib/launcher";
 import {
   RepoxCommandEnum,
   RepoxProgramEnum
@@ -18,7 +18,7 @@ import {
  * for repox project.
  */
 export class RepoxLaunchProgramAppService {
-  getPrograms(): LauncherModel {
+  getPrograms (): LauncherModel {
     return {
       programs: [
         {

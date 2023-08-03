@@ -6,12 +6,12 @@ import {
   ParamDtoStoreService
 } from "../dom-service/store/param-dto-store.service";
 import {
-  ParamDtoValidationModel
+  type ParamDtoValidationModel
 } from "../model/param-dto-validation.model";
-import { ParamDtoModel } from "../model/param-dto.model";
+import { type ParamDtoModel } from "../model/param-dto.model";
 
-const runTest = (argv: Array<string>): {
-  paramDto: ParamDtoModel,
+const runTest = (argv: string[]): {
+  paramDto: ParamDtoModel
   paramDtoValidation: ParamDtoValidationModel
 } => {
   const store = container.resolve(ParamDtoStoreService);
@@ -28,7 +28,6 @@ afterAll((): void => {
   container.clearInstances();
   container.reset();
 });
-
 
 describe("BuildParamDtoAppService - parameter order", (): void => {
   test("Should be correct for the program: name", (): void => {
@@ -222,7 +221,7 @@ describe("BuildParamDtoAppService - parameter structure", (): void => {
     expect(paramValues).toEqual([]);
   });
 
-  test('should be correct for the program: name generate workspace=true', (): void => {
+  test("should be correct for the program: name generate workspace=true", (): void => {
     const result = runTest(["generate", "workspace=true"]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
@@ -300,8 +299,8 @@ describe("BuildParamDtoAppService - parameter structure for arguments", (): void
     expect(paramValues).toEqual(["test"]);
   });
 
-  test('should be correct for the program: name generate --name="test"', (): void => {
-    const result = runTest(["generate", '--name="test"']);
+  test("should be correct for the program: name generate --name=\"test\"", (): void => {
+    const result = runTest(["generate", "--name=\"test\""]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -310,7 +309,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", (): void
     expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
     expect(result.paramDtoValidation.errors).toEqual([]);
     expect(result.paramDtoValidation.tips).toEqual([]);
-    expect(paramBaseValue).toEqual('--name="test"');
+    expect(paramBaseValue).toEqual("--name=\"test\"");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
@@ -376,8 +375,8 @@ describe("BuildParamDtoAppService - parameter structure for arguments", (): void
     expect(paramValues).toEqual(["te$$s&&t"]);
   });
 
-  test('should be incorrect for the program: name generate --name="te$$s&&t"', (): void => {
-    const result = runTest(["generate", '--name="te$$s&&t"']);
+  test("should be incorrect for the program: name generate --name=\"te$$s&&t\"", (): void => {
+    const result = runTest(["generate", "--name=\"te$$s&&t\""]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -386,7 +385,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", (): void
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
     expect(result.paramDtoValidation.tips).toEqual(["Supported signs for --name=\"te$$s&&t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
-    expect(paramBaseValue).toEqual('--name="te$$s&&t"');
+    expect(paramBaseValue).toEqual("--name=\"te$$s&&t\"");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
@@ -452,8 +451,8 @@ describe("BuildParamDtoAppService - parameter structure for arguments", (): void
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test('should be correct for the program: name generate --name="test1,test2,test3"', (): void => {
-    const result = runTest(["generate", '--name="test1,test2,test3"']);
+  test("should be correct for the program: name generate --name=\"test1,test2,test3\"", (): void => {
+    const result = runTest(["generate", "--name=\"test1,test2,test3\""]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -462,7 +461,7 @@ describe("BuildParamDtoAppService - parameter structure for arguments", (): void
     expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
     expect(result.paramDtoValidation.errors).toEqual([]);
     expect(result.paramDtoValidation.tips).toEqual([]);
-    expect(paramBaseValue).toEqual('--name="test1,test2,test3"');
+    expect(paramBaseValue).toEqual("--name=\"test1,test2,test3\"");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("argument");
     expect(paramHasValue).toBeTruthy();
@@ -587,8 +586,8 @@ describe("BuildParamDtoAppService - parameter structure for aliases", (): void =
     expect(paramValues).toEqual(["test"]);
   });
 
-  test('should be correct for the program: name generate -n="test"', (): void => {
-    const result = runTest(["generate", '-n="test"']);
+  test("should be correct for the program: name generate -n=\"test\"", (): void => {
+    const result = runTest(["generate", "-n=\"test\""]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -597,7 +596,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", (): void =
     expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
     expect(result.paramDtoValidation.errors).toEqual([]);
     expect(result.paramDtoValidation.tips).toEqual([]);
-    expect(paramBaseValue).toEqual('-n="test"');
+    expect(paramBaseValue).toEqual("-n=\"test\"");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
@@ -663,8 +662,8 @@ describe("BuildParamDtoAppService - parameter structure for aliases", (): void =
     expect(paramValues).toEqual(["te%%s$$t"]);
   });
 
-  test('should be incorrect for the program: name generate -n="te%%s$$t"', (): void => {
-    const result = runTest(["generate", '-n="te%%s$$t"']);
+  test("should be incorrect for the program: name generate -n=\"te%%s$$t\"", (): void => {
+    const result = runTest(["generate", "-n=\"te%%s$$t\""]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -673,7 +672,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", (): void =
     expect(result.paramDtoValidation.wrongIndexes).toEqual([3]);
     expect(result.paramDtoValidation.errors).toEqual(["You have used not supported signs!"]);
     expect(result.paramDtoValidation.tips).toEqual(["Supported signs for -n=\"te%%s$$t\" are: [a-z] [A-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [space]"]);
-    expect(paramBaseValue).toEqual('-n="te%%s$$t"');
+    expect(paramBaseValue).toEqual("-n=\"te%%s$$t\"");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();
@@ -739,8 +738,8 @@ describe("BuildParamDtoAppService - parameter structure for aliases", (): void =
     expect(paramValues).toEqual(["test1", "test2", "test3"]);
   });
 
-  test('should be correct for the program: name generate -n="test1,test2,test3"', (): void => {
-    const result = runTest(["generate", '-n="test1,test2,test3"']);
+  test("should be correct for the program: name generate -n=\"test1,test2,test3\"", (): void => {
+    const result = runTest(["generate", "-n=\"test1,test2,test3\""]);
     const {
       paramBaseValue, paramIndex, paramType, paramHasValue,
       paramHasManyValues, paramName, paramValues
@@ -749,7 +748,7 @@ describe("BuildParamDtoAppService - parameter structure for aliases", (): void =
     expect(result.paramDtoValidation.wrongIndexes).toEqual([]);
     expect(result.paramDtoValidation.errors).toEqual([]);
     expect(result.paramDtoValidation.tips).toEqual([]);
-    expect(paramBaseValue).toEqual('-n="test1,test2,test3"');
+    expect(paramBaseValue).toEqual("-n=\"test1,test2,test3\"");
     expect(paramIndex).toEqual(3);
     expect(paramType).toEqual("alias");
     expect(paramHasValue).toBeTruthy();

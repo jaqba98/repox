@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  ValidatorDomainModel
+  type ValidatorDomainModel
 } from "../../model/validator/validator-domain.model";
 import {
   BuildParamDomainResultService
@@ -8,9 +8,9 @@ import {
 import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
-import { BaseGetParamDepModel } from "@lib/model";
+import { type BaseGetParamDepModel } from "@lib/model";
 import {
-  ParamDomainValidationModel
+  type ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 import { BaseParamTypeEnum } from "../../enum/base-param-type.enum";
 
@@ -20,14 +20,14 @@ import { BaseParamTypeEnum } from "../../enum/base-param-type.enum";
  * that given command exist.
  */
 export class ValidatorCommandExistService
-  implements ValidatorDomainModel {
-  constructor(
+implements ValidatorDomainModel {
+  constructor (
     private readonly buildParamDomain: BuildParamDomainResultService,
     private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
+  runValidator (
     getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();

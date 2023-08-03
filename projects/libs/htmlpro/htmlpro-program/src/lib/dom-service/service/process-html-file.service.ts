@@ -10,13 +10,13 @@ import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
  * The service is responsible for process html file.
  */
 export class ProcessHtmlFileService {
-  constructor(
+  constructor (
     private readonly htmlProDomainStore: HtmlProDomainStoreService,
     private readonly fileUtils: FileUtilsService
   ) {
   }
 
-  process(
+  process (
     inputPath: string,
     attributes: Array<{ key: string, value: string }>
   ): string {
@@ -28,7 +28,7 @@ export class ProcessHtmlFileService {
     const parser = new Parser({
       onopentag: (
         name: string,
-        attribs: { [s: string]: string; }
+        attribs: Record<string, string>
       ): void => {
         dataImport = attribs[HtmlAttributesEnum.dataImport] ??
           EMPTY_STRING;
@@ -47,7 +47,7 @@ export class ProcessHtmlFileService {
           .map(attribKey => ({
             key: attribKey,
             value: attribs[attribKey]
-          }))
+          }));
         htmlContentResult += this.process(
           component.templateUrl, attribsArray
         );
@@ -70,7 +70,7 @@ export class ProcessHtmlFileService {
     return htmlContentResult;
   }
 
-  private preBuildHtmlContent(
+  private preBuildHtmlContent (
     inputPath: string,
     attributes: Array<{ key: string, value: string }>
   ): string {
@@ -82,7 +82,7 @@ export class ProcessHtmlFileService {
       .forEach(attribute => {
         htmlFileContent = htmlFileContent.replace(
           new RegExp(attribute.regex, "g"), attribute.value
-        )
+        );
       });
     return htmlFileContent;
   }

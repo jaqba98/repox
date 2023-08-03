@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDomainValidationModel
+  type ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
 
 @singleton()
@@ -9,7 +9,7 @@ import {
  * for success and error.
  */
 export class BuildParamDomainResultService {
-  buildSuccess(): ParamDomainValidationModel {
+  buildSuccess (): ParamDomainValidationModel {
     return {
       success: true,
       wrongIndexes: [],
@@ -18,10 +18,10 @@ export class BuildParamDomainResultService {
     };
   }
 
-  buildError(
-    wrongIndexes: Array<number>,
-    errors: Array<string>,
-    tips: Array<string>
+  buildError (
+    wrongIndexes: number[],
+    errors: string[],
+    tips: string[]
   ): ParamDomainValidationModel {
     return {
       success: false,

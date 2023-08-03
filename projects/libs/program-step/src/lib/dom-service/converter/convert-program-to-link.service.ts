@@ -7,7 +7,7 @@ import { ProgramSystemEnum } from "../../enum/program-system.enum";
  * to url link.
  */
 export class ConvertProgramToLinkService {
-  convert(programSystem: ProgramSystemEnum): string {
+  convert (programSystem: ProgramSystemEnum): string {
     switch (programSystem) {
       case ProgramSystemEnum.git:
         return "https://git-scm.com/";

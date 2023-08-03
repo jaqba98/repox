@@ -1,5 +1,5 @@
 import { container, singleton } from "tsyringe";
-import { LauncherModel } from "@lib/launcher";
+import { type LauncherModel } from "@lib/launcher";
 import { HtmlProProgramEnum } from "../enum/html-pro-program.enum";
 import { HtmlProCommandEnum } from "../enum/html-pro-command.enum";
 import {
@@ -14,7 +14,7 @@ import {
  * for HtmlPro project.
  */
 export class HtmlProLaunchProgramAppService {
-  getPrograms(): LauncherModel {
+  getPrograms (): LauncherModel {
     return {
       programs: [
         {

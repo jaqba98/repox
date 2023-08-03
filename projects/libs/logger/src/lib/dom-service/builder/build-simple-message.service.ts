@@ -8,26 +8,26 @@ import { EMPTY_STRING } from "@lib/const";
  * The service is responsible for building the simple message.
  */
 export class BuildSimpleMessageService {
-  constructor(private readonly buildMessage: BuildMessageService) {
+  constructor (private readonly buildMessage: BuildMessageService) {
   }
 
-  buildSuccess(message: string, logo: string): string {
+  buildSuccess (message: string, logo: string): string {
     return this.baseBuildMsg(message, logo, LoggerModeEnum.success);
   }
 
-  buildError(message: string, logo: string): string {
+  buildError (message: string, logo: string): string {
     return this.baseBuildMsg(message, logo, LoggerModeEnum.error);
   }
 
-  buildWarning(message: string, logo: string): string {
+  buildWarning (message: string, logo: string): string {
     return this.baseBuildMsg(message, logo, LoggerModeEnum.warning);
   }
 
-  buildInfo(message: string, logo: string): string {
+  buildInfo (message: string, logo: string): string {
     return this.baseBuildMsg(message, logo, LoggerModeEnum.info);
   }
 
-  buildPlain(message: string): string {
+  buildPlain (message: string): string {
     return this.buildMessage.build({
       lines: [{
         mode: LoggerModeEnum.plain,
@@ -39,7 +39,7 @@ export class BuildSimpleMessageService {
     });
   }
 
-  private baseBuildMsg(
+  private baseBuildMsg (
     message: string,
     logo: string,
     loggerMode: LoggerModeEnum

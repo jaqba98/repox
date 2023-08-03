@@ -1,5 +1,5 @@
 import {
-  ParamDtoValidationModel
+  type ParamDtoValidationModel
 } from "./param-dto-validation.model";
 
 /**
@@ -7,5 +7,5 @@ import {
  * It defines the implementation of it.
  */
 export interface ValidatorDtoModel {
-  runValidator(): ParamDtoValidationModel;
+  runValidator: () => ParamDtoValidationModel
 }

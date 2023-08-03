@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { HtmlProDomainModel } from "../model/html-pro-domain.model";
+import { type HtmlProDomainModel } from "../model/html-pro-domain.model";
 
 @singleton()
 /**
@@ -7,7 +7,7 @@ import { HtmlProDomainModel } from "../model/html-pro-domain.model";
  * for all HtmlPro files.
  */
 export class CreateHtmlProFileAppService {
-  buildDefaultHtmlProContentFile(): HtmlProDomainModel {
+  buildDefaultHtmlProContentFile (): HtmlProDomainModel {
     return {
       components: {}
     };

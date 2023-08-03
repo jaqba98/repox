@@ -6,7 +6,7 @@ import { singleton } from "tsyringe";
  * on the console screen.
  */
 export class WriteMessageService {
-  write(message: string): void {
+  write (message: string): void {
     console.log(message);
   }
 }

@@ -13,14 +13,14 @@ import {
  * parameter DTO model from command line.
  */
 export class BuildParamDtoAppService {
-  constructor(
+  constructor (
     private readonly readArgv: ReadArgvService,
     private readonly buildParamDto: BuildParamDtoService,
     private readonly validationParamDto: ValidationParamDtoService
   ) {
   }
 
-  build(): void {
+  build (): void {
     const argv = this.readArgv.getArgv();
     this.buildParamDto.buildParamDto(argv);
     this.validationParamDto.runValidation();

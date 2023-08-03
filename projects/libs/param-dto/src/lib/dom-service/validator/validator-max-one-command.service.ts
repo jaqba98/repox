@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { ValidatorDtoModel } from "../../model/validator-dto.model";
+import { type ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
@@ -7,7 +7,7 @@ import {
   FindParamDtoEntityService
 } from "../finder/find-param-dto-entity.service";
 import {
-  ParamDtoValidationModel
+  type ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
 import {
   ParamDtoStoreService
@@ -19,15 +19,15 @@ import {
  * (0 or 1 if the program exist and 0 if the program not exist).
  */
 export class ValidatorMaxOneCommandService
-  implements ValidatorDtoModel {
-  constructor(
+implements ValidatorDtoModel {
+  constructor (
     private readonly paramDtoStore: ParamDtoStoreService,
     private readonly buildParamDtoResult: BuildParamDtoResultService,
     private readonly findParamDtoEntity: FindParamDtoEntityService
   ) {
   }
 
-  runValidator(): ParamDtoValidationModel {
+  runValidator (): ParamDtoValidationModel {
     const program = this.findParamDtoEntity.findPrograms()[0];
     const commands = this.findParamDtoEntity.findCommands();
     if (!program && commands.length > 0) {
@@ -40,7 +40,7 @@ export class ValidatorMaxOneCommandService
         ]
       );
     }
-    if (program && commands.length > 1) {
+    if (program !== undefined && commands.length > 1) {
       return this.buildParamDtoResult.buildError(
         commands,
         ["You have specified too many commands!"],

@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import {
-  EmptyHtmlProCommandModel,
-  InitDefaultHtmlProProgramModel
+  type EmptyHtmlProCommandModel,
+  type InitDefaultHtmlProProgramModel
 } from "@lib/htmlpro-domain";
 import { HTML_PRO_LOGO } from "@lib/htmlpro-const";
 import {
@@ -26,7 +26,7 @@ import {
  * The list of steps for the program init default.
  */
 export class InitDefaultStepService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
@@ -37,7 +37,7 @@ export class InitDefaultStepService {
   ) {
   }
 
-  runSteps(
+  runSteps (
     programModel: InitDefaultHtmlProProgramModel,
     _commandModel: EmptyHtmlProCommandModel
   ): void {

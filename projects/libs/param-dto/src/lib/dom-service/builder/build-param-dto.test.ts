@@ -1,20 +1,20 @@
 import { container } from "tsyringe";
 import { BuildParamDtoService } from "./build-param-dto.service";
-import { ParamDtoModel } from "../../model/param-dto.model";
+import { type ParamDtoModel } from "../../model/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 import {
   ParamDtoStoreService
 } from "../store/param-dto-store.service";
 
 class MockReadArgvService {
-  getArgv(): Array<string> {
+  getArgv (): string[] {
     return [
       "node",
       "application",
       "program",
       "--argument1",
       "--argument2=val1",
-      `--argument3="val1,val2"`,
+      "--argument3=\"val1,val2\"",
       "command",
       "-a",
       "-b='val1'",
@@ -28,7 +28,7 @@ describe("BuildParamDtoService", (): void => {
   const argv = container.resolve(MockReadArgvService).getArgv();
   const store = container.resolve(ParamDtoStoreService);
 
-  afterAll(() => container.clearInstances());
+  afterAll(() => { container.clearInstances(); });
 
   test("Should correctly build param DTO model", (): void => {
     service.buildParamDto(argv);
@@ -80,7 +80,7 @@ describe("BuildParamDtoService", (): void => {
           paramHasManyValues: false
         },
         {
-          paramBaseValue: `--argument3="val1,val2"`,
+          paramBaseValue: "--argument3=\"val1,val2\"",
           paramIndex: 5,
           paramType: ParamTypeEnum.argument,
           paramHasValue: true,

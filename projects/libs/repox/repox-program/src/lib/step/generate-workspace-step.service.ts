@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import {
-  EmptyRepoxProgramModel,
-  GenerateWorkspaceRepoxCommandModel
+  type EmptyRepoxProgramModel,
+  type GenerateWorkspaceRepoxCommandModel
 } from "@lib/repox-domain";
 import {
   NewlineAppService,
@@ -24,7 +24,7 @@ import { AllProgramInstalledService } from "@lib/program-step";
  * The list of steps for the program generate workspace.
  */
 export class GenerateWorkspaceStepService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
@@ -34,7 +34,7 @@ export class GenerateWorkspaceStepService {
   ) {
   }
 
-  runSteps(
+  runSteps (
     programModel: EmptyRepoxProgramModel,
     commandModel: GenerateWorkspaceRepoxCommandModel
   ): void {

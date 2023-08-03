@@ -8,13 +8,13 @@ import { PathUtilsService } from "@lib/utils";
  * file exist.
  */
 export class FileExistAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly pathUtils: PathUtilsService
   ) {
   }
 
-  run(filePath: string): boolean {
+  run (filePath: string): boolean {
     this.simpleMessage.writePlain(
       `Checking if ${filePath} file exist`
     );

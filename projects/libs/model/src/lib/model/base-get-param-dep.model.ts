@@ -1,8 +1,8 @@
-import { ParamDomainDepModel } from "@lib/param-domain";
+import { type ParamDomainDepModel } from "@lib/param-domain";
 
 /**
  * The base get param dependency for each project.
  */
 export interface BaseGetParamDepModel {
-  getDependency(program: string): ParamDomainDepModel;
+  getDependency: (program: string) => ParamDomainDepModel
 }

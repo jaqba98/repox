@@ -6,18 +6,18 @@ export interface EmptyHtmlProProgramModel {
 }
 
 export interface DefaultDefaultHtmlProProgramModel {
-  showVersion: boolean;
+  showVersion: boolean
 }
 
 export interface InitDefaultHtmlProProgramModel {
-  isForce: boolean;
+  isForce: boolean
 }
 
 export interface BuildDefaultHtmlProProgramModel {
-  inputPath: string;
-  outputPath: string;
+  inputPath: string
+  outputPath: string
 }
 
 export type THtmlProProgramModel = EmptyHtmlProProgramModel |
-  DefaultDefaultHtmlProProgramModel | InitDefaultHtmlProProgramModel |
-  BuildDefaultHtmlProProgramModel;
+DefaultDefaultHtmlProProgramModel | InitDefaultHtmlProProgramModel |
+BuildDefaultHtmlProProgramModel;

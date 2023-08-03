@@ -1,4 +1,4 @@
-import { Schema } from "jsonschema";
+import { type Schema } from "jsonschema";
 
 /**
  * Schemes used to verify the correctness of files.

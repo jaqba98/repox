@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { ParamDomainDepModel } from "@lib/param-domain";
+import { type ParamDomainDepModel } from "@lib/param-domain";
 import {
   RepoxArgumentEnum,
   RepoxCommandEnum,
@@ -16,7 +16,7 @@ import {
  * for given program.
  */
 export class RepoxGetParamDepService {
-  getProgramDefault(): ParamDomainDepModel {
+  getProgramDefault (): ParamDomainDepModel {
     return {
       program: RepoxProgramEnum.default,
       commands: {
@@ -36,7 +36,7 @@ export class RepoxGetParamDepService {
     };
   }
 
-  getProgramGenerate(): ParamDomainDepModel {
+  getProgramGenerate (): ParamDomainDepModel {
     return {
       program: RepoxProgramEnum.generate,
       commands: {
@@ -89,7 +89,7 @@ export class RepoxGetParamDepService {
     };
   }
 
-  getProgramBuild(): ParamDomainDepModel {
+  getProgramBuild (): ParamDomainDepModel {
     return {
       program: RepoxProgramEnum.build,
       commands: {
@@ -126,7 +126,7 @@ export class RepoxGetParamDepService {
     };
   }
 
-  getProgramPublish(): ParamDomainDepModel {
+  getProgramPublish (): ParamDomainDepModel {
     return {
       program: RepoxProgramEnum.publish,
       commands: {

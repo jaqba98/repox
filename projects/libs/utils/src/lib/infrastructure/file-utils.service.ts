@@ -11,13 +11,13 @@ import { FolderUtilsService } from "./folder-utils.service";
  * The service contains a group of utils to file manage.
  */
 export class FileUtilsService {
-  constructor(
+  constructor (
     private readonly pathUtils: PathUtilsService,
     private readonly folderUtils: FolderUtilsService
   ) {
   }
 
-  copyFile(input: string, output: string): void {
+  copyFile (input: string, output: string): void {
     const fileName = this.getFileName(input);
     const outputPath = this.pathUtils.createPath([output, fileName]);
     const destinationDir = this.pathUtils.getDirname(outputPath);
@@ -27,15 +27,15 @@ export class FileUtilsService {
     copyFileSync(input, outputPath);
   }
 
-  getFileName(path: string): string {
+  getFileName (path: string): string {
     return basename(path);
   }
 
-  createEmptyFile(filePath: string): void {
+  createEmptyFile (filePath: string): void {
     this.writeTextFile(filePath, EMPTY_STRING);
   }
 
-  readTextFile(filePath: string): string {
+  readTextFile (filePath: string): string {
     if (!this.pathUtils.existPath(filePath)) {
       throw new Error(
         `The specified file does not exist! Path: ${filePath}`
@@ -48,30 +48,30 @@ export class FileUtilsService {
     if (!this.pathUtils.existPath(filePath)) {
       throw new Error("The specified file does not exist!");
     }
-    return <T>JSON.parse(readFileSync(filePath, "utf-8"));
+    return JSON.parse(readFileSync(filePath, "utf-8")) as T;
   }
 
-  readProjectFiles(pattern: string): Array<string> {
-    const options = { cwd: "./", ignore: ['**/node_modules/**'] };
+  readProjectFiles (pattern: string): string[] {
+    const options = { cwd: "./", ignore: ["**/node_modules/**"] };
     return globSync(pattern, options)
       .map(path => this.pathUtils.normalizePath(path));
   }
 
-  readAllHtmlFiles(cwd: string): Array<string> {
-    const options = { cwd, ignore: ['**/node_modules/**'] };
+  readAllHtmlFiles (cwd: string): string[] {
+    const options = { cwd, ignore: ["**/node_modules/**"] };
     return globSync("*.html", options)
       .map(path => this.pathUtils.createPath([cwd, path]))
       .map(path => this.pathUtils.normalizePath(path));
   }
 
-  readAllCssFiles(cwd: string): Array<string> {
-    const options = { cwd, ignore: ['**/node_modules/**'] };
+  readAllCssFiles (cwd: string): string[] {
+    const options = { cwd, ignore: ["**/node_modules/**"] };
     return globSync("*.css", options)
       .map(path => this.pathUtils.createPath([cwd, path]))
       .map(path => this.pathUtils.normalizePath(path));
   }
 
-  writeTextFile(path: string, content: string): void {
+  writeTextFile (path: string, content: string): void {
     writeFileSync(path, content);
   }
 
@@ -79,7 +79,7 @@ export class FileUtilsService {
     writeFileSync(path, JSON.stringify(content, null, 2));
   }
 
-  changeExtname(filePath: string, newExtname: string): string {
+  changeExtname (filePath: string, newExtname: string): string {
     return basename(filePath, extname(filePath)).concat(newExtname);
   }
 }

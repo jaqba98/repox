@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
-import { WsRepoxDtoModel } from "../model/ws-dto/ws-repox-dto.model";
+import { type WsRepoxDtoModel } from "../model/ws-dto/ws-repox-dto.model";
 import {
-  WsProjectTsconfigDtoModel,
-  WsTsconfigDtoModel
+  type WsProjectTsconfigDtoModel,
+  type WsTsconfigDtoModel
 } from "../model/ws-dto/ws-tsconfig-dto.model";
 import {
   WorkspaceFileEnum
@@ -18,10 +18,10 @@ import {
  * for all workspace files.
  */
 export class CreateWsFileAppService {
-  constructor(private readonly pathUtils: PathUtilsService) {
+  constructor (private readonly pathUtils: PathUtilsService) {
   }
 
-  buildDefaultGitignoreContentFile(): string {
+  buildDefaultGitignoreContentFile (): string {
     return `# Webstorm
 .idea/
 
@@ -36,7 +36,7 @@ tmp/
 `;
   }
 
-  buildDefaultRootJestConfigTsContentFile(): string {
+  buildDefaultRootJestConfigTsContentFile (): string {
     return `import type { Config } from "jest";
 
 const config: Config = {
@@ -51,13 +51,13 @@ export default config;
 `;
   }
 
-  buildDefaultRepoxJsonContentFile(): WsRepoxDtoModel {
+  buildDefaultRepoxJsonContentFile (): WsRepoxDtoModel {
     return {
       projects: {}
     };
   }
 
-  buildDefaultTsconfigJsonContentFile(): WsTsconfigDtoModel {
+  buildDefaultTsconfigJsonContentFile (): WsTsconfigDtoModel {
     return {
       compilerOptions: {
         target: "ES2022",
@@ -83,7 +83,7 @@ export default config;
     };
   }
 
-  buildProjectTsconfigJsonContentFile(
+  buildProjectTsconfigJsonContentFile (
     projectPath: string
   ): WsProjectTsconfigDtoModel {
     const tsconfigRootPath = this.pathUtils.getRootPath(
@@ -91,14 +91,14 @@ export default config;
     );
     return {
       extends: tsconfigRootPath
-    }
+    };
   }
 
-  buildProjectJestConfigTsContentFile(projectPath: string): string {
+  buildProjectJestConfigTsContentFile (projectPath: string): string {
     const jestRootPath = this.pathUtils.getRootPath(
       projectPath, WorkspaceImportEnum.importJestConfigTs
     );
-        return `import config from "${jestRootPath}";
+    return `import config from "${jestRootPath}";
 
 export default { ...config };
 `;

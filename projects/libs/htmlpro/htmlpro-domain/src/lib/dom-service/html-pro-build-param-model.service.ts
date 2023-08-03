@@ -1,12 +1,12 @@
 import { singleton } from "tsyringe";
 import { ParamDomainAppService } from "@lib/param-domain";
 import {
-  BuildDefaultHtmlProProgramModel,
-  DefaultDefaultHtmlProProgramModel,
-  EmptyHtmlProCommandModel,
-  EmptyHtmlProProgramModel,
+  type BuildDefaultHtmlProProgramModel,
+  type DefaultDefaultHtmlProProgramModel,
+  type EmptyHtmlProCommandModel,
+  type EmptyHtmlProProgramModel,
   HtmlProArgumentEnum,
-  InitDefaultHtmlProProgramModel
+  type InitDefaultHtmlProProgramModel
 } from "@lib/htmlpro-domain";
 
 @singleton()
@@ -15,18 +15,18 @@ import {
  * model for all kinds of programs and commends.
  */
 export class HtmlProBuildParamModelService {
-  constructor(private readonly paramDomain: ParamDomainAppService) {
+  constructor (private readonly paramDomain: ParamDomainAppService) {
   }
 
-  emptyProgram(): EmptyHtmlProProgramModel {
+  emptyProgram (): EmptyHtmlProProgramModel {
     return {};
   }
 
-  emptyCommand(): EmptyHtmlProCommandModel {
+  emptyCommand (): EmptyHtmlProCommandModel {
     return {};
   }
 
-  defaultProgram(): DefaultDefaultHtmlProProgramModel {
+  defaultProgram (): DefaultDefaultHtmlProProgramModel {
     return {
       showVersion: this.paramDomain.getProgramBooleanValue(
         HtmlProArgumentEnum.version
@@ -34,7 +34,7 @@ export class HtmlProBuildParamModelService {
     };
   }
 
-  initDefaultProgram(): InitDefaultHtmlProProgramModel {
+  initDefaultProgram (): InitDefaultHtmlProProgramModel {
     return {
       isForce: this.paramDomain.getProgramBooleanValue(
         HtmlProArgumentEnum.force
@@ -42,7 +42,7 @@ export class HtmlProBuildParamModelService {
     };
   }
 
-  buildDefaultProgram(): BuildDefaultHtmlProProgramModel {
+  buildDefaultProgram (): BuildDefaultHtmlProProgramModel {
     return {
       inputPath: this.paramDomain.getProgramStringValue(
         HtmlProArgumentEnum.input

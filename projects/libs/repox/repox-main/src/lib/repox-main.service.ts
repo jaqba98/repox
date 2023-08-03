@@ -28,7 +28,7 @@ import { LauncherAppService } from "@lib/launcher";
  * The main service is responsible for run repox program.
  */
 export class RepoxMainService {
-  constructor(
+  constructor (
     private readonly buildParamDto: BuildParamDtoAppService,
     private readonly getParamDtoData: GetParamDtoDataAppService,
     private readonly paramErrorMessage: ParamErrorMessageAppService,
@@ -40,7 +40,7 @@ export class RepoxMainService {
   ) {
   }
 
-  run(): void {
+  run (): void {
     this.buildParamDto.build();
     const paramDtoValidation = this.getParamDtoData
       .getParamDtoValidation();

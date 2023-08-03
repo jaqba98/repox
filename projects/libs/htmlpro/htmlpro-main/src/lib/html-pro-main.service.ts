@@ -28,7 +28,7 @@ import { HTML_PRO_LOGO } from "@lib/htmlpro-const";
  * The main service is responsible for run HtmlPro program.
  */
 export class HtmlProMainService {
-  constructor(
+  constructor (
     private readonly buildParamDto: BuildParamDtoAppService,
     private readonly getParamDtoData: GetParamDtoDataAppService,
     private readonly paramErrorMessage: ParamErrorMessageAppService,
@@ -40,7 +40,7 @@ export class HtmlProMainService {
   ) {
   }
 
-  run(): void {
+  run (): void {
     this.buildParamDto.build();
     const paramDtoValidation = this.getParamDtoData
       .getParamDtoValidation();

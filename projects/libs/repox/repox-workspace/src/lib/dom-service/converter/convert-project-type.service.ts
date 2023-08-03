@@ -9,7 +9,7 @@ import {
  * The service is responsible for convert string to project type.
  */
 export class ConvertProjectTypeService {
-  toProjectType(projectType: string): ProjectTypeEnum {
+  toProjectType (projectType: string): ProjectTypeEnum {
     switch (projectType) {
       case "app":
         return ProjectTypeEnum.app;
@@ -22,7 +22,7 @@ export class ConvertProjectTypeService {
     }
   }
 
-  toWorkspaceFolder(
+  toWorkspaceFolder (
     projectType: ProjectTypeEnum
   ): WorkspaceFolderEnum {
     switch (projectType) {

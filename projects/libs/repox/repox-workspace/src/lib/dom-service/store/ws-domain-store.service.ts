@@ -5,10 +5,10 @@ import {
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
   WsDtoStoreService,
-  WsProjectBuildDomainModel,
-  WsProjectDomainModel
+  type WsProjectBuildDomainModel,
+  type WsProjectDomainModel
 } from "@lib/repox-workspace";
-import { WsDomainModel } from "../../model/ws-domain/ws-domain.model";
+import { type WsDomainModel } from "../../model/ws-domain/ws-domain.model";
 import {
   BuildProjectAliasService
 } from "../builder/build-project-alias.service";
@@ -23,14 +23,14 @@ import { PathUtilsService } from "@lib/utils";
 export class WsDomainStoreService {
   private wsDomain: WsDomainModel | undefined;
 
-  constructor(
+  constructor (
     private readonly wsDtoStore: WsDtoStoreService,
     private readonly buildProjectAlias: BuildProjectAliasService,
     private readonly pathUtils: PathUtilsService
   ) {
   }
 
-  loadWsDomain(): void {
+  loadWsDomain (): void {
     this.wsDomain = {
       projects: this.wsDtoStore.getWsRepoxDtoProjects()
         .map(project => {
@@ -63,20 +63,20 @@ export class WsDomainStoreService {
     };
   }
 
-  saveWsDomain(): void {
+  saveWsDomain (): void {
     this.getWsDomain().projects
       .filter(project => project.changed)
-      .forEach(project => this.wsDtoStore.addProjectDto(project));
+      .forEach(project => { this.wsDtoStore.addProjectDto(project); });
   }
 
-  getWsDomain(): WsDomainModel {
+  getWsDomain (): WsDomainModel {
     if (this.wsDomain === undefined) {
       throw new Error("The store is undefined!");
     }
     return this.wsDomain;
   }
 
-  getProjectBeName(
+  getProjectBeName (
     projectName: string
   ): WsProjectDomainModel | undefined {
     return this.getWsDomain().projects.find(
@@ -84,12 +84,12 @@ export class WsDomainStoreService {
     );
   }
 
-  getProject(projectName: string): WsProjectDomainModel | undefined {
+  getProject (projectName: string): WsProjectDomainModel | undefined {
     return this.getWsDomain().projects
-      .find(project => project.name == projectName);
+      .find(project => project.name === projectName);
   }
 
-  addProject(
+  addProject (
     projectName: string, projectType: ProjectTypeEnum,
     projectPath: string, projectScheme: ProjectSchemeEnum
   ): void {
@@ -115,7 +115,7 @@ export class WsDomainStoreService {
     });
   }
 
-  private getProjectBuild(
+  private getProjectBuild (
     projectType: ProjectTypeEnum,
     projectScheme: ProjectSchemeEnum,
     projectPath: string,
@@ -161,7 +161,7 @@ export class WsDomainStoreService {
     }
   }
 
-  private getProjectAlias(
+  private getProjectAlias (
     projectName: string,
     projectScheme: ProjectSchemeEnum,
     projectType: ProjectTypeEnum
@@ -175,16 +175,16 @@ export class WsDomainStoreService {
       case ProjectSchemeEnum.toolTypeScript:
         return this.buildProjectAlias.buildAlias(
           projectName, projectType
-        )
+        );
       default:
         throw new Error("Not supported project scheme");
     }
   }
 
-  private getProjectIndexPath(
+  private getProjectIndexPath (
     projectScheme: ProjectSchemeEnum,
     projectPath: string
-  ): Array<string> {
+  ): string[] {
     switch (projectScheme) {
       case ProjectSchemeEnum.blank:
       case ProjectSchemeEnum.htmlPro:

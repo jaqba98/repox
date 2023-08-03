@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
-import { RunProgramModel } from "@lib/model";
+import { type RunProgramModel } from "@lib/model";
 import {
-  EmptyHtmlProCommandModel,
-  InitDefaultHtmlProProgramModel
+  type EmptyHtmlProCommandModel,
+  type InitDefaultHtmlProProgramModel
 } from "@lib/htmlpro-domain";
 import {
   InitDefaultStepService
@@ -13,13 +13,12 @@ import {
  * The start point of the program init default.
  */
 export class InitDefaultProgramService implements RunProgramModel {
-  constructor(private readonly step: InitDefaultStepService) {
+  constructor (private readonly step: InitDefaultStepService) {
   }
 
-  runProgram(programDomain: unknown, commandDomain: unknown): void {
-    const programModel = <InitDefaultHtmlProProgramModel>
-      programDomain;
-    const commandModel = <EmptyHtmlProCommandModel>commandDomain;
+  runProgram (programDomain: unknown, commandDomain: unknown): void {
+    const programModel = programDomain as InitDefaultHtmlProProgramModel;
+    const commandModel = commandDomain as EmptyHtmlProCommandModel;
     this.step.runSteps(programModel, commandModel);
   }
 }

@@ -1,6 +1,6 @@
 import {
-  ProjectSchemeEnum,
-  ProjectTypeEnum
+  type ProjectSchemeEnum,
+  type ProjectTypeEnum
 } from "@lib/repox-workspace";
 
 /**
@@ -11,27 +11,27 @@ export interface EmptyRepoxCommandModel {
 }
 
 export interface GenerateWorkspaceRepoxCommandModel {
-  workspaceName: string;
+  workspaceName: string
 }
 
 export interface GenerateProjectRepoxCommandModel {
-  projectName: string;
-  projectType: ProjectTypeEnum;
-  projectScheme: ProjectSchemeEnum;
-  projectPath: string;
+  projectName: string
+  projectType: ProjectTypeEnum
+  projectScheme: ProjectSchemeEnum
+  projectPath: string
 }
 
 export interface BuildProjectRepoxCommandModel {
-  projectName: string;
-  buildWatch: boolean;
+  projectName: string
+  buildWatch: boolean
 }
 
 export interface PublishNpmRepoxCommandModel {
-  projectName: string;
+  projectName: string
 }
 
 export type TRepoxCommandModel = EmptyRepoxCommandModel |
-  GenerateWorkspaceRepoxCommandModel |
-  GenerateProjectRepoxCommandModel |
-  BuildProjectRepoxCommandModel |
-  PublishNpmRepoxCommandModel;
+GenerateWorkspaceRepoxCommandModel |
+GenerateProjectRepoxCommandModel |
+BuildProjectRepoxCommandModel |
+PublishNpmRepoxCommandModel;

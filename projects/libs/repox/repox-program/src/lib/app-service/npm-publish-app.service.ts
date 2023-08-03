@@ -7,13 +7,13 @@ import { SimpleMessageAppService } from "@lib/logger";
  * The service is responsible for run command npm publish.
  */
 export class NpmPublishAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly runCommandUtils: RunCommandUtilsService
   ) {
   }
 
-  run(): boolean {
+  run (): boolean {
     this.simpleMessage.writePlain("Npm publish");
     this.runCommandUtils.runCommand("npm publish", true);
     return true;

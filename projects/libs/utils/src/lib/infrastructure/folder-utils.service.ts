@@ -8,11 +8,11 @@ import { extname } from "path";
  * The service contains a group of utils to file manage.
  */
 export class FolderUtilsService {
-  createFolder(folderPath: string): void {
+  createFolder (folderPath: string): void {
     mkdirSync(folderPath, { recursive: true });
   }
 
-  isFolder(path: string): boolean {
+  isFolder (path: string): boolean {
     return extname(path) === EMPTY_STRING;
   }
 }

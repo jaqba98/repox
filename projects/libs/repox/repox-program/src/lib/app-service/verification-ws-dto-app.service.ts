@@ -11,13 +11,13 @@ import {
  * workspace dto model.
  */
 export class VerificationWsDtoAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDtoStore: WsDtoStoreService
   ) {
   }
 
-  run(productionMode: boolean): boolean {
+  run (productionMode: boolean): boolean {
     if (productionMode) return true;
     this.simpleMessage.writePlain("Verification workspace dto model");
     // Verification the workspace dto model

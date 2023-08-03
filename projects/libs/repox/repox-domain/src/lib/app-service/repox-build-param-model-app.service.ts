@@ -1,14 +1,14 @@
 import { singleton } from "tsyringe";
 import {
   RepoxCommandEnum,
-  RepoxProgramEnum,
+  RepoxProgramEnum
 } from "@lib/repox-domain";
 import {
   RepoxBuildParamModelService
 } from "../dom-service/repox-build-param-model.service";
 import { ParamDomainAppService } from "@lib/param-domain";
-import { TRepoxProgramModel } from "../model/repox-program.model";
-import { TRepoxCommandModel } from "../model/repox-command.model";
+import { type TRepoxProgramModel } from "../model/repox-program.model";
+import { type TRepoxCommandModel } from "../model/repox-command.model";
 
 @singleton()
 /**
@@ -16,13 +16,13 @@ import { TRepoxCommandModel } from "../model/repox-command.model";
  * for given program and command.
  */
 export class RepoxBuildParamModelAppService {
-  constructor(
+  constructor (
     private readonly buildParamModel: RepoxBuildParamModelService,
     private readonly paramDom: ParamDomainAppService
   ) {
   }
 
-  buildProgramParamModel(): TRepoxProgramModel {
+  buildProgramParamModel (): TRepoxProgramModel {
     const programName = this.paramDom.getParamDomain().program.name;
     if (programName === RepoxProgramEnum.default) {
       return this.buildParamModel.defaultProgram();
@@ -33,7 +33,7 @@ export class RepoxBuildParamModelAppService {
     return this.buildParamModel.emptyProgram();
   }
 
-  buildCommandParamModel(): TRepoxCommandModel {
+  buildCommandParamModel (): TRepoxCommandModel {
     const programName = this.paramDom.getParamDomain().program.name;
     const commandName = this.paramDom.getParamDomain().command.name;
     if (programName === RepoxProgramEnum.generate) {

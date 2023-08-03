@@ -18,7 +18,7 @@ import {
  * of files and folders.
  */
 export class CreateWsStructureAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly folderUtils: FolderUtilsService,
     private readonly pathUtils: PathUtilsService,
@@ -29,7 +29,7 @@ export class CreateWsStructureAppService {
   ) {
   }
 
-  run(workspaceName: string): boolean {
+  run (workspaceName: string): boolean {
     this.simpleMessage.writePlain(
       `Creating a ${workspaceName} workspace structure`
     );

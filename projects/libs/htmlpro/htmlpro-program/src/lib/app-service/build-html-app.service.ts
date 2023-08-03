@@ -20,7 +20,7 @@ import { NEW_LINE } from "@lib/const";
  * The app service is responsible for build html file.
  */
 export class BuildHtmlAppService {
-  constructor(
+  constructor (
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly processHtmlFile: ProcessHtmlFileService,
@@ -30,7 +30,7 @@ export class BuildHtmlAppService {
   ) {
   }
 
-  run(
+  run (
     inputPath: string, outputPath: string
   ): boolean {
     this.folderUtils.createFolder(outputPath);
@@ -51,15 +51,17 @@ export class BuildHtmlAppService {
           [outputPath, htmlFile.htmlFileName]
         )
       }));
-    allHtmlResults.forEach(htmlResult => this.fileUtils.writeTextFile(
-      htmlResult.htmlFileOutput, htmlResult.htmlFileResult
-    ));
+    allHtmlResults.forEach(htmlResult => {
+      this.fileUtils.writeTextFile(
+        htmlResult.htmlFileOutput, htmlResult.htmlFileResult
+      );
+    });
     // Build css
     const allCssFiles = this.fileUtils.readAllCssFiles(inputPath);
     const allCssResults = allHtmlResults
       .map(htmlResult => htmlResult.htmlFileDependencies)
       .flat()
-      .reduce((acc: Array<string>, curr: string): Array<string> =>
+      .reduce((acc: string[], curr: string): string[] =>
         acc.includes(curr) ? acc : [...acc, curr], [])
       .map(alias => this.processCssFile.process(alias))
       .join(NEW_LINE);

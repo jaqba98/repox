@@ -3,10 +3,10 @@ import {
   ParamDomainStoreService
 } from "../dom-service/store/param-domain-store.service";
 import {
-  ParamDomainModel
+  type ParamDomainModel
 } from "../model/param-domain/param-domain.model";
 import {
-  ParamDomainValidationModel
+  type ParamDomainValidationModel
 } from "../model/param-domain/param-domain-validation.model";
 import { EMPTY_STRING } from "@lib/const";
 
@@ -16,33 +16,33 @@ import { EMPTY_STRING } from "@lib/const";
  * for other projects.
  */
 export class ParamDomainAppService {
-  constructor(
+  constructor (
     private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  getParamDomain(): ParamDomainModel {
+  getParamDomain (): ParamDomainModel {
     return this.paramDomainStore.getParamDomain();
   }
 
-  getParamDomainValidation(): ParamDomainValidationModel {
+  getParamDomainValidation (): ParamDomainValidationModel {
     return this.paramDomainStore.getParamDomainValidation();
   }
 
-  getProgramName(): string {
+  getProgramName (): string {
     return this.paramDomainStore.getParamDomain().program.name;
   }
 
-  getCommandName(): string {
+  getCommandName (): string {
     return this.paramDomainStore.getParamDomain().command.name;
   }
 
-  getProgramBooleanValue(argument: string): boolean {
+  getProgramBooleanValue (argument: string): boolean {
     return this.paramDomainStore.getParamDomain().program.args
       .some(param => param.name === argument);
   }
 
-  getCommandStringValue(
+  getCommandStringValue (
     argument: string, defaultValue: string = EMPTY_STRING
   ): string {
     const argumentValue = this.paramDomainStore.getParamDomain()
@@ -50,16 +50,15 @@ export class ParamDomainAppService {
     if (argumentValue === undefined) {
       return defaultValue;
     }
-    const value = argumentValue.values.at(0);
-    return value ? value : defaultValue;
+    return argumentValue.values.at(0) || defaultValue;
   }
 
-  getCommandBooleanValue(argument: string): boolean {
+  getCommandBooleanValue (argument: string): boolean {
     return this.paramDomainStore.getParamDomain().command.args
       .some(param => param.name === argument);
   }
 
-  getProgramStringValue(
+  getProgramStringValue (
     argument: string, defaultValue: string = EMPTY_STRING
   ): string {
     const argumentValue = this.paramDomainStore.getParamDomain()
@@ -68,6 +67,6 @@ export class ParamDomainAppService {
       return defaultValue;
     }
     const value = argumentValue.values.at(0);
-    return value ? value : defaultValue;
+    return value || defaultValue;
   }
 }

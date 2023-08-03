@@ -9,7 +9,7 @@ import { EMPTY_STRING } from "@lib/const";
  * The service contains a group of utils to path manage.
  */
 export class PathUtilsService {
-  getRootPath(path: string, file: string): string {
+  getRootPath (path: string, file: string): string {
     return this.normalizePath(path)
       .split("/")
       .map((): string => "..")
@@ -18,40 +18,40 @@ export class PathUtilsService {
       .concat(file);
   }
 
-  existPath(path: string): boolean {
+  existPath (path: string): boolean {
     return existsSync(path);
   }
 
-  notExistPath(path: string): boolean {
+  notExistPath (path: string): boolean {
     return !this.existPath(path);
   }
 
-  changePath(path: string): void {
+  changePath (path: string): void {
     chdir(path);
   }
 
-  createPath(pathItems: Array<string>): string {
+  createPath (pathItems: string[]): string {
     return this.normalizePath(join(...pathItems));
   }
 
-  normalizePath(path: string): string {
+  normalizePath (path: string): string {
     return path.replace(/\\/g, "/");
   }
 
-  getCurrentPath(): string {
+  getCurrentPath (): string {
     return process.cwd();
   }
 
-  isRootPath(path: string): boolean {
+  isRootPath (path: string): boolean {
     const parsedPath = parse(path);
     return parsedPath.root === parsedPath.dir;
   }
 
-  getDirname(path: string): string {
+  getDirname (path: string): string {
     return dirname(path);
   }
 
-  getPackageJsonPath(currentPath: string): string {
+  getPackageJsonPath (currentPath: string): string {
     const packageJsonPath = join(currentPath, "package.json");
     if (this.existPath(packageJsonPath)) {
       return currentPath;

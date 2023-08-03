@@ -8,13 +8,13 @@ import { WsDomainStoreService } from "@lib/repox-workspace";
  * to the dto model.
  */
 export class SaveWsDomainAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDomainStore: WsDomainStoreService
   ) {
   }
 
-  run(): boolean {
+  run (): boolean {
     this.simpleMessage.writePlain("Save workspace domain model");
     this.wsDomainStore.saveWsDomain();
     return true;

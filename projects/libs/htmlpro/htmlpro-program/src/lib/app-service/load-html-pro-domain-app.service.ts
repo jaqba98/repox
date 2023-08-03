@@ -11,14 +11,14 @@ import { PathUtilsService } from "@lib/utils";
  * The app service is responsible for load HtmlPro domain model.
  */
 export class LoadHtmlProDomainAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly pathUtils: PathUtilsService,
     private readonly htmlProDomainStore: HtmlProDomainStoreService
   ) {
   }
 
-  run(): boolean {
+  run (): boolean {
     this.simpleMessage.writePlain("Load HTMLPRO domain model");
     // Check if workspace files exist
     if (this.pathUtils.notExistPath(HtmlProFileEnum.htmlProJson)) {

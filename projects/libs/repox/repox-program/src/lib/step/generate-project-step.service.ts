@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import {
-  EmptyRepoxProgramModel,
-  GenerateProjectRepoxCommandModel
+  type EmptyRepoxProgramModel,
+  type GenerateProjectRepoxCommandModel
 } from "@lib/repox-domain";
 import {
   NewlineAppService,
@@ -39,7 +39,7 @@ import {
  * The list of steps for the program generate project.
  */
 export class GenerateProjectStepService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
@@ -54,7 +54,7 @@ export class GenerateProjectStepService {
   ) {
   }
 
-  runSteps(
+  runSteps (
     programModel: EmptyRepoxProgramModel,
     commandModel: GenerateProjectRepoxCommandModel
   ): void {

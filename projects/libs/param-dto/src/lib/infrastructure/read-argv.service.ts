@@ -5,7 +5,7 @@ import { singleton } from "tsyringe";
  * Read parameters given by user from the command line.
  */
 export class ReadArgvService {
-  getArgv(): Array<string> {
+  getArgv (): string[] {
     return process.argv;
   }
 }

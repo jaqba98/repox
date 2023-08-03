@@ -14,8 +14,8 @@ import {
   LoadWsDomainAppService
 } from "../app-service/load-ws-domain-app.service";
 import {
-  BuildProjectRepoxCommandModel,
-  BuildProjectRepoxProgramModel
+  type BuildProjectRepoxCommandModel,
+  type BuildProjectRepoxProgramModel
 } from "@lib/repox-domain";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
@@ -33,7 +33,7 @@ import {
  * The list of steps for the program build project.
  */
 export class BuildProjectStepService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly allProgramInstalled: AllProgramInstalledService,
@@ -46,7 +46,7 @@ export class BuildProjectStepService {
   ) {
   }
 
-  runSteps(
+  runSteps (
     programModel: BuildProjectRepoxProgramModel,
     commandModel: BuildProjectRepoxCommandModel
   ): void {
@@ -60,6 +60,6 @@ export class BuildProjectStepService {
     if (!this.loadWsDomain.run()) return;
     const { projectName, buildWatch } = commandModel;
     if (!this.projectExist.run(projectName)) return;
-    if (!this.buildProject.run(projectName, buildWatch)) return;
+    this.buildProject.run(projectName, buildWatch);
   }
 }

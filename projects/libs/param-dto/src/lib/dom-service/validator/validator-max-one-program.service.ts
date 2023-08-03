@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
-import { ValidatorDtoModel } from "../../model/validator-dto.model";
+import { type ValidatorDtoModel } from "../../model/validator-dto.model";
 import {
   BuildParamDtoResultService
 } from "../builder/build-param-dto-result.service";
 import {
-  ParamDtoValidationModel
+  type ParamDtoValidationModel
 } from "../../model/param-dto-validation.model";
 import {
   FindParamDtoEntityService
@@ -18,15 +18,15 @@ import {
  * Check the given DTO parameters have max one program.
  */
 export class ValidatorMaxOneProgramService
-  implements ValidatorDtoModel {
-  constructor(
+implements ValidatorDtoModel {
+  constructor (
     private readonly paramDtoStore: ParamDtoStoreService,
     private readonly buildParamDtoResult: BuildParamDtoResultService,
     private readonly findParamDtoEntity: FindParamDtoEntityService
   ) {
   }
 
-  runValidator(): ParamDtoValidationModel {
+  runValidator (): ParamDtoValidationModel {
     const programs = this.findParamDtoEntity.findPrograms();
     if (programs.length > 1) {
       return this.buildParamDtoResult.buildError(

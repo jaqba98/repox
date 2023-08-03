@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  ParamDtoValidationModel
+  type ParamDtoValidationModel
 } from "../model/param-dto-validation.model";
 import {
   ParamDtoStoreService
@@ -12,12 +12,12 @@ import {
  * for other projects.
  */
 export class GetParamDtoDataAppService {
-  constructor(
+  constructor (
     private readonly paramDtoStore: ParamDtoStoreService
   ) {
   }
 
-  getParamDtoValidation(): ParamDtoValidationModel {
+  getParamDtoValidation (): ParamDtoValidationModel {
     return this.paramDtoStore.getParamDtoValidation();
   }
 }

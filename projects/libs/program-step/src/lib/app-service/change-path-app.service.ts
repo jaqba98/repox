@@ -7,13 +7,13 @@ import { SimpleMessageAppService } from "@lib/logger";
  * The service is responsible for change path.
  */
 export class ChangePathAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly pathUtils: PathUtilsService
   ) {
   }
 
-  run(path: string): boolean {
+  run (path: string): boolean {
     this.simpleMessage.writePlain("Change path");
     this.pathUtils.changePath(path);
     return true;

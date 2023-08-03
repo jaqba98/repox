@@ -6,9 +6,9 @@ import {
   ValidationParamDomainService
 } from "../dom-service/validation/validation-param-domain.service";
 import {
-  BaseGetParamDepModel,
-  EnumModel,
-  KeyValueModel
+  type BaseGetParamDepModel,
+  type EnumModel,
+  type KeyValueModel
 } from "@lib/model";
 
 @singleton()
@@ -17,13 +17,13 @@ import {
  * parameter domain model from param DTO.
  */
 export class BuildParamDomainAppService {
-  constructor(
+  constructor (
     private readonly buildParamDomain: BuildParamDomainService,
     private readonly validationParamDom: ValidationParamDomainService
   ) {
   }
 
-  build<T>(
+  build (
     programEnumModel: EnumModel,
     programAliasEnumModel: EnumModel,
     commandEnumModel: EnumModel,

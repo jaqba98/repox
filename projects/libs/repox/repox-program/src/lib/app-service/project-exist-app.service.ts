@@ -8,13 +8,13 @@ import { WsDomainStoreService } from "@lib/repox-workspace";
  * whether a given project not exist.
  */
 export class ProjectExistAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly wsDomainStore: WsDomainStoreService
   ) {
   }
 
-  run(projectName: string): boolean {
+  run (projectName: string): boolean {
     this.simpleMessage.writePlain(
       `Check that project ${projectName} exist`
     );
@@ -24,7 +24,7 @@ export class ProjectExistAppService {
         `The ${projectName} project does not exist!`
       );
       this.simpleMessage.writeWarning(
-        `Specify a different project name and restart the program`
+        "Specify a different project name and restart the program"
       );
       return false;
     }

@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import { SystemUtilsService } from "@lib/utils";
-import { ProgramSystemEnum } from "../enum/program-system.enum";
+import { type ProgramSystemEnum } from "../enum/program-system.enum";
 import {
   ConvertProgramToLinkService
 } from "../dom-service/converter/convert-program-to-link.service";
@@ -12,14 +12,14 @@ import {
  * is installed on the system.
  */
 export class ProgramInstalledAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly systemUtils: SystemUtilsService,
     private readonly convertProgramToLink: ConvertProgramToLinkService
   ) {
   }
 
-  run(programSystem: ProgramSystemEnum): boolean {
+  run (programSystem: ProgramSystemEnum): boolean {
     this.simpleMessage.writePlain(
       `Checking if ${programSystem} program is installed`
     );

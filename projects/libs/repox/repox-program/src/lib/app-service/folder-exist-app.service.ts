@@ -8,13 +8,13 @@ import { PathUtilsService } from "@lib/utils";
  * folder exist.
  */
 export class FolderExistAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly pathUtils: PathUtilsService
   ) {
   }
 
-  run(folderPath: string): boolean {
+  run (folderPath: string): boolean {
     this.simpleMessage.writePlain(
       `Checking if ${folderPath} folder exist`
     );

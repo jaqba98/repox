@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import {
-  ValidatorDomainModel
+  type ValidatorDomainModel
 } from "../../model/validator/validator-domain.model";
 import {
   BuildParamDomainResultService
@@ -8,11 +8,11 @@ import {
 import {
   ParamDomainStoreService
 } from "../store/param-domain-store.service";
-import { BaseGetParamDepModel } from "@lib/model";
+import { type BaseGetParamDepModel } from "@lib/model";
 import {
-  ParamDomainValidationModel
+  type ParamDomainValidationModel
 } from "../../model/param-domain/param-domain-validation.model";
-import { ParamDomainDepModel } from "@lib/param-domain";
+import { type ParamDomainDepModel } from "@lib/param-domain";
 
 @singleton()
 /**
@@ -20,14 +20,14 @@ import { ParamDomainDepModel } from "@lib/param-domain";
  * contains all required arguments.
  */
 export class ValidatorCommandContainsArgumentsService
-  implements ValidatorDomainModel {
-  constructor(
+implements ValidatorDomainModel {
+  constructor (
     private readonly buildParamDomain: BuildParamDomainResultService,
     private readonly paramDomainStore: ParamDomainStoreService
   ) {
   }
 
-  runValidator(
+  runValidator (
     getParamDepService: BaseGetParamDepModel
   ): ParamDomainValidationModel {
     const paramDomain = this.paramDomainStore.getParamDomain();
@@ -39,13 +39,13 @@ export class ValidatorCommandContainsArgumentsService
     const commandArgs = command.args;
     const wrongArgs = Object.values(commandArgs)
       .filter(commandArg => commandArg.required)
-      .filter(commandArg => !paramDomain.command.args
-        .find(arg => arg.name === commandArg.name)
+      .filter(commandArg => paramDomain.command.args
+        .find(arg => arg.name === commandArg.name) == null
       );
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess();
     }
-    const missingArgs = wrongArgs.map(arg => arg.name).join(',');
+    const missingArgs = wrongArgs.map(arg => arg.name).join(",");
     return this.buildParamDomain.buildError(
       [],
       ["You have not specified all required arguments for command!"],

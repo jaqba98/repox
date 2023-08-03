@@ -6,12 +6,12 @@ export interface EmptyRepoxProgramModel {
 }
 
 export interface DefaultDefaultRepoxProgramModel {
-  showVersion: boolean;
+  showVersion: boolean
 }
 
 export interface BuildProjectRepoxProgramModel {
-  productionMode: boolean;
+  productionMode: boolean
 }
 
 export type TRepoxProgramModel = EmptyRepoxProgramModel |
-  DefaultDefaultRepoxProgramModel | BuildProjectRepoxProgramModel;
+DefaultDefaultRepoxProgramModel | BuildProjectRepoxProgramModel;

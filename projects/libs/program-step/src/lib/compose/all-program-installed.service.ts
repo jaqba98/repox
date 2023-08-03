@@ -10,12 +10,12 @@ import { ProgramSystemEnum } from "../enum/program-system.enum";
  * whether all program are installed.
  */
 export class AllProgramInstalledService {
-  constructor(
+  constructor (
     private readonly programInstalled: ProgramInstalledAppService
   ) {
   }
 
-  run(): boolean {
+  run (): boolean {
     if (!this.programInstalled.run(ProgramSystemEnum.git)) {
       return false;
     }

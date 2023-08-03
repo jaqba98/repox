@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { ParamDtoModel } from "../../model/param-dto.model";
+import { type ParamDtoModel } from "../../model/param-dto.model";
 import { ParamTypeEnum } from "../../enum/param-type.enum";
 import {
   ALIAS_PREFIX,
@@ -17,10 +17,10 @@ import {
  * from the command line parameters.
  */
 export class BuildParamDtoService {
-  constructor(private readonly paramDtoStore: ParamDtoStoreService) {
+  constructor (private readonly paramDtoStore: ParamDtoStoreService) {
   }
 
-  buildParamDto(argv: Array<string>): void {
+  buildParamDto (argv: string[]): void {
     const paramDto: ParamDtoModel = {
       params: argv
         .map((arg: string, index: number) => ({
@@ -49,7 +49,7 @@ export class BuildParamDtoService {
     this.paramDtoStore.setParamDto(paramDto);
   }
 
-  private getParamType(arg: string, index: number): ParamTypeEnum {
+  private getParamType (arg: string, index: number): ParamTypeEnum {
     if (arg.startsWith(ARGUMENT_PREFIX)) {
       return ParamTypeEnum.argument;
     }
@@ -60,14 +60,14 @@ export class BuildParamDtoService {
     return ParamTypeEnum.command;
   }
 
-  private getParamName(
+  private getParamName (
     paramBaseValue: string,
     paramHasValue: boolean,
     paramType: ParamTypeEnum
   ): string {
-    const paramName: string = paramHasValue ?
-      paramBaseValue.split(EQUAL_SIGN)[0] :
-      paramBaseValue;
+    const paramName: string = paramHasValue
+      ? paramBaseValue.split(EQUAL_SIGN)[0]
+      : paramBaseValue;
     if (paramType === ParamTypeEnum.argument) {
       return paramName.replace(ARGUMENT_PREFIX, "");
     }
@@ -77,10 +77,10 @@ export class BuildParamDtoService {
     return paramName;
   }
 
-  private getParamValues(
+  private getParamValues (
     paramBaseValue: string,
     paramHasValue: boolean
-  ): Array<string> {
+  ): string[] {
     if (!paramHasValue) return [];
     return paramBaseValue
       .split(EQUAL_SIGN)[1]

@@ -13,13 +13,13 @@ import {
  * The service is responsible for create path for project.
  */
 export class BuildProjectPathService {
-  constructor(
+  constructor (
     private readonly pathUtils: PathUtilsService,
     private readonly convertProjectType: ConvertProjectTypeService
   ) {
   }
 
-  buildPath(name: string, type: string, path: string): string {
+  buildPath (name: string, type: string, path: string): string {
     if (path === EMPTY_STRING) {
       const projectType = this.convertProjectType.toProjectType(type);
       const workspaceType = this.convertProjectType.toWorkspaceFolder(

@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
 import { DisplayVersionAppService } from "@lib/program-step";
 import {
-  DefaultDefaultHtmlProProgramModel,
-  EmptyHtmlProCommandModel
+  type DefaultDefaultHtmlProProgramModel,
+  type EmptyHtmlProCommandModel
 } from "@lib/htmlpro-domain";
 import { HTML_PRO_VERSION } from "@lib/htmlpro-const";
 
@@ -11,12 +11,12 @@ import { HTML_PRO_VERSION } from "@lib/htmlpro-const";
  * The list of steps for the program default.
  */
 export class DefaultDefaultStepService {
-  constructor(
+  constructor (
     private readonly displayVersion: DisplayVersionAppService
   ) {
   }
 
-  runSteps(
+  runSteps (
     programModel: DefaultDefaultHtmlProProgramModel,
     _commandModel: EmptyHtmlProCommandModel
   ): void {

@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import {
   ParamDtoStoreService
 } from "../dom-service/store/param-dto-store.service";
-import { ParamDtoEntityModel } from "../model/param-dto.model";
+import { type ParamDtoEntityModel } from "../model/param-dto.model";
 import {
   FindParamDtoEntityService
 } from "../dom-service/finder/find-param-dto-entity.service";
@@ -13,23 +13,23 @@ import {
  * for other projects.
  */
 export class GetParamDtoArgAppService {
-  constructor(
+  constructor (
     private readonly paramDtoStore: ParamDtoStoreService,
     private readonly findParamDtoEntity: FindParamDtoEntityService
   ) {
   }
 
-  getProgramArgs(
+  getProgramArgs (
     programIndex: number,
     commandIndex: number
-  ): Array<ParamDtoEntityModel> {
+  ): ParamDtoEntityModel[] {
     return this.findParamDtoEntity.findProgramArgs(
       programIndex,
       commandIndex
     );
   }
 
-  getCommandArgs(commandIndex: number): Array<ParamDtoEntityModel> {
+  getCommandArgs (commandIndex: number): ParamDtoEntityModel[] {
     return this.findParamDtoEntity.findCommandArgs(commandIndex);
   }
 }

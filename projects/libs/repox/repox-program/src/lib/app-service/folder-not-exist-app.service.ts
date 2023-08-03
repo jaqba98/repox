@@ -8,13 +8,13 @@ import { PathUtilsService } from "@lib/utils";
  * folder name not exist.
  */
 export class FolderNotExistAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly pathUtils: PathUtilsService
   ) {
   }
 
-  run(workspaceName: string): boolean {
+  run (workspaceName: string): boolean {
     this.simpleMessage.writePlain(
       `Checking if ${workspaceName} folder not exist`
     );

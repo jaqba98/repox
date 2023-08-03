@@ -13,13 +13,13 @@ import { EMPTY_STRING } from "@lib/const";
  * on the console screen.
  */
 export class SimpleMessageAppService {
-  constructor(
+  constructor (
     private readonly buildSimpleMessage: BuildSimpleMessageService,
     private readonly writeMessage: WriteMessageService
   ) {
   }
 
-  writeSuccess(message: string, logo: string = EMPTY_STRING): void {
+  writeSuccess (message: string, logo: string = EMPTY_STRING): void {
     const outputMessage = this.buildSimpleMessage.buildSuccess(
       message,
       logo
@@ -27,7 +27,7 @@ export class SimpleMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 
-  writeError(message: string, logo: string = EMPTY_STRING): void {
+  writeError (message: string, logo: string = EMPTY_STRING): void {
     const outputMessage = this.buildSimpleMessage.buildError(
       message,
       logo
@@ -35,7 +35,7 @@ export class SimpleMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 
-  writeWarning(message: string, logo: string = EMPTY_STRING): void {
+  writeWarning (message: string, logo: string = EMPTY_STRING): void {
     const outputMessage = this.buildSimpleMessage.buildWarning(
       message,
       logo
@@ -43,7 +43,7 @@ export class SimpleMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 
-  writeInfo(message: string, logo: string = EMPTY_STRING): void {
+  writeInfo (message: string, logo: string = EMPTY_STRING): void {
     const outputMessage = this.buildSimpleMessage.buildInfo(
       message,
       logo
@@ -51,7 +51,7 @@ export class SimpleMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 
-  writePlain(message: string): void {
+  writePlain (message: string): void {
     const outputMessage = this.buildSimpleMessage.buildPlain(message);
     this.writeMessage.write(outputMessage);
   }

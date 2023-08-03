@@ -8,13 +8,13 @@ import { EMPTY_STRING } from "@lib/const";
  * The service is responsible for go to project root path.
  */
 export class GoToProjectRootAppService {
-  constructor(
+  constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly pathUtils: PathUtilsService
   ) {
   }
 
-  run(): boolean {
+  run (): boolean {
     this.simpleMessage.writePlain("Go to project root");
     const currentPath = this.pathUtils.getCurrentPath();
     const packageJsonPath = this.pathUtils.getPackageJsonPath(

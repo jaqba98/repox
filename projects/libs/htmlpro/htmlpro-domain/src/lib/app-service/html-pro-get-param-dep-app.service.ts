@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
-import { ParamDomainDepModel } from "@lib/param-domain";
-import { BaseGetParamDepModel } from "@lib/model";
+import { type ParamDomainDepModel } from "@lib/param-domain";
+import { type BaseGetParamDepModel } from "@lib/model";
 import {
   HtmlProGetParamDepService
 } from "../dom-service/html-pro-get-param-dep.service";
@@ -12,13 +12,13 @@ import { HtmlProProgramEnum } from "../enum/html-pro-program.enum";
  * programs, commands, and arguments.
  */
 export class HtmlProGetParamDepAppService
-  implements BaseGetParamDepModel {
-  constructor(
+implements BaseGetParamDepModel {
+  constructor (
     private readonly htmlProGetParamDep: HtmlProGetParamDepService
   ) {
   }
 
-  getDependency(program: string): ParamDomainDepModel {
+  getDependency (program: string): ParamDomainDepModel {
     switch (program) {
       case HtmlProProgramEnum.default:
         return this.htmlProGetParamDep.getProgramDefault();

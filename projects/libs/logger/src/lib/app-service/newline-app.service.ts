@@ -10,10 +10,10 @@ import { EMPTY_STRING } from "@lib/const";
  * on the console screen.
  */
 export class NewlineAppService {
-  constructor(private readonly writeMessage: WriteMessageService) {
+  constructor (private readonly writeMessage: WriteMessageService) {
   }
 
-  writeNewline(): void {
+  writeNewline (): void {
     this.writeMessage.write(EMPTY_STRING);
   }
 }
