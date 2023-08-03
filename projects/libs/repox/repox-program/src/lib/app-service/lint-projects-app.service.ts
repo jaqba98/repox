@@ -1,6 +1,9 @@
 import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
-import { WsDomainStoreService } from "@lib/repox-workspace";
+import {
+  ProjectSchemeEnum,
+  WsDomainStoreService
+} from "@lib/repox-workspace";
 import { RunCommandUtilsService } from "@lib/utils";
 
 @singleton()
@@ -18,13 +21,17 @@ export class LintProjectsAppService {
 
   run(): boolean {
     this.simpleMessage.writePlain("Lint projects");
-    const projects = Object.values(
-      this.wsDomainStore.getWsDomain().projects
-    );
-    for(const project of projects) {
+    const projects = Object
+      .values(this.wsDomainStore.getWsDomain().projects)
+      .filter(project =>
+        project.scheme === ProjectSchemeEnum.appTypeScript ||
+        project.scheme === ProjectSchemeEnum.libTypeScript ||
+        project.scheme === ProjectSchemeEnum.toolTypeScript
+      )
+    for (const project of projects) {
       this.runCommandUtils.runNpxCommand(
         `eslint ${project.src}/**/*.ts -c .eslintrc.json`, true
-      )
+      );
     }
     return true;
   }

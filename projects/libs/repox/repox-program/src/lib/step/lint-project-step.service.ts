@@ -3,9 +3,9 @@ import {
   NewlineAppService,
   SimpleMessageAppService
 } from "@lib/logger";
-import {
+import type {
   EmptyRepoxCommandModel,
-  type EmptyRepoxProgramModel
+  EmptyRepoxProgramModel
 } from "@lib/repox-domain";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
