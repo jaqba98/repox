@@ -3,7 +3,7 @@ import { copyFileSync, readFileSync, writeFileSync } from "fs";
 import { EMPTY_STRING } from "@lib/const";
 import { PathUtilsService } from "./path-utils.service";
 import { globSync } from "glob";
-import { basename, extname } from "path";
+import { basename } from "path";
 import { FolderUtilsService } from "./folder-utils.service";
 
 @singleton()
@@ -64,13 +64,6 @@ export class FileUtilsService {
       .map(path => this.pathUtils.normalizePath(path));
   }
 
-  readAllCssFiles (cwd: string): string[] {
-    const options = { cwd, ignore: ["**/node_modules/**"] };
-    return globSync("*.css", options)
-      .map(path => this.pathUtils.createPath([cwd, path]))
-      .map(path => this.pathUtils.normalizePath(path));
-  }
-
   writeTextFile (path: string, content: string): void {
     writeFileSync(path, content);
   }
@@ -79,7 +72,9 @@ export class FileUtilsService {
     writeFileSync(path, JSON.stringify(content, null, 2));
   }
 
-  changeExtname (filePath: string, newExtname: string): string {
-    return basename(filePath, extname(filePath)).concat(newExtname);
+  readHtmlFile (htmlFile: string): string {
+    return this.readTextFile(htmlFile)
+      .replaceAll(/\r\n/g, EMPTY_STRING)
+      .replaceAll(/<!--.*-->/g, EMPTY_STRING);
   }
 }

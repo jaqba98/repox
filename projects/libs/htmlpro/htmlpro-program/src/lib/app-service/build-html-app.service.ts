@@ -2,18 +2,8 @@ import { singleton } from "tsyringe";
 import {
   FileUtilsService,
   FolderUtilsService,
-  PathUtilsService
+  HtmlConverterService
 } from "@lib/utils";
-import {
-  ProcessHtmlFileService
-} from "../dom-service/service/process-html-file.service";
-import {
-  ProcessCssFileService
-} from "../dom-service/service/process-css-file.service";
-import {
-  GetHtmlDependenciesService
-} from "../dom-service/service/get-html-dependencies.service";
-import { NEW_LINE } from "@lib/const";
 
 @singleton()
 /**
@@ -23,10 +13,11 @@ export class BuildHtmlAppService {
   constructor (
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
-    private readonly processHtmlFile: ProcessHtmlFileService,
-    private readonly getHtmlDependencies: GetHtmlDependenciesService,
-    private readonly processCssFile: ProcessCssFileService,
-    private readonly pathUtils: PathUtilsService
+    private readonly htmlConverter: HtmlConverterService
+    // private readonly processHtmlFile: ProcessHtmlFileService,
+    // private readonly getHtmlDependencies: GetHtmlDependenciesService,
+    // private readonly processCssFile: ProcessCssFileService,
+    // private readonly pathUtils: PathUtilsService
   ) {
   }
 
@@ -34,45 +25,56 @@ export class BuildHtmlAppService {
     inputPath: string, outputPath: string
   ): boolean {
     this.folderUtils.createFolder(outputPath);
-    // Build html
-    const allHtmlFiles = this.fileUtils.readAllHtmlFiles(inputPath);
-    const allHtmlResults = allHtmlFiles
-      .map(htmlFilePath => ({
-        htmlFilePath,
-        htmlFileResult: this.processHtmlFile.process(htmlFilePath, []),
-        htmlFileDependencies: this.getHtmlDependencies.getDependencies(
-          htmlFilePath
-        ),
-        htmlFileName: this.fileUtils.getFileName(htmlFilePath)
+    const htmlFiles = this.fileUtils.readAllHtmlFiles(inputPath)
+      .map(htmlPath => ({ htmlPath }))
+      .map(html => ({
+        ...html,
+        htmlBase: this.fileUtils.readHtmlFile(html.htmlPath)
       }))
-      .map(htmlFile => ({
-        ...htmlFile,
-        htmlFileOutput: this.pathUtils.createPath(
-          [outputPath, htmlFile.htmlFileName]
-        )
+      .map(html => ({
+        ...html,
+        htmlJson: this.htmlConverter.htmlToJson(html.htmlBase)
       }));
-    allHtmlResults.forEach(htmlResult => {
-      this.fileUtils.writeTextFile(
-        htmlResult.htmlFileOutput, htmlResult.htmlFileResult
-      );
-    });
-    // Build css
-    const allCssFiles = this.fileUtils.readAllCssFiles(inputPath);
-    const allCssResults = allHtmlResults
-      .map(htmlResult => htmlResult.htmlFileDependencies)
-      .flat()
-      .reduce((acc: string[], curr: string): string[] =>
-        acc.includes(curr) ? acc : [...acc, curr], [])
-      .map(alias => this.processCssFile.process(alias))
-      .join(NEW_LINE);
-    const cssResult = allCssFiles
-      .map(cssFile => this.fileUtils.readTextFile(cssFile))
-      .join(NEW_LINE)
-      .concat(allCssResults);
-    const cssOutputPath: string = this.pathUtils.createPath([
-      outputPath, "style.css"
-    ]);
-    this.fileUtils.writeTextFile(cssOutputPath, cssResult);
+    console.log(htmlFiles);
+    // // Build html
+    // const allHtmlFiles = this.fileUtils.readAllHtmlFiles(inputPath);
+    // const allHtmlResults = allHtmlFiles
+    //   .map(htmlFilePath => ({
+    //     htmlFilePath,
+    //     htmlFileResult: this.processHtmlFile.process(htmlFilePath, []),
+    //     htmlFileDependencies: this.getHtmlDependencies.getDependencies(
+    //       htmlFilePath
+    //     ),
+    //     htmlFileName: this.fileUtils.getFileName(htmlFilePath)
+    //   }))
+    //   .map(htmlFile => ({
+    //     ...htmlFile,
+    //     htmlFileOutput: this.pathUtils.createPath(
+    //       [outputPath, htmlFile.htmlFileName]
+    //     )
+    //   }));
+    // allHtmlResults.forEach(htmlResult => {
+    //   this.fileUtils.writeTextFile(
+    //     htmlResult.htmlFileOutput, htmlResult.htmlFileResult
+    //   );
+    // });
+    // // Build css
+    // const allCssFiles = this.fileUtils.readAllCssFiles(inputPath);
+    // const allCssResults = allHtmlResults
+    //   .map(htmlResult => htmlResult.htmlFileDependencies)
+    //   .flat()
+    //   .reduce((acc: string[], curr: string): string[] =>
+    //     acc.includes(curr) ? acc : [...acc, curr], [])
+    //   .map(alias => this.processCssFile.process(alias))
+    //   .join(NEW_LINE);
+    // const cssResult = allCssFiles
+    //   .map(cssFile => this.fileUtils.readTextFile(cssFile))
+    //   .join(NEW_LINE)
+    //   .concat(allCssResults);
+    // const cssOutputPath: string = this.pathUtils.createPath([
+    //   outputPath, "style.css"
+    // ]);
+    // this.fileUtils.writeTextFile(cssOutputPath, cssResult);
     return true;
   }
 }
