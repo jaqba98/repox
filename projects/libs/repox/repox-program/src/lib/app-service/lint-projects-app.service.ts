@@ -23,7 +23,7 @@ export class LintProjectsAppService {
     );
     for(const project of projects) {
       this.runCommandUtils.runNpxCommand(
-        `eslint ${project.src}/**/*.ts -c .eslintrc.json`
+        `eslint ${project.src}/**/*.ts -c .eslintrc.json`, true
       )
     }
     return true;
