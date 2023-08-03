@@ -1,3 +1,25 @@
 .footer-menu {
-    color: red;
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: var(--footer-menu-background);
+}
+
+.footer-menu-column > p {
+    color: var(--footer-menu-font-color);
+    padding: var(--footer-menu-padding);
+    text-align: var(--footer-menu-text-align);
+}
+
+@media screen and (max-width: 300px) {
+    .footer-menu-column > p {
+        font-size: 5vw;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .footer-menu {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        background-color: var(--footer-menu-background);
+    }
 }

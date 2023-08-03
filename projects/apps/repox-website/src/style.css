@@ -6,14 +6,6 @@
     box-sizing: border-box;
 }
 
-ul {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
 /* GENERAL */
 
 body {
@@ -23,6 +15,11 @@ body {
 /* VARIABLES */
 
 :root {
+    /* FOOTER MENU COMPONENT */
+    --footer-menu-background: #6320EE;
+    --footer-menu-font-color: #FFFFFF;
+    --footer-menu-padding: 2em;
+    --footer-menu-text-align: center;
     /* FOOTER COPYRIGHT COMPONENT */
     --footer-copyright-background: #6320EE;
     --footer-copyright-font-color: #FFFFFF;
