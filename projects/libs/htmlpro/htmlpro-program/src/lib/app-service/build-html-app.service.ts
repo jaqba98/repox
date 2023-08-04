@@ -27,7 +27,7 @@ export class BuildHtmlAppService {
     inputPath: string, outputPath: string
   ): boolean {
     this.folderUtils.createFolder(outputPath);
-    this.fileUtils.readAllHtmlFiles(inputPath)
+    const result = this.fileUtils.readAllHtmlFiles(inputPath)
       .map(htmlPath => ({ htmlPath }))
       .map(html => ({
         ...html,
@@ -54,12 +54,13 @@ export class BuildHtmlAppService {
         htmlFileOutput: this.pathUtils.createPath(
           [outputPath, html.htmlFileName]
         )
-      }))
-      .forEach(html => {
-        this.fileUtils.writeTextFile(
-          html.htmlFileOutput, html.htmlToSave
-        );
-      });
+      }));
+    console.log(result);
+    result.forEach(html => {
+      this.fileUtils.writeTextFile(
+        html.htmlFileOutput, html.htmlToSave
+      );
+    });
     return true;
   }
 }
