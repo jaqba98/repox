@@ -5,6 +5,9 @@ import {
   HtmlConverterService,
   PathUtilsService
 } from "@lib/utils";
+import {
+  ProcessHtmlJsonService
+} from "../dom-service/service/process-html-json.service";
 
 @singleton()
 /**
@@ -15,7 +18,8 @@ export class BuildHtmlAppService {
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly htmlConverter: HtmlConverterService,
-    private readonly pathUtils: PathUtilsService
+    private readonly pathUtils: PathUtilsService,
+    private readonly processHtmlJson: ProcessHtmlJsonService
   ) {
   }
 
@@ -32,6 +36,10 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         htmlJson: this.htmlConverter.htmlToJson(html.htmlBase)
+      }))
+      .map(html => ({
+        ...html,
+        htmlJsonParsed: this.processHtmlJson.process(html.htmlJson)
       }))
       .map(html => ({
         ...html,
