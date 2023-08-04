@@ -75,6 +75,6 @@ export class FileUtilsService {
   readHtmlFile (htmlFile: string): string {
     return this.readTextFile(htmlFile)
       .replaceAll(/\r\n/g, EMPTY_STRING)
-      .replaceAll(/<!--.*-->/g, EMPTY_STRING);
+      .replaceAll(/\n/g, EMPTY_STRING);
   }
 }

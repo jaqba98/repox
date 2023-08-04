@@ -1,10 +1,13 @@
+import type { HtmlTypeEnum } from "../enum/html-type.enum";
+
 /**
  * The model contains all fields after parse html to json.
  */
 export interface HtmlJsonModel {
   children: HtmlJsonModel[];
-  attributes: { [key: string]: string }[];
-  tagName: string;
-  tagType: "openTag" | "closeTag";
-  tagBase: string;
+  htmlAttributes: Array<Record<string, string>>;
+  htmlName: string;
+  htmlSelfClose: boolean;
+  htmlType: HtmlTypeEnum;
+  htmlBase: string;
 }

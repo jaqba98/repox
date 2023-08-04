@@ -1,6 +1,10 @@
 import { singleton } from "tsyringe";
 import { EMPTY_STRING, SPACE } from "@lib/const";
 import type { HtmlJsonModel } from "../model/html-json.model";
+import { HtmlTypeEnum } from "../enum/html-type.enum";
+import {
+  HtmlSelfCloseTagEnum
+} from "../enum/html-self-close-tag.enum";
 
 @singleton()
 /**
@@ -8,84 +12,56 @@ import type { HtmlJsonModel } from "../model/html-json.model";
  * json to html.
  */
 export class HtmlConverterService {
-  htmlToJson (html: string): HtmlJsonModel[] {
-    return html
-      .split(/>\s*</g)
-      .filter(item => item !== EMPTY_STRING)
-      .map(item => item.at(0) === "<" ? item : `<${item}`)
-      .map(item => item.at(-1) === ">" ? item : `${item}>`)
-      .map(item => ({ tagBase: item }))
-      .map(item => ({
-        ...item,
-        tagType: this.getTagType(item.tagBase)
+  htmlToJson(html: string): HtmlJsonModel[] {
+    const json: HtmlJsonModel[] = html
+      .split(/(?=<)|(?<=>)/)
+      .map(htmlItem => htmlItem.trim())
+      .filter(htmlItem => htmlItem !== EMPTY_STRING)
+      .map(htmlItem => ({ htmlBase: htmlItem }))
+      .map(htmlItem => ({
+        ...htmlItem, htmlType: this.getTagType(htmlItem.htmlBase)
       }))
-      .map(item => ({
-        ...item,
-        tagName: this.getTagName(item.tagBase)
+      .map(htmlItem => ({
+        ...htmlItem,
+        htmlName: this.getTagName(htmlItem.htmlBase, htmlItem.htmlType)
       }))
-      .map(item => ({
-        ...item,
-        attributes: this.getAttributes(item.tagBase)
+      .map(htmlItem => ({
+        ...htmlItem,
+        htmlSelfClose: this.getSelfClose(
+          htmlItem.htmlBase, htmlItem.htmlName
+        )
       }))
-      .reduce((
-        acc: HtmlJsonModel[], curr: Omit<HtmlJsonModel, "children">
-      ): HtmlJsonModel[] => {
-        if (curr.tagType === "openTag") {
-          const newTag: HtmlJsonModel = { ...curr, children: [] };
-          if (acc.length > 0) {
-            acc[acc.length - 1].children.push(newTag);
-          } else {
-            acc.push(newTag);
-          }
-          return [...acc, newTag];
-        } else if (curr.tagType === "closeTag") {
-          acc.pop();
-        }
-        return acc;
-      }, []);
+      .map(htmlItem => ({
+        ...htmlItem,
+        htmlAttributes: this.getAttributes(htmlItem.htmlBase)
+      }))
+      .map(htmlItem => ({
+        ...htmlItem,
+        children: []
+      }))
+      .filter(htmlItem => htmlItem.htmlType !== HtmlTypeEnum.tagComment);
+    return this.createHierarchy(json);
   }
 
-  jsonToHtml (data: HtmlJsonModel[]): string {
-    function buildTag (tag: HtmlJsonModel): string {
-      if (tag.tagType === "openTag") {
-        const attributes = tag.attributes
-          .map((attr): string => `${Object.keys(attr)[0]}="${attr[Object.keys(attr)[0]]}"`)
-          .join(SPACE);
-        const openingTag = `<${tag.tagName}${attributes !== undefined ? SPACE + attributes : EMPTY_STRING}>`;
-        const closingTag = `</${tag.tagName}>`;
-        if (tag.children !== undefined && tag.children.length > 0) {
-          const innerContent = tag.children
-            .map((child) => buildTag(child)).join(EMPTY_STRING);
-          return `${openingTag}${innerContent}${closingTag}`;
-        } else {
-          return openingTag;
-        }
-      } else if (tag.tagType === "closeTag") {
-        return `</${tag.tagName}>`;
-      }
-      return EMPTY_STRING;
-    }
-    return data.map((tag) => buildTag(tag)).join(EMPTY_STRING);
+  private getTagType(htmlBase: string): HtmlTypeEnum {
+    if (/<!--.*-->/g.test(htmlBase)) return HtmlTypeEnum.tagComment;
+    if (/<\/.*>/g.test(htmlBase)) return HtmlTypeEnum.tagClose;
+    if (/<.*>/g.test(htmlBase)) return HtmlTypeEnum.tagOpen;
+    return HtmlTypeEnum.tagContent;
   }
 
-  private getTagType (htmlItem: string): "openTag" | "closeTag" {
-    if (/<\/.*>/g.test(htmlItem)) return "closeTag";
-    if (/<.*>/g.test(htmlItem)) return "openTag";
-    throw new Error("Given item is not an html tag");
+  private getTagName(htmlBase: string, htmlType: HtmlTypeEnum): string {
+    if (htmlType === HtmlTypeEnum.tagContent) return EMPTY_STRING;
+    if (htmlType === HtmlTypeEnum.tagComment) return EMPTY_STRING;
+    return htmlBase
+      .split(SPACE)[0]
+      .trim()
+      .replaceAll(/[</>]/g, EMPTY_STRING);
   }
 
-  private getTagName (tagBase: string): string {
-    const pattern = /<\/?(\w+)/g;
-    const matches = tagBase.match(pattern);
-    if (matches === null) {
-      throw new Error("The given tag is not html!");
-    }
-    return matches.map((match) => match.replace(/[</>]/g, ""))[0];
-  }
-
-  private getAttributes (
+  private getAttributes(
     tagBase: string
-  ): HtmlJsonModel["attributes"] {
+  ): HtmlJsonModel["htmlAttributes"] {
     const pattern = /(\S+)=([`'"])(.*?)\2/g;
     const attributes: Array<Record<string, string>> = [];
     let match;
@@ -95,5 +71,62 @@ export class HtmlConverterService {
       attributes.push({ [attribute]: value });
     }
     return attributes;
+  }
+
+  private getSelfClose(htmlBase: string, htmlName: string): boolean {
+    if (Object.values(HtmlSelfCloseTagEnum).includes(
+      htmlName as HtmlSelfCloseTagEnum
+    )) {
+      return true;
+    }
+    return /<.*\/>/g.test(htmlBase);
+  }
+
+  private createHierarchy(tags: HtmlJsonModel[]): HtmlJsonModel[] {
+    const stack: HtmlJsonModel[] = [];
+    const result: HtmlJsonModel[] = [];
+    for (const tag of tags) {
+      if (tag.htmlType === "tagContent") {
+        if (stack.length > 0) {
+          const topTag = stack[stack.length - 1];
+          topTag.children.push(tag);
+        } else {
+          result.push(tag);
+        }
+      } else if (tag.htmlType === "tagOpen") {
+        tag.children = [];
+        if (stack.length > 0) {
+          const topTag = stack[stack.length - 1];
+          topTag.children.push(tag);
+        } else {
+          result.push(tag);
+        }
+
+        if (!tag.htmlSelfClose) {
+          stack.push(tag);
+        }
+      } else if (tag.htmlType === "tagClose") {
+        if (stack.length === 0) {
+          throw new Error(`Invalid HTML structure. Found closing tag "${tag.htmlName}" without matching opening tag.`);
+        }
+        const closedTagName = tag.htmlName;
+        let found = false;
+        while (stack.length > 0) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const currentTag = stack.pop()!;
+          if (currentTag.htmlName === closedTagName) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          throw new Error(`Invalid HTML structure. Expected closing tag for "${closedTagName}" but not found.`);
+        }
+      }
+    }
+    if (stack.length > 0) {
+      throw new Error("Invalid HTML structure. Not all tags were closed properly.");
+    }
+    return result;
   }
 }

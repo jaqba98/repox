@@ -10,7 +10,7 @@ import {
  * The app service is responsible for build html file.
  */
 export class BuildHtmlAppService {
-  constructor (
+  constructor(
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly htmlConverter: HtmlConverterService
@@ -34,10 +34,6 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         htmlJson: this.htmlConverter.htmlToJson(html.htmlBase)
-      }))
-      .map(html => ({
-        ...html,
-        htmlToSave: this.htmlConverter.jsonToHtml(html.htmlJson)
       }));
     console.log(htmlFiles);
     // // Build html
