@@ -122,7 +122,7 @@ export class BuildProjectAppService {
     }
     this.copyAssets(project.build.assets);
     this.runCommandUtils.runNpxCommand(
-      `htmlpro build --input=${project.src} --output=${project.build.output}`
+      `htmlpro build --input=${project.src} --output=${project.build.output}`, true
     );
     return true;
   }

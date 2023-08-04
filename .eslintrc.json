@@ -17,6 +17,8 @@
     "@typescript-eslint/quotes": ["error", "double"],
     "@typescript-eslint/member-delimiter-style": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/space-before-function-paren": "off"
+    "@typescript-eslint/space-before-function-paren": "off",
+    "@typescript-eslint/no-base-to-string": "off",
+    "@typescript-eslint/no-for-in-array": "off"
   }
 }
