@@ -3,7 +3,7 @@
  */
 export interface HtmlJsonModel {
   children: HtmlJsonModel[];
-  attributes: any;
+  attributes: { [key: string]: string }[];
   tagName: string;
   tagType: "openTag" | "closeTag";
   tagBase: string;

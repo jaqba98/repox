@@ -37,7 +37,7 @@ export class BuildHtmlAppService {
       }))
       .map(html => ({
         ...html,
-        htmlToSave: ""
+        htmlToSave: this.htmlConverter.jsonToHtml(html.htmlJson)
       }));
     console.log(htmlFiles);
     // // Build html

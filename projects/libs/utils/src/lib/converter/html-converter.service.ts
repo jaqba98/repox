@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING, SPACE } from "@lib/const";
 import type { HtmlJsonModel } from "../model/html-json.model";
 
 @singleton()
@@ -43,6 +43,29 @@ export class HtmlConverterService {
         }
         return acc;
       }, []);
+  }
+
+  jsonToHtml (data: HtmlJsonModel[]): string {
+    function buildTag (tag: HtmlJsonModel): string {
+      if (tag.tagType === "openTag") {
+        const attributes = tag.attributes
+          .map((attr): string => `${Object.keys(attr)[0]}="${attr[Object.keys(attr)[0]]}"`)
+          .join(SPACE);
+        const openingTag = `<${tag.tagName}${attributes !== undefined ? SPACE + attributes : EMPTY_STRING}>`;
+        const closingTag = `</${tag.tagName}>`;
+        if (tag.children !== undefined && tag.children.length > 0) {
+          const innerContent = tag.children
+            .map((child) => buildTag(child)).join(EMPTY_STRING);
+          return `${openingTag}${innerContent}${closingTag}`;
+        } else {
+          return openingTag;
+        }
+      } else if (tag.tagType === "closeTag") {
+        return `</${tag.tagName}>`;
+      }
+      return EMPTY_STRING;
+    }
+    return data.map((tag) => buildTag(tag)).join(EMPTY_STRING);
   }
 
   private getTagType (htmlItem: string): "openTag" | "closeTag" {
