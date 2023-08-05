@@ -1,11 +1,14 @@
 import { singleton } from "tsyringe";
 import {
-  type BuildProjectRepoxCommandModel, type BuildProjectRepoxProgramModel,
+  type BuildProjectRepoxCommandModel,
+  type BuildProjectRepoxProgramModel,
   type DefaultDefaultRepoxProgramModel,
   type EmptyRepoxCommandModel,
   type EmptyRepoxProgramModel,
   type GenerateProjectRepoxCommandModel,
-  type GenerateWorkspaceRepoxCommandModel, type PublishNpmRepoxCommandModel,
+  type GenerateWorkspaceRepoxCommandModel,
+  LintProjectRepoxCommandModel,
+  type PublishNpmRepoxCommandModel,
   RepoxArgumentEnum
 } from "@lib/repox-domain";
 import { ParamDomainAppService } from "@lib/param-domain";
@@ -89,6 +92,14 @@ export class RepoxBuildParamModelService {
     return {
       projectName: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.name
+      )
+    };
+  }
+
+  lintProjectCommand (): LintProjectRepoxCommandModel {
+    return {
+      fix: this.paramDomain.getCommandBooleanValue(
+        RepoxArgumentEnum.fix
       )
     };
   }

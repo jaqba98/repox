@@ -10,7 +10,8 @@ export enum RepoxArgumentEnum {
   path = "path",
   scheme = "scheme",
   watch = "watch",
-  production = "production"
+  production = "production",
+  fix = "fix"
 }
 
 export enum RepoxAliasEnum {
@@ -20,5 +21,6 @@ export enum RepoxAliasEnum {
   path = "p",
   scheme = "s",
   watch = "w",
-  production = "P"
+  production = "P",
+  fix = "f"
 }

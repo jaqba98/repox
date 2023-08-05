@@ -54,6 +54,11 @@ export class RepoxBuildParamModelAppService {
         return this.buildParamModel.publishNpmCommand();
       }
     }
+    if (programName === RepoxProgramEnum.lint) {
+      if (commandName === RepoxCommandEnum.project) {
+        return this.buildParamModel.lintProjectCommand();
+      }
+    }
     return this.buildParamModel.emptyCommand();
   }
 }

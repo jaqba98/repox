@@ -31,8 +31,13 @@ export interface PublishNpmRepoxCommandModel {
   projectName: string
 }
 
+export interface LintProjectRepoxCommandModel {
+  fix: boolean
+}
+
 export type TRepoxCommandModel = EmptyRepoxCommandModel |
 GenerateWorkspaceRepoxCommandModel |
 GenerateProjectRepoxCommandModel |
 BuildProjectRepoxCommandModel |
-PublishNpmRepoxCommandModel;
+PublishNpmRepoxCommandModel |
+LintProjectRepoxCommandModel;

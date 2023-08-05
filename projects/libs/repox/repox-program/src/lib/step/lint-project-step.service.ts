@@ -4,8 +4,7 @@ import {
   SimpleMessageAppService
 } from "@lib/logger";
 import type {
-  EmptyRepoxCommandModel,
-  EmptyRepoxProgramModel
+  EmptyRepoxProgramModel, LintProjectRepoxCommandModel,
 } from "@lib/repox-domain";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
@@ -40,7 +39,7 @@ export class LintProjectStepService {
 
   runSteps (
     programModel: EmptyRepoxProgramModel,
-    commandModel: EmptyRepoxCommandModel
+    commandModel: LintProjectRepoxCommandModel
   ): void {
     this.simpleMessage.writeInfo("Lint project", REPOX_LOGO);
     this.newline.writeNewline();
@@ -48,7 +47,8 @@ export class LintProjectStepService {
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return;
     if (!this.loadWsDomain.run()) return;
-    if (!this.lintProjectsApp.run()) return;
+    const { fix } = commandModel;
+    if (!this.lintProjectsApp.run(fix)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
       "Project linted successfully!"

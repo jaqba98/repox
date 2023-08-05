@@ -160,7 +160,14 @@ export class RepoxGetParamDepService {
         },
         [RepoxCommandEnum.project]: {
           command: RepoxCommandEnum.project,
-          args: {}
+          args: {
+            [RepoxArgumentEnum.fix]: {
+              name: RepoxArgumentEnum.fix,
+              values: [],
+              valueMode: "empty",
+              required: false
+            }
+          }
         }
       },
       args: {}

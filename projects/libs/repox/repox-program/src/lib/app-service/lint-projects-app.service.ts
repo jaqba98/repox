@@ -19,7 +19,7 @@ export class LintProjectsAppService {
   ) {
   }
 
-  run (): boolean {
+  run (fix: boolean): boolean {
     this.simpleMessage.writePlain("Lint projects");
     const projects = Object
       .values(this.wsDomainStore.getWsDomain().projects)
@@ -28,10 +28,11 @@ export class LintProjectsAppService {
         project.scheme === ProjectSchemeEnum.libTypeScript ||
         project.scheme === ProjectSchemeEnum.toolTypeScript
       );
+    const fixMode: string = fix ? `--fix` : ``;
     for (const project of projects) {
       this.simpleMessage.writePlain(`Lint ${project.name} project`);
       this.runCommandUtils.runNpxCommand(
-        `eslint ${project.src}/**/*.ts -c .eslintrc.json`, true
+        `eslint ${project.src}/**/*.ts -c .eslintrc.json ${fixMode}`, true
       );
     }
     return true;

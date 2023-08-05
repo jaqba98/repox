@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import { type RunProgramModel } from "@lib/model";
 import type {
   EmptyRepoxCommandModel,
-  EmptyRepoxProgramModel
+  EmptyRepoxProgramModel, LintProjectRepoxCommandModel
 } from "@lib/repox-domain";
 import {
   LintProjectStepService
@@ -20,7 +20,7 @@ export class LintProjectProgramService implements RunProgramModel {
 
   runProgram (programDomain: unknown, commandDomain: unknown): void {
     const programModel = programDomain as EmptyRepoxProgramModel;
-    const commandModel = commandDomain as EmptyRepoxCommandModel;
+    const commandModel = commandDomain as LintProjectRepoxCommandModel;
     this.step.runSteps(programModel, commandModel);
   }
 }
