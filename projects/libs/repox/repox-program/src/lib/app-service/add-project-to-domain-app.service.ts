@@ -28,7 +28,7 @@ export class AddProjectToDomainAppService {
     projectName: string, projectType: string, projectPath: string,
     projectScheme: string
   ): boolean {
-    this.simpleMessage.writePlain("Add project to domain");
+    this.simpleMessage.writePlain(`Add project to domain`);
     // Prepare data
     const name = projectName;
     const type = projectType as ProjectTypeEnum;

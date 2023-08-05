@@ -34,7 +34,7 @@ implements ValidatorDtoModel {
     }
     return this.buildParamDtoResult.buildError(
       wrongParamsDto,
-      ["You have used incorrect parameter pattern!"],
+      [`You have used incorrect parameter pattern!`],
       wrongParamsDto.map(param => this.getParamTip(param))
     );
   }
@@ -53,7 +53,7 @@ implements ValidatorDtoModel {
       case ParamTypeEnum.alias:
         return this.checkAlias(paramHasValue, paramBaseValue);
       default:
-        throw new Error("Not supported parameter type");
+        throw new Error(`Not supported parameter type`);
     }
   }
 
@@ -86,20 +86,20 @@ implements ValidatorDtoModel {
       case ParamTypeEnum.command:
         return this.buildCorrectPatternMessage(
           paramBaseValue,
-          "<name>"
+          `<name>`
         );
       case ParamTypeEnum.argument:
         return this.buildCorrectPatternMessage(
           paramBaseValue,
-          "--<name> or --<name>=<value>"
+          `--<name> or --<name>=<value>`
         );
       case ParamTypeEnum.alias:
         return this.buildCorrectPatternMessage(
           paramBaseValue,
-          "-<sign> or -<sign>=<value>"
+          `-<sign> or -<sign>=<value>`
         );
       default:
-        throw new Error("Not supported parameter type");
+        throw new Error(`Not supported parameter type`);
     }
   }
 

@@ -3,7 +3,7 @@
  */
 
 export enum HtmlProCommandEnum {
-  default = "default"
+  default = `default`
 }
 
 export enum HtmlProCommandAliasEnum {

@@ -41,10 +41,10 @@ implements ValidatorDomainModel {
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess();
     }
-    const notExistedArgs = wrongArgs.map(arg => arg.name).join(",");
+    const notExistedArgs = wrongArgs.map(arg => arg.name).join(`,`);
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
-      ["You have specified not existed arguments for program!"],
+      [`You have specified not existed arguments for program!`],
       [
         `Not existed arguments for program: ${notExistedArgs}`
       ]

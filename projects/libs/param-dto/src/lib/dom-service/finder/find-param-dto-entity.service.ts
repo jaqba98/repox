@@ -18,7 +18,7 @@ export class FindParamDtoEntityService {
       param => param.paramType === ParamTypeEnum.application
     );
     if (application == null) {
-      throw new Error("Application cannot be undefined!");
+      throw new Error(`Application cannot be undefined!`);
     }
     return application;
   }

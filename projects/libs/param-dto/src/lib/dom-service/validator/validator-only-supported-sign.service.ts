@@ -34,7 +34,7 @@ implements ValidatorDtoModel {
     }
     return this.buildParamDtoResult.buildError(
       wrongParamsDto,
-      ["You have used not supported signs!"],
+      [`You have used not supported signs!`],
       wrongParamsDto.map(param => this.getParamTip(param))
     );
   }
@@ -52,7 +52,7 @@ implements ValidatorDtoModel {
       case ParamTypeEnum.alias:
         return this.checkArgumentAndAlias(paramBaseValue);
       default:
-        throw new Error("Not supported parameter type!");
+        throw new Error(`Not supported parameter type!`);
     }
   }
 
@@ -71,16 +71,16 @@ implements ValidatorDtoModel {
       case ParamTypeEnum.command:
         return this.buildSupportedSignsMessage(
           paramBaseValue,
-          "[a-Z] [0-9] [-]"
+          `[a-Z] [0-9] [-]`
         );
       case ParamTypeEnum.argument:
       case ParamTypeEnum.alias:
         return this.buildSupportedSignsMessage(
           paramBaseValue,
-          "[a-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [@] [*] [space]"
+          `[a-Z] [0-9] [-] [=] ["] ['] [\`] [,] [/] [.] [@] [*] [space]`
         );
       default:
-        throw new Error("Not supported parameter type!");
+        throw new Error(`Not supported parameter type!`);
     }
   }
 

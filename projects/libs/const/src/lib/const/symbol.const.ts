@@ -5,5 +5,5 @@ import { EOL } from "os";
  */
 
 export const NEW_LINE: string = EOL;
-export const EMPTY_STRING: string = "";
-export const SPACE: string = " ";
+export const EMPTY_STRING: string = ``;
+export const SPACE: string = ` `;

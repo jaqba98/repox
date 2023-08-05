@@ -11,14 +11,14 @@ import {
 export class ConvertProjectTypeService {
   toProjectType (projectType: string): ProjectTypeEnum {
     switch (projectType) {
-      case "app":
+      case `app`:
         return ProjectTypeEnum.app;
-      case "lib":
+      case `lib`:
         return ProjectTypeEnum.lib;
-      case "tool":
+      case `tool`:
         return ProjectTypeEnum.tool;
       default:
-        throw new Error("Failed to convert the project type!");
+        throw new Error(`Failed to convert the project type!`);
     }
   }
 
@@ -33,7 +33,7 @@ export class ConvertProjectTypeService {
       case ProjectTypeEnum.tool:
         return WorkspaceFolderEnum.tools;
       default:
-        throw new Error("Failed to convert the project type!");
+        throw new Error(`Failed to convert the project type!`);
     }
   }
 }

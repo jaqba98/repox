@@ -31,10 +31,10 @@ implements ValidatorDtoModel {
     if (programs.length > 1) {
       return this.buildParamDtoResult.buildError(
         programs,
-        ["You have specified too many programs!"],
+        [`You have specified too many programs!`],
         [
-          "You have to specify max one program.",
-          "Pattern: repox <program> <arguments> <program> <arguments>"
+          `You have to specify max one program.`,
+          `Pattern: repox <program> <arguments> <program> <arguments>`
         ]
       );
     }

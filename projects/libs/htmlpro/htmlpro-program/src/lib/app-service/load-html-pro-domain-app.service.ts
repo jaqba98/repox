@@ -19,10 +19,10 @@ export class LoadHtmlProDomainAppService {
   }
 
   run (): boolean {
-    this.simpleMessage.writePlain("Load HTMLPRO domain model");
+    this.simpleMessage.writePlain(`Load HTMLPRO domain model`);
     // Check if workspace files exist
     if (this.pathUtils.notExistPath(HtmlProFileEnum.htmlProJson)) {
-      this.simpleMessage.writeError("Incorrect workspace structure");
+      this.simpleMessage.writeError(`Incorrect workspace structure`);
       this.simpleMessage.writeError(
         `The ${HtmlProFileEnum.htmlProJson} file does not exist`
       );

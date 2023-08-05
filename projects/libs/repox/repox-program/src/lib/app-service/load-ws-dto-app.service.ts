@@ -20,17 +20,17 @@ export class LoadWsDtoAppService {
   }
 
   run (): boolean {
-    this.simpleMessage.writePlain("Load workspace dto model");
+    this.simpleMessage.writePlain(`Load workspace dto model`);
     // Check if workspace files exist
     if (this.pathUtils.notExistPath(WorkspaceFileEnum.repoxJson)) {
-      this.simpleMessage.writeError("Incorrect workspace structure");
+      this.simpleMessage.writeError(`Incorrect workspace structure`);
       this.simpleMessage.writeError(
         `The ${WorkspaceFileEnum.repoxJson} file does not exist`
       );
       return false;
     }
     if (this.pathUtils.notExistPath(WorkspaceFileEnum.tsconfigJson)) {
-      this.simpleMessage.writeError("Incorrect workspace structure");
+      this.simpleMessage.writeError(`Incorrect workspace structure`);
       this.simpleMessage.writeError(
         `The ${WorkspaceFileEnum.tsconfigJson} file does not exist`
       );

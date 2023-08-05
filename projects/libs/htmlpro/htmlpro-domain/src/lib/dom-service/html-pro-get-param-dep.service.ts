@@ -25,7 +25,7 @@ export class HtmlProGetParamDepService {
         [HtmlProArgumentEnum.version]: {
           name: HtmlProArgumentEnum.version,
           values: [],
-          valueMode: "empty",
+          valueMode: `empty`,
           required: false
         }
       }
@@ -45,7 +45,7 @@ export class HtmlProGetParamDepService {
         [HtmlProArgumentEnum.force]: {
           name: HtmlProArgumentEnum.force,
           values: [],
-          valueMode: "empty",
+          valueMode: `empty`,
           required: false
         }
       }
@@ -65,13 +65,13 @@ export class HtmlProGetParamDepService {
         [HtmlProArgumentEnum.input]: {
           name: HtmlProArgumentEnum.input,
           values: [],
-          valueMode: "single",
+          valueMode: `single`,
           required: true
         },
         [HtmlProArgumentEnum.output]: {
           name: HtmlProArgumentEnum.output,
           values: [],
-          valueMode: "single",
+          valueMode: `single`,
           required: true
         }
       }

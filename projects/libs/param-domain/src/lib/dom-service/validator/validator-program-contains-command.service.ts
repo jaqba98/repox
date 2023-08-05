@@ -40,10 +40,10 @@ implements ValidatorDomainModel {
     }
     return this.buildParamDomain.buildError(
       [paramDomain.command.index],
-      ["The given command is not supported by the given program!"],
+      [`The given command is not supported by the given program!`],
       [
-        "You have to specify supported command name.",
-        "Check the documentation to get full list of commands."
+        `You have to specify supported command name.`,
+        `Check the documentation to get full list of commands.`
       ]
     );
   }

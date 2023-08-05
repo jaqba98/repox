@@ -9,119 +9,119 @@ import {
 class MockReadArgvService {
   getArgv (): string[] {
     return [
-      "node",
-      "application",
-      "program",
-      "--argument1",
-      "--argument2=val1",
-      "--argument3=\"val1,val2\"",
-      "command",
-      "-a",
-      "-b='val1'",
-      "-c=`val1,val2`"
+      `node`,
+      `application`,
+      `program`,
+      `--argument1`,
+      `--argument2=val1`,
+      `--argument3="val1,val2"`,
+      `command`,
+      `-a`,
+      `-b='val1'`,
+      `-c=\`val1,val2\``
     ];
   }
 }
 
-describe("BuildParamDtoService", (): void => {
+describe(`BuildParamDtoService`, (): void => {
   const service = container.resolve(BuildParamDtoService);
   const argv = container.resolve(MockReadArgvService).getArgv();
   const store = container.resolve(ParamDtoStoreService);
 
   afterAll(() => { container.clearInstances(); });
 
-  test("Should correctly build param DTO model", (): void => {
+  test(`Should correctly build param DTO model`, (): void => {
     service.buildParamDto(argv);
     expect(store.getParamDto()).toEqual<ParamDtoModel>({
       params: [
         {
-          paramBaseValue: "node",
+          paramBaseValue: `node`,
           paramIndex: 0,
           paramType: ParamTypeEnum.executor,
           paramHasValue: false,
-          paramName: "node",
+          paramName: `node`,
           paramValues: [],
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "application",
+          paramBaseValue: `application`,
           paramIndex: 1,
           paramType: ParamTypeEnum.application,
           paramHasValue: false,
-          paramName: "application",
+          paramName: `application`,
           paramValues: [],
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "program",
+          paramBaseValue: `program`,
           paramIndex: 2,
           paramType: ParamTypeEnum.program,
           paramHasValue: false,
-          paramName: "program",
+          paramName: `program`,
           paramValues: [],
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "--argument1",
+          paramBaseValue: `--argument1`,
           paramIndex: 3,
           paramType: ParamTypeEnum.argument,
           paramHasValue: false,
-          paramName: "argument1",
+          paramName: `argument1`,
           paramValues: [],
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "--argument2=val1",
+          paramBaseValue: `--argument2=val1`,
           paramIndex: 4,
           paramType: ParamTypeEnum.argument,
           paramHasValue: true,
-          paramName: "argument2",
-          paramValues: ["val1"],
+          paramName: `argument2`,
+          paramValues: [`val1`],
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "--argument3=\"val1,val2\"",
+          paramBaseValue: `--argument3="val1,val2"`,
           paramIndex: 5,
           paramType: ParamTypeEnum.argument,
           paramHasValue: true,
-          paramName: "argument3",
-          paramValues: ["val1", "val2"],
+          paramName: `argument3`,
+          paramValues: [`val1`, `val2`],
           paramHasManyValues: true
         },
         {
-          paramBaseValue: "command",
+          paramBaseValue: `command`,
           paramIndex: 6,
           paramType: ParamTypeEnum.command,
           paramHasValue: false,
-          paramName: "command",
+          paramName: `command`,
           paramValues: [],
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "-a",
+          paramBaseValue: `-a`,
           paramIndex: 7,
           paramType: ParamTypeEnum.alias,
           paramHasValue: false,
-          paramName: "a",
+          paramName: `a`,
           paramValues: [],
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "-b='val1'",
+          paramBaseValue: `-b='val1'`,
           paramIndex: 8,
           paramType: ParamTypeEnum.alias,
           paramHasValue: true,
-          paramName: "b",
-          paramValues: ["val1"],
+          paramName: `b`,
+          paramValues: [`val1`],
           paramHasManyValues: false
         },
         {
-          paramBaseValue: "-c=`val1,val2`",
+          paramBaseValue: `-c=\`val1,val2\``,
           paramIndex: 9,
           paramType: ParamTypeEnum.alias,
           paramHasValue: true,
-          paramName: "c",
-          paramValues: ["val1", "val2"],
+          paramName: `c`,
+          paramValues: [`val1`, `val2`],
           paramHasManyValues: true
         }
       ]

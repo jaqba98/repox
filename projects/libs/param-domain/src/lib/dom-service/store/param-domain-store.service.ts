@@ -27,14 +27,14 @@ export class ParamDomainStoreService {
 
   getParamDomain (): ParamDomainModel {
     if (this.domain === undefined) {
-      throw new Error("The domain store is undefined!");
+      throw new Error(`The domain store is undefined!`);
     }
     return this.domain;
   }
 
   getParamDomainValidation (): ParamDomainValidationModel {
     if (this.validation === undefined) {
-      throw new Error("The validation store is undefined!");
+      throw new Error(`The validation store is undefined!`);
     }
     return this.validation;
   }

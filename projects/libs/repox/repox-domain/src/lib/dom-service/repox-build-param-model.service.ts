@@ -7,7 +7,7 @@ import {
   type EmptyRepoxProgramModel,
   type GenerateProjectRepoxCommandModel,
   type GenerateWorkspaceRepoxCommandModel,
-  LintProjectRepoxCommandModel,
+  type LintProjectRepoxCommandModel,
   type PublishNpmRepoxCommandModel,
   RepoxArgumentEnum
 } from "@lib/repox-domain";

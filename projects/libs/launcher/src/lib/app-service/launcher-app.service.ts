@@ -20,7 +20,7 @@ export class LauncherAppService {
       program.commandName === commandName
     );
     if (programToRun === undefined) {
-      throw new Error("Not found implementation for given program!");
+      throw new Error(`Not found implementation for given program!`);
     }
     return programToRun.service;
   }

@@ -3,12 +3,12 @@
  */
 
 export enum HtmlProProgramEnum {
-  default = "default",
-  init = "init",
-  build = "build"
+  default = `default`,
+  init = `init`,
+  build = `build`
 }
 
 export enum HtmlProProgramAliasEnum {
-  init = "i",
-  build = "b"
+  init = `i`,
+  build = `b`
 }

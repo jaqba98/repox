@@ -29,7 +29,7 @@ export class RepoxGetParamDepService {
         [RepoxArgumentEnum.version]: {
           name: RepoxArgumentEnum.version,
           values: [],
-          valueMode: "empty",
+          valueMode: `empty`,
           required: false
         }
       }
@@ -50,7 +50,7 @@ export class RepoxGetParamDepService {
             [RepoxArgumentEnum.name]: {
               name: RepoxArgumentEnum.name,
               values: [],
-              valueMode: "single",
+              valueMode: `single`,
               required: true
             }
           }
@@ -61,25 +61,25 @@ export class RepoxGetParamDepService {
             [RepoxArgumentEnum.name]: {
               name: RepoxArgumentEnum.name,
               values: [],
-              valueMode: "single",
+              valueMode: `single`,
               required: true
             },
             [RepoxArgumentEnum.type]: {
               name: RepoxArgumentEnum.type,
               values: Object.values(ProjectTypeEnum),
-              valueMode: "single",
+              valueMode: `single`,
               required: true
             },
             [RepoxArgumentEnum.scheme]: {
               name: RepoxArgumentEnum.scheme,
               values: Object.values(ProjectSchemeEnum),
-              valueMode: "single",
+              valueMode: `single`,
               required: true
             },
             [RepoxArgumentEnum.path]: {
               name: RepoxArgumentEnum.path,
               values: [],
-              valueMode: "single",
+              valueMode: `single`,
               required: false
             }
           }
@@ -103,13 +103,13 @@ export class RepoxGetParamDepService {
             [RepoxArgumentEnum.name]: {
               name: RepoxArgumentEnum.name,
               values: [],
-              valueMode: "single",
+              valueMode: `single`,
               required: true
             },
             [RepoxArgumentEnum.watch]: {
               name: RepoxArgumentEnum.watch,
               values: [],
-              valueMode: "empty",
+              valueMode: `empty`,
               required: false
             }
           }
@@ -119,7 +119,7 @@ export class RepoxGetParamDepService {
         [RepoxArgumentEnum.production]: {
           name: RepoxArgumentEnum.production,
           values: [],
-          valueMode: "empty",
+          valueMode: `empty`,
           required: false
         }
       }
@@ -140,7 +140,7 @@ export class RepoxGetParamDepService {
             [RepoxArgumentEnum.name]: {
               name: RepoxArgumentEnum.name,
               values: [],
-              valueMode: "single",
+              valueMode: `single`,
               required: true
             }
           }
@@ -164,7 +164,7 @@ export class RepoxGetParamDepService {
             [RepoxArgumentEnum.fix]: {
               name: RepoxArgumentEnum.fix,
               values: [],
-              valueMode: "empty",
+              valueMode: `empty`,
               required: false
             }
           }

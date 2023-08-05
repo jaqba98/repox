@@ -69,10 +69,10 @@ export class BuildParamDtoService {
       ? paramBaseValue.split(EQUAL_SIGN)[0]
       : paramBaseValue;
     if (paramType === ParamTypeEnum.argument) {
-      return paramName.replace(ARGUMENT_PREFIX, "");
+      return paramName.replace(ARGUMENT_PREFIX, ``);
     }
     if (paramType === ParamTypeEnum.alias) {
-      return paramName.replace(ALIAS_PREFIX, "");
+      return paramName.replace(ALIAS_PREFIX, ``);
     }
     return paramName;
   }
@@ -84,9 +84,9 @@ export class BuildParamDtoService {
     if (!paramHasValue) return [];
     return paramBaseValue
       .split(EQUAL_SIGN)[1]
-      .replace(/\s/g, "")
-      .replace(/^(["'`])/, "")
-      .replace(/(["'`])$/, "")
+      .replace(/\s/g, ``)
+      .replace(/^(["'`])/, ``)
+      .replace(/(["'`])$/, ``)
       .split(VALUE_SEPARATION);
   }
 }

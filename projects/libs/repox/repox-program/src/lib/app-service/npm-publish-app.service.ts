@@ -14,8 +14,8 @@ export class NpmPublishAppService {
   }
 
   run (): boolean {
-    this.simpleMessage.writePlain("Npm publish");
-    this.runCommandUtils.runCommand("npm publish", true);
+    this.simpleMessage.writePlain(`Npm publish`);
+    this.runCommandUtils.runCommand(`npm publish`, true);
     return true;
   }
 }

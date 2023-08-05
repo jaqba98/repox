@@ -34,10 +34,10 @@ implements ValidatorDomainModel {
     if (paramDomain.program.name === BaseParamTypeEnum.unknown) {
       return this.buildParamDomain.buildError(
         [paramDomain.program.index],
-        ["You have specified not existed program!"],
+        [`You have specified not existed program!`],
         [
-          "You have to specify correct program name.",
-          "Check the documentation to get full list of programs."
+          `You have to specify correct program name.`,
+          `Check the documentation to get full list of programs.`
         ]
       );
     }

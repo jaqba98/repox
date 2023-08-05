@@ -60,25 +60,25 @@ export default config;
   buildDefaultTsconfigJsonContentFile (): WsTsconfigDtoModel {
     return {
       compilerOptions: {
-        target: "ES2022",
+        target: `ES2022`,
         experimentalDecorators: true,
         emitDecoratorMetadata: true,
-        module: "commonjs",
-        rootDir: "./projects",
-        outDir: "./dist",
+        module: `commonjs`,
+        rootDir: `./projects`,
+        outDir: `./dist`,
         esModuleInterop: true,
         forceConsistentCasingInFileNames: true,
         strict: true,
         skipLibCheck: true,
-        baseUrl: ".",
+        baseUrl: `.`,
         sourceMap: true,
         paths: {}
       },
       exclude: [
-        "node_modules",
-        "**/*.spec.ts",
-        "**/*.test.ts",
-        "**/jest.config.ts"
+        `node_modules`,
+        `**/*.spec.ts`,
+        `**/*.test.ts`,
+        `**/jest.config.ts`
       ]
     };
   }

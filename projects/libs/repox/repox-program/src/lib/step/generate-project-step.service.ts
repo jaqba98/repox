@@ -58,7 +58,7 @@ export class GenerateProjectStepService {
     programModel: EmptyRepoxProgramModel,
     commandModel: GenerateProjectRepoxCommandModel
   ): void {
-    this.simpleMessage.writeInfo("Generate project", REPOX_LOGO);
+    this.simpleMessage.writeInfo(`Generate project`, REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
@@ -75,6 +75,6 @@ export class GenerateProjectStepService {
     if (!this.saveWsDto.run()) return;
     if (!this.createProjectFiles.run(projectName)) return;
     this.newline.writeNewline();
-    this.simpleMessage.writeSuccess("Project generated correctly");
+    this.simpleMessage.writeSuccess(`Project generated correctly`);
   }
 }

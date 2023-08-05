@@ -5,32 +5,32 @@ import { type Schema } from "jsonschema";
  */
 
 export const htmlProJsonFileSchema: Schema = {
-  id: "/HtmlProJsonFileSchema",
-  type: "object",
+  id: `/HtmlProJsonFileSchema`,
+  type: `object`,
   properties: {
     components: {
-      type: "object",
+      type: `object`,
       additionalProperties: {
-        type: "object",
+        type: `object`,
         properties: {
           alias: {
-            type: "string"
+            type: `string`
           },
           templateUrl: {
-            type: "string"
+            type: `string`
           },
           styleUrls: {
-            type: "array",
+            type: `array`,
             items: {
-              type: "string"
+              type: `string`
             }
           }
         },
         additionalProperties: false,
-        required: ["alias", "templateUrl", "styleUrls"]
+        required: [`alias`, `templateUrl`, `styleUrls`]
       }
     }
   },
   additionalProperties: false,
-  required: ["components"]
+  required: [`components`]
 };

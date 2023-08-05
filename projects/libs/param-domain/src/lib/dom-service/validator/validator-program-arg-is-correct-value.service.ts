@@ -51,7 +51,7 @@ implements ValidatorDomainModel {
       [...wrongArgs.map(arg => arg.index)],
       [...wrongArgs.map(arg => arg.error)],
       [
-        "Check the documentation to get full list of arguments."
+        `Check the documentation to get full list of arguments.`
       ]
     );
   }

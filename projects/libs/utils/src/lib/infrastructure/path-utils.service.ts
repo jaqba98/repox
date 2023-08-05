@@ -11,10 +11,10 @@ import { EMPTY_STRING } from "@lib/const";
 export class PathUtilsService {
   getRootPath (path: string, file: string): string {
     return this.normalizePath(path)
-      .split("/")
-      .map((): string => "..")
-      .join("/")
-      .concat("/")
+      .split(`/`)
+      .map((): string => `..`)
+      .join(`/`)
+      .concat(`/`)
       .concat(file);
   }
 
@@ -35,7 +35,7 @@ export class PathUtilsService {
   }
 
   normalizePath (path: string): string {
-    return path.replace(/\\/g, "/");
+    return path.replace(/\\/g, `/`);
   }
 
   getCurrentPath (): string {
@@ -52,14 +52,14 @@ export class PathUtilsService {
   }
 
   getPackageJsonPath (currentPath: string): string {
-    const packageJsonPath = join(currentPath, "package.json");
+    const packageJsonPath = join(currentPath, `package.json`);
     if (this.existPath(packageJsonPath)) {
       return currentPath;
     }
     if (this.isRootPath(currentPath)) {
       return EMPTY_STRING;
     }
-    const nextPath = join(currentPath, "../");
+    const nextPath = join(currentPath, `../`);
     return this.getPackageJsonPath(nextPath);
   }
 }

@@ -24,7 +24,7 @@ export class FolderNotExistAppService {
     this.simpleMessage.writeError(
       `The ${workspaceName} folder already exist`
     );
-    this.simpleMessage.writeWarning("Specify another workspace name");
+    this.simpleMessage.writeWarning(`Specify another workspace name`);
     return false;
   }
 }

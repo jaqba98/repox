@@ -15,7 +15,7 @@ export class SaveWsDomainAppService {
   }
 
   run (): boolean {
-    this.simpleMessage.writePlain("Save workspace domain model");
+    this.simpleMessage.writePlain(`Save workspace domain model`);
     this.wsDomainStore.saveWsDomain();
     return true;
   }

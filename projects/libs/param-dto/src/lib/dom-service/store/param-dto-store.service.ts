@@ -19,7 +19,7 @@ export class ParamDtoStoreService {
 
   getParamDto (): ParamDtoModel {
     if (this.paramDto === undefined) {
-      throw new Error("The param dto store is undefined!");
+      throw new Error(`The param dto store is undefined!`);
     }
     return this.paramDto;
   }
@@ -32,7 +32,7 @@ export class ParamDtoStoreService {
 
   getParamDtoValidation (): ParamDtoValidationModel {
     if (this.paramDtoValidation === undefined) {
-      throw new Error("The param dto validation store is undefined!");
+      throw new Error(`The param dto validation store is undefined!`);
     }
     return this.paramDtoValidation;
   }

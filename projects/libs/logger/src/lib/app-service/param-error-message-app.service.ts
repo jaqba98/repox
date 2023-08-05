@@ -49,7 +49,7 @@ export class ParamErrorMessageAppService {
             content: LoggerModeEnum.error.toUpperCase()
           },
           words: [
-            { content: "Failed to run program!", underscore: false }
+            { content: `Failed to run program!`, underscore: false }
           ],
           newline: 1
         },

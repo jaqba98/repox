@@ -39,10 +39,10 @@ implements ValidatorDtoModel {
     }
     return this.buildParamDtoResult.buildError(
       wrongParamsDto,
-      ["You have specified the program in the incorrect order!"],
+      [`You have specified the program in the incorrect order!`],
       [
-        "You have to specify the program in the correct order.",
-        "Pattern: repox <program> <arguments> <program> <arguments>"
+        `You have to specify the program in the correct order.`,
+        `Pattern: repox <program> <arguments> <program> <arguments>`
       ]
     );
   }
@@ -55,7 +55,7 @@ implements ValidatorDtoModel {
       order => order.paramTypes.includes(paramDto.paramType)
     );
     if (paramOrder == null) {
-      throw new Error("Not supported param type!");
+      throw new Error(`Not supported param type!`);
     }
     if (paramOrder.order === 3 && (program == null)) {
       return paramDto.paramIndex >= 2;

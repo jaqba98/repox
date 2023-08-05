@@ -71,7 +71,7 @@ export class WsDomainStoreService {
 
   getWsDomain (): WsDomainModel {
     if (this.wsDomain === undefined) {
-      throw new Error("The store is undefined!");
+      throw new Error(`The store is undefined!`);
     }
     return this.wsDomain;
   }
@@ -94,7 +94,7 @@ export class WsDomainStoreService {
     projectPath: string, projectScheme: ProjectSchemeEnum
   ): void {
     if (this.wsDomain === undefined) {
-      throw new Error("The store is undefined!");
+      throw new Error(`The store is undefined!`);
     }
     this.wsDomain.projects.push({
       name: projectName,
@@ -157,7 +157,7 @@ export class WsDomainStoreService {
           assets: []
         };
       default:
-        throw new Error("Not supported project scheme");
+        throw new Error(`Not supported project scheme`);
     }
   }
 
@@ -177,7 +177,7 @@ export class WsDomainStoreService {
           projectName, projectType
         );
       default:
-        throw new Error("Not supported project scheme");
+        throw new Error(`Not supported project scheme`);
     }
   }
 
@@ -199,7 +199,7 @@ export class WsDomainStoreService {
           ])
         ];
       default:
-        throw new Error("Not supported project scheme");
+        throw new Error(`Not supported project scheme`);
     }
   }
 }

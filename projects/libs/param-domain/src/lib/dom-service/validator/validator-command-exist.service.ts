@@ -34,10 +34,10 @@ implements ValidatorDomainModel {
     if (paramDomain.command.name === BaseParamTypeEnum.unknown) {
       return this.buildParamDomain.buildError(
         [paramDomain.command.index],
-        ["You have specified not existed command!"],
+        [`You have specified not existed command!`],
         [
-          "You have to specify correct command name.",
-          "Check the documentation to get full list of commands."
+          `You have to specify correct command name.`,
+          `Check the documentation to get full list of commands.`
         ]
       );
     }

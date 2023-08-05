@@ -14,7 +14,7 @@ export class ChangePathAppService {
   }
 
   run (path: string): boolean {
-    this.simpleMessage.writePlain("Change path");
+    this.simpleMessage.writePlain(`Change path`);
     this.pathUtils.changePath(path);
     return true;
   }

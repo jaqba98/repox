@@ -29,7 +29,7 @@ export class HtmlProDomainStoreService {
 
   verifyHtmlProDomain (): ValidatorResult {
     this.validator.addSchema(
-      htmlProJsonFileSchema, "/HtmlProJsonFileSchema"
+      htmlProJsonFileSchema, `/HtmlProJsonFileSchema`
     );
     return this.validator.validate(
       this.htmlProDomain, htmlProJsonFileSchema
@@ -38,7 +38,7 @@ export class HtmlProDomainStoreService {
 
   getHtmlProDomain (): HtmlProDomainModel {
     if (this.htmlProDomain === undefined) {
-      throw new Error("The store is undefined!");
+      throw new Error(`The store is undefined!`);
     }
     return this.htmlProDomain;
   }

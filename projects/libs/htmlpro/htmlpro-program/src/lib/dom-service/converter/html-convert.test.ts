@@ -2,7 +2,6 @@ import { container } from "tsyringe";
 import { HtmlConverterService } from "./html-converter.service";
 import type { HtmlJsonModel } from "../../model/html-json.model";
 import { HtmlTypeEnum } from "../../enum/html-type.enum";
-import { FileUtilsService } from "@lib/utils";
 
 const htmlExample = `
 <html lang="en">

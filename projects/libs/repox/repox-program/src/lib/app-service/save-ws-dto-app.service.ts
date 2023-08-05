@@ -15,7 +15,7 @@ export class SaveWsDtoAppService {
   }
 
   run (): boolean {
-    this.simpleMessage.writePlain("Save workspace dto model");
+    this.simpleMessage.writePlain(`Save workspace dto model`);
     this.wsDtoStore.saveWsDto();
     return true;
   }

@@ -38,14 +38,14 @@ export class BuildProjectAppService {
   }
 
   run (projectName: string, buildWatch: boolean): boolean {
-    this.simpleMessage.writePlain("Build the project");
+    this.simpleMessage.writePlain(`Build the project`);
     const project = this.wsDomainStore.getProject(projectName);
     if (project === undefined) {
       this.simpleMessage.writeError(
         `The ${projectName} project does not exist!`
       );
       this.simpleMessage.writeWarning(
-        "Specify a different project name and restart the program"
+        `Specify a different project name and restart the program`
       );
       return false;
     }
@@ -55,10 +55,10 @@ export class BuildProjectAppService {
         `Could not build a project of type ${project.type}.`
       );
       this.simpleMessage.writeError(
-        "It it only possible to build applications!"
+        `It it only possible to build applications!`
       );
       this.simpleMessage.writeError(
-        "Other types of projects will be build as dependencies!"
+        `Other types of projects will be build as dependencies!`
       );
       return false;
     }
@@ -69,7 +69,7 @@ export class BuildProjectAppService {
     }
     this.buildImmediately(project);
     this.newline.writeNewline();
-    this.simpleMessage.writeSuccess("Project built correctly");
+    this.simpleMessage.writeSuccess(`Project built correctly`);
     return true;
   }
 
@@ -77,13 +77,13 @@ export class BuildProjectAppService {
     const watcher = watch(
       WorkspaceFolderEnum.projects, { recursive: true }
     );
-    watcher.on("change", (_, filename): void => {
+    watcher.on(`change`, (_, filename): void => {
       if (this.folderUtils.isFolder(filename.toString())) {
-        this.simpleMessage.writePlain("Rebuilding the project");
+        this.simpleMessage.writePlain(`Rebuilding the project`);
       }
       this.buildImmediately(project);
       if (this.folderUtils.isFolder(filename.toString())) {
-        this.simpleMessage.writeSuccess("Project built correctly");
+        this.simpleMessage.writeSuccess(`Project built correctly`);
       }
     });
   }
@@ -100,7 +100,7 @@ export class BuildProjectAppService {
         this.buildProjectAppTypescript(project);
         break;
       default:
-        throw new Error("Not supported project scheme");
+        throw new Error(`Not supported project scheme`);
     }
   }
 
@@ -135,7 +135,7 @@ export class BuildProjectAppService {
     ]);
     if (!this.pathUtils.existPath(projectTsconfig)) {
       this.simpleMessage.writeError(
-        "There is no tsconfig.json file for the project."
+        `There is no tsconfig.json file for the project.`
       );
       return false;
     }

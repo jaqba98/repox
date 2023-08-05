@@ -46,10 +46,10 @@ export class WsDtoStoreService {
 
   saveWsDto (): void {
     if (this.wsRepoxDto === undefined) {
-      throw new Error("The repox store is undefined!");
+      throw new Error(`The repox store is undefined!`);
     }
     if (this.wsTsconfigDto === undefined) {
-      throw new Error("The tsconfig store is undefined!");
+      throw new Error(`The tsconfig store is undefined!`);
     }
     this.file.writeJsonFile<WsRepoxDtoModel>(
       WorkspaceFileEnum.repoxJson, this.wsRepoxDto
@@ -61,14 +61,14 @@ export class WsDtoStoreService {
 
   getWsRepoxDto (): WsRepoxDtoModel {
     if (this.wsRepoxDto === undefined) {
-      throw new Error("The store is undefined!");
+      throw new Error(`The store is undefined!`);
     }
     return this.wsRepoxDto;
   }
 
   getWsTsconfigDto (): WsTsconfigDtoModel {
     if (this.wsTsconfigDto === undefined) {
-      throw new Error("The store is undefined!");
+      throw new Error(`The store is undefined!`);
     }
     return this.wsTsconfigDto;
   }
@@ -76,20 +76,20 @@ export class WsDtoStoreService {
   getWsRepoxDtoProjects (): WsRepoxProjectDtoModel[] {
     const { projects } = this.getWsRepoxDto();
     if (projects === undefined) {
-      throw new Error("The projects in store is undefined!");
+      throw new Error(`The projects in store is undefined!`);
     }
     return Object.values(projects);
   }
 
   addProjectDto (project: WsProjectDomainModel): void {
     if (this.wsRepoxDto === undefined) {
-      throw new Error("The repox store is undefined!");
+      throw new Error(`The repox store is undefined!`);
     }
     if (this.wsRepoxDto.projects === undefined) {
-      throw new Error("The projects in repox store is undefined!");
+      throw new Error(`The projects in repox store is undefined!`);
     }
     if (this.wsTsconfigDto === undefined) {
-      throw new Error("The tsconfig store is undefined!");
+      throw new Error(`The tsconfig store is undefined!`);
     }
     this.wsRepoxDto.projects[project.name] = {
       name: project.name === EMPTY_STRING ? undefined : project.name,
@@ -126,7 +126,7 @@ export class WsDtoStoreService {
 
   verifyWsRepoxDto (): ValidatorResult {
     this.validator.addSchema(
-      repoxJsonFileSchema, "/RepoxJsonFileSchema"
+      repoxJsonFileSchema, `/RepoxJsonFileSchema`
     );
     return this.validator.validate(
       this.wsRepoxDto, repoxJsonFileSchema
@@ -135,7 +135,7 @@ export class WsDtoStoreService {
 
   verifyWsTsconfigDto (): ValidatorResult {
     this.validator.addSchema(
-      tsconfigJsonFileSchema, "/TsconfigJsonFileSchema"
+      tsconfigJsonFileSchema, `/TsconfigJsonFileSchema`
     );
     return this.validator.validate(
       this.wsTsconfigDto, tsconfigJsonFileSchema

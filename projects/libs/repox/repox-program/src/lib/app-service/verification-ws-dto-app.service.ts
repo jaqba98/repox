@@ -19,7 +19,7 @@ export class VerificationWsDtoAppService {
 
   run (productionMode: boolean): boolean {
     if (productionMode) return true;
-    this.simpleMessage.writePlain("Verification workspace dto model");
+    this.simpleMessage.writePlain(`Verification workspace dto model`);
     // Verification the workspace dto model
     const verifyRepoxDto = this.wsDtoStore.verifyWsRepoxDto();
     if (verifyRepoxDto.errors.length > 0) {

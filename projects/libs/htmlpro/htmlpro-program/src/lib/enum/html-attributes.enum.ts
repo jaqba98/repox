@@ -2,5 +2,5 @@
  * All attributed available in the HtmlPro program.
  */
 export enum HtmlAttributesEnum {
-  dataImport = "data-import"
+  dataImport = `data-import`
 }

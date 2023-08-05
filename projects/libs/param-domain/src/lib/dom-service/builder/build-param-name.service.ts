@@ -54,7 +54,7 @@ export class BuildParamNameService {
     enums: KeyValueModel[],
     aliasEnums: KeyValueModel[]
   ): string {
-    if (baseName === EMPTY_STRING) return "default";
+    if (baseName === EMPTY_STRING) return `default`;
     const argument = enums
       .find(argumentItem => argumentItem.value === baseName);
     if (argument != null) {

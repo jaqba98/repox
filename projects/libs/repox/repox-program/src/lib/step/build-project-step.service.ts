@@ -50,7 +50,7 @@ export class BuildProjectStepService {
     programModel: BuildProjectRepoxProgramModel,
     commandModel: BuildProjectRepoxCommandModel
   ): void {
-    this.simpleMessage.writeInfo("Build project", REPOX_LOGO);
+    this.simpleMessage.writeInfo(`Build project`, REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;

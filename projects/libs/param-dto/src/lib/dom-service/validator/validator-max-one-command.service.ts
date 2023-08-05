@@ -33,20 +33,20 @@ implements ValidatorDtoModel {
     if (program === undefined && commands.length > 0) {
       return this.buildParamDtoResult.buildError(
         commands,
-        ["You have specified the command without any program!"],
+        [`You have specified the command without any program!`],
         [
-          "You have to specify a program.",
-          "Pattern: repox <program> <arguments> <program> <arguments>"
+          `You have to specify a program.`,
+          `Pattern: repox <program> <arguments> <program> <arguments>`
         ]
       );
     }
     if (program !== undefined && commands.length > 1) {
       return this.buildParamDtoResult.buildError(
         commands,
-        ["You have specified too many commands!"],
+        [`You have specified too many commands!`],
         [
-          "You have to specify one command for the given program.",
-          "Pattern: repox <program> <arguments> <program> <arguments>"
+          `You have to specify one command for the given program.`,
+          `Pattern: repox <program> <arguments> <program> <arguments>`
         ]
       );
     }

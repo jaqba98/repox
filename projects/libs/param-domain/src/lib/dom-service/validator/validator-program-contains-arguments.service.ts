@@ -43,12 +43,12 @@ implements ValidatorDomainModel {
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess();
     }
-    const missingArgs = wrongArgs.map(arg => arg.name).join(",");
+    const missingArgs = wrongArgs.map(arg => arg.name).join(`,`);
     return this.buildParamDomain.buildError(
       [],
-      ["You have not specified all required arguments for program!"],
+      [`You have not specified all required arguments for program!`],
       [
-        "You have to specify required arguments.",
+        `You have to specify required arguments.`,
         `Missing arguments for program are: ${missingArgs}`
       ]
     );

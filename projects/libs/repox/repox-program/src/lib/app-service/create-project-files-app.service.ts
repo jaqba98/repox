@@ -33,7 +33,7 @@ export class CreateProjectFilesAppService {
 
   run (projectName: string): boolean {
     this.simpleMessage.writePlain(
-      "Creating a project workspace structure"
+      `Creating a project workspace structure`
     );
     const project = this.wsDomainStore.getProject(projectName);
     if (project == null) {
@@ -58,7 +58,7 @@ export class CreateProjectFilesAppService {
         this.createLibToolTsProjectStructure(project.path);
         break;
       default:
-        throw new Error("Not supported project scheme!");
+        throw new Error(`Not supported project scheme!`);
     }
     this.pathUtils.changePath(currentPath);
     return true;
@@ -70,8 +70,8 @@ export class CreateProjectFilesAppService {
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     this.pathUtils.changePath(WorkspaceFolderEnum.src);
     this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
-    this.pathUtils.changePath("../");
-    this.runCommandUtils.runCommand("npm init -y");
+    this.pathUtils.changePath(`../`);
+    this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
       WorkspaceFileEnum.jestConfigTs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
@@ -84,8 +84,8 @@ export class CreateProjectFilesAppService {
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     this.pathUtils.changePath(WorkspaceFolderEnum.src);
     this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
-    this.pathUtils.changePath("../");
-    this.runCommandUtils.runCommand("npm init -y");
+    this.pathUtils.changePath(`../`);
+    this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
       WorkspaceFileEnum.jestConfigTs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
@@ -98,8 +98,8 @@ export class CreateProjectFilesAppService {
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     this.pathUtils.changePath(WorkspaceFolderEnum.src);
     this.fileUtils.createEmptyFile(WorkspaceFileEnum.mainTs);
-    this.pathUtils.changePath("../");
-    this.runCommandUtils.runCommand("npm init -y");
+    this.pathUtils.changePath(`../`);
+    this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
       WorkspaceFileEnum.jestConfigTs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
@@ -119,8 +119,8 @@ export class CreateProjectFilesAppService {
     this.fileUtils.createEmptyFile(WorkspaceFileEnum.indexTs);
     this.pathUtils.changePath(WorkspaceFolderEnum.lib);
     this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
-    this.pathUtils.changePath("../../");
-    this.runCommandUtils.runCommand("npm init -y");
+    this.pathUtils.changePath(`../../`);
+    this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
       WorkspaceFileEnum.jestConfigTs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)

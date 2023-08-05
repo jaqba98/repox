@@ -5,46 +5,46 @@ import { type Schema } from "jsonschema";
  */
 
 export const repoxJsonFileSchema: Schema = {
-  id: "/RepoxJsonFileSchema",
-  type: "object",
+  id: `/RepoxJsonFileSchema`,
+  type: `object`,
   properties: {
     projects: {
-      type: "object",
+      type: `object`,
       additionalProperties: {
-        type: "object",
+        type: `object`,
         properties: {
-          name: { type: "string" },
-          type: { type: "string" },
-          path: { type: "string" },
-          src: { type: "string" },
-          scheme: { type: "string" },
+          name: { type: `string` },
+          type: { type: `string` },
+          path: { type: `string` },
+          src: { type: `string` },
+          scheme: { type: `string` },
           build: {
-            type: "object",
+            type: `object`,
             properties: {
-              output: { type: "string" },
-              main: { type: "string" },
+              output: { type: `string` },
+              main: { type: `string` },
               pages: {
-                type: "array",
+                type: `array`,
                 items: {
-                  type: "object",
+                  type: `object`,
                   properties: {
-                    input: { type: "string" },
-                    output: { type: "string" }
+                    input: { type: `string` },
+                    output: { type: `string` }
                   },
                   additionalProperties: false,
-                  required: ["input", "output"]
+                  required: [`input`, `output`]
                 }
               },
               assets: {
-                type: "array",
+                type: `array`,
                 items: {
-                  type: "object",
+                  type: `object`,
                   properties: {
-                    input: { type: "string" },
-                    output: { type: "string" }
+                    input: { type: `string` },
+                    output: { type: `string` }
                   },
                   additionalProperties: false,
-                  required: ["input", "output"]
+                  required: [`input`, `output`]
                 }
               }
             },
@@ -54,17 +54,17 @@ export const repoxJsonFileSchema: Schema = {
         if: {
           properties: {
             type: {
-              const: "app"
+              const: `app`
             },
             scheme: {
-              const: "@blank"
+              const: `@blank`
             }
           }
         },
         then: {
           properties: {
             build: {
-              required: ["output"]
+              required: [`output`]
             }
           }
         },
@@ -72,44 +72,44 @@ export const repoxJsonFileSchema: Schema = {
           if: {
             properties: {
               scheme: {
-                const: "@app/ts"
+                const: `@app/ts`
               }
             }
           },
           then: {
             properties: {
               build: {
-                required: ["output", "main"]
+                required: [`output`, `main`]
               }
             }
           }
         },
         additionalProperties: false,
-        required: ["name", "type", "path", "src", "scheme"]
+        required: [`name`, `type`, `path`, `src`, `scheme`]
       }
     }
   },
   additionalProperties: false,
-  required: ["projects"]
+  required: [`projects`]
 };
 
 export const tsconfigJsonFileSchema: Schema = {
-  id: "/TsconfigJsonFileSchema",
-  type: "object",
+  id: `/TsconfigJsonFileSchema`,
+  type: `object`,
   properties: {
     compilerOptions: {
-      type: "object",
+      type: `object`,
       properties: {
         paths: {
-          type: "object",
+          type: `object`,
           additionalProperties: {
-            type: "array",
-            items: { type: "string" }
+            type: `array`,
+            items: { type: `string` }
           }
         }
       },
-      required: ["paths"]
+      required: [`paths`]
     }
   },
-  required: ["compilerOptions"]
+  required: [`compilerOptions`]
 };

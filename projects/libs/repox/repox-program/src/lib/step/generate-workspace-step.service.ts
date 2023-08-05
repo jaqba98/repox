@@ -39,7 +39,7 @@ export class GenerateWorkspaceStepService {
     commandModel: GenerateWorkspaceRepoxCommandModel
   ): void {
     const { workspaceName } = commandModel;
-    this.simpleMessage.writeInfo("Generate workspace", REPOX_LOGO);
+    this.simpleMessage.writeInfo(`Generate workspace`, REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.folderNotExist.run(workspaceName)) return;
@@ -47,7 +47,7 @@ export class GenerateWorkspaceStepService {
     if (!this.initWsProject.run()) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
-      "Workspace generated successfully!"
+      `Workspace generated successfully!`
     );
   }
 }

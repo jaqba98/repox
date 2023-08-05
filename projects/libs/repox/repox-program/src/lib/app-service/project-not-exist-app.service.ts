@@ -26,7 +26,7 @@ export class ProjectNotExistAppService {
       `The ${projectName} project already exist!`
     );
     this.simpleMessage.writeWarning(
-      "Specify a different project name and restart the program"
+      `Specify a different project name and restart the program`
     );
     return false;
   }

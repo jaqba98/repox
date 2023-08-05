@@ -20,7 +20,7 @@ export class LintProjectsAppService {
   }
 
   run (fix: boolean): boolean {
-    this.simpleMessage.writePlain("Lint projects");
+    this.simpleMessage.writePlain(`Lint projects`);
     const projects = Object
       .values(this.wsDomainStore.getWsDomain().projects)
       .filter(project =>

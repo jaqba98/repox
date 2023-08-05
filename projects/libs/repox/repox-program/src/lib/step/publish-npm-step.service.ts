@@ -55,7 +55,7 @@ export class PublishNpmStepService {
     programModel: EmptyRepoxProgramModel,
     commandModel: PublishNpmRepoxCommandModel
   ): void {
-    this.simpleMessage.writeInfo("Publish npm", REPOX_LOGO);
+    this.simpleMessage.writeInfo(`Publish npm`, REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
@@ -70,7 +70,7 @@ export class PublishNpmStepService {
     if (!this.npmPublish.run()) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
-      "Npm published successfully!"
+      `Npm published successfully!`
     );
   }
 }

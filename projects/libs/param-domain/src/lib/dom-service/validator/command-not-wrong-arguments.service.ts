@@ -43,10 +43,10 @@ implements ValidatorDomainModel {
     if (wrongArgs.length === 0) {
       return this.buildParamDomain.buildSuccess();
     }
-    const notExistedArgs = wrongArgs.map(arg => arg.name).join(",");
+    const notExistedArgs = wrongArgs.map(arg => arg.name).join(`,`);
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
-      ["You have specified not existed arguments for command!"],
+      [`You have specified not existed arguments for command!`],
       [
         `Not existed arguments for command: ${notExistedArgs}`
       ]

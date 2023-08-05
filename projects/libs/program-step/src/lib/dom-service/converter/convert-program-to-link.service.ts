@@ -10,12 +10,12 @@ export class ConvertProgramToLinkService {
   convert (programSystem: ProgramSystemEnum): string {
     switch (programSystem) {
       case ProgramSystemEnum.git:
-        return "https://git-scm.com/";
+        return `https://git-scm.com/`;
       case ProgramSystemEnum.node:
       case ProgramSystemEnum.npm:
-        return "https://nodejs.org/";
+        return `https://nodejs.org/`;
       default:
-        throw new Error("No link found for this program");
+        throw new Error(`No link found for this program`);
     }
   }
 }

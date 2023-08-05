@@ -1,8 +1,8 @@
 import { singleton } from "tsyringe";
 import { type RunProgramModel } from "@lib/model";
 import type {
-  EmptyRepoxCommandModel,
-  EmptyRepoxProgramModel, LintProjectRepoxCommandModel
+  EmptyRepoxProgramModel,
+  LintProjectRepoxCommandModel
 } from "@lib/repox-domain";
 import {
   LintProjectStepService

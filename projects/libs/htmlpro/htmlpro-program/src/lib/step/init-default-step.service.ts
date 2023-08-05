@@ -41,20 +41,20 @@ export class InitDefaultStepService {
     programModel: InitDefaultHtmlProProgramModel,
     _commandModel: EmptyHtmlProCommandModel
   ): void {
-    this.simpleMessage.writeInfo("Init", HTML_PRO_LOGO);
+    this.simpleMessage.writeInfo(`Init`, HTML_PRO_LOGO);
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
     const { isForce } = programModel;
     if (!this.htmlProConfigNotExist.run(isForce)) return;
-    this.simpleMessage.writePlain("Generate the htmlpro.json file");
+    this.simpleMessage.writePlain(`Generate the htmlpro.json file`);
     this.fileUtils.writeJsonFile(
       HtmlProFileEnum.htmlProJson,
       this.createHtmlProFile.buildDefaultHtmlProContentFile()
     );
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
-      "HTMLPRO initialized successfully!"
+      `HTMLPRO initialized successfully!`
     );
   }
 }

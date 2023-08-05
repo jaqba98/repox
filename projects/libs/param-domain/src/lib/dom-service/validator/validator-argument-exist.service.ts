@@ -41,10 +41,10 @@ implements ValidatorDomainModel {
     }
     return this.buildParamDomain.buildError(
       [...wrongArgs.map(arg => arg.index)],
-      ["You have specified not existed arguments!"],
+      [`You have specified not existed arguments!`],
       [
-        "You have to specify correct arguments.",
-        "Check the documentation to get full list of arguments."
+        `You have to specify correct arguments.`,
+        `Check the documentation to get full list of arguments.`
       ]
     );
   }

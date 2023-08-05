@@ -17,7 +17,7 @@ export class HtmlProConfigNotExistAppService {
 
   run (isForce: boolean): boolean {
     this.simpleMessage.writePlain(
-      "Checking if HTMLPRO config file exist"
+      `Checking if HTMLPRO config file exist`
     );
     if (this.pathUtils.notExistPath(HtmlProFileEnum.htmlProJson)) {
       return true;
@@ -26,10 +26,10 @@ export class HtmlProConfigNotExistAppService {
       return true;
     }
     this.simpleMessage.writeError(
-      "HTMLPRO configuration already exist"
+      `HTMLPRO configuration already exist`
     );
     this.simpleMessage.writeWarning(
-      "Use flag --force to generate configuration again"
+      `Use flag --force to generate configuration again`
     );
     return false;
   }

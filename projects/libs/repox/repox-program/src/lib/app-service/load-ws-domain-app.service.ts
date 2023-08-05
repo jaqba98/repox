@@ -14,7 +14,7 @@ export class LoadWsDomainAppService {
   }
 
   run (): boolean {
-    this.simpleMessage.writePlain("Load workspace domain model");
+    this.simpleMessage.writePlain(`Load workspace domain model`);
     this.wsDomainStore.loadWsDomain();
     return true;
   }
