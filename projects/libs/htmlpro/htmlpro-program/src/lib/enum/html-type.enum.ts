@@ -4,6 +4,5 @@
 export enum HtmlTypeEnum {
   tagOpen = `tagOpen`,
   tagClose = `tagClose`,
-  tagContent = `tagContent`,
-  tagComment = `tagComment`
+  tagContent = `tagContent`
 }

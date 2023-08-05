@@ -139,6 +139,12 @@ To lint project use the command below.
 repox lint project
 ```
 
+Arguments of generate project
+
+| Argument | Alias | Description                  | Required |
+|----------|-------|------------------------------|----------|
+| --fix    | -f    | Fix issues during linting    | False    |
+
 <br>
 
 # Configurations

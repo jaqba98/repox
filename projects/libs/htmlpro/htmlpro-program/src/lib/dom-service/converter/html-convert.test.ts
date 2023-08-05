@@ -17,6 +17,18 @@ const htmlExample = `
 <!--        <p>Lorem ipsum 2</p>-->
 <!--        <p>Lorem ipsum 3</p>-->
 <!--    </div>-->
+<!--
+    <div>
+        <p>Lorem ipsum 1</p>
+        <p>Lorem ipsum 2</p>
+        <p>Lorem ipsum 3</p>
+    </div>
+-->
+    <div>
+        <img src="image1.png" alt="Image 1">
+        <img src="image2.png" alt="Image 2">
+<!--        <img src="image3.png" alt="Image 3">-->
+    </div>
 </body>
 </html>
 `;
@@ -92,6 +104,37 @@ describe(`HtmlConverterService`, () => {
                       htmlName: ``,
                       htmlAttributes: {},
                       htmlSelfClose: false,
+                      children: []
+                    }
+                  ]
+                },
+                {
+                  htmlBase: `<div>`,
+                  htmlType: HtmlTypeEnum.tagOpen,
+                  htmlName: `div`,
+                  htmlAttributes: {},
+                  htmlSelfClose: false,
+                  children: [
+                    {
+                      htmlBase: `<img src="image1.png" alt="Image 1">`,
+                      htmlType: HtmlTypeEnum.tagOpen,
+                      htmlName: `img`,
+                      htmlAttributes: {
+                        src: `image1.png`,
+                        alt: `Image 1`
+                      },
+                      htmlSelfClose: true,
+                      children: []
+                    },
+                    {
+                      htmlBase: `<img src="image2.png" alt="Image 2">`,
+                      htmlType: HtmlTypeEnum.tagOpen,
+                      htmlName: `img`,
+                      htmlAttributes: {
+                        src: `image2.png`,
+                        alt: `Image 2`
+                      },
+                      htmlSelfClose: true,
                       children: []
                     }
                   ]

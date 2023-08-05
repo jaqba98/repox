@@ -16,6 +16,7 @@ import type {
 export class HtmlConverterService {
   htmlToJson(html: string): HtmlJsonModel[] {
     const json: HtmlJsonModel[] = html
+      .replaceAll(/<!--[\s\S]*?-->/gm, ``)
       .split(/(?=<)|(?<=>)/)
       .map(htmlItem => htmlItem.trim())
       .filter(htmlItem => htmlItem !== ``)
@@ -40,13 +41,11 @@ export class HtmlConverterService {
       .map(htmlItem => ({
         ...htmlItem,
         children: []
-      }))
-      .filter(htmlItem => htmlItem.htmlType !== HtmlTypeEnum.tagComment);
+      }));
     return this.createHierarchy(json);
   }
 
   private getTagType(htmlBase: string): HtmlTypeEnum {
-    if (/<!--.*-->/g.test(htmlBase)) return HtmlTypeEnum.tagComment;
     if (/<\/.*>/g.test(htmlBase)) return HtmlTypeEnum.tagClose;
     if (/<.*>/g.test(htmlBase)) return HtmlTypeEnum.tagOpen;
     return HtmlTypeEnum.tagContent;
@@ -54,7 +53,6 @@ export class HtmlConverterService {
 
   private getTagName(htmlBase: string, htmlType: HtmlTypeEnum): string {
     if (htmlType === HtmlTypeEnum.tagContent) return ``;
-    if (htmlType === HtmlTypeEnum.tagComment) return ``;
     return htmlBase
       .split(` `)[0]
       .trim()
