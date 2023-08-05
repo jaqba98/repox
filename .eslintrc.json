@@ -14,7 +14,7 @@
     "semi": "off",
     "quotes": "off",
     "@typescript-eslint/semi": ["error", "always"],
-    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/quotes": ["error", "backtick"],
     "@typescript-eslint/member-delimiter-style": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/space-before-function-paren": "off",
