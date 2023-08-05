@@ -1,5 +1,4 @@
 import { singleton } from "tsyringe";
-import { EMPTY_STRING, SPACE } from "@lib/const";
 import { HtmlTypeEnum } from "../../enum/html-type.enum";
 import {
   HtmlSelfCloseTagEnum
@@ -19,7 +18,7 @@ export class HtmlConverterService {
     const json: HtmlJsonModel[] = html
       .split(/(?=<)|(?<=>)/)
       .map(htmlItem => htmlItem.trim())
-      .filter(htmlItem => htmlItem !== EMPTY_STRING)
+      .filter(htmlItem => htmlItem !== "")
       .map(htmlItem => ({ htmlBase: htmlItem }))
       .map(htmlItem => ({
         ...htmlItem, htmlType: this.getTagType(htmlItem.htmlBase)
@@ -54,12 +53,12 @@ export class HtmlConverterService {
   }
 
   private getTagName(htmlBase: string, htmlType: HtmlTypeEnum): string {
-    if (htmlType === HtmlTypeEnum.tagContent) return EMPTY_STRING;
-    if (htmlType === HtmlTypeEnum.tagComment) return EMPTY_STRING;
+    if (htmlType === HtmlTypeEnum.tagContent) return "";
+    if (htmlType === HtmlTypeEnum.tagComment) return "";
     return htmlBase
-      .split(SPACE)[0]
+      .split(" ")[0]
       .trim()
-      .replaceAll(/[</>]/g, EMPTY_STRING);
+      .replaceAll(/[</>]/g, "");
   }
 
   private getAttributes(
