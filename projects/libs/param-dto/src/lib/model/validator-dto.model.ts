@@ -7,5 +7,5 @@ import {
  * It defines the implementation of it.
  */
 export interface ValidatorDtoModel {
-  runValidator: () => ParamDtoValidationModel
+  runValidator: () => ParamDtoValidationModel;
 }

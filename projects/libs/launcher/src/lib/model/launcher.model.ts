@@ -6,11 +6,11 @@ import { type RunProgramModel } from "@lib/model";
  */
 
 export interface LauncherProgramModel {
-  programName: string
-  commandName: string
-  service: RunProgramModel
+  programName: string;
+  commandName: string;
+  service: RunProgramModel;
 }
 
 export interface LauncherModel {
-  programs: LauncherProgramModel[]
+  programs: LauncherProgramModel[];
 }

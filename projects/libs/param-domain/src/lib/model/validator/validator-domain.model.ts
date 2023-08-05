@@ -10,5 +10,5 @@ import {
 export interface ValidatorDomainModel {
   runValidator: (
     getParamDepService: BaseGetParamDepModel
-  ) => ParamDomainValidationModel
+  ) => ParamDomainValidationModel;
 }

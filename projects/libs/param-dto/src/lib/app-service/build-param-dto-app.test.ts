@@ -11,8 +11,8 @@ import {
 import { type ParamDtoModel } from "../model/param-dto.model";
 
 const runTest = (argv: string[]): {
-  paramDto: ParamDtoModel
-  paramDtoValidation: ParamDtoValidationModel
+  paramDto: ParamDtoModel;
+  paramDtoValidation: ParamDtoValidationModel;
 } => {
   const store = container.resolve(ParamDtoStoreService);
   const service = container.resolve(BuildParamDtoAppService);

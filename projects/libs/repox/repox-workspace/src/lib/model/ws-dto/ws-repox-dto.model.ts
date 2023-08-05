@@ -8,14 +8,14 @@ import {
  */
 
 export interface WsRepoxAssetsDtoModel {
-  input: string
-  output: string
+  input: string;
+  output: string;
 }
 
 export interface WsRepoxBuildAppTsDtoModel {
-  output?: string
-  main?: string
-  assets?: WsRepoxAssetsDtoModel[]
+  output?: string;
+  main?: string;
+  assets?: WsRepoxAssetsDtoModel[];
 }
 
 export interface WsRepoxProjectBuildDtoModel
@@ -23,16 +23,16 @@ export interface WsRepoxProjectBuildDtoModel
 }
 
 export interface WsRepoxProjectDtoModel {
-  name?: string
-  type?: ProjectTypeEnum
-  path?: string
-  src?: string
-  scheme?: ProjectSchemeEnum
-  build?: WsRepoxProjectBuildDtoModel
+  name?: string;
+  type?: ProjectTypeEnum;
+  path?: string;
+  src?: string;
+  scheme?: ProjectSchemeEnum;
+  build?: WsRepoxProjectBuildDtoModel;
 }
 
 export type WsRepoxProjectsDtoModel = Record<string, WsRepoxProjectDtoModel>;
 
 export interface WsRepoxDtoModel {
-  projects?: WsRepoxProjectsDtoModel
+  projects?: WsRepoxProjectsDtoModel;
 }

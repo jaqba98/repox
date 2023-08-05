@@ -67,8 +67,8 @@ implements ValidatorDtoModel {
   }
 
   private getParamOrder (): Array<{
-    order: number
-    paramTypes: ParamTypeEnum[]
+    order: number;
+    paramTypes: ParamTypeEnum[];
   }> {
     return [
       { order: 0, paramTypes: [ParamTypeEnum.executor] },

@@ -13,7 +13,7 @@ export class CheckArgumentService {
   valueMode (
     paramArg: ParamDomainArgModel,
     paramDomainDepArgs: ParamDomainDepArgsModel
-  ): { success: boolean, error: string, index: number } {
+  ): { success: boolean; error: string; index: number } {
     const arg = paramDomainDepArgs[paramArg.name];
     const { valueMode } = arg;
     if (valueMode === `empty` && paramArg.values.length !== 0) {
@@ -43,7 +43,7 @@ export class CheckArgumentService {
   argumentValue (
     paramArg: ParamDomainArgModel,
     paramDomainDepArgs: ParamDomainDepArgsModel
-  ): { success: boolean, error: string, index: number } {
+  ): { success: boolean; error: string; index: number } {
     const arg = paramDomainDepArgs[paramArg.name];
     if (arg.values.length === 0) {
       return { success: true, error: ``, index: paramArg.index };

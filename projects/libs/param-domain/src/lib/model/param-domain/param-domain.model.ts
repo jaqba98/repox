@@ -4,24 +4,24 @@
  */
 
 export interface ParamDomainBaseEntityModel {
-  baseName: string
-  name: string
-  index: number
+  baseName: string;
+  name: string;
+  index: number;
 }
 
 export interface ParamDomainArgModel
   extends ParamDomainBaseEntityModel {
-  values: string[]
-  hasValue: boolean
-  hasManyValues: boolean
+  values: string[];
+  hasValue: boolean;
+  hasManyValues: boolean;
 }
 
 export interface ParamDomainEntityModel
   extends ParamDomainBaseEntityModel {
-  args: ParamDomainArgModel[]
+  args: ParamDomainArgModel[];
 }
 
 export interface ParamDomainModel {
-  program: ParamDomainEntityModel
-  command: ParamDomainEntityModel
+  program: ParamDomainEntityModel;
+  command: ParamDomainEntityModel;
 }
