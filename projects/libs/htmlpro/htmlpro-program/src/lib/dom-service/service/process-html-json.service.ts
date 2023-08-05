@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import type { HtmlJsonModel } from "@lib/utils";
+import type { HtmlJsonModel } from "../../model/html-json.model";
 
 @singleton()
 /**
@@ -7,6 +7,15 @@ import type { HtmlJsonModel } from "@lib/utils";
  */
 export class ProcessHtmlJsonService {
   process(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
-    return htmlJson;
+    return htmlJson
+      .map(html => this.processChild(html));
+  }
+
+  private processChild(htmlJson: HtmlJsonModel): HtmlJsonModel {
+    return {
+      ...htmlJson,
+      children: htmlJson.children
+        .map(nextChild => this.processChild(nextChild))
+    };
   }
 }

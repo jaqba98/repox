@@ -1,13 +1,11 @@
 import { singleton } from "tsyringe";
-import {
-  FileUtilsService,
-  FolderUtilsService,
-  HtmlConverterService,
-  PathUtilsService
-} from "@lib/utils";
+import { FileUtilsService, FolderUtilsService } from "@lib/utils";
 import {
   ProcessHtmlJsonService
 } from "../dom-service/service/process-html-json.service";
+import {
+  HtmlConverterService
+} from "../dom-service/converter/html-converter.service";
 
 @singleton()
 /**
@@ -18,7 +16,6 @@ export class BuildHtmlAppService {
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly htmlConverter: HtmlConverterService,
-    private readonly pathUtils: PathUtilsService,
     private readonly processHtmlJson: ProcessHtmlJsonService
   ) {
   }
@@ -40,27 +37,8 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         htmlJsonParsed: this.processHtmlJson.process(html.htmlJson)
-      }))
-      .map(html => ({
-        ...html,
-        htmlToSave: this.htmlConverter.jsonToHtml(html.htmlJson)
-      }))
-      .map(html => ({
-        ...html,
-        htmlFileName: this.fileUtils.getFileName(html.htmlPath)
-      }))
-      .map(html => ({
-        ...html,
-        htmlFileOutput: this.pathUtils.createPath(
-          [outputPath, html.htmlFileName]
-        )
       }));
     console.log(result);
-    result.forEach(html => {
-      this.fileUtils.writeTextFile(
-        html.htmlFileOutput, html.htmlToSave
-      );
-    });
     return true;
   }
 }

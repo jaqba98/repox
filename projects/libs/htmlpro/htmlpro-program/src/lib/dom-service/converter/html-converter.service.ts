@@ -1,10 +1,10 @@
 import { singleton } from "tsyringe";
 import { EMPTY_STRING, SPACE } from "@lib/const";
-import type { HtmlJsonModel } from "../model/html-json.model";
-import { HtmlTypeEnum } from "../enum/html-type.enum";
+import { HtmlTypeEnum } from "../../enum/html-type.enum";
 import {
   HtmlSelfCloseTagEnum
-} from "../enum/html-self-close-tag.enum";
+} from "../../enum/html-self-close-tag.enum";
+import type { HtmlJsonModel } from "../../model/html-json.model";
 
 @singleton()
 /**
@@ -41,35 +41,6 @@ export class HtmlConverterService {
       }))
       .filter(htmlItem => htmlItem.htmlType !== HtmlTypeEnum.tagComment);
     return this.createHierarchy(json);
-  }
-
-  jsonToHtml(htmlJson: HtmlJsonModel[]): string {
-    return htmlJson
-      .map(json => this.buildHtmlContent(json))
-      .join(EMPTY_STRING);
-  }
-
-  private buildHtmlContent(json: HtmlJsonModel): string {
-    if (json.htmlType === HtmlTypeEnum.tagContent) {
-      return json.htmlBase;
-    }
-    let htmlContent: string = EMPTY_STRING;
-    // Build open tag
-    htmlContent += `<${json.htmlName}`;
-    json.htmlAttributes.forEach((attr): void => {
-      const [key, value] = Object.entries(attr)[0];
-      htmlContent += ` ${key}="${value}"`;
-    });
-    htmlContent += ">";
-    // Build content
-    json.children.forEach(child => {
-      htmlContent += this.buildHtmlContent(child);
-    });
-    // Build close tag
-    if (!json.htmlSelfClose) {
-      htmlContent += `</${json.htmlName}>`;
-    }
-    return htmlContent;
   }
 
   private getTagType(htmlBase: string): HtmlTypeEnum {
