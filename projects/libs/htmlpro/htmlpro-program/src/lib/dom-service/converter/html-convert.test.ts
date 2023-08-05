@@ -13,6 +13,11 @@ const htmlExample = `
 <body>
     <!-- Simple comment -->
     <h1>Hello Example</h1>
+<!--    <div>-->
+<!--        <p>Lorem ipsum 1</p>-->
+<!--        <p>Lorem ipsum 2</p>-->
+<!--        <p>Lorem ipsum 3</p>-->
+<!--    </div>-->
 </body>
 </html>
 `;
