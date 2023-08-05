@@ -4,7 +4,10 @@ import { HtmlTypeEnum } from "../../enum/html-type.enum";
 import {
   HtmlSelfCloseTagEnum
 } from "../../enum/html-self-close-tag.enum";
-import type { HtmlJsonModel } from "../../model/html-json.model";
+import type {
+  HtmlJsonAttributeModel,
+  HtmlJsonModel
+} from "../../model/html-json.model";
 
 @singleton()
 /**
@@ -63,12 +66,10 @@ export class HtmlConverterService {
     tagBase: string
   ): HtmlJsonModel["htmlAttributes"] {
     const pattern = /(\S+)=([`'"])(.*?)\2/g;
-    const attributes: Array<Record<string, string>> = [];
+    const attributes: HtmlJsonAttributeModel = {};
     let match;
     while ((match = pattern.exec(tagBase)) !== null) {
-      const attribute = match[1];
-      const value = match[3];
-      attributes.push({ [attribute]: value });
+      attributes[match[1]] = match[3];
     }
     return attributes;
   }

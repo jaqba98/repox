@@ -19,6 +19,7 @@
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/no-base-to-string": "off",
-    "@typescript-eslint/no-for-in-array": "off"
+    "@typescript-eslint/no-for-in-array": "off",
+    "@typescript-eslint/consistent-indexed-object-style": "off"
   }
 }
