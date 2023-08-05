@@ -18,7 +18,7 @@ export class HtmlConverterService {
     const json: HtmlJsonModel[] = html
       .split(/(?=<)|(?<=>)/)
       .map(htmlItem => htmlItem.trim())
-      .filter(htmlItem => htmlItem !== "")
+      .filter(htmlItem => htmlItem !== ``)
       .map(htmlItem => ({ htmlBase: htmlItem }))
       .map(htmlItem => ({
         ...htmlItem, htmlType: this.getTagType(htmlItem.htmlBase)
@@ -53,12 +53,12 @@ export class HtmlConverterService {
   }
 
   private getTagName(htmlBase: string, htmlType: HtmlTypeEnum): string {
-    if (htmlType === HtmlTypeEnum.tagContent) return "";
-    if (htmlType === HtmlTypeEnum.tagComment) return "";
+    if (htmlType === HtmlTypeEnum.tagContent) return ``;
+    if (htmlType === HtmlTypeEnum.tagComment) return ``;
     return htmlBase
-      .split(" ")[0]
+      .split(` `)[0]
       .trim()
-      .replaceAll(/[</>]/g, "");
+      .replaceAll(/[</>]/g, ``);
   }
 
   private getAttributes(
@@ -86,14 +86,14 @@ export class HtmlConverterService {
     const stack: HtmlJsonModel[] = [];
     const result: HtmlJsonModel[] = [];
     for (const tag of tags) {
-      if (tag.htmlType === "tagContent") {
+      if (tag.htmlType === `tagContent`) {
         if (stack.length > 0) {
           const topTag = stack[stack.length - 1];
           topTag.children.push(tag);
         } else {
           result.push(tag);
         }
-      } else if (tag.htmlType === "tagOpen") {
+      } else if (tag.htmlType === `tagOpen`) {
         tag.children = [];
         if (stack.length > 0) {
           const topTag = stack[stack.length - 1];
@@ -105,7 +105,7 @@ export class HtmlConverterService {
         if (!tag.htmlSelfClose) {
           stack.push(tag);
         }
-      } else if (tag.htmlType === "tagClose") {
+      } else if (tag.htmlType === `tagClose`) {
         if (stack.length === 0) {
           throw new Error(`Invalid HTML structure. Found closing tag "${tag.htmlName}" without matching opening tag.`);
         }
@@ -125,7 +125,7 @@ export class HtmlConverterService {
       }
     }
     if (stack.length > 0) {
-      throw new Error("Invalid HTML structure. Not all tags were closed properly.");
+      throw new Error(`Invalid HTML structure. Not all tags were closed properly.`);
     }
     return result;
   }

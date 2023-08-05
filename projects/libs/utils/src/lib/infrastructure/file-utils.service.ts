@@ -41,25 +41,25 @@ export class FileUtilsService {
         `The specified file does not exist! Path: ${filePath}`
       );
     }
-    return readFileSync(filePath, "utf-8");
+    return readFileSync(filePath, `utf-8`);
   }
 
   readJsonFile<T>(filePath: string): T {
     if (!this.pathUtils.existPath(filePath)) {
-      throw new Error("The specified file does not exist!");
+      throw new Error(`The specified file does not exist!`);
     }
-    return JSON.parse(readFileSync(filePath, "utf-8")) as T;
+    return JSON.parse(readFileSync(filePath, `utf-8`)) as T;
   }
 
   readProjectFiles (pattern: string): string[] {
-    const options = { cwd: "./", ignore: ["**/node_modules/**"] };
+    const options = { cwd: `./`, ignore: [`**/node_modules/**`] };
     return globSync(pattern, options)
       .map(path => this.pathUtils.normalizePath(path));
   }
 
   readAllHtmlFiles (cwd: string): string[] {
-    const options = { cwd, ignore: ["**/node_modules/**"] };
-    return globSync("*.html", options)
+    const options = { cwd, ignore: [`**/node_modules/**`] };
+    return globSync(`*.html`, options)
       .map(path => this.pathUtils.createPath([cwd, path]))
       .map(path => this.pathUtils.normalizePath(path));
   }
