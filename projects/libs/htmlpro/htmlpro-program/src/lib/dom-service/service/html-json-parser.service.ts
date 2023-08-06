@@ -4,8 +4,8 @@ import { HtmlProDomainStoreService } from "@lib/htmlpro-workspace";
 import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
 import { FileUtilsService } from "@lib/utils";
 import {
-  HtmlConverterService
-} from "../converter/html-converter.service";
+  HtmlToJsonConverterService
+} from "../converter/html-to-json-converter.service";
 
 @singleton()
 /**
@@ -15,7 +15,7 @@ export class HtmlJsonParserService {
   constructor(
     private readonly htmlProDomainStore: HtmlProDomainStoreService,
     private readonly fileUtils: FileUtilsService,
-    private readonly htmlConverter: HtmlConverterService
+    private readonly htmlConverter: HtmlToJsonConverterService
   ) {
   }
 

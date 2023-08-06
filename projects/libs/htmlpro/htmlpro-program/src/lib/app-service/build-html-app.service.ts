@@ -4,8 +4,8 @@ import {
   HtmlJsonParserService
 } from "../dom-service/service/html-json-parser.service";
 import {
-  HtmlConverterService
-} from "../dom-service/converter/html-converter.service";
+  HtmlToJsonConverterService
+} from "../dom-service/converter/html-to-json-converter.service";
 
 @singleton()
 /**
@@ -15,7 +15,7 @@ export class BuildHtmlAppService {
   constructor(
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
-    private readonly htmlConverter: HtmlConverterService,
+    private readonly htmlConverter: HtmlToJsonConverterService,
     private readonly processHtmlJson: HtmlJsonParserService
   ) {
   }

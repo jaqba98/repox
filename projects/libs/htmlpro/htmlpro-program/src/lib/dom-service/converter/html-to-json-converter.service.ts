@@ -10,10 +10,9 @@ import type {
 
 @singleton()
 /**
- * The service is responsible for convert html to json and
- * json to html.
+ * The service is responsible for convert html to json.
  */
-export class HtmlConverterService {
+export class HtmlToJsonConverterService {
   htmlToJson(html: string): HtmlJsonModel[] {
     const json: HtmlJsonModel[] = html
       .replaceAll(/<!--[\s\S]*?-->/gm, ``)
