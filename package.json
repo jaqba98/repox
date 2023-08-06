@@ -5,8 +5,6 @@
   "author": "Jakub Olejarczyk",
   "license": "ISC",
   "scripts": {
-    "install::repox": "repox build project --name=repox",
-    "install::htmlpro": "repox build project --name=htmlpro",
     "build::repox-website": "repox build project --name=repox-website"
   },
   "devDependencies": {

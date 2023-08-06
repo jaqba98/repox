@@ -9,9 +9,9 @@ import {
 
 @singleton()
 /**
- * The service is responsible for parse html json file.
+ * The service is responsible for parse html json imports.
  */
-export class HtmlJsonParserService {
+export class HtmlJsonImportParserService {
   constructor(
     private readonly htmlProDomainStore: HtmlProDomainStoreService,
     private readonly fileUtils: FileUtilsService,
@@ -20,26 +20,27 @@ export class HtmlJsonParserService {
   }
 
   parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
-    return htmlJson
-      .map(html => this.processChild(html));
+    return htmlJson.map(html => this.parseChild(html));
   }
 
-  private processChild(htmlJson: HtmlJsonModel): HtmlJsonModel {
-    const processImport: HtmlJsonModel = this.processImport(htmlJson);
+  private parseChild(htmlJson: HtmlJsonModel): HtmlJsonModel {
+    const htmlJsonResult = this.parseImport(htmlJson);
     return {
-      ...processImport,
-      children: htmlJson.children
-        .map(nextChild => this.processChild(nextChild))
+      ...htmlJsonResult,
+      children: htmlJsonResult.children
+        .map(child => this.parseChild(child))
     };
   }
 
-  private processImport(htmlJson: HtmlJsonModel): HtmlJsonModel {
-    const alias = htmlJson.htmlAttributes[HtmlAttributesEnum.dataImport];
-    if (alias === undefined) {
-      return htmlJson;
-    }
+  private parseImport(htmlJson: HtmlJsonModel): HtmlJsonModel {
+    const alias = htmlJson.htmlAttributes[
+      HtmlAttributesEnum.dataImport
+    ];
+    if (alias === undefined) return htmlJson;
     const component = this.htmlProDomainStore.getComponent(alias);
-    const htmlContent = this.fileUtils.readHtmlFile(component.templateUrl);
+    const htmlContent = this.fileUtils.readHtmlFile(
+      component.templateUrl
+    );
     return this.htmlConverter.htmlToJson(htmlContent)[0];
   }
 }

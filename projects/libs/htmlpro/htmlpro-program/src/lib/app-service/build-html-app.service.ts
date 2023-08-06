@@ -1,11 +1,11 @@
 import { singleton } from "tsyringe";
 import { FileUtilsService, FolderUtilsService } from "@lib/utils";
 import {
-  HtmlJsonParserService
-} from "../dom-service/service/html-json-parser.service";
-import {
   HtmlToJsonConverterService
 } from "../dom-service/converter/html-to-json-converter.service";
+import {
+  HtmlJsonImportParserService
+} from "../dom-service/parser/html-json-import-parser.service";
 
 @singleton()
 /**
@@ -16,7 +16,7 @@ export class BuildHtmlAppService {
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly htmlConverter: HtmlToJsonConverterService,
-    private readonly processHtmlJson: HtmlJsonParserService
+    private readonly importParser: HtmlJsonImportParserService
   ) {
   }
 
@@ -36,7 +36,7 @@ export class BuildHtmlAppService {
       }))
       .map(html => ({
         ...html,
-        htmlJsonParsed: this.processHtmlJson.parse(html.htmlJson)
+        htmlJsonParsed: this.importParser.parse(html.htmlJson)
       }));
     console.log(result);
     return true;

@@ -10,7 +10,8 @@ import type {
 
 @singleton()
 /**
- * The service is responsible for convert html to json.
+ * The service is responsible for convert html to json and
+ * json to html.
  */
 export class HtmlToJsonConverterService {
   htmlToJson(html: string): HtmlJsonModel[] {
