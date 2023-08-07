@@ -35,11 +35,11 @@
         "projects/libs/components/what-is/src/what-is.css"
       ]
     },
-    "@component/support": {
-      "alias": "@component/support",
-      "templateUrl": "projects/libs/components/support/src/support.html",
+    "@component/repox-support": {
+      "alias": "@component/repox-support",
+      "templateUrl": "projects/libs/repox/repox-component/src/repox-support/repox-support.html",
       "styleUrls": [
-        "projects/libs/components/support/src/support.css"
+        "projects/libs/repox/repox-component/src/repox-support/repox-support.css"
       ]
     },
     "@component/repox-footer-copyright": {
@@ -50,7 +50,7 @@
       ]
     },
     "@component/repox-footer-menu": {
-      "alias": "@component/footer-menu",
+      "alias": "@component/repox-footer-menu",
       "templateUrl": "projects/libs/repox/repox-component/src/repox-footer-menu/repox-footer-menu.html",
       "styleUrls": [
         "projects/libs/repox/repox-component/src/repox-footer-menu/repox-footer-menu.css"

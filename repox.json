@@ -238,14 +238,6 @@
       "scheme": "@htmlpro",
       "build": {}
     },
-    "support": {
-      "name": "support",
-      "type": "lib",
-      "path": "projects/libs/components/support",
-      "src": "projects/libs/components/support/src",
-      "scheme": "@htmlpro",
-      "build": {}
-    },
     "repox-component": {
       "name": "repox-component",
       "type": "lib",
