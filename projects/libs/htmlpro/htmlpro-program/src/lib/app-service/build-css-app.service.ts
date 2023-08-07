@@ -9,6 +9,9 @@ import {
 import {
   HtmlJsonImportParserService
 } from "../dom-service/parser/html-json-import-parser.service";
+import {
+  AliasToCssParserService
+} from "../dom-service/parser/alias-to-css-parser.service";
 
 @singleton()
 /**
@@ -19,14 +22,15 @@ export class BuildCssAppService {
     private readonly fileUtils: FileUtilsService,
     private readonly htmlToJson: HtmlToJsonConverterService,
     private readonly htmlJsonImport: HtmlJsonImportParserService,
-    private readonly aliasParser: HtmlJsonAliasParserService
+    private readonly aliasParser: HtmlJsonAliasParserService,
+    private readonly aliasToCssParser: AliasToCssParserService
   ) {
   }
 
   run(
     inputPath: string, outputPath: string
   ): boolean {
-    const result = this.fileUtils.readAllHtmlFiles(inputPath)
+    const htmlFiles = this.fileUtils.readAllHtmlFiles(inputPath)
       .map(htmlPath => ({ htmlPath }))
       .map(html => ({
         ...html,
@@ -44,7 +48,14 @@ export class BuildCssAppService {
         ...html,
         aliases: this.aliasParser.parse(html.parsedHtmlJson)
       }));
-    console.log(result);
+    const styles = htmlFiles
+      .map(htmlFile => htmlFile.aliases)
+      .flat()
+      .reduce((acc: string[], curr: string): string[] =>
+        acc.includes(curr) ? acc : [...acc, curr], []
+      )
+      .map(cssFile => this.aliasToCssParser.parse(cssFile));
+    console.log(styles);
     return true;
   }
 }
