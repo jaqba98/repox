@@ -16,6 +16,9 @@ import {
 import {
   JsonToHtmlConverterService
 } from "../dom-service/converter/json-to-html-converter.service";
+import {
+  HtmlJsonCssDepParserService
+} from "../dom-service/parser/html-json-css-dep-parser.service";
 
 @singleton()
 /**
@@ -29,7 +32,8 @@ export class BuildHtmlAppService {
     private readonly htmlToJson: HtmlToJsonConverterService,
     private readonly importParser: HtmlJsonImportParserService,
     private readonly loopParser: HtmlJsonLoopParserService,
-    private readonly jsonToHtml: JsonToHtmlConverterService
+    private readonly jsonToHtml: JsonToHtmlConverterService,
+    private readonly cssDepParser: HtmlJsonCssDepParserService
   ) {
   }
 
@@ -37,7 +41,7 @@ export class BuildHtmlAppService {
     inputPath: string, outputPath: string
   ): boolean {
     this.folderUtils.createFolder(outputPath);
-    this.fileUtils.readAllHtmlFiles(inputPath)
+    const result = this.fileUtils.readAllHtmlFiles(inputPath)
       .map(htmlPath => ({ htmlPath }))
       .map(html => ({
         ...html,
@@ -69,11 +73,16 @@ export class BuildHtmlAppService {
           [outputPath, html.htmlFileName]
         )
       }))
-      .forEach(html => {
-        this.fileUtils.writeTextFile(
-          html.htmlOutput, html.htmlToSave
-        );
-      });
+      .map(html => ({
+        ...html,
+        cssDependencies: this.cssDepParser.parse(html.htmlJson)
+      }));
+    console.log(result);
+    // .forEach(html => {
+    //   this.fileUtils.writeTextFile(
+    //     html.htmlOutput, html.htmlToSave
+    //   );
+    // });
     return true;
   }
 }
