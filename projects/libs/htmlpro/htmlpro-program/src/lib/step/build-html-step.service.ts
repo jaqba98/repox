@@ -19,6 +19,9 @@ import {
 import {
   BuildHtmlAppService
 } from "../app-service/build-html-app.service";
+import {
+  BuildCssAppService
+} from "../app-service/build-css-app.service";
 
 @singleton()
 /**
@@ -32,7 +35,8 @@ export class BuildHtmlStepService {
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadHtmlProDomain: LoadHtmlProDomainAppService,
     private readonly fileExist: FileExistAppService,
-    private readonly buildHtml: BuildHtmlAppService
+    private readonly buildHtml: BuildHtmlAppService,
+    private readonly buildCssApp: BuildCssAppService
   ) {
   }
 
@@ -48,6 +52,7 @@ export class BuildHtmlStepService {
     const { inputPath, outputPath } = programModel;
     if (!this.fileExist.run(inputPath)) return;
     if (!this.buildHtml.run(inputPath, outputPath)) return;
+    if (!this.buildCssApp.run(inputPath, outputPath)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
       `HTML file built successfully!`

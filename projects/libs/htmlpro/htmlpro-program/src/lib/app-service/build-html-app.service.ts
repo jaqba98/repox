@@ -69,7 +69,6 @@ export class BuildHtmlAppService {
           [outputPath, html.htmlFileName]
         )
       }));
-    console.log(result);
     result.forEach(html => {
       this.fileUtils.writeTextFile(html.htmlOutput, html.htmlToSave);
     });
