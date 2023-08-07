@@ -21,18 +21,18 @@
         "projects/libs/repox/repox-component/src/repox-header/repox-header.css"
       ]
     },
-    "@component/statistics": {
-      "alias": "@component/statistics",
-      "templateUrl": "projects/libs/components/statistics/src/statistics.html",
+    "@component/repox-statistics": {
+      "alias": "@component/repox-statistics",
+      "templateUrl": "projects/libs/repox/repox-component/src/repox-statistics/repox-statistics.html",
       "styleUrls": [
-        "projects/libs/components/statistics/src/statistics.css"
+        "projects/libs/repox/repox-component/src/repox-statistics/repox-statistics.css"
       ]
     },
-    "@component/what-is": {
-      "alias": "@component/what-is",
-      "templateUrl": "projects/libs/components/what-is/src/what-is.html",
+    "@component/repox-what-is": {
+      "alias": "@component/repox-what-is",
+      "templateUrl": "projects/libs/repox/repox-component/src/repox-what-is/repox-what-is.html",
       "styleUrls": [
-        "projects/libs/components/what-is/src/what-is.css"
+        "projects/libs/repox/repox-component/src/repox-what-is/repox-what-is.css"
       ]
     },
     "@component/repox-support": {

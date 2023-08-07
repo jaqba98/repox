@@ -1,7 +1,7 @@
 /* statistics */
 
 .statistics-container {
-    background-color: var(--light-color);
+    background-color: white;
 }
 
 .statistics {
@@ -16,14 +16,14 @@
 
 .statistics-element > h2 {
     font-weight: lighter;
-    color: var(--gray-color);
+    color: grey;
     margin-bottom: 1em;
 }
 
 .statistics-element > p {
     font-size: 3em;
     font-weight: bold;
-    color: var(--primary-color);
+    color: #6320EE;
 }
 
 @media only screen and (min-width: 768px) {

@@ -214,22 +214,6 @@
       "scheme": "@htmlpro",
       "build": {}
     },
-    "statistics": {
-      "name": "statistics",
-      "type": "lib",
-      "path": "projects/libs/components/statistics",
-      "src": "projects/libs/components/statistics/src",
-      "scheme": "@htmlpro",
-      "build": {}
-    },
-    "what-is": {
-      "name": "what-is",
-      "type": "lib",
-      "path": "projects/libs/components/what-is",
-      "src": "projects/libs/components/what-is/src",
-      "scheme": "@htmlpro",
-      "build": {}
-    },
     "repox-component": {
       "name": "repox-component",
       "type": "lib",

@@ -7,8 +7,8 @@
     justify-content: center;
     gap: 3em;
     padding: 4em 2em;
-    background-color: var(--primary-color);
-    color: var(--font-white-color);
+    background-color: #6320EE;
+    color: #FFFFFF;
 }
 
 .what-is-container > h2 {
