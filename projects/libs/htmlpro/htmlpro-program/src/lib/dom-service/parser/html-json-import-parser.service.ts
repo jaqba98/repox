@@ -47,7 +47,8 @@ export class HtmlJsonImportParserService {
     );
     for (const attribute in htmlJson.htmlAttributes) {
       htmlContent = htmlContent.replaceAll(
-        attribute, htmlJson.htmlAttributes[attribute]
+        new RegExp(`{{\\s*${attribute}\\s*}}`, `gm`),
+        htmlJson.htmlAttributes[attribute]
       );
     }
     return this.htmlConverter.htmlToJson(htmlContent)[0];
