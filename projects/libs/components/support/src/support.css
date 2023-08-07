@@ -1,43 +1,25 @@
-/* support */
-
 .support {
+    background-color: #FFFDFD;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3em;
-    padding: 4em 2em;
-    background-color: var(--light-color);
-    color: var(--dark-color);
+    gap: 2em;
+    padding: 5em;
 }
 
-.support > h2 {
+.support-title {
     font-size: 2em;
-}
-
-.support-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4em;
-}
-
-.support-content > img {
-    width: 50%;
+    color: #6320EE;
 }
 
 .support-content > p {
-    font-size: 1.5em;
-    color: var(--gray-color);
+    font-size: 1.25em;
+    color: grey;
 }
 
-@media only screen and (min-width: 768px) {
-    .support-content {
-        flex-direction: row;
-    }
-
-    .support-content > img {
-        width: 10em;
+@media screen and (max-width: 300px) {
+    .support {
+        font-size: 5vw;
     }
 }
