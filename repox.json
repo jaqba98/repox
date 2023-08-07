@@ -253,6 +253,14 @@
       "src": "projects/libs/components/footer-menu/src",
       "scheme": "@htmlpro",
       "build": {}
+    },
+    "repox-component": {
+      "name": "repox-component",
+      "type": "lib",
+      "path": "projects/libs/repox/repox-component",
+      "src": "projects/libs/repox/repox-component/src",
+      "scheme": "@htmlpro",
+      "build": {}
     }
   }
 }
