@@ -14,11 +14,11 @@
         "projects/libs/components/nav/src/nav.css"
       ]
     },
-    "@component/header": {
-      "alias": "@component/header",
-      "templateUrl": "projects/libs/components/header/src/header.html",
+    "@component/repox-header": {
+      "alias": "@component/repox-header",
+      "templateUrl": "projects/libs/repox/repox-component/src/repox-header/repox-header.html",
       "styleUrls": [
-        "projects/libs/components/header/src/header.css"
+        "projects/libs/repox/repox-component/src/repox-header/repox-header.css"
       ]
     },
     "@component/statistics": {

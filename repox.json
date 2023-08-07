@@ -214,14 +214,6 @@
       "scheme": "@htmlpro",
       "build": {}
     },
-    "header": {
-      "name": "header",
-      "type": "lib",
-      "path": "projects/libs/components/header",
-      "src": "projects/libs/components/header/src",
-      "scheme": "@htmlpro",
-      "build": {}
-    },
     "statistics": {
       "name": "statistics",
       "type": "lib",
