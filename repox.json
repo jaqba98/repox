@@ -246,14 +246,6 @@
       "scheme": "@htmlpro",
       "build": {}
     },
-    "footer-menu": {
-      "name": "footer-menu",
-      "type": "lib",
-      "path": "projects/libs/components/footer-menu",
-      "src": "projects/libs/components/footer-menu/src",
-      "scheme": "@htmlpro",
-      "build": {}
-    },
     "repox-component": {
       "name": "repox-component",
       "type": "lib",

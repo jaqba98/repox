@@ -49,11 +49,11 @@
         "projects/libs/repox/repox-component/src/repox-footer-copyright/repox-footer-copyright.css"
       ]
     },
-    "@component/footer-menu": {
+    "@component/repox-footer-menu": {
       "alias": "@component/footer-menu",
-      "templateUrl": "projects/libs/components/footer-menu/src/footer-menu.html",
+      "templateUrl": "projects/libs/repox/repox-component/src/repox-footer-menu/repox-footer-menu.html",
       "styleUrls": [
-        "projects/libs/components/footer-menu/src/footer-menu.css"
+        "projects/libs/repox/repox-component/src/repox-footer-menu/repox-footer-menu.css"
       ]
     }
   }
