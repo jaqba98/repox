@@ -1,15 +1,15 @@
 .footer-copyright {
-    background-color: var(--footer-copyright-background);
+    background-color: #6320EE;
 }
 
-.footer-copyright > p {
-    color: var(--footer-copyright-font-color);
-    padding: var(--footer-copyright-padding);
-    text-align: var(--footer-copyright-text-align);
+.footer-copyright-content {
+    color: #FFFFFF;
+    padding: 1em;
+    text-align: center;
 }
 
 @media screen and (max-width: 300px) {
-    .footer-copyright > p {
+    .footer-copyright-content {
         font-size: 5vw;
     }
 }
