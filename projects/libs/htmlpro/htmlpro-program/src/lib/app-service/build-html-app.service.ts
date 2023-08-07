@@ -6,6 +6,9 @@ import {
 import {
   HtmlJsonImportParserService
 } from "../dom-service/parser/html-json-import-parser.service";
+import {
+  HtmlJsonLoopParserService
+} from "../dom-service/parser/html-json-loop-parser.service";
 
 @singleton()
 /**
@@ -16,7 +19,8 @@ export class BuildHtmlAppService {
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly htmlConverter: HtmlToJsonConverterService,
-    private readonly importParser: HtmlJsonImportParserService
+    private readonly importParser: HtmlJsonImportParserService,
+    private readonly loopParser: HtmlJsonLoopParserService
   ) {
   }
 
@@ -37,8 +41,11 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         htmlJsonParsed: this.importParser.parse(html.htmlJson)
+      }))
+      .map(html => ({
+        ...html,
+        htmlJsonParsed: this.loopParser.parse(html.htmlJsonParsed)
       }));
-    console.log(result);
     return true;
   }
 }
