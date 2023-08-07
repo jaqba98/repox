@@ -57,7 +57,7 @@ export class BuildHtmlAppService {
       }))
       .map(html => ({
         ...html,
-        htmlToSave: this.jsonToHtml.htmlToJson(html.htmlJsonParsed)
+        htmlToSave: this.jsonToHtml.jsonToHtml(html.htmlJsonParsed)
       }))
       .map(html => ({
         ...html,

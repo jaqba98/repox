@@ -1,6 +1,5 @@
 import { singleton } from "tsyringe";
 import type { HtmlJsonModel } from "../../model/html-json.model";
-import { EMPTY_STRING } from "@lib/const";
 import { HtmlTypeEnum } from "../../enum/html-type.enum";
 
 @singleton()
@@ -8,10 +7,10 @@ import { HtmlTypeEnum } from "../../enum/html-type.enum";
  * The service is responsible for convert json to html.
  */
 export class JsonToHtmlConverterService {
-  htmlToJson(htmlJson: HtmlJsonModel[]): string {
+  jsonToHtml(htmlJson: HtmlJsonModel[]): string {
     return htmlJson
       .map(html => this.parseChild(html))
-      .join(EMPTY_STRING);
+      .join(``);
   }
 
   private parseChild(htmlJson: HtmlJsonModel): string {
@@ -22,18 +21,19 @@ export class JsonToHtmlConverterService {
     if (htmlJson.htmlType === HtmlTypeEnum.tagContent) {
       return htmlJson.htmlBase;
     }
-    let result: string = EMPTY_STRING;
+    let result: string = ``;
     // Build open tag
     result += `<${htmlJson.htmlName}`;
     for (const attr in htmlJson.htmlAttributes) {
-      result += ` ${attr}=${htmlJson.htmlAttributes[attr]}`;
+      result += ` ${attr}="${htmlJson.htmlAttributes[attr]}"`;
     }
     result += `>`;
     // Build children
     result += htmlJson.children
       .map(child => this.parseChild(child))
-      .join(EMPTY_STRING);
+      .join(``);
     // Build close tag
+    if (htmlJson.htmlSelfClose) return result;
     result += `</${htmlJson.htmlName}>`;
     return result;
   }
