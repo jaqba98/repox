@@ -25,6 +25,10 @@ export class HtmlJsonImportParserService {
 
   private parseChild(htmlJson: HtmlJsonModel): HtmlJsonModel {
     const htmlJsonResult = this.parseImport(htmlJson);
+    htmlJsonResult.htmlAttributes = {
+      ...htmlJsonResult.htmlAttributes,
+      ...htmlJson.htmlAttributes
+    };
     return {
       ...htmlJsonResult,
       children: htmlJsonResult.children
@@ -38,9 +42,14 @@ export class HtmlJsonImportParserService {
     ];
     if (alias === undefined) return htmlJson;
     const component = this.htmlProDomainStore.getComponent(alias);
-    const htmlContent = this.fileUtils.readHtmlFile(
+    let htmlContent = this.fileUtils.readHtmlFile(
       component.templateUrl
     );
+    for (const attribute in htmlJson.htmlAttributes) {
+      htmlContent = htmlContent.replaceAll(
+        attribute, htmlJson.htmlAttributes[attribute]
+      );
+    }
     return this.htmlConverter.htmlToJson(htmlContent)[0];
   }
 }

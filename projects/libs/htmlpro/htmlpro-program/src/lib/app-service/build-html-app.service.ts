@@ -16,13 +16,6 @@ import {
 import {
   JsonToHtmlConverterService
 } from "../dom-service/converter/json-to-html-converter.service";
-import {
-  HtmlJsonCssDepParserService
-} from "../dom-service/parser/html-json-css-dep-parser.service";
-import {
-  CssDepToStyleParserService
-} from "../dom-service/parser/css-dep-to-style-parser.service";
-import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -36,9 +29,7 @@ export class BuildHtmlAppService {
     private readonly htmlToJson: HtmlToJsonConverterService,
     private readonly importParser: HtmlJsonImportParserService,
     private readonly loopParser: HtmlJsonLoopParserService,
-    private readonly jsonToHtml: JsonToHtmlConverterService,
-    private readonly cssDepParser: HtmlJsonCssDepParserService,
-    private readonly cssDepToStyleParser: CssDepToStyleParserService
+    private readonly jsonToHtml: JsonToHtmlConverterService
   ) {
   }
 
@@ -77,34 +68,11 @@ export class BuildHtmlAppService {
         htmlOutput: this.pathUtils.createPath(
           [outputPath, html.htmlFileName]
         )
-      }))
-      .map(html => ({
-        ...html,
-        cssDependencies: this.cssDepParser.parse(html.htmlJson)
       }));
-    // Build all html files
+    console.log(result);
     result.forEach(html => {
       this.fileUtils.writeTextFile(html.htmlOutput, html.htmlToSave);
     });
-    // Build css file
-    const cssFromProject = this.fileUtils.readAllCssFiles(inputPath)
-      .map(cssFile => this.fileUtils.readTextFile(cssFile))
-      .join(EMPTY_STRING);
-    const cssFromComponents = result
-      .map(html => html.cssDependencies)
-      .flat()
-      .reduce((acc: string[], current: string) => {
-        if (!acc.includes(current)) {
-          acc.push(current);
-        }
-        return acc;
-      }, []);
-    const cssResult = cssFromProject
-      .concat(this.cssDepToStyleParser.parse(cssFromComponents));
-    this.fileUtils.writeTextFile(
-      this.pathUtils.createPath([outputPath, `style.css`]),
-      cssResult
-    );
     return true;
   }
 }
