@@ -16,9 +16,9 @@ export class CssDepToStyleParserService {
   parse(cssDep: string[]): string {
     return cssDep
       .map(alias => this.htmlProDomainStore.getComponent(alias))
-      .map(component => this.fileUtils.readHtmlFile(
-        component.templateUrl
-      ))
+      .map(component => component.styleUrls)
+      .flat()
+      .map(styleUrl => this.fileUtils.readHtmlFile(styleUrl))
       .join(``);
   }
 }
