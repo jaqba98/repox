@@ -1,0 +1,40 @@
+import { singleton } from "tsyringe";
+import type { HtmlJsonModel } from "../../model/html-json.model";
+import { EMPTY_STRING } from "@lib/const";
+import { HtmlTypeEnum } from "../../enum/html-type.enum";
+
+@singleton()
+/**
+ * The service is responsible for convert json to html.
+ */
+export class JsonToHtmlConverterService {
+  htmlToJson(htmlJson: HtmlJsonModel[]): string {
+    return htmlJson
+      .map(html => this.parseChild(html))
+      .join(EMPTY_STRING);
+  }
+
+  private parseChild(htmlJson: HtmlJsonModel): string {
+    return this.parseHtmlJson(htmlJson);
+  }
+
+  private parseHtmlJson(htmlJson: HtmlJsonModel): string {
+    if (htmlJson.htmlType === HtmlTypeEnum.tagContent) {
+      return htmlJson.htmlBase;
+    }
+    let result: string = EMPTY_STRING;
+    // Build open tag
+    result += `<${htmlJson.htmlName}`;
+    for (const attr in htmlJson.htmlAttributes) {
+      result += ` ${attr}=${htmlJson.htmlAttributes[attr]}`;
+    }
+    result += `>`;
+    // Build children
+    result += htmlJson.children
+      .map(child => this.parseChild(child))
+      .join(EMPTY_STRING);
+    // Build close tag
+    result += `</${htmlJson.htmlName}>`;
+    return result;
+  }
+}

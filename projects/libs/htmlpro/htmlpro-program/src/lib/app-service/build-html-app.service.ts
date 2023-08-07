@@ -1,5 +1,9 @@
 import { singleton } from "tsyringe";
-import { FileUtilsService, FolderUtilsService } from "@lib/utils";
+import {
+  FileUtilsService,
+  FolderUtilsService,
+  PathUtilsService
+} from "@lib/utils";
 import {
   HtmlToJsonConverterService
 } from "../dom-service/converter/html-to-json-converter.service";
@@ -9,6 +13,9 @@ import {
 import {
   HtmlJsonLoopParserService
 } from "../dom-service/parser/html-json-loop-parser.service";
+import {
+  JsonToHtmlConverterService
+} from "../dom-service/converter/json-to-html-converter.service";
 
 @singleton()
 /**
@@ -18,9 +25,11 @@ export class BuildHtmlAppService {
   constructor(
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
-    private readonly htmlConverter: HtmlToJsonConverterService,
+    private readonly pathUtils: PathUtilsService,
+    private readonly htmlToJson: HtmlToJsonConverterService,
     private readonly importParser: HtmlJsonImportParserService,
-    private readonly loopParser: HtmlJsonLoopParserService
+    private readonly loopParser: HtmlJsonLoopParserService,
+    private readonly jsonToHtml: JsonToHtmlConverterService
   ) {
   }
 
@@ -28,7 +37,7 @@ export class BuildHtmlAppService {
     inputPath: string, outputPath: string
   ): boolean {
     this.folderUtils.createFolder(outputPath);
-    const result = this.fileUtils.readAllHtmlFiles(inputPath)
+    this.fileUtils.readAllHtmlFiles(inputPath)
       .map(htmlPath => ({ htmlPath }))
       .map(html => ({
         ...html,
@@ -36,7 +45,7 @@ export class BuildHtmlAppService {
       }))
       .map(html => ({
         ...html,
-        htmlJson: this.htmlConverter.htmlToJson(html.htmlBase)
+        htmlJson: this.htmlToJson.htmlToJson(html.htmlBase)
       }))
       .map(html => ({
         ...html,
@@ -45,7 +54,26 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         htmlJsonParsed: this.loopParser.parse(html.htmlJsonParsed)
-      }));
+      }))
+      .map(html => ({
+        ...html,
+        htmlToSave: this.jsonToHtml.htmlToJson(html.htmlJsonParsed)
+      }))
+      .map(html => ({
+        ...html,
+        htmlFileName: this.fileUtils.getFileName(html.htmlPath)
+      }))
+      .map(html => ({
+        ...html,
+        htmlOutput: this.pathUtils.createPath(
+          [outputPath, html.htmlFileName]
+        )
+      }))
+      .forEach(html => {
+        this.fileUtils.writeTextFile(
+          html.htmlOutput, html.htmlToSave
+        );
+      });
     return true;
   }
 }
