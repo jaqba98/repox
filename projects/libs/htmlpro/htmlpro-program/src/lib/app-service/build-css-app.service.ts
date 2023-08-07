@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { FileUtilsService } from "@lib/utils";
+import { FileUtilsService, PathUtilsService } from "@lib/utils";
 import {
   HtmlToJsonConverterService
 } from "../dom-service/converter/html-to-json-converter.service";
@@ -12,6 +12,7 @@ import {
 import {
   AliasToCssParserService
 } from "../dom-service/parser/alias-to-css-parser.service";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -20,6 +21,7 @@ import {
 export class BuildCssAppService {
   constructor(
     private readonly fileUtils: FileUtilsService,
+    private readonly pathUtils: PathUtilsService,
     private readonly htmlToJson: HtmlToJsonConverterService,
     private readonly htmlJsonImport: HtmlJsonImportParserService,
     private readonly aliasParser: HtmlJsonAliasParserService,
@@ -48,14 +50,22 @@ export class BuildCssAppService {
         ...html,
         aliases: this.aliasParser.parse(html.parsedHtmlJson)
       }));
-    const styles = htmlFiles
+    const componentStyles = htmlFiles
       .map(htmlFile => htmlFile.aliases)
       .flat()
       .reduce((acc: string[], curr: string): string[] =>
         acc.includes(curr) ? acc : [...acc, curr], []
       )
-      .map(cssFile => this.aliasToCssParser.parse(cssFile));
-    console.log(styles);
+      .map(cssFile => this.aliasToCssParser.parse(cssFile))
+      .join(EMPTY_STRING);
+    const projectStyles = this.fileUtils.readAllCssFiles(inputPath)
+      .map(cssFile => this.fileUtils.readTextFile(cssFile))
+      .join(EMPTY_STRING);
+    const resultStyles = projectStyles.concat(componentStyles);
+    const outputCssFile = this.pathUtils.createPath([
+      outputPath, `style.css`
+    ]);
+    this.fileUtils.writeTextFile(outputCssFile, resultStyles);
     return true;
   }
 }
