@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--primary-color);
+    background-color: #6320EE;
 }
 
 .main-nav-logo {
@@ -30,8 +30,8 @@
     width: 100%;
     height: 0.4em;
     border-radius: 1rem;
-    background-color: var(--font-white-color);
-    transition: transform var(--animation-speed) ease-in-out;
+    background-color: #ffffff;
+    transition: transform 0.25s ease-in-out;
 }
 
 .main-nav-open .hamburger-line-top {
@@ -52,8 +52,8 @@
     height: calc(100vh - 4em);
     left: 100%;
     width: 100%;
-    background-color: var(--primary-color);
-    transition: left var(--animation-speed) ease-in-out;
+    background-color: #6320EE;
+    transition: left 0.25s ease-in-out;
     overflow-y: auto;
 }
 
@@ -66,18 +66,18 @@
     padding: 1em;
     font-size: 1.2em;
     font-weight: bold;
-    color: var(--font-white-color);
-    background-color: var(--secondary-color);
-    border-bottom: 1px solid var(--third-color);
-    transition: all var(--animation-speed) ease-in-out;
+    color: #ffffff;
+    background-color: #571cd2;
+    border-bottom: 1px solid #4d19bb;
+    transition: all 0.25s ease-in-out;
     outline: none;
 }
 
 .main-nav-menu-link:focus,
 .main-nav-menu-link:hover {
-    color: var(--primary-color);
-    background-color: var(--font-white-color);
-    border-bottom: 1px solid var(--font-white-color);
+    color: #6320EE;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ffffff;
 }
 
 @media only screen and (min-width: 768px) {

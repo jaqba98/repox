@@ -198,14 +198,6 @@
       "scheme": "@lib/ts",
       "build": {}
     },
-    "nav": {
-      "name": "nav",
-      "type": "lib",
-      "path": "projects/libs/components/nav",
-      "src": "projects/libs/components/nav/src",
-      "scheme": "@htmlpro",
-      "build": {}
-    },
     "repox-component": {
       "name": "repox-component",
       "type": "lib",
