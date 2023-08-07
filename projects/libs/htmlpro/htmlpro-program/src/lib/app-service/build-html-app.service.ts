@@ -85,12 +85,10 @@ export class BuildHtmlAppService {
         ...html,
         cssStyle: this.cssDepToStyleParser.parse(html.cssDependencies)
       }));
-    console.log(result);
-    // .forEach(html => {
-    //   this.fileUtils.writeTextFile(
-    //     html.htmlOutput, html.htmlToSave
-    //   );
-    // });
+    // Build all html files
+    result.forEach(html => {
+      this.fileUtils.writeTextFile(html.htmlOutput, html.htmlToSave);
+    });
     return true;
   }
 }
