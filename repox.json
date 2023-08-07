@@ -198,14 +198,6 @@
       "scheme": "@lib/ts",
       "build": {}
     },
-    "head": {
-      "name": "head",
-      "type": "lib",
-      "path": "projects/libs/components/head",
-      "src": "projects/libs/components/head/src",
-      "scheme": "@htmlpro",
-      "build": {}
-    },
     "nav": {
       "name": "nav",
       "type": "lib",

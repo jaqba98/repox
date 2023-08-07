@@ -1,12 +1,5 @@
 {
   "components": {
-    "@component/head": {
-      "alias": "@component/head",
-      "templateUrl": "projects/libs/components/head/src/head.html",
-      "styleUrls": [
-        "projects/libs/components/head/src/head.css"
-      ]
-    },
     "@component/nav": {
       "alias": "@component/nav",
       "templateUrl": "projects/libs/components/nav/src/nav.html",
