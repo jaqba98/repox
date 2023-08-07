@@ -10,14 +10,20 @@ export class HtmlJsonCssDepParserService {
   parse(htmlJson: HtmlJsonModel[]): string[] {
     return htmlJson
       .map(html => this.parseChild(html))
-      .flat();
+      .flat()
+      .reduce((acc: string[], current: string) => {
+        if (!acc.includes(current)) {
+          acc.push(current);
+        }
+        return acc;
+      }, []);
   }
 
   private parseChild(htmlJson: HtmlJsonModel): string[] {
     let cssDependencies: string[] = [];
     const alias = htmlJson.htmlAttributes[
       HtmlAttributesEnum.dataImport
-      ];
+    ];
     if (alias !== undefined) {
       cssDependencies.push(alias);
       return cssDependencies;

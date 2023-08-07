@@ -19,6 +19,9 @@ import {
 import {
   HtmlJsonCssDepParserService
 } from "../dom-service/parser/html-json-css-dep-parser.service";
+import {
+  CssDepToStyleParserService
+} from "../dom-service/parser/css-dep-to-style-parser.service";
 
 @singleton()
 /**
@@ -33,7 +36,8 @@ export class BuildHtmlAppService {
     private readonly importParser: HtmlJsonImportParserService,
     private readonly loopParser: HtmlJsonLoopParserService,
     private readonly jsonToHtml: JsonToHtmlConverterService,
-    private readonly cssDepParser: HtmlJsonCssDepParserService
+    private readonly cssDepParser: HtmlJsonCssDepParserService,
+    private readonly cssDepToStyleParser: CssDepToStyleParserService
   ) {
   }
 
@@ -76,6 +80,10 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         cssDependencies: this.cssDepParser.parse(html.htmlJson)
+      }))
+      .map(html => ({
+        ...html,
+        cssStyle: this.cssDepToStyleParser.parse(html.cssDependencies)
       }));
     console.log(result);
     // .forEach(html => {
