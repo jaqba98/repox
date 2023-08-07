@@ -64,6 +64,13 @@ export class FileUtilsService {
       .map(path => this.pathUtils.normalizePath(path));
   }
 
+  readAllCssFiles (cwd: string): string[] {
+    const options = { cwd, ignore: [`**/node_modules/**`] };
+    return globSync(`*.css`, options)
+      .map(path => this.pathUtils.createPath([cwd, path]))
+      .map(path => this.pathUtils.normalizePath(path));
+  }
+
   writeTextFile (path: string, content: string): void {
     writeFileSync(path, content);
   }
