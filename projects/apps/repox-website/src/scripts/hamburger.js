@@ -1,15 +1,15 @@
 // HTML Elements
-const hamburgers = document.getElementsByClassName("hamburger");
-const navigations = document.getElementsByClassName("main-nav");
+const hamburgers = document.getElementsByClassName(`hamburger`);
+const navigations = document.getElementsByClassName(`main-nav`);
 
 // Functions
-const toggleNavigation = () => {
+const toggleNavigation = (): void => {
   Array.from(navigations).forEach(nav => {
-    nav.classList.toggle("main-nav-open");
+    nav.classList.toggle(`main-nav-open`);
   });
 };
 
 // Add events
 Array.from(hamburgers).forEach(hamburger => {
-  hamburger.addEventListener("click", () => { toggleNavigation(); });
+  hamburger.addEventListener(`click`, () => { toggleNavigation(); });
 });

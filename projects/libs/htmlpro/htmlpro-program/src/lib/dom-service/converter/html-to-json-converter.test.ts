@@ -9,6 +9,7 @@ const htmlExample = `
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script src="script.js" defer="defer"></script>
 <title>Example</title>
 </head>
 <body>
@@ -63,6 +64,17 @@ describe(`HtmlToJsonConverterService`, () => {
                   charset: `utf-8`
                 },
                 htmlSelfClose: true,
+                children: []
+              },
+              {
+                htmlBase: `<script src="script.js" defer="defer">`,
+                htmlType: HtmlTypeEnum.tagOpen,
+                htmlName: `script`,
+                htmlAttributes: {
+                  src: `script.js`,
+                  defer: `defer`
+                },
+                htmlSelfClose: false,
                 children: []
               },
               {
