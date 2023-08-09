@@ -17,3 +17,9 @@ a {
 body {
     font-family: 'Lato', sans-serif;
 }
+
+@media screen and (max-width: 300px) {
+    body {
+        font-size: 5vw;
+    }
+}
