@@ -1,4 +1,4 @@
-/* nav */
+/* nav mobile */
 .top-nav {
     display: flex;
     align-items: center;
@@ -63,9 +63,51 @@
 .top-nav-menu-link {
     display: block;
     padding: 1em;
+    font-weight: bold;
     color: #FFFFFF;
     background-color: #551ACE;
-    border-bottom: 1px solid #4816B0;
     transition: all 0.25s ease-in-out;
     outline: none;
+}
+
+/* nav tablet */
+@media screen and (min-width: 768px) {
+    .hamburger {
+        display: none;
+    }
+
+    .top-nav-menu {
+        display: flex;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .top-nav-menu-link {
+        padding: 0.75em;
+        margin: 0.25em;
+        border-radius: 0.25em;
+        background-color: transparent;
+    }
+
+    .top-nav-menu-link:hover,
+    .top-nav-menu-link:active {
+        color: #FFFFFF;
+        background-color: #340E83;
+    }
+
+    .top-nav-donate-line {
+        color: #340E83;
+        background-color: #FFFFFF;
+    }
+}
+
+/* pc tablet */
+@media screen and (min-width: 1024px) {
+    .top-nav {
+        justify-content: space-around;
+    }
 }
