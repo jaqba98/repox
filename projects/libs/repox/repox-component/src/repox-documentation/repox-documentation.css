@@ -13,17 +13,25 @@
     gap: 2em;
 }
 
+.documentation-content > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
 .documentation-menu p {
-    margin-bottom: 1em;
     font-weight: bold;
     font-size: 1.25em;
 }
 
-.documentation-menu li {
-    color: #FFFFFF;
+.documentation-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
-.documentation-menu ul {
+.documentation-menu li {
+    color: #FFFFFF;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -34,5 +42,40 @@
 }
 
 .documentation-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
     padding: 2em;
+}
+
+.documentation-content h2 {
+    color: #6320EE;
+}
+
+.documentation-content code {
+    display: block;
+    padding: 1em;
+    background-color: lightgray;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.documentation-content table {
+    border-collapse: collapse;
+}
+
+.documentation-content tr,
+.documentation-content td {
+    border: 1px solid lightgray;
+    padding: 0.5em;
+}
+
+/* documentation tablet */
+@media screen and (min-width: 768px) {
+    .documentation {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        flex: 1;
+    }
 }

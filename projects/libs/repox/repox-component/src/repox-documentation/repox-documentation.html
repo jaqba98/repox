@@ -39,8 +39,7 @@
         <div id="createWorkspace">
             <h3>Create workspace</h3>
             <p>To create workspace use the command below.</p>
-            <code>repox generate workspace
-                --name="example-workspace"</code>
+            <code>repox generate workspace --name="example-workspace"</code>
             <p>Arguments of generate workspace</p>
             <table>
                 <tr>
@@ -60,8 +59,7 @@
         <div id="createProject">
             <h3>Create project</h3>
             <p>To create project use the command below.</p>
-            <code>repox generate project --name="example-project"
-                --type="app" --scheme="@app/ts"</code>
+            <code>repox generate project --name="example-project" --type="app" --scheme="@app/ts"</code>
             <p>Arguments of generate project</p>
             <table>
                 <tr>
@@ -219,71 +217,6 @@
         <h2>Configurations</h2>
         <div id="repoxJsonConfig">
             <h3>repox.json file</h3>
-            <code>
-                {
-                // All projects in the monorepo workspace
-                "projects": {
-                // Application TypeScript project
-                "example-project-app": {
-                // Project name
-                "name": "example-project-app",
-                // Project type
-                "type": "app",
-                // Project path
-                "path": "projects/apps/example-project-app",
-                // Project src path
-                "src": "projects/apps/example-project-app/src",
-                // Project scheme
-                "scheme": "@app/ts",
-                // Build settings for project
-                "build": {
-                // The compilation output path
-                "output": "dist/example-project-app",
-                // The main typescript file
-                "main":
-                "projects/apps/example-project-app/src/main.ts",
-                // Additional resources that will be copied after
-                compilation
-                "assets": [
-                {
-                // The path to the copied item
-                "input":
-                "projects/apps/example-project-app/package.json",
-                // The path where the file should be copied
-                "output": "dist/example-project-app"
-                }
-                ]
-                }
-                },
-                // Library TypeScript project
-                "example-project-lib": {
-                // Project name
-                "name": "example-project-lib",
-                // Project type
-                "type": "lib",
-                // Project path
-                "path": "projects/libs/example-project-lib",
-                // Project src path
-                "src": "projects/libs/example-project-lib/src",
-                // Project scheme
-                "scheme": "@lib/ts"
-                },
-                // Tool TypeScript project
-                "example-project-tool": {
-                // Project name
-                "name": "example-project-tool",
-                // Project type
-                "type": "tool",
-                // Project path
-                "path": "projects/tool/example-project-tool",
-                // Project path
-                "src": "projects/tool/example-project-tool/src",
-                // Project scheme
-                "scheme": "@tool/ts"
-                }
-                }
-                }
-            </code>
         </div>
         <h2>Dictionary</h2>
         <div id="listOfPrograms">
