@@ -1,3 +1,5 @@
+/* footer menu mobile*/
+
 .footer-menu {
     background-color: #6320EE;
     padding: 2em;
@@ -38,11 +40,7 @@
     text-decoration: underline;
 }
 
-@media screen and (max-width: 300px) {
-    .footer-menu {
-        font-size: 5vw;
-    }
-}
+/* footer menu tablet */
 
 @media screen and (min-width: 768px) {
     .footer-menu {
@@ -51,6 +49,8 @@
         align-items: flex-start;
     }
 }
+
+/* footer menu pc */
 
 @media screen and (min-width: 1024px) {
     .footer-menu {
