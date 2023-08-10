@@ -35,11 +35,11 @@
         "projects/libs/repox/repox-component/src/repox-support/repox-support.css"
       ]
     },
-    "@component/repox-footer-copyright": {
-      "alias": "@component/repox-footer-copyright",
-      "templateUrl": "projects/libs/repox/repox-component/src/repox-footer-copyright/repox-footer-copyright.html",
+    "@component/footer-copyright": {
+      "alias": "@component/footer-copyright",
+      "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/footer-copyright/footer-copyright.html",
       "styleUrls": [
-        "projects/libs/repox/repox-component/src/repox-footer-copyright/repox-footer-copyright.css"
+        "projects/libs/htmlpro/htmlpro-components/src/footer-copyright/footer-copyright.css"
       ]
     },
     "@component/repox-footer-menu": {

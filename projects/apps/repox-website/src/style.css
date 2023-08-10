@@ -1,3 +1,12 @@
+/* variables */
+:root {
+    /* constants */
+    --primary-bg-color: #6320EE;
+    /* components */
+    --footer-copyright-background-color: var(--primary-bg-color);
+    --footer-copyright-color: #FFFFFF;
+}
+
 /* reset */
 * {
     margin: 0;
