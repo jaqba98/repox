@@ -40,46 +40,48 @@ export class BuildHtmlAppService {
   run(
     inputPath: string, outputPath: string
   ): boolean {
+    // todo: Fix the method
     this.folderUtils.createFolder(outputPath);
     const result = this.fileUtils.readAllHtmlFiles(inputPath)
-      .map(htmlPath => ({ htmlPath }))
+      .map(htmlFilePath => ({ htmlFilePath }))
       .map(html => ({
         ...html,
-        htmlBase: this.fileUtils.readHtmlFile(html.htmlPath)
-      }))
-      .map(html => ({
-        ...html,
-        htmlJson: this.htmlToJson.htmlToJson(html.htmlBase)
-      }))
-      .map(html => ({
-        ...html,
-        htmlJsonParsed: this.importParser.parse(html.htmlJson)
-      }))
-      .map(html => ({
-        ...html,
-        htmlJsonParsed: this.loopParser.parse(html.htmlJsonParsed)
-      }))
-      .map(html => ({
-        ...html,
-        htmlJsonParsed: this.valueParser.parse(html.htmlJsonParsed)
-      }))
-      .map(html => ({
-        ...html,
-        htmlToSave: this.jsonToHtml.jsonToHtml(html.htmlJsonParsed)
-      }))
-      .map(html => ({
-        ...html,
-        htmlFileName: this.fileUtils.getFileName(html.htmlPath)
-      }))
-      .map(html => ({
-        ...html,
-        htmlOutput: this.pathUtils.createPath(
-          [outputPath, html.htmlFileName]
-        )
+        htmlFileRead: this.fileUtils.readHtmlFile(html.htmlFilePath)
       }));
-    result.forEach(html => {
-      this.fileUtils.writeTextFile(html.htmlOutput, html.htmlToSave);
-    });
+    console.log(result);
+    // .map(html => ({
+    //   ...html,
+    //   htmlJson: this.htmlToJson.htmlToJson(html.htmlBase)
+    // }))
+    // .map(html => ({
+    //   ...html,
+    //   htmlJsonParsed: this.importParser.parse(html.htmlJson)
+    // }))
+    // .map(html => ({
+    //   ...html,
+    //   htmlJsonParsed: this.loopParser.parse(html.htmlJsonParsed)
+    // }))
+    // .map(html => ({
+    //   ...html,
+    //   htmlJsonParsed: this.valueParser.parse(html.htmlJsonParsed)
+    // }))
+    // .map(html => ({
+    //   ...html,
+    //   htmlToSave: this.jsonToHtml.jsonToHtml(html.htmlJsonParsed)
+    // }))
+    // .map(html => ({
+    //   ...html,
+    //   htmlFileName: this.fileUtils.getFileName(html.htmlPath)
+    // }))
+    // .map(html => ({
+    //   ...html,
+    //   htmlOutput: this.pathUtils.createPath(
+    //     [outputPath, html.htmlFileName]
+    //   )
+    // }));
+    // result.forEach(html => {
+    //   this.fileUtils.writeTextFile(html.htmlOutput, html.htmlToSave);
+    // });
     return true;
   }
 }
