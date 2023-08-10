@@ -3,20 +3,12 @@ import type {
   HtmlJsonAttributeModel,
   HtmlJsonModel
 } from "../../model/html-json.model";
-import {
-  HtmlToJsonConverterService
-} from "../converter/html-to-json-converter.service";
 
 @singleton()
 /**
  * The service is responsible for parse html json values.
  */
 export class HtmlJsonValueParserService {
-  constructor(
-    private readonly htmlConverter: HtmlToJsonConverterService
-  ) {
-  }
-
   parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
     return htmlJson.map(html => this.parseChild(html, {}));
   }
@@ -44,7 +36,7 @@ export class HtmlJsonValueParserService {
     for (const attribute in parentAttributes) {
       htmlJson.htmlBase = htmlJson.htmlBase.replaceAll(
         new RegExp(`{{\\s*${attribute}\\s*}}`, `gm`),
-        htmlJson.htmlAttributes[attribute]
+        parentAttributes[attribute]
       );
     }
     return htmlJson;
