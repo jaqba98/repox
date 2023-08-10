@@ -1,40 +1,38 @@
-/* header */
-
+/* header mobile */
 .header {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 2em;
-    padding: 4em 2em;
+    padding: 8em 4em 4em 4em;
     background-color: #6320EE;
     color: #FFFFFF;
 }
 
-.motto {
+.header-motto {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.motto > p {
+.header-motto > p {
     text-align: center;
     font-size: 2em;
     letter-spacing: -1px;
     word-spacing: 1px;
 }
 
-.motto > p:first-child {
+.header-motto > p:first-child {
     font-weight: bold;
 }
 
-.header > img {
-    width: 50%;
+.header-logo {
+    width: 100%;
 }
 
 .header > p {
     text-align: center;
-    font-size: 1.25em;
     letter-spacing: -1px;
     word-spacing: 1px;
     font-weight: bold;
@@ -43,13 +41,13 @@
 
 .header-link {
     display: block;
-    font-size: 1.25em;
     font-weight: bold;
     padding: 0.5em;
-    border-radius: 10px;
+    border-radius: 0.25em;
     color: #FFFFFF;
     border: 0.2em solid #FFFFFF;
-    transition: all var(--animation-speed) ease-in-out;
+    transition: background-color 0.25s ease-in-out,
+                color 0.25s ease-in-out;
 }
 
 .header-link:hover,
@@ -59,11 +57,11 @@
 }
 
 @media only screen and (min-width: 768px) {
-    .motto {
+    .header-motto {
         flex-direction: row;
     }
 
-    .header > img {
+    .header-logo {
         width: 15em;
     }
 }
