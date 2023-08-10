@@ -48,6 +48,13 @@
       "styleUrls": [
         "projects/libs/repox/repox-component/src/repox-footer-menu/repox-footer-menu.css"
       ]
+    },
+    "@component/repox-documentation": {
+      "alias": "@component/repox-documentation",
+      "templateUrl": "projects/libs/repox/repox-component/src/repox-documentation/repox-documentation.html",
+      "styleUrls": [
+        "projects/libs/repox/repox-component/src/repox-documentation/repox-documentation.css"
+      ]
     }
   }
 }

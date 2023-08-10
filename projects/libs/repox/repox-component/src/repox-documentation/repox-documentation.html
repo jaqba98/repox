@@ -1,0 +1,332 @@
+<section class="documentation">
+    <ol class="documentation-menu">
+        <li>
+            <p>Repox commands</p>
+            <ul>
+                <li><a href="#checkVersion">Check version</a></li>
+                <li><a href="#createWorkspace">Create workspace</a>
+                </li>
+                <li><a href="#createProject">Create project</a></li>
+                <li><a href="#buildProject">Build project</a></li>
+                <li><a href="#publishNpm">Publish npm</a></li>
+                <li><a href="#lintProject">Lint project</a></li>
+            </ul>
+        </li>
+        <li>
+            <p>Configurations</p>
+            <ul>
+                <li><a href="#repoxJsonConfig">repox.json file</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <p>Dictionary</p>
+            <ul>
+                <li><a href="#listOfPrograms">List of programs</a></li>
+                <li><a href="#listOfCommands">List of commands</a></li>
+            </ul>
+        </li>
+    </ol>
+    <div class="documentation-content">
+        <h2>Repox commands</h2>
+        <div id="checkVersion">
+            <h3>Check version</h3>
+            <p>To check the current version use the command below.</p>
+            <code>repox --version</code>
+            <p>You can use alias instead of argument.</p>
+            <code>repox -v</code>
+        </div>
+        <div id="createWorkspace">
+            <h3>Create workspace</h3>
+            <p>To create workspace use the command below.</p>
+            <code>repox generate workspace
+                --name="example-workspace"</code>
+            <p>Arguments of generate workspace</p>
+            <table>
+                <tr>
+                    <td>Argument</td>
+                    <td>Alias</td>
+                    <td>Description</td>
+                    <td>Required</td>
+                </tr>
+                <tr>
+                    <td>--name</td>
+                    <td>-n</td>
+                    <td>Specify a workspace name</td>
+                    <td>True</td>
+                </tr>
+            </table>
+        </div>
+        <div id="createProject">
+            <h3>Create project</h3>
+            <p>To create project use the command below.</p>
+            <code>repox generate project --name="example-project"
+                --type="app" --scheme="@app/ts"</code>
+            <p>Arguments of generate project</p>
+            <table>
+                <tr>
+                    <td>Argument</td>
+                    <td>Alias</td>
+                    <td>Description</td>
+                    <td>Required</td>
+                </tr>
+                <tr>
+                    <td>--name</td>
+                    <td>-n</td>
+                    <td>Specify a workspace name</td>
+                    <td>True</td>
+                </tr>
+                <tr>
+                    <td>--type</td>
+                    <td>-t</td>
+                    <td>Specify a project type</td>
+                    <td>True</td>
+                </tr>
+                <tr>
+                    <td>--scheme</td>
+                    <td>-s</td>
+                    <td>Specify a workspace scheme</td>
+                    <td>True</td>
+                </tr>
+                <tr>
+                    <td>--path</td>
+                    <td>-p</td>
+                    <td>Specify a project path</td>
+                    <td>False</td>
+                </tr>
+            </table>
+            <p>Project type (--type argument) values</p>
+            <table>
+                <tr>
+                    <td>Type value</td>
+                    <td>Description</td>
+                </tr>
+                <tr>
+                    <td>app</td>
+                    <td>Application project</td>
+                </tr>
+                <tr>
+                    <td>lib</td>
+                    <td>Library project</td>
+                </tr>
+                <tr>
+                    <td>tool</td>
+                    <td>Tool project</td>
+                </tr>
+            </table>
+            <p>Project scheme (--scheme argument) values</p>
+            <table>
+                <tr>
+                    <td>Project scheme</td>
+                    <td>Description</td>
+                </tr>
+                <tr>
+                    <td>@blank</td>
+                    <td>Blank project</td>
+                </tr>
+                <tr>
+                    <td>@htmlpro</td>
+                    <td>HTMLPRO project</td>
+                </tr>
+                <tr>
+                    <td>@app/ts</td>
+                    <td>TypeScript application</td>
+                </tr>
+                <tr>
+                    <td>@lib/ts</td>
+                    <td>TypeScript library</td>
+                </tr>
+                <tr>
+                    <td>@tool/ts</td>
+                    <td>TypeScript tool</td>
+                </tr>
+            </table>
+        </div>
+        <div id="buildProject">
+            <h3>Build project</h3>
+            <p>To build project use the command below.</p>
+            <code>repox build project --name="example-project"</code>
+            <p>Arguments of build project</p>
+            <table>
+                <tr>
+                    <td>Argument</td>
+                    <td>Alias</td>
+                    <td>Description</td>
+                    <td>Required</td>
+                </tr>
+                <tr>
+                    <td>--name</td>
+                    <td>-n</td>
+                    <td>Specify a workspace name</td>
+                    <td>True</td>
+                </tr>
+                <tr>
+                    <td>--watch</td>
+                    <td>-w</td>
+                    <td>Build the project as soon as something
+                        changes
+                    </td>
+                    <td>False</td>
+                </tr>
+                <tr>
+                    <td>--production</td>
+                    <td>-P</td>
+                    <td>Turn on production build mode</td>
+                    <td>False</td>
+                </tr>
+            </table>
+        </div>
+        <div id="publishNpm">
+            <h3>Publish npm</h3>
+            <p>To publish npm use the command below.</p>
+            <code>repox publish npm --name="example-project"</code>
+            <p>Arguments of publish npm</p>
+            <table>
+                <tr>
+                    <td>Argument</td>
+                    <td>Alias</td>
+                    <td>Description</td>
+                    <td>Required</td>
+                </tr>
+                <tr>
+                    <td>--name</td>
+                    <td>-n</td>
+                    <td>Specify a workspace name</td>
+                    <td>True</td>
+                </tr>
+            </table>
+        </div>
+        <div id="lintProject">
+            <h3>Lint project</h3>
+            <p>To lint project use the command below.</p>
+            <code>repox lint project</code>
+            <p>Arguments of generate project</p>
+            <table>
+                <tr>
+                    <td>Argument</td>
+                    <td>Alias</td>
+                    <td>Description</td>
+                    <td>Required</td>
+                </tr>
+                <tr>
+                    <td>--fix</td>
+                    <td>-f</td>
+                    <td>Fix issues during linting</td>
+                    <td>False</td>
+                </tr>
+            </table>
+        </div>
+        <h2>Configurations</h2>
+        <div id="repoxJsonConfig">
+            <h3>repox.json file</h3>
+            <code>
+                {
+                // All projects in the monorepo workspace
+                "projects": {
+                // Application TypeScript project
+                "example-project-app": {
+                // Project name
+                "name": "example-project-app",
+                // Project type
+                "type": "app",
+                // Project path
+                "path": "projects/apps/example-project-app",
+                // Project src path
+                "src": "projects/apps/example-project-app/src",
+                // Project scheme
+                "scheme": "@app/ts",
+                // Build settings for project
+                "build": {
+                // The compilation output path
+                "output": "dist/example-project-app",
+                // The main typescript file
+                "main":
+                "projects/apps/example-project-app/src/main.ts",
+                // Additional resources that will be copied after
+                compilation
+                "assets": [
+                {
+                // The path to the copied item
+                "input":
+                "projects/apps/example-project-app/package.json",
+                // The path where the file should be copied
+                "output": "dist/example-project-app"
+                }
+                ]
+                }
+                },
+                // Library TypeScript project
+                "example-project-lib": {
+                // Project name
+                "name": "example-project-lib",
+                // Project type
+                "type": "lib",
+                // Project path
+                "path": "projects/libs/example-project-lib",
+                // Project src path
+                "src": "projects/libs/example-project-lib/src",
+                // Project scheme
+                "scheme": "@lib/ts"
+                },
+                // Tool TypeScript project
+                "example-project-tool": {
+                // Project name
+                "name": "example-project-tool",
+                // Project type
+                "type": "tool",
+                // Project path
+                "path": "projects/tool/example-project-tool",
+                // Project path
+                "src": "projects/tool/example-project-tool/src",
+                // Project scheme
+                "scheme": "@tool/ts"
+                }
+                }
+                }
+            </code>
+        </div>
+        <h2>Dictionary</h2>
+        <div id="listOfPrograms">
+            <h3>List of programs</h3>
+            <table>
+                <tr>
+                    <td>Program</td>
+                    <td>Program alias</td>
+                </tr>
+                <tr>
+                    <td>generate</td>
+                    <td>g</td>
+                </tr>
+                <tr>
+                    <td>build</td>
+                    <td>b</td>
+                </tr>
+                <tr>
+                    <td>publish</td>
+                    <td>p</td>
+                </tr>
+            </table>
+        </div>
+        <div id="listOfCommands">
+            <h3>List of commands</h3>
+            <table>
+                <tr>
+                    <td>Command</td>
+                    <td>Command alias</td>
+                </tr>
+                <tr>
+                    <td>workspace</td>
+                    <td>w</td>
+                </tr>
+                <tr>
+                    <td>project</td>
+                    <td>p</td>
+                </tr>
+                <tr>
+                    <td>npm</td>
+                    <td>n</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,38 @@
+/* documentation mobile */
+.documentation {
+    display: flex;
+    flex-direction: column;
+}
+
+.documentation-menu {
+    padding: 2em;
+    list-style: none;
+    background-color: #5A1DD9;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.documentation-menu p {
+    margin-bottom: 1em;
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+.documentation-menu li {
+    color: #FFFFFF;
+}
+
+.documentation-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.documentation-menu a {
+    color: #FFFFFF;
+}
+
+.documentation-content {
+    padding: 2em;
+}
