@@ -4,21 +4,14 @@
              alt="{{data-logo-alt}}"
              class="footer-menu-logo">
     </div>
-    <div data-loop="{{data-menu}}">{{loopValue}}</div>
-<!--    <div class="footer-menu-column" data-loop="{{data-menu-quantity}}">-->
-<!--        <h3>Documentation</h3>-->
-<!--        <ul>-->
-<!--            <li><a href="#">Link 1</a></li>-->
-<!--            <li><a href="#">Link 2</a></li>-->
-<!--            <li><a href="#">Link 3</a></li>-->
-<!--            <li><a href="#">Link 4</a></li>-->
-<!--            <li><a href="#">Link 5</a></li>-->
-<!--            <li><a href="#">Link 6</a></li>-->
-<!--            <li><a href="#">Link 7</a></li>-->
-<!--            <li><a href="#">Link 8</a></li>-->
-<!--            <li><a href="#">Link 9</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
+    <div class="footer-menu-column" data-loop="{{data-menu-columns}}">
+        <h3>{{title}}</h3>
+        <ul>
+            <li data-loop="{{links}}">
+                <a href="{{url}}">{{value}}</a>
+            </li>
+        </ul>
+    </div>
 <!--    <div class="footer-menu-column">-->
 <!--        <h3>Links</h3>-->
 <!--        <ul>-->

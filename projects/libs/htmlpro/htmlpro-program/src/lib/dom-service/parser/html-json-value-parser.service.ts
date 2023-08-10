@@ -34,10 +34,7 @@ export class HtmlJsonValueParserService {
     parentAttributes: HtmlJsonAttributeModel
   ): HtmlJsonModel {
     for (const attribute in parentAttributes) {
-      htmlJson.htmlBase = htmlJson.htmlBase.replaceAll(
-        new RegExp(`{{\\s*${attribute}\\s*}}`, `gm`),
-        parentAttributes[attribute]
-      );
+      htmlJson.htmlAttributes[attribute] = parentAttributes[attribute];
     }
     return htmlJson;
   }

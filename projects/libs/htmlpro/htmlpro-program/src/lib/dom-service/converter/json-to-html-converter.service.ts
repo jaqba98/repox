@@ -25,7 +25,9 @@ export class JsonToHtmlConverterService {
     // Build open tag
     result += `<${htmlJson.htmlName}`;
     for (const attr in htmlJson.htmlAttributes) {
-      result += ` ${attr}="${htmlJson.htmlAttributes[attr]}"`;
+      if (htmlJson.htmlBase.includes(attr)) {
+        result += ` ${attr}="${htmlJson.htmlAttributes[attr]}"`;
+      }
     }
     result += `>`;
     // Build children
