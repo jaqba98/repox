@@ -16,6 +16,7 @@
           },
           {
             "input": "projects/apps/repox/package.json",
+            "input": "projects/apps/repox/package.json",
             "output": "dist/repox"
           }
         ]
@@ -203,6 +204,14 @@
       "type": "lib",
       "path": "projects/libs/repox/repox-component",
       "src": "projects/libs/repox/repox-component/src",
+      "scheme": "@htmlpro",
+      "build": {}
+    },
+    "htmlpro-components": {
+      "name": "htmlpro-components",
+      "type": "lib",
+      "path": "projects/libs/htmlpro/htmlpro-components",
+      "src": "projects/libs/htmlpro/htmlpro-components/src",
       "scheme": "@htmlpro",
       "build": {}
     }
