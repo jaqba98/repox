@@ -1,7 +1,7 @@
-/* statistics */
+/* statistics mobile */
 
 .statistics-container {
-    background-color: white;
+    background-color: #FFFFFF;
 }
 
 .statistics {
@@ -26,12 +26,16 @@
     color: #6320EE;
 }
 
+/* statistics tablet */
+
 @media only screen and (min-width: 768px) {
     .statistics {
         flex-direction: row;
         justify-content: space-between;
     }
 }
+
+/* statistics pc */
 
 @media only screen and (min-width: 1024px) {
     .statistics {
