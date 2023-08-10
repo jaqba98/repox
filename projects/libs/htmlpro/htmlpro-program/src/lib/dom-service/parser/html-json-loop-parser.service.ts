@@ -25,6 +25,17 @@ export class HtmlJsonLoopParserService {
       HtmlAttributesEnum.dataLoop
     ];
     if (loop === undefined) return [htmlJson];
-    return Array.from({ length: Number(loop) }, () => htmlJson);
+    const loopValues = JSON.parse(loop.replaceAll(`'`, `"`));
+    if (!isNaN(Number(loopValues))) {
+      return Array.from({ length: Number(loop) }, () => htmlJson);
+    }
+    if (typeof loopValues === `object`) {
+      return loopValues
+        .map((loopValue: any) => ({
+          ...htmlJson,
+          htmlAttributes: { ...htmlJson.htmlAttributes, loopValue }
+        }));
+    }
+    return [];
   }
 }

@@ -16,6 +16,9 @@ import {
 import {
   JsonToHtmlConverterService
 } from "../dom-service/converter/json-to-html-converter.service";
+import {
+  HtmlJsonValueParserService
+} from "../dom-service/parser/html-json-value-parser.service";
 
 @singleton()
 /**
@@ -29,7 +32,8 @@ export class BuildHtmlAppService {
     private readonly htmlToJson: HtmlToJsonConverterService,
     private readonly importParser: HtmlJsonImportParserService,
     private readonly loopParser: HtmlJsonLoopParserService,
-    private readonly jsonToHtml: JsonToHtmlConverterService
+    private readonly jsonToHtml: JsonToHtmlConverterService,
+    private readonly valueParser: HtmlJsonValueParserService
   ) {
   }
 
@@ -54,6 +58,10 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         htmlJsonParsed: this.loopParser.parse(html.htmlJsonParsed)
+      }))
+      .map(html => ({
+        ...html,
+        htmlJsonParsed: this.valueParser.parse(html.htmlJsonParsed)
       }))
       .map(html => ({
         ...html,
