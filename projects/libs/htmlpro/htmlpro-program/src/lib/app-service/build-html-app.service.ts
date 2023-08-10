@@ -28,8 +28,8 @@ export class BuildHtmlAppService {
   constructor(
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
-    private readonly pathUtils: PathUtilsService,
     private readonly htmlToJson: HtmlToJsonConverterService,
+    private readonly pathUtils: PathUtilsService,
     private readonly importParser: HtmlJsonImportParserService,
     private readonly loopParser: HtmlJsonLoopParserService,
     private readonly jsonToHtml: JsonToHtmlConverterService,
@@ -47,16 +47,16 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         htmlFileRead: this.fileUtils.readHtmlFile(html.htmlFilePath)
+      }))
+      .map(html => ({
+        ...html,
+        htmlJson: this.htmlToJson.htmlToJson(html.htmlFileRead)
+      }))
+      .map(html => ({
+        ...html,
+        htmlJsonImport: this.importParser.parse(html.htmlJson)
       }));
     console.log(result);
-    // .map(html => ({
-    //   ...html,
-    //   htmlJson: this.htmlToJson.htmlToJson(html.htmlBase)
-    // }))
-    // .map(html => ({
-    //   ...html,
-    //   htmlJsonParsed: this.importParser.parse(html.htmlJson)
-    // }))
     // .map(html => ({
     //   ...html,
     //   htmlJsonParsed: this.loopParser.parse(html.htmlJsonParsed)

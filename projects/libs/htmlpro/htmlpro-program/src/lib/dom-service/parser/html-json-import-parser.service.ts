@@ -24,15 +24,16 @@ export class HtmlJsonImportParserService {
   }
 
   private parseChild(htmlJson: HtmlJsonModel): HtmlJsonModel {
-    const htmlJsonResult = this.parseImport(htmlJson);
-    htmlJsonResult.htmlAttributes = {
-      ...htmlJsonResult.htmlAttributes,
-      ...htmlJson.htmlAttributes
+    const htmlJsonImport = this.parseImport(htmlJson);
+    htmlJsonImport.htmlAttributes = {
+      ...htmlJson.htmlAttributes,
+      ...htmlJsonImport.htmlAttributes
     };
     return {
-      ...htmlJsonResult,
-      children: htmlJsonResult.children
-        .map(child => this.parseChild(child))
+      ...htmlJsonImport,
+      children: htmlJsonImport.children.map(
+        child => this.parseChild(child)
+      )
     };
   }
 
@@ -42,15 +43,9 @@ export class HtmlJsonImportParserService {
     ];
     if (alias === undefined) return htmlJson;
     const component = this.htmlProDomainStore.getComponent(alias);
-    let htmlContent = this.fileUtils.readHtmlFile(
+    const htmlFileContent = this.fileUtils.readHtmlFile(
       component.templateUrl
     );
-    for (const attribute in htmlJson.htmlAttributes) {
-      htmlContent = htmlContent.replaceAll(
-        new RegExp(`{{\\s*${attribute}\\s*}}`, `gm`),
-        htmlJson.htmlAttributes[attribute]
-      );
-    }
-    return this.htmlConverter.htmlToJson(htmlContent)[0];
+    return this.htmlConverter.htmlToJson(htmlFileContent)[0];
   }
 }
