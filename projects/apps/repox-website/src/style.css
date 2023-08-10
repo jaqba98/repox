@@ -1,10 +1,15 @@
 /* variables */
 :root {
     /* constants */
-    --primary-bg-color: #6320EE;
-    /* components */
-    --footer-copyright-background-color: var(--primary-bg-color);
-    --footer-copyright-color: #FFFFFF;
+    --primary-background-color: #6320EE;
+    --secondary-background-color: #501ac0;
+    --white-background-color: #FEFEFE;
+    /* component footer copyright */
+    --footer-copyright-background-color: var(--primary-background-color);
+    --footer-copyright-color: var(--white-background-color);
+    /* component footer author*/
+    --footer-author-background-color: var(--secondary-background-color);
+    --footer-author-color: var(--white-background-color);
 }
 
 /* reset */

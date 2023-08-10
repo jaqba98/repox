@@ -1,0 +1,9 @@
+.footer-author {
+    background-color: var(--footer-author-background-color);
+}
+
+.footer-author-content {
+    color: var(--footer-author-color);
+    padding: 0.5em;
+    text-align: right;
+}
