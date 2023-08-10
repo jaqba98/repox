@@ -18,6 +18,10 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+main {
+    padding-top: 4em;
+}
+
 @media screen and (max-width: 300px) {
     body {
         font-size: 5vw;

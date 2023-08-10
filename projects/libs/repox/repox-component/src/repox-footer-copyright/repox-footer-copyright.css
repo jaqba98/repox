@@ -7,9 +7,3 @@
     padding: 1em;
     text-align: center;
 }
-
-@media screen and (max-width: 300px) {
-    .footer-copyright-content {
-        font-size: 5vw;
-    }
-}
