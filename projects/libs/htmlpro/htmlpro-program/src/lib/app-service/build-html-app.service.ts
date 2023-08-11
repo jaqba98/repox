@@ -51,23 +51,19 @@ export class BuildHtmlAppService {
       .map(htmlFilePath => ({ htmlFilePath }))
       .map(html => ({
         ...html,
-        htmlFileRead: this.fileUtils
-          .readHtmlFile(cloneDeep(html.htmlFilePath))
+        htmlFileRead: this.fileUtils.readHtmlFile(cloneDeep(html.htmlFilePath))
       }))
       .map(html => ({
         ...html,
-        htmlJson: this.htmlToJson
-          .htmlToJson(cloneDeep(html.htmlFileRead))
+        htmlJson: this.htmlToJson.htmlToJson(cloneDeep(html.htmlFileRead))
       }))
       .map(html => ({
         ...html,
-        htmlJsonImport: this.importParser
-          .parse(cloneDeep(html.htmlJson))
+        htmlJsonImport: this.importParser.parse(cloneDeep(html.htmlJson))
       }))
       .map(html => ({
         ...html,
-        htmlJsonCorrectType: this.correctType
-          .parse(cloneDeep(html.htmlJsonImport))
+        htmlJsonCorrectType: this.correctType.parse(cloneDeep(html.htmlJsonImport))
       }));
     console.log(result);
     // .map(html => ({

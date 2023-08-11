@@ -32,12 +32,6 @@ export class HtmlJsonCorrectTypeParserService {
         htmlJson.htmlAttributes[attribute]
       );
     }
-    // Process htmlAttributes
-    for (const importAttribute in htmlJson.importHtmlAttributes) {
-      htmlJson.importHtmlAttributes[importAttribute] = this.parseValue(
-        htmlJson.importHtmlAttributes[importAttribute]
-      );
-    }
     return [htmlJson];
   }
 

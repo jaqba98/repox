@@ -1,5 +1,8 @@
 import { singleton } from "tsyringe";
-import type { HtmlJsonModel } from "../../model/html-json.model";
+import type {
+  HtmlJsonAttributeModel,
+  HtmlJsonModel
+} from "../../model/html-json.model";
 import { HtmlProDomainStoreService } from "@lib/htmlpro-workspace";
 import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
 import { FileUtilsService } from "@lib/utils";
@@ -20,16 +23,18 @@ export class HtmlJsonImportParserService {
   }
 
   parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
-    return htmlJson.map(html => this.parseChild(html)).flat();
+    return htmlJson
+      .map(html => this.parseChild(html))
+      .flat();
   }
 
   private parseChild(htmlJson: HtmlJsonModel): HtmlJsonModel[] {
     const htmlJsonImport = this.parseImport(htmlJson);
     return htmlJsonImport.map(htmlJsonImportResult => ({
       ...htmlJsonImportResult,
-      children: htmlJsonImportResult.children.map(
-        child => this.parseChild(child)
-      ).flat()
+      children: htmlJsonImportResult.children
+        .map(child => this.parseChild(child))
+        .flat()
     }));
   }
 
@@ -44,12 +49,6 @@ export class HtmlJsonImportParserService {
     );
     return this.htmlConverter
       .htmlToJson(htmlFileContent)
-      .map(newHtml => ({
-        ...newHtml,
-        importHtmlAttributes: {
-          ...htmlJson.htmlAttributes,
-          ...newHtml.importHtmlAttributes
-        }
-      }));
+      .map(newHtml => ({ ...newHtml }));
   }
 }
