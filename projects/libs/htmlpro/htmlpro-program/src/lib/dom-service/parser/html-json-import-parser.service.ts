@@ -20,32 +20,36 @@ export class HtmlJsonImportParserService {
   }
 
   parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
-    return htmlJson.map(html => this.parseChild(html));
+    return htmlJson.map(html => this.parseChild(html)).flat();
   }
 
-  private parseChild(htmlJson: HtmlJsonModel): HtmlJsonModel {
+  private parseChild(htmlJson: HtmlJsonModel): HtmlJsonModel[] {
     const htmlJsonImport = this.parseImport(htmlJson);
-    htmlJsonImport.htmlAttributes = {
-      ...htmlJson.htmlAttributes,
-      ...htmlJsonImport.htmlAttributes
-    };
-    return {
-      ...htmlJsonImport,
-      children: htmlJsonImport.children.map(
+    return htmlJsonImport.map(htmlJsonImportResult => ({
+      ...htmlJsonImportResult,
+      children: htmlJsonImportResult.children.map(
         child => this.parseChild(child)
-      )
-    };
+      ).flat()
+    }));
   }
 
-  private parseImport(htmlJson: HtmlJsonModel): HtmlJsonModel {
+  private parseImport(htmlJson: HtmlJsonModel): HtmlJsonModel[] {
     const alias = htmlJson.htmlAttributes[
       HtmlAttributesEnum.dataImport
     ];
-    if (alias === undefined) return htmlJson;
+    if (alias === undefined) return [htmlJson];
     const component = this.htmlProDomainStore.getComponent(alias);
     const htmlFileContent = this.fileUtils.readHtmlFile(
       component.templateUrl
     );
-    return this.htmlConverter.htmlToJson(htmlFileContent)[0];
+    return this.htmlConverter
+      .htmlToJson(htmlFileContent)
+      .map(newHtml => ({
+        ...newHtml,
+        importHtmlAttributes: {
+          ...htmlJson.htmlAttributes,
+          ...newHtml.importHtmlAttributes
+        }
+      }));
   }
 }

@@ -35,7 +35,8 @@ export class HtmlToJsonConverterService {
       }))
       .map(htmlItem => ({
         ...htmlItem,
-        htmlAttributes: this.getAttributes(htmlItem.htmlBase)
+        htmlAttributes: this.getAttributes(htmlItem.htmlBase),
+        importHtmlAttributes: {}
       }))
       .map(htmlItem => ({
         ...htmlItem,

@@ -47,6 +47,7 @@ describe(`HtmlToJsonConverterService`, () => {
         htmlAttributes: {
           lang: `en`
         },
+        importHtmlAttributes: {},
         htmlSelfClose: false,
         children: [
           {
@@ -54,6 +55,7 @@ describe(`HtmlToJsonConverterService`, () => {
             htmlType: HtmlTypeEnum.tagOpen,
             htmlName: `head`,
             htmlAttributes: {},
+            importHtmlAttributes: {},
             htmlSelfClose: false,
             children: [
               {
@@ -63,6 +65,7 @@ describe(`HtmlToJsonConverterService`, () => {
                 htmlAttributes: {
                   charset: `utf-8`
                 },
+                importHtmlAttributes: {},
                 htmlSelfClose: true,
                 children: []
               },
@@ -74,6 +77,7 @@ describe(`HtmlToJsonConverterService`, () => {
                   src: `script.js`,
                   defer: `defer`
                 },
+                importHtmlAttributes: {},
                 htmlSelfClose: false,
                 children: []
               },
@@ -82,6 +86,7 @@ describe(`HtmlToJsonConverterService`, () => {
                 htmlType: HtmlTypeEnum.tagOpen,
                 htmlName: `title`,
                 htmlAttributes: {},
+                importHtmlAttributes: {},
                 htmlSelfClose: false,
                 children: [
                   {
@@ -89,6 +94,7 @@ describe(`HtmlToJsonConverterService`, () => {
                     htmlType: HtmlTypeEnum.tagContent,
                     htmlName: ``,
                     htmlAttributes: {},
+                    importHtmlAttributes: {},
                     htmlSelfClose: false,
                     children: []
                   }
@@ -101,6 +107,7 @@ describe(`HtmlToJsonConverterService`, () => {
             htmlType: HtmlTypeEnum.tagOpen,
             htmlName: `body`,
             htmlAttributes: {},
+            importHtmlAttributes: {},
             htmlSelfClose: false,
             children: [
               {
@@ -108,6 +115,7 @@ describe(`HtmlToJsonConverterService`, () => {
                 htmlType: HtmlTypeEnum.tagOpen,
                 htmlName: `h1`,
                 htmlAttributes: {},
+                importHtmlAttributes: {},
                 htmlSelfClose: false,
                 children: [
                   {
@@ -115,6 +123,7 @@ describe(`HtmlToJsonConverterService`, () => {
                     htmlType: HtmlTypeEnum.tagContent,
                     htmlName: ``,
                     htmlAttributes: {},
+                    importHtmlAttributes: {},
                     htmlSelfClose: false,
                     children: []
                   }
@@ -125,6 +134,7 @@ describe(`HtmlToJsonConverterService`, () => {
                 htmlType: HtmlTypeEnum.tagOpen,
                 htmlName: `div`,
                 htmlAttributes: {},
+                importHtmlAttributes: {},
                 htmlSelfClose: false,
                 children: [
                   {
@@ -135,6 +145,7 @@ describe(`HtmlToJsonConverterService`, () => {
                       src: `image1.png`,
                       alt: `Image 1`
                     },
+                    importHtmlAttributes: {},
                     htmlSelfClose: true,
                     children: []
                   },
@@ -146,6 +157,7 @@ describe(`HtmlToJsonConverterService`, () => {
                       src: `image2.png`,
                       alt: `Image 2`
                     },
+                    importHtmlAttributes: {},
                     htmlSelfClose: true,
                     children: []
                   }

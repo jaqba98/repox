@@ -11,6 +11,7 @@ export interface HtmlJsonAttributeModel {
 export interface HtmlJsonModel {
   children: HtmlJsonModel[];
   htmlAttributes: HtmlJsonAttributeModel;
+  importHtmlAttributes: HtmlJsonAttributeModel;
   htmlName: string;
   htmlSelfClose: boolean;
   htmlType: HtmlTypeEnum;
