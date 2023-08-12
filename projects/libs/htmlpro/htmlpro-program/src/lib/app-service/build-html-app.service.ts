@@ -23,6 +23,7 @@ import {
   HtmlJsonCorrectTypeParserService
 } from "../dom-service/parser/html-json-correct-type-parser.service";
 import cloneDeep from "lodash/cloneDeep";
+import { clone } from "lodash";
 
 @singleton()
 /**
@@ -35,8 +36,8 @@ export class BuildHtmlAppService {
     private readonly htmlToJson: HtmlToJsonConverterService,
     private readonly importParser: HtmlJsonImportParserService,
     private readonly correctType: HtmlJsonCorrectTypeParserService,
-    private readonly pathUtils: PathUtilsService,
     private readonly loopParser: HtmlJsonLoopParserService,
+    private readonly pathUtils: PathUtilsService,
     private readonly jsonToHtml: JsonToHtmlConverterService,
     private readonly valueParser: HtmlJsonValueParserService
   ) {
@@ -64,12 +65,12 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         htmlJsonCorrectType: this.correctType.parse(cloneDeep(html.htmlJsonImport))
+      }))
+      .map(html => ({
+        ...html,
+        htmlJsonLoop: this.loopParser.parse(cloneDeep(html.htmlJsonCorrectType))
       }));
     console.log(result);
-    // .map(html => ({
-    //   ...html,
-    //   htmlJsonParsed: this.loopParser.parse(html.htmlJsonParsed)
-    // }))
     // .map(html => ({
     //   ...html,
     //   htmlJsonParsed: this.valueParser.parse(html.htmlJsonParsed)

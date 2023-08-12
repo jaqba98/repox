@@ -1,65 +1,54 @@
 import { singleton } from "tsyringe";
-import type { HtmlJsonModel } from "../../model/html-json.model";
+import type {
+  HtmlJsonModel,
+  HtmlJsonAttributeModel
+} from "../../model/html-json.model";
 import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
-import { HtmlJsonAttributeModel } from "../../model/html-json.model";
+import { TypeUtilsService } from "@lib/utils";
 
 @singleton()
 /**
  * The service is responsible for parse html json loops.
  */
 export class HtmlJsonLoopParserService {
-  parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
-    return htmlJson.map(html => this.parseChild(html, {})).flat();
+  private loopHtmlAttributes: HtmlJsonAttributeModel = {};
+
+  constructor(private readonly typeUtils: TypeUtilsService) {
   }
 
-  private parseChild(
-    htmlJson: HtmlJsonModel, parentAttributes: HtmlJsonAttributeModel
-  ): HtmlJsonModel[] {
-    const htmlJsonResult = this.parseLoop(htmlJson, parentAttributes);
-    return htmlJsonResult.map(result => ({
-      ...result,
-      children: result.children
-        .map(child => this.parseChild(
-          child, { ...parentAttributes, ...result.htmlAttributes }
-        )).flat()
+  parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
+    return htmlJson
+      .map(html => this.parseChild(html))
+      .flat();
+  }
+
+  private parseChild(htmlJson: HtmlJsonModel): HtmlJsonModel[] {
+    const htmlJsonLoop = this.parseLoop(htmlJson);
+    return htmlJsonLoop.map(htmlJsonImportLoop => ({
+      ...htmlJsonImportLoop,
+      children: htmlJsonImportLoop.children
+        .map(child => this.parseChild(child))
+        .flat()
     }));
   }
 
-  private parseLoop(
-    htmlJson: HtmlJsonModel, parentAttributes: HtmlJsonAttributeModel
-  ): HtmlJsonModel[] {
-    let loop: any = htmlJson.htmlAttributes[
+  private parseLoop(htmlJson: HtmlJsonModel): HtmlJsonModel[] {
+    const loop = htmlJson.htmlAttributes[
       HtmlAttributesEnum.dataLoop
     ];
     if (loop === undefined) return [htmlJson];
-    for (const attribute in parentAttributes) {
-      if (!new RegExp(`{{\\s*${attribute}\\s*}}`, `gm`).test(loop)) {
-        continue;
-      }
-      loop = parentAttributes[attribute];
-      break;
+    if (this.typeUtils.valueIsString(loop)) {
+      throw new Error(`Dupa`);
     }
-    if (typeof loop === `string`) {
-      const loopValues = JSON.parse(loop.replaceAll(`'`, `"`));
-      if (!isNaN(Number(loopValues))) {
-        return Array.from({ length: Number(loop) }, () => htmlJson);
-      }
-      if (typeof loopValues === `object`) {
-        return loopValues
-          .map((loopValue: any) => ({
-            ...htmlJson,
-            htmlAttributes: { ...htmlJson.htmlAttributes, ...loopValue }
-          }));
-      }
-      return [];
-    }
-    if (typeof loop === `object`) {
-      return loop
-        .map((loopValue: any) => ({
-          ...htmlJson,
-          htmlAttributes: { ...htmlJson.htmlAttributes, ...loopValue }
-        }));
-    }
-    return [];
+    return loop.map((loopItem: any) => {
+      this.loopHtmlAttributes = loopItem;
+      return {
+        ...htmlJson,
+        htmlAttributes: {
+          ...htmlJson.htmlAttributes,
+          ...loopItem
+        }
+      };
+    });
   }
 }

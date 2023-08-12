@@ -5,7 +5,7 @@ import type { HtmlTypeEnum } from "../enum/html-type.enum";
  */
 
 export interface HtmlJsonAttributeModel {
-  [attribute: string]: string;
+  [attribute: string]: any;
 }
 
 export interface HtmlJsonModel {

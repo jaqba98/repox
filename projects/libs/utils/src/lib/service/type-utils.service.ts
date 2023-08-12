@@ -17,4 +17,8 @@ export class TypeUtilsService {
   valueIsNumber(value: string): boolean {
     return !isNaN(Number(value));
   }
+
+  valueIsString(value: any): boolean {
+    return typeof value === `string`;
+  }
 }

@@ -9,7 +9,6 @@ import { FileUtilsService } from "@lib/utils";
 import {
   HtmlToJsonConverterService
 } from "../converter/html-to-json-converter.service";
-import cloneDeep from "lodash/cloneDeep";
 import { HtmlTypeEnum } from "../../enum/html-type.enum";
 
 @singleton()
@@ -47,7 +46,7 @@ export class HtmlJsonImportParserService {
     this.parseContent(htmlJson);
     const alias = htmlJson.htmlAttributes[
       HtmlAttributesEnum.dataImport
-      ];
+    ];
     if (alias === undefined) return [htmlJson];
     this.importHtmlAttributes = htmlJson.htmlAttributes;
     const component = this.htmlProDomainStore.getComponent(alias);
