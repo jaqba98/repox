@@ -9,12 +9,16 @@ import { FileUtilsService } from "@lib/utils";
 import {
   HtmlToJsonConverterService
 } from "../converter/html-to-json-converter.service";
+import cloneDeep from "lodash/cloneDeep";
+import { HtmlTypeEnum } from "../../enum/html-type.enum";
 
 @singleton()
 /**
  * The service is responsible for parse html json imports.
  */
 export class HtmlJsonImportParserService {
+  private importHtmlAttributes: HtmlJsonAttributeModel = {};
+
   constructor(
     private readonly htmlProDomainStore: HtmlProDomainStoreService,
     private readonly fileUtils: FileUtilsService,
@@ -39,16 +43,46 @@ export class HtmlJsonImportParserService {
   }
 
   private parseImport(htmlJson: HtmlJsonModel): HtmlJsonModel[] {
+    this.parseAttributes(htmlJson);
+    this.parseContent(htmlJson);
     const alias = htmlJson.htmlAttributes[
       HtmlAttributesEnum.dataImport
-    ];
+      ];
     if (alias === undefined) return [htmlJson];
+    this.importHtmlAttributes = htmlJson.htmlAttributes;
     const component = this.htmlProDomainStore.getComponent(alias);
     const htmlFileContent = this.fileUtils.readHtmlFile(
       component.templateUrl
     );
-    return this.htmlConverter
-      .htmlToJson(htmlFileContent)
-      .map(newHtml => ({ ...newHtml }));
+    return this.htmlConverter.htmlToJson(htmlFileContent);
+  }
+
+  private parseAttributes(htmlJson: HtmlJsonModel): void {
+    if (htmlJson.htmlType === HtmlTypeEnum.tagContent) {
+      return;
+    }
+    for (const importHtmlAttribute in this.importHtmlAttributes) {
+      for (const htmlAttribute in htmlJson.htmlAttributes) {
+        // eslint-disable-next-line no-useless-escape
+        const pattern: string = `{{\s*${importHtmlAttribute}\s*}}`;
+        if (new RegExp(pattern, `g`).test(htmlJson.htmlAttributes[htmlAttribute])) {
+          htmlJson.htmlAttributes[htmlAttribute] = this.importHtmlAttributes[importHtmlAttribute];
+        }
+      }
+    }
+  }
+
+  private parseContent(htmlJson: HtmlJsonModel): void {
+    if (htmlJson.htmlType !== HtmlTypeEnum.tagContent) {
+      return;
+    }
+    for (const importHtmlAttribute in this.importHtmlAttributes) {
+      // eslint-disable-next-line no-useless-escape
+      const pattern: string = `{{\s*${importHtmlAttribute}\s*}}`;
+      htmlJson.htmlBase = htmlJson.htmlBase.replaceAll(
+        new RegExp(pattern, `gm`),
+        this.importHtmlAttributes[importHtmlAttribute]
+      );
+    }
   }
 }
