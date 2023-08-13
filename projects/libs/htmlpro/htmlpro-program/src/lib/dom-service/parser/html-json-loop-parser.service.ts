@@ -45,6 +45,8 @@ export class HtmlJsonLoopParserService {
       htmlJson: HtmlJsonModel;
       loopHtmlAttributes: HtmlJsonAttributeModel;
     }> {
+    this.parseAttributes(htmlJson, loopHtmlAttributes);
+    this.parseContent(htmlJson, loopHtmlAttributes);
     let loop = htmlJson.htmlAttributes[
       HtmlAttributesEnum.dataLoop
     ];
@@ -52,7 +54,6 @@ export class HtmlJsonLoopParserService {
       return [{ htmlJson, loopHtmlAttributes }];
     }
     if (this.typeUtils.valueIsString(loop)) {
-      this.parseAttributes(htmlJson, loopHtmlAttributes);
       loop = htmlJson.htmlAttributes[HtmlAttributesEnum.dataLoop];
     }
     return loop.map((loopItem: any) => ({
@@ -75,6 +76,23 @@ export class HtmlJsonLoopParserService {
           htmlJson.htmlAttributes[htmlAttribute] = loopHtmlAttributes[loopHtmlAttribute];
         }
       }
+    }
+  }
+
+  private parseContent(
+    htmlJson: HtmlJsonModel,
+    loopHtmlAttributes: HtmlJsonAttributeModel
+  ): void {
+    if (htmlJson.htmlType !== HtmlTypeEnum.tagContent) {
+      return;
+    }
+    for (const loopHtmlAttribute in loopHtmlAttributes) {
+      // eslint-disable-next-line no-useless-escape
+      const pattern: string = `{{\s*${loopHtmlAttribute}\s*}}`;
+      htmlJson.htmlBase = htmlJson.htmlBase.replaceAll(
+        new RegExp(pattern, `gm`),
+        loopHtmlAttributes[loopHtmlAttribute]
+      );
     }
   }
 }
