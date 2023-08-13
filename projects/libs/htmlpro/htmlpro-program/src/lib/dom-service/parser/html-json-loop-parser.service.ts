@@ -6,6 +6,7 @@ import type {
 import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
 import { TypeUtilsService } from "@lib/utils";
 import { HtmlTypeEnum } from "../../enum/html-type.enum";
+import cloneDeep from "lodash/cloneDeep";
 
 @singleton()
 /**
@@ -17,7 +18,7 @@ export class HtmlJsonLoopParserService {
 
   parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
     return htmlJson
-      .map(html => this.parseChild(html, {}))
+      .map(html => this.parseChild(cloneDeep(html), {}))
       .flat();
   }
 
@@ -31,7 +32,7 @@ export class HtmlJsonLoopParserService {
         ...htmlJsonLoopItem.htmlJson,
         children: htmlJsonLoopItem.htmlJson.children
           .map(child => this.parseChild(
-            child, htmlJsonLoopItem.loopHtmlAttributes
+            cloneDeep(child), cloneDeep(htmlJsonLoopItem.loopHtmlAttributes)
           ))
           .flat()
       };
@@ -47,14 +48,11 @@ export class HtmlJsonLoopParserService {
     }> {
     this.parseAttributes(htmlJson, loopHtmlAttributes);
     this.parseContent(htmlJson, loopHtmlAttributes);
-    let loop = htmlJson.htmlAttributes[
+    const loop = htmlJson.htmlAttributes[
       HtmlAttributesEnum.dataLoop
     ];
     if (loop === undefined) {
       return [{ htmlJson, loopHtmlAttributes }];
-    }
-    if (this.typeUtils.valueIsString(loop)) {
-      loop = htmlJson.htmlAttributes[HtmlAttributesEnum.dataLoop];
     }
     return loop.map((loopItem: any) => ({
       htmlJson, loopHtmlAttributes: loopItem

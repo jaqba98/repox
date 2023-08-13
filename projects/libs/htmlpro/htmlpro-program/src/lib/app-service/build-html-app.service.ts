@@ -46,7 +46,7 @@ export class BuildHtmlAppService {
   run(
     inputPath: string, outputPath: string
   ): boolean {
-    // todo: Fix the method
+    // todo: Refactor the build html process
     this.folderUtils.createFolder(outputPath);
     const result = this.fileUtils.readAllHtmlFiles(inputPath)
       .map(htmlFilePath => ({ htmlFilePath }))
