@@ -78,10 +78,4 @@ export class FileUtilsService {
   writeJsonFile<T>(path: string, content: T): void {
     writeFileSync(path, JSON.stringify(content, null, 2));
   }
-
-  readHtmlFile (htmlFile: string): string {
-    return this.readTextFile(htmlFile)
-      .replaceAll(/\r\n/g, EMPTY_STRING)
-      .replaceAll(/\n/g, EMPTY_STRING);
-  }
 }

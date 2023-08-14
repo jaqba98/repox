@@ -14,7 +14,7 @@ const htmlExample = `<DOCTYPE html>
 </head>
 <body>
     <!-- Simple comment -->
-    <h1>Hello Example</h1>
+    <h1 class='logo'>Hello Example</h1>
 <!--    <div>-->
 <!--        <p>Lorem ipsum 1</p>-->
 <!--        <p>Lorem ipsum 2</p>-->
@@ -27,6 +27,7 @@ const htmlExample = `<DOCTYPE html>
         <p>Lorem ipsum 3</p>
     </div>
 -->
+    <div data-items="[{'id':'1'},{'id':'2'},{'id':'3'}]"></div>
     <div>
         <img src="image1.png" alt="Image 1">
         <img src="image2.png" alt="Image 2">
@@ -114,10 +115,12 @@ describe(`HtmlToJsonConverterService`, () => {
             htmlSelfClose: false,
             children: [
               {
-                htmlBase: `<h1>`,
+                htmlBase: `<h1 class='logo'>`,
                 htmlType: HtmlTypeEnum.tagOpen,
                 htmlName: `h1`,
-                htmlAttributes: {},
+                htmlAttributes: {
+                  class: `logo`
+                },
                 htmlSelfClose: false,
                 children: [
                   {
@@ -129,6 +132,16 @@ describe(`HtmlToJsonConverterService`, () => {
                     children: []
                   }
                 ]
+              },
+              {
+                htmlBase: `<div data-items="[{'id':'1'},{'id':'2'},{'id':'3'}]">`,
+                htmlType: HtmlTypeEnum.tagOpen,
+                htmlName: `div`,
+                htmlAttributes: {
+                  "data-items": `[{'id':'1'},{'id':'2'},{'id':'3'}]`
+                },
+                htmlSelfClose: false,
+                children: []
               },
               {
                 htmlBase: `<div>`,

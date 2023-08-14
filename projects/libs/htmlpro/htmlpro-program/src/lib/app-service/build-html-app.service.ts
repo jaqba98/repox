@@ -22,8 +22,6 @@ import {
 import {
   HtmlJsonCorrectTypeParserService
 } from "../dom-service/parser/html-json-correct-type-parser.service";
-import cloneDeep from "lodash/cloneDeep";
-import { clone } from "lodash";
 
 @singleton()
 /**
@@ -46,31 +44,32 @@ export class BuildHtmlAppService {
   run(
     inputPath: string, outputPath: string
   ): boolean {
-    // todo: Refactor the build html process
     this.folderUtils.createFolder(outputPath);
     const result = this.fileUtils.readAllHtmlFiles(inputPath)
       .map(htmlFilePath => ({ htmlFilePath }))
       .map(html => ({
         ...html,
-        htmlFileRead: this.fileUtils.readHtmlFile(cloneDeep(html.htmlFilePath))
-      }))
-      .map(html => ({
-        ...html,
-        htmlJson: this.htmlToJson.htmlToJson(cloneDeep(html.htmlFileRead))
-      }))
-      .map(html => ({
-        ...html,
-        htmlJsonImport: this.importParser.parse(cloneDeep(html.htmlJson))
-      }))
-      .map(html => ({
-        ...html,
-        htmlJsonCorrectType: this.correctType.parse(cloneDeep(html.htmlJsonImport))
-      }))
-      .map(html => ({
-        ...html,
-        htmlJsonLoop: this.loopParser.parse(cloneDeep(html.htmlJsonCorrectType))
+        htmlFileBaseContent: this.fileUtils.readTextFile(
+          html.htmlFilePath
+        )
       }));
-    console.log(result);
+      // todo: Clean the html file base content
+    //   .map(html => ({
+    //     ...html,
+    //     htmlJson: this.htmlToJson.htmlToJson(cloneDeep(html.htmlFileRead))
+    //   }))
+    //   .map(html => ({
+    //     ...html,
+    //     htmlJsonImport: this.importParser.parse(cloneDeep(html.htmlJson))
+    //   }))
+    //   .map(html => ({
+    //     ...html,
+    //     htmlJsonCorrectType: this.correctType.parse(cloneDeep(html.htmlJsonImport))
+    //   }))
+    //   .map(html => ({
+    //     ...html,
+    //     htmlJsonLoop: this.loopParser.parse(cloneDeep(html.htmlJsonCorrectType))
+    //   }));
     // .map(html => ({
     //   ...html,
     //   htmlJsonParsed: this.valueParser.parse(html.htmlJsonParsed)
@@ -92,6 +91,7 @@ export class BuildHtmlAppService {
     // result.forEach(html => {
     //   this.fileUtils.writeTextFile(html.htmlOutput, html.htmlToSave);
     // });
+    console.log(result);
     return true;
   }
 }

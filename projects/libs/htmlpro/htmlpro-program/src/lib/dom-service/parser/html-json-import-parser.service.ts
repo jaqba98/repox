@@ -50,9 +50,10 @@ export class HtmlJsonImportParserService {
     if (alias === undefined) return [htmlJson];
     this.importHtmlAttributes = htmlJson.htmlAttributes;
     const component = this.htmlProDomainStore.getComponent(alias);
-    const htmlFileContent = this.fileUtils.readHtmlFile(
-      component.templateUrl
-    );
+    // const htmlFileContent = this.fileUtils.readHtmlFile(
+    //   component.templateUrl
+    // );
+    const htmlFileContent = component.templateUrl;
     return this.htmlConverter.htmlToJson(htmlFileContent);
   }
 

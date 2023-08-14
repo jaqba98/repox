@@ -12,7 +12,6 @@ import {
 import {
   AliasToCssParserService
 } from "../dom-service/parser/alias-to-css-parser.service";
-import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -32,40 +31,40 @@ export class BuildCssAppService {
   run(
     inputPath: string, outputPath: string
   ): boolean {
-    const htmlFiles = this.fileUtils.readAllHtmlFiles(inputPath)
-      .map(htmlPath => ({ htmlPath }))
-      .map(html => ({
-        ...html,
-        htmlBase: this.fileUtils.readHtmlFile(html.htmlPath)
-      }))
-      .map(html => ({
-        ...html,
-        htmlJson: this.htmlToJson.htmlToJson(html.htmlBase)
-      }))
-      .map(html => ({
-        ...html,
-        parsedHtmlJson: this.htmlJsonImport.parse(html.htmlJson)
-      }))
-      .map(html => ({
-        ...html,
-        aliases: this.aliasParser.parse(html.parsedHtmlJson)
-      }));
-    const componentStyles = htmlFiles
-      .map(htmlFile => htmlFile.aliases)
-      .flat()
-      .reduce((acc: string[], curr: string): string[] =>
-        acc.includes(curr) ? acc : [...acc, curr], []
-      )
-      .map(cssFile => this.aliasToCssParser.parse(cssFile))
-      .join(EMPTY_STRING);
-    const projectStyles = this.fileUtils.readAllCssFiles(inputPath)
-      .map(cssFile => this.fileUtils.readTextFile(cssFile))
-      .join(EMPTY_STRING);
-    const resultStyles = projectStyles.concat(componentStyles);
-    const outputCssFile = this.pathUtils.createPath([
-      outputPath, `style.css`
-    ]);
-    this.fileUtils.writeTextFile(outputCssFile, resultStyles);
+    // const htmlFiles = this.fileUtils.readAllHtmlFiles(inputPath)
+    //   .map(htmlPath => ({ htmlPath }))
+    //   .map(html => ({
+    //     ...html,
+    //     htmlBase: this.fileUtils.readHtmlFile(html.htmlPath)
+    //   }))
+    //   .map(html => ({
+    //     ...html,
+    //     htmlJson: this.htmlToJson.htmlToJson(html.htmlBase)
+    //   }))
+    //   .map(html => ({
+    //     ...html,
+    //     parsedHtmlJson: this.htmlJsonImport.parse(html.htmlJson)
+    //   }))
+    //   .map(html => ({
+    //     ...html,
+    //     aliases: this.aliasParser.parse(html.parsedHtmlJson)
+    //   }));
+    // const componentStyles = htmlFiles
+    //   .map(htmlFile => htmlFile.aliases)
+    //   .flat()
+    //   .reduce((acc: string[], curr: string): string[] =>
+    //     acc.includes(curr) ? acc : [...acc, curr], []
+    //   )
+    //   .map(cssFile => this.aliasToCssParser.parse(cssFile))
+    //   .join(EMPTY_STRING);
+    // const projectStyles = this.fileUtils.readAllCssFiles(inputPath)
+    //   .map(cssFile => this.fileUtils.readTextFile(cssFile))
+    //   .join(EMPTY_STRING);
+    // const resultStyles = projectStyles.concat(componentStyles);
+    // const outputCssFile = this.pathUtils.createPath([
+    //   outputPath, `style.css`
+    // ]);
+    // this.fileUtils.writeTextFile(outputCssFile, resultStyles);
     return true;
   }
 }
