@@ -3,9 +3,7 @@ import { HtmlTypeEnum } from "../../enum/html-type.enum";
 import {
   HtmlSelfCloseTagEnum
 } from "../../enum/html-self-close-tag.enum";
-import type {
-  HtmlJsonModel
-} from "../../model/html-json.model";
+import type { HtmlJsonModel } from "../../model/html-json.model";
 
 @singleton()
 /**
@@ -34,20 +32,15 @@ export class HtmlToJsonConverterService {
       }))
       .map(htmlItem => ({
         ...htmlItem,
-        htmlAttributes: this.getAttributes(htmlItem.htmlBase)
+        htmlAttributes: this.getAttributes(
+          htmlItem.htmlBase, htmlItem.htmlName, htmlItem.htmlType
+        )
       }))
       .map(htmlItem => ({
         ...htmlItem,
         children: []
       }));
     return this.createHierarchy(json);
-  }
-
-  getAttributes(
-    tagBase: string
-  ): HtmlJsonModel["htmlAttributes"] {
-    const pattern = /[^<>\s]+="[^"]+"|[^<>\s]+='[^']+'|[^<>\s]+/gm;
-    return tagBase.match(pattern) ?? [];
   }
 
   private getTagType(htmlBase: string): HtmlTypeEnum {
@@ -63,6 +56,34 @@ export class HtmlToJsonConverterService {
       .trim()
       .replaceAll(/[</>]/g, ``)
       .toLowerCase();
+  }
+
+  private getAttributes(
+    tagBase: string, tagName: string, htmlType: HtmlTypeEnum
+  ): HtmlJsonModel["htmlAttributes"] {
+    if (htmlType !== HtmlTypeEnum.tagOpen) return {};
+    const pattern = /[^<>\s]+="[^"]+"|[^<>\s]+='[^']+'|[^<>\s]+/gm;
+    const attributes = tagBase.match(pattern);
+    if (attributes === null) return {};
+    return attributes
+      .filter((item, index) =>
+        item.toLowerCase() !== tagName.toLowerCase() &&
+        index !== 0
+      )
+      .reduce((
+        acc: HtmlJsonModel["htmlAttributes"], curr: string
+      ): HtmlJsonModel["htmlAttributes"] => {
+        if (curr.includes(`=`)) {
+          const splitCurr = curr.split(`=`);
+          const currKey: string = splitCurr[0];
+          acc[currKey] = splitCurr[1]
+            .replaceAll(/^["']/gm, ``)
+            .replaceAll(/["']$/gm, ``);
+        } else {
+          acc[curr] = true;
+        }
+        return acc;
+      }, {});
   }
 
   private getSelfClose(htmlBase: string, htmlName: string): boolean {

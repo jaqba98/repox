@@ -9,7 +9,7 @@ const htmlExample = `<DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script src="script.js" defer="defer"></script>
+<script src="script.js" defer></script>
 <title>Example</title>
 </head>
 <body>
@@ -45,7 +45,7 @@ describe(`HtmlToJsonConverterService`, () => {
         htmlType: HtmlTypeEnum.tagOpen,
         htmlName: `doctype`,
         htmlAttributes: {
-          html: ``
+          html: true
         },
         htmlSelfClose: true,
         children: []
@@ -77,12 +77,12 @@ describe(`HtmlToJsonConverterService`, () => {
                 children: []
               },
               {
-                htmlBase: `<script src="script.js" defer="defer">`,
+                htmlBase: `<script src="script.js" defer>`,
                 htmlType: HtmlTypeEnum.tagOpen,
                 htmlName: `script`,
                 htmlAttributes: {
                   src: `script.js`,
-                  defer: `defer`
+                  defer: true
                 },
                 htmlSelfClose: false,
                 children: []
@@ -165,43 +165,6 @@ describe(`HtmlToJsonConverterService`, () => {
           }
         ]
       }
-    ]);
-  });
-
-  test(`getAttributes should return correct list`, () => {
-    const service = container.resolve(HtmlToJsonConverterService);
-    const tag = `<div
-        attribute1="value1"
-        attribute2='value1'
-        attribute3=value1
-        attribute4="value1 value2 value3"
-        attribute5='value1 value2 value3'
-        data-attribute_6="value1"
-        data-attribute_7="[
-    { 'id': '1' },
-    { 'id': '2' },
-    { 'id': '3' }
-]"
-        attribite8
-        data-attribite_9
-        data-attribite_10=100
-    >`;
-    expect(service.getAttributes(tag)).toEqual([
-      `div`,
-      `attribute1="value1"`,
-      `attribute2='value1'`,
-      `attribute3=value1`,
-      `attribute4="value1 value2 value3"`,
-      `attribute5='value1 value2 value3'`,
-      `data-attribute_6="value1"`,
-      `data-attribute_7="[
-    { 'id': '1' },
-    { 'id': '2' },
-    { 'id': '3' }
-]"`,
-      `attribite8`,
-      `data-attribite_9`,
-      `data-attribite_10=100`
     ]);
   });
 });
