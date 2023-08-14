@@ -4,7 +4,6 @@ import {
   HtmlSelfCloseTagEnum
 } from "../../enum/html-self-close-tag.enum";
 import type {
-  HtmlJsonAttributeModel,
   HtmlJsonModel
 } from "../../model/html-json.model";
 
@@ -44,6 +43,13 @@ export class HtmlToJsonConverterService {
     return this.createHierarchy(json);
   }
 
+  getAttributes(
+    tagBase: string
+  ): HtmlJsonModel["htmlAttributes"] {
+    const pattern = /[^<>\s]+="[^"]+"|[^<>\s]+='[^']+'|[^<>\s]+/gm;
+    return tagBase.match(pattern) ?? [];
+  }
+
   private getTagType(htmlBase: string): HtmlTypeEnum {
     if (/<\/.*>/g.test(htmlBase)) return HtmlTypeEnum.tagClose;
     if (/<.*>/g.test(htmlBase)) return HtmlTypeEnum.tagOpen;
@@ -55,19 +61,8 @@ export class HtmlToJsonConverterService {
     return htmlBase
       .split(` `)[0]
       .trim()
-      .replaceAll(/[</>]/g, ``);
-  }
-
-  private getAttributes(
-    tagBase: string
-  ): HtmlJsonModel["htmlAttributes"] {
-    const pattern = /(\S+)=([`'"])(.*?)\2/g;
-    const attributes: HtmlJsonAttributeModel = {};
-    let match;
-    while ((match = pattern.exec(tagBase)) !== null) {
-      attributes[match[1]] = match[3];
-    }
-    return attributes;
+      .replaceAll(/[</>]/g, ``)
+      .toLowerCase();
   }
 
   private getSelfClose(htmlBase: string, htmlName: string): boolean {
@@ -98,7 +93,6 @@ export class HtmlToJsonConverterService {
         } else {
           result.push(tag);
         }
-
         if (!tag.htmlSelfClose) {
           stack.push(tag);
         }
