@@ -1,5 +1,4 @@
 import { singleton } from "tsyringe";
-import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -8,9 +7,9 @@ import { EMPTY_STRING } from "@lib/const";
 export class CleanHtmlContentService {
   clean(htmlBaseContent: string): string {
     return htmlBaseContent
-      .replaceAll(/\r\n/gm, EMPTY_STRING)
-      .replaceAll(/\n/gm, EMPTY_STRING)
-      .replaceAll(/<!--.*?-->/gm, EMPTY_STRING)
+      .replaceAll(/\r\n/gm, ` `)
+      .replaceAll(/\n/gm, ` `)
+      .replaceAll(/<!--.*?-->/gm, ` `)
       .replaceAll(/\[\s+{/gm, `[{`)
       .replaceAll(/}\s+]/gm, `}]`)
       .replaceAll(/]\s+}/gm, `]}`)
