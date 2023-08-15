@@ -22,6 +22,9 @@ import {
 import {
   HtmlJsonCorrectTypeParserService
 } from "../dom-service/parser/html-json-correct-type-parser.service";
+import {
+  CleanHtmlContentService
+} from "../dom-service/service/clean-html-content.service";
 
 @singleton()
 /**
@@ -31,6 +34,7 @@ export class BuildHtmlAppService {
   constructor(
     private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
+    private readonly cleanHtmlContent: CleanHtmlContentService,
     private readonly htmlToJson: HtmlToJsonConverterService,
     private readonly importParser: HtmlJsonImportParserService,
     private readonly correctType: HtmlJsonCorrectTypeParserService,
@@ -52,8 +56,13 @@ export class BuildHtmlAppService {
         htmlFileBaseContent: this.fileUtils.readTextFile(
           html.htmlFilePath
         )
+      }))
+      .map(html => ({
+        ...html,
+        htmlFileCleanedContent: this.cleanHtmlContent.clean(
+          html.htmlFileBaseContent
+        )
       }));
-      // todo: Clean the html file base content
     //   .map(html => ({
     //     ...html,
     //     htmlJson: this.htmlToJson.htmlToJson(cloneDeep(html.htmlFileRead))
