@@ -1,5 +1,10 @@
 {
   "components": {
+    "@component/head": {
+      "alias": "@component/head",
+      "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/head/head.html",
+      "styleUrls": []
+    },
     "@component/footer-copyright": {
       "alias": "@component/footer-copyright",
       "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/footer-copyright/footer-copyright.html",
