@@ -1,9 +1,5 @@
 import { singleton } from "tsyringe";
-import {
-  FileUtilsService,
-  FolderUtilsService,
-  PathUtilsService
-} from "@lib/utils";
+import { FileUtilsService, FolderUtilsService } from "@lib/utils";
 import {
   HtmlToJsonConverterService
 } from "../dom-service/converter/html-to-json-converter.service";
@@ -16,9 +12,6 @@ import {
 import {
   JsonToHtmlConverterService
 } from "../dom-service/converter/json-to-html-converter.service";
-import {
-  HtmlJsonValueParserService
-} from "../dom-service/parser/html-json-value-parser.service";
 import {
   HtmlJsonCorrectTypeParserService
 } from "../dom-service/parser/html-json-correct-type-parser.service";
@@ -40,9 +33,7 @@ export class BuildHtmlAppService {
     private readonly importParser: HtmlJsonImportParserService,
     private readonly correctType: HtmlJsonCorrectTypeParserService,
     private readonly loopParser: HtmlJsonLoopParserService,
-    private readonly pathUtils: PathUtilsService,
-    private readonly jsonToHtml: JsonToHtmlConverterService,
-    private readonly valueParser: HtmlJsonValueParserService
+    private readonly jsonToHtml: JsonToHtmlConverterService
   ) {
   }
 
@@ -91,11 +82,11 @@ export class BuildHtmlAppService {
         htmlToSave: this.jsonToHtml.parse(
           cloneDeep(html.htmlJsonLoop)
         )
+      }))
+      .map(html => ({
+        ...html,
+        htmlFileName: this.fileUtils.getFileName(html.htmlFilePath)
       }));
-    // .map(html => ({
-    //   ...html,
-    //   htmlFileName: this.fileUtils.getFileName(html.htmlPath)
-    // }))
     // .map(html => ({
     //   ...html,
     //   htmlOutput: this.pathUtils.createPath(

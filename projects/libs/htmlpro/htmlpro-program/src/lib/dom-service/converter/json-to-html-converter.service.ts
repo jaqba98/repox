@@ -1,6 +1,7 @@
 import { singleton } from "tsyringe";
 import type { HtmlJsonModel } from "../../model/html-json.model";
 import { HtmlTypeEnum } from "../../enum/html-type.enum";
+import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
 
 @singleton()
 /**
@@ -26,6 +27,11 @@ export class JsonToHtmlConverterService {
     result += `<${htmlJson.htmlName}`;
     for (const attr in htmlJson.htmlAttributes) {
       if (htmlJson.htmlBase.includes(attr)) {
+        if (Object.values(HtmlAttributesEnum).includes(
+          attr as HtmlAttributesEnum
+        )) {
+          continue;
+        }
         if (typeof htmlJson.htmlAttributes[attr] === `boolean`) {
           result += ` ${attr}`;
         } else {
