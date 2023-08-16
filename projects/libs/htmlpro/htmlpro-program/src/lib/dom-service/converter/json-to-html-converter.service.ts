@@ -7,7 +7,7 @@ import { HtmlTypeEnum } from "../../enum/html-type.enum";
  * The service is responsible for convert json to html.
  */
 export class JsonToHtmlConverterService {
-  jsonToHtml(htmlJson: HtmlJsonModel[]): string {
+  parse(htmlJson: HtmlJsonModel[]): string {
     return htmlJson
       .map(html => this.parseChild(html))
       .join(``);
@@ -26,7 +26,11 @@ export class JsonToHtmlConverterService {
     result += `<${htmlJson.htmlName}`;
     for (const attr in htmlJson.htmlAttributes) {
       if (htmlJson.htmlBase.includes(attr)) {
-        result += ` ${attr}="${htmlJson.htmlAttributes[attr]}"`;
+        if (typeof htmlJson.htmlAttributes[attr] === `boolean`) {
+          result += ` ${attr}`;
+        } else {
+          result += ` ${attr}="${htmlJson.htmlAttributes[attr]}"`;
+        }
       }
     }
     result += `>`;

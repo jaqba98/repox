@@ -33,6 +33,17 @@ const jsonExample: HtmlJsonModel[] = [
             children: []
           },
           {
+            htmlBase: `<script src="script.js" defer>`,
+            htmlType: HtmlTypeEnum.tagOpen,
+            htmlName: `script`,
+            htmlAttributes: {
+              src: `script.js`,
+              defer: true
+            },
+            htmlSelfClose: false,
+            children: []
+          },
+          {
             htmlBase: `<title>`,
             htmlType: HtmlTypeEnum.tagOpen,
             htmlName: `title`,
@@ -115,6 +126,6 @@ const jsonExample: HtmlJsonModel[] = [
 describe(`JsonToHtmlConverterService`, () => {
   const service = container.resolve(JsonToHtmlConverterService);
   test(`should be correct when correct json content`, () => {
-    expect(service.jsonToHtml(jsonExample)).toEqual<string>(`<html lang="en"><head><meta charset="utf-8"><title>Example</title></head><body><h1>Hello Example</h1><div><img src="image1.png" alt="Image 1"><img src="image2.png" alt="Image 2"></div></body></html>`);
+    expect(service.parse(jsonExample)).toEqual<string>(`<html lang="en"><head><meta charset="utf-8"><script src="script.js" defer></script><title>Example</title></head><body><h1>Hello Example</h1><div><img src="image1.png" alt="Image 1"><img src="image2.png" alt="Image 2"></div></body></html>`);
   });
 });

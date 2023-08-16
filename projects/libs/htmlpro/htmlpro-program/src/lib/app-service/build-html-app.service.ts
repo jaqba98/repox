@@ -85,15 +85,13 @@ export class BuildHtmlAppService {
         htmlJsonLoop: this.loopParser.parse(
           cloneDeep(html.htmlJsonCorrectType)
         )
+      }))
+      .map(html => ({
+        ...html,
+        htmlToSave: this.jsonToHtml.parse(
+          cloneDeep(html.htmlJsonLoop)
+        )
       }));
-    // .map(html => ({
-    //   ...html,
-    //   htmlJsonParsed: this.valueParser.parse(html.htmlJsonParsed)
-    // }))
-    // .map(html => ({
-    //   ...html,
-    //   htmlToSave: this.jsonToHtml.jsonToHtml(html.htmlJsonParsed)
-    // }))
     // .map(html => ({
     //   ...html,
     //   htmlFileName: this.fileUtils.getFileName(html.htmlPath)
