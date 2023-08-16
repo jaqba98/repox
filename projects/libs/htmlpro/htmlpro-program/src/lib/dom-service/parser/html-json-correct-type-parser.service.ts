@@ -1,6 +1,7 @@
 import { singleton } from "tsyringe";
-import type { HtmlJsonModel } from "../../model/html-json.model";
 import { TypeUtilsService } from "@lib/utils";
+import type { HtmlJsonModel } from "../../model/html-json.model";
+import cloneDeep from "lodash/cloneDeep";
 
 @singleton()
 /**
@@ -12,7 +13,9 @@ export class HtmlJsonCorrectTypeParserService {
   }
 
   parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
-    return htmlJson.map(html => this.parseChild(html)).flat();
+    return htmlJson
+      .map(html => this.parseChild(cloneDeep(html)))
+      .flat();
   }
 
   private parseChild(htmlJson: HtmlJsonModel): HtmlJsonModel[] {
@@ -20,13 +23,12 @@ export class HtmlJsonCorrectTypeParserService {
     return htmlJsonCorrectType.map(htmlJsonCorrectTypeResult => ({
       ...htmlJsonCorrectTypeResult,
       children: htmlJsonCorrectTypeResult.children.map(
-        child => this.parseChild(child)
+        child => this.parseChild(cloneDeep(child))
       ).flat()
     }));
   }
 
   private parseCorrectType(htmlJson: HtmlJsonModel): HtmlJsonModel[] {
-    // Process htmlAttributes
     for (const attribute in htmlJson.htmlAttributes) {
       htmlJson.htmlAttributes[attribute] = this.parseValue(
         htmlJson.htmlAttributes[attribute]
@@ -35,7 +37,11 @@ export class HtmlJsonCorrectTypeParserService {
     return [htmlJson];
   }
 
-  private parseValue(baseValue: string): any {
+  private parseValue(baseValue: any): any {
+    // Parse to boolean
+    if (typeof baseValue === `boolean`) {
+      return Boolean(baseValue);
+    }
     // Parse to object
     const parsedValue = baseValue.replaceAll(`'`, `"`);
     if (this.typeUtils.valueIsObject(parsedValue)) {

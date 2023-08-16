@@ -73,11 +73,13 @@ export class BuildHtmlAppService {
         htmlJsonImport: this.importParser.parse(
           cloneDeep(html.htmlJson)
         )
+      }))
+      .map(html => ({
+        ...html,
+        htmlJsonCorrectType: this.correctType.parse(
+          cloneDeep(html.htmlJsonImport)
+        )
       }));
-    //   .map(html => ({
-    //     ...html,
-    //     htmlJsonCorrectType: this.correctType.parse(cloneDeep(html.htmlJsonImport))
-    //   }))
     //   .map(html => ({
     //     ...html,
     //     htmlJsonLoop: this.loopParser.parse(cloneDeep(html.htmlJsonCorrectType))
