@@ -54,7 +54,7 @@ export class HtmlJsonImportParserService {
     //   component.templateUrl
     // );
     const htmlFileContent = component.templateUrl;
-    return this.htmlConverter.htmlToJson(htmlFileContent);
+    return this.htmlConverter.parse(htmlFileContent);
   }
 
   private parseAttributes(htmlJson: HtmlJsonModel): void {

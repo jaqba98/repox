@@ -10,9 +10,8 @@ import type { HtmlJsonModel } from "../../model/html-json.model";
  * The service is responsible for convert html to json.
  */
 export class HtmlToJsonConverterService {
-  htmlToJson(html: string): HtmlJsonModel[] {
+  parse(html: string): HtmlJsonModel[] {
     const json: HtmlJsonModel[] = html
-      .replaceAll(/<!--[\s\S]*?-->/gm, ``)
       .split(/(?=<)|(?<=>)/)
       .map(htmlItem => htmlItem.trim())
       .filter(htmlItem => htmlItem !== ``)

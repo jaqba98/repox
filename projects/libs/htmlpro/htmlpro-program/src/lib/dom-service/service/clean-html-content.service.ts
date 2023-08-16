@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import * as htmlMinifier from "html-minifier";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -7,9 +7,25 @@ import * as htmlMinifier from "html-minifier";
  */
 export class CleanHtmlContentService {
   clean(htmlBaseContent: string): string {
-    return htmlMinifier.minify(htmlBaseContent, {
-      collapseWhitespace: true,
-      removeComments: true
-    });
+    return htmlBaseContent
+      .replaceAll(/\r\n/gm, EMPTY_STRING)
+      .replaceAll(/\n/gm, EMPTY_STRING)
+      .replaceAll(/<!--.*?-->/gm, EMPTY_STRING)
+      .replaceAll(/\[\s+{/gm, `[{`)
+      .replaceAll(/}\s+]/gm, `}]`)
+      .replaceAll(/]\s+}/gm, `]}`)
+      .replaceAll(/,\s+{/gm, `,{`)
+      .replaceAll(/},\s+{/gm, `},{`)
+      .replaceAll(/{\s+'/gm, `{'`)
+      .replaceAll(/{\s+"/gm, `{"`)
+      .replaceAll(/,\s+'/gm, `,'`)
+      .replaceAll(/,\s+"/gm, `,"`)
+      .replaceAll(/{\s+'/gm, `{'`)
+      .replaceAll(/{\s+"/gm, `{"`)
+      .replaceAll(/>\s+</gm, `><`)
+      .replaceAll(/>\s+/gm, `>`)
+      .replaceAll(/\s+</gm, `<`)
+      .replaceAll(/"\s+/gm, `" `)
+      .replaceAll(/'\s+/gm, `" `);
   }
 }

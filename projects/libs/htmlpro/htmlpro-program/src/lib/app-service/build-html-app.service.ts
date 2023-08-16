@@ -62,11 +62,11 @@ export class BuildHtmlAppService {
         htmlFileCleanedContent: this.cleanHtmlContent.clean(
           html.htmlFileBaseContent
         )
+      }))
+      .map(html => ({
+        ...html,
+        htmlJson: this.htmlToJson.parse(html.htmlFileCleanedContent)
       }));
-    //   .map(html => ({
-    //     ...html,
-    //     htmlJson: this.htmlToJson.htmlToJson(cloneDeep(html.htmlFileRead))
-    //   }))
     //   .map(html => ({
     //     ...html,
     //     htmlJsonImport: this.importParser.parse(cloneDeep(html.htmlJson))

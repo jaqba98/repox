@@ -2,7 +2,7 @@
  * The enum contains all self close tags.
  */
 export enum HtmlSelfCloseTagEnum {
-  doctype = `doctype`,
+  doctype = `!doctype`,
   area = `area`,
   base = `base`,
   br = `br`,

@@ -4,8 +4,11 @@ import {
 } from "./html-to-json-converter.service";
 import type { HtmlJsonModel } from "../../model/html-json.model";
 import { HtmlTypeEnum } from "../../enum/html-type.enum";
+import {
+  CleanHtmlContentService
+} from "../service/clean-html-content.service";
 
-const htmlExample = `<DOCTYPE html>
+const htmlExample = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -38,13 +41,15 @@ const htmlExample = `<DOCTYPE html>
 `;
 
 describe(`HtmlToJsonConverterService`, () => {
+  const cleanHtmlContent = container.resolve(CleanHtmlContentService);
   const service = container.resolve(HtmlToJsonConverterService);
-  test(`should be correct when correct html content`, () => {
-    expect(service.htmlToJson(htmlExample)).toEqual<HtmlJsonModel[]>([
+  test(`should be correct when correct html content`, (): void => {
+    const cleanedHtmlExample = cleanHtmlContent.clean(htmlExample);
+    expect(service.parse(cleanedHtmlExample)).toEqual<HtmlJsonModel[]>([
       {
-        htmlBase: `<DOCTYPE html>`,
+        htmlBase: `<!DOCTYPE html>`,
         htmlType: HtmlTypeEnum.tagOpen,
-        htmlName: `doctype`,
+        htmlName: `!doctype`,
         htmlAttributes: {
           html: true
         },
