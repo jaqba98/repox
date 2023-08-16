@@ -25,6 +25,7 @@ import {
 import {
   CleanHtmlContentService
 } from "../dom-service/service/clean-html-content.service";
+import cloneDeep from "lodash/cloneDeep";
 
 @singleton()
 /**
@@ -66,11 +67,13 @@ export class BuildHtmlAppService {
       .map(html => ({
         ...html,
         htmlJson: this.htmlToJson.parse(html.htmlFileCleanedContent)
+      }))
+      .map(html => ({
+        ...html,
+        htmlJsonImport: this.importParser.parse(
+          cloneDeep(html.htmlJson)
+        )
       }));
-    //   .map(html => ({
-    //     ...html,
-    //     htmlJsonImport: this.importParser.parse(cloneDeep(html.htmlJson))
-    //   }))
     //   .map(html => ({
     //     ...html,
     //     htmlJsonCorrectType: this.correctType.parse(cloneDeep(html.htmlJsonImport))

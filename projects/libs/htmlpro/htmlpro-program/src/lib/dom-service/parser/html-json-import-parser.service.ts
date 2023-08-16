@@ -4,12 +4,16 @@ import type {
   HtmlJsonModel
 } from "../../model/html-json.model";
 import { HtmlProDomainStoreService } from "@lib/htmlpro-workspace";
-import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
-import { FileUtilsService } from "@lib/utils";
 import {
   HtmlToJsonConverterService
 } from "../converter/html-to-json-converter.service";
+import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
 import { HtmlTypeEnum } from "../../enum/html-type.enum";
+import cloneDeep from "lodash/cloneDeep";
+import { FileUtilsService } from "@lib/utils";
+import {
+  CleanHtmlContentService
+} from "../service/clean-html-content.service";
 
 @singleton()
 /**
@@ -20,14 +24,15 @@ export class HtmlJsonImportParserService {
 
   constructor(
     private readonly htmlProDomainStore: HtmlProDomainStoreService,
-    private readonly fileUtils: FileUtilsService,
-    private readonly htmlConverter: HtmlToJsonConverterService
+    private readonly cleanHtmlContent: CleanHtmlContentService,
+    private readonly htmlToJson: HtmlToJsonConverterService,
+    private readonly fileUtils: FileUtilsService
   ) {
   }
 
   parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
     return htmlJson
-      .map(html => this.parseChild(html))
+      .map(html => this.parseChild(cloneDeep(html)))
       .flat();
   }
 
@@ -36,7 +41,7 @@ export class HtmlJsonImportParserService {
     return htmlJsonImport.map(htmlJsonImportResult => ({
       ...htmlJsonImportResult,
       children: htmlJsonImportResult.children
-        .map(child => this.parseChild(child))
+        .map(child => this.parseChild(cloneDeep(child)))
         .flat()
     }));
   }
@@ -44,17 +49,17 @@ export class HtmlJsonImportParserService {
   private parseImport(htmlJson: HtmlJsonModel): HtmlJsonModel[] {
     this.parseAttributes(htmlJson);
     this.parseContent(htmlJson);
-    const alias = htmlJson.htmlAttributes[
-      HtmlAttributesEnum.dataImport
-    ];
+    const alias = htmlJson
+      .htmlAttributes[HtmlAttributesEnum.dataImport];
     if (alias === undefined) return [htmlJson];
     this.importHtmlAttributes = htmlJson.htmlAttributes;
     const component = this.htmlProDomainStore.getComponent(alias);
-    // const htmlFileContent = this.fileUtils.readHtmlFile(
-    //   component.templateUrl
-    // );
-    const htmlFileContent = component.templateUrl;
-    return this.htmlConverter.parse(htmlFileContent);
+    const htmlFileContent = this.fileUtils.readTextFile(
+      component.templateUrl
+    );
+    return this.htmlToJson.parse(
+      this.cleanHtmlContent.clean(htmlFileContent)
+    );
   }
 
   private parseAttributes(htmlJson: HtmlJsonModel): void {
@@ -66,7 +71,8 @@ export class HtmlJsonImportParserService {
         // eslint-disable-next-line no-useless-escape
         const pattern: string = `{{\s*${importHtmlAttribute}\s*}}`;
         if (new RegExp(pattern, `g`).test(htmlJson.htmlAttributes[htmlAttribute])) {
-          htmlJson.htmlAttributes[htmlAttribute] = this.importHtmlAttributes[importHtmlAttribute];
+          htmlJson.htmlAttributes[htmlAttribute] =
+            this.importHtmlAttributes[importHtmlAttribute];
         }
       }
     }
