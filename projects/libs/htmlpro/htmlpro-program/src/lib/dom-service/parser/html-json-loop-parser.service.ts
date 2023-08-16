@@ -3,19 +3,15 @@ import type {
   HtmlJsonAttributeModel,
   HtmlJsonModel
 } from "../../model/html-json.model";
-import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
-import { TypeUtilsService } from "@lib/utils";
-import { HtmlTypeEnum } from "../../enum/html-type.enum";
 import cloneDeep from "lodash/cloneDeep";
+import { HtmlAttributesEnum } from "../../enum/html-attributes.enum";
+import { HtmlTypeEnum } from "../../enum/html-type.enum";
 
 @singleton()
 /**
  * The service is responsible for parse html json loops.
  */
 export class HtmlJsonLoopParserService {
-  constructor(private readonly typeUtils: TypeUtilsService) {
-  }
-
   parse(htmlJson: HtmlJsonModel[]): HtmlJsonModel[] {
     return htmlJson
       .map(html => this.parseChild(cloneDeep(html), {}))
@@ -32,7 +28,8 @@ export class HtmlJsonLoopParserService {
         ...htmlJsonLoopItem.htmlJson,
         children: htmlJsonLoopItem.htmlJson.children
           .map(child => this.parseChild(
-            cloneDeep(child), cloneDeep(htmlJsonLoopItem.loopHtmlAttributes)
+            cloneDeep(child),
+            cloneDeep(htmlJsonLoopItem.loopHtmlAttributes)
           ))
           .flat()
       };
