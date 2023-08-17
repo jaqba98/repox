@@ -3,4 +3,4 @@
  */
 
 export const REPOX_LOGO: string = `REPOX`;
-export const REPOX_VERSION: string = `1.4.11`;
+export const REPOX_VERSION: string = `1.4.12`;
