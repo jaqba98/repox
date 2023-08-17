@@ -1,6 +1,5 @@
 <nav class="top-nav">
-    <img src="{{data-logo-small}}"
-         alt="{{data-logo-small-alt}}"
+    <img src="{{data-logo-small}}" alt="{{data-logo-alt}}"
          class="top-nav-logo">
     <div class="hamburger">
         <div class="hamburger-line hamburger-line-top"></div>
@@ -8,30 +7,8 @@
         <div class="hamburger-line hamburger-line-bottom"></div>
     </div>
     <ul class="top-nav-menu">
-        <li>
-            <a href="{{data-home-href}}" class="top-nav-menu-link">
-                Home
-            </a>
-        </li>
-        <li>
-            <a href="{{data-documentation-href}}" class="top-nav-menu-link">
-                Documentation
-            </a>
-        </li>
-        <li>
-            <a href="{{data-team-href}}" class="top-nav-menu-link">
-                Team
-            </a>
-        </li>
-        <li>
-            <a href="{{data-blog-href}}" class="top-nav-menu-link">
-                Blog
-            </a>
-        </li>
-        <li>
-            <a href="{{data-donate-href}}" class="top-nav-menu-link top-nav-donate-line">
-                Donate
-            </a>
+        <li data-loop="{{data-links}}">
+            <a href="{{href}}" class="top-nav-menu-link">{{value}}</a>
         </li>
     </ul>
 </nav>

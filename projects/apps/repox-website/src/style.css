@@ -1,7 +1,11 @@
 /* variables */
 :root {
-    /* global variables */
-    --global-font-family: 'Lato', sans-serif;
+    /* top-nav */
+    --top-nav-background-color: #272829;
+    --top-nav-hamburger-line-background-color: #D8D9DA;
+    --top-nav-menu-background-color: #D8D9DA;
+    --top-nav-menu-link-color: #272829;
+    --top-nav-menu-link-border-color: #bcc1c5;
 }
 
 /* reset */
@@ -21,7 +25,7 @@ a {
 
 /* general */
 body {
-    font-family: var(--global-font-family);
+    font-family: 'Lato', sans-serif;
 }
 
 @media screen and (max-width: 300px) {

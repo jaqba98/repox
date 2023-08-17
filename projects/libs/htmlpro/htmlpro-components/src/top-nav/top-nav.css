@@ -1,16 +1,21 @@
+/* variables */
+:root {
+    --top-nav-height: 4em;
+}
+
 /* nav mobile */
 .top-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 4em;
-    background-color: #6320EE;
+    height: var(--top-nav-height);
+    background-color: var(--top-nav-background-color);
 }
 
 .top-nav-logo {
-    width: 4em;
-    padding: 0.5em;
+    width: var(--top-nav-height);
+    padding: 0.75em;
 }
 
 .hamburger {
@@ -19,21 +24,21 @@
     align-items: center;
     justify-content: space-around;
     overflow: hidden;
-    width: 4em;
-    height: 4em;
-    padding: 0.5em;
+    width: var(--top-nav-height);
+    height: var(--top-nav-height);
+    padding: 0.75em;
 }
 
 .hamburger-line {
     width: 100%;
-    height: 0.4em;
+    height: 5px;
     border-radius: 1em;
-    background-color: #FFFFFF;
+    background-color: var(--top-nav-hamburger-line-background-color);
     transition: transform 0.25s ease-in-out;
 }
 
 .top-nav-open .hamburger-line-top {
-    transform: translateY(1em) rotate(45deg);
+    transform: translateY(0.85em) rotate(45deg);
 }
 
 .top-nav-open .hamburger-line-middle {
@@ -41,17 +46,17 @@
 }
 
 .top-nav-open .hamburger-line-bottom {
-    transform: translateY(-1em) rotate(-45deg);
+    transform: translateY(-0.85em) rotate(-45deg);
 }
 
 .top-nav-menu {
     position: fixed;
-    top: 4em;
-    height: calc(100vh - 4em);
+    top: var(--top-nav-height);
+    height: calc(100vh - var(--top-nav-height));
     left: 100%;
     width: 100%;
-    background-color: #551ACE;
     overflow-y: auto;
+    background-color: var(--top-nav-menu-background-color);
     transition: left 0.25s ease-in-out;
 }
 
@@ -62,50 +67,6 @@
 .top-nav-menu-link {
     display: block;
     padding: 1em;
-    font-weight: bold;
-    color: #FFFFFF;
-    transition: all 0.25s ease-in-out;
-    outline: none;
-}
-
-/* nav tablet */
-@media screen and (min-width: 768px) {
-    .hamburger {
-        display: none;
-    }
-
-    .top-nav-menu {
-        display: flex;
-        position: relative;
-        top: 0;
-        left: 0;
-        width: auto;
-        height: auto;
-        overflow-y: hidden;
-    }
-
-    .top-nav-menu-link {
-        padding: 0.75em;
-        margin: 0.25em;
-        border-radius: 0.25em;
-        background-color: transparent;
-    }
-
-    .top-nav-menu-link:hover,
-    .top-nav-menu-link:active {
-        color: #FFFFFF;
-        background-color: #340E83;
-    }
-
-    .top-nav-donate-line {
-        color: #340E83;
-        background-color: #FFFFFF;
-    }
-}
-
-/* pc tablet */
-@media screen and (min-width: 1024px) {
-    .top-nav {
-        justify-content: space-around;
-    }
+    color: var(--top-nav-menu-link-color);
+    border-bottom: 1px solid var(--top-nav-menu-link-border-color);
 }
