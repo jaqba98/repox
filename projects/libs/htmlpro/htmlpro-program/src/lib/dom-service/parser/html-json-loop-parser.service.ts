@@ -51,6 +51,8 @@ export class HtmlJsonLoopParserService {
     if (loop === undefined) {
       return [{ htmlJson, loopHtmlAttributes }];
     }
+    this.parseAttributes(htmlJson, loop[0]);
+    this.parseContent(htmlJson, loop[0]);
     return loop.map((loopItem: any) => ({
       htmlJson, loopHtmlAttributes: loopItem
     }));

@@ -12,6 +12,7 @@ const htmlExample = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="script.js" defer></script>
 <title>Example</title>
 </head>
@@ -78,6 +79,17 @@ describe(`HtmlToJsonConverterService`, () => {
                 htmlName: `meta`,
                 htmlAttributes: {
                   charset: `utf-8`
+                },
+                htmlSelfClose: true,
+                children: []
+              },
+              {
+                htmlBase: `<meta name="viewport" content="width=device-width, initial-scale=1.0">`,
+                htmlType: HtmlTypeEnum.tagOpen,
+                htmlName: `meta`,
+                htmlAttributes: {
+                  name: `viewport`,
+                  content: `width=device-width, initial-scale=1.0`
                 },
                 htmlSelfClose: true,
                 children: []

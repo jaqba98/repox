@@ -73,7 +73,7 @@ export class HtmlToJsonConverterService {
         acc: HtmlJsonModel["htmlAttributes"], curr: string
       ): HtmlJsonModel["htmlAttributes"] => {
         if (curr.includes(`=`)) {
-          const splitCurr = curr.split(`=`);
+          const splitCurr = curr.split(/=["']/gm);
           const currKey: string = splitCurr[0];
           acc[currKey] = splitCurr[1]
             .replaceAll(/^["']/gm, ``)

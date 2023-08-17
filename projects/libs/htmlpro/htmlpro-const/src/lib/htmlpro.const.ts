@@ -3,4 +3,4 @@
  */
 
 export const HTML_PRO_LOGO: string = `HTMLPRO`;
-export const HTML_PRO_VERSION: string = `1.1.8`;
+export const HTML_PRO_VERSION: string = `1.1.9`;
