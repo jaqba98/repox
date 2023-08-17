@@ -5,6 +5,13 @@
       "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/head/head.html",
       "styleUrls": []
     },
+    "@component/top-nav": {
+      "alias": "@component/top-nav",
+      "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/top-nav/top-nav.html",
+      "styleUrls": [
+        "projects/libs/htmlpro/htmlpro-components/src/top-nav/top-nav.css"
+      ]
+    },
     "@component/footer-copyright": {
       "alias": "@component/footer-copyright",
       "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/footer-copyright/footer-copyright.html",
@@ -17,13 +24,6 @@
       "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/footer-author/footer-author.html",
       "styleUrls": [
         "projects/libs/htmlpro/htmlpro-components/src/footer-author/footer-author.css"
-      ]
-    },
-    "@component/repox-nav": {
-      "alias": "@component/repox-nav",
-      "templateUrl": "projects/libs/repox/repox-component/src/repox-nav/repox-nav.html",
-      "styleUrls": [
-        "projects/libs/repox/repox-component/src/repox-nav/repox-nav.css"
       ]
     },
     "@component/repox-header": {
