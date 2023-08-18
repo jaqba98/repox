@@ -5,9 +5,9 @@
     align-items: center;
     justify-content: center;
     gap: 2em;
-    padding: 8em 4em 4em 4em;
-    background-color: #6320EE;
-    color: #FFFFFF;
+    padding: 4em;
+    background-color: var(--header-background-color);
+    color: var(--header-color);
 }
 
 .header-motto {
@@ -28,7 +28,7 @@
 }
 
 .header-logo {
-    width: 100%;
+    width: 15em;
 }
 
 .header > p {
@@ -42,26 +42,8 @@
 .header-link {
     display: block;
     font-weight: bold;
-    padding: 0.5em;
+    padding: 1em;
     border-radius: 0.25em;
-    color: #FFFFFF;
-    border: 0.2em solid #FFFFFF;
-    transition: background-color 0.25s ease-in-out,
-                color 0.25s ease-in-out;
-}
-
-.header-link:hover,
-.header-link:focus {
-    color: #6320EE;
-    background-color: #FFFFFF;
-}
-
-@media only screen and (min-width: 768px) {
-    .header-motto {
-        flex-direction: row;
-    }
-
-    .header-logo {
-        width: 15em;
-    }
+    color: var(--header-link-color);
+    border: 1px solid var(--header-link-color);
 }

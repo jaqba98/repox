@@ -6,6 +6,10 @@
     --top-nav-menu-background-color: #D8D9DA;
     --top-nav-menu-link-color: #272829;
     --top-nav-menu-link-border-color: #bcc1c5;
+    /* header */
+    --header-background-color: #272829;
+    --header-color: #D8D9DA;
+    --header-link-color: #D8D9DA;
 }
 
 /* reset */
