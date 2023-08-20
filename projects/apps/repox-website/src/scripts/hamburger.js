@@ -1,8 +1,8 @@
-/** HTML Elements */
+// HTML Element
 const hamburgersEl = document.getElementsByClassName(`hamburger`);
 const navigationsEl = document.getElementsByClassName(`top-nav`);
 
-/** Add events */
+// Add events
 Array.from(hamburgersEl).forEach(hamburgerEl => {
   hamburgerEl.addEventListener(`click`, () => {
     Array.from(navigationsEl).forEach(navigationEl => {

@@ -23,17 +23,30 @@ export class HtmlJsonLoopParserService {
     loopHtmlAttributes: HtmlJsonAttributeModel
   ): HtmlJsonModel[] {
     const htmlJsonLoop = this.parseLoop(htmlJson, loopHtmlAttributes);
-    return htmlJsonLoop.map(htmlJsonLoopItem => {
-      return {
-        ...htmlJsonLoopItem.htmlJson,
-        children: htmlJsonLoopItem.htmlJson.children
-          .map(child => this.parseChild(
-            cloneDeep(child),
-            cloneDeep(htmlJsonLoopItem.loopHtmlAttributes)
-          ))
-          .flat()
-      };
-    });
+    return htmlJsonLoop
+      .map(htmlJsonLoopItem => cloneDeep(htmlJsonLoopItem))
+      .map(htmlJsonLoopItem => {
+        this.parseAttributes(
+          htmlJsonLoopItem.htmlJson,
+          htmlJsonLoopItem.loopHtmlAttributes
+        );
+        this.parseContent(
+          htmlJsonLoopItem.htmlJson,
+          htmlJsonLoopItem.loopHtmlAttributes
+        );
+        return htmlJsonLoopItem;
+      })
+      .map(htmlJsonLoopItem => {
+        return {
+          ...htmlJsonLoopItem.htmlJson,
+          children: htmlJsonLoopItem.htmlJson.children
+            .map(child => this.parseChild(
+              cloneDeep(child),
+              cloneDeep(htmlJsonLoopItem.loopHtmlAttributes)
+            ))
+            .flat()
+        };
+      });
   }
 
   private parseLoop(
@@ -51,8 +64,6 @@ export class HtmlJsonLoopParserService {
     if (loop === undefined) {
       return [{ htmlJson, loopHtmlAttributes }];
     }
-    this.parseAttributes(htmlJson, loop[0]);
-    this.parseContent(htmlJson, loop[0]);
     return loop.map((loopItem: any) => ({
       htmlJson, loopHtmlAttributes: loopItem
     }));
