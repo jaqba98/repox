@@ -45,5 +45,18 @@
     padding: 1em;
     border-radius: 0.25em;
     color: var(--header-link-color);
-    border: 1px solid var(--header-link-color);
+    border: 2px solid var(--header-link-color);
+}
+
+@media only screen and (min-width: 768px) {
+    .header-motto {
+        flex-direction: row;
+    }
+
+    .header-link:active,
+    .header-link:hover {
+        transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out;
+        color: var(--header-background-color);
+        background-color: var(--header-link-color);
+    }
 }
