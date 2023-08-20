@@ -16,7 +16,6 @@
           },
           {
             "input": "projects/apps/repox/package.json",
-            "input": "projects/apps/repox/package.json",
             "output": "dist/repox"
           }
         ]
