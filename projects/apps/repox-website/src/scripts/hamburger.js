@@ -1,12 +1,12 @@
-// HTML Elements
-const hamburgers = document.getElementsByClassName(`hamburger`);
-const navigations = document.getElementsByClassName(`top-nav`);
+/** HTML Elements */
+const hamburgersEl = document.getElementsByClassName(`hamburger`);
+const navigationsEl = document.getElementsByClassName(`top-nav`);
 
-// Add events
-Array.from(hamburgers).forEach(hamburger => {
-  hamburger.addEventListener(`click`, () => {
-    Array.from(navigations).forEach(nav => {
-      nav.classList.toggle(`top-nav-open`);
+/** Add events */
+Array.from(hamburgersEl).forEach(hamburgerEl => {
+  hamburgerEl.addEventListener(`click`, () => {
+    Array.from(navigationsEl).forEach(navigationEl => {
+      navigationEl.classList.toggle(`top-nav-open`);
     });
   });
 });
