@@ -14,6 +14,9 @@
     --statistics-container-background-color: #D8D9DA;
     --statistics-element-h2: #272829BF;
     --statistics-element-p: #272829;
+    /* footer author */
+    --footer-author-background-color: #000000;
+    --footer-author-color: #FFFFFF;
 }
 
 /* reset */
