@@ -1,7 +1,6 @@
 /* statistics mobile */
-
 .statistics-container {
-    background-color: #FFFFFF;
+    background-color: var(--statistics-container-background-color);
 }
 
 .statistics {
@@ -16,14 +15,14 @@
 
 .statistics-element > h2 {
     font-weight: lighter;
-    color: grey;
     margin-bottom: 1em;
+    color: var(--statistics-element-h2);
 }
 
 .statistics-element > p {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: bold;
-    color: #6320EE;
+    color: var(--statistics-element-p);
 }
 
 /* statistics tablet */

@@ -10,6 +10,10 @@
     --header-background-color: #272829;
     --header-color: #D8D9DA;
     --header-link-color: #D8D9DA;
+    /* statistics */
+    --statistics-container-background-color: #D8D9DA;
+    --statistics-element-h2: #272829BF;
+    --statistics-element-p: #272829;
 }
 
 /* reset */
