@@ -1,46 +1,12 @@
 <!doctype html>
 <html lang="en">
-<div data-import="@component/head"
-     data-google-font="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap"
-     data-icon="images/repox-icon.png"
-     data-css="[
-        {'href': 'style.css'}
-     ]"
-     data-js="[
-        {'src': 'scripts/hamburger.js'},
-        {'src': 'scripts/downloads.js'}
-     ]"
-     data-title="Repox: Lightweight monorepo system"></div>
-<body>
-<div data-import="@component/top-nav"
-     data-logo-small="images/repox-logo-small.png"
-     data-logo-alt="Repox top navigation logo"
-     data-links="[
-        {'href': 'index.html', 'value': 'Home'},
-        {'href': 'documentation.html', 'value': 'Documentation'},
-        {'href': 'team.html', 'value': 'Team'},
-        {'href': 'blog.html', 'value': 'Blog'},
-        {'href': 'donate.html', 'value': 'Donate'}
-     ]"></div>
-<main>
-    <div data-import="@component/header"
-         data-header-motto="[
-            {'motto': 'Reuse code.'},
-            {'motto': 'Develop faster.'}
-         ]"
-         data-header-logo-src="images/repox-logo.png"
-         data-header-logo-alt="Repox header logo"
-         data-header-description="Develop all your products with our lightweight monorepo."
-         data-header-link="documentation.html"
-         data-header-link-value="Documentation"></div>
-    <div data-import="@component/statistics"></div>
-    <div data-import="@component/what-is"></div>
-</main>
-<footer>
-    <div data-import="@component/footer-copyright"
-         data-footer-copyright-content="© 2023 Repox. All rights reserved."></div>
-    <div data-import="@component/footer-author"
-         data-footer-author-content="Jakub Olejarczyk"></div>
-</footer>
-</body>
+<import data-import="@component/head"
+        data-google-font-link="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap"
+        data-icon-path="images/repox-icon.png"
+        data-css-paths="[{'path': 'style.css'}]"
+        data-js-paths="[
+            {'path': 'scripts/hamburger.js'},
+            {'path': 'scripts/downloads.js'}
+        ]"
+        data-title="Repox: Lightweight monorepo system"></import>
 </html>
