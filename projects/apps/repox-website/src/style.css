@@ -1,25 +1,13 @@
-/* variables */
+/* application variables */
 :root {
-    /* top-nav */
-    --top-nav-background-color: #272829;
+    /* top nav variables */
+    --top-nav-height: 4em;
+    --top-nav-background-color: #3626A7;
     --top-nav-hamburger-line-background-color: #D8D9DA;
-    --top-nav-menu-background-color: #D8D9DA;
-    --top-nav-menu-link-color: #272829;
-    --top-nav-menu-link-border-color: #bcc1c5;
-    /* header */
-    --header-background-color: #272829;
-    --header-color: #D8D9DA;
-    --header-link-color: #D8D9DA;
-    /* statistics */
-    --statistics-container-background-color: #D8D9DA;
-    --statistics-element-h2: #272829BF;
-    --statistics-element-p: #272829;
-    /* footer copyright */
-    --footer-copyright-background-color: #272829;
-    --footer-copyright-color: #D8D9DA;
-    /* footer author */
-    --footer-author-background-color: #000000;
-    --footer-author-color: #FFFFFF;
+    --top-nav-hamburger-line-animation-speed: 0.25s;
+    --top-nav-menu-background-color: #312296;
+    --top-nav-menu-link-color: #D8D9DA;
+    --top-nav-menu-link-border-color: #FFFFFF33;
 }
 
 /* reset */

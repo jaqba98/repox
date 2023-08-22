@@ -1,9 +1,4 @@
-/* variables */
-:root {
-    --top-nav-height: 4em;
-}
-
-/* nav mobile */
+/* top nav mobile */
 .top-nav {
     display: flex;
     align-items: center;
@@ -15,7 +10,7 @@
 
 .top-nav-logo {
     width: var(--top-nav-height);
-    padding: 0.75em;
+    padding: 0.5em;
 }
 
 .hamburger {
@@ -26,7 +21,7 @@
     overflow: hidden;
     width: var(--top-nav-height);
     height: var(--top-nav-height);
-    padding: 0.75em;
+    padding: 0.5em;
 }
 
 .hamburger-line {
@@ -34,11 +29,11 @@
     height: 5px;
     border-radius: 1em;
     background-color: var(--top-nav-hamburger-line-background-color);
-    transition: transform 0.25s ease-in-out;
+    transition: transform var(--top-nav-hamburger-line-animation-speed) ease-in-out;
 }
 
 .top-nav-open .hamburger-line-top {
-    transform: translateY(0.85em) rotate(45deg);
+    transform: translateY(1em) rotate(45deg);
 }
 
 .top-nav-open .hamburger-line-middle {
@@ -46,7 +41,7 @@
 }
 
 .top-nav-open .hamburger-line-bottom {
-    transform: translateY(-0.85em) rotate(-45deg);
+    transform: translateY(-1em) rotate(-45deg);
 }
 
 .top-nav-menu {
@@ -57,7 +52,7 @@
     width: 100%;
     overflow-y: auto;
     background-color: var(--top-nav-menu-background-color);
-    transition: left 0.25s ease-in-out;
+    transition: left var(--top-nav-hamburger-line-animation-speed) ease-in-out;
 }
 
 .top-nav-open .top-nav-menu {
@@ -66,50 +61,7 @@
 
 .top-nav-menu-link {
     display: block;
-    padding: 1em;
+    padding: 1.5em 1em;
     color: var(--top-nav-menu-link-color);
     border-bottom: 1px solid var(--top-nav-menu-link-border-color);
-}
-
-@media only screen and (min-width: 768px) {
-    .top-nav {
-        justify-content: space-between;
-    }
-
-    .hamburger {
-        display: none;
-    }
-
-    .top-nav-menu {
-        display: flex;
-        gap: 0.5em;
-        position: relative;
-        margin: 0.5em;
-        top: 0;
-        left: 0;
-        width: auto;
-        height: auto;
-        background-color: inherit;
-        transition: none;
-    }
-
-    .top-nav-menu-link {
-        padding: 0.5em 0.75em;
-        border-radius: 0.25em;
-        color: var(--top-nav-menu-background-color);
-        border: 1px solid var(--top-nav-menu-link-border-color);
-        transition: background-color 0.25s ease-in-out;
-    }
-
-    .top-nav-menu-link:focus,
-    .top-nav-menu-link:hover {
-        color: var(--top-nav-menu-link-color);
-        background-color: var(--top-nav-menu-link-border-color);
-    }
-}
-
-@media only screen and (min-width: 1024px) {
-    .top-nav {
-        justify-content: space-around;
-    }
 }
