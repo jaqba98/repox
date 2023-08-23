@@ -3,11 +3,15 @@
     /* top-nav */
     --top-nav-height: 4em;
     --top-nav-background-color: #3626A7;
-    --top-nav-hamburger-line-background-color: #D8D9DA;
+    --top-nav-hamburger-line-background-color: #FFFFFF;
     --top-nav-hamburger-line-animation-speed: 0.25s;
     --top-nav-menu-background-color: #312296;
-    --top-nav-menu-link-color: #D8D9DA;
-    --top-nav-menu-link-border-color: #FFFFFF33;
+    --top-nav-menu-link-background-color: #312296;
+    --top-nav-menu-link-color: #FFFFFF;
+    --top-nav-menu-link-border-color: #FFFFFF30;
+    --top-nav-menu-color-hover: #3626A7;
+    --top-nav-menu-link-background-color-hover: #FFFFFF;
+    --top-nav-menu-link-color-hover: #FFFFFF;
 }
 
 /* reset */
@@ -28,7 +32,6 @@ a {
 /* general */
 body {
     font-family: 'Lato', sans-serif;
-    overflow-x: hidden;
 }
 
 @media screen and (max-width: 300px) {

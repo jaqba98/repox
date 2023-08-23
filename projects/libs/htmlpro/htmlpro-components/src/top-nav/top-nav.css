@@ -1,5 +1,6 @@
 /* top nav mobile */
 .top-nav {
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -45,7 +46,7 @@
 }
 
 .top-nav-menu {
-    position: absolute;
+    position: fixed;
     top: var(--top-nav-height);
     height: calc(100vh - var(--top-nav-height));
     left: 100%;
@@ -64,4 +65,51 @@
     padding: 1.5em 1em;
     color: var(--top-nav-menu-link-color);
     border-bottom: 1px solid var(--top-nav-menu-link-border-color);
+}
+
+/* top nav tablet */
+@media only screen and (min-width: 768px) {
+    .hamburger {
+        display: none;
+    }
+
+    .top-nav-menu {
+        display: flex;
+        gap: 0.5em;
+        margin: 0.5em;
+        position: static;
+        height: auto;
+        left: 0;
+        width: auto;
+        background-color: inherit;
+        transition: none;
+    }
+
+    .top-nav-menu-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1em;
+        border-radius: 5px;
+        color: var(--top-nav-menu-link-color);
+        background-color: var(--top-nav-menu-link-background-color);
+        border: 1px solid var(--top-nav-menu-link-border-color);
+        transition: color var(--top-nav-hamburger-line-animation-speed) ease-in-out,
+                    background-color var(--top-nav-hamburger-line-animation-speed) ease-in-out,
+                    border var(--top-nav-hamburger-line-animation-speed) ease-in-out;
+    }
+
+    .top-nav-menu-link:hover,
+    .top-nav-menu-link:active {
+        color: var(--top-nav-menu-color-hover);
+        background-color: var(--top-nav-menu-link-background-color-hover);
+        border: 1px solid var(--top-nav-menu-link-color-hover);
+    }
+}
+
+/* top nav pc */
+@media only screen and (min-width: 1024px) {
+    .top-nav {
+        justify-content: space-around;
+    }
 }
