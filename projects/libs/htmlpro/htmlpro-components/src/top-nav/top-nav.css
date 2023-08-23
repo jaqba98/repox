@@ -45,7 +45,7 @@
 }
 
 .top-nav-menu {
-    position: fixed;
+    position: absolute;
     top: var(--top-nav-height);
     height: calc(100vh - var(--top-nav-height));
     left: 100%;
