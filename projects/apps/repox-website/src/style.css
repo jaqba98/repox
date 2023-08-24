@@ -14,34 +14,7 @@
     --top-nav-menu-link-color-hover: #FFFFFF;
 }
 
-/* reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-ul, ol {
-   list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
 /* general */
 body {
     font-family: 'Lato', sans-serif;
-}
-
-@media screen and (max-width: 300px) {
-    body {
-        font-size: 5vw;
-    }
-}
-
-@media screen and (min-width: 2560px) {
-    body {
-        font-size: 125%;
-    }
 }

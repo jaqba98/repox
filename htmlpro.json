@@ -3,7 +3,9 @@
     "@component/head": {
       "alias": "@component/head",
       "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/head/head.html",
-      "styleUrls": []
+      "styleUrls": [
+        "projects/libs/htmlpro/htmlpro-components/src/head/head.css"
+      ]
     },
     "@component/top-nav": {
       "alias": "@component/top-nav",
