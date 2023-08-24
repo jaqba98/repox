@@ -14,11 +14,11 @@
         "projects/libs/htmlpro/htmlpro-components/src/top-nav/top-nav.css"
       ]
     },
-    "@component/documentation-menu": {
-      "alias": "@component/documentation-menu",
-      "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/documentation-menu/documentation-menu.html",
+    "@component/documentation": {
+      "alias": "@component/documentation",
+      "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/documentation/documentation.html",
       "styleUrls": [
-        "projects/libs/htmlpro/htmlpro-components/src/documentation-menu/documentation-menu.css"
+        "projects/libs/htmlpro/htmlpro-components/src/documentation/documentation.css"
       ]
     },
     "@component/header": {

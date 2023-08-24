@@ -1,0 +1,92 @@
+/* documentation mobile */
+.documentation-menu,
+.documentation-content {
+    padding: 3em 2em;
+}
+
+.documentation-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    background-color: var(--documentation-menu-background-color);
+}
+
+.documentation-menu > h1 {
+    color: var(--documentation-menu-h1-color);
+}
+
+.documentation-menu-links > a {
+    display: inline-block;
+    margin-bottom: 0.5em;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-decoration: underline;
+    color: var(--documentation-menu-links-title-color);
+}
+
+.documentation-menu-links > p {
+    color: var(--documentation-menu-links-description-color);
+}
+
+.documentation-content,
+.documentation-content-parts,
+.documentation-content-parts > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.documentation-content {
+    gap: 2em;
+}
+
+.documentation-content-parts {
+    gap: 0.5em;
+}
+
+.documentation-content-parts > div {
+    gap: 1em;
+}
+
+.documentation-content > h1 {
+    color: var(--documentation-menu-h1-color);
+}
+
+.documentation-content h2 {
+    color: var(--documentation-menu-h2-color);
+}
+
+.documentation-content code {
+    background-color: var(--documentation-menu-code-background-color);
+    color: var(--documentation-menu-code-color);
+    border-radius: 5px;
+    padding: 1em;
+    overflow-x: auto;
+}
+
+.documentation-content p {
+    color: var(--documentation-menu-p-color);
+}
+
+/* documentation tablet */
+@media only screen and (min-width: 768px) {
+    .documentation {
+        display: flex;
+        flex: 1;
+    }
+
+    .documentation-menu {
+        width: 300px;
+    }
+
+    .documentation-content{
+        flex: 3;
+    }
+}
+
+/* documentation pc */
+@media only screen and (min-width: 1024px) {
+    .documentation {
+        margin: auto;
+        width: 80%;
+    }
+}

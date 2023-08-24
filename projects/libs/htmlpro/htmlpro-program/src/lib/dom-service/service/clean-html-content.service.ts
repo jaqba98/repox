@@ -13,19 +13,9 @@ export class CleanHtmlContentService {
       .replaceAll(/<!--.*?-->/gm, EMPTY_STRING)
       .replaceAll(/\[\s+{/gm, `[{`)
       .replaceAll(/}\s+]/gm, `}]`)
-      .replaceAll(/]\s+}/gm, `]}`)
-      .replaceAll(/,\s+{/gm, `,{`)
-      .replaceAll(/},\s+{/gm, `},{`)
       .replaceAll(/{\s+'/gm, `{'`)
-      .replaceAll(/{\s+"/gm, `{"`)
+      .replaceAll(/'\s+}/gm, `'}`)
       .replaceAll(/,\s+'/gm, `,'`)
-      .replaceAll(/,\s+"/gm, `,"`)
-      .replaceAll(/{\s+'/gm, `{'`)
-      .replaceAll(/{\s+"/gm, `{"`)
-      .replaceAll(/>\s+</gm, `><`)
-      .replaceAll(/>\s+/gm, `>`)
-      .replaceAll(/\s+</gm, `<`)
-      .replaceAll(/"\s+/gm, `" `)
-      .replaceAll(/'\s+/gm, `" `);
+      .replaceAll(/,\s+{/gm, `,{`);
   }
 }

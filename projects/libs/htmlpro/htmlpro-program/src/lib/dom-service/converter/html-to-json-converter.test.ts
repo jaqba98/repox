@@ -37,6 +37,38 @@ const htmlExample = `<!DOCTYPE html>
         <img src="image2.png" alt="Image 2">
 <!--        <img src="image3.png" alt="Image 3">-->
     </div>
+    <div data-hello="[
+            {
+                'title': 'Title 1',
+                'link': '',
+                'description': 'aaa'
+            },
+            {
+                'title': 'Title 2',
+                'link': '',
+                'description': 'bbb'
+            },
+            {
+                'title': 'Title 3',
+                'link': '',
+                'description': 'ccc'
+            },
+            {
+                'title': 'Title 4',
+                'link': '',
+                'description': 'ddd'
+            },
+            {
+                'title': 'Title 5',
+                'link': '',
+                'description': 'eee'
+            },
+            {
+                'title': 'Title 6',
+                'link': '',
+                'description': 'fff'
+            }
+         ]"></div>
 </body>
 </html>
 `;
@@ -190,6 +222,17 @@ describe(`HtmlToJsonConverterService`, () => {
                     children: []
                   }
                 ]
+              },
+
+              {
+                htmlBase: `<div data-hello="[{'title': 'Title 1','link': '','description': 'aaa'},{'title': 'Title 2','link': '','description': 'bbb'},{'title': 'Title 3','link': '','description': 'ccc'},{'title': 'Title 4','link': '','description': 'ddd'},{'title': 'Title 5','link': '','description': 'eee'},{'title': 'Title 6','link': '','description': 'fff'}]">`,
+                htmlType: HtmlTypeEnum.tagOpen,
+                htmlName: `div`,
+                htmlAttributes: {
+                  "data-hello": `[{'title': 'Title 1','link': '','description': 'aaa'},{'title': 'Title 2','link': '','description': 'bbb'},{'title': 'Title 3','link': '','description': 'ccc'},{'title': 'Title 4','link': '','description': 'ddd'},{'title': 'Title 5','link': '','description': 'eee'},{'title': 'Title 6','link': '','description': 'fff'}]`
+                },
+                htmlSelfClose: false,
+                children: []
               }
             ]
           }
