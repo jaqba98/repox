@@ -14,6 +14,13 @@
         "projects/libs/htmlpro/htmlpro-components/src/top-nav/top-nav.css"
       ]
     },
+    "@component/documentation-menu": {
+      "alias": "@component/documentation-menu",
+      "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/documentation-menu/documentation-menu.html",
+      "styleUrls": [
+        "projects/libs/htmlpro/htmlpro-components/src/documentation-menu/documentation-menu.css"
+      ]
+    },
     "@component/header": {
       "alias": "@component/header",
       "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/header/header.html",

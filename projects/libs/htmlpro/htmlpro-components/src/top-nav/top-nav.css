@@ -1,6 +1,5 @@
 /* top nav mobile */
 .top-nav {
-    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,7 +45,7 @@
 }
 
 .top-nav-menu {
-    position: fixed;
+    position: absolute;
     top: var(--top-nav-height);
     height: calc(100vh - var(--top-nav-height));
     left: 100%;
