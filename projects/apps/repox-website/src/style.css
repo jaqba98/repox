@@ -13,11 +13,11 @@
     --top-nav-menu-link-background-color-hover: #FFFFFF;
     --top-nav-menu-link-color-hover: #FFFFFF;
     /* documentation menu */
-    --documentation-menu-background-color: #E1E1E1;
-    --documentation-menu-h1-color: #171717;
+    --documentation-menu-background-color: #f1f1f1;
+    --documentation-menu-h1-color: #373737;
     --documentation-menu-links-title-color: #3626A7;
     --documentation-menu-links-description-color: #373737;
-    --documentation-content-parts-h1-color: #171717;
+    --documentation-content-parts-h1-color: #262626;
     --documentation-menu-h2-color: #3626A7;
     --documentation-menu-code-background-color: #3626A7;
     --documentation-menu-code-color: #FFFFFF;

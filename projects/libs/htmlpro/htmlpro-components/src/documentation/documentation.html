@@ -10,12 +10,10 @@
     <div class="documentation-content">
         <h1>{{data-documentation-content-title}}</h1>
         <div class="documentation-content-parts"
-             data-loop="{{data-documentation-content-paths}}">
+             data-loop="{{data-documentation-content-parts}}">
             <h2>{{title}}</h2>
-            <div data-loop="{{content}}">
-                <p>{{top-description}}</p>
-                <code>&#62; {{code}}</code>
-                <p>{{bottom-description}}</p>
+            <div data-loop="{{content}}" class="{{type}}">
+                {{value}}
             </div>
         </div>
     </div>

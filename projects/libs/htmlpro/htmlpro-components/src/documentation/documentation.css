@@ -1,7 +1,7 @@
 /* documentation mobile */
 .documentation-menu,
 .documentation-content {
-    padding: 3em 2em;
+    padding: 2em;
 }
 
 .documentation-menu {
@@ -25,6 +25,7 @@
 }
 
 .documentation-menu-links > p {
+    line-height: 1.5em;
     color: var(--documentation-menu-links-description-color);
 }
 
@@ -35,16 +36,10 @@
     flex-direction: column;
 }
 
-.documentation-content {
-    gap: 2em;
-}
-
-.documentation-content-parts {
-    gap: 0.5em;
-}
-
+.documentation-content,
+.documentation-content-parts,
 .documentation-content-parts > div {
-    gap: 1em;
+    gap: 2em;
 }
 
 .documentation-content > h1 {
@@ -55,7 +50,7 @@
     color: var(--documentation-menu-h2-color);
 }
 
-.documentation-content code {
+.documentation-code {
     background-color: var(--documentation-menu-code-background-color);
     color: var(--documentation-menu-code-color);
     border-radius: 5px;
@@ -63,7 +58,8 @@
     overflow-x: auto;
 }
 
-.documentation-content p {
+.documentation-paragraph {
+    line-height: 1.5em;
     color: var(--documentation-menu-p-color);
 }
 
@@ -71,22 +67,29 @@
 @media only screen and (min-width: 768px) {
     .documentation {
         display: flex;
-        flex: 1;
     }
 
     .documentation-menu {
         width: 300px;
     }
 
-    .documentation-content{
-        flex: 3;
+    .documentation-content {
+        flex: 1;
     }
 }
 
-/* documentation pc */
 @media only screen and (min-width: 1024px) {
-    .documentation {
-        margin: auto;
+    .documentation-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .documentation-content > h1 {
+        width: 80%;
+    }
+
+    .documentation-content-parts {
         width: 80%;
     }
 }
