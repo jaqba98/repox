@@ -14,10 +14,6 @@ a {
 }
 
 /* general */
-body {
-    overflow-x: hidden;
-}
-
 @media screen and (max-width: 300px) {
     body {
         font-size: 5vw;

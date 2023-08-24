@@ -48,15 +48,15 @@
     position: absolute;
     top: var(--top-nav-height);
     height: calc(100vh - var(--top-nav-height));
-    left: 100%;
+    transform: translateX(-100%);
     width: 100%;
     overflow-y: auto;
     background-color: var(--top-nav-menu-background-color);
-    transition: left var(--top-nav-hamburger-line-animation-speed) ease-in-out;
+    transition: transform var(--top-nav-hamburger-line-animation-speed) ease-in-out;
 }
 
 .top-nav-open .top-nav-menu {
-    left: 0;
+    transform: translateX(0%);
 }
 
 .top-nav-menu-link {
@@ -78,7 +78,7 @@
         margin: 0.5em;
         position: static;
         height: auto;
-        left: 0;
+        transform: translateX(0);
         width: auto;
         background-color: inherit;
         transition: none;
