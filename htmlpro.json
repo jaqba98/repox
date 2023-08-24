@@ -21,6 +21,13 @@
         "projects/libs/htmlpro/htmlpro-components/src/documentation/documentation.css"
       ]
     },
+    "@component/footer-author": {
+      "alias": "@component/footer-author",
+      "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/footer-author/footer-author.html",
+      "styleUrls": [
+        "projects/libs/htmlpro/htmlpro-components/src/footer-author/footer-author.css"
+      ]
+    },
     "@component/header": {
       "alias": "@component/header",
       "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/header/header.html",
@@ -47,13 +54,6 @@
       "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/footer-copyright/footer-copyright.html",
       "styleUrls": [
         "projects/libs/htmlpro/htmlpro-components/src/footer-copyright/footer-copyright.css"
-      ]
-    },
-    "@component/footer-author": {
-      "alias": "@component/footer-author",
-      "templateUrl": "projects/libs/htmlpro/htmlpro-components/src/footer-author/footer-author.html",
-      "styleUrls": [
-        "projects/libs/htmlpro/htmlpro-components/src/footer-author/footer-author.css"
       ]
     },
     "@component/repox-support": {

@@ -22,6 +22,9 @@
     --documentation-menu-code-background-color: #3626A7;
     --documentation-menu-code-color: #FFFFFF;
     --documentation-menu-p-color: #373737;
+    /* footer author */
+    --footer-author-background-color: #000000;
+    --footer-author-color: #FFFFFF;
 }
 
 /* general */
