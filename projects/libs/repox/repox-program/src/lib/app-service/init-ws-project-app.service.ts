@@ -29,7 +29,7 @@ export class InitWsProjectAppService {
     this.runCommand.runCommand(`npm i eslint-plugin-import@2.28.0 -D`);
     this.runCommand.runCommand(`npm i eslint-plugin-n@16.0.1 -D`);
     this.runCommand.runCommand(`npm i eslint-plugin-promise@6.1.1 -D`);
-    this.runCommand.runCommand(`npm i htmlpro@1.1.10 -D`);
+    this.runCommand.runCommand(`npm i htmlpro@1.1.11 -D`);
     this.runCommand.runCommand(`npm i jest@29.6.2 -D`);
     this.runCommand.runCommand(`npm i repox@1.4.12 -D`);
     this.runCommand.runCommand(`npm i ts-jest@29.1.1 -D`);
