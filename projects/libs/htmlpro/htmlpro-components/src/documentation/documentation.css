@@ -1,7 +1,7 @@
 /* documentation mobile */
 .documentation-menu,
 .documentation-content {
-    padding: 2em;
+    padding: 3em 2em;
 }
 
 .documentation-menu {
@@ -12,13 +12,13 @@
 }
 
 .documentation-menu > h1 {
+    font-weight: lighter;
     color: var(--documentation-menu-h1-color);
 }
 
 .documentation-menu-links > a {
     display: inline-block;
     margin-bottom: 0.5em;
-    font-size: 1.25em;
     font-weight: bold;
     text-decoration: underline;
     color: var(--documentation-menu-links-title-color);
@@ -36,24 +36,29 @@
     flex-direction: column;
 }
 
-.documentation-content,
+.documentation-content {
+    gap: 3em;
+}
+
 .documentation-content-parts,
 .documentation-content-parts > div {
-    gap: 2em;
+    gap: 1.5em;
 }
 
 .documentation-content > h1 {
+    font-weight: lighter;
     color: var(--documentation-menu-h1-color);
 }
 
 .documentation-content h2 {
+    font-weight: lighter;
     color: var(--documentation-menu-h2-color);
 }
 
 .documentation-code {
     background-color: var(--documentation-menu-code-background-color);
     color: var(--documentation-menu-code-color);
-    border-radius: 5px;
+    border-radius: 2px;
     padding: 1em;
     overflow-x: auto;
 }
