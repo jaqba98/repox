@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { type RunProgramModel } from "@lib/model";
+import { type ProgramModel } from "@lib/model";
 import {
   type EmptyRepoxProgramModel,
   type PublishNpmRepoxCommandModel
@@ -12,13 +12,13 @@ import {
 /**
  * The start point of the program publish npm.
  */
-export class PublishNpmProgramService implements RunProgramModel {
+export class PublishNpmProgramService implements ProgramModel {
   constructor (
     private readonly step: PublishNpmStepService
   ) {
   }
 
-  runProgram (programDomain: unknown, commandDomain: unknown): void {
+  run (programDomain: unknown, commandDomain: unknown): void {
     const programModel = programDomain as EmptyRepoxProgramModel;
     const commandModel = commandDomain as PublishNpmRepoxCommandModel;
     this.step.runSteps(programModel, commandModel);

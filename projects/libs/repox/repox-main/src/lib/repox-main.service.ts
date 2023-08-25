@@ -80,7 +80,7 @@ export class RepoxMainService {
       .buildProgramParamModel();
     const commandDomain = this.buildParamModel
       .buildCommandParamModel();
-    this.launcher.launchProgram(programs).runProgram(
+    this.launcher.launchProgram(programs).run(
       programDomain, commandDomain
     );
   }

@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { type RunProgramModel } from "@lib/model";
+import { type ProgramModel } from "@lib/model";
 import {
   GenerateWorkspaceStepService
 } from "../step/generate-workspace-step.service";
@@ -11,16 +11,17 @@ import {
 @singleton()
 /**
  * The start point of the program generate workspace.
+ * It generates workspace from zero or
+ * regenerate existing workspace if it has permission.
  */
-export class GenerateWorkspaceProgramService
-implements RunProgramModel {
-  constructor (private readonly step: GenerateWorkspaceStepService) {
+export class GenerateWorkspaceProgramService implements ProgramModel {
+  constructor(private readonly step: GenerateWorkspaceStepService) {
   }
 
-  runProgram (programDomain: unknown, commandDomain: unknown): void {
-    const programModel = programDomain as EmptyRepoxProgramModel;
-    const commandModel = commandDomain as GenerateWorkspaceRepoxCommandModel;
-    this.step.runSteps(programModel, commandModel);
+  run(programDomain: unknown, commandDomain: unknown): void {
+    this.step.runSteps(
+      programDomain as EmptyRepoxProgramModel,
+      commandDomain as GenerateWorkspaceRepoxCommandModel
+    );
   }
 }
-// todo: refactor the file

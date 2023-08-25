@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { type RunProgramModel } from "@lib/model";
+import { type ProgramModel } from "@lib/model";
 import {
   DefaultDefaultStepService
 } from "../step/default-default-step.service";
@@ -12,11 +12,11 @@ import {
 /**
  * The start point of the program default.
  */
-export class DefaultDefaultProgramService implements RunProgramModel {
+export class DefaultDefaultProgramService implements ProgramModel {
   constructor (private readonly step: DefaultDefaultStepService) {
   }
 
-  runProgram (programDomain: unknown, commandDomain: unknown): void {
+  run (programDomain: unknown, commandDomain: unknown): void {
     const programModel = programDomain as DefaultDefaultRepoxProgramModel;
     const commandModel = commandDomain as EmptyRepoxCommandModel;
     this.step.runSteps(programModel, commandModel);

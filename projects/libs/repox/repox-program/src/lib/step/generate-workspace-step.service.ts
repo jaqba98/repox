@@ -35,10 +35,11 @@ export class GenerateWorkspaceStepService {
   }
 
   runSteps (
-    programModel: EmptyRepoxProgramModel,
+    _programModel: EmptyRepoxProgramModel,
     commandModel: GenerateWorkspaceRepoxCommandModel
   ): void {
-    const { workspaceName } = commandModel;
+    const { workspaceName, workspaceRegenerate } = commandModel;
+    console.log(workspaceName, workspaceRegenerate);
     this.simpleMessage.writeInfo(`Generate workspace`, REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.allProgramInstalled.run()) return;

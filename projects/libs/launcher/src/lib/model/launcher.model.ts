@@ -1,4 +1,4 @@
-import { type RunProgramModel } from "@lib/model";
+import { type ProgramModel } from "@lib/model";
 
 /**
  * The model represents list of run program services
@@ -8,7 +8,7 @@ import { type RunProgramModel } from "@lib/model";
 export interface LauncherProgramModel {
   programName: string;
   commandName: string;
-  service: RunProgramModel;
+  service: ProgramModel;
 }
 
 export interface LauncherModel {

@@ -78,7 +78,7 @@ export class HtmlProMainService {
     const programs = this.launchProgram.getPrograms();
     const programDomain = this.htmlProBuild.buildProgramParamModel();
     const commandDomain = this.htmlProBuild.buildCommandParamModel();
-    this.launcher.launchProgram(programs).runProgram(
+    this.launcher.launchProgram(programs).run(
       programDomain, commandDomain
     );
   }

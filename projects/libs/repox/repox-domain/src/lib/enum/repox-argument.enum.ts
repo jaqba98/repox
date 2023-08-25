@@ -11,7 +11,8 @@ export enum RepoxArgumentEnum {
   scheme = `scheme`,
   watch = `watch`,
   production = `production`,
-  fix = `fix`
+  fix = `fix`,
+  regenerate = `regenerate`
 }
 
 export enum RepoxAliasEnum {
@@ -22,6 +23,7 @@ export enum RepoxAliasEnum {
   scheme = `s`,
   watch = `w`,
   production = `P`,
-  fix = `f`
+  fix = `f`,
+  regenerate = `r`
 }
 // todo: refactor the file

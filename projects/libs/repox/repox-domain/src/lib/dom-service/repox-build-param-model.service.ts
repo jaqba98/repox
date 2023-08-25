@@ -46,6 +46,9 @@ export class RepoxBuildParamModelService {
     return {
       workspaceName: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.name
+      ),
+      workspaceRegenerate: this.paramDomain.getCommandBooleanValue(
+        RepoxArgumentEnum.regenerate
       )
     };
   }

@@ -13,6 +13,7 @@ export interface EmptyRepoxCommandModel {
 
 export interface GenerateWorkspaceRepoxCommandModel {
   workspaceName: string;
+  workspaceRegenerate: boolean;
 }
 
 export interface GenerateProjectRepoxCommandModel {

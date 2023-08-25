@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 import { ParamDomainAppService } from "@lib/param-domain";
 import { type LauncherModel } from "../model/launcher.model";
-import { type RunProgramModel } from "@lib/model";
+import { type ProgramModel } from "@lib/model";
 
 @singleton()
 /**
@@ -12,7 +12,7 @@ export class LauncherAppService {
   constructor (private readonly paramDomain: ParamDomainAppService) {
   }
 
-  launchProgram (launcher: LauncherModel): RunProgramModel {
+  launchProgram (launcher: LauncherModel): ProgramModel {
     const programName = this.paramDomain.getProgramName();
     const commandName = this.paramDomain.getCommandName();
     const programToRun = launcher.programs.find(program =>

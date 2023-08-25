@@ -6,7 +6,9 @@
   "license": "ISC",
   "scripts": {
     "build::htmlpro": "repox build project --name=htmlpro",
-    "build::repox-website": "repox build project --name=repox-website"
+    "build::repox-website": "repox build project --name=repox-website",
+    "build::repox": "repox build project --name=repox",
+    "repox:generate:workspace": "node dist/repox/projects/apps/repox/src/main.js generate workspace --regenerate"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
@@ -22,7 +24,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "htmlpro": "^1.1.11",
     "jest": "^29.6.4",
-    "repox": "^1.4.12",
+    "repox": "file:dist/repox",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.7",
