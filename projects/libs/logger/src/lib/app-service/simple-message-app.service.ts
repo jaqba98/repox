@@ -56,3 +56,4 @@ export class SimpleMessageAppService {
     this.writeMessage.write(outputMessage);
   }
 }
+// todo: refactor the file

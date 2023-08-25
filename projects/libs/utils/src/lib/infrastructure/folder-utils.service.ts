@@ -16,3 +16,4 @@ export class FolderUtilsService {
     return extname(path) === EMPTY_STRING;
   }
 }
+// todo: refactor the file

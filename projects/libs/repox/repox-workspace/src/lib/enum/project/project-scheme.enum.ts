@@ -8,3 +8,4 @@ export enum ProjectSchemeEnum {
   libTypeScript = `@lib/ts`,
   toolTypeScript = `@tool/ts`
 }
+// todo: refactor the file

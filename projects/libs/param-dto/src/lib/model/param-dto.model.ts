@@ -18,3 +18,4 @@ export interface ParamDtoEntityModel {
 export interface ParamDtoModel {
   params: ParamDtoEntityModel[];
 }
+// todo: refactor the file

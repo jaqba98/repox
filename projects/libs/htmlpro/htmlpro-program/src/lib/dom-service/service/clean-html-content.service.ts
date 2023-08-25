@@ -19,3 +19,4 @@ export class CleanHtmlContentService {
       .replaceAll(/,\s+{/gm, `,{`);
   }
 }
+// todo: refactor the file

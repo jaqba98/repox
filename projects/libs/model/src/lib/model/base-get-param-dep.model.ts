@@ -6,3 +6,4 @@ import { type ParamDomainDepModel } from "@lib/param-domain";
 export interface BaseGetParamDepModel {
   getDependency: (program: string) => ParamDomainDepModel;
 }
+// todo: refactor the file

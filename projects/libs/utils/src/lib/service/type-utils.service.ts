@@ -22,3 +22,4 @@ export class TypeUtilsService {
     return typeof value === `string`;
   }
 }
+// todo: refactor the file

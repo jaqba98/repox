@@ -18,3 +18,4 @@ export enum HtmlSelfCloseTagEnum {
   track = `track`,
   wbr = `wbr`
 }
+// todo: refactor the file

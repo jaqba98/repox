@@ -4,3 +4,4 @@
 
 export const ERR = `ERR`;
 export const TIP = `TIP`;
+// todo: refactor the file

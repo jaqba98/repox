@@ -34,3 +34,4 @@ export const htmlProJsonFileSchema: Schema = {
   additionalProperties: false,
   required: [`components`]
 };
+// todo: refactor the file

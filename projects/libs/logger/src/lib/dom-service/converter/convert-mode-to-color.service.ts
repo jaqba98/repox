@@ -55,3 +55,4 @@ export class ConvertModeToColorService {
     }
   }
 }
+// todo: refactor the file

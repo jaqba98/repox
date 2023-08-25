@@ -55,3 +55,4 @@ export class HtmlJsonCorrectTypeParserService {
     return baseValue.toString();
   }
 }
+// todo: refactor the file

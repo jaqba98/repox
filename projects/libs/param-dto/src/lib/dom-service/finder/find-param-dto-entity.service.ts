@@ -59,3 +59,4 @@ export class FindParamDtoEntityService {
       .filter(param => param.paramIndex > commandIndex);
   }
 }
+// todo: refactor the file

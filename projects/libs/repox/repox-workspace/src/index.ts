@@ -8,3 +8,4 @@ export * from "./lib/enum/project/project-type.enum";
 export * from "./lib/enum/workspace/workspace-folder.enum";
 export * from "./lib/app-service/create-ws-file-app.service";
 export * from "./lib/model/ws-domain/ws-domain.model";
+// todo: refactor the file

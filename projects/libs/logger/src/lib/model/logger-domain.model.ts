@@ -27,3 +27,4 @@ export interface LoggerLineModel {
 export interface LoggerDomainModel {
   lines: LoggerLineModel[];
 }
+// todo: refactor the file

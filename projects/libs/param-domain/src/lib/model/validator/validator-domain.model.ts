@@ -12,3 +12,4 @@ export interface ValidatorDomainModel {
     getParamDepService: BaseGetParamDepModel
   ) => ParamDomainValidationModel;
 }
+// todo: refactor the file

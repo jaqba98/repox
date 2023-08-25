@@ -16,3 +16,4 @@ export interface HtmlJsonModel {
   htmlType: HtmlTypeEnum;
   htmlBase: string;
 }
+// todo: refactor the file

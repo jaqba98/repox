@@ -129,3 +129,4 @@ describe(`JsonToHtmlConverterService`, () => {
     expect(service.parse(jsonExample)).toEqual<string>(`<html lang="en"><head><meta charset="utf-8"><script src="script.js" defer></script><title>Example</title></head><body><h1>Hello Example</h1><div><img src="image1.png" alt="Image 1"><img src="image2.png" alt="Image 2"></div></body></html>`);
   });
 });
+// todo: refactor the file

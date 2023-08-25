@@ -60,3 +60,4 @@ describe(`CleanHtmlContentService`, () => {
     expect(service.clean(htmlBaseContent)).toBe(`<!DOCTYPE html><html lang="en"><head><meta charset='utf-8'><title>Hello World</title><script>console.log("Hello world");</script></head><body><div  data-attribute_1  data-attribute_2  data-attribute_3></div><div        data-import="@component/nav" ></div><div        class="style1 style2 style3" ></div><h1>Hello World</h1><h2 data-text="hello 'boy'" ></h2><h2     data-text-new='hello "dog"'></h2></body></html>`);
   });
 });
+// todo: refactor the file

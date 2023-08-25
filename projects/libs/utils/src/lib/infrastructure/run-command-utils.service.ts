@@ -17,3 +17,4 @@ export class RunCommandUtilsService {
     return this.runCommand(`npx ${command}`, verbose);
   }
 }
+// todo: refactor the file

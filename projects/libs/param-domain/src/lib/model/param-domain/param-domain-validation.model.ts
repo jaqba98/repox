@@ -7,3 +7,4 @@ export interface ParamDomainValidationModel {
   errors: string[];
   tips: string[];
 }
+// todo: refactor the file

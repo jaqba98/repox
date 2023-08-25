@@ -3,3 +3,4 @@ export * from "./lib/app-service/change-path-app.service";
 export * from "./lib/app-service/file-exist-app.service";
 export * from "./lib/app-service/display-version-app.service";
 export * from "./lib/compose/all-program-installed.service";
+// todo: refactor the file

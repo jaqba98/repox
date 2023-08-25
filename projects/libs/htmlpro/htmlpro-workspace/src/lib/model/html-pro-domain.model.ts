@@ -13,3 +13,4 @@ export type HtmlProComponentsDomainModel = Record<string, HtmProComponentDomainM
 export interface HtmlProDomainModel {
   components: HtmlProComponentsDomainModel;
 }
+// todo: refactor the file

@@ -25,3 +25,4 @@ export interface ParamDomainModel {
   program: ParamDomainEntityModel;
   command: ParamDomainEntityModel;
 }
+// todo: refactor the file

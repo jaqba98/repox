@@ -78,3 +78,4 @@ export class GenerateProjectStepService {
     this.simpleMessage.writeSuccess(`Project generated correctly`);
   }
 }
+// todo: refactor the file

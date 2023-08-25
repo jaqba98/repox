@@ -33,3 +33,4 @@ export interface WsProjectDomainModel {
 export interface WsDomainModel {
   projects: WsProjectDomainModel[];
 }
+// todo: refactor the file

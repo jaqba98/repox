@@ -38,3 +38,4 @@ export class LintProjectsAppService {
     return true;
   }
 }
+// todo: refactor the file

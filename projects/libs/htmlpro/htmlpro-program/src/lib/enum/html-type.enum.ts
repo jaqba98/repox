@@ -6,3 +6,4 @@ export enum HtmlTypeEnum {
   tagClose = `tagClose`,
   tagContent = `tagContent`
 }
+// todo: refactor the file

@@ -7,3 +7,4 @@ export interface EmptyHtmlProCommandModel {
 }
 
 export type THtmlProCommandModel = EmptyHtmlProCommandModel;
+// todo: refactor the file

@@ -35,3 +35,4 @@ export class GetParamDtoIndexAppService {
       : commandIndex;
   }
 }
+// todo: refactor the file
