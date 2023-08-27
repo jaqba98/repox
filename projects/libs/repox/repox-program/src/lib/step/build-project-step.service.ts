@@ -3,10 +3,7 @@ import {
   NewlineAppService,
   SimpleMessageAppService
 } from "@lib/logger";
-import {
-  AllProgramInstalledService,
-  GoToProjectRootAppService
-} from "@lib/program-step";
+import { GoToProjectRootAppService } from "@lib/program-step";
 import {
   LoadWsDtoAppService
 } from "../app-service/load-ws-dto-app.service";
@@ -36,7 +33,7 @@ export class BuildProjectStepService {
   constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
-    private readonly allProgramInstalled: AllProgramInstalledService,
+    // private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly verificationWsDto: VerificationWsDtoAppService,
     private readonly loadWsDto: LoadWsDtoAppService,
@@ -52,7 +49,7 @@ export class BuildProjectStepService {
   ): void {
     this.simpleMessage.writeInfo(`Build project`, REPOX_LOGO);
     this.newline.writeNewline();
-    if (!this.allProgramInstalled.run()) return;
+    // if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return;
     const { productionMode } = programModel;

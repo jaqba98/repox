@@ -9,7 +9,6 @@ import {
   type EmptyHtmlProCommandModel
 } from "@lib/htmlpro-domain";
 import {
-  AllProgramInstalledService,
   FileExistAppService,
   GoToProjectRootAppService
 } from "@lib/program-step";
@@ -31,7 +30,7 @@ export class BuildHtmlStepService {
   constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
-    private readonly allProgramInstalled: AllProgramInstalledService,
+    // private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadHtmlProDomain: LoadHtmlProDomainAppService,
     private readonly fileExist: FileExistAppService,
@@ -46,7 +45,7 @@ export class BuildHtmlStepService {
   ): void {
     this.simpleMessage.writeInfo(`Build`, HTML_PRO_LOGO);
     this.newline.writeNewline();
-    if (!this.allProgramInstalled.run()) return;
+    // if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadHtmlProDomain.run()) return;
     const { inputPath, outputPath } = programModel;

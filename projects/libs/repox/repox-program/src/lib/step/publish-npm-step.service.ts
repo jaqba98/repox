@@ -4,7 +4,6 @@ import {
   SimpleMessageAppService
 } from "@lib/logger";
 import {
-  AllProgramInstalledService,
   ChangePathAppService,
   GoToProjectRootAppService
 } from "@lib/program-step";
@@ -39,7 +38,7 @@ export class PublishNpmStepService {
   constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
-    private readonly allProgramInstalled: AllProgramInstalledService,
+    // private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadWsDto: LoadWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
@@ -57,7 +56,7 @@ export class PublishNpmStepService {
   ): void {
     this.simpleMessage.writeInfo(`Publish npm`, REPOX_LOGO);
     this.newline.writeNewline();
-    if (!this.allProgramInstalled.run()) return;
+    // if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return;
     if (!this.loadWsDomain.run()) return;

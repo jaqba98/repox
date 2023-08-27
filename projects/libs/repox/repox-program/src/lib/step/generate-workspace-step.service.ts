@@ -9,15 +9,9 @@ import {
 } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
-  FolderNotExistAppService
-} from "../app-service/folder-not-exist-app.service";
-import {
-  CreateWsStructureAppService
-} from "../app-service/create-ws-structure-app.service";
-import {
-  InitWsProjectAppService
-} from "../app-service/init-ws-project-app.service";
-import { AllProgramInstalledService } from "@lib/program-step";
+  SystemProgramEnum,
+  SystemProgramExistAppService
+} from "@lib/program-step";
 
 @singleton()
 /**
@@ -27,29 +21,30 @@ export class GenerateWorkspaceStepService {
   constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
-    private readonly allProgramInstalled: AllProgramInstalledService,
-    private readonly folderNotExist: FolderNotExistAppService,
-    private readonly createWsStructure: CreateWsStructureAppService,
-    private readonly initWsProject: InitWsProjectAppService
+    private readonly systemProgramExist: SystemProgramExistAppService
+    //   private readonly allProgramInstalled: AllProgramInstalledService,
+    //   private readonly folderNotExist: FolderNotExistAppService,
+    //   private readonly createWsStructure: CreateWsStructureAppService,
+    //   private readonly initWsProject: InitWsProjectAppService
   ) {
   }
 
   runSteps (
     _programModel: EmptyRepoxProgramModel,
-    commandModel: GenerateWorkspaceRepoxCommandModel
+    _commandModel: GenerateWorkspaceRepoxCommandModel
   ): void {
-    const { workspaceName, workspaceRegenerate } = commandModel;
-    console.log(workspaceName, workspaceRegenerate);
     this.simpleMessage.writeInfo(`Generate workspace`, REPOX_LOGO);
     this.newline.writeNewline();
-    if (!this.allProgramInstalled.run()) return;
-    if (!this.folderNotExist.run(workspaceName)) return;
-    if (!this.createWsStructure.run(workspaceName)) return;
-    if (!this.initWsProject.run()) return;
+    if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
+    if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
+    if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
     this.newline.writeNewline();
-    this.simpleMessage.writeSuccess(
-      `Workspace generated successfully!`
-    );
+    this.simpleMessage.writeSuccess(`Command executed correctly`);
+    // todo: I am here
+    // if (!this.folderNotExist.run(workspaceName)) return;
+    // if (!this.createWsStructure.run(workspaceName)) return;
+    // if (!this.initWsProject.run()) return;
   }
 }
+
 // todo: refactor the file

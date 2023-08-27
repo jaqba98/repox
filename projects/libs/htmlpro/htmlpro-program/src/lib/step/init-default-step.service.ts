@@ -8,10 +8,7 @@ import {
   NewlineAppService,
   SimpleMessageAppService
 } from "@lib/logger";
-import {
-  AllProgramInstalledService,
-  GoToProjectRootAppService
-} from "@lib/program-step";
+import { GoToProjectRootAppService } from "@lib/program-step";
 import {
   HtmlProConfigNotExistAppService
 } from "../app-service/html-pro-config-not-exist-app.service";
@@ -29,7 +26,7 @@ export class InitDefaultStepService {
   constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
-    private readonly allProgramInstalled: AllProgramInstalledService,
+    // private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly htmlProConfigNotExist: HtmlProConfigNotExistAppService,
     private readonly fileUtils: FileUtilsService,
@@ -43,7 +40,7 @@ export class InitDefaultStepService {
   ): void {
     this.simpleMessage.writeInfo(`Init`, HTML_PRO_LOGO);
     this.newline.writeNewline();
-    if (!this.allProgramInstalled.run()) return;
+    // if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
     const { isForce } = programModel;
     if (!this.htmlProConfigNotExist.run(isForce)) return;

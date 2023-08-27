@@ -15,10 +15,10 @@ import {
  * regenerate existing workspace if it has permission.
  */
 export class GenerateWorkspaceProgramService implements ProgramModel {
-  constructor(private readonly step: GenerateWorkspaceStepService) {
+  constructor (private readonly step: GenerateWorkspaceStepService) {
   }
 
-  run(programDomain: unknown, commandDomain: unknown): void {
+  run (programDomain: unknown, commandDomain: unknown): void {
     this.step.runSteps(
       programDomain as EmptyRepoxProgramModel,
       commandDomain as GenerateWorkspaceRepoxCommandModel

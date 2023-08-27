@@ -8,10 +8,7 @@ import {
   SimpleMessageAppService
 } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
-import {
-  AllProgramInstalledService,
-  GoToProjectRootAppService
-} from "@lib/program-step";
+import { GoToProjectRootAppService } from "@lib/program-step";
 import {
   LoadWsDtoAppService
 } from "../app-service/load-ws-dto-app.service";
@@ -42,7 +39,7 @@ export class GenerateProjectStepService {
   constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
-    private readonly allProgramInstalled: AllProgramInstalledService,
+    // private readonly allProgramInstalled: AllProgramInstalledService,
     private readonly goToProjectRoot: GoToProjectRootAppService,
     private readonly loadWsDto: LoadWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
@@ -60,7 +57,7 @@ export class GenerateProjectStepService {
   ): void {
     this.simpleMessage.writeInfo(`Generate project`, REPOX_LOGO);
     this.newline.writeNewline();
-    if (!this.allProgramInstalled.run()) return;
+    // if (!this.allProgramInstalled.run()) return;
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return;
     if (!this.loadWsDomain.run()) return;
