@@ -30,7 +30,7 @@ export class PathUtilsService {
     chdir(path);
   }
 
-  createPath (pathItems: string[]): string {
+  createPath (...pathItems: string[]): string {
     return this.normalizePath(join(...pathItems));
   }
 

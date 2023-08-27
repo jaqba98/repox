@@ -130,9 +130,9 @@ export class BuildProjectAppService {
   private buildProjectAppTypescript (
     project: WsProjectDomainModel
   ): boolean {
-    const projectTsconfig = this.pathUtils.createPath([
+    const projectTsconfig = this.pathUtils.createPath(
       project.path, WorkspaceFileEnum.tsconfigJson
-    ]);
+    );
     if (!this.pathUtils.existPath(projectTsconfig)) {
       this.simpleMessage.writeError(
         `There is no tsconfig.json file for the project.`

@@ -101,7 +101,7 @@ export class WsDomainStoreService {
       type: projectType,
       path: projectPath,
       src: this.pathUtils.createPath(
-        [projectPath, WorkspaceFolderEnum.src]
+        projectPath, WorkspaceFolderEnum.src
       ),
       scheme: projectScheme,
       build: this.getProjectBuild(
@@ -132,21 +132,21 @@ export class WsDomainStoreService {
       case ProjectSchemeEnum.blank:
       case ProjectSchemeEnum.htmlPro:
         return {
-          output: this.pathUtils.createPath([
+          output: this.pathUtils.createPath(
             WorkspaceFolderEnum.dist, projectName
-          ]),
+          ),
           main: EMPTY_STRING,
           assets: []
         };
       case ProjectSchemeEnum.appTypeScript:
         return {
-          output: this.pathUtils.createPath([
+          output: this.pathUtils.createPath(
             WorkspaceFolderEnum.dist, projectName
-          ]),
-          main: this.pathUtils.createPath([
+          ),
+          main: this.pathUtils.createPath(
             projectPath, WorkspaceFolderEnum.src,
             WorkspaceFileEnum.mainTs
-          ]),
+          ),
           assets: []
         };
       case ProjectSchemeEnum.libTypeScript:
@@ -193,10 +193,10 @@ export class WsDomainStoreService {
       case ProjectSchemeEnum.libTypeScript:
       case ProjectSchemeEnum.toolTypeScript:
         return [
-          this.pathUtils.createPath([
+          this.pathUtils.createPath(
             projectPath, WorkspaceFolderEnum.src,
             WorkspaceFileEnum.indexTs
-          ])
+          )
         ];
       default:
         throw new Error(`Not supported project scheme`);

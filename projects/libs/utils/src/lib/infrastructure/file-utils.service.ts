@@ -19,7 +19,7 @@ export class FileUtilsService {
 
   copyFile (input: string, output: string): void {
     const fileName = this.getFileName(input);
-    const outputPath = this.pathUtils.createPath([output, fileName]);
+    const outputPath = this.pathUtils.createPath(output, fileName);
     const destinationDir = this.pathUtils.getDirname(outputPath);
     if (this.pathUtils.notExistPath(destinationDir)) {
       this.folderUtils.createFolder(destinationDir);
@@ -60,14 +60,14 @@ export class FileUtilsService {
   readAllHtmlFiles (cwd: string): string[] {
     const options = { cwd, ignore: [`**/node_modules/**`] };
     return globSync(`*.html`, options)
-      .map(path => this.pathUtils.createPath([cwd, path]))
+      .map(path => this.pathUtils.createPath(cwd, path))
       .map(path => this.pathUtils.normalizePath(path));
   }
 
   readAllCssFiles (cwd: string): string[] {
     const options = { cwd, ignore: [`**/node_modules/**`] };
     return globSync(`*.css`, options)
-      .map(path => this.pathUtils.createPath([cwd, path]))
+      .map(path => this.pathUtils.createPath(cwd, path))
       .map(path => this.pathUtils.normalizePath(path));
   }
 

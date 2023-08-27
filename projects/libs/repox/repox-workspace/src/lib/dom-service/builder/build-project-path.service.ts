@@ -25,11 +25,11 @@ export class BuildProjectPathService {
       const workspaceType = this.convertProjectType.toWorkspaceFolder(
         projectType
       );
-      return this.pathUtils.createPath([
+      return this.pathUtils.createPath(
         WorkspaceFolderEnum.projects, workspaceType, name
-      ]);
+      );
     }
-    return this.pathUtils.createPath([path, name]);
+    return this.pathUtils.createPath(path, name);
   }
 }
 // todo: refactor the file
