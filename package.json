@@ -8,7 +8,7 @@
     "build::htmlpro": "repox build project --name=htmlpro",
     "build::repox-website": "repox build project --name=repox-website",
     "build::repox": "repox build project --name=repox",
-    "repox:generate:workspace": "node dist/repox/projects/apps/repox/src/main.js generate workspace --regenerate"
+    "repox:generate:workspace": "node dist/repox/projects/apps/repox/src/main.js generate workspace --name=dog"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",

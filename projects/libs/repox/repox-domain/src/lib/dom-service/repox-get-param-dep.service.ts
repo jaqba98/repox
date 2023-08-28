@@ -51,13 +51,7 @@ export class RepoxGetParamDepService {
               name: RepoxArgumentEnum.name,
               values: [],
               valueMode: `single`,
-              required: false
-            },
-            [RepoxArgumentEnum.regenerate]: {
-              name: RepoxArgumentEnum.regenerate,
-              values: [],
-              valueMode: `empty`,
-              required: false
+              required: true
             }
           }
         },
