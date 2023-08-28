@@ -1,19 +1,12 @@
 import { singleton } from "tsyringe";
-import {
-  BuildWsStructureService,
-  WorkspaceFileEnum
-} from "@lib/repox-workspace";
+import { BuildWsStructureService } from "@lib/repox-workspace";
+import { FolderUtilsService, PathUtilsService } from "@lib/utils";
 import {
   type WsStructureModel
 } from "../model/ws-structure/ws-structure.model";
 import {
   WsStructureEntityEnum
 } from "../enum/ws-structure/ws-structure-entity.enum";
-import {
-  FileUtilsService,
-  FolderUtilsService,
-  PathUtilsService
-} from "@lib/utils";
 
 @singleton()
 /**
@@ -26,8 +19,7 @@ export class GenerateWsStructureService {
   constructor (
     private readonly buildWsStructure: BuildWsStructureService,
     private readonly pathUtils: PathUtilsService,
-    private readonly folderUtils: FolderUtilsService,
-    private readonly fileUtils: FileUtilsService
+    private readonly folderUtils: FolderUtilsService
   ) {
   }
 
@@ -40,13 +32,10 @@ export class GenerateWsStructureService {
   private processGenerateStructure (
     wsStructureModels: WsStructureModel[]
   ): void {
-    wsStructureModels.forEach(wsModel => {
-      switch (wsModel.type) {
+    wsStructureModels.forEach(wsStructureModel => {
+      switch (wsStructureModel.type) {
         case WsStructureEntityEnum.folder:
-          this.processFolderEntity(wsModel);
-          break;
-        case WsStructureEntityEnum.gitkeep:
-          this.processGitkeepEntity(wsModel);
+          this.processFolderEntity(wsStructureModel);
           break;
         default:
           throw new Error(
@@ -56,24 +45,15 @@ export class GenerateWsStructureService {
     });
   }
 
-  private processFolderEntity (wsModel: WsStructureModel): void {
-    this.currentPath.push(wsModel.value);
-    const newFolder = this.pathUtils.createPath(...this.currentPath);
-    if (this.pathUtils.notExistPath(newFolder)) {
-      this.folderUtils.createFolder(newFolder);
-    }
-    this.processGenerateStructure(wsModel.children);
-    this.currentPath.pop();
-  }
-
-  private processGitkeepEntity (wsModel: WsStructureModel): void {
+  private processFolderEntity (
+    wsStructureModel: WsStructureModel
+  ): void {
+    this.currentPath.push(wsStructureModel.value);
     const folderPath = this.pathUtils.createPath(...this.currentPath);
-    if (this.pathUtils.folderIsEmpty(folderPath)) {
-      const gitkeepPath = this.pathUtils.createPath(
-        folderPath, WorkspaceFileEnum.gitkeepText
-      );
-      this.fileUtils.createEmptyFile(gitkeepPath);
+    if (this.pathUtils.notExistPath(folderPath)) {
+      this.folderUtils.createFolder(folderPath);
     }
-    this.processGenerateStructure(wsModel.children);
+    this.processGenerateStructure(wsStructureModel.children);
+    this.currentPath.pop();
   }
 }
