@@ -9,6 +9,7 @@ import {
 } from "@lib/logger";
 import { REPOX_LOGO } from "@lib/repox-const";
 import {
+  ChangePathAppService,
   CreateFolderAppService,
   FolderNotExistAppService,
   SystemProgramEnum,
@@ -25,7 +26,8 @@ export class GenerateWorkspaceStepService {
     private readonly newline: NewlineAppService,
     private readonly systemProgramExist: SystemProgramExistAppService,
     private readonly folderNotExist: FolderNotExistAppService,
-    private readonly createFolder: CreateFolderAppService
+    private readonly createFolder: CreateFolderAppService,
+    private readonly changePath: ChangePathAppService
     //   private readonly createWsStructure: CreateWsStructureAppService,
     //   private readonly initWsProject: InitWsProjectAppService
   ) {
@@ -43,6 +45,7 @@ export class GenerateWorkspaceStepService {
     const { workspaceName } = commandModel;
     if (!this.folderNotExist.run(workspaceName)) return;
     if (!this.createFolder.run(workspaceName)) return;
+    if (!this.changePath.run(workspaceName)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(`Command executed correctly`);
     // todo: I am here
