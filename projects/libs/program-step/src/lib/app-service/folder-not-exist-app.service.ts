@@ -18,16 +18,16 @@ export class FolderNotExistAppService {
   ) {
   }
 
-  run (workspaceName: string): boolean {
+  run (folderName: string): boolean {
     this.simpleMessage.writePlain(
-      `Step: Folder Not Exist >>> ${workspaceName}`
+      `Step: Folder Not Exist >>> ${folderName}`
     );
-    if (this.pathUtils.notExistPath(workspaceName)) {
+    if (this.pathUtils.notExistPath(folderName)) {
       return true;
     }
     this.newline.writeNewline();
     this.simpleMessage.writeError(
-      `A ${workspaceName} folder exists in the current directory`
+      `A ${folderName} folder exists in the current directory`
     );
     this.simpleMessage.writeWarning(
       `Specify a different workspace name and restart the program`
