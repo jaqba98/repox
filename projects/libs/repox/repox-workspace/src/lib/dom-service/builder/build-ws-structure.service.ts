@@ -8,6 +8,7 @@ import {
 import {
   WorkspaceFolderEnum
 } from "../../enum/workspace/workspace-folder.enum";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -24,17 +25,35 @@ export class BuildWsStructureService {
           {
             type: WsStructureEntityEnum.folder,
             value: WorkspaceFolderEnum.apps,
-            children: []
+            children: [
+              {
+                type: WsStructureEntityEnum.gitkeep,
+                value: EMPTY_STRING,
+                children: []
+              }
+            ]
           },
           {
             type: WsStructureEntityEnum.folder,
             value: WorkspaceFolderEnum.libs,
-            children: []
+            children: [
+              {
+                type: WsStructureEntityEnum.gitkeep,
+                value: EMPTY_STRING,
+                children: []
+              }
+            ]
           },
           {
             type: WsStructureEntityEnum.folder,
             value: WorkspaceFolderEnum.tools,
-            children: []
+            children: [
+              {
+                type: WsStructureEntityEnum.gitkeep,
+                value: EMPTY_STRING,
+                children: []
+              }
+            ]
           }
         ]
       }

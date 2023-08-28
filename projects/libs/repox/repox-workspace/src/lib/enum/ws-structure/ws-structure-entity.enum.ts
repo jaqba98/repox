@@ -5,5 +5,5 @@
 
 export enum WsStructureEntityEnum {
   folder = `folder`,
-  execCommand = `execCommand`
+  gitkeep = `gitkeep`
 }

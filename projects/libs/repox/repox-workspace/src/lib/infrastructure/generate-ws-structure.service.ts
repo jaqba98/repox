@@ -45,6 +45,9 @@ export class GenerateWsStructureService {
         case WsStructureEntityEnum.folder:
           this.processFolderEntity(wsModel);
           break;
+        case WsStructureEntityEnum.gitkeep:
+          this.processGitkeepEntity(wsModel);
+          break;
         default:
           throw new Error(
             `Not supported workspace structure entity!`
@@ -61,5 +64,16 @@ export class GenerateWsStructureService {
     }
     this.processGenerateStructure(wsModel.children);
     this.currentPath.pop();
+  }
+
+  private processGitkeepEntity (wsModel: WsStructureModel): void {
+    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    if (this.pathUtils.folderIsEmpty(folderPath)) {
+      const gitkeepPath = this.pathUtils.createPath(
+        folderPath, WorkspaceFileEnum.gitkeepText
+      );
+      this.fileUtils.createEmptyFile(gitkeepPath);
+    }
+    this.processGenerateStructure(wsModel.children);
   }
 }
