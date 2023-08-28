@@ -6,6 +6,8 @@ export * from "./lib/enum/project/project-scheme.enum";
 export * from "./lib/enum/workspace/workspace-file.enum";
 export * from "./lib/enum/project/project-type.enum";
 export * from "./lib/enum/workspace/workspace-folder.enum";
-export * from "./lib/app-service/create-ws-file-app.service";
 export * from "./lib/model/ws-domain/ws-domain.model";
+export * from "./lib/app-service/create-ws-file-app.service";
+export * from "./lib/dom-service/builder/build-ws-structure.service";
+export * from "./lib/infrastructure/generate-ws-structure.service";
 // todo: refactor the file

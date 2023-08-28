@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { existsSync } from "fs";
+import { existsSync, readdirSync } from "fs";
 import process, { chdir } from "process";
 import { dirname, join, parse } from "path";
 import { EMPTY_STRING } from "@lib/const";
@@ -20,6 +20,10 @@ export class PathUtilsService {
 
   existPath (path: string): boolean {
     return existsSync(path);
+  }
+
+  folderIsEmpty (path: string): boolean {
+    return readdirSync(path).length === 0;
   }
 
   notExistPath (path: string): boolean {

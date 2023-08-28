@@ -15,6 +15,9 @@ import {
   SystemProgramEnum,
   SystemProgramExistAppService
 } from "@lib/program-step";
+import {
+  GenerateWorkspaceAppService
+} from "../app-service/generate-workspace-app.service";
 
 @singleton()
 /**
@@ -27,9 +30,8 @@ export class GenerateWorkspaceStepService {
     private readonly systemProgramExist: SystemProgramExistAppService,
     private readonly folderNotExist: FolderNotExistAppService,
     private readonly createFolder: CreateFolderAppService,
-    private readonly changePath: ChangePathAppService
-    //   private readonly createWsStructure: CreateWsStructureAppService,
-    //   private readonly initWsProject: InitWsProjectAppService
+    private readonly changePath: ChangePathAppService,
+    private readonly generateWorkspace: GenerateWorkspaceAppService
   ) {
   }
 
@@ -46,11 +48,8 @@ export class GenerateWorkspaceStepService {
     if (!this.folderNotExist.run(workspaceName)) return;
     if (!this.createFolder.run(workspaceName)) return;
     if (!this.changePath.run(workspaceName)) return;
+    if (!this.generateWorkspace.run()) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(`Command executed correctly`);
-    // todo: I am here
-    // if (!this.createWsStructure.run(workspaceName)) return;
-    // if (!this.initWsProject.run()) return;
   }
 }
-// todo: refactor the file
