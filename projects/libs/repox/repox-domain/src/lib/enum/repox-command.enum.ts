@@ -1,5 +1,5 @@
 /**
- * The enum contains all commands available in the repox program.
+ * The enum contains all commands available in the repox project.
  */
 
 export enum RepoxCommandEnum {
@@ -14,4 +14,3 @@ export enum RepoxCommandAliasEnum {
   project = `p`,
   npm = `n`
 }
-// todo: refactor the file

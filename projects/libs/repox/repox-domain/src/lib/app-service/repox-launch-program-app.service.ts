@@ -8,8 +8,10 @@ import {
   BuildProjectProgramService,
   DefaultDefaultProgramService,
   GenerateProjectProgramService,
-  GenerateWorkspaceProgramService, LintProjectProgramService,
-  PublishNpmProgramService
+  GenerateWorkspaceProgramService,
+  LintProjectProgramService,
+  PublishNpmProgramService,
+  RegenerateWorkspaceProgramService
 } from "@lib/repox-program";
 
 @singleton()
@@ -30,6 +32,13 @@ export class RepoxLaunchProgramAppService {
           programName: RepoxProgramEnum.generate,
           commandName: RepoxCommandEnum.workspace,
           service: container.resolve(GenerateWorkspaceProgramService)
+        },
+        {
+          programName: RepoxProgramEnum.regenerate,
+          commandName: RepoxCommandEnum.workspace,
+          service: container.resolve(
+            RegenerateWorkspaceProgramService
+          )
         },
         {
           programName: RepoxProgramEnum.generate,
@@ -55,4 +64,3 @@ export class RepoxLaunchProgramAppService {
     };
   }
 }
-// todo: refactor the file

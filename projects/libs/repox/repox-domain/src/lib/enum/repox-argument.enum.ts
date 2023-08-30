@@ -1,6 +1,6 @@
 /**
- * The enum contains all arguments and aliases available
- * in the repox program.
+ * The enum contains all arguments and aliases
+ * available in the repox project.
  */
 
 export enum RepoxArgumentEnum {
@@ -11,7 +11,8 @@ export enum RepoxArgumentEnum {
   scheme = `scheme`,
   watch = `watch`,
   production = `production`,
-  fix = `fix`
+  fix = `fix`,
+  force = `force`
 }
 
 export enum RepoxAliasEnum {
@@ -22,6 +23,6 @@ export enum RepoxAliasEnum {
   scheme = `s`,
   watch = `w`,
   production = `P`,
-  fix = `f`
+  fix = `f`,
+  force = `F`
 }
-// todo: refactor the file

@@ -89,6 +89,30 @@ export class RepoxGetParamDepService {
     };
   }
 
+  getProgramRegenerate (): ParamDomainDepModel {
+    return {
+      program: RepoxProgramEnum.regenerate,
+      commands: {
+        [RepoxCommandEnum.default]: {
+          command: RepoxCommandEnum.default,
+          args: {}
+        },
+        [RepoxCommandEnum.workspace]: {
+          command: RepoxCommandEnum.workspace,
+          args: {
+            [RepoxArgumentEnum.force]: {
+              name: RepoxArgumentEnum.force,
+              values: [],
+              valueMode: `empty`,
+              required: false
+            }
+          }
+        }
+      },
+      args: {}
+    };
+  }
+
   getProgramBuild (): ParamDomainDepModel {
     return {
       program: RepoxProgramEnum.build,
@@ -174,4 +198,3 @@ export class RepoxGetParamDepService {
     };
   }
 }
-// todo: refactor the file

@@ -7,6 +7,7 @@ export enum WorkspaceFolderEnum {
   libs = `libs`,
   tools = `tools`,
   dist = `dist`,
+  node_modules = `node_modules`,
   src = `src`,
   lib = `lib`
 }

@@ -53,6 +53,17 @@ export class ParamDomainAppService {
     return argumentValue.values.at(0) ?? defaultValue;
   }
 
+  getCommandEnumValue <TEnum>(
+    argument: string, defaultValue: string = EMPTY_STRING
+  ): TEnum {
+    const argumentValue = this.paramDomainStore.getParamDomain()
+      .command.args.find(param => param.name === argument);
+    if (argumentValue === undefined) {
+      return defaultValue as TEnum;
+    }
+    return (argumentValue.values.at(0) ?? defaultValue) as TEnum;
+  }
+
   getCommandBooleanValue (argument: string): boolean {
     return this.paramDomainStore.getParamDomain().command.args
       .some(param => param.name === argument);

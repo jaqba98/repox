@@ -24,6 +24,8 @@ implements BaseGetParamDepModel {
         return this.repoxGetParamDep.getProgramDefault();
       case RepoxProgramEnum.generate:
         return this.repoxGetParamDep.getProgramGenerate();
+      case RepoxProgramEnum.regenerate:
+        return this.repoxGetParamDep.getProgramRegenerate();
       case RepoxProgramEnum.build:
         return this.repoxGetParamDep.getProgramBuild();
       case RepoxProgramEnum.publish:
@@ -35,4 +37,3 @@ implements BaseGetParamDepModel {
     }
   }
 }
-// todo: refactor the file

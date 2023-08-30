@@ -1,5 +1,5 @@
 /**
- * The program models for repox program.
+ * The repox program model for all programs.
  */
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -14,6 +14,7 @@ export interface BuildProjectRepoxProgramModel {
   productionMode: boolean;
 }
 
-export type TRepoxProgramModel = EmptyRepoxProgramModel |
-DefaultDefaultRepoxProgramModel | BuildProjectRepoxProgramModel;
-// todo: refactor the file
+export type TRepoxProgramModel =
+  EmptyRepoxProgramModel |
+  DefaultDefaultRepoxProgramModel |
+  BuildProjectRepoxProgramModel;

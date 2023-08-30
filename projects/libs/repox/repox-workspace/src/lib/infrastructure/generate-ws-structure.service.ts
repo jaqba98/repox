@@ -1,6 +1,13 @@
 import { singleton } from "tsyringe";
-import { BuildWsStructureService } from "@lib/repox-workspace";
-import { FolderUtilsService, PathUtilsService } from "@lib/utils";
+import {
+  BuildWsStructureService,
+  WorkspaceFileEnum
+} from "@lib/repox-workspace";
+import {
+  FileUtilsService,
+  FolderUtilsService,
+  PathUtilsService
+} from "@lib/utils";
 import {
   type WsStructureModel
 } from "../model/ws-structure/ws-structure.model";
@@ -19,7 +26,8 @@ export class GenerateWsStructureService {
   constructor (
     private readonly buildWsStructure: BuildWsStructureService,
     private readonly pathUtils: PathUtilsService,
-    private readonly folderUtils: FolderUtilsService
+    private readonly folderUtils: FolderUtilsService,
+    private readonly fileUtils: FileUtilsService
   ) {
   }
 
@@ -34,8 +42,14 @@ export class GenerateWsStructureService {
   ): void {
     wsStructureModels.forEach(wsStructureModel => {
       switch (wsStructureModel.type) {
-        case WsStructureEntityEnum.folder:
-          this.processFolderEntity(wsStructureModel);
+        case WsStructureEntityEnum.createFolder:
+          this.processCreateFolderEntity(wsStructureModel);
+          break;
+        case WsStructureEntityEnum.removeFolder:
+          this.processRemoveFolderEntity(wsStructureModel);
+          break;
+        case WsStructureEntityEnum.createGitkeepFile:
+          this.processCreateGitkeepFileEntity();
           break;
         default:
           throw new Error(
@@ -45,7 +59,7 @@ export class GenerateWsStructureService {
     });
   }
 
-  private processFolderEntity (
+  private processCreateFolderEntity (
     wsStructureModel: WsStructureModel
   ): void {
     this.currentPath.push(wsStructureModel.value);
@@ -55,5 +69,26 @@ export class GenerateWsStructureService {
     }
     this.processGenerateStructure(wsStructureModel.children);
     this.currentPath.pop();
+  }
+
+  private processRemoveFolderEntity (
+    wsStructureModel: WsStructureModel
+  ): void {
+    this.currentPath.push(wsStructureModel.value);
+    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    if (this.pathUtils.existPath(folderPath)) {
+      this.folderUtils.removeFolder(folderPath);
+    }
+    this.currentPath.pop();
+  }
+
+  private processCreateGitkeepFileEntity (): void {
+    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    if (this.folderUtils.isEmpty(folderPath)) {
+      const gitkeepPath = this.pathUtils.createPath(
+        folderPath, WorkspaceFileEnum.gitkeepText
+      );
+      this.fileUtils.createEmptyFile(gitkeepPath);
+    }
   }
 }

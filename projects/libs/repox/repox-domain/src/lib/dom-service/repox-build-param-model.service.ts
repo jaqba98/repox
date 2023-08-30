@@ -9,6 +9,7 @@ import {
   type GenerateWorkspaceRepoxCommandModel,
   type LintProjectRepoxCommandModel,
   type PublishNpmRepoxCommandModel,
+  type RegenerateWorkspaceRepoxCommandModel,
   RepoxArgumentEnum
 } from "@lib/repox-domain";
 import { ParamDomainAppService } from "@lib/param-domain";
@@ -50,19 +51,26 @@ export class RepoxBuildParamModelService {
     };
   }
 
+  regenerateWorkspaceCommand ():
+  RegenerateWorkspaceRepoxCommandModel {
+    return {
+      isForceMode: this.paramDomain.getCommandBooleanValue(
+        RepoxArgumentEnum.force
+      )
+    };
+  }
+
   generateProjectCommand (): GenerateProjectRepoxCommandModel {
     return {
       projectName: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.name
       ),
-      projectType: this.paramDomain
-        .getCommandStringValue(
-          RepoxArgumentEnum.type, ProjectTypeEnum.app
-        ) as ProjectTypeEnum,
-      projectScheme: this.paramDomain
-        .getCommandStringValue(
-          RepoxArgumentEnum.scheme, ProjectSchemeEnum.appTypeScript
-        ) as ProjectSchemeEnum,
+      projectType: this.paramDomain.getCommandEnumValue(
+        RepoxArgumentEnum.type, ProjectTypeEnum.app
+      ),
+      projectScheme: this.paramDomain.getCommandEnumValue(
+        RepoxArgumentEnum.scheme, ProjectSchemeEnum.appTypeScript
+      ),
       projectPath: this.paramDomain.getCommandStringValue(
         RepoxArgumentEnum.path
       )
@@ -98,10 +106,9 @@ export class RepoxBuildParamModelService {
 
   lintProjectCommand (): LintProjectRepoxCommandModel {
     return {
-      fix: this.paramDomain.getCommandBooleanValue(
+      isFixMode: this.paramDomain.getCommandBooleanValue(
         RepoxArgumentEnum.fix
       )
     };
   }
 }
-// todo: refactor the file

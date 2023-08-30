@@ -45,8 +45,8 @@ export class LintProjectStepService {
     if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return;
     if (!this.loadWsDomain.run()) return;
-    const { fix } = commandModel;
-    if (!this.lintProjectsApp.run(fix)) return;
+    const { isFixMode } = commandModel;
+    if (!this.lintProjectsApp.run(isFixMode)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(
       `Project linted successfully!`

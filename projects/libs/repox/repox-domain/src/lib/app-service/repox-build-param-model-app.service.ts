@@ -7,8 +7,12 @@ import {
   RepoxBuildParamModelService
 } from "../dom-service/repox-build-param-model.service";
 import { ParamDomainAppService } from "@lib/param-domain";
-import { type TRepoxProgramModel } from "../model/repox-program.model";
-import { type TRepoxCommandModel } from "../model/repox-command.model";
+import {
+  type TRepoxProgramModel
+} from "../model/repox-program.model";
+import {
+  type TRepoxCommandModel
+} from "../model/repox-command.model";
 
 @singleton()
 /**
@@ -44,6 +48,11 @@ export class RepoxBuildParamModelAppService {
         return this.buildParamModel.generateProjectCommand();
       }
     }
+    if (programName === RepoxProgramEnum.regenerate) {
+      if (commandName === RepoxCommandEnum.workspace) {
+        return this.buildParamModel.regenerateWorkspaceCommand();
+      }
+    }
     if (programName === RepoxProgramEnum.build) {
       if (commandName === RepoxCommandEnum.project) {
         return this.buildParamModel.buildProjectCommand();
@@ -62,4 +71,3 @@ export class RepoxBuildParamModelAppService {
     return this.buildParamModel.emptyCommand();
   }
 }
-// todo: refactor the file
