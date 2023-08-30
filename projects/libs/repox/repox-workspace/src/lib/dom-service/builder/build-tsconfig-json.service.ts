@@ -6,7 +6,10 @@ import { FileUtilsService, PathUtilsService } from "@lib/utils";
 import {
   type WsPackageJsonDtoModel
 } from "../../model/ws-dto/ws-package-json-dto.model";
-import { BuildProjectAliasService } from "@lib/repox-workspace";
+import {
+  BuildProjectAliasService,
+  WorkspaceFileEnum
+} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -22,8 +25,13 @@ export class BuildTsconfigJsonService {
   }
 
   build (): WsTsconfigDtoModel {
+    const tsconfig = this.fileUtils.readJsonFile<WsTsconfigDtoModel>(
+      WorkspaceFileEnum.tsconfigJson
+    );
     return {
+      ...tsconfig,
       compilerOptions: {
+        ...tsconfig.compilerOptions,
         target: `ES2022`,
         experimentalDecorators: true,
         emitDecoratorMetadata: true,
@@ -38,12 +46,7 @@ export class BuildTsconfigJsonService {
         sourceMap: true,
         paths: this.getTsconfigPath()
       },
-      exclude: [
-        `node_modules`,
-        `**/*.spec.ts`,
-        `**/*.test.ts`,
-        `**/jest.config.ts`
-      ]
+      exclude: this.getExcludes(tsconfig.exclude)
     };
   }
 
@@ -96,5 +99,20 @@ export class BuildTsconfigJsonService {
       return `tool`;
     }
     throw new Error(`Not supported project type!`);
+  }
+
+  private getExcludes (exclude: string[]): string [] {
+    return [
+      ...exclude,
+      `node_modules`,
+      `**/*.spec.ts`,
+      `**/*.test.ts`,
+      `**/jest.config.ts`
+    ].reduce((acc: string[], curr: string) => {
+      if (!acc.includes(curr)) {
+        acc = [...acc, curr];
+      }
+      return acc;
+    }, []);
   }
 }
