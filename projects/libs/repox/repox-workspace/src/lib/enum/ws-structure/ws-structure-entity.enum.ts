@@ -4,7 +4,7 @@
  */
 
 export enum WsStructureEntityEnum {
-  createFolder = `createFolder`,
   removeFolder = `removeFolder`,
+  createFolder = `createFolder`,
   createGitkeepFile = `createGitkeepFile`
 }

@@ -42,14 +42,14 @@ export class GenerateWsStructureService {
   ): void {
     wsStructureModels.forEach(wsStructureModel => {
       switch (wsStructureModel.type) {
-        case WsStructureEntityEnum.createFolder:
-          this.processCreateFolderEntity(wsStructureModel);
-          break;
         case WsStructureEntityEnum.removeFolder:
-          this.processRemoveFolderEntity(wsStructureModel);
+          this.removeFolderEntity(wsStructureModel);
+          break;
+        case WsStructureEntityEnum.createFolder:
+          this.createFolderEntity(wsStructureModel);
           break;
         case WsStructureEntityEnum.createGitkeepFile:
-          this.processCreateGitkeepFileEntity();
+          this.createGitkeepFileEntity();
           break;
         default:
           throw new Error(
@@ -59,7 +59,18 @@ export class GenerateWsStructureService {
     });
   }
 
-  private processCreateFolderEntity (
+  private removeFolderEntity (
+    wsStructureModel: WsStructureModel
+  ): void {
+    this.currentPath.push(wsStructureModel.value);
+    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    if (this.pathUtils.existPath(folderPath)) {
+      this.folderUtils.removeFolder(folderPath);
+    }
+    this.currentPath.pop();
+  }
+
+  private createFolderEntity (
     wsStructureModel: WsStructureModel
   ): void {
     this.currentPath.push(wsStructureModel.value);
@@ -71,18 +82,7 @@ export class GenerateWsStructureService {
     this.currentPath.pop();
   }
 
-  private processRemoveFolderEntity (
-    wsStructureModel: WsStructureModel
-  ): void {
-    this.currentPath.push(wsStructureModel.value);
-    const folderPath = this.pathUtils.createPath(...this.currentPath);
-    if (this.pathUtils.existPath(folderPath)) {
-      this.folderUtils.removeFolder(folderPath);
-    }
-    this.currentPath.pop();
-  }
-
-  private processCreateGitkeepFileEntity (): void {
+  private createGitkeepFileEntity (): void {
     const folderPath = this.pathUtils.createPath(...this.currentPath);
     if (this.folderUtils.isEmpty(folderPath)) {
       const gitkeepPath = this.pathUtils.createPath(
