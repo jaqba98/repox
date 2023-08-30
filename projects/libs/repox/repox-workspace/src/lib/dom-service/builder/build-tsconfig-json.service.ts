@@ -6,6 +6,7 @@ import { FileUtilsService, PathUtilsService } from "@lib/utils";
 import {
   type WsPackageJsonDtoModel
 } from "../../model/ws-dto/ws-package-json-dto.model";
+import { BuildProjectAliasService } from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -15,7 +16,8 @@ import {
 export class BuildTsconfigJsonService {
   constructor (
     private readonly fileUtils: FileUtilsService,
-    private readonly pathUtils: PathUtilsService
+    private readonly pathUtils: PathUtilsService,
+    private readonly buildProjectAlias: BuildProjectAliasService
   ) {
   }
 
@@ -53,7 +55,7 @@ export class BuildTsconfigJsonService {
       )
       .map(packageJson => ({
         packageJson,
-        projectType: this.getProjectType(packageJson)
+        projectType: this.getProjectTypeByProjectPath(packageJson)
       }))
       .filter(project => project.projectType !== `app`)
       .map(project => ({
@@ -64,7 +66,9 @@ export class BuildTsconfigJsonService {
       }))
       .map(project => ({
         ...project,
-        projectAlias: `@${project.projectType}/${project.projectName}`
+        projectAlias: this.buildProjectAlias.buildAlias(
+          project.projectName, project.projectType
+        )
       }))
       .map(project => ({
         ...project,
@@ -72,13 +76,14 @@ export class BuildTsconfigJsonService {
           project.packageJson, `../src/index.ts`
         )
       }))
+      .filter(project => this.pathUtils.existPath(project.indexPath))
       .reduce((acc, curr) => {
         acc = { ...acc, [curr.projectAlias]: [curr.indexPath] };
         return acc;
       }, {});
   }
 
-  private getProjectType (
+  private getProjectTypeByProjectPath (
     packageJsonPath: string
   ): `app` | `lib` | `tool` {
     if (packageJsonPath.startsWith(`projects/apps`)) {

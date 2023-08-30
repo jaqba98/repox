@@ -31,9 +31,6 @@
       "@lib/repox-const": [
         "projects/libs/repox/repox-const/src/index.ts"
       ],
-      "@lib/repox-component": [
-        "projects/libs/repox/repox-component/src/index.ts"
-      ],
       "@lib/program-step": [
         "projects/libs/program-step/src/index.ts"
       ],
@@ -66,9 +63,6 @@
       ],
       "@lib/htmlpro-const": [
         "projects/libs/htmlpro/htmlpro-const/src/index.ts"
-      ],
-      "@lib/htmlpro-components": [
-        "projects/libs/htmlpro/htmlpro-components/src/index.ts"
       ],
       "@lib/const": [
         "projects/libs/const/src/index.ts"
