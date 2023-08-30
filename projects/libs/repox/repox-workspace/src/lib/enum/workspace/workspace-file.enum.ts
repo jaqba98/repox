@@ -9,6 +9,7 @@ export enum WorkspaceFileEnum {
   importJestConfigTs = `jest.config`,
   gitkeepText = `.gitkeep`,
   packageJson = `package.json`,
+  packageLockJson = `package-lock.json`,
   indexTs = `index.ts`,
   mainTs = `main.ts`
 }

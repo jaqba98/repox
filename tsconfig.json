@@ -4,6 +4,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",
+    "rootDir": "./projects",
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -12,41 +13,50 @@
     "baseUrl": ".",
     "sourceMap": true,
     "paths": {
-      "@lib/const": [
-        "projects/libs/const/src/index.ts"
-      ],
-      "@lib/logger": [
-        "projects/libs/logger/src/index.ts"
-      ],
-      "@lib/param-domain": [
-        "projects/libs/param-domain/src/index.ts"
-      ],
-      "@lib/param-dto": [
-        "projects/libs/param-dto/src/index.ts"
-      ],
-      "@lib/launcher": [
-        "projects/libs/launcher/src/index.ts"
-      ],
-      "@lib/repox-main": [
-        "projects/libs/repox/repox-main/src/index.ts"
-      ],
-      "@lib/repox-program": [
-        "projects/libs/repox/repox-program/src/index.ts"
+      "@lib/utils": [
+        "projects/libs/utils/src/index.ts"
       ],
       "@lib/repox-workspace": [
         "projects/libs/repox/repox-workspace/src/index.ts"
       ],
-      "@lib/utils": [
-        "projects/libs/utils/src/index.ts"
+      "@lib/repox-program": [
+        "projects/libs/repox/repox-program/src/index.ts"
       ],
-      "@lib/model": [
-        "projects/libs/model/src/index.ts"
+      "@lib/repox-main": [
+        "projects/libs/repox/repox-main/src/index.ts"
+      ],
+      "@lib/repox-domain": [
+        "projects/libs/repox/repox-domain/src/index.ts"
       ],
       "@lib/repox-const": [
         "projects/libs/repox/repox-const/src/index.ts"
       ],
-      "@lib/repox-domain": [
-        "projects/libs/repox/repox-domain/src/index.ts"
+      "@lib/repox-component": [
+        "projects/libs/repox/repox-component/src/index.ts"
+      ],
+      "@lib/program-step": [
+        "projects/libs/program-step/src/index.ts"
+      ],
+      "@lib/param-dto": [
+        "projects/libs/param-dto/src/index.ts"
+      ],
+      "@lib/param-domain": [
+        "projects/libs/param-domain/src/index.ts"
+      ],
+      "@lib/model": [
+        "projects/libs/model/src/index.ts"
+      ],
+      "@lib/logger": [
+        "projects/libs/logger/src/index.ts"
+      ],
+      "@lib/launcher": [
+        "projects/libs/launcher/src/index.ts"
+      ],
+      "@lib/htmlpro-workspace": [
+        "projects/libs/htmlpro/htmlpro-workspace/src/index.ts"
+      ],
+      "@lib/htmlpro-program": [
+        "projects/libs/htmlpro/htmlpro-program/src/index.ts"
       ],
       "@lib/htmlpro-main": [
         "projects/libs/htmlpro/htmlpro-main/src/index.ts"
@@ -54,21 +64,21 @@
       "@lib/htmlpro-domain": [
         "projects/libs/htmlpro/htmlpro-domain/src/index.ts"
       ],
-      "@lib/htmlpro-program": [
-        "projects/libs/htmlpro/htmlpro-program/src/index.ts"
-      ],
       "@lib/htmlpro-const": [
         "projects/libs/htmlpro/htmlpro-const/src/index.ts"
       ],
-      "@lib/program-step": [
-        "projects/libs/program-step/src/index.ts"
+      "@lib/htmlpro-components": [
+        "projects/libs/htmlpro/htmlpro-components/src/index.ts"
       ],
-      "@lib/htmlpro-workspace": [
-        "projects/libs/htmlpro/htmlpro-workspace/src/index.ts"
+      "@lib/const": [
+        "projects/libs/const/src/index.ts"
       ]
     }
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/jest.config.ts"
   ]
 }

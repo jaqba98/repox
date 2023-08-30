@@ -78,5 +78,11 @@ export class FileUtilsService {
   writeJsonFile<T>(path: string, content: T): void {
     writeFileSync(path, JSON.stringify(content, null, 2));
   }
+
+  getAllFiles (rootPath: string, fileName: string): string[] {
+    const options = { cwd: rootPath, ignore: [`**/node_modules/**`] };
+    return globSync(fileName, options)
+      .map(path => this.pathUtils.normalizePath(path));
+  }
 }
 // todo: refactor the file

@@ -1,12 +1,14 @@
 import { singleton } from "tsyringe";
 import {
   BuildWsStructureService,
+  CreateWsFileAppService,
   WorkspaceFileEnum
 } from "@lib/repox-workspace";
 import {
   FileUtilsService,
   FolderUtilsService,
-  PathUtilsService
+  PathUtilsService,
+  RunCommandUtilsService
 } from "@lib/utils";
 import {
   type WsStructureModel
@@ -14,6 +16,9 @@ import {
 import {
   WsStructureEntityEnum
 } from "../enum/ws-structure/ws-structure-entity.enum";
+import {
+  BuildTsconfigJsonService
+} from "../dom-service/builder/build-tsconfig-json.service";
 
 @singleton()
 /**
@@ -27,7 +32,10 @@ export class GenerateWsStructureService {
     private readonly buildWsStructure: BuildWsStructureService,
     private readonly pathUtils: PathUtilsService,
     private readonly folderUtils: FolderUtilsService,
-    private readonly fileUtils: FileUtilsService
+    private readonly fileUtils: FileUtilsService,
+    private readonly runCommandUtils: RunCommandUtilsService,
+    private readonly createWsFile: CreateWsFileAppService,
+    private readonly buildTsconfigJson: BuildTsconfigJsonService
   ) {
   }
 
@@ -42,14 +50,8 @@ export class GenerateWsStructureService {
   ): void {
     wsStructureModels.forEach(wsStructureModel => {
       switch (wsStructureModel.type) {
-        case WsStructureEntityEnum.removeFolder:
-          this.removeFolderEntity(wsStructureModel);
-          break;
-        case WsStructureEntityEnum.createFolder:
-          this.createFolderEntity(wsStructureModel);
-          break;
-        case WsStructureEntityEnum.createGitkeepFile:
-          this.createGitkeepFileEntity();
+        case WsStructureEntityEnum.createTsconfigJsonFile:
+          this.processCreateTsconfigJsonFile(wsStructureModel);
           break;
         default:
           throw new Error(
@@ -59,36 +61,15 @@ export class GenerateWsStructureService {
     });
   }
 
-  private removeFolderEntity (
+  private processCreateTsconfigJsonFile (
     wsStructureModel: WsStructureModel
   ): void {
-    this.currentPath.push(wsStructureModel.value);
-    const folderPath = this.pathUtils.createPath(...this.currentPath);
-    if (this.pathUtils.existPath(folderPath)) {
-      this.folderUtils.removeFolder(folderPath);
-    }
-    this.currentPath.pop();
-  }
-
-  private createFolderEntity (
-    wsStructureModel: WsStructureModel
-  ): void {
-    this.currentPath.push(wsStructureModel.value);
-    const folderPath = this.pathUtils.createPath(...this.currentPath);
-    if (this.pathUtils.notExistPath(folderPath)) {
-      this.folderUtils.createFolder(folderPath);
-    }
+    const tsconfigJsonPath = this.pathUtils.createPath(
+      ...this.currentPath, WorkspaceFileEnum.tsconfigJson
+    );
+    this.fileUtils.writeJsonFile(
+      tsconfigJsonPath, this.buildTsconfigJson.build()
+    );
     this.processGenerateStructure(wsStructureModel.children);
-    this.currentPath.pop();
-  }
-
-  private createGitkeepFileEntity (): void {
-    const folderPath = this.pathUtils.createPath(...this.currentPath);
-    if (this.folderUtils.isEmpty(folderPath)) {
-      const gitkeepPath = this.pathUtils.createPath(
-        folderPath, WorkspaceFileEnum.gitkeepText
-      );
-      this.fileUtils.createEmptyFile(gitkeepPath);
-    }
   }
 }

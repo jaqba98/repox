@@ -7,10 +7,13 @@ import {
 import {
   WorkspaceFileEnum
 } from "../enum/workspace/workspace-file.enum";
-import { PathUtilsService } from "@lib/utils";
+import { FileUtilsService, PathUtilsService } from "@lib/utils";
 import {
   WorkspaceImportEnum
 } from "../enum/workspace/workspace-import.enum";
+import {
+  WsPackageJsonDtoModel
+} from "../model/ws-dto/ws-package-json-dto.model";
 
 @singleton()
 /**
@@ -18,7 +21,10 @@ import {
  * for all workspace files.
  */
 export class CreateWsFileAppService {
-  constructor (private readonly pathUtils: PathUtilsService) {
+  constructor (
+    private readonly pathUtils: PathUtilsService,
+    private readonly fileUtils: FileUtilsService
+  ) {
   }
 
   buildDefaultGitignoreContentFile (): string {
@@ -51,35 +57,9 @@ export default config;
 `;
   }
 
-  buildDefaultRepoxJsonContentFile (): WsRepoxDtoModel {
+  buildRepoxJsonFile (): WsRepoxDtoModel {
     return {
       projects: {}
-    };
-  }
-
-  buildDefaultTsconfigJsonContentFile (): WsTsconfigDtoModel {
-    return {
-      compilerOptions: {
-        target: `ES2022`,
-        experimentalDecorators: true,
-        emitDecoratorMetadata: true,
-        module: `commonjs`,
-        rootDir: `./projects`,
-        outDir: `./dist`,
-        esModuleInterop: true,
-        forceConsistentCasingInFileNames: true,
-        strict: true,
-        skipLibCheck: true,
-        baseUrl: `.`,
-        sourceMap: true,
-        paths: {}
-      },
-      exclude: [
-        `node_modules`,
-        `**/*.spec.ts`,
-        `**/*.test.ts`,
-        `**/jest.config.ts`
-      ]
     };
   }
 

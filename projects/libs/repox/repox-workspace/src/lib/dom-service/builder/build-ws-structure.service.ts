@@ -5,9 +5,6 @@ import {
 import {
   WsStructureEntityEnum
 } from "../../enum/ws-structure/ws-structure-entity.enum";
-import {
-  WorkspaceFolderEnum
-} from "../../enum/workspace/workspace-folder.enum";
 import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
@@ -19,48 +16,9 @@ export class BuildWsStructureService {
   buildStructure (): WsStructureModel[] {
     return [
       {
-        type: WsStructureEntityEnum.removeFolder,
-        value: WorkspaceFolderEnum.node_modules,
+        type: WsStructureEntityEnum.createTsconfigJsonFile,
+        value: EMPTY_STRING,
         children: []
-      },
-      {
-        type: WsStructureEntityEnum.createFolder,
-        value: WorkspaceFolderEnum.projects,
-        children: [
-          {
-            type: WsStructureEntityEnum.createFolder,
-            value: WorkspaceFolderEnum.apps,
-            children: [
-              {
-                type: WsStructureEntityEnum.createGitkeepFile,
-                value: EMPTY_STRING,
-                children: []
-              }
-            ]
-          },
-          {
-            type: WsStructureEntityEnum.createFolder,
-            value: WorkspaceFolderEnum.libs,
-            children: [
-              {
-                type: WsStructureEntityEnum.createGitkeepFile,
-                value: EMPTY_STRING,
-                children: []
-              }
-            ]
-          },
-          {
-            type: WsStructureEntityEnum.createFolder,
-            value: WorkspaceFolderEnum.tools,
-            children: [
-              {
-                type: WsStructureEntityEnum.createGitkeepFile,
-                value: EMPTY_STRING,
-                children: []
-              }
-            ]
-          }
-        ]
       }
     ];
   }
