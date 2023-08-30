@@ -1,15 +1,9 @@
 import { singleton } from "tsyringe";
 import {
   BuildWsStructureService,
-  CreateWsFileAppService,
   WorkspaceFileEnum
 } from "@lib/repox-workspace";
-import {
-  FileUtilsService,
-  FolderUtilsService,
-  PathUtilsService,
-  RunCommandUtilsService
-} from "@lib/utils";
+import { FileUtilsService, PathUtilsService } from "@lib/utils";
 import {
   type WsStructureModel
 } from "../model/ws-structure/ws-structure.model";
@@ -31,10 +25,7 @@ export class GenerateWsStructureService {
   constructor (
     private readonly buildWsStructure: BuildWsStructureService,
     private readonly pathUtils: PathUtilsService,
-    private readonly folderUtils: FolderUtilsService,
     private readonly fileUtils: FileUtilsService,
-    private readonly runCommandUtils: RunCommandUtilsService,
-    private readonly createWsFile: CreateWsFileAppService,
     private readonly buildTsconfigJson: BuildTsconfigJsonService
   ) {
   }
