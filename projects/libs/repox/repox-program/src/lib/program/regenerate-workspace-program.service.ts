@@ -1,5 +1,12 @@
 import { singleton } from "tsyringe";
 import { type ProgramModel } from "@lib/model";
+import {
+  RegenerateWorkspaceStepService
+} from "../step/regenerate-workspace-step.service";
+import {
+  type EmptyRepoxProgramModel,
+  type RegenerateWorkspaceRepoxCommandModel
+} from "@lib/repox-domain";
 
 @singleton()
 /**
@@ -8,8 +15,15 @@ import { type ProgramModel } from "@lib/model";
  */
 export class RegenerateWorkspaceProgramService
 implements ProgramModel {
-  run (_programDomain: unknown, _commandDomain: unknown): void {
-    console.log(`RegenerateWorkspaceProgramService`);
+  constructor (
+    private readonly step: RegenerateWorkspaceStepService
+  ) {
+  }
+
+  run (programDomain: unknown, commandDomain: unknown): void {
+    this.step.runSteps(
+      programDomain as EmptyRepoxProgramModel,
+      commandDomain as RegenerateWorkspaceRepoxCommandModel
+    );
   }
 }
-// todo: refactor the file
