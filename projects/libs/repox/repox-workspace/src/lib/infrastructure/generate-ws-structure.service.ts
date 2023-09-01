@@ -3,7 +3,11 @@ import {
   BuildWsStructureService,
   WorkspaceFileEnum
 } from "@lib/repox-workspace";
-import { FileUtilsService, PathUtilsService } from "@lib/utils";
+import {
+  FileUtilsService,
+  FolderUtilsService,
+  PathUtilsService
+} from "@lib/utils";
 import {
   type WsStructureModel
 } from "../model/ws-structure/ws-structure.model";
@@ -13,6 +17,7 @@ import {
 import {
   BuildTsconfigJsonService
 } from "../dom-service/builder/build-tsconfig-json.service";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
@@ -26,6 +31,7 @@ export class GenerateWsStructureService {
     private readonly buildWsStructure: BuildWsStructureService,
     private readonly pathUtils: PathUtilsService,
     private readonly fileUtils: FileUtilsService,
+    private readonly folderUtils: FolderUtilsService,
     private readonly buildTsconfigJson: BuildTsconfigJsonService
   ) {
   }
@@ -41,6 +47,12 @@ export class GenerateWsStructureService {
   ): void {
     wsStructureModels.forEach(wsStructureModel => {
       switch (wsStructureModel.type) {
+        case WsStructureEntityEnum.createFolder:
+          this.processCreateFolder(wsStructureModel);
+          break;
+        case WsStructureEntityEnum.createGitkeepFile:
+          this.processCreateGitkeepFile(wsStructureModel);
+          break;
         case WsStructureEntityEnum.createTsconfigJsonFile:
           this.processCreateTsconfigJsonFile(wsStructureModel);
           break;
@@ -50,6 +62,31 @@ export class GenerateWsStructureService {
           );
       }
     });
+  }
+
+  private processCreateFolder (
+    wsStructureModel: WsStructureModel
+  ): void {
+    this.currentPath.push(wsStructureModel.value);
+    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    if (this.pathUtils.notExistPath(folderPath)) {
+      this.folderUtils.createFolder(folderPath);
+    }
+    this.processGenerateStructure(wsStructureModel.children);
+    this.currentPath.pop();
+  }
+
+  private processCreateGitkeepFile (
+    wsStructureModel: WsStructureModel
+  ): void {
+    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    if (this.folderUtils.isEmpty(folderPath)) {
+      const gitkeepPath = this.pathUtils.createPath(
+        folderPath, WorkspaceFileEnum.gitkeepText
+      );
+      this.fileUtils.writeTextFile(gitkeepPath, EMPTY_STRING);
+    }
+    this.processGenerateStructure(wsStructureModel.children);
   }
 
   private processCreateTsconfigJsonFile (
