@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { copyFileSync, readFileSync, writeFileSync } from "fs";
+import { copyFileSync, readFileSync, unlinkSync, writeFileSync } from "fs";
 import { EMPTY_STRING } from "@lib/const";
 import { PathUtilsService } from "./path-utils.service";
 import { globSync } from "glob";
@@ -83,6 +83,10 @@ export class FileUtilsService {
     const options = { cwd: rootPath, ignore: [`**/node_modules/**`] };
     return globSync(fileName, options)
       .map(path => this.pathUtils.normalizePath(path));
+  }
+
+  removeFile (filePath: string): void {
+    unlinkSync(filePath);
   }
 }
 // todo: refactor the file

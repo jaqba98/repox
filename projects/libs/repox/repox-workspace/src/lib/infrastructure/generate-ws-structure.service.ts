@@ -54,6 +54,9 @@ export class GenerateWsStructureService {
         case WsStructureEntityEnum.createFolder:
           this.processCreateFolder(wsStructureModel);
           break;
+        case WsStructureEntityEnum.removeFile:
+          this.processRemoveFile(wsStructureModel);
+          break;
         case WsStructureEntityEnum.createGitkeepFile:
           this.processCreateGitkeepFile(wsStructureModel);
           break;
@@ -81,6 +84,19 @@ export class GenerateWsStructureService {
     }
     this.processGenerateStructure(wsStructureModel.children);
     this.currentPath.pop();
+  }
+
+  private processRemoveFile (
+    wsStructureModel: WsStructureModel
+  ): void {
+    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    const filePath = this.pathUtils.createPath(
+      folderPath, wsStructureModel.value
+    );
+    if (this.pathUtils.existPath(filePath)) {
+      this.fileUtils.removeFile(filePath);
+    }
+    this.processGenerateStructure(wsStructureModel.children);
   }
 
   private processCreateGitkeepFile (

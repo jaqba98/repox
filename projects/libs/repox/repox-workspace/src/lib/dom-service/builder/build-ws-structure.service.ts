@@ -9,6 +9,9 @@ import { EMPTY_STRING } from "@lib/const";
 import {
   WorkspaceFolderEnum
 } from "../../enum/workspace/workspace-folder.enum";
+import {
+  WorkspaceFileEnum
+} from "../../enum/workspace/workspace-file.enum";
 
 @singleton()
 /**
@@ -67,6 +70,14 @@ export class BuildWsStructureService {
       {
         type: WsStructureEntityEnum.createGitignoreFile,
         value: EMPTY_STRING,
+        children: []
+      },
+      /**
+       * Remove the package-lock.json file.
+       */
+      {
+        type: WsStructureEntityEnum.removeFile,
+        value: WorkspaceFileEnum.packageLockJson,
         children: []
       },
       /**
