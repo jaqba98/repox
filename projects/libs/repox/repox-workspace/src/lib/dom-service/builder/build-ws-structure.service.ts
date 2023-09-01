@@ -62,6 +62,14 @@ export class BuildWsStructureService {
         ]
       },
       /**
+       * Create .gitignore file.
+       */
+      {
+        type: WsStructureEntityEnum.createGitignoreFile,
+        value: EMPTY_STRING,
+        children: []
+      },
+      /**
        * Create tsconfig.json file with filled path section for each
        * typescript library and tool project.
        */

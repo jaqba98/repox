@@ -18,6 +18,9 @@ import {
   BuildTsconfigJsonService
 } from "../dom-service/builder/build-tsconfig-json.service";
 import { EMPTY_STRING } from "@lib/const";
+import {
+  BuildGitignoreService
+} from "../dom-service/builder/build-gitignore.service";
 
 @singleton()
 /**
@@ -32,7 +35,8 @@ export class GenerateWsStructureService {
     private readonly pathUtils: PathUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly folderUtils: FolderUtilsService,
-    private readonly buildTsconfigJson: BuildTsconfigJsonService
+    private readonly buildTsconfigJson: BuildTsconfigJsonService,
+    private readonly buildGitignore: BuildGitignoreService
   ) {
   }
 
@@ -52,6 +56,9 @@ export class GenerateWsStructureService {
           break;
         case WsStructureEntityEnum.createGitkeepFile:
           this.processCreateGitkeepFile(wsStructureModel);
+          break;
+        case WsStructureEntityEnum.createGitignoreFile:
+          this.processCreateGitignoreFile(wsStructureModel);
           break;
         case WsStructureEntityEnum.createTsconfigJsonFile:
           this.processCreateTsconfigJsonFile(wsStructureModel);
@@ -86,6 +93,18 @@ export class GenerateWsStructureService {
       );
       this.fileUtils.writeTextFile(gitkeepPath, EMPTY_STRING);
     }
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
+  private processCreateGitignoreFile (
+    wsStructureModel: WsStructureModel
+  ): void {
+    const gitignorePath = this.pathUtils.createPath(
+      ...this.currentPath, WorkspaceFileEnum.gitignoreText
+    );
+    this.fileUtils.writeTextFile(
+      gitignorePath, this.buildGitignore.build()
+    );
     this.processGenerateStructure(wsStructureModel.children);
   }
 

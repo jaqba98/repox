@@ -6,5 +6,6 @@
 export enum WsStructureEntityEnum {
   createFolder = `createFolder`,
   createGitkeepFile = `createGitkeepFile`,
+  createGitignoreFile = `createGitignoreFile`,
   createTsconfigJsonFile = `createTsconfigJsonFile`
 }
