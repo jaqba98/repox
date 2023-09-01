@@ -22,6 +22,14 @@ export class BuildWsStructureService {
   buildStructure (): WsStructureModel[] {
     return [
       /**
+       * Remove the disc folder in workspace root.
+       */
+      {
+        type: WsStructureEntityEnum.removeFolder,
+        value: WorkspaceFolderEnum.dist,
+        children: []
+      },
+      /**
        * Remove the node_modules folder in workspace root.
        */
       {
