@@ -22,6 +22,14 @@ export class BuildWsStructureService {
   buildStructure (): WsStructureModel[] {
     return [
       /**
+       * Remove the node_modules folder in workspace root.
+       */
+      {
+        type: WsStructureEntityEnum.removeFolder,
+        value: WorkspaceFolderEnum.node_modules,
+        children: []
+      },
+      /**
        * Folder called projects with apps, libs, tools subfolder.
        * Each subfolder contains .gitkeep file if it is empty.
        * */

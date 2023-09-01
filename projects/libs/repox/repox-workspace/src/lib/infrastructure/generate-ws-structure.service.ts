@@ -51,6 +51,9 @@ export class GenerateWsStructureService {
   ): void {
     wsStructureModels.forEach(wsStructureModel => {
       switch (wsStructureModel.type) {
+        case WsStructureEntityEnum.removeFolder:
+          this.processRemoveFolder(wsStructureModel);
+          break;
         case WsStructureEntityEnum.createFolder:
           this.processCreateFolder(wsStructureModel);
           break;
@@ -72,6 +75,18 @@ export class GenerateWsStructureService {
           );
       }
     });
+  }
+
+  private processRemoveFolder (
+    wsStructureModel: WsStructureModel
+  ): void {
+    this.currentPath.push(wsStructureModel.value);
+    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    if (this.pathUtils.existPath(folderPath)) {
+      this.folderUtils.removeFolder(folderPath);
+    }
+    this.processGenerateStructure(wsStructureModel.children);
+    this.currentPath.pop();
   }
 
   private processCreateFolder (
