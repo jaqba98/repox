@@ -138,6 +138,11 @@ export class BuildWsStructureService {
               },
               {
                 type: WsStructureEntityEnum.execCommand,
+                value: `npm i ts-jest@29.1.1 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
                 value: `npm i ts-node@10.9.1 -D`,
                 children: []
               },
