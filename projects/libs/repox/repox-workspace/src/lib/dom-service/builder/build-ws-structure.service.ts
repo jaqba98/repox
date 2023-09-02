@@ -89,6 +89,14 @@ export class BuildWsStructureService {
         children: []
       },
       /**
+       * Create jest.config.ts configuration in root of workspace.
+       */
+      {
+        type: WsStructureEntityEnum.createRootJestConfigTsFile,
+        value: EMPTY_STRING,
+        children: []
+      },
+      /**
        * Remove the package-lock.json file.
        */
       {
@@ -116,6 +124,11 @@ export class BuildWsStructureService {
               {
                 type: WsStructureEntityEnum.execCommand,
                 value: `npm i @types/node@20.5.8 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i jest@29.6.4 -D`,
                 children: []
               },
               {

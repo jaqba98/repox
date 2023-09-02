@@ -1,8 +1,6 @@
 import { singleton } from "tsyringe";
-import { type WsRepoxDtoModel } from "../model/ws-dto/ws-repox-dto.model";
 import {
-  type WsProjectTsconfigDtoModel,
-  type WsTsconfigDtoModel
+  type WsProjectTsconfigDtoModel
 } from "../model/ws-dto/ws-tsconfig-dto.model";
 import {
   WorkspaceFileEnum
@@ -11,9 +9,6 @@ import { FileUtilsService, PathUtilsService } from "@lib/utils";
 import {
   WorkspaceImportEnum
 } from "../enum/workspace/workspace-import.enum";
-import {
-  WsPackageJsonDtoModel
-} from "../model/ws-dto/ws-package-json-dto.model";
 
 @singleton()
 /**
@@ -25,21 +20,6 @@ export class CreateWsFileAppService {
     private readonly pathUtils: PathUtilsService,
     private readonly fileUtils: FileUtilsService
   ) {
-  }
-
-  buildDefaultRootJestConfigTsContentFile (): string {
-    return `import type { Config } from "jest";
-
-const config: Config = {
-  clearMocks: true,
-  coverageProvider: "v8",
-  preset: "ts-jest",
-  setupFilesAfterEnv: ["core-js/features/reflect"],
-  testEnvironment: "jest-environment-node"
-};
-
-export default config;
-`;
   }
 
   buildProjectTsconfigJsonContentFile (

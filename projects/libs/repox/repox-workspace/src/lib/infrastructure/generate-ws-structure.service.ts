@@ -24,6 +24,9 @@ import {
 import {
   BuildRepoxJsonService
 } from "../dom-service/builder/build-repox-json.service";
+import {
+  BuildJestConfigTsService
+} from "../dom-service/builder/build-jest-config-ts.service";
 
 @singleton()
 /**
@@ -41,6 +44,7 @@ export class GenerateWsStructureService {
     private readonly buildRepoxJson: BuildRepoxJsonService,
     private readonly buildTsconfigJson: BuildTsconfigJsonService,
     private readonly buildGitignore: BuildGitignoreService,
+    private readonly buildJestConfigTs: BuildJestConfigTsService,
     private readonly runCommandUtils: RunCommandUtilsService
   ) {
   }
@@ -70,6 +74,9 @@ export class GenerateWsStructureService {
           break;
         case WsStructureEntityEnum.createGitignoreFile:
           this.processCreateGitignoreFile(wsStructureModel);
+          break;
+        case WsStructureEntityEnum.createRootJestConfigTsFile:
+          this.processCreateRootJestConfigTsFile(wsStructureModel);
           break;
         case WsStructureEntityEnum.createRepoxJsonFile:
           this.processCreateRepoxJsonFile(wsStructureModel);
@@ -146,6 +153,18 @@ export class GenerateWsStructureService {
     );
     this.fileUtils.writeTextFile(
       gitignorePath, this.buildGitignore.build()
+    );
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
+  private processCreateRootJestConfigTsFile (
+    wsStructureModel: WsStructureModel
+  ): void {
+    const jestConfigTsPath = this.pathUtils.createPath(
+      ...this.currentPath, WorkspaceFileEnum.jestConfigTs
+    );
+    this.fileUtils.writeTextFile(
+      jestConfigTsPath, this.buildJestConfigTs.build()
     );
     this.processGenerateStructure(wsStructureModel.children);
   }

@@ -9,6 +9,7 @@ export enum WsStructureEntityEnum {
   removeFile = `removeFile`,
   createGitkeepFile = `createGitkeepFile`,
   createGitignoreFile = `createGitignoreFile`,
+  createRootJestConfigTsFile = `createRootJestConfigTsFile`,
   createTsconfigJsonFile = `createTsconfigJsonFile`,
   createRepoxJsonFile = `createRepoxJsonFile`,
   execCommand = `execCommand`
