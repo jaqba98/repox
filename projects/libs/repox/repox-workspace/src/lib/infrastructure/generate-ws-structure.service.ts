@@ -156,9 +156,11 @@ export class GenerateWsStructureService {
     const repoxJsonPath = this.pathUtils.createPath(
       ...this.currentPath, WorkspaceFileEnum.repoxJson
     );
-    this.fileUtils.writeJsonFile(
-      repoxJsonPath, this.buildRepoxJson.build()
-    );
+    if (this.pathUtils.notExistPath(repoxJsonPath)) {
+      this.fileUtils.writeJsonFile(
+        repoxJsonPath, this.buildRepoxJson.build()
+      );
+    }
     this.processGenerateStructure(wsStructureModel.children);
   }
 
