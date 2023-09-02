@@ -97,6 +97,35 @@ export class BuildWsStructureService {
         children: []
       },
       /**
+       * Remove the package.json then generate default package.json
+       * and install all needed npm.
+       */
+      {
+        type: WsStructureEntityEnum.removeFile,
+        value: WorkspaceFileEnum.packageJson,
+        children: [
+          {
+            type: WsStructureEntityEnum.execCommand,
+            value: `npm init -y`,
+            children: [
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm install repox@1.4.12 --save-dev`,
+                children: []
+              }
+            ]
+          }
+        ]
+      },
+      /**
+       * Create repox.json file.
+       */
+      {
+        type: WsStructureEntityEnum.createRepoxJsonFile,
+        value: EMPTY_STRING,
+        children: []
+      },
+      /**
        * Create tsconfig.json file with filled path section for each
        * typescript library and tool project.
        */

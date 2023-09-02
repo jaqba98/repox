@@ -27,21 +27,6 @@ export class CreateWsFileAppService {
   ) {
   }
 
-  buildDefaultGitignoreContentFile (): string {
-    return `# Webstorm
-.idea/
-
-# Compilation output
-dist/
-
-# Dependency directories
-node_modules/
-
-# Temporary files and directories
-tmp/
-`;
-  }
-
   buildDefaultRootJestConfigTsContentFile (): string {
     return `import type { Config } from "jest";
 
@@ -55,12 +40,6 @@ const config: Config = {
 
 export default config;
 `;
-  }
-
-  buildRepoxJsonFile (): WsRepoxDtoModel {
-    return {
-      projects: {}
-    };
   }
 
   buildProjectTsconfigJsonContentFile (

@@ -6,7 +6,7 @@ import {
 import {
   FileUtilsService,
   FolderUtilsService,
-  PathUtilsService
+  PathUtilsService, RunCommandUtilsService
 } from "@lib/utils";
 import {
   type WsStructureModel
@@ -21,6 +21,9 @@ import { EMPTY_STRING } from "@lib/const";
 import {
   BuildGitignoreService
 } from "../dom-service/builder/build-gitignore.service";
+import {
+  BuildRepoxJsonService
+} from "../dom-service/builder/build-repox-json.service";
 
 @singleton()
 /**
@@ -35,8 +38,10 @@ export class GenerateWsStructureService {
     private readonly pathUtils: PathUtilsService,
     private readonly fileUtils: FileUtilsService,
     private readonly folderUtils: FolderUtilsService,
+    private readonly buildRepoxJson: BuildRepoxJsonService,
     private readonly buildTsconfigJson: BuildTsconfigJsonService,
-    private readonly buildGitignore: BuildGitignoreService
+    private readonly buildGitignore: BuildGitignoreService,
+    private readonly runCommandUtils: RunCommandUtilsService
   ) {
   }
 
@@ -66,8 +71,14 @@ export class GenerateWsStructureService {
         case WsStructureEntityEnum.createGitignoreFile:
           this.processCreateGitignoreFile(wsStructureModel);
           break;
+        case WsStructureEntityEnum.createRepoxJsonFile:
+          this.processCreateRepoxJsonFile(wsStructureModel);
+          break;
         case WsStructureEntityEnum.createTsconfigJsonFile:
           this.processCreateTsconfigJsonFile(wsStructureModel);
+          break;
+        case WsStructureEntityEnum.execCommand:
+          this.processExecCommand(wsStructureModel);
           break;
         default:
           throw new Error(
@@ -139,6 +150,18 @@ export class GenerateWsStructureService {
     this.processGenerateStructure(wsStructureModel.children);
   }
 
+  private processCreateRepoxJsonFile (
+    wsStructureModel: WsStructureModel
+  ): void {
+    const repoxJsonPath = this.pathUtils.createPath(
+      ...this.currentPath, WorkspaceFileEnum.repoxJson
+    );
+    this.fileUtils.writeJsonFile(
+      repoxJsonPath, this.buildRepoxJson.build()
+    );
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
   private processCreateTsconfigJsonFile (
     wsStructureModel: WsStructureModel
   ): void {
@@ -148,6 +171,13 @@ export class GenerateWsStructureService {
     this.fileUtils.writeJsonFile(
       tsconfigJsonPath, this.buildTsconfigJson.build()
     );
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
+  private processExecCommand (
+    wsStructureModel: WsStructureModel
+  ): void {
+    this.runCommandUtils.runCommand(wsStructureModel.value);
     this.processGenerateStructure(wsStructureModel.children);
   }
 }
