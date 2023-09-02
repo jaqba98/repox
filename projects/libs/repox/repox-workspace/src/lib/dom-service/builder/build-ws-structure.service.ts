@@ -110,7 +110,12 @@ export class BuildWsStructureService {
             children: [
               {
                 type: WsStructureEntityEnum.execCommand,
-                value: `npm install repox@1.4.12 --save-dev`,
+                value: `npm i repox@1.4.12 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i typescript@5.2.2 -D`,
                 children: []
               }
             ]
