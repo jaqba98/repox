@@ -110,6 +110,11 @@ export class BuildWsStructureService {
             children: [
               {
                 type: WsStructureEntityEnum.execCommand,
+                value: `npm i @types/command-exists@1.2.0 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
                 value: `npm i @types/node@20.5.8 -D`,
                 children: []
               },
