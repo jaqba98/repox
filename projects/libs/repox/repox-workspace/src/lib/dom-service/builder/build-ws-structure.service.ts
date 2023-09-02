@@ -122,6 +122,11 @@ export class BuildWsStructureService {
                 type: WsStructureEntityEnum.execCommand,
                 value: `npm i typescript@5.2.2 -D`,
                 children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i command-exists@1.2.9 -D`,
+                children: []
               }
             ]
           }
