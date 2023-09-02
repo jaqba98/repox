@@ -125,7 +125,7 @@ export class BuildWsStructureService {
               },
               {
                 type: WsStructureEntityEnum.execCommand,
-                value: `npm i command-exists@1.2.9 -D`,
+                value: `npm i command-exists@1.2.9`,
                 children: []
               }
             ]
