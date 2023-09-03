@@ -126,11 +126,6 @@ export class BuildWsStructureService {
             children: [
               {
                 type: WsStructureEntityEnum.execCommand,
-                value: `npm i @types/command-exists@1.2.0 -D`,
-                children: []
-              },
-              {
-                type: WsStructureEntityEnum.execCommand,
                 value: `npm i @types/node@20.5.8 -D`,
                 children: []
               },
@@ -152,6 +147,11 @@ export class BuildWsStructureService {
               {
                 type: WsStructureEntityEnum.execCommand,
                 value: `npm i jest@29.6.4 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i @types/jest@29.5.4 -D`,
                 children: []
               },
               {
@@ -182,6 +182,52 @@ export class BuildWsStructureService {
               {
                 type: WsStructureEntityEnum.execCommand,
                 value: `npm i command-exists@1.2.9`,
+                children: []
+              },
+              // additional
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i @types/command-exists@1.2.0 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i @types/core-js@2.5.5 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i @types/lodash@4.14.197 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i htmlpro@1.1.11 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i core-js@3.32.1`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i glob@10.3.3`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i jsonschema@1.4.1`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i lodash@4.17.21`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i tsyringe@4.8.0`,
                 children: []
               }
             ]
