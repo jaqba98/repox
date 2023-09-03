@@ -1,22 +1,31 @@
 {
   "name": "repox",
   "version": "1.0.0",
-  "description": "Lightweight monorepo for many huge projects.",
-  "author": "Jakub Olejarczyk",
-  "license": "ISC",
+  "description": "",
+  "main": ".eslintrc.js",
   "scripts": {
-    "build::htmlpro": "repox build project --name=htmlpro",
-    "build::repox-website": "repox build project --name=repox-website",
-    "build::repox": "repox build project --name=repox",
-    "repox:generate:workspace": "node dist/repox/apps/repox/src/main.js generate workspace --name=dog",
-    "repox:regenerate:workspace": "node dist/repox/apps/repox/src/main.js regenerate workspace --force"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaqba98/repox.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaqba98/repox/issues"
+  },
+  "homepage": "https://github.com/jaqba98/repox#readme",
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
     "@types/core-js": "^2.5.5",
     "@types/jest": "^29.5.4",
     "@types/lodash": "^4.14.197",
-    "@types/node": "^20.5.4",
+    "@types/node": "^20.5.8",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
     "htmlpro": "^1.1.11",
     "jest": "^29.6.4",
     "repox": "^1.4.12",
