@@ -11,6 +11,7 @@ export enum WorkspaceFileEnum {
   packageJson = `package.json`,
   packageLockJson = `package-lock.json`,
   indexTs = `index.ts`,
-  mainTs = `main.ts`
+  mainTs = `main.ts`,
+  eslintrcFile = `.eslintrc.ts`
 }
 // todo: refactor the file

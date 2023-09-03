@@ -27,6 +27,9 @@ import {
 import {
   BuildJestConfigTsService
 } from "../dom-service/builder/build-jest-config-ts.service";
+import {
+  BuildEslintrcTsService
+} from "../dom-service/builder/build-eslintrc-ts.service";
 
 @singleton()
 /**
@@ -45,7 +48,8 @@ export class GenerateWsStructureService {
     private readonly buildTsconfigJson: BuildTsconfigJsonService,
     private readonly buildGitignore: BuildGitignoreService,
     private readonly buildJestConfigTs: BuildJestConfigTsService,
-    private readonly runCommandUtils: RunCommandUtilsService
+    private readonly runCommandUtils: RunCommandUtilsService,
+    private readonly buildEslintrcTs: BuildEslintrcTsService
   ) {
   }
 
@@ -86,6 +90,9 @@ export class GenerateWsStructureService {
           break;
         case WsStructureEntityEnum.execCommand:
           this.processExecCommand(wsStructureModel);
+          break;
+        case WsStructureEntityEnum.createEslintrcTsFile:
+          this.processCreateEslintrcTsFile(wsStructureModel);
           break;
         default:
           throw new Error(
@@ -199,6 +206,18 @@ export class GenerateWsStructureService {
     wsStructureModel: WsStructureModel
   ): void {
     this.runCommandUtils.runCommand(wsStructureModel.value);
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
+  private processCreateEslintrcTsFile (
+    wsStructureModel: WsStructureModel
+  ): void {
+    const eslintrcTsPath = this.pathUtils.createPath(
+      ...this.currentPath, WorkspaceFileEnum.eslintrcFile
+    );
+    this.fileUtils.writeJsonFile(
+      eslintrcTsPath, this.buildEslintrcTs.build()
+    );
     this.processGenerateStructure(wsStructureModel.children);
   }
 }

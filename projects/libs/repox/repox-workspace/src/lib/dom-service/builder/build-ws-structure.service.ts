@@ -89,6 +89,14 @@ export class BuildWsStructureService {
         children: []
       },
       /**
+       * Create .eslintrc.ts file.
+       */
+      {
+        type: WsStructureEntityEnum.createEslintrcTsFile,
+        value: EMPTY_STRING,
+        children: []
+      },
+      /**
        * Create jest.config.ts configuration in root of workspace.
        */
       {
@@ -124,6 +132,21 @@ export class BuildWsStructureService {
               {
                 type: WsStructureEntityEnum.execCommand,
                 value: `npm i @types/node@20.5.8 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i eslint@8.48.0 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i @typescript-eslint/eslint-plugin@6.5.0 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
+                value: `npm i @typescript-eslint/parser@6.5.0 -D`,
                 children: []
               },
               {
