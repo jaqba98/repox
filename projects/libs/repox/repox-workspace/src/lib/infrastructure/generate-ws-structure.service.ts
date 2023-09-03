@@ -215,7 +215,7 @@ export class GenerateWsStructureService {
     const eslintrcTsPath = this.pathUtils.createPath(
       ...this.currentPath, WorkspaceFileEnum.eslintrcFile
     );
-    this.fileUtils.writeJsonFile(
+    this.fileUtils.writeTextFile(
       eslintrcTsPath, this.buildEslintrcTs.build()
     );
     this.processGenerateStructure(wsStructureModel.children);
