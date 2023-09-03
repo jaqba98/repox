@@ -2,9 +2,9 @@ import { singleton } from "tsyringe";
 
 @singleton()
 /**
- * The service is responsible for create .eslintrc.ts content.
+ * The service is responsible for create .eslintrc.js content.
  */
-export class BuildEslintrcTsService {
+export class BuildEslintrcJsService {
   build (): string {
     return `/* eslint-env node */
 module.exports = {

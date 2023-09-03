@@ -89,10 +89,10 @@ export class BuildWsStructureService {
         children: []
       },
       /**
-       * Create .eslintrc.ts file.
+       * Create .eslintrc.js file.
        */
       {
-        type: WsStructureEntityEnum.createEslintrcTsFile,
+        type: WsStructureEntityEnum.createEslintrcJsFile,
         value: EMPTY_STRING,
         children: []
       },
@@ -136,37 +136,17 @@ export class BuildWsStructureService {
               },
               {
                 type: WsStructureEntityEnum.execCommand,
+                value: `npm i @typescript-eslint/parser@6.5.0 -D`,
+                children: []
+              },
+              {
+                type: WsStructureEntityEnum.execCommand,
                 value: `npm i @typescript-eslint/eslint-plugin@6.5.0 -D`,
                 children: []
               },
               {
                 type: WsStructureEntityEnum.execCommand,
                 value: `npm i eslint@8.48.0 -D`,
-                children: []
-              },
-              {
-                type: WsStructureEntityEnum.execCommand,
-                value: `npm i @typescript-eslint/parser@6.5.0 -D`,
-                children: []
-              },
-              {
-                type: WsStructureEntityEnum.execCommand,
-                value: `npm i eslint-config-standard-with-typescript@38.0.0 -D`,
-                children: []
-              },
-              {
-                type: WsStructureEntityEnum.execCommand,
-                value: `npm i eslint-plugin-import@2.28.1 -D`,
-                children: []
-              },
-              {
-                type: WsStructureEntityEnum.execCommand,
-                value: `npm i eslint-plugin-n@16.0.2 -D`,
-                children: []
-              },
-              {
-                type: WsStructureEntityEnum.execCommand,
-                value: `npm i eslint-plugin-promise@6.1.1 -D`,
                 children: []
               },
               {

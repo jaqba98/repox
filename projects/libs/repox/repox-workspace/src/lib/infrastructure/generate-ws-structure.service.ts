@@ -28,8 +28,8 @@ import {
   BuildJestConfigTsService
 } from "../dom-service/builder/build-jest-config-ts.service";
 import {
-  BuildEslintrcTsService
-} from "../dom-service/builder/build-eslintrc-ts.service";
+  BuildEslintrcJsService
+} from "../dom-service/builder/build-eslintrc-js.service";
 
 @singleton()
 /**
@@ -49,7 +49,7 @@ export class GenerateWsStructureService {
     private readonly buildGitignore: BuildGitignoreService,
     private readonly buildJestConfigTs: BuildJestConfigTsService,
     private readonly runCommandUtils: RunCommandUtilsService,
-    private readonly buildEslintrcTs: BuildEslintrcTsService
+    private readonly buildEslintrcTs: BuildEslintrcJsService
   ) {
   }
 
@@ -91,8 +91,8 @@ export class GenerateWsStructureService {
         case WsStructureEntityEnum.execCommand:
           this.processExecCommand(wsStructureModel);
           break;
-        case WsStructureEntityEnum.createEslintrcTsFile:
-          this.processCreateEslintrcTsFile(wsStructureModel);
+        case WsStructureEntityEnum.createEslintrcJsFile:
+          this.processCreateEslintrcJsFile(wsStructureModel);
           break;
         default:
           throw new Error(
@@ -209,7 +209,7 @@ export class GenerateWsStructureService {
     this.processGenerateStructure(wsStructureModel.children);
   }
 
-  private processCreateEslintrcTsFile (
+  private processCreateEslintrcJsFile (
     wsStructureModel: WsStructureModel
   ): void {
     const eslintrcTsPath = this.pathUtils.createPath(
