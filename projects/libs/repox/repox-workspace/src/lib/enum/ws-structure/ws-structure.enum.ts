@@ -7,6 +7,7 @@ export enum WsStructureEnum {
   createFolder = `createFolder`,
   createEmptyFileWhenFolderEmpty = `createEmptyFileWhenFolderEmpty`,
   createPackageJsonFile = `createPackageJsonFile`,
+  runCommand = `runCommand`,
   // todo: I am here
   removeFolder = `removeFolder`,
   removeFile = `removeFile`,
@@ -14,6 +15,5 @@ export enum WsStructureEnum {
   createEslintrcJsFile = `createEslintrcTsFile`,
   createRootJestConfigTsFile = `createRootJestConfigTsFile`,
   createTsconfigJsonFile = `createTsconfigJsonFile`,
-  createRepoxJsonFile = `createRepoxJsonFile`,
-  execCommand = `execCommand`
+  createRepoxJsonFile = `createRepoxJsonFile`
 }

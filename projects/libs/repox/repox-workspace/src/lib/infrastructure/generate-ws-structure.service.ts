@@ -85,6 +85,9 @@ export class GenerateWsStructureService {
         case WsStructureEnum.createPackageJsonFile:
           this.createPackageJsonFile(wsStructureModel);
           break;
+        case WsStructureEnum.runCommand:
+          this.runCommand(wsStructureModel);
+          break;
         // todo: I am here
         case WsStructureEnum.removeFolder:
           this.processRemoveFolder(wsStructureModel);
@@ -103,9 +106,6 @@ export class GenerateWsStructureService {
           break;
         case WsStructureEnum.createTsconfigJsonFile:
           this.processCreateTsconfigJsonFile(wsStructureModel);
-          break;
-        case WsStructureEnum.execCommand:
-          this.processExecCommand(wsStructureModel);
           break;
         case WsStructureEnum.createEslintrcJsFile:
           this.processCreateEslintrcJsFile(wsStructureModel);
@@ -165,6 +165,13 @@ export class GenerateWsStructureService {
         packageJsonPath, packageJsonNewContent
       );
     }
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
+  private runCommand(
+    wsStructureModel: WsStructureModel
+  ): void {
+    this.runCommandUtils.runCommand(wsStructureModel.value);
     this.processGenerateStructure(wsStructureModel.children);
   }
 
@@ -240,13 +247,6 @@ export class GenerateWsStructureService {
     this.fileUtils.writeJsonFile(
       tsconfigJsonPath, this.buildTsconfigJson.build()
     );
-    this.processGenerateStructure(wsStructureModel.children);
-  }
-
-  private processExecCommand(
-    wsStructureModel: WsStructureModel
-  ): void {
-    this.runCommandUtils.runCommand(wsStructureModel.value);
     this.processGenerateStructure(wsStructureModel.children);
   }
 

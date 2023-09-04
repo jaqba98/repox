@@ -70,7 +70,13 @@ export class BuildWsStructureService {
       {
         type: WsStructureEnum.createPackageJsonFile,
         value: EMPTY_STRING,
-        children: []
+        children: [
+          {
+            type: WsStructureEnum.runCommand,
+            value: `npm install`,
+            children: []
+          }
+        ]
       },
       // todo: I am here
       /**

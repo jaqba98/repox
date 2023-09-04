@@ -11,5 +11,7 @@ export interface WsRootPackageJsonDtoModel {
   keywords: string[],
   author: string;
   license: string;
+  devDependencies: Record<string, string>;
+  dependencies: Record<string, string>;
 }
 // todo: refactor the file
