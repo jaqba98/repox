@@ -13,7 +13,7 @@ export class GenerateWorkspaceAppService {
   ) {
   }
 
-  run (): boolean {
+  run(): boolean {
     this.simpleMessage.writePlain(`Step: Generate Workspace`);
     this.generateWsStructure.generateStructure();
     return true;

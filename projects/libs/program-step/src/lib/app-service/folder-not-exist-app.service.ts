@@ -18,7 +18,7 @@ export class FolderNotExistAppService {
   ) {
   }
 
-  run (folderName: string): boolean {
+  run(folderName: string): boolean {
     this.simpleMessage.writePlain(
       `Step: Folder Not Exist >>> ${folderName}`
     );

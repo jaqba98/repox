@@ -1,13 +1,8 @@
 import { singleton } from "tsyringe";
 import {
-  type EmptyRepoxProgramModel,
-  type GenerateWorkspaceRepoxCommandModel
-} from "@lib/repox-domain";
-import {
   NewlineAppService,
   SimpleMessageAppService
 } from "@lib/logger";
-import { REPOX_LOGO } from "@lib/repox-const";
 import {
   ChangePathAppService,
   CreateFolderAppService,
@@ -18,13 +13,18 @@ import {
 import {
   GenerateWorkspaceAppService
 } from "../app-service/generate-workspace-app.service";
+import {
+  EmptyRepoxProgramModel,
+  GenerateWorkspaceRepoxCommandModel
+} from "@lib/repox-domain";
+import { REPOX_LOGO } from "@lib/repox-const";
 
 @singleton()
 /**
  * The list of steps for the program generate workspace.
  */
 export class GenerateWorkspaceStepService {
-  constructor (
+  constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly systemProgramExist: SystemProgramExistAppService,
@@ -35,7 +35,7 @@ export class GenerateWorkspaceStepService {
   ) {
   }
 
-  runSteps (
+  runSteps(
     _programModel: EmptyRepoxProgramModel,
     commandModel: GenerateWorkspaceRepoxCommandModel
   ): void {

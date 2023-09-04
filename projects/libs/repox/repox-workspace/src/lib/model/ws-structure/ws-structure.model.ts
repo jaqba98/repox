@@ -1,6 +1,6 @@
 import {
-  type WsStructureEntityEnum
-} from "../../enum/ws-structure/ws-structure-entity.enum";
+  type WsStructureEnum
+} from "../../enum/ws-structure/ws-structure.enum";
 
 /**
  * The model of workspace structure is responsible for define
@@ -8,7 +8,7 @@ import {
  */
 
 export interface WsStructureModel {
-  type: WsStructureEntityEnum;
+  type: WsStructureEnum;
   value: string;
   children: WsStructureModel[];
 }

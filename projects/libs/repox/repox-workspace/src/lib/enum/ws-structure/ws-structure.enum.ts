@@ -3,11 +3,12 @@
  * each element in the workspace.
  */
 
-export enum WsStructureEntityEnum {
+export enum WsStructureEnum {
   createFolder = `createFolder`,
+  createEmptyFileWhenFolderEmpty = `createEmptyFileWhenFolderEmpty`,
+  // todo: I am here
   removeFolder = `removeFolder`,
   removeFile = `removeFile`,
-  createGitkeepFile = `createGitkeepFile`,
   createGitignoreFile = `createGitignoreFile`,
   createEslintrcJsFile = `createEslintrcTsFile`,
   createRootJestConfigTsFile = `createRootJestConfigTsFile`,

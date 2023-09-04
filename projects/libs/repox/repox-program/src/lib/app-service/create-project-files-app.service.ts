@@ -69,7 +69,7 @@ export class CreateProjectFilesAppService {
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     this.pathUtils.changePath(WorkspaceFolderEnum.src);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeep);
     this.pathUtils.changePath(`../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
@@ -83,7 +83,7 @@ export class CreateProjectFilesAppService {
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     this.pathUtils.changePath(WorkspaceFolderEnum.src);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeep);
     this.pathUtils.changePath(`../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
@@ -118,7 +118,7 @@ export class CreateProjectFilesAppService {
     this.folderUtils.createFolder(WorkspaceFolderEnum.lib);
     this.fileUtils.createEmptyFile(WorkspaceFileEnum.indexTs);
     this.pathUtils.changePath(WorkspaceFolderEnum.lib);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeepText);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeep);
     this.pathUtils.changePath(`../../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(

@@ -1,14 +1,14 @@
 import { singleton } from "tsyringe";
 import {
-  type WsStructureModel
+  WsStructureModel
 } from "../../model/ws-structure/ws-structure.model";
 import {
-  WsStructureEntityEnum
-} from "../../enum/ws-structure/ws-structure-entity.enum";
-import { EMPTY_STRING } from "@lib/const";
+  WsStructureEnum
+} from "../../enum/ws-structure/ws-structure.enum";
 import {
   WorkspaceFolderEnum
 } from "../../enum/workspace/workspace-folder.enum";
+import { EMPTY_STRING } from "@lib/const";
 import {
   WorkspaceFileEnum
 } from "../../enum/workspace/workspace-file.enum";
@@ -19,72 +19,57 @@ import {
  * workspace structure to generate.
  */
 export class BuildWsStructureService {
-  buildStructure (): WsStructureModel[] {
+  buildStructure(): WsStructureModel[] {
     return [
       /**
-       * Remove the disc folder in workspace root.
-       */
-      {
-        type: WsStructureEntityEnum.removeFolder,
-        value: WorkspaceFolderEnum.dist,
-        children: []
-      },
-      /**
-       * Remove the node_modules folder in workspace root.
-       */
-      {
-        type: WsStructureEntityEnum.removeFolder,
-        value: WorkspaceFolderEnum.node_modules,
-        children: []
-      },
-      /**
-       * Folder called projects with apps, libs, tools subfolder.
-       * Each subfolder contains .gitkeep file if it is empty.
+       * Folder called projects with apps, libs and tools folders.
+       * Each folder contains .gitkeep file if it is empty.
        * */
       {
-        type: WsStructureEntityEnum.createFolder,
+        type: WsStructureEnum.createFolder,
         value: WorkspaceFolderEnum.projects,
         children: [
           {
-            type: WsStructureEntityEnum.createFolder,
+            type: WsStructureEnum.createFolder,
             value: WorkspaceFolderEnum.apps,
             children: [
               {
-                type: WsStructureEntityEnum.createGitkeepFile,
-                value: EMPTY_STRING,
+                type: WsStructureEnum.createEmptyFileWhenFolderEmpty,
+                value: WorkspaceFileEnum.gitkeep,
                 children: []
               }
             ]
           },
           {
-            type: WsStructureEntityEnum.createFolder,
+            type: WsStructureEnum.createFolder,
             value: WorkspaceFolderEnum.libs,
             children: [
               {
-                type: WsStructureEntityEnum.createGitkeepFile,
-                value: EMPTY_STRING,
+                type: WsStructureEnum.createEmptyFileWhenFolderEmpty,
+                value: WorkspaceFileEnum.gitkeep,
                 children: []
               }
             ]
           },
           {
-            type: WsStructureEntityEnum.createFolder,
+            type: WsStructureEnum.createFolder,
             value: WorkspaceFolderEnum.tools,
             children: [
               {
-                type: WsStructureEntityEnum.createGitkeepFile,
-                value: EMPTY_STRING,
+                type: WsStructureEnum.createEmptyFileWhenFolderEmpty,
+                value: WorkspaceFileEnum.gitkeep,
                 children: []
               }
             ]
           }
         ]
       },
+      // todo: I am here
       /**
        * Create .gitignore file.
        */
       {
-        type: WsStructureEntityEnum.createGitignoreFile,
+        type: WsStructureEnum.createGitignoreFile,
         value: EMPTY_STRING,
         children: []
       },
@@ -92,7 +77,7 @@ export class BuildWsStructureService {
        * Create .eslintrc.js file.
        */
       {
-        type: WsStructureEntityEnum.createEslintrcJsFile,
+        type: WsStructureEnum.createEslintrcJsFile,
         value: EMPTY_STRING,
         children: []
       },
@@ -100,7 +85,7 @@ export class BuildWsStructureService {
        * Create jest.config.ts configuration in root of workspace.
        */
       {
-        type: WsStructureEntityEnum.createRootJestConfigTsFile,
+        type: WsStructureEnum.createRootJestConfigTsFile,
         value: EMPTY_STRING,
         children: []
       },
@@ -108,7 +93,7 @@ export class BuildWsStructureService {
        * Remove the package-lock.json file.
        */
       {
-        type: WsStructureEntityEnum.removeFile,
+        type: WsStructureEnum.removeFile,
         value: WorkspaceFileEnum.packageLockJson,
         children: []
       },
@@ -117,116 +102,116 @@ export class BuildWsStructureService {
        * and install all needed npm.
        */
       {
-        type: WsStructureEntityEnum.removeFile,
+        type: WsStructureEnum.removeFile,
         value: WorkspaceFileEnum.packageJson,
         children: [
           {
-            type: WsStructureEntityEnum.execCommand,
+            type: WsStructureEnum.execCommand,
             value: `npm init -y`,
             children: [
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i @types/node@20.5.8 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i @typescript-eslint/parser@6.5.0 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i @typescript-eslint/eslint-plugin@6.5.0 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i eslint@8.48.0 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i jest@29.6.4 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i @types/jest@29.5.4 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i repox@1.4.12 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i ts-jest@29.1.1 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i ts-node@10.9.1 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i tsc-alias@1.8.7 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i typescript@5.2.2 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i command-exists@1.2.9`,
                 children: []
               },
               // additional
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i @types/command-exists@1.2.0 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i @types/core-js@2.5.5 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i @types/lodash@4.14.197 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i htmlpro@1.1.11 -D`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i core-js@3.32.1`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i glob@10.3.3`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i jsonschema@1.4.1`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i lodash@4.17.21`,
                 children: []
               },
               {
-                type: WsStructureEntityEnum.execCommand,
+                type: WsStructureEnum.execCommand,
                 value: `npm i tsyringe@4.8.0`,
                 children: []
               }
@@ -238,7 +223,7 @@ export class BuildWsStructureService {
        * Create repox.json file.
        */
       {
-        type: WsStructureEntityEnum.createRepoxJsonFile,
+        type: WsStructureEnum.createRepoxJsonFile,
         value: EMPTY_STRING,
         children: []
       },
@@ -247,7 +232,7 @@ export class BuildWsStructureService {
        * typescript library and tool project.
        */
       {
-        type: WsStructureEntityEnum.createTsconfigJsonFile,
+        type: WsStructureEnum.createTsconfigJsonFile,
         value: EMPTY_STRING,
         children: []
       }

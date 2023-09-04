@@ -1,10 +1,5 @@
 import { singleton } from "tsyringe";
 import {
-  type EmptyRepoxProgramModel,
-  type RegenerateWorkspaceRepoxCommandModel
-} from "@lib/repox-domain";
-import { REPOX_LOGO } from "@lib/repox-const";
-import {
   NewlineAppService,
   SimpleMessageAppService
 } from "@lib/logger";
@@ -16,13 +11,18 @@ import {
 import {
   GenerateWorkspaceAppService
 } from "../app-service/generate-workspace-app.service";
+import {
+  EmptyRepoxProgramModel,
+  RegenerateWorkspaceRepoxCommandModel
+} from "@lib/repox-domain";
+import { REPOX_LOGO } from "@lib/repox-const";
 
 @singleton()
 /**
- * The list of steps for the program generate workspace.
+ * The list of steps for the program regenerate workspace.
  */
 export class RegenerateWorkspaceStepService {
-  constructor (
+  constructor(
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService,
     private readonly systemProgramExist: SystemProgramExistAppService,
@@ -31,11 +31,11 @@ export class RegenerateWorkspaceStepService {
   ) {
   }
 
-  runSteps (
+  runSteps(
     _programModel: EmptyRepoxProgramModel,
     commandModel: RegenerateWorkspaceRepoxCommandModel
   ): void {
-    this.simpleMessage.writeInfo(`Generate workspace`, REPOX_LOGO);
+    this.simpleMessage.writeInfo(`Regenerate workspace`, REPOX_LOGO);
     this.newline.writeNewline();
     if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
     if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;

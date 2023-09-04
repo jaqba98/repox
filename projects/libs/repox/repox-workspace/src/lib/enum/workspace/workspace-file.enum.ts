@@ -7,7 +7,7 @@ export enum WorkspaceFileEnum {
   tsconfigJson = `tsconfig.json`,
   jestConfigTs = `jest.config.ts`,
   importJestConfigTs = `jest.config`,
-  gitkeepText = `.gitkeep`,
+  gitkeep = `.gitkeep`,
   packageJson = `package.json`,
   packageLockJson = `package-lock.json`,
   indexTs = `index.ts`,
