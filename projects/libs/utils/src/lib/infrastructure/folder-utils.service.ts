@@ -1,7 +1,8 @@
 import { singleton } from "tsyringe";
 import { mkdirSync, readdirSync, rmSync } from "fs";
 import { EMPTY_STRING } from "@lib/const";
-import { extname } from "path";
+import { basename, extname } from "path";
+import process from "process";
 
 @singleton()
 /**
@@ -22,6 +23,9 @@ export class FolderUtilsService {
 
   removeFolder (folderPath: string): void {
     rmSync(folderPath, { recursive: true, force: true });
+  }
+  getCurrentFolderName(): string {
+    return basename(process.cwd());
   }
 }
 // todo: refactor the file
