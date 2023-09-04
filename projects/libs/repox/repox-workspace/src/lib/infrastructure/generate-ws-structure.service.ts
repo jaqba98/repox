@@ -5,7 +5,8 @@ import {
 import {
   FileUtilsService,
   FolderUtilsService,
-  PathUtilsService, RunCommandUtilsService
+  PathUtilsService,
+  RunCommandUtilsService
 } from "@lib/utils";
 import {
   BuildRepoxJsonService
@@ -32,9 +33,6 @@ import {
   WorkspaceFileEnum
 } from "../enum/workspace/workspace-file.enum";
 import { EMPTY_STRING } from "@lib/const";
-import {
-  WsPackageJsonDtoModel
-} from "../model/ws-dto/ws-package-json-dto.model";
 import {
   WsRootPackageJsonDtoModel
 } from "../model/ws-dto/ws-root-package-json-dto.model";
