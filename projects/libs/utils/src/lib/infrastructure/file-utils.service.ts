@@ -48,7 +48,19 @@ export class FileUtilsService {
     if (!this.pathUtils.existPath(filePath)) {
       throw new Error(`The specified file does not exist!`);
     }
-    return JSON.parse(readFileSync(filePath, `utf-8`)) as T;
+    try {
+      return JSON.parse(readFileSync(filePath, `utf-8`)) as T;
+    } catch {
+      return <T>{};
+    }
+  }
+
+  readJsonFileWithoutError<T>(filePath: string): T {
+    try {
+      return JSON.parse(readFileSync(filePath, `utf-8`)) as T;
+    } catch {
+      return <T>{};
+    }
   }
 
   readProjectFiles (pattern: string): string[] {

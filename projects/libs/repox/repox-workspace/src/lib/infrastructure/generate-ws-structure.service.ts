@@ -152,7 +152,9 @@ export class GenerateWsStructureService {
     );
     if (this.pathUtils.existPath(packageJsonPath)) {
       const packageJsonContent = this.fileUtils
-        .readJsonFile<WsRootPackageJsonDtoModel>(packageJsonPath);
+        .readJsonFileWithoutError<WsRootPackageJsonDtoModel>(
+          packageJsonPath
+        );
       const packageJsonNewContent = this.buildRootPackageJson
         .rebuild(packageJsonContent);
       this.fileUtils.writeJsonFile(
