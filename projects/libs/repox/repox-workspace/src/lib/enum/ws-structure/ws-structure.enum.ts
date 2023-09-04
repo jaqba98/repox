@@ -6,6 +6,7 @@
 export enum WsStructureEnum {
   createFolder = `createFolder`,
   createEmptyFileWhenFolderEmpty = `createEmptyFileWhenFolderEmpty`,
+  createPackageJsonFile = `createPackageJsonFile`,
   // todo: I am here
   removeFolder = `removeFolder`,
   removeFile = `removeFile`,

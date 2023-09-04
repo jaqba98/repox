@@ -32,6 +32,15 @@ import {
   WorkspaceFileEnum
 } from "../enum/workspace/workspace-file.enum";
 import { EMPTY_STRING } from "@lib/const";
+import {
+  WsPackageJsonDtoModel
+} from "../model/ws-dto/ws-package-json-dto.model";
+import {
+  WsRootPackageJsonDtoModel
+} from "../model/ws-dto/ws-root-package-json-dto.model";
+import {
+  BuildRootPackageJsonService
+} from "../dom-service/builder/build-root-package-json.service";
 
 @singleton()
 /**
@@ -51,7 +60,8 @@ export class GenerateWsStructureService {
     private readonly buildGitignore: BuildGitignoreService,
     private readonly buildJestConfigTs: BuildJestConfigTsService,
     private readonly runCommandUtils: RunCommandUtilsService,
-    private readonly buildEslintrcTs: BuildEslintrcJsService
+    private readonly buildEslintrcTs: BuildEslintrcJsService,
+    private readonly buildRootPackageJson: BuildRootPackageJsonService
   ) {
   }
 
@@ -71,6 +81,9 @@ export class GenerateWsStructureService {
           break;
         case WsStructureEnum.createEmptyFileWhenFolderEmpty:
           this.createEmptyFileWhenFolderEmpty(wsStructureModel);
+          break;
+        case WsStructureEnum.createPackageJsonFile:
+          this.createPackageJsonFile(wsStructureModel);
           break;
         // todo: I am here
         case WsStructureEnum.removeFolder:
@@ -126,6 +139,31 @@ export class GenerateWsStructureService {
         folderPath, wsStructureModel.value
       );
       this.fileUtils.writeTextFile(filePath, EMPTY_STRING);
+    }
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
+  private createPackageJsonFile(
+    wsStructureModel: WsStructureModel
+  ): void {
+    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    const packageJsonPath = this.pathUtils.createPath(
+      folderPath, WorkspaceFileEnum.packageJson
+    );
+    if (this.pathUtils.existPath(packageJsonPath)) {
+      const packageJsonContent = this.fileUtils
+        .readJsonFile<WsRootPackageJsonDtoModel>(packageJsonPath);
+      const packageJsonNewContent = this.buildRootPackageJson
+        .rebuild(packageJsonContent);
+      this.fileUtils.writeJsonFile(
+        packageJsonPath, packageJsonNewContent
+      );
+    } else {
+      const packageJsonNewContent = this.buildRootPackageJson
+        .build();
+      this.fileUtils.writeJsonFile(
+        packageJsonPath, packageJsonNewContent
+      );
     }
     this.processGenerateStructure(wsStructureModel.children);
   }
