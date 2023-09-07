@@ -24,14 +24,14 @@ export class BuildTsconfigJsonService {
 
   rebuild (wsTsconfigDto: WsTsconfigDtoModel): WsTsconfigDtoModel {
     return {
-      ...wsTsconfigDto,
+      ...(wsTsconfigDto ?? {}),
       ...this.build(),
       compilerOptions: {
-        ...wsTsconfigDto.compilerOptions,
+        ...(wsTsconfigDto.compilerOptions ?? {}),
         ...this.build().compilerOptions,
       },
       exclude: this.arrayUtils.removeDuplicates([
-        ...wsTsconfigDto.exclude,
+        ...(wsTsconfigDto.exclude ?? []),
         ...this.build().exclude
       ])
     };
