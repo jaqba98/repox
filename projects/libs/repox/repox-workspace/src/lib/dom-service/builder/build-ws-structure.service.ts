@@ -102,21 +102,21 @@ export class BuildWsStructureService {
         value: EMPTY_STRING,
         children: []
       },
-      // todo: I am here
-      /**
-       * Create repox.json file.
-       */
-      {
-        type: WsStructureEnum.createRepoxJsonFile,
-        value: EMPTY_STRING,
-        children: []
-      },
       /**
        * Create tsconfig.json file with filled path section for each
        * typescript library and tool project.
        */
       {
         type: WsStructureEnum.createTsconfigJsonFile,
+        value: EMPTY_STRING,
+        children: []
+      },
+      // todo: I am here
+      /**
+       * Create repox.json file.
+       */
+      {
+        type: WsStructureEnum.createRepoxJsonFile,
         value: EMPTY_STRING,
         children: []
       }

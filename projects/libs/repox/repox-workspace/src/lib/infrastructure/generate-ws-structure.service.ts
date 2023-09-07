@@ -39,6 +39,7 @@ import {
 import {
   BuildRootPackageJsonService
 } from "../dom-service/builder/build-root-package-json.service";
+import {WsTsconfigDtoModel} from "../model/ws-dto/ws-tsconfig-dto.model";
 
 @singleton()
 /**
@@ -95,6 +96,9 @@ export class GenerateWsStructureService {
         case WsStructureEnum.createJestConfigJsFile:
           this.createJestConfigJsFile(wsStructureModel);
           break;
+        case WsStructureEnum.createTsconfigJsonFile:
+          this.createTsconfigJsonFile(wsStructureModel);
+          break;
         // todo: I am here
         case WsStructureEnum.removeFolder:
           this.processRemoveFolder(wsStructureModel);
@@ -104,9 +108,6 @@ export class GenerateWsStructureService {
           break;
         case WsStructureEnum.createRepoxJsonFile:
           this.processCreateRepoxJsonFile(wsStructureModel);
-          break;
-        case WsStructureEnum.createTsconfigJsonFile:
-          this.processCreateTsconfigJsonFile(wsStructureModel);
           break;
         default:
           throw new Error(
@@ -211,6 +212,31 @@ export class GenerateWsStructureService {
     this.processGenerateStructure(wsStructureModel.children);
   }
 
+  private createTsconfigJsonFile(
+      wsStructureModel: WsStructureModel
+  ): void {
+    const folderPath: string = this.pathUtils.createPath(...this.currentPath);
+    const tsconfigJsonPath: string = this.pathUtils.createPath(
+        folderPath, WorkspaceFileEnum.tsconfigJson
+    );
+    if (this.pathUtils.existPath(tsconfigJsonPath)) {
+      const tsconfigJsonContent = this.fileUtils
+          .readJsonFileWithoutError<WsTsconfigDtoModel>(tsconfigJsonPath);
+      const tsconfigJsonNewContent = this.buildTsconfigJson
+          .rebuild(tsconfigJsonContent);
+      this.fileUtils.writeJsonFile(
+          tsconfigJsonPath, tsconfigJsonNewContent
+      );
+    } else {
+      const packageJsonNewContent: WsTsconfigDtoModel = this.buildTsconfigJson
+          .build();
+      this.fileUtils.writeJsonFile(
+          tsconfigJsonPath, packageJsonNewContent
+      );
+    }
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
   private processRemoveFolder(
     wsStructureModel: WsStructureModel
   ): void {
@@ -247,18 +273,6 @@ export class GenerateWsStructureService {
         repoxJsonPath, this.buildRepoxJson.build()
       );
     }
-    this.processGenerateStructure(wsStructureModel.children);
-  }
-
-  private processCreateTsconfigJsonFile(
-    wsStructureModel: WsStructureModel
-  ): void {
-    const tsconfigJsonPath = this.pathUtils.createPath(
-      ...this.currentPath, WorkspaceFileEnum.tsconfigJson
-    );
-    this.fileUtils.writeJsonFile(
-      tsconfigJsonPath, this.buildTsconfigJson.build()
-    );
     this.processGenerateStructure(wsStructureModel.children);
   }
 }

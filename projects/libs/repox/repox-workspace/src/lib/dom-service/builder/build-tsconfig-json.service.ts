@@ -21,6 +21,21 @@ export class BuildTsconfigJsonService {
   ) {
   }
 
+  rebuild (wsTsconfigDto: WsTsconfigDtoModel): WsTsconfigDtoModel {
+    return {
+      ...wsTsconfigDto,
+      ...this.build(),
+      compilerOptions: {
+        ...wsTsconfigDto.compilerOptions,
+        ...this.build().compilerOptions,
+      },
+      exclude: [
+          ...wsTsconfigDto.exclude,
+          ...this.build().exclude
+      ]
+    };
+  }
+
   build (): WsTsconfigDtoModel {
     return {
       compilerOptions: {

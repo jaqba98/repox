@@ -19,12 +19,12 @@ export class BuildRootPackageJsonService {
       ...basePackageJsonContent,
       ...this.build(),
       scripts: {
-        ...this.build().scripts,
-        ...(basePackageJsonContent?.scripts ?? {})
+        ...(basePackageJsonContent?.scripts ?? {}),
+        ...this.build().scripts
       },
       keywords: [
-        ...this.build().keywords,
-        ...(basePackageJsonContent?.keywords ?? [])
+        ...(basePackageJsonContent?.keywords ?? []),
+        ...this.build().keywords
       ],
       devDependencies: {
         ...(basePackageJsonContent?.devDependencies ?? {}),
