@@ -2,7 +2,7 @@ import {
   type WsTsconfigDtoModel
 } from "../../model/ws-dto/ws-tsconfig-dto.model";
 import { singleton } from "tsyringe";
-import { FileUtilsService, PathUtilsService } from "@lib/utils";
+import {ArrayUtilsService, FileUtilsService, PathUtilsService} from "@lib/utils";
 import {
   type WsPackageJsonDtoModel
 } from "../../model/ws-dto/ws-package-json-dto.model";
@@ -17,7 +17,8 @@ export class BuildTsconfigJsonService {
   constructor (
     private readonly fileUtils: FileUtilsService,
     private readonly pathUtils: PathUtilsService,
-    private readonly buildProjectAlias: BuildProjectAliasService
+    private readonly buildProjectAlias: BuildProjectAliasService,
+    private readonly arrayUtils: ArrayUtilsService
   ) {
   }
 
@@ -29,10 +30,10 @@ export class BuildTsconfigJsonService {
         ...wsTsconfigDto.compilerOptions,
         ...this.build().compilerOptions,
       },
-      exclude: [
-          ...wsTsconfigDto.exclude,
-          ...this.build().exclude
-      ]
+      exclude: this.arrayUtils.removeDuplicates([
+        ...wsTsconfigDto.exclude,
+        ...this.build().exclude
+      ])
     };
   }
 

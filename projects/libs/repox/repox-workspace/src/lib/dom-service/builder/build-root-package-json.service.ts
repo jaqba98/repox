@@ -2,30 +2,33 @@ import { singleton } from "tsyringe";
 import {
   WsRootPackageJsonDtoModel
 } from "../../model/ws-dto/ws-root-package-json-dto.model";
-import { FolderUtilsService } from "@lib/utils";
+import {ArrayUtilsService, FolderUtilsService} from "@lib/utils";
 
 @singleton()
 /**
  * The service is responsible for building root package json file.
  */
 export class BuildRootPackageJsonService {
-  constructor(private readonly folderUtils: FolderUtilsService) {
+  constructor(
+    private readonly folderUtils: FolderUtilsService,
+    private readonly arrayUtils: ArrayUtilsService
+  ) {
   }
 
   rebuild (
     basePackageJsonContent: WsRootPackageJsonDtoModel
   ): WsRootPackageJsonDtoModel {
     return {
-      ...basePackageJsonContent,
+      ...(basePackageJsonContent ?? {}),
       ...this.build(),
       scripts: {
         ...(basePackageJsonContent?.scripts ?? {}),
         ...this.build().scripts
       },
-      keywords: [
+      keywords: this.arrayUtils.removeDuplicates([
         ...(basePackageJsonContent?.keywords ?? []),
         ...this.build().keywords
-      ],
+      ]),
       devDependencies: {
         ...(basePackageJsonContent?.devDependencies ?? {}),
         ...this.build().devDependencies,
