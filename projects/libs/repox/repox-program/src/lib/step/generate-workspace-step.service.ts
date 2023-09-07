@@ -51,6 +51,7 @@ export class GenerateWorkspaceStepService {
     if (!this.changePath.run(workspaceName)) return;
     if (!this.generateWorkspace.run()) return;
     if (!this.runCommand.run(`git init`)) return;
+    if (!this.runCommand.run(`git config core.autocrlf`)) return;
     if (!this.runCommand.run(`git add .`)) return;
     if (!this.runCommand.run(`git commit -m "init commit"`)) return;
     this.newline.writeNewline();
