@@ -105,26 +105,6 @@
       "src": "projects/libs/repox/repox-domain/src",
       "scheme": "@lib/ts"
     },
-    "repox-website": {
-      "name": "repox-website",
-      "type": "app",
-      "path": "projects/apps/repox-website",
-      "src": "projects/apps/repox-website/src",
-      "scheme": "@htmlpro",
-      "build": {
-        "output": "dist/repox-website",
-        "assets": [
-          {
-            "input": "projects/apps/repox-website/src/images/**/*",
-            "output": "dist/repox-website/images"
-          },
-          {
-            "input": "projects/apps/repox-website/src/scripts/**/*",
-            "output": "dist/repox-website/scripts"
-          }
-        ]
-      }
-    },
     "htmlpro": {
       "name": "htmlpro",
       "type": "app",
@@ -196,22 +176,6 @@
       "path": "projects/libs/htmlpro/htmlpro-workspace",
       "src": "projects/libs/htmlpro/htmlpro-workspace/src",
       "scheme": "@lib/ts",
-      "build": {}
-    },
-    "repox-component": {
-      "name": "repox-component",
-      "type": "lib",
-      "path": "projects/libs/repox/repox-component",
-      "src": "projects/libs/repox/repox-component/src",
-      "scheme": "@htmlpro",
-      "build": {}
-    },
-    "htmlpro-components": {
-      "name": "htmlpro-components",
-      "type": "lib",
-      "path": "projects/libs/htmlpro/htmlpro-components",
-      "src": "projects/libs/htmlpro/htmlpro-components/src",
-      "scheme": "@htmlpro",
       "build": {}
     }
   }
