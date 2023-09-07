@@ -18,8 +18,8 @@ import {
   BuildGitignoreService
 } from "../dom-service/builder/build-gitignore.service";
 import {
-  BuildJestConfigTsService
-} from "../dom-service/builder/build-jest-config-ts.service";
+  BuildJestConfigJsService
+} from "../dom-service/builder/build-jest-config-js.service";
 import {
   BuildEslintrcJsService
 } from "../dom-service/builder/build-eslintrc-js.service";
@@ -56,7 +56,7 @@ export class GenerateWsStructureService {
     private readonly buildRepoxJson: BuildRepoxJsonService,
     private readonly buildTsconfigJson: BuildTsconfigJsonService,
     private readonly buildGitignore: BuildGitignoreService,
-    private readonly buildJestConfigTs: BuildJestConfigTsService,
+    private readonly buildJestConfigJs: BuildJestConfigJsService,
     private readonly runCommandUtils: RunCommandUtilsService,
     private readonly buildEslintrcJs: BuildEslintrcJsService,
     private readonly buildRootPackageJson: BuildRootPackageJsonService
@@ -92,15 +92,15 @@ export class GenerateWsStructureService {
         case WsStructureEnum.createGitignoreTextFile:
           this.createGitignoreFile(wsStructureModel);
           break;
+        case WsStructureEnum.createJestConfigJsFile:
+          this.createJestConfigJsFile(wsStructureModel);
+          break;
         // todo: I am here
         case WsStructureEnum.removeFolder:
           this.processRemoveFolder(wsStructureModel);
           break;
         case WsStructureEnum.removeFile:
           this.processRemoveFile(wsStructureModel);
-          break;
-        case WsStructureEnum.createRootJestConfigTsFile:
-          this.processCreateRootJestConfigTsFile(wsStructureModel);
           break;
         case WsStructureEnum.createRepoxJsonFile:
           this.processCreateRepoxJsonFile(wsStructureModel);
@@ -199,6 +199,18 @@ export class GenerateWsStructureService {
     this.processGenerateStructure(wsStructureModel.children);
   }
 
+  private createJestConfigJsFile(
+      wsStructureModel: WsStructureModel
+  ): void {
+    const jestConfigJsPath = this.pathUtils.createPath(
+        ...this.currentPath, WorkspaceFileEnum.jestConfigJs
+    );
+    this.fileUtils.writeTextFile(
+        jestConfigJsPath, this.buildJestConfigJs.build()
+    );
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
   private processRemoveFolder(
     wsStructureModel: WsStructureModel
   ): void {
@@ -221,18 +233,6 @@ export class GenerateWsStructureService {
     if (this.pathUtils.existPath(filePath)) {
       this.fileUtils.removeFile(filePath);
     }
-    this.processGenerateStructure(wsStructureModel.children);
-  }
-
-  private processCreateRootJestConfigTsFile(
-    wsStructureModel: WsStructureModel
-  ): void {
-    const jestConfigTsPath = this.pathUtils.createPath(
-      ...this.currentPath, WorkspaceFileEnum.jestConfigTs
-    );
-    this.fileUtils.writeTextFile(
-      jestConfigTsPath, this.buildJestConfigTs.build()
-    );
     this.processGenerateStructure(wsStructureModel.children);
   }
 

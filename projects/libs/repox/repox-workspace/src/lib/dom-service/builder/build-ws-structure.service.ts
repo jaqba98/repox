@@ -94,15 +94,15 @@ export class BuildWsStructureService {
         value: EMPTY_STRING,
         children: []
       },
-      // todo: I am here
       /**
-       * Create jest.config.ts configuration in root of workspace.
+       * Generate default jest.config.js file. It replaces the current configuration.
        */
       {
-        type: WsStructureEnum.createRootJestConfigTsFile,
+        type: WsStructureEnum.createJestConfigJsFile,
         value: EMPTY_STRING,
         children: []
       },
+      // todo: I am here
       /**
        * Create repox.json file.
        */

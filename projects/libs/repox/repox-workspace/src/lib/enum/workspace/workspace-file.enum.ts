@@ -5,7 +5,7 @@ export enum WorkspaceFileEnum {
   gitignoreText = `.gitignore`,
   repoxJson = `repox.json`,
   tsconfigJson = `tsconfig.json`,
-  jestConfigTs = `jest.config.ts`,
+  jestConfigJs = `jest.config.js`,
   importJestConfigTs = `jest.config`,
   gitkeep = `.gitkeep`,
   packageJson = `package.json`,

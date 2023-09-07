@@ -73,7 +73,7 @@ export class CreateProjectFilesAppService {
     this.pathUtils.changePath(`../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
-      WorkspaceFileEnum.jestConfigTs,
+      WorkspaceFileEnum.jestConfigJs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
     );
   }
@@ -87,7 +87,7 @@ export class CreateProjectFilesAppService {
     this.pathUtils.changePath(`../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
-      WorkspaceFileEnum.jestConfigTs,
+      WorkspaceFileEnum.jestConfigJs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
     );
   }
@@ -101,7 +101,7 @@ export class CreateProjectFilesAppService {
     this.pathUtils.changePath(`../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
-      WorkspaceFileEnum.jestConfigTs,
+      WorkspaceFileEnum.jestConfigJs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
     );
     this.fileUtils.writeJsonFile(
@@ -122,7 +122,7 @@ export class CreateProjectFilesAppService {
     this.pathUtils.changePath(`../../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
-      WorkspaceFileEnum.jestConfigTs,
+      WorkspaceFileEnum.jestConfigJs,
       this.createWsFile.buildProjectJestConfigTsContentFile(projectPath)
     );
     this.fileUtils.writeJsonFile(

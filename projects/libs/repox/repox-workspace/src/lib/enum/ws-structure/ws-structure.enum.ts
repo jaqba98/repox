@@ -10,10 +10,10 @@ export enum WsStructureEnum {
   runCommand = `runCommand`,
   createEslintrcJsFile = `createEslintrcJsFile`,
   createGitignoreTextFile = `createGitignoreTextFile`,
+  createJestConfigJsFile = `createJestConfigJsFile`,
   // todo: I am here
   removeFolder = `removeFolder`,
   removeFile = `removeFile`,
-  createRootJestConfigTsFile = `createRootJestConfigTsFile`,
   createTsconfigJsonFile = `createTsconfigJsonFile`,
   createRepoxJsonFile = `createRepoxJsonFile`
 }
