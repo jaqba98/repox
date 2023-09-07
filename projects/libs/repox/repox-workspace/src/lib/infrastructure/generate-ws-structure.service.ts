@@ -96,18 +96,11 @@ export class GenerateWsStructureService {
         case WsStructureEnum.createJestConfigJsFile:
           this.createJestConfigJsFile(wsStructureModel);
           break;
+        case WsStructureEnum.createRepoxJsonFile:
+          this.createRepoxJsonFile(wsStructureModel);
+          break;
         case WsStructureEnum.createTsconfigJsonFile:
           this.createTsconfigJsonFile(wsStructureModel);
-          break;
-        // todo: I am here
-        case WsStructureEnum.removeFolder:
-          this.processRemoveFolder(wsStructureModel);
-          break;
-        case WsStructureEnum.removeFile:
-          this.processRemoveFile(wsStructureModel);
-          break;
-        case WsStructureEnum.createRepoxJsonFile:
-          this.processCreateRepoxJsonFile(wsStructureModel);
           break;
         default:
           throw new Error(
@@ -212,6 +205,20 @@ export class GenerateWsStructureService {
     this.processGenerateStructure(wsStructureModel.children);
   }
 
+  private createRepoxJsonFile(
+      wsStructureModel: WsStructureModel
+  ): void {
+    const repoxJsonPath = this.pathUtils.createPath(
+        ...this.currentPath, WorkspaceFileEnum.repoxJson
+    );
+    if (this.pathUtils.notExistPath(repoxJsonPath)) {
+      this.fileUtils.writeJsonFile(
+          repoxJsonPath, this.buildRepoxJson.build()
+      );
+    }
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
   private createTsconfigJsonFile(
       wsStructureModel: WsStructureModel
   ): void {
@@ -232,45 +239,6 @@ export class GenerateWsStructureService {
           .build();
       this.fileUtils.writeJsonFile(
           tsconfigJsonPath, packageJsonNewContent
-      );
-    }
-    this.processGenerateStructure(wsStructureModel.children);
-  }
-
-  private processRemoveFolder(
-    wsStructureModel: WsStructureModel
-  ): void {
-    this.currentPath.push(wsStructureModel.value);
-    const folderPath = this.pathUtils.createPath(...this.currentPath);
-    if (this.pathUtils.existPath(folderPath)) {
-      this.folderUtils.removeFolder(folderPath);
-    }
-    this.processGenerateStructure(wsStructureModel.children);
-    this.currentPath.pop();
-  }
-
-  private processRemoveFile(
-    wsStructureModel: WsStructureModel
-  ): void {
-    const folderPath = this.pathUtils.createPath(...this.currentPath);
-    const filePath = this.pathUtils.createPath(
-      folderPath, wsStructureModel.value
-    );
-    if (this.pathUtils.existPath(filePath)) {
-      this.fileUtils.removeFile(filePath);
-    }
-    this.processGenerateStructure(wsStructureModel.children);
-  }
-
-  private processCreateRepoxJsonFile(
-    wsStructureModel: WsStructureModel
-  ): void {
-    const repoxJsonPath = this.pathUtils.createPath(
-      ...this.currentPath, WorkspaceFileEnum.repoxJson
-    );
-    if (this.pathUtils.notExistPath(repoxJsonPath)) {
-      this.fileUtils.writeJsonFile(
-        repoxJsonPath, this.buildRepoxJson.build()
       );
     }
     this.processGenerateStructure(wsStructureModel.children);
