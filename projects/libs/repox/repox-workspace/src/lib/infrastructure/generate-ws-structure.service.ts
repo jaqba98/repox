@@ -86,15 +86,15 @@ export class GenerateWsStructureService {
         case WsStructureEnum.runCommand:
           this.runCommand(wsStructureModel);
           break;
+        case WsStructureEnum.createGitignoreTextFile:
+          this.createGitignoreFile(wsStructureModel);
+          break;
         // todo: I am here
         case WsStructureEnum.removeFolder:
           this.processRemoveFolder(wsStructureModel);
           break;
         case WsStructureEnum.removeFile:
           this.processRemoveFile(wsStructureModel);
-          break;
-        case WsStructureEnum.createGitignoreFile:
-          this.processCreateGitignoreFile(wsStructureModel);
           break;
         case WsStructureEnum.createRootJestConfigTsFile:
           this.processCreateRootJestConfigTsFile(wsStructureModel);
@@ -120,7 +120,7 @@ export class GenerateWsStructureService {
     wsStructureModel: WsStructureModel
   ): void {
     this.currentPath.push(wsStructureModel.value);
-    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    const folderPath: string = this.pathUtils.createPath(...this.currentPath);
     if (this.pathUtils.notExistPath(folderPath)) {
       this.folderUtils.createFolder(folderPath);
     }
@@ -131,9 +131,9 @@ export class GenerateWsStructureService {
   private createEmptyFileWhenFolderEmpty(
     wsStructureModel: WsStructureModel
   ): void {
-    const folderPath = this.pathUtils.createPath(...this.currentPath);
+    const folderPath: string = this.pathUtils.createPath(...this.currentPath);
     if (this.folderUtils.isEmpty(folderPath)) {
-      const filePath = this.pathUtils.createPath(
+      const filePath: string = this.pathUtils.createPath(
         folderPath, wsStructureModel.value
       );
       this.fileUtils.writeTextFile(filePath, EMPTY_STRING);
@@ -144,8 +144,8 @@ export class GenerateWsStructureService {
   private createPackageJsonFile(
     wsStructureModel: WsStructureModel
   ): void {
-    const folderPath = this.pathUtils.createPath(...this.currentPath);
-    const packageJsonPath = this.pathUtils.createPath(
+    const folderPath: string = this.pathUtils.createPath(...this.currentPath);
+    const packageJsonPath: string = this.pathUtils.createPath(
       folderPath, WorkspaceFileEnum.packageJson
     );
     if (this.pathUtils.existPath(packageJsonPath)) {
@@ -159,7 +159,7 @@ export class GenerateWsStructureService {
         packageJsonPath, packageJsonNewContent
       );
     } else {
-      const packageJsonNewContent = this.buildRootPackageJson
+      const packageJsonNewContent: WsRootPackageJsonDtoModel = this.buildRootPackageJson
         .build();
       this.fileUtils.writeJsonFile(
         packageJsonPath, packageJsonNewContent
@@ -172,6 +172,18 @@ export class GenerateWsStructureService {
     wsStructureModel: WsStructureModel
   ): void {
     this.runCommandUtils.runCommand(wsStructureModel.value);
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
+  private createGitignoreFile(
+      wsStructureModel: WsStructureModel
+  ): void {
+    const gitignorePath: string = this.pathUtils.createPath(
+        ...this.currentPath, WorkspaceFileEnum.gitignoreText
+    );
+    this.fileUtils.writeTextFile(
+        gitignorePath, this.buildGitignore.build()
+    );
     this.processGenerateStructure(wsStructureModel.children);
   }
 
@@ -197,18 +209,6 @@ export class GenerateWsStructureService {
     if (this.pathUtils.existPath(filePath)) {
       this.fileUtils.removeFile(filePath);
     }
-    this.processGenerateStructure(wsStructureModel.children);
-  }
-
-  private processCreateGitignoreFile(
-    wsStructureModel: WsStructureModel
-  ): void {
-    const gitignorePath = this.pathUtils.createPath(
-      ...this.currentPath, WorkspaceFileEnum.gitignoreText
-    );
-    this.fileUtils.writeTextFile(
-      gitignorePath, this.buildGitignore.build()
-    );
     this.processGenerateStructure(wsStructureModel.children);
   }
 

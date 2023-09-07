@@ -78,15 +78,15 @@ export class BuildWsStructureService {
           }
         ]
       },
-      // todo: I am here
       /**
-       * Create .gitignore file.
+       * Generate default .gitignore file. It replaces the current configuration.
        */
       {
-        type: WsStructureEnum.createGitignoreFile,
+        type: WsStructureEnum.createGitignoreTextFile,
         value: EMPTY_STRING,
         children: []
       },
+      // todo: I am here
       /**
        * Create .eslintrc.js file.
        */
