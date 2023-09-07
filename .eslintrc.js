@@ -8,5 +8,5 @@ module.exports = {
   plugins: [
     '@typescript-eslint'
   ],
-  root: true,
+  root: true
 };
