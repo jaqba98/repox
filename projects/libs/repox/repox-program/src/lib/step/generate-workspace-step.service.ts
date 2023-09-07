@@ -6,7 +6,7 @@ import {
 import {
   ChangePathAppService,
   CreateFolderAppService,
-  FolderNotExistAppService,
+  FolderNotExistAppService, RunCommandAppService,
   SystemProgramEnum,
   SystemProgramExistAppService
 } from "@lib/program-step";
@@ -31,7 +31,8 @@ export class GenerateWorkspaceStepService {
     private readonly folderNotExist: FolderNotExistAppService,
     private readonly createFolder: CreateFolderAppService,
     private readonly changePath: ChangePathAppService,
-    private readonly generateWorkspace: GenerateWorkspaceAppService
+    private readonly generateWorkspace: GenerateWorkspaceAppService,
+    private readonly runCommand: RunCommandAppService
   ) {
   }
 
@@ -49,6 +50,9 @@ export class GenerateWorkspaceStepService {
     if (!this.createFolder.run(workspaceName)) return;
     if (!this.changePath.run(workspaceName)) return;
     if (!this.generateWorkspace.run()) return;
+    if (!this.runCommand.run(`git init`)) return;
+    if (!this.runCommand.run(`git add .`)) return;
+    if (!this.runCommand.run(`git commit -m "init commit"`)) return;
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(`Command executed correctly`);
   }
