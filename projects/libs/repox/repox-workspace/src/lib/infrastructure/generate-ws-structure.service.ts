@@ -58,7 +58,7 @@ export class GenerateWsStructureService {
     private readonly buildGitignore: BuildGitignoreService,
     private readonly buildJestConfigTs: BuildJestConfigTsService,
     private readonly runCommandUtils: RunCommandUtilsService,
-    private readonly buildEslintrcTs: BuildEslintrcJsService,
+    private readonly buildEslintrcJs: BuildEslintrcJsService,
     private readonly buildRootPackageJson: BuildRootPackageJsonService
   ) {
   }
@@ -86,6 +86,9 @@ export class GenerateWsStructureService {
         case WsStructureEnum.runCommand:
           this.runCommand(wsStructureModel);
           break;
+        case WsStructureEnum.createEslintrcJsFile:
+          this.createEslintrcJsFile(wsStructureModel);
+          break;
         case WsStructureEnum.createGitignoreTextFile:
           this.createGitignoreFile(wsStructureModel);
           break;
@@ -104,9 +107,6 @@ export class GenerateWsStructureService {
           break;
         case WsStructureEnum.createTsconfigJsonFile:
           this.processCreateTsconfigJsonFile(wsStructureModel);
-          break;
-        case WsStructureEnum.createEslintrcJsFile:
-          this.processCreateEslintrcJsFile(wsStructureModel);
           break;
         default:
           throw new Error(
@@ -172,6 +172,18 @@ export class GenerateWsStructureService {
     wsStructureModel: WsStructureModel
   ): void {
     this.runCommandUtils.runCommand(wsStructureModel.value);
+    this.processGenerateStructure(wsStructureModel.children);
+  }
+
+  private createEslintrcJsFile(
+      wsStructureModel: WsStructureModel
+  ): void {
+    const eslintrcTsPath = this.pathUtils.createPath(
+        ...this.currentPath, WorkspaceFileEnum.eslintrcFile
+    );
+    this.fileUtils.writeTextFile(
+        eslintrcTsPath, this.buildEslintrcJs.build()
+    );
     this.processGenerateStructure(wsStructureModel.children);
   }
 
@@ -246,18 +258,6 @@ export class GenerateWsStructureService {
     );
     this.fileUtils.writeJsonFile(
       tsconfigJsonPath, this.buildTsconfigJson.build()
-    );
-    this.processGenerateStructure(wsStructureModel.children);
-  }
-
-  private processCreateEslintrcJsFile(
-    wsStructureModel: WsStructureModel
-  ): void {
-    const eslintrcTsPath = this.pathUtils.createPath(
-      ...this.currentPath, WorkspaceFileEnum.eslintrcFile
-    );
-    this.fileUtils.writeTextFile(
-      eslintrcTsPath, this.buildEslintrcTs.build()
     );
     this.processGenerateStructure(wsStructureModel.children);
   }

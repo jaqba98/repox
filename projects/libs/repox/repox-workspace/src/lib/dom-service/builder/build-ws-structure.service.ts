@@ -79,6 +79,14 @@ export class BuildWsStructureService {
         ]
       },
       /**
+       * Generate default .eslintrc.js file. It replaces the current configuration.
+       */
+      {
+        type: WsStructureEnum.createEslintrcJsFile,
+        value: EMPTY_STRING,
+        children: []
+      },
+      /**
        * Generate default .gitignore file. It replaces the current configuration.
        */
       {
@@ -87,14 +95,6 @@ export class BuildWsStructureService {
         children: []
       },
       // todo: I am here
-      /**
-       * Create .eslintrc.js file.
-       */
-      {
-        type: WsStructureEnum.createEslintrcJsFile,
-        value: EMPTY_STRING,
-        children: []
-      },
       /**
        * Create jest.config.ts configuration in root of workspace.
        */

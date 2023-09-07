@@ -8,11 +8,11 @@ export enum WsStructureEnum {
   createEmptyFileWhenFolderEmpty = `createEmptyFileWhenFolderEmpty`,
   createPackageJsonFile = `createPackageJsonFile`,
   runCommand = `runCommand`,
+  createEslintrcJsFile = `createEslintrcJsFile`,
   createGitignoreTextFile = `createGitignoreTextFile`,
   // todo: I am here
   removeFolder = `removeFolder`,
   removeFile = `removeFile`,
-  createEslintrcJsFile = `createEslintrcTsFile`,
   createRootJestConfigTsFile = `createRootJestConfigTsFile`,
   createTsconfigJsonFile = `createTsconfigJsonFile`,
   createRepoxJsonFile = `createRepoxJsonFile`
