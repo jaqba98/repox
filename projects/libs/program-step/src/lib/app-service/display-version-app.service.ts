@@ -11,8 +11,7 @@ export class DisplayVersionAppService {
   ) {
   }
 
-  displayRepoxVersion (version: string): void {
+  display (version: string): void {
     this.simpleMessage.writeInfo(version);
   }
 }
-// todo: refactor the file
