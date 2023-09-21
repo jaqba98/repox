@@ -112,14 +112,6 @@
       "src": "projects/libs/program-step/src",
       "scheme": "@lib/ts",
       "build": {}
-    },
-    "footer": {
-      "name": "footer",
-      "type": "lib",
-      "path": "projects/libs/components/footer",
-      "src": "projects/libs/components/footer/src",
-      "scheme": "@htmlpro",
-      "build": {}
     }
   }
 }
