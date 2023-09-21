@@ -105,55 +105,6 @@
       "src": "projects/libs/repox/repox-domain/src",
       "scheme": "@lib/ts"
     },
-    "htmlpro": {
-      "name": "htmlpro",
-      "type": "app",
-      "path": "projects/apps/htmlpro",
-      "src": "projects/apps/htmlpro/src",
-      "scheme": "@app/ts",
-      "build": {
-        "output": "dist/htmlpro",
-        "main": "projects/apps/htmlpro/src/main.ts",
-        "assets": [
-          {
-            "input": "projects/apps/htmlpro/package.json",
-            "output": "dist/htmlpro"
-          }
-        ]
-      }
-    },
-    "htmlpro-main": {
-      "name": "htmlpro-main",
-      "type": "lib",
-      "path": "projects/libs/htmlpro/htmlpro-main",
-      "src": "projects/libs/htmlpro/htmlpro-main/src",
-      "scheme": "@lib/ts",
-      "build": {}
-    },
-    "htmlpro-domain": {
-      "name": "htmlpro-domain",
-      "type": "lib",
-      "path": "projects/libs/htmlpro/htmlpro-domain",
-      "src": "projects/libs/htmlpro/htmlpro-domain/src",
-      "scheme": "@lib/ts",
-      "build": {}
-    },
-    "htmlpro-program": {
-      "name": "htmlpro-program",
-      "type": "lib",
-      "path": "projects/libs/htmlpro/htmlpro-program",
-      "src": "projects/libs/htmlpro/htmlpro-program/src",
-      "scheme": "@lib/ts",
-      "build": {}
-    },
-    "htmlpro-const": {
-      "name": "htmlpro-const",
-      "type": "lib",
-      "path": "projects/libs/htmlpro/htmlpro-const",
-      "src": "projects/libs/htmlpro/htmlpro-const/src",
-      "scheme": "@lib/ts",
-      "build": {}
-    },
     "program-step": {
       "name": "program-step",
       "type": "lib",
@@ -168,14 +119,6 @@
       "path": "projects/libs/components/footer",
       "src": "projects/libs/components/footer/src",
       "scheme": "@htmlpro",
-      "build": {}
-    },
-    "htmlpro-workspace": {
-      "name": "htmlpro-workspace",
-      "type": "lib",
-      "path": "projects/libs/htmlpro/htmlpro-workspace",
-      "src": "projects/libs/htmlpro/htmlpro-workspace/src",
-      "scheme": "@lib/ts",
       "build": {}
     }
   }
