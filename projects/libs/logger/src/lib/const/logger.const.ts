@@ -2,6 +2,5 @@
  * List of general constants of logger.
  */
 
-export const ERR = `ERR`;
-export const TIP = `TIP`;
-// todo: refactor the file
+export const ERR: string = `ERR`;
+export const TIP: string = `TIP`;

@@ -1,5 +1,5 @@
-import { singleton } from "tsyringe";
-import { type LoggerWordModel } from "../../model/logger-domain.model";
+import {singleton} from "tsyringe";
+import {type LoggerWordModel} from "../../model/logger-domain.model";
 
 @singleton()
 /**
@@ -7,19 +7,14 @@ import { type LoggerWordModel } from "../../model/logger-domain.model";
  * param error data for message (DTO and domain).
  */
 export class BuildParamErrorMessageService {
-  build (
-    wrongParamIndexes: number[],
-    baseValues: string[],
-    logo: string
-  ): LoggerWordModel[] {
-    const prefixContent = `> ${logo.toLowerCase()}`;
-    const words: LoggerWordModel[] = baseValues
-      .map((param, index): LoggerWordModel => ({
-        content: param,
-        underscore: wrongParamIndexes.includes(index)
-      }))
-      .filter((_, index): boolean => index > 1);
-    return [{ content: prefixContent, underscore: false }, ...words];
-  }
+    build(wrongParamIndexes: number[], baseValues: string[], logo: string): LoggerWordModel[] {
+        const prefixContent = `> ${logo.toLowerCase()}`;
+        const words: LoggerWordModel[] = baseValues
+            .map((param, index): LoggerWordModel => ({
+                content: param,
+                underscore: wrongParamIndexes.includes(index)
+            }))
+            .filter((_, index): boolean => index > 1);
+        return [{content: prefixContent, underscore: false}, ...words];
+    }
 }
-// todo: refactor the file
