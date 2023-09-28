@@ -1,4 +1,4 @@
-import { type ProgramModel } from "@lib/model";
+import {type ProgramModel} from "@lib/model";
 
 /**
  * The model represents list of run program services
@@ -6,12 +6,11 @@ import { type ProgramModel } from "@lib/model";
  */
 
 export interface LauncherProgramModel {
-  programName: string;
-  commandName: string;
-  service: ProgramModel;
+    programName: string;
+    commandName: string;
+    service: ProgramModel;
 }
 
 export interface LauncherModel {
-  programs: LauncherProgramModel[];
+    programs: LauncherProgramModel[];
 }
-// todo: refactor the file
