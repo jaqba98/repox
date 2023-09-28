@@ -21,7 +21,6 @@ import {REPOX_LOGO} from "@lib/repox-const";
 /**
  * The main service is responsible for run the repox program.
  */
-// todd: I am here
 export class RepoxMainService {
   constructor(
     private readonly buildParamDto: BuildParamDtoAppService,
@@ -36,6 +35,7 @@ export class RepoxMainService {
   }
 
   run(): void {
+    // todo: I am here
     this.buildParamDto.build();
     const paramDtoValidation = this.getParamDtoData
       .getParamDtoValidation();
@@ -82,4 +82,3 @@ export class RepoxMainService {
 }
 
 container.resolve(RepoxMainService).run();
-// todo: refactor the file
