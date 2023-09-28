@@ -1,1 +1,1 @@
-export * from "./lib/const/symbol.const";
+export * from "./lib/symbol.const";
