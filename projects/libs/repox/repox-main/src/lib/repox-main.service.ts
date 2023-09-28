@@ -1,15 +1,8 @@
 import "core-js/features/reflect";
-import { container, singleton } from "tsyringe";
-import {
-  BuildParamDtoAppService,
-  GetParamDtoDataAppService
-} from "@lib/param-dto";
-import { REPOX_LOGO } from "@lib/repox-const";
-import { ParamErrorMessageAppService } from "@lib/logger";
-import {
-  BuildParamDomainAppService,
-  ParamDomainAppService
-} from "@lib/param-domain";
+import {container, singleton} from "tsyringe";
+import {BuildParamDtoAppService, GetParamDtoDataAppService} from "@lib/param-dto";
+import {ParamErrorMessageAppService} from "@lib/logger";
+import {BuildParamDomainAppService, ParamDomainAppService} from "@lib/param-domain";
 import {
   RepoxAliasEnum,
   RepoxArgumentEnum,
@@ -21,14 +14,15 @@ import {
   RepoxProgramAliasEnum,
   RepoxProgramEnum
 } from "@lib/repox-domain";
-import { LauncherAppService } from "@lib/launcher";
+import {LauncherAppService} from "@lib/launcher";
+import {REPOX_LOGO} from "@lib/repox-const";
 
 @singleton()
 /**
- * The main service is responsible for run repox program.
+ * The main service is responsible for run the repox program.
  */
 export class RepoxMainService {
-  constructor (
+  constructor(
     private readonly buildParamDto: BuildParamDtoAppService,
     private readonly getParamDtoData: GetParamDtoDataAppService,
     private readonly paramErrorMessage: ParamErrorMessageAppService,
@@ -40,7 +34,8 @@ export class RepoxMainService {
   ) {
   }
 
-  run (): void {
+  run(): void {
+    // todo: I am here
     this.buildParamDto.build();
     const paramDtoValidation = this.getParamDtoData
       .getParamDtoValidation();
