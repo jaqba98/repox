@@ -60,7 +60,7 @@ export class BuildRootPackageJsonService {
         "@typescript-eslint/parser": `6.7.3`,
         "eslint": `8.50.0`,
         "jest": `29.7.0`,
-        "repox": `1.4.13`,
+        "repox": `1.4.14`,
         "ts-jest": `29.1.1`,
         "ts-node": `10.9.1`,
         "tsc-alias": `1.8.8`,

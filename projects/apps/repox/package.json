@@ -1,9 +1,9 @@
 {
   "name": "repox",
-  "version": "1.4.13",
+  "version": "1.4.14",
   "description": "Lightweight monorepo for many huge projects.",
-  "main": "./projects/apps/repox/src/main.js",
-  "bin": "./projects/apps/repox/src/main.js",
+  "main": "./apps/repox/src/main.js",
+  "bin": "./apps/repox/src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
