@@ -3,6 +3,5 @@
  * for each program services.
  */
 export interface ProgramModel {
-  run: (programDomain: unknown, commandDomain: unknown) => void;
+    run: (programDomain: unknown, commandDomain: unknown) => void;
 }
-// todo: refactor the file
