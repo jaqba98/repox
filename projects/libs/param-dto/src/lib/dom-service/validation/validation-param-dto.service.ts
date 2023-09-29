@@ -1,26 +1,12 @@
-import { container, singleton } from "tsyringe";
-import {
-  BuildParamDtoResultService
-} from "../builder/build-param-dto-result.service";
-import { type ValidatorDtoModel } from "../../model/validator-dto.model";
-import {
-  ValidatorOnlySupportedSignService
-} from "../validator/validator-only-supported-sign.service";
-import {
-  ValidatorCorrectPatternService
-} from "../validator/validator-correct-pattern.service";
-import {
-  ValidatorMaxOneProgramService
-} from "../validator/validator-max-one-program.service";
-import {
-  ParamDtoStoreService
-} from "../store/param-dto-store.service";
-import {
-  ValidatorMaxOneCommandService
-} from "../validator/validator-max-one-command.service";
-import {
-  ValidatorCorrectOrderService
-} from "../validator/validator-correct-order.service";
+import {container, singleton} from "tsyringe";
+import {BuildParamDtoResultService} from "../builder/build-param-dto-result.service";
+import {type ValidatorDtoModel} from "../../model/validator-dto.model";
+import {ValidatorOnlySupportedSignService} from "../validator/validator-only-supported-sign.service";
+import {ValidatorCorrectPatternService} from "../validator/validator-correct-pattern.service";
+import {ValidatorMaxOneProgramService} from "../validator/validator-max-one-program.service";
+import {ParamDtoStoreService} from "../store/param-dto-store.service";
+import {ValidatorMaxOneCommandService} from "../validator/validator-max-one-command.service";
+import {ValidatorCorrectOrderService} from "../validator/validator-correct-order.service";
 
 @singleton()
 /**
@@ -39,32 +25,31 @@ import {
  * 5.Verify that each part of the command are in correct order.
  */
 export class ValidationParamDtoService {
-  constructor (
-    private readonly paramDtoStore: ParamDtoStoreService,
-    private readonly buildParamDtoResult: BuildParamDtoResultService
-  ) {
-  }
-
-  runValidation (): void {
-    for (const service of this.getValidators()) {
-      const result = service.runValidator();
-      if (!result.success) {
-        this.paramDtoStore.setParamDtoValidation(result);
-        return;
-      }
+    constructor(
+        private readonly paramDtoStore: ParamDtoStoreService,
+        private readonly buildParamDtoResult: BuildParamDtoResultService
+    ) {
     }
-    const success = this.buildParamDtoResult.buildSuccess();
-    this.paramDtoStore.setParamDtoValidation(success);
-  }
 
-  private getValidators (): ValidatorDtoModel[] {
-    return [
-      ValidatorOnlySupportedSignService,
-      ValidatorCorrectPatternService,
-      ValidatorMaxOneProgramService,
-      ValidatorMaxOneCommandService,
-      ValidatorCorrectOrderService
-    ].map(service => container.resolve<ValidatorDtoModel>(service));
-  }
+    runValidation(): void {
+        for (const service of this.getValidators()) {
+            const result = service.runValidator();
+            if (!result.success) {
+                this.paramDtoStore.setParamDtoValidation(result);
+                return;
+            }
+        }
+        const success = this.buildParamDtoResult.buildSuccess();
+        this.paramDtoStore.setParamDtoValidation(success);
+    }
+
+    private getValidators(): ValidatorDtoModel[] {
+        return [
+            ValidatorOnlySupportedSignService,
+            ValidatorCorrectPatternService,
+            ValidatorMaxOneProgramService,
+            ValidatorMaxOneCommandService,
+            ValidatorCorrectOrderService
+        ].map(service => container.resolve<ValidatorDtoModel>(service));
+    }
 }
-// todo: refactor the file

@@ -1,10 +1,6 @@
-import { singleton } from "tsyringe";
-import {
-  type ParamDtoValidationModel
-} from "../model/param-dto-validation.model";
-import {
-  ParamDtoStoreService
-} from "../dom-service/store/param-dto-store.service";
+import {singleton} from "tsyringe";
+import {type ParamDtoValidationModel} from "../model/param-dto-validation.model";
+import {ParamDtoStoreService} from "../dom-service/store/param-dto-store.service";
 
 @singleton()
 /**
@@ -12,13 +8,10 @@ import {
  * for other projects.
  */
 export class GetParamDtoDataAppService {
-  constructor (
-    private readonly paramDtoStore: ParamDtoStoreService
-  ) {
-  }
+    constructor(private readonly paramDtoStore: ParamDtoStoreService) {
+    }
 
-  getParamDtoValidation (): ParamDtoValidationModel {
-    return this.paramDtoStore.getParamDtoValidation();
-  }
+    getParamDtoValidation(): ParamDtoValidationModel {
+        return this.paramDtoStore.getParamDtoValidation();
+    }
 }
-// todo: refactor the file

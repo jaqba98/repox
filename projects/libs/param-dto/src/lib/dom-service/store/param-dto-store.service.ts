@@ -1,8 +1,6 @@
-import { singleton } from "tsyringe";
-import { type ParamDtoModel } from "../../model/param-dto.model";
-import {
-  type ParamDtoValidationModel
-} from "../../model/param-dto-validation.model";
+import {singleton} from "tsyringe";
+import {type ParamDtoModel} from "../../model/param-dto.model";
+import {type ParamDtoValidationModel} from "../../model/param-dto-validation.model";
 
 @singleton()
 /**
@@ -10,31 +8,28 @@ import {
  * given directly from the command line and validation DTO result.
  */
 export class ParamDtoStoreService {
-  private paramDto: ParamDtoModel | undefined;
-  private paramDtoValidation: ParamDtoValidationModel | undefined;
+    private paramDto: ParamDtoModel | undefined;
+    private paramDtoValidation: ParamDtoValidationModel | undefined;
 
-  setParamDto (paramDto: ParamDtoModel): void {
-    this.paramDto = paramDto;
-  }
-
-  getParamDto (): ParamDtoModel {
-    if (this.paramDto === undefined) {
-      throw new Error(`The param dto store is undefined!`);
+    setParamDto(paramDto: ParamDtoModel): void {
+        this.paramDto = paramDto;
     }
-    return this.paramDto;
-  }
 
-  setParamDtoValidation (
-    paramDtoValidation: ParamDtoValidationModel
-  ): void {
-    this.paramDtoValidation = paramDtoValidation;
-  }
-
-  getParamDtoValidation (): ParamDtoValidationModel {
-    if (this.paramDtoValidation === undefined) {
-      throw new Error(`The param dto validation store is undefined!`);
+    getParamDto(): ParamDtoModel {
+        if (this.paramDto === undefined) {
+            throw new Error(`The param dto store is undefined!`);
+        }
+        return this.paramDto;
     }
-    return this.paramDtoValidation;
-  }
+
+    setParamDtoValidation(paramDtoValidation: ParamDtoValidationModel): void {
+        this.paramDtoValidation = paramDtoValidation;
+    }
+
+    getParamDtoValidation(): ParamDtoValidationModel {
+        if (this.paramDtoValidation === undefined) {
+            throw new Error(`The param dto validation store is undefined!`);
+        }
+        return this.paramDtoValidation;
+    }
 }
-// todo: refactor the file
