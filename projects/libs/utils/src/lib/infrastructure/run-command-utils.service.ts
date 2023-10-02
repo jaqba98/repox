@@ -1,5 +1,5 @@
-import { singleton } from "tsyringe";
-import { execSync } from "child_process";
+import {singleton} from "tsyringe";
+import {execSync} from "child_process";
 
 @singleton()
 /**
@@ -7,14 +7,13 @@ import { execSync } from "child_process";
  * and return the result.
  */
 export class RunCommandUtilsService {
-  runCommand (command: string, verbose: boolean = false): string {
-    return verbose
-      ? execSync(command, { encoding: `utf-8`, stdio: `inherit` })
-      : execSync(command, { encoding: `utf-8` });
-  }
+    runCommand(command: string, verbose: boolean = false): string {
+        return verbose
+            ? execSync(command, {encoding: `utf-8`, stdio: `inherit`})
+            : execSync(command, {encoding: `utf-8`});
+    }
 
-  runNpxCommand (command: string, verbose: boolean = false): string {
-    return this.runCommand(`npx ${command}`, verbose);
-  }
+    runNpxCommand(command: string, verbose: boolean = false): string {
+        return this.runCommand(`npx ${command}`, verbose);
+    }
 }
-// todo: refactor the file

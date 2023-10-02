@@ -14,4 +14,3 @@ export class ArrayUtilsService {
         }, []);
     }
 }
-// todo: refactor the file
