@@ -19,7 +19,7 @@ export class ValidatorCommandExistService
     ) {
     }
 
-    runValidator(getParamDepService: BaseGetParamDepModel): ParamDomainValidationModel {
+    runValidator(_getParamDepService: BaseGetParamDepModel): ParamDomainValidationModel {
         const paramDomain = this.paramDomainStore.getParamDomain();
         if (paramDomain.command.name === BaseParamTypeEnum.unknown) {
             return this.buildParamDomain.buildError(

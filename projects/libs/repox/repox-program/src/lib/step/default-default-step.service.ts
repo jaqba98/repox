@@ -15,7 +15,7 @@ export class DefaultDefaultStepService {
 
     runSteps(
         programModel: DefaultDefaultRepoxProgramModel,
-        commandModel: EmptyRepoxCommandModel
+        _commandModel: EmptyRepoxCommandModel
     ): void {
         if (programModel.showVersion) {
             this.displayVersion.display(REPOX_VERSION);

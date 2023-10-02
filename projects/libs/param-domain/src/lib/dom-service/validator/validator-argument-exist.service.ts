@@ -19,7 +19,7 @@ export class ValidatorArgumentExistService
     ) {
     }
 
-    runValidator(getParamDepService: BaseGetParamDepModel): ParamDomainValidationModel {
+    runValidator(_getParamDepService: BaseGetParamDepModel): ParamDomainValidationModel {
         const paramDomain = this.paramDomainStore.getParamDomain();
         const programArgs = paramDomain.program.args;
         const commandArgs = paramDomain.command.args;
