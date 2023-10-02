@@ -1,50 +1,20 @@
-import { container, singleton } from "tsyringe";
-import {
-  BuildParamDomainResultService
-} from "../builder/build-param-domain-result.service";
-import {
-  ParamDomainStoreService
-} from "../store/param-domain-store.service";
-import { type BaseGetParamDepModel } from "@lib/model";
-import {
-  type ValidatorDomainModel
-} from "../../model/validator/validator-domain.model";
-import {
-  ValidatorProgramExistService
-} from "../validator/validator-program-exist.service";
-import {
-  ValidatorCommandExistService
-} from "../validator/validator-command-exist.service";
-import {
-  ValidatorProgramContainsCommandService
-} from "../validator/validator-program-contains-command.service";
-import {
-  ValidatorArgumentExistService
-} from "../validator/validator-argument-exist.service";
-import {
-  ValidatorProgramContainsArgumentsService
-} from "../validator/validator-program-contains-arguments.service";
-import {
-  ValidatorCommandContainsArgumentsService
-} from "../validator/validator-command-contains-arguments.service";
-import {
-  ValidatorProgramNotWrongArgumentsService
-} from "../validator/validator-program-not-wrong-arguments.service";
-import {
-  CommandNotWrongArgumentsService
-} from "../validator/command-not-wrong-arguments.service";
-import {
-  ValidatorProgramArgumentsCorrectService
-} from "../validator/validator-program-arguments-correct.service";
-import {
-  ValidatorCommandArgumentsCorrectService
-} from "../validator/validator-command-arguments-correct.service";
-import {
-  ValidatorProgramArgIsCorrectValueService
-} from "../validator/validator-program-arg-is-correct-value.service";
-import {
-  ValidatorCommandArgIsCorrectValueService
-} from "../validator/validator-command-arg-is-correct-value.service";
+import {container, singleton} from "tsyringe";
+import {BuildParamDomainResultService} from "../builder/build-param-domain-result.service";
+import {ParamDomainStoreService} from "../store/param-domain-store.service";
+import {type BaseGetParamDepModel} from "@lib/model";
+import {type ValidatorDomainModel} from "../../model/validator/validator-domain.model";
+import {ValidatorProgramExistService} from "../validator/validator-program-exist.service";
+import {ValidatorCommandExistService} from "../validator/validator-command-exist.service";
+import {ValidatorProgramContainsCommandService} from "../validator/validator-program-contains-command.service";
+import {ValidatorArgumentExistService} from "../validator/validator-argument-exist.service";
+import {ValidatorProgramContainsArgumentsService} from "../validator/validator-program-contains-arguments.service";
+import {ValidatorCommandContainsArgumentsService} from "../validator/validator-command-contains-arguments.service";
+import {ValidatorProgramNotWrongArgumentsService} from "../validator/validator-program-not-wrong-arguments.service";
+import {CommandNotWrongArgumentsService} from "../validator/command-not-wrong-arguments.service";
+import {ValidatorProgramArgumentsCorrectService} from "../validator/validator-program-arguments-correct.service";
+import {ValidatorCommandArgumentsCorrectService} from "../validator/validator-command-arguments-correct.service";
+import {ValidatorProgramArgIsCorrectValueService} from "../validator/validator-program-arg-is-correct-value.service";
+import {ValidatorCommandArgIsCorrectValueService} from "../validator/validator-command-arg-is-correct-value.service";
 
 @singleton()
 /**
@@ -65,43 +35,42 @@ import {
  * 12.Verify that command arguments have correct value.
  */
 export class ValidationParamDomainService {
-  constructor (
-    private readonly buildParamDomain: BuildParamDomainResultService,
-    private readonly paramDomainStore: ParamDomainStoreService
-  ) {
-  }
-
-  runValidation (
-    getParamDepService: BaseGetParamDepModel
-  ): void {
-    for (const service of this.getValidators()) {
-      const result = service.runValidator(getParamDepService);
-      if (!result.success) {
-        this.paramDomainStore.setParamDomainValidation(result);
-        return;
-      }
+    constructor(
+        private readonly buildParamDomain: BuildParamDomainResultService,
+        private readonly paramDomainStore: ParamDomainStoreService
+    ) {
     }
-    const success = this.buildParamDomain.buildSuccess();
-    this.paramDomainStore.setParamDomainValidation(success);
-  }
 
-  private getValidators (): ValidatorDomainModel[] {
-    return [
-      ValidatorProgramExistService,
-      ValidatorCommandExistService,
-      ValidatorProgramContainsCommandService,
-      ValidatorArgumentExistService,
-      ValidatorProgramContainsArgumentsService,
-      ValidatorCommandContainsArgumentsService,
-      ValidatorProgramNotWrongArgumentsService,
-      CommandNotWrongArgumentsService,
-      ValidatorProgramArgumentsCorrectService,
-      ValidatorCommandArgumentsCorrectService,
-      ValidatorProgramArgIsCorrectValueService,
-      ValidatorCommandArgIsCorrectValueService
-    ].map(service => {
-      return container.resolve<ValidatorDomainModel>(service);
-    });
-  }
+    runValidation(
+        getParamDepService: BaseGetParamDepModel
+    ): void {
+        for (const service of this.getValidators()) {
+            const result = service.runValidator(getParamDepService);
+            if (!result.success) {
+                this.paramDomainStore.setParamDomainValidation(result);
+                return;
+            }
+        }
+        const success = this.buildParamDomain.buildSuccess();
+        this.paramDomainStore.setParamDomainValidation(success);
+    }
+
+    private getValidators(): ValidatorDomainModel[] {
+        return [
+            ValidatorProgramExistService,
+            ValidatorCommandExistService,
+            ValidatorProgramContainsCommandService,
+            ValidatorArgumentExistService,
+            ValidatorProgramContainsArgumentsService,
+            ValidatorCommandContainsArgumentsService,
+            ValidatorProgramNotWrongArgumentsService,
+            CommandNotWrongArgumentsService,
+            ValidatorProgramArgumentsCorrectService,
+            ValidatorCommandArgumentsCorrectService,
+            ValidatorProgramArgIsCorrectValueService,
+            ValidatorCommandArgIsCorrectValueService
+        ].map(service => {
+            return container.resolve<ValidatorDomainModel>(service);
+        });
+    }
 }
-// todo: refactor the file

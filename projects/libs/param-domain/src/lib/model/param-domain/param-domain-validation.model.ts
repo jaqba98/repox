@@ -2,9 +2,8 @@
  * The result model of the parameter domain validation.
  */
 export interface ParamDomainValidationModel {
-  success: boolean;
-  wrongIndexes: number[];
-  errors: string[];
-  tips: string[];
+    success: boolean;
+    wrongIndexes: number[];
+    errors: string[];
+    tips: string[];
 }
-// todo: refactor the file
