@@ -1,9 +1,6 @@
-import { singleton } from "tsyringe";
-import {
-  NewlineAppService,
-  SimpleMessageAppService
-} from "@lib/logger";
-import { PathUtilsService } from "@lib/utils";
+import {singleton} from "tsyringe";
+import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
+import {PathUtilsService} from "@lib/utils";
 
 @singleton()
 /**

@@ -1,17 +1,15 @@
-import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
+import {singleton} from "tsyringe";
+import {SimpleMessageAppService} from "@lib/logger";
 
 @singleton()
 /**
  * The app service is responsible for display a version.
  */
 export class DisplayVersionAppService {
-  constructor (
-    private readonly simpleMessage: SimpleMessageAppService
-  ) {
-  }
+    constructor(private readonly simpleMessage: SimpleMessageAppService) {
+    }
 
-  display (version: string): void {
-    this.simpleMessage.writeInfo(version);
-  }
+    display(version: string): void {
+        this.simpleMessage.writeInfo(version);
+    }
 }

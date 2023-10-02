@@ -1,6 +1,6 @@
-import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
-import { PathUtilsService } from "@lib/utils";
+import {singleton} from "tsyringe";
+import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
+import {PathUtilsService} from "@lib/utils";
 
 @singleton()
 /**
@@ -8,23 +8,20 @@ import { PathUtilsService } from "@lib/utils";
  * file exist.
  */
 export class FileExistAppService {
-  constructor (
-    private readonly simpleMessage: SimpleMessageAppService,
-    private readonly pathUtils: PathUtilsService
-  ) {
-  }
-
-  run (filePath: string): boolean {
-    this.simpleMessage.writePlain(
-      `Checking if ${filePath} file exist`
-    );
-    if (this.pathUtils.existPath(filePath)) {
-      return true;
+    constructor(
+        private readonly simpleMessage: SimpleMessageAppService,
+        private readonly pathUtils: PathUtilsService,
+        private readonly newline: NewlineAppService
+    ) {
     }
-    this.simpleMessage.writeError(
-      `The ${filePath} file not exist`
-    );
-    return false;
-  }
+
+    run(filePath: string): boolean {
+        this.simpleMessage.writePlain(`Step: File Exist >>> ${filePath}`);
+        if (this.pathUtils.existPath(filePath)) {
+            return true;
+        }
+        this.newline.writeNewline();
+        this.simpleMessage.writeError(`The file ${filePath} does not exist`);
+        return false;
+    }
 }
-// todo: refactor the file
