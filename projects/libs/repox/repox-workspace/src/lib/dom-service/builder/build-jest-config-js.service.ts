@@ -10,7 +10,8 @@ export class BuildJestConfigJsService {
 const path = require("path");
 
 const buildModuleNameMapper = () => {
-  const tsconfigText = fs.readFileSync("tsconfig.json", "utf-8");
+  const tsconfigPath = path.join(__dirname, "tsconfig.json");
+  const tsconfigText = fs.readFileSync(tsconfigPath, "utf-8");
   const tsconfigJson = JSON.parse(tsconfigText);
   if (tsconfigJson?.compilerOptions?.paths === undefined) return {};
   const { paths } = tsconfigJson.compilerOptions;
@@ -24,7 +25,6 @@ const buildModuleNameMapper = () => {
     }, {});
 };
 
-/** @type {import('jest').Config} */
 const config = {
   clearMocks: true,
   coverageProvider: "v8",
