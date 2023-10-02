@@ -55,7 +55,7 @@ export class BuildRootPackageJsonService {
       devDependencies: {
         "@types/core-js": `2.5.6`,
         "@types/jest": `29.5.5`,
-        "@types/node": `20.7.1`,
+        "@types/node": `20.8.0`,
         "@typescript-eslint/eslint-plugin": `6.7.3`,
         "@typescript-eslint/parser": `6.7.3`,
         "eslint": `8.50.0`,
@@ -67,7 +67,7 @@ export class BuildRootPackageJsonService {
         "typescript": `5.2.2`
       },
       dependencies: {
-        "core-js": `3.32.2`,
+        "core-js": `3.33.0`,
         "tsyringe": `4.8.0`
       }
     };
