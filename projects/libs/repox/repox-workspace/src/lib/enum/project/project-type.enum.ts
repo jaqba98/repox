@@ -2,8 +2,7 @@
  * All kinds of project type.
  */
 export enum ProjectTypeEnum {
-  app = `app`,
-  lib = `lib`,
-  tool = `tool`
+    appTs = `@app/ts`,
+    libTs = `@lib/ts`,
+    toolTs = `@tool/ts`
 }
-// todo: refactor the file

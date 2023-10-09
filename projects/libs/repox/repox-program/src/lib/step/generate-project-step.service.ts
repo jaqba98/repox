@@ -2,7 +2,7 @@ import {singleton} from "tsyringe";
 import {type EmptyRepoxProgramModel, type GenerateProjectRepoxCommandModel} from "@lib/repox-domain";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
+import {GoToProjectRootAppService, SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
 
 @singleton()
 /**
@@ -13,8 +13,7 @@ export class GenerateProjectStepService {
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,
         private readonly systemProgramExist: SystemProgramExistAppService,
-        // private readonly allProgramInstalled: AllProgramInstalledService,
-        // private readonly goToProjectRoot: GoToProjectRootAppService,
+        private readonly goToProjectRoot: GoToProjectRootAppService,
         // private readonly loadWsDto: LoadWsDtoAppService,
         // private readonly loadWsDomain: LoadWsDomainAppService,
         // private readonly projectNotExist: ProjectNotExistAppService,
@@ -27,17 +26,15 @@ export class GenerateProjectStepService {
 
     runSteps(
         _programModel: EmptyRepoxProgramModel,
-        commandModel: GenerateProjectRepoxCommandModel
+        _commandModel: GenerateProjectRepoxCommandModel
     ): void {
         this.simpleMessage.writeInfo(`Generate project`, REPOX_LOGO);
         this.newline.writeNewline();
         if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
         if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
-        const {projectName, projectType, projectPath} = commandModel;
-        console.log(projectName, projectType, projectPath);
+        if (!this.goToProjectRoot.run()) return;
         // todo: I am here
-        // if (!this.goToProjectRoot.run()) return;
         // if (!this.loadWsDto.run()) return;
         // if (!this.loadWsDomain.run()) return;
         // if (!this.projectNotExist.run(projectName)) return;
