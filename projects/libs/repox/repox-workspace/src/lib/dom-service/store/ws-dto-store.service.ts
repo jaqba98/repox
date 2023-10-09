@@ -101,21 +101,13 @@ export class WsDtoStoreService {
     }
 
     verifyWsRepoxDto(): ValidatorResult {
-        this.validator.addSchema(
-            repoxJsonFileSchema, `/RepoxJsonFileSchema`
-        );
-        return this.validator.validate(
-            this.wsRepoxDto, repoxJsonFileSchema
-        );
+        this.validator.addSchema(repoxJsonFileSchema, `/RepoxJsonFileSchema`);
+        return this.validator.validate(this.wsRepoxDto, repoxJsonFileSchema);
     }
 
     verifyWsTsconfigDto(): ValidatorResult {
-        this.validator.addSchema(
-            tsconfigJsonFileSchema, `/TsconfigJsonFileSchema`
-        );
-        return this.validator.validate(
-            this.wsTsconfigDto, tsconfigJsonFileSchema
-        );
+        this.validator.addSchema(tsconfigJsonFileSchema, `/TsconfigJsonFileSchema`);
+        return this.validator.validate(this.wsTsconfigDto, tsconfigJsonFileSchema);
     }
 }
 
