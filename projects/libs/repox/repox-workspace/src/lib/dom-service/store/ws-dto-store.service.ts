@@ -96,7 +96,6 @@ export class WsDtoStoreService {
       type: project.type,
       path: project.path === EMPTY_STRING ? undefined : project.path,
       src: project.src === EMPTY_STRING ? undefined : project.src,
-      scheme: project.scheme,
       build: {
         output: project.build.output === EMPTY_STRING
           ? undefined

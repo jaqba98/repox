@@ -4,7 +4,6 @@ import {
   SimpleMessageAppService
 } from "@lib/logger";
 import {
-  ProjectSchemeEnum,
   ProjectTypeEnum,
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
@@ -63,11 +62,11 @@ export class BuildProjectAppService {
       return false;
     }
     if (buildWatch) {
-      this.buildImmediately(project);
+      this.buildProjectAppTypescript(project);
       this.buildWatch(project);
       return true;
     }
-    this.buildImmediately(project);
+    this.buildProjectAppTypescript(project);
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(`Project built correctly`);
     return true;
@@ -81,50 +80,11 @@ export class BuildProjectAppService {
       if (this.folderUtils.isFolder(filename.toString())) {
         this.simpleMessage.writePlain(`Rebuilding the project`);
       }
-      this.buildImmediately(project);
+      this.buildProjectAppTypescript(project);
       if (this.folderUtils.isFolder(filename.toString())) {
         this.simpleMessage.writeSuccess(`Project built correctly`);
       }
     });
-  }
-
-  private buildImmediately (project: WsProjectDomainModel): void {
-    switch (project.scheme) {
-      case ProjectSchemeEnum.blank:
-        this.buildProjectBlank(project);
-        break;
-      case ProjectSchemeEnum.htmlPro:
-        this.buildProjectHtmlPro(project);
-        break;
-      case ProjectSchemeEnum.appTypeScript:
-        this.buildProjectAppTypescript(project);
-        break;
-      default:
-        throw new Error(`Not supported project scheme`);
-    }
-  }
-
-  private buildProjectBlank (
-    project: WsProjectDomainModel
-  ): boolean {
-    if (!this.pathUtils.existPath(project.build.output)) {
-      this.folderUtils.createFolder(project.build.output);
-    }
-    this.copyAssets(project.build.assets);
-    return true;
-  }
-
-  private buildProjectHtmlPro (
-    project: WsProjectDomainModel
-  ): boolean {
-    if (!this.pathUtils.existPath(project.build.output)) {
-      this.folderUtils.createFolder(project.build.output);
-    }
-    this.copyAssets(project.build.assets);
-    this.runCommandUtils.runNpxCommand(
-      `htmlpro build --input=${project.src} --output=${project.build.output}`, true
-    );
-    return true;
   }
 
   private buildProjectAppTypescript (

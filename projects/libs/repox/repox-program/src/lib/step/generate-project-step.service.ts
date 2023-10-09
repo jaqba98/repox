@@ -34,8 +34,8 @@ export class GenerateProjectStepService {
         if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
         if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
-        const {projectName, projectType, projectPath, projectScheme} = commandModel;
-        console.log(projectName, projectType, projectPath, projectScheme);
+        const {projectName, projectType, projectPath} = commandModel;
+        console.log(projectName, projectType, projectPath);
         // todo: I am here
         // if (!this.goToProjectRoot.run()) return;
         // if (!this.loadWsDto.run()) return;

@@ -1,6 +1,5 @@
 import { singleton } from "tsyringe";
 import {
-  ProjectSchemeEnum,
   ProjectTypeEnum,
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
@@ -39,7 +38,6 @@ export class WsDomainStoreService {
             type: project.type ?? undefined,
             path: project.path ?? EMPTY_STRING,
             src: project.src ?? EMPTY_STRING,
-            scheme: project.scheme ?? undefined,
             build: {
               output: project.build?.output ?? EMPTY_STRING,
               main: project.build?.main ?? EMPTY_STRING,
@@ -91,7 +89,7 @@ export class WsDomainStoreService {
 
   addProject (
     projectName: string, projectType: ProjectTypeEnum,
-    projectPath: string, projectScheme: ProjectSchemeEnum
+    projectPath: string
   ): void {
     if (this.wsDomain === undefined) {
       throw new Error(`The store is undefined!`);
@@ -103,104 +101,41 @@ export class WsDomainStoreService {
       src: this.pathUtils.createPath(
         projectPath, WorkspaceFolderEnum.src
       ),
-      scheme: projectScheme,
-      build: this.getProjectBuild(
-        projectType, projectScheme, projectPath, projectName
-      ),
+      build: this.getProjectBuild(),
       alias: this.getProjectAlias(
-        projectName, projectScheme, projectType
+        projectName, projectType
       ),
-      indexPath: this.getProjectIndexPath(projectScheme, projectPath),
+      indexPath: this.getProjectIndexPath(projectPath),
       changed: true
     });
   }
 
-  private getProjectBuild (
-    projectType: ProjectTypeEnum,
-    projectScheme: ProjectSchemeEnum,
-    projectPath: string,
-    projectName: string
-  ): WsProjectBuildDomainModel {
-    if (projectType !== ProjectTypeEnum.app) {
-      return {
-        output: EMPTY_STRING,
-        main: EMPTY_STRING,
-        assets: []
-      };
-    }
-    switch (projectScheme) {
-      case ProjectSchemeEnum.blank:
-      case ProjectSchemeEnum.htmlPro:
-        return {
-          output: this.pathUtils.createPath(
-            WorkspaceFolderEnum.dist, projectName
-          ),
-          main: EMPTY_STRING,
-          assets: []
-        };
-      case ProjectSchemeEnum.appTypeScript:
-        return {
-          output: this.pathUtils.createPath(
-            WorkspaceFolderEnum.dist, projectName
-          ),
-          main: this.pathUtils.createPath(
-            projectPath, WorkspaceFolderEnum.src,
-            WorkspaceFileEnum.mainTs
-          ),
-          assets: []
-        };
-      case ProjectSchemeEnum.libTypeScript:
-      case ProjectSchemeEnum.toolTypeScript:
-        return {
-          output: EMPTY_STRING,
-          main: EMPTY_STRING,
-          assets: []
-        };
-      default:
-        throw new Error(`Not supported project scheme`);
-    }
+  private getProjectBuild (): WsProjectBuildDomainModel {
+    return {
+      output: EMPTY_STRING,
+      main: EMPTY_STRING,
+      assets: []
+    };
   }
 
   private getProjectAlias (
     projectName: string,
-    projectScheme: ProjectSchemeEnum,
     projectType: ProjectTypeEnum
   ): string {
-    switch (projectScheme) {
-      case ProjectSchemeEnum.blank:
-      case ProjectSchemeEnum.htmlPro:
-      case ProjectSchemeEnum.appTypeScript:
-        return EMPTY_STRING;
-      case ProjectSchemeEnum.libTypeScript:
-      case ProjectSchemeEnum.toolTypeScript:
-        return this.buildProjectAlias.buildAlias(
-          projectName, projectType
-        );
-      default:
-        throw new Error(`Not supported project scheme`);
-    }
+    return this.buildProjectAlias.buildAlias(
+        projectName, projectType
+    );
   }
 
   private getProjectIndexPath (
-    projectScheme: ProjectSchemeEnum,
     projectPath: string
   ): string[] {
-    switch (projectScheme) {
-      case ProjectSchemeEnum.blank:
-      case ProjectSchemeEnum.htmlPro:
-      case ProjectSchemeEnum.appTypeScript:
-        return [];
-      case ProjectSchemeEnum.libTypeScript:
-      case ProjectSchemeEnum.toolTypeScript:
-        return [
-          this.pathUtils.createPath(
-            projectPath, WorkspaceFolderEnum.src,
-            WorkspaceFileEnum.indexTs
-          )
-        ];
-      default:
-        throw new Error(`Not supported project scheme`);
-    }
+    return [
+      this.pathUtils.createPath(
+          projectPath, WorkspaceFolderEnum.src,
+          WorkspaceFileEnum.indexTs
+      )
+    ];
   }
 }
 // todo: refactor the file
