@@ -35,7 +35,7 @@ export class BuildWsStructureService {
             children: [
               {
                 type: WsStructureEnum.createEmptyFileWhenFolderEmpty,
-                value: WorkspaceFileEnum.gitkeep,
+                value: WorkspaceFileEnum.gitignoreTextFile,
                 children: []
               }
             ]
@@ -46,7 +46,7 @@ export class BuildWsStructureService {
             children: [
               {
                 type: WsStructureEnum.createEmptyFileWhenFolderEmpty,
-                value: WorkspaceFileEnum.gitkeep,
+                value: WorkspaceFileEnum.gitignoreTextFile,
                 children: []
               }
             ]
@@ -57,7 +57,7 @@ export class BuildWsStructureService {
             children: [
               {
                 type: WsStructureEnum.createEmptyFileWhenFolderEmpty,
-                value: WorkspaceFileEnum.gitkeep,
+                value: WorkspaceFileEnum.gitkeepTextFile,
                 children: []
               }
             ]

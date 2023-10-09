@@ -48,7 +48,7 @@ export class BuildProjectAppService {
       );
       return false;
     }
-    if (project.type !== ProjectTypeEnum.app) {
+    if (project.type !== ProjectTypeEnum.appTs) {
       this.simpleMessage.writeError(
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         `Could not build a project of type ${project.type}.`

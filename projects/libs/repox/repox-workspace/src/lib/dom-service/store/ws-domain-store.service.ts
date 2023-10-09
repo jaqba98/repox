@@ -39,9 +39,9 @@ export class WsDomainStoreService {
             path: project.path ?? EMPTY_STRING,
             src: project.src ?? EMPTY_STRING,
             build: {
-              output: project.build?.output ?? EMPTY_STRING,
-              main: project.build?.main ?? EMPTY_STRING,
-              assets: project.build?.assets ?? []
+              output: EMPTY_STRING,
+              main: EMPTY_STRING,
+              assets: []
             },
             changed: false
           };

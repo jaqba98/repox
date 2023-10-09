@@ -3,7 +3,6 @@ import { SimpleMessageAppService } from "@lib/logger";
 import {
   BuildProjectAliasService,
   BuildProjectPathService,
-  type ProjectSchemeEnum,
   type ProjectTypeEnum,
   WsDomainStoreService
 } from "@lib/repox-workspace";
@@ -26,7 +25,7 @@ export class AddProjectToDomainAppService {
 
   run (
     projectName: string, projectType: string, projectPath: string,
-    projectScheme: string
+    _projectScheme: string
   ): boolean {
     this.simpleMessage.writePlain(`Add project to domain`);
     // Prepare data
@@ -35,9 +34,8 @@ export class AddProjectToDomainAppService {
     const path = this.buildProjectPath.buildPath(
       projectName, projectType, projectPath
     );
-    const scheme = projectScheme as ProjectSchemeEnum;
     // Add project to the domain store
-    this.wsDomainStore.addProject(name, type, path, scheme);
+    this.wsDomainStore.addProject(name, type, path);
     return true;
   }
 }

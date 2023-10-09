@@ -54,7 +54,7 @@ export class RepoxBuildParamModelService {
     generateProjectCommand(): GenerateProjectRepoxCommandModel {
         return {
             projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name),
-            projectType: this.paramDomain.getCommandEnumValue(RepoxArgumentEnum.type, ProjectTypeEnum.app),
+            projectType: this.paramDomain.getCommandEnumValue(RepoxArgumentEnum.type, ProjectTypeEnum.appTs),
             projectPath: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.path)
         };
     }

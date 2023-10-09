@@ -2,7 +2,6 @@ import { singleton } from "tsyringe";
 import { SimpleMessageAppService } from "@lib/logger";
 import {
   CreateWsFileAppService,
-  ProjectSchemeEnum,
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
   WsDomainStoreService
@@ -43,23 +42,23 @@ export class CreateProjectFilesAppService {
       return false;
     }
     const currentPath = this.pathUtils.getCurrentPath();
-    switch (project.scheme) {
-      case ProjectSchemeEnum.blank:
-        this.createBlankProjectStructure(project.path);
-        break;
-      case ProjectSchemeEnum.htmlPro:
-        this.createBlankProjectStructure(project.path);
-        break;
-      case ProjectSchemeEnum.appTypeScript:
-        this.createHtmlProProjectStructure(project.path);
-        break;
-      case ProjectSchemeEnum.libTypeScript:
-      case ProjectSchemeEnum.toolTypeScript:
-        this.createLibToolTsProjectStructure(project.path);
-        break;
-      default:
-        throw new Error(`Not supported project scheme!`);
-    }
+    // switch (project.scheme) {
+    //   case ProjectSchemeEnum.blank:
+    //     this.createBlankProjectStructure(project.path);
+    //     break;
+    //   case ProjectSchemeEnum.htmlPro:
+    //     this.createBlankProjectStructure(project.path);
+    //     break;
+    //   case ProjectSchemeEnum.appTypeScript:
+    //     this.createHtmlProProjectStructure(project.path);
+    //     break;
+    //   case ProjectSchemeEnum.libTypeScript:
+    //   case ProjectSchemeEnum.toolTypeScript:
+    //     this.createLibToolTsProjectStructure(project.path);
+    //     break;
+    //   default:
+    //     throw new Error(`Not supported project scheme!`);
+    // }
     this.pathUtils.changePath(currentPath);
     return true;
   }
@@ -69,7 +68,7 @@ export class CreateProjectFilesAppService {
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     this.pathUtils.changePath(WorkspaceFolderEnum.src);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeep);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitignoreTextFile);
     this.pathUtils.changePath(`../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
@@ -83,7 +82,7 @@ export class CreateProjectFilesAppService {
     this.pathUtils.changePath(projectPath);
     this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     this.pathUtils.changePath(WorkspaceFolderEnum.src);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeep);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitignoreTextFile);
     this.pathUtils.changePath(`../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
@@ -118,7 +117,7 @@ export class CreateProjectFilesAppService {
     this.folderUtils.createFolder(WorkspaceFolderEnum.lib);
     this.fileUtils.createEmptyFile(WorkspaceFileEnum.indexTsFile);
     this.pathUtils.changePath(WorkspaceFolderEnum.lib);
-    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitkeep);
+    this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitignoreTextFile);
     this.pathUtils.changePath(`../../`);
     this.runCommandUtils.runCommand(`npm init -y`);
     this.fileUtils.writeTextFile(
