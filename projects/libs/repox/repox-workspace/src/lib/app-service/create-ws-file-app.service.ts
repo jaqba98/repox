@@ -26,7 +26,7 @@ export class CreateWsFileAppService {
     projectPath: string
   ): WsProjectTsconfigDtoModel {
     const tsconfigRootPath = this.pathUtils.getRootPath(
-      projectPath, WorkspaceFileEnum.tsconfigJson
+      projectPath, WorkspaceFileEnum.tsconfigJsonFile
     );
     return {
       extends: tsconfigRootPath

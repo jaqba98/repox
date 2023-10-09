@@ -91,7 +91,7 @@ export class BuildProjectAppService {
     project: WsProjectDomainModel
   ): boolean {
     const projectTsconfig = this.pathUtils.createPath(
-      project.path, WorkspaceFileEnum.tsconfigJson
+      project.path, WorkspaceFileEnum.tsconfigJsonFile
     );
     if (!this.pathUtils.existPath(projectTsconfig)) {
       this.simpleMessage.writeError(

@@ -2,16 +2,13 @@
  * All kind of files in the workspace.
  */
 export enum WorkspaceFileEnum {
-  gitignoreText = `.gitignore`,
-  repoxJson = `repox.json`,
-  tsconfigJson = `tsconfig.json`,
-  jestConfigJs = `jest.config.js`,
-  importJestConfigTs = `jest.config`,
-  gitkeep = `.gitkeep`,
-  packageJson = `package.json`,
-  packageLockJson = `package-lock.json`,
-  indexTs = `index.ts`,
-  mainTs = `main.ts`,
-  eslintrcFile = `.eslintrc.js`
+    gitignoreTextFile = `.gitignore`,
+    repoxJsonFile = `repox.json`,
+    tsconfigJsonFile = `tsconfig.json`,
+    jestConfigJsFile = `jest.config.js`,
+    gitkeepTextFile = `.gitkeep`,
+    packageJsonFile = `package.json`,
+    indexTsFile = `index.ts`,
+    mainTsFile = `main.ts`,
+    eslintrcJsFile = `.eslintrc.js`
 }
-// todo: refactor the file

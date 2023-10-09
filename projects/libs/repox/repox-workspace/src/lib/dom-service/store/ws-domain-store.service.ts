@@ -133,7 +133,7 @@ export class WsDomainStoreService {
     return [
       this.pathUtils.createPath(
           projectPath, WorkspaceFolderEnum.src,
-          WorkspaceFileEnum.indexTs
+          WorkspaceFileEnum.indexTsFile
       )
     ];
   }

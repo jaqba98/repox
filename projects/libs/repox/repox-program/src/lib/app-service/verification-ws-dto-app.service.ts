@@ -24,7 +24,7 @@ export class VerificationWsDtoAppService {
     const verifyRepoxDto = this.wsDtoStore.verifyWsRepoxDto();
     if (verifyRepoxDto.errors.length > 0) {
       this.simpleMessage.writeError(
-        `Incorrect content of ${WorkspaceFileEnum.repoxJson} file`
+        `Incorrect content of ${WorkspaceFileEnum.repoxJsonFile} file`
       );
       verifyRepoxDto.errors.forEach(error => {
         this.simpleMessage.writeError(error.toString());
@@ -34,7 +34,7 @@ export class VerificationWsDtoAppService {
     const verifyTsconfigDto = this.wsDtoStore.verifyWsTsconfigDto();
     if (verifyTsconfigDto.errors.length > 0) {
       this.simpleMessage.writeError(
-        `Incorrect content of ${WorkspaceFileEnum.tsconfigJson} file`
+        `Incorrect content of ${WorkspaceFileEnum.tsconfigJsonFile} file`
       );
       verifyTsconfigDto.errors.forEach(error => {
         this.simpleMessage.writeError(error.toString());

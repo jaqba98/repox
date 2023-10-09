@@ -140,7 +140,7 @@ export class GenerateWsStructureService {
   ): void {
     const folderPath: string = this.pathUtils.createPath(...this.currentPath);
     const packageJsonPath: string = this.pathUtils.createPath(
-      folderPath, WorkspaceFileEnum.packageJson
+      folderPath, WorkspaceFileEnum.packageJsonFile
     );
     if (this.pathUtils.existPath(packageJsonPath)) {
       const packageJsonContent = this.fileUtils
@@ -173,7 +173,7 @@ export class GenerateWsStructureService {
       wsStructureModel: WsStructureModel
   ): void {
     const eslintrcTsPath = this.pathUtils.createPath(
-        ...this.currentPath, WorkspaceFileEnum.eslintrcFile
+        ...this.currentPath, WorkspaceFileEnum.eslintrcJsFile
     );
     this.fileUtils.writeTextFile(
         eslintrcTsPath, this.buildEslintrcJs.build()
@@ -185,7 +185,7 @@ export class GenerateWsStructureService {
       wsStructureModel: WsStructureModel
   ): void {
     const gitignorePath: string = this.pathUtils.createPath(
-        ...this.currentPath, WorkspaceFileEnum.gitignoreText
+        ...this.currentPath, WorkspaceFileEnum.gitignoreTextFile
     );
     this.fileUtils.writeTextFile(
         gitignorePath, this.buildGitignore.build()
@@ -197,7 +197,7 @@ export class GenerateWsStructureService {
       wsStructureModel: WsStructureModel
   ): void {
     const jestConfigJsPath = this.pathUtils.createPath(
-        ...this.currentPath, WorkspaceFileEnum.jestConfigJs
+        ...this.currentPath, WorkspaceFileEnum.jestConfigJsFile
     );
     this.fileUtils.writeTextFile(
         jestConfigJsPath, this.buildJestConfigJs.build()
@@ -209,7 +209,7 @@ export class GenerateWsStructureService {
       wsStructureModel: WsStructureModel
   ): void {
     const repoxJsonPath = this.pathUtils.createPath(
-        ...this.currentPath, WorkspaceFileEnum.repoxJson
+        ...this.currentPath, WorkspaceFileEnum.repoxJsonFile
     );
     if (this.pathUtils.notExistPath(repoxJsonPath)) {
       this.fileUtils.writeJsonFile(
@@ -224,7 +224,7 @@ export class GenerateWsStructureService {
   ): void {
     const folderPath: string = this.pathUtils.createPath(...this.currentPath);
     const tsconfigJsonPath: string = this.pathUtils.createPath(
-        folderPath, WorkspaceFileEnum.tsconfigJson
+        folderPath, WorkspaceFileEnum.tsconfigJsonFile
     );
     if (this.pathUtils.existPath(tsconfigJsonPath)) {
       const tsconfigJsonContent = this.fileUtils
