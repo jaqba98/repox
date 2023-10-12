@@ -39,11 +39,8 @@ export class WsDomainStoreService {
                         changed: false
                     };
                 })
-                .map(project => ({...project, alias: this.buildProjectAlias.buildAlias(project.name, project.type)}))
-                .map(project => ({
-                    ...project,
-                    indexPath: this.wsDtoStore.getProjectIndexPath(project.alias, project.type)
-                }))
+                .map(project => ({...project, alias: this.wsDtoStore.getProjectAlias(project.src)}))
+                .map(project => ({...project, indexPath: this.wsDtoStore.getProjectIndexPath(project.alias)}))
         };
     }
 

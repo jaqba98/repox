@@ -7,7 +7,6 @@ import {
   ProjectTypeEnum,
   WorkspaceFileEnum,
   WorkspaceFolderEnum,
-  type WsAssetsDomainModel,
   WsDomainStoreService,
   type WsProjectDomainModel
 } from "@lib/repox-workspace";
@@ -100,7 +99,8 @@ export class BuildProjectAppService {
       return false;
     }
     const projectArg = `--project ${projectTsconfig}`;
-    const distArg = `--outDir ${project.build.output}`;
+    // const distArg = `--outDir ${project.build.output}`;
+    const distArg = `--outDir`;
     this.runCommandUtils.runNpxCommand(
       `tsc ${projectArg} ${distArg} --noEmit`, true
     );
@@ -110,22 +110,22 @@ export class BuildProjectAppService {
     this.runCommandUtils.runNpxCommand(
       `tsc-alias ${distArg}`, true
     );
-    this.copyAssets(project.build.assets);
+    // this.copyAssets(project.build.assets);
     return true;
   }
 
-  private copyAssets (assets: WsAssetsDomainModel[]): void {
-    assets
-      .map(asset => ({
-        output: asset.output,
-        files: this.fileUtils.readProjectFiles(asset.input)
-      }))
-      .map(asset => asset.files.map(file => ({
-        file, output: asset.output
-      })))
-      .flat()
-      .forEach(asset => { this.fileUtils.copyFile(asset.file, asset.output); }
-      );
-  }
+  // private copyAssets (assets: WsAssetsDomainModel[]): void {
+  //   assets
+  //     .map(asset => ({
+  //       output: asset.output,
+  //       files: this.fileUtils.readProjectFiles(asset.input)
+  //     }))
+  //     .map(asset => asset.files.map(file => ({
+  //       file, output: asset.output
+  //     })))
+  //     .flat()
+  //     .forEach(asset => { this.fileUtils.copyFile(asset.file, asset.output); }
+  //     );
+  // }
 }
 // todo: refactor the file

@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 import {WsRepoxDtoModel, WsRepoxProjectDtoModel} from "../../model/ws-dto/ws-repox-dto.model";
 import {WsTsconfigDtoModel} from "../../model/ws-dto/ws-tsconfig-dto.model";
-import {FileUtilsService} from "@lib/utils";
+import {FileUtilsService, PathUtilsService} from "@lib/utils";
 import {Validator, ValidatorResult} from "jsonschema";
 import {WorkspaceFileEnum} from "../../enum/workspace/workspace-file.enum";
 import {WsProjectDomainModel} from "../../model/ws-domain/ws-domain.model";
@@ -19,7 +19,8 @@ export class WsDtoStoreService {
 
     constructor(
         private readonly fileUtils: FileUtilsService,
-        private readonly validator: Validator
+        private readonly validator: Validator,
+        private readonly pathUtils: PathUtilsService
     ) {
     }
 
@@ -90,12 +91,17 @@ export class WsDtoStoreService {
             .paths[project.alias] = project.indexPath;
     }
 
-    getProjectIndexPath(
-        projectAlias: string, projectType: string | undefined
-    ): string[] {
-        if (projectType === EMPTY_STRING || projectType === undefined) {
-            return [];
-        }
+    getProjectAlias(projectSrc: string): string {
+        const tsconfigDto = this.getWsTsconfigDto();
+        const projectIndexTs = this.pathUtils.createPath(
+            tsconfigDto.compilerOptions.rootDir, projectSrc, WorkspaceFileEnum.indexTsFile
+        );
+        const alias = Object.keys(tsconfigDto.compilerOptions.paths)
+            .find(pathAlias => tsconfigDto.compilerOptions.paths[pathAlias].includes(projectIndexTs));
+        return alias ?? EMPTY_STRING;
+    }
+
+    getProjectIndexPath(projectAlias: string): string[] {
         const tsconfigDto = this.getWsTsconfigDto();
         return tsconfigDto.compilerOptions.paths[projectAlias] ?? [];
     }

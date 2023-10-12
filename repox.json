@@ -61,32 +61,32 @@
     "repox-const": {
       "name": "repox-const",
       "type": "@lib/ts",
-      "path": "libs/repox-const",
-      "src": "libs/repox-const/src"
+      "path": "libs/repox/repox-const",
+      "src": "libs/repox/repox-const/src"
     },
     "repox-domain": {
       "name": "repox-domain",
       "type": "@lib/ts",
-      "path": "libs/repox-domain",
-      "src": "libs/repox-domain/src"
+      "path": "libs/repox/repox-domain",
+      "src": "libs/repox/repox-domain/src"
     },
     "repox-main": {
       "name": "repox-main",
       "type": "@lib/ts",
-      "path": "libs/repox-main",
-      "src": "libs/repox-main/src"
+      "path": "libs/repox/repox-main",
+      "src": "libs/repox/repox-main/src"
     },
     "repox-program": {
       "name": "repox-program",
       "type": "@lib/ts",
-      "path": "libs/repox-program",
-      "src": "libs/repox-program/src"
+      "path": "libs/repox/repox-program",
+      "src": "libs/repox/repox-program/src"
     },
     "repox-workspace": {
       "name": "repox-workspace",
       "type": "@lib/ts",
-      "path": "libs/repox-workspace",
-      "src": "libs/repox-workspace/src"
+      "path": "libs/repox/repox-workspace",
+      "src": "libs/repox/repox-workspace/src"
     },
     "utils": {
       "name": "utils",
