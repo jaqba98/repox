@@ -4,23 +4,12 @@ import {type ProjectTypeEnum} from "@lib/repox-workspace";
  * The workspace domain model.
  */
 
-export interface WsAssetsDomainModel {
-    input: string;
-    output: string;
-}
-
-export interface WsProjectBuildDomainModel {
-    output: string;
-    main: string;
-    assets: WsAssetsDomainModel[];
-}
-
 export interface WsProjectDomainModel {
     name: string;
-    type: ProjectTypeEnum | undefined;
+    type: ProjectTypeEnum;
     path: string;
     src: string;
-    build: WsProjectBuildDomainModel;
+    assets: Array<{ input: string; output: string; }>;
     alias: string;
     indexPath: string[];
     changed: boolean;
@@ -29,5 +18,3 @@ export interface WsProjectDomainModel {
 export interface WsDomainModel {
     projects: WsProjectDomainModel[];
 }
-
-// todo: refactor the file

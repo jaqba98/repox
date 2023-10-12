@@ -5,6 +5,7 @@ import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {GoToProjectRootAppService, SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
 import {LoadWsDtoAppService} from "../app-service/load-ws-dto-app.service";
 import {VerificationWsDtoAppService} from "../app-service/verification-ws-dto-app.service";
+import {LoadWsDomainAppService} from "../app-service/load-ws-domain-app.service";
 
 @singleton()
 /**
@@ -17,8 +18,8 @@ export class GenerateProjectStepService {
         private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly goToProjectRoot: GoToProjectRootAppService,
         private readonly loadWsDto: LoadWsDtoAppService,
-        private readonly verificationWsDto: VerificationWsDtoAppService
-        // private readonly loadWsDomain: LoadWsDomainAppService,
+        private readonly verificationWsDto: VerificationWsDtoAppService,
+        private readonly loadWsDomain: LoadWsDomainAppService
         // private readonly projectNotExist: ProjectNotExistAppService,
         // private readonly addProjectToDomain: AddProjectToDomainAppService,
         // private readonly saveWsDomain: SaveWsDomainAppService,
@@ -39,8 +40,8 @@ export class GenerateProjectStepService {
         if (!this.goToProjectRoot.run()) return;
         if (!this.loadWsDto.run()) return;
         if (!this.verificationWsDto.run()) return;
+        if (!this.loadWsDomain.run()) return;
         // todo: I am here
-        // if (!this.loadWsDomain.run()) return;
         // if (!this.projectNotExist.run(projectName)) return;
         // this.addProjectToDomain.run(
         //     projectName, projectType, projectPath, projectScheme
