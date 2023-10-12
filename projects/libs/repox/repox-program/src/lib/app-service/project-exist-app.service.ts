@@ -18,7 +18,7 @@ export class ProjectExistAppService {
     this.simpleMessage.writePlain(
       `Check that project ${projectName} exist`
     );
-    const project = this.wsDomainStore.getProjectBeName(projectName);
+    const project = this.wsDomainStore.getProjectByName(projectName);
     if (project === undefined) {
       this.simpleMessage.writeError(
         `The ${projectName} project does not exist!`

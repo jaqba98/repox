@@ -6,6 +6,7 @@ import {GoToProjectRootAppService, SystemProgramEnum, SystemProgramExistAppServi
 import {LoadWsDtoAppService} from "../app-service/load-ws-dto-app.service";
 import {VerificationWsDtoAppService} from "../app-service/verification-ws-dto-app.service";
 import {LoadWsDomainAppService} from "../app-service/load-ws-domain-app.service";
+import {ProjectNotExistAppService} from "../app-service/project-not-exist-app.service";
 
 @singleton()
 /**
@@ -19,8 +20,8 @@ export class GenerateProjectStepService {
         private readonly goToProjectRoot: GoToProjectRootAppService,
         private readonly loadWsDto: LoadWsDtoAppService,
         private readonly verificationWsDto: VerificationWsDtoAppService,
-        private readonly loadWsDomain: LoadWsDomainAppService
-        // private readonly projectNotExist: ProjectNotExistAppService,
+        private readonly loadWsDomain: LoadWsDomainAppService,
+        private readonly projectNotExist: ProjectNotExistAppService
         // private readonly addProjectToDomain: AddProjectToDomainAppService,
         // private readonly saveWsDomain: SaveWsDomainAppService,
         // private readonly saveWsDto: SaveWsDtoAppService,
@@ -30,7 +31,7 @@ export class GenerateProjectStepService {
 
     runSteps(
         _programModel: EmptyRepoxProgramModel,
-        _commandModel: GenerateProjectRepoxCommandModel
+        commandModel: GenerateProjectRepoxCommandModel
     ): void {
         this.simpleMessage.writeInfo(`Generate project`, REPOX_LOGO);
         this.newline.writeNewline();
@@ -41,8 +42,9 @@ export class GenerateProjectStepService {
         if (!this.loadWsDto.run()) return;
         if (!this.verificationWsDto.run()) return;
         if (!this.loadWsDomain.run()) return;
+        const { projectName } = commandModel;
+        if (!this.projectNotExist.run(projectName)) return;
         // todo: I am here
-        // if (!this.projectNotExist.run(projectName)) return;
         // this.addProjectToDomain.run(
         //     projectName, projectType, projectPath, projectScheme
         // );

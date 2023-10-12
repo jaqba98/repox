@@ -59,12 +59,8 @@ export class WsDomainStoreService {
         return this.wsDomain;
     }
 
-    getProjectBeName(
-        projectName: string
-    ): WsProjectDomainModel | undefined {
-        return this.getWsDomain().projects.find(
-            project => project.name === projectName
-        );
+    getProjectByName(projectName: string): WsProjectDomainModel | undefined {
+        return this.getWsDomain().projects.find(project => project.name === projectName);
     }
 
     getProject(projectName: string): WsProjectDomainModel | undefined {
