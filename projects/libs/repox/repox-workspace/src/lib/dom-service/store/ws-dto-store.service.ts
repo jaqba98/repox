@@ -29,21 +29,16 @@ export class WsDtoStoreService {
         this.wsTsconfigDto = this.fileUtils.readJsonFile<WsTsconfigDtoModel>(WorkspaceFileEnum.tsconfigJsonFile);
     }
 
-    // todo: I am here
-    // saveWsDto(): void {
-    //     if (this.wsRepoxDto === undefined) {
-    //         throw new Error(`The repox store is undefined!`);
-    //     }
-    //     if (this.wsTsconfigDto === undefined) {
-    //         throw new Error(`The tsconfig store is undefined!`);
-    //     }
-    //     this.file.writeJsonFile<WsRepoxDtoModel>(
-    //         WorkspaceFileEnum.repoxJsonFile, this.wsRepoxDto
-    //     );
-    //     this.file.writeJsonFile<WsTsconfigDtoModel>(
-    //         WorkspaceFileEnum.tsconfigJsonFile, this.wsTsconfigDto
-    //     );
-    // }
+    saveWsDto(): void {
+        if (this.wsRepoxDto === undefined) {
+            throw new Error(`The repox store is undefined!`);
+        }
+        if (this.wsTsconfigDto === undefined) {
+            throw new Error(`The tsconfig store is undefined!`);
+        }
+        this.fileUtils.writeJsonFile<WsRepoxDtoModel>(WorkspaceFileEnum.repoxJsonFile, this.wsRepoxDto);
+        this.fileUtils.writeJsonFile<WsTsconfigDtoModel>(WorkspaceFileEnum.tsconfigJsonFile, this.wsTsconfigDto);
+    }
 
     getWsRepoxDto(): WsRepoxDtoModel {
         if (this.wsRepoxDto === undefined) {
@@ -77,15 +72,13 @@ export class WsDtoStoreService {
         if (this.wsTsconfigDto === undefined) {
             throw new Error(`The tsconfig store is undefined!`);
         }
-        // this.wsRepoxDto.projects[project.name] = {
-        //     name: project.name === EMPTY_STRING ? undefined : project.name,
-        //     type: project.type,
-        //     path: project.path === EMPTY_STRING ? undefined : project.path,
-        //     src: project.src === EMPTY_STRING ? undefined : project.src,
-        //     assets: project.build.assets.length === 0
-        //         ? undefined
-        //         : project.build.assets
-        // };
+        this.wsRepoxDto.projects[project.name] = {
+            name: project.name === EMPTY_STRING ? undefined : project.name,
+            type: project.type,
+            path: project.path === EMPTY_STRING ? undefined : project.path,
+            src: project.src === EMPTY_STRING ? undefined : project.src,
+            assets: project.assets.length === 0 ? undefined : project.assets
+        };
         if (project.alias === EMPTY_STRING) return;
         this.wsTsconfigDto.compilerOptions
             .paths[project.alias] = project.indexPath;

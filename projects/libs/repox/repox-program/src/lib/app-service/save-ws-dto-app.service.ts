@@ -1,5 +1,6 @@
 import {singleton} from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
+import {WsDtoStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -8,16 +9,14 @@ import {SimpleMessageAppService} from "@lib/logger";
  */
 export class SaveWsDtoAppService {
     constructor(
-        private readonly simpleMessage: SimpleMessageAppService
-        // private readonly wsDtoStore: WsDtoStoreService
+        private readonly simpleMessage: SimpleMessageAppService,
+        private readonly wsDtoStore: WsDtoStoreService
     ) {
     }
 
     run(): boolean {
-        this.simpleMessage.writePlain(`Save workspace dto model`);
-        // this.wsDtoStore.saveWsDto();
+        this.simpleMessage.writePlain(`Step: Save WS DTO`);
+        this.wsDtoStore.saveWsDto();
         return true;
     }
 }
-
-// todo: refactor the file

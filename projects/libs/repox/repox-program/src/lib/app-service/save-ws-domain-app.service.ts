@@ -1,6 +1,6 @@
-import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
-import { WsDomainStoreService } from "@lib/repox-workspace";
+import {singleton} from "tsyringe";
+import {SimpleMessageAppService} from "@lib/logger";
+import {WsDomainStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -8,16 +8,15 @@ import { WsDomainStoreService } from "@lib/repox-workspace";
  * to the dto model.
  */
 export class SaveWsDomainAppService {
-  constructor (
-    private readonly simpleMessage: SimpleMessageAppService,
-    private readonly wsDomainStore: WsDomainStoreService
-  ) {
-  }
+    constructor(
+        private readonly simpleMessage: SimpleMessageAppService,
+        private readonly wsDomainStore: WsDomainStoreService
+    ) {
+    }
 
-  run (): boolean {
-    this.simpleMessage.writePlain(`Save workspace domain model`);
-    this.wsDomainStore.saveWsDomain();
-    return true;
-  }
+    run(): boolean {
+        this.simpleMessage.writePlain(`Step: Save WS Domain`);
+        this.wsDomainStore.saveWsDomain();
+        return true;
+    }
 }
-// todo: refactor the file
