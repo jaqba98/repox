@@ -1,12 +1,6 @@
-import { singleton } from "tsyringe";
-import { SimpleMessageAppService } from "@lib/logger";
-import {
-  BuildProjectAliasService,
-  BuildProjectPathService,
-  type ProjectTypeEnum,
-  WsDomainStoreService
-} from "@lib/repox-workspace";
-import { PathUtilsService } from "@lib/utils";
+import {singleton} from "tsyringe";
+import {SimpleMessageAppService} from "@lib/logger";
+import {BuildProjectPathService, ProjectTypeEnum, WsDomainStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -14,29 +8,23 @@ import { PathUtilsService } from "@lib/utils";
  * to the domain model.
  */
 export class AddProjectToDomainAppService {
-  constructor (
-    private readonly simpleMessage: SimpleMessageAppService,
-    private readonly buildProjectAlias: BuildProjectAliasService,
-    private readonly buildProjectPath: BuildProjectPathService,
-    private readonly pathUtils: PathUtilsService,
-    private readonly wsDomainStore: WsDomainStoreService
-  ) {
-  }
+    constructor(
+        private readonly simpleMessage: SimpleMessageAppService,
+        private readonly buildProjectPath: BuildProjectPathService,
+        private readonly wsDomainStore: WsDomainStoreService
+    ) {
+    }
 
-  run (
-    projectName: string, projectType: string, projectPath: string,
-    _projectScheme: string
-  ): boolean {
-    this.simpleMessage.writePlain(`Add project to domain`);
-    // Prepare data
-    const name = projectName;
-    const type = projectType as ProjectTypeEnum;
-    const path = this.buildProjectPath.buildPath(
-      projectName, projectType, projectPath
-    );
-    // Add project to the domain store
-    this.wsDomainStore.addProject(name, type, path);
-    return true;
-  }
+    run(projectName: string, projectType: string, projectPath: string): boolean {
+        this.simpleMessage.writePlain(`Step: Add Project to domain`);
+        // Prepare data
+        const name = projectName;
+        const type = projectType as ProjectTypeEnum;
+        const path = this.buildProjectPath.buildPath(
+            projectName, projectType, projectPath
+        );
+        // Add project to the domain store
+        this.wsDomainStore.addProject(name, type, path);
+        return true;
+    }
 }
-// todo: refactor the file

@@ -7,6 +7,10 @@ import {LoadWsDtoAppService} from "../app-service/load-ws-dto-app.service";
 import {VerificationWsDtoAppService} from "../app-service/verification-ws-dto-app.service";
 import {LoadWsDomainAppService} from "../app-service/load-ws-domain-app.service";
 import {ProjectNotExistAppService} from "../app-service/project-not-exist-app.service";
+import {AddProjectToDomainAppService} from "../app-service/add-project-to-domain-app.service";
+import { SaveWsDomainAppService } from "../app-service/save-ws-domain-app.service";
+import { SaveWsDtoAppService } from "../app-service/save-ws-dto-app.service";
+import {CreateProjectFilesAppService} from "../app-service/create-project-files-app.service";
 
 @singleton()
 /**
@@ -21,11 +25,11 @@ export class GenerateProjectStepService {
         private readonly loadWsDto: LoadWsDtoAppService,
         private readonly verificationWsDto: VerificationWsDtoAppService,
         private readonly loadWsDomain: LoadWsDomainAppService,
-        private readonly projectNotExist: ProjectNotExistAppService
-        // private readonly addProjectToDomain: AddProjectToDomainAppService,
-        // private readonly saveWsDomain: SaveWsDomainAppService,
-        // private readonly saveWsDto: SaveWsDtoAppService,
-        // private readonly createProjectFiles: CreateProjectFilesAppService
+        private readonly projectNotExist: ProjectNotExistAppService,
+        private readonly addProjectToDomain: AddProjectToDomainAppService,
+        private readonly saveWsDomain: SaveWsDomainAppService,
+        private readonly saveWsDto: SaveWsDtoAppService,
+        private readonly createProjectFiles: CreateProjectFilesAppService
     ) {
     }
 
@@ -42,15 +46,13 @@ export class GenerateProjectStepService {
         if (!this.loadWsDto.run()) return;
         if (!this.verificationWsDto.run()) return;
         if (!this.loadWsDomain.run()) return;
-        const { projectName } = commandModel;
+        const {projectName, projectType, projectPath} = commandModel;
         if (!this.projectNotExist.run(projectName)) return;
+        this.addProjectToDomain.run(projectName, projectType, projectPath);
+        if (!this.saveWsDomain.run()) return;
+        if (!this.saveWsDto.run()) return;
+        if (!this.createProjectFiles.run(projectName)) return;
         // todo: I am here
-        // this.addProjectToDomain.run(
-        //     projectName, projectType, projectPath, projectScheme
-        // );
-        // if (!this.saveWsDomain.run()) return;
-        // if (!this.saveWsDto.run()) return;
-        // if (!this.createProjectFiles.run(projectName)) return;
         // this.newline.writeNewline();
         // this.simpleMessage.writeSuccess(`Project generated correctly`);
     }

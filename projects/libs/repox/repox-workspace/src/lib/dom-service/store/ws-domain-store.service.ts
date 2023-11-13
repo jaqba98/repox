@@ -47,9 +47,7 @@ export class WsDomainStoreService {
     saveWsDomain(): void {
         this.getWsDomain().projects
             .filter(project => project.changed)
-            .forEach(project => {
-                this.wsDtoStore.addProjectDto(project);
-            });
+            .forEach(project => this.wsDtoStore.addProjectDto(project));
     }
 
     getWsDomain(): WsDomainModel {
@@ -68,10 +66,7 @@ export class WsDomainStoreService {
             .find(project => project.name === projectName);
     }
 
-    addProject(
-        projectName: string, projectType: ProjectTypeEnum,
-        projectPath: string
-    ): void {
+    addProject(projectName: string, projectType: ProjectTypeEnum, projectPath: string): void {
         if (this.wsDomain === undefined) {
             throw new Error(`The store is undefined!`);
         }
@@ -79,14 +74,9 @@ export class WsDomainStoreService {
             name: projectName,
             type: projectType,
             path: projectPath,
-            src: this.pathUtils.createPath(
-                projectPath, WorkspaceFolderEnum.src
-            ),
-            // build: this.getProjectBuild(),
+            src: this.pathUtils.createPath(projectPath, WorkspaceFolderEnum.src),
             assets: [],
-            alias: this.getProjectAlias(
-                projectName, projectType
-            ),
+            alias: this.getProjectAlias(projectName, projectType),
             indexPath: this.getProjectIndexPath(projectPath),
             changed: true
         });
