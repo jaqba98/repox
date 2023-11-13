@@ -10,6 +10,7 @@ import {ProjectNotExistAppService} from "../app-service/project-not-exist-app.se
 import {AddProjectToDomainAppService} from "../app-service/add-project-to-domain-app.service";
 import { SaveWsDomainAppService } from "../app-service/save-ws-domain-app.service";
 import { SaveWsDtoAppService } from "../app-service/save-ws-dto-app.service";
+import {CreateProjectFilesAppService} from "../app-service/create-project-files-app.service";
 
 @singleton()
 /**
@@ -27,8 +28,8 @@ export class GenerateProjectStepService {
         private readonly projectNotExist: ProjectNotExistAppService,
         private readonly addProjectToDomain: AddProjectToDomainAppService,
         private readonly saveWsDomain: SaveWsDomainAppService,
-        private readonly saveWsDto: SaveWsDtoAppService
-        // private readonly createProjectFiles: CreateProjectFilesAppService
+        private readonly saveWsDto: SaveWsDtoAppService,
+        private readonly createProjectFiles: CreateProjectFilesAppService
     ) {
     }
 
@@ -50,9 +51,8 @@ export class GenerateProjectStepService {
         this.addProjectToDomain.run(projectName, projectType, projectPath);
         if (!this.saveWsDomain.run()) return;
         if (!this.saveWsDto.run()) return;
-        console.log("Work");
+        if (!this.createProjectFiles.run(projectName)) return;
         // todo: I am here
-        // if (!this.createProjectFiles.run(projectName)) return;
         // this.newline.writeNewline();
         // this.simpleMessage.writeSuccess(`Project generated correctly`);
     }
