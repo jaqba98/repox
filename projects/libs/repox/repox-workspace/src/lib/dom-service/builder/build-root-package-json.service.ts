@@ -54,20 +54,20 @@ export class BuildRootPackageJsonService {
       license: `ISC`,
       devDependencies: {
         "@types/core-js": `2.5.8`,
-        "@types/jest": `29.5.8`,
-        "@types/node": `20.9.0`,
-        "@typescript-eslint/eslint-plugin": `6.11.0`,
-        "@typescript-eslint/parser": `6.11.0`,
-        "eslint": `8.53.0`,
+        "@types/jest": `29.5.9`,
+        "@types/node": `20.9.3`,
+        "@typescript-eslint/eslint-plugin": `6.12.0`,
+        "@typescript-eslint/parser": `6.12.0`,
+        "eslint": `8.54.0`,
         "jest": `29.7.0`,
         "repox": `1.4.15`,
         "ts-jest": `29.1.1`,
         "ts-node": `10.9.1`,
         "tsc-alias": `1.8.8`,
-        "typescript": `5.2.2`
+        "typescript": `5.3.2`
       },
       dependencies: {
-        "core-js": `3.33.2`,
+        "core-js": `3.33.3`,
         "tsyringe": `4.8.0`
       }
     };
