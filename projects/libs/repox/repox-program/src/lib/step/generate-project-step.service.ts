@@ -51,7 +51,7 @@ export class GenerateProjectStepService {
         this.addProjectToDomain.run(projectName, projectType, projectPath);
         if (!this.saveWsDomain.run()) return;
         if (!this.saveWsDto.run()) return;
-        if (!this.createProjectFiles.run(projectName, projectPath)) return;
+        if (!this.createProjectFiles.run(projectName)) return;
         // todo: I am here
         // this.newline.writeNewline();
         // this.simpleMessage.writeSuccess(`Project generated correctly`);

@@ -90,24 +90,12 @@ export class WsDomainStoreService {
     //     };
     // }
 
-    private getProjectAlias(
-        projectName: string,
-        projectType: ProjectTypeEnum
-    ): string {
-        return this.buildProjectAlias.buildAlias(
-            projectName, projectType
-        );
+    private getProjectAlias(projectName: string, projectType: ProjectTypeEnum): string {
+        return this.buildProjectAlias.buildAlias(projectName, projectType);
     }
 
-    private getProjectIndexPath(
-        projectPath: string
-    ): string[] {
-        return [
-            this.pathUtils.createPath(
-                projectPath, WorkspaceFolderEnum.src,
-                WorkspaceFileEnum.indexTsFile
-            )
-        ];
+    private getProjectIndexPath(projectPath: string): string[] {
+        return [this.pathUtils.createPath(projectPath, WorkspaceFolderEnum.src, WorkspaceFileEnum.indexTsFile)];
     }
 }
 

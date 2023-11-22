@@ -1,5 +1,6 @@
 import { singleton } from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
+import { WsDomainStoreService } from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -9,7 +10,7 @@ import {SimpleMessageAppService} from "@lib/logger";
 export class CreateProjectFilesAppService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
-        // private readonly wsDomainStore: WsDomainStoreService,
+        private readonly wsDomainStore: WsDomainStoreService
         // private readonly pathUtils: PathUtilsService,
         // private readonly folderUtils: FolderUtilsService,
         // private readonly fileUtils: FileUtilsService,
@@ -18,12 +19,10 @@ export class CreateProjectFilesAppService {
     ) {
     }
 
-    run(_projectName: string, _projectPath: string): boolean {
+    run(projectName: string): boolean {
         this.simpleMessage.writePlain(`Step: Generate Workspace`);
-        // this.simpleMessage.writePlain(
-        //   `Creating a project workspace structure`
-        // );
-        // const project = this.wsDomainStore.getProject(projectName);
+        const project = this.wsDomainStore.getProject(projectName);
+        console.log(project);
         // if (project == null) {
         //   this.simpleMessage.writeError(
         //     `Project ${projectName} does not exist in the store!`

@@ -6,7 +6,9 @@ import {singleton} from "tsyringe";
  */
 export class BuildProjectAliasService {
     buildAlias(name: string, type: string | undefined): string {
-        if (type === `app` || type === undefined) return ``;
-        return `@${type}/${name}`;
+        if (type === undefined) return ``;
+        if (type.startsWith(`@app/`)) return ``;
+        const typePrefix: string = type.split(`/`)[0];
+        return `${typePrefix}/${name}`;
     }
 }

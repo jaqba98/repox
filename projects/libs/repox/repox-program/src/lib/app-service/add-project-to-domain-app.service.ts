@@ -20,9 +20,7 @@ export class AddProjectToDomainAppService {
         // Prepare data
         const name = projectName;
         const type = projectType as ProjectTypeEnum;
-        const path = this.buildProjectPath.buildPath(
-            projectName, projectType, projectPath
-        );
+        const path = this.buildProjectPath.buildPath(projectName, projectType, projectPath);
         // Add project to the domain store
         this.wsDomainStore.addProject(name, type, path);
         return true;
