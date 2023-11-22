@@ -7,7 +7,7 @@
     "build": "tsc && tsc-alias dist/apps/repox",
     "generate:workspace": "cd tmp && node ../dist/apps/repox/src/main generate workspace --name=pets",
     "regenerate:workspace": "cd tmp/pets && node ../../dist/apps/repox/src/main regenerate workspace --force",
-    "generate:project": "cd tmp/pets && node ../../dist/apps/repox/src/main generate project --name=dog --type=@app/ts",
+    "generate:project": "cd tmp/pets && node ../../dist/apps/repox/src/main generate project --name=dog --type=@lib/ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
