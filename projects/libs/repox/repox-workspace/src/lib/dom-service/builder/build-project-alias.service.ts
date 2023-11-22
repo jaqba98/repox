@@ -5,10 +5,10 @@ import {singleton} from "tsyringe";
  * The service is responsible for create alias for project.
  */
 export class BuildProjectAliasService {
-    buildAlias(name: string, type: string | undefined): string {
+    buildAlias(name: string, type: string | undefined, prefix: string = ''): string {
         if (type === undefined) return ``;
         if (type.startsWith(`@app/`)) return ``;
         const typePrefix: string = type.split(`/`)[0];
-        return `${typePrefix}/${name}`;
+        return `${prefix}${typePrefix}/${name}`;
     }
 }
