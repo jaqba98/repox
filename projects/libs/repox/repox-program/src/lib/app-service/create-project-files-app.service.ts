@@ -1,5 +1,5 @@
-// todo: I am here
-import {singleton} from "tsyringe";
+import { singleton } from "tsyringe";
+import {SimpleMessageAppService} from "@lib/logger";
 
 @singleton()
 /**
@@ -8,7 +8,7 @@ import {singleton} from "tsyringe";
  */
 export class CreateProjectFilesAppService {
     constructor(
-        // private readonly simpleMessage: SimpleMessageAppService,
+        private readonly simpleMessage: SimpleMessageAppService,
         // private readonly wsDomainStore: WsDomainStoreService,
         // private readonly pathUtils: PathUtilsService,
         // private readonly folderUtils: FolderUtilsService,
@@ -18,7 +18,8 @@ export class CreateProjectFilesAppService {
     ) {
     }
 
-    run(_projectName: string): boolean {
+    run(_projectName: string, _projectPath: string): boolean {
+        this.simpleMessage.writePlain(`Step: Generate Workspace`);
         // this.simpleMessage.writePlain(
         //   `Creating a project workspace structure`
         // );
@@ -118,5 +119,3 @@ export class CreateProjectFilesAppService {
     //   );
     // }
 }
-
-// todo: refactor the file
