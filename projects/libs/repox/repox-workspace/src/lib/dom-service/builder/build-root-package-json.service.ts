@@ -54,8 +54,8 @@ export class BuildRootPackageJsonService {
       license: `ISC`,
       devDependencies: {
         "@types/core-js": `2.5.8`,
-        "@types/jest": `29.5.9`,
-        "@types/node": `20.9.3`,
+        "@types/jest": `29.5.10`,
+        "@types/node": `20.9.4`,
         "@typescript-eslint/eslint-plugin": `6.12.0`,
         "@typescript-eslint/parser": `6.12.0`,
         "eslint": `8.54.0`,
