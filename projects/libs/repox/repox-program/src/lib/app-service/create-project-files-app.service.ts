@@ -44,6 +44,10 @@ export class CreateProjectFilesAppService {
             WorkspaceFileEnum.jestConfigJsFile,
             this.createWsFile.buildProjectJestConfigTsContentFile(project.path)
         );
+        this.fileUtils.writeTextFile(
+            WorkspaceFileEnum.tsconfigJsonFile,
+            this.createWsFile.buildProjectTsconfigJsonContentFile(project.path)
+        );
         this.pathUtils.changePath(currentPath);
         return true;
     }
