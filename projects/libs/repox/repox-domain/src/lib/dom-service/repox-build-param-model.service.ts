@@ -1,7 +1,6 @@
 import {singleton} from "tsyringe";
 import {
     type BuildProjectRepoxCommandModel,
-    type BuildProjectRepoxProgramModel,
     type DefaultDefaultRepoxProgramModel,
     type EmptyRepoxCommandModel,
     type EmptyRepoxProgramModel,
@@ -59,16 +58,9 @@ export class RepoxBuildParamModelService {
         };
     }
 
-    buildProjectProgram(): BuildProjectRepoxProgramModel {
-        return {
-            productionMode: this.paramDomain.getProgramBooleanValue(RepoxArgumentEnum.production)
-        };
-    }
-
     buildProjectCommand(): BuildProjectRepoxCommandModel {
         return {
-            projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name),
-            buildWatch: this.paramDomain.getCommandBooleanValue(RepoxArgumentEnum.watch)
+            projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
         };
     }
 

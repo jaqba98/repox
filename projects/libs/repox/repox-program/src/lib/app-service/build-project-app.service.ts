@@ -35,7 +35,7 @@ export class BuildProjectAppService {
   ) {
   }
 
-  run (projectName: string, buildWatch: boolean): boolean {
+  run (projectName: string): boolean {
     this.simpleMessage.writePlain(`Build the project`);
     const project = this.wsDomainStore.getProject(projectName);
     if (project === undefined) {
@@ -60,31 +60,31 @@ export class BuildProjectAppService {
       );
       return false;
     }
-    if (buildWatch) {
-      this.buildProjectAppTypescript(project);
-      this.buildWatch(project);
-      return true;
-    }
+    // if (buildWatch) {
+    //   this.buildProjectAppTypescript(project);
+    //   this.buildWatch(project);
+    //   return true;
+    // }
     this.buildProjectAppTypescript(project);
     this.newline.writeNewline();
     this.simpleMessage.writeSuccess(`Project built correctly`);
     return true;
   }
 
-  private buildWatch (project: WsProjectDomainModel): void {
-    const watcher = watch(
-      WorkspaceFolderEnum.projects, { recursive: true }
-    );
-    watcher.on(`change`, (_, filename): void => {
-      if (this.folderUtils.isFolder(filename.toString())) {
-        this.simpleMessage.writePlain(`Rebuilding the project`);
-      }
-      this.buildProjectAppTypescript(project);
-      if (this.folderUtils.isFolder(filename.toString())) {
-        this.simpleMessage.writeSuccess(`Project built correctly`);
-      }
-    });
-  }
+  // private buildWatch (project: WsProjectDomainModel): void {
+  //   const watcher = watch(
+  //     WorkspaceFolderEnum.projects, { recursive: true }
+  //   );
+  //   watcher.on(`change`, (_, filename): void => {
+  //     if (this.folderUtils.isFolder(filename.toString())) {
+  //       this.simpleMessage.writePlain(`Rebuilding the project`);
+  //     }
+  //     this.buildProjectAppTypescript(project);
+  //     if (this.folderUtils.isFolder(filename.toString())) {
+  //       this.simpleMessage.writeSuccess(`Project built correctly`);
+  //     }
+  //   });
+  // }
 
   private buildProjectAppTypescript (
     project: WsProjectDomainModel

@@ -32,7 +32,7 @@ export class RepoxBuildParamModelAppService {
       return this.buildParamModel.defaultProgram();
     }
     if (programName === RepoxProgramEnum.build) {
-      return this.buildParamModel.buildProjectProgram();
+      return this.buildParamModel.defaultProgram();
     }
     return this.buildParamModel.emptyProgram();
   }

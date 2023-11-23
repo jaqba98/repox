@@ -3,7 +3,7 @@ import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {GoToProjectRootAppService} from "@lib/program-step";
 import {LoadWsDtoAppService} from "../app-service/load-ws-dto-app.service";
 import {LoadWsDomainAppService} from "../app-service/load-ws-domain-app.service";
-import {type BuildProjectRepoxCommandModel, type BuildProjectRepoxProgramModel} from "@lib/repox-domain";
+import {type BuildProjectRepoxCommandModel, EmptyRepoxProgramModel} from "@lib/repox-domain";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {BuildProjectAppService} from "../app-service/build-project-app.service";
 import {ProjectExistAppService} from "../app-service/project-exist-app.service";
@@ -28,7 +28,7 @@ export class BuildProjectStepService {
     }
 
     runSteps(
-        _programModel: BuildProjectRepoxProgramModel,
+        _programModel: EmptyRepoxProgramModel,
         commandModel: BuildProjectRepoxCommandModel
     ): void {
         this.simpleMessage.writeInfo(`Build project`, REPOX_LOGO);
@@ -38,9 +38,9 @@ export class BuildProjectStepService {
         if (!this.loadWsDto.run()) return;
         if (!this.verificationWsDto.run()) return;
         if (!this.loadWsDomain.run()) return;
-        const {projectName, buildWatch} = commandModel;
+        const {projectName} = commandModel;
         if (!this.projectExist.run(projectName)) return;
-        this.buildProject.run(projectName, buildWatch);
+        this.buildProject.run(projectName);
     }
 }
 
