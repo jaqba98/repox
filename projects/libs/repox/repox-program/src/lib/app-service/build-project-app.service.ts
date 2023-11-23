@@ -17,7 +17,7 @@ export class BuildProjectAppService {
   ) {
   }
 
-  run (projectName: string): boolean {
+  run (_projectName: string): boolean {
     // this.simpleMessage.writePlain(`Build the project`);
     // const project = this.wsDomainStore.getProject(projectName);
     // if (project === undefined) {

@@ -28,7 +28,7 @@ export class BuildProjectStepService {
     }
 
     runSteps(_programModel: EmptyRepoxProgramModel, commandModel: BuildProjectRepoxCommandModel): void {
-        this.simpleMessage.writeInfo(`Generate project`, REPOX_LOGO);
+        this.simpleMessage.writeInfo(`Build project`, REPOX_LOGO);
         this.newline.writeNewline();
         if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
         if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
