@@ -1,4 +1,5 @@
 import {singleton} from "tsyringe";
+import {SimpleMessageAppService} from "@lib/logger";
 
 @singleton()
 /**
@@ -7,17 +8,12 @@ import {singleton} from "tsyringe";
  */
 export class BuildProjectAppService {
   constructor (
-      // private readonly simpleMessage: SimpleMessageAppService,
-      // private readonly wsDomainStore: WsDomainStoreService,
-      // private readonly pathUtils: PathUtilsService,
-      // private readonly runCommandUtils: RunCommandUtilsService,
-      // private readonly fileUtils: FileUtilsService,
-      // private readonly folderUtils: FolderUtilsService,
-      // private readonly newline: NewlineAppService
+      private readonly simpleMessage: SimpleMessageAppService
   ) {
   }
 
   run (_projectName: string): boolean {
+    this.simpleMessage.writePlain(`Step: Build Project`);
     // this.simpleMessage.writePlain(`Build the project`);
     // const project = this.wsDomainStore.getProject(projectName);
     // if (project === undefined) {
@@ -110,4 +106,3 @@ export class BuildProjectAppService {
   //     );
   // }
 }
-// todo: refactor the file
