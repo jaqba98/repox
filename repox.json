@@ -3,8 +3,8 @@
     "repox": {
       "name": "repox",
       "type": "@app/ts",
-      "path": "apps/repox",
-      "src": "apps/repox/src",
+      "path": "projects/apps/repox",
+      "src": "projects/apps/repox/src",
       "assets": [
         {
           "input": "README.md",
@@ -19,80 +19,80 @@
     "const": {
       "name": "const",
       "type": "@lib/ts",
-      "path": "libs/const",
-      "src": "libs/const/src"
+      "path": "projects/libs/const",
+      "src": "projects/libs/const/src"
     },
     "launcher": {
       "name": "launcher",
       "type": "@lib/ts",
-      "path": "libs/launcher",
-      "src": "libs/launcher/src"
+      "path": "projects/libs/launcher",
+      "src": "projects/libs/launcher/src"
     },
     "logger": {
       "name": "logger",
       "type": "@lib/ts",
-      "path": "libs/logger",
-      "src": "libs/logger/src"
+      "path": "projects/libs/logger",
+      "src": "projects/libs/logger/src"
     },
     "model": {
       "name": "model",
       "type": "@lib/ts",
-      "path": "libs/model",
-      "src": "libs/model/src"
+      "path": "projects/libs/model",
+      "src": "projects/libs/model/src"
     },
     "param-domain": {
       "name": "param-domain",
       "type": "@lib/ts",
-      "path": "libs/param-domain",
-      "src": "libs/param-domain/src"
+      "path": "projects/libs/param-domain",
+      "src": "projects/libs/param-domain/src"
     },
     "param-dto": {
       "name": "param-dto",
       "type": "@lib/ts",
-      "path": "libs/param-dto",
-      "src": "libs/param-dto/src"
+      "path": "projects/libs/param-dto",
+      "src": "projects/libs/param-dto/src"
     },
     "program-step": {
       "name": "program-step",
       "type": "@lib/ts",
-      "path": "libs/program-step",
-      "src": "libs/program-step/src"
+      "path": "projects/libs/program-step",
+      "src": "projects/libs/program-step/src"
     },
     "repox-const": {
       "name": "repox-const",
       "type": "@lib/ts",
-      "path": "libs/repox/repox-const",
-      "src": "libs/repox/repox-const/src"
+      "path": "projects/libs/repox/repox-const",
+      "src": "projects/libs/repox/repox-const/src"
     },
     "repox-domain": {
       "name": "repox-domain",
       "type": "@lib/ts",
-      "path": "libs/repox/repox-domain",
-      "src": "libs/repox/repox-domain/src"
+      "path": "projects/libs/repox/repox-domain",
+      "src": "projects/libs/repox/repox-domain/src"
     },
     "repox-main": {
       "name": "repox-main",
       "type": "@lib/ts",
-      "path": "libs/repox/repox-main",
-      "src": "libs/repox/repox-main/src"
+      "path": "projects/libs/repox/repox-main",
+      "src": "projects/libs/repox/repox-main/src"
     },
     "repox-program": {
       "name": "repox-program",
       "type": "@lib/ts",
-      "path": "libs/repox/repox-program",
-      "src": "libs/repox/repox-program/src"
+      "path": "projects/libs/repox/repox-program",
+      "src": "projects/libs/repox/repox-program/src"
     },
     "repox-workspace": {
       "name": "repox-workspace",
       "type": "@lib/ts",
-      "path": "libs/repox/repox-workspace",
-      "src": "libs/repox/repox-workspace/src"
+      "path": "projects/libs/repox/repox-workspace",
+      "src": "projects/libs/repox/repox-workspace/src"
     },
     "utils": {
       "name": "utils",
       "type": "@lib/ts",
-      "path": "libs/utils",
-      "src": "libs/utils/src"
+      "path": "projects/libs/utils",
+      "src": "projects/libs/utils/src"
     }
   }
 }
