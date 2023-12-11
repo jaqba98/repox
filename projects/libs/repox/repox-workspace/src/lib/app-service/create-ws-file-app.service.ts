@@ -1,8 +1,5 @@
 import {singleton} from "tsyringe";
 import {
-    type WsProjectTsconfigDtoModel
-} from "../model/ws-dto/ws-tsconfig-dto.model";
-import {
     WorkspaceFileEnum
 } from "../enum/workspace/workspace-file.enum";
 import {FileUtilsService, PathUtilsService} from "@lib/utils";
