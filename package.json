@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --project projects/apps/repox --outDir dist/repox && tsc-alias --outDir dist/repox",
-    "generate:workspace": "cd tmp && node ../dist/apps/repox/src/main generate workspace --name=pets",
-    "regenerate:workspace": "cd tmp/pets && node ../../dist/apps/repox/src/main regenerate workspace --force",
-    "generate:project": "cd tmp/pets && node ../../dist/apps/repox/src/main generate project --name=dog --type=@app/ts",
-    "build:project": "cd tmp/pets && node ../../dist/apps/repox/src/main build project --name=dog",
-    "lint:project": "cd tmp/pets && node ../../dist/apps/repox/src/main lint project"
+    "generate:workspace": "cd tmp && node ../dist/repox/apps/src/main generate workspace --name=pets",
+    "regenerate:workspace": "cd tmp/pets && node ../../dist/repox/apps/src/main regenerate workspace --force",
+    "generate:project": "cd tmp/pets && node ../../dist/repox/apps/src/main generate project --name=dog --type=@app/ts",
+    "build:project": "cd tmp/pets && node ../../dist/repox/apps/src/main build project --name=dog",
+    "lint:project": "cd tmp/pets && node ../../dist/repox/apps/src/main lint project"
   },
   "keywords": [],
   "author": "",
