@@ -29,7 +29,7 @@ export class LintProjectsAppService {
         const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
         for (const project of projects) {
             this.simpleMessage.writePlain(`Lint: ${project.name} project`);
-            this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.json`, true);
+            this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.js`, true);
         }
     }
 
@@ -37,7 +37,7 @@ export class LintProjectsAppService {
         const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
         for (const project of projects) {
             this.simpleMessage.writePlain(`Lint: ${project.name} project`);
-            this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.json --fix`, true);
+            this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.js --fix`, true);
         }
     }
 }
