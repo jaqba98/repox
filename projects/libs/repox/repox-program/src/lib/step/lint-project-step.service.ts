@@ -1,56 +1,38 @@
-import { singleton } from "tsyringe";
-import {
-  NewlineAppService,
-  SimpleMessageAppService
-} from "@lib/logger";
-import type {
-  EmptyRepoxProgramModel,
-  LintProjectRepoxCommandModel
-} from "@lib/repox-domain";
-import { REPOX_LOGO } from "@lib/repox-const";
-import { GoToProjectRootAppService } from "@lib/program-step";
-import {
-  LoadWsDtoAppService
-} from "../app-service/load-ws-dto-app.service";
-import {
-  LoadWsDomainAppService
-} from "../app-service/load-ws-domain-app.service";
-import {
-  LintProjectsAppService
-} from "../app-service/lint-projects-app.service";
+import {singleton} from "tsyringe";
+import type {EmptyRepoxProgramModel, LintProjectRepoxCommandModel} from "@lib/repox-domain";
 
 @singleton()
 /**
- * The list of steps for the program publish npm.
+ * The list of steps for the program lint project.
  */
 export class LintProjectStepService {
-  constructor (
-    private readonly simpleMessage: SimpleMessageAppService,
-    private readonly newline: NewlineAppService,
-    // private readonly allProgramInstalled: AllProgramInstalledService,
-    private readonly goToProjectRoot: GoToProjectRootAppService,
-    private readonly loadWsDto: LoadWsDtoAppService,
-    private readonly loadWsDomain: LoadWsDomainAppService,
-    private readonly lintProjectsApp: LintProjectsAppService
-  ) {
-  }
+    // todo: I am here
+    constructor(
+        // private readonly simpleMessage: SimpleMessageAppService,
+        // private readonly newline: NewlineAppService,
+        // // private readonly allProgramInstalled: AllProgramInstalledService,
+        // private readonly goToProjectRoot: GoToProjectRootAppService,
+        // private readonly loadWsDto: LoadWsDtoAppService,
+        // private readonly loadWsDomain: LoadWsDomainAppService,
+        // private readonly lintProjectsApp: LintProjectsAppService
+    ) {
+    }
 
-  runSteps (
-    programModel: EmptyRepoxProgramModel,
-    commandModel: LintProjectRepoxCommandModel
-  ): void {
-    this.simpleMessage.writeInfo(`Lint project`, REPOX_LOGO);
-    this.newline.writeNewline();
-    // if (!this.allProgramInstalled.run()) return;
-    if (!this.goToProjectRoot.run()) return;
-    if (!this.loadWsDto.run()) return;
-    if (!this.loadWsDomain.run()) return;
-    const { isFixMode } = commandModel;
-    if (!this.lintProjectsApp.run(isFixMode)) return;
-    this.newline.writeNewline();
-    this.simpleMessage.writeSuccess(
-      `Project linted successfully!`
-    );
-  }
+    runSteps(
+        _programModel: EmptyRepoxProgramModel,
+        _commandModel: LintProjectRepoxCommandModel
+    ): void {
+        // this.simpleMessage.writeInfo(`Lint project`, REPOX_LOGO);
+        // this.newline.writeNewline();
+        // // if (!this.allProgramInstalled.run()) return;
+        // if (!this.goToProjectRoot.run()) return;
+        // if (!this.loadWsDto.run()) return;
+        // if (!this.loadWsDomain.run()) return;
+        // const { isFixMode } = commandModel;
+        // if (!this.lintProjectsApp.run(isFixMode)) return;
+        // this.newline.writeNewline();
+        // this.simpleMessage.writeSuccess(
+        //   `Project linted successfully!`
+        // );
+    }
 }
-// todo: refactor the file
