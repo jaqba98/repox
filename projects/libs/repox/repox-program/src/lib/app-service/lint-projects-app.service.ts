@@ -5,8 +5,7 @@ import {RunCommandUtilsService} from "@lib/utils";
 
 @singleton()
 /**
- * The app service is responsible for checking
- * whether a given project not exist.
+ * The app service is responsible to run lint process.
  */
 export class LintProjectsAppService {
     constructor(
@@ -17,18 +16,28 @@ export class LintProjectsAppService {
     }
 
     run(fix: boolean): boolean {
-        this.simpleMessage.writePlain(`Lint projects`);
-        const projects = Object
-            .values(this.wsDomainStore.getWsDomain().projects);
-        const fixMode: string = fix ? `--fix` : ``;
-        for (const project of projects) {
-            this.simpleMessage.writePlain(`Lint ${project.name} project`);
-            this.runCommandUtils.runNpxCommand(
-                `eslint ${project.src}/**/*.ts -c .eslintrc.json ${fixMode}`, true
-            );
+        this.simpleMessage.writePlain(`Step: Lint Project`);
+        if (fix) {
+            this.lintFix();
+        } else {
+            this.lint();
         }
         return true;
     }
-}
 
-// todo: refactor the file
+    private lint(): void {
+        const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
+        for (const project of projects) {
+            this.simpleMessage.writePlain(`Lint: ${project.name} project`);
+            this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.json`, true);
+        }
+    }
+
+    private lintFix(): void {
+        const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
+        for (const project of projects) {
+            this.simpleMessage.writePlain(`Lint: ${project.name} project`);
+            this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.json --fix`, true);
+        }
+    }
+}
