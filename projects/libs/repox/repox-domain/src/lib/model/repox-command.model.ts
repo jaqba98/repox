@@ -8,7 +8,7 @@ import {type ProjectTypeEnum} from "@lib/repox-workspace";
 export interface EmptyRepoxCommandModel {
 }
 
-export interface GenerateWorkspaceRepoxCommandModel {
+export interface GenerateWorkspaceCommandModel {
     workspaceName: string;
 }
 
@@ -36,7 +36,7 @@ export interface LintProjectRepoxCommandModel {
 
 export type TRepoxCommandModel =
     EmptyRepoxCommandModel |
-    GenerateWorkspaceRepoxCommandModel |
+    GenerateWorkspaceCommandModel |
     RegenerateWorkspaceRepoxCommandModel |
     GenerateProjectCommandModel |
     BuildProjectRepoxCommandModel |

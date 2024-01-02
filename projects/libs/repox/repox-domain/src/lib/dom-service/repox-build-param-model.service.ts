@@ -5,7 +5,7 @@ import {
     type EmptyRepoxCommandModel,
     type EmptyRepoxProgramModel,
     type GenerateProjectCommandModel,
-    type GenerateWorkspaceRepoxCommandModel,
+    type GenerateWorkspaceCommandModel,
     type LintProjectRepoxCommandModel,
     type PublishNpmRepoxCommandModel,
     type RegenerateWorkspaceRepoxCommandModel,
@@ -37,7 +37,7 @@ export class RepoxBuildParamModelService {
         };
     }
 
-    generateWorkspaceCommand(): GenerateWorkspaceRepoxCommandModel {
+    generateWorkspaceCommand(): GenerateWorkspaceCommandModel {
         return {
             workspaceName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
         };
