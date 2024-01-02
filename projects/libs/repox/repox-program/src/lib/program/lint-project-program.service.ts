@@ -11,7 +11,7 @@ export class LintProjectProgramService implements ProgramModel {
     constructor(private readonly step: LintProjectStepService) {
     }
 
-    run(programDomain: unknown, commandDomain: unknown): void {
+    runProgram(programDomain: unknown, commandDomain: unknown): void {
         this.step.runSteps(
             programDomain as EmptyRepoxProgramModel,
             commandDomain as LintProjectRepoxCommandModel

@@ -18,7 +18,7 @@ export class RegenerateWorkspaceProgramService
     constructor(private readonly step: RegenerateWorkspaceStepService) {
     }
 
-    run(programDomain: unknown, commandDomain: unknown): void {
+    runProgram(programDomain: unknown, commandDomain: unknown): void {
         this.step.runSteps(
             programDomain as EmptyRepoxProgramModel,
             commandDomain as RegenerateWorkspaceRepoxCommandModel

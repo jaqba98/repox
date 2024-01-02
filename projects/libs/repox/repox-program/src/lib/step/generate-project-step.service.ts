@@ -1,13 +1,23 @@
 import {singleton} from "tsyringe";
 
 import {GenerateProjectCommandModel} from "@lib/repox-domain";
+import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
+import {REPOX_LOGO} from "@lib/repox-const";
 
 @singleton()
 /**
  * The program steps service is responsible for executing the step list to generate the project in the workspace.
  */
 export class GenerateProjectStepService {
+    constructor(
+        private readonly simpleMessage: SimpleMessageAppService,
+        private readonly newline: NewlineAppService
+    ) {
+    }
+
     runProgramSteps(programDomain: Record<string, never>, commandDomain: GenerateProjectCommandModel): void {
+        this.simpleMessage.writeInfo("Generate Project", REPOX_LOGO);
+        this.newline.writeNewline();
         // todo: I am here
         console.log(programDomain, commandDomain);
     }
@@ -15,8 +25,6 @@ export class GenerateProjectStepService {
 
 // export class GenerateProjectStepService {
 //     constructor(
-//         // private readonly simpleMessage: SimpleMessageAppService,
-//         // private readonly newline: NewlineAppService,
 //         // private readonly systemProgramExist: SystemProgramExistAppService,
 //         // private readonly goToProjectRoot: GoToProjectRootAppService,
 //         // private readonly loadWsDto: LoadWsDtoAppService,
@@ -34,8 +42,6 @@ export class GenerateProjectStepService {
 //         _programModel: Record<string, never>,
 //         _commandModel: GenerateProjectCommandModel
 //     ): void {
-//         // this.simpleMessage.writeInfo(`Generate project`, REPOX_LOGO);
-//         // this.newline.writeNewline();
 //         // if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
 //         // if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
 //         // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;

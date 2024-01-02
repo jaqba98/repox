@@ -11,7 +11,7 @@ export class DefaultDefaultProgramService implements ProgramModel {
     constructor(private readonly step: DefaultDefaultStepService) {
     }
 
-    run(programDomain: unknown, commandDomain: unknown): void {
+    runProgram(programDomain: unknown, commandDomain: unknown): void {
         this.step.runSteps(
             programDomain as DefaultDefaultRepoxProgramModel,
             commandDomain as EmptyRepoxCommandModel

@@ -17,7 +17,7 @@ export class GenerateWorkspaceProgramService implements ProgramModel {
   constructor(private readonly step: GenerateWorkspaceStepService) {
   }
 
-  run(programDomain: unknown, commandDomain: unknown): void {
+  runProgram(programDomain: unknown, commandDomain: unknown): void {
     this.step.runSteps(
       programDomain as EmptyRepoxProgramModel,
       commandDomain as GenerateWorkspaceRepoxCommandModel

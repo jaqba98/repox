@@ -11,7 +11,7 @@ export class PublishNpmProgramService implements ProgramModel {
     constructor(private readonly step: PublishNpmStepService) {
     }
 
-    run(programDomain: unknown, commandDomain: unknown): void {
+    runProgram(programDomain: unknown, commandDomain: unknown): void {
         this.step.runSteps(
             programDomain as EmptyRepoxProgramModel,
             commandDomain as PublishNpmRepoxCommandModel
