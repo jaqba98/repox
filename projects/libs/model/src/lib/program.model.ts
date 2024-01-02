@@ -1,7 +1,8 @@
 /**
- * The model is responsible for define methods
- * for each program services.
+ * The program model defines all methods for each program services.
  */
 export interface ProgramModel {
-    run: (programDomain: unknown, commandDomain: unknown) => void;
+    runProgram: (programDomain: unknown, commandDomain: unknown) => void;
 }
+
+// todo: done

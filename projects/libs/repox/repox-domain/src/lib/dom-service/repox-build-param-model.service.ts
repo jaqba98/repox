@@ -4,7 +4,7 @@ import {
     type DefaultDefaultRepoxProgramModel,
     type EmptyRepoxCommandModel,
     type EmptyRepoxProgramModel,
-    type GenerateProjectRepoxCommandModel,
+    type GenerateProjectCommandModel,
     type GenerateWorkspaceRepoxCommandModel,
     type LintProjectRepoxCommandModel,
     type PublishNpmRepoxCommandModel,
@@ -50,7 +50,7 @@ export class RepoxBuildParamModelService {
         };
     }
 
-    generateProjectCommand(): GenerateProjectRepoxCommandModel {
+    generateProjectCommand(): GenerateProjectCommandModel {
         return {
             projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name),
             projectType: this.paramDomain.getCommandEnumValue(RepoxArgumentEnum.type, ProjectTypeEnum.appTs),

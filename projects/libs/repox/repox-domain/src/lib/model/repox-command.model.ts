@@ -16,7 +16,7 @@ export interface RegenerateWorkspaceRepoxCommandModel {
     isForceMode: boolean;
 }
 
-export interface GenerateProjectRepoxCommandModel {
+export interface GenerateProjectCommandModel {
     projectName: string;
     projectType: ProjectTypeEnum;
     projectPath: string;
@@ -38,7 +38,7 @@ export type TRepoxCommandModel =
     EmptyRepoxCommandModel |
     GenerateWorkspaceRepoxCommandModel |
     RegenerateWorkspaceRepoxCommandModel |
-    GenerateProjectRepoxCommandModel |
+    GenerateProjectCommandModel |
     BuildProjectRepoxCommandModel |
     PublishNpmRepoxCommandModel |
     LintProjectRepoxCommandModel;
