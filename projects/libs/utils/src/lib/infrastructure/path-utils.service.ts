@@ -63,3 +63,22 @@ export class PathUtilsService {
         return this.getPackageJsonPath(nextPath);
     }
 }
+
+export const changePath = (path: string): void => chdir(path);
+
+export const existPath = (path: string): boolean => existsSync(path);
+
+export const isSystemRootPath = (path: string): boolean => {
+    const parsedPath = parse(path);
+    return parsedPath.root === parsedPath.dir;
+}
+
+export const getCurrentPath = (): string => process.cwd();
+
+export const findWorkspacePath = (path: string): string => {
+    const packageJsonPath = join(path, "repox.json");
+    if (existPath(packageJsonPath)) return path;
+    if (isSystemRootPath(packageJsonPath)) return EMPTY_STRING;
+    const previousPath = join(path, "../");
+    return findWorkspacePath(previousPath);
+};

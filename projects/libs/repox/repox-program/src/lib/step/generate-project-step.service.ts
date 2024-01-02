@@ -3,6 +3,7 @@ import {singleton} from "tsyringe";
 import {GenerateProjectCommandModel} from "@lib/repox-domain";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {REPOX_LOGO} from "@lib/repox-const";
+import {GoToWorkspaceRootAppService} from "@lib/program-step";
 
 @singleton()
 /**
@@ -11,22 +12,21 @@ import {REPOX_LOGO} from "@lib/repox-const";
 export class GenerateProjectStepService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
-        private readonly newline: NewlineAppService
+        private readonly newline: NewlineAppService,
+        private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService
     ) {
     }
 
-    runProgramSteps(programDomain: Record<string, never>, commandDomain: GenerateProjectCommandModel): void {
+    runProgramSteps(_programDomain: Record<string, never>, _commandDomain: GenerateProjectCommandModel): void {
         this.simpleMessage.writeInfo("Generate Project", REPOX_LOGO);
         this.newline.writeNewline();
+        if (!this.goToWorkspaceRoot.run()) return;
         // todo: I am here
-        console.log(programDomain, commandDomain);
     }
 }
 
 // export class GenerateProjectStepService {
 //     constructor(
-//         // private readonly systemProgramExist: SystemProgramExistAppService,
-//         // private readonly goToProjectRoot: GoToProjectRootAppService,
 //         // private readonly loadWsDto: LoadWsDtoAppService,
 //         // private readonly verificationWsDto: VerificationWsDtoAppService,
 //         // private readonly loadWsDomain: LoadWsDomainAppService,
@@ -42,9 +42,6 @@ export class GenerateProjectStepService {
 //         _programModel: Record<string, never>,
 //         _commandModel: GenerateProjectCommandModel
 //     ): void {
-//         // if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
-//         // if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
-//         // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
 //         // if (!this.goToProjectRoot.run()) return;
 //         // if (!this.loadWsDto.run()) return;
 //         // if (!this.verificationWsDto.run()) return;

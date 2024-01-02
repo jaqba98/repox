@@ -2,7 +2,7 @@ import {singleton} from "tsyringe";
 import {BuildProjectRepoxCommandModel, EmptyRepoxProgramModel} from "@lib/repox-domain";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {GoToProjectRootAppService, SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
+import {GoToWorkspaceRootAppService, SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
 import {LoadWsDomainAppService} from "../app-service/load-ws-domain-app.service";
 import {VerificationWsDtoAppService} from "../app-service/verification-ws-dto-app.service";
 import {LoadWsDtoAppService} from "../app-service/load-ws-dto-app.service";
@@ -19,7 +19,7 @@ export class BuildProjectStepService {
         private readonly newline: NewlineAppService,
         private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly loadWsDto: LoadWsDtoAppService,
-        private readonly goToProjectRoot: GoToProjectRootAppService,
+        private readonly goToProjectRoot: GoToWorkspaceRootAppService,
         private readonly loadWsDomain: LoadWsDomainAppService,
         private readonly verificationWsDto: VerificationWsDtoAppService,
         private readonly projectExist: ProjectExistAppService,
