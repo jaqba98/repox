@@ -21,7 +21,7 @@ export class GenerateProjectStepService {
         this.simpleMessage.writeInfo("Generate Project", REPOX_LOGO);
         this.newline.writeNewline();
         if (!this.goToWorkspaceRoot.run()) return;
-        // todo: I am here
+        // I am here
     }
 }
 
