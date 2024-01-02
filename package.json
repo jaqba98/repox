@@ -10,6 +10,7 @@
     "generate:project": "cd tmp/pets && node ../../dist/repox/apps/repox/src/main generate project --name=dog --type=@app/ts",
     "build:project": "cd tmp/pets && node ../../dist/repox/apps/repox/src/main build project --name=dog",
     "lint:project": "cd tmp/pets && node ../../dist/repox/apps/repox/src/main lint project",
+    "publish:npm": "cd tmp/pets && node ../../dist/repox/apps/repox/src/main publish npm --name=dog",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

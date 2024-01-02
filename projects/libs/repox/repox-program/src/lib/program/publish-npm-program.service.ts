@@ -1,27 +1,20 @@
-import { singleton } from "tsyringe";
-import { type ProgramModel } from "@lib/model";
-import {
-  type EmptyRepoxProgramModel,
-  type PublishNpmRepoxCommandModel
-} from "@lib/repox-domain";
-import {
-  PublishNpmStepService
-} from "../step/publish-npm-step.service";
+import {ProgramModel} from "@lib/model";
+import {singleton} from "tsyringe";
+import {PublishNpmStepService} from "../step/publish-npm-step.service";
+import {EmptyRepoxProgramModel, PublishNpmRepoxCommandModel} from "@lib/repox-domain";
 
 @singleton()
 /**
  * The start point of the program publish npm.
  */
 export class PublishNpmProgramService implements ProgramModel {
-  constructor (
-    private readonly step: PublishNpmStepService
-  ) {
-  }
+    constructor(private readonly step: PublishNpmStepService) {
+    }
 
-  run (programDomain: unknown, commandDomain: unknown): void {
-    const programModel = programDomain as EmptyRepoxProgramModel;
-    const commandModel = commandDomain as PublishNpmRepoxCommandModel;
-    this.step.runSteps(programModel, commandModel);
-  }
+    run(programDomain: unknown, commandDomain: unknown): void {
+        this.step.runSteps(
+            programDomain as EmptyRepoxProgramModel,
+            commandDomain as PublishNpmRepoxCommandModel
+        );
+    }
 }
-// todo: refactor the file
