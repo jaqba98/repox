@@ -11,4 +11,3 @@ export enum WorkspaceFolderEnum {
   src = `src`,
   lib = `lib`
 }
-// todo: refactor the file

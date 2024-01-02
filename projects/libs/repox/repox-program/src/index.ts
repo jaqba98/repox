@@ -5,4 +5,3 @@ export * from "./lib/program/generate-workspace-program.service";
 export * from "./lib/program/publish-npm-program.service";
 export * from "./lib/program/lint-project-program.service";
 export * from "./lib/program/regenerate-workspace-program.service";
-// todo: refactor the file

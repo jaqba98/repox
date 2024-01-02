@@ -5,4 +5,3 @@
 export interface WsPackageJsonDtoModel {
   name: string;
 }
-// todo: refactor the file

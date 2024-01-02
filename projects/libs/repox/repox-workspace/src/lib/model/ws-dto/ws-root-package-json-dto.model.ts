@@ -14,4 +14,3 @@ export interface WsRootPackageJsonDtoModel {
   devDependencies: Record<string, string>;
   dependencies: Record<string, string>;
 }
-// todo: refactor the file

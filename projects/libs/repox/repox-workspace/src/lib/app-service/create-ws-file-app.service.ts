@@ -38,4 +38,3 @@ export default { ...config };
     }
 }
 
-// todo: refactor the file

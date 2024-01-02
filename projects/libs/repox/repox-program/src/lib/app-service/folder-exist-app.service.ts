@@ -27,4 +27,3 @@ export class FolderExistAppService {
     return false;
   }
 }
-// todo: refactor the file

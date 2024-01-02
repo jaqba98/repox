@@ -9,4 +9,3 @@ export * from "./lib/model/ws-domain/ws-domain.model";
 export * from "./lib/app-service/create-ws-file-app.service";
 export * from "./lib/dom-service/builder/build-ws-structure.service";
 export * from "./lib/infrastructure/generate-ws-structure.service";
-// todo: refactor the file

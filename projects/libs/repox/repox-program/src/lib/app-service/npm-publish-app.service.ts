@@ -19,4 +19,3 @@ export class NpmPublishAppService {
     return true;
   }
 }
-// todo: refactor the file

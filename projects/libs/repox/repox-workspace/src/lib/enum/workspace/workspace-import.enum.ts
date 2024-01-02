@@ -4,4 +4,3 @@
 export enum WorkspaceImportEnum {
   importJestConfigTs = `jest.config`
 }
-// todo: refactor the file
