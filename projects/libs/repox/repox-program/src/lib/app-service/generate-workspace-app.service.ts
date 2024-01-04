@@ -17,9 +17,11 @@ export class GenerateWorkspaceAppService {
 
     run(): boolean {
         this.stepMessage.write("Generate Workspace");
-        if (this.workspaceFolderStructure.generateStructure()) return true;
-        // todo: I am here
-        this.simpleMessage.writeError("An error occurred while generating the workspace structure!");
-        return false;
+        if (!this.workspaceFolderStructure.generateStructure()) {
+            this.simpleMessage.writeError("Failed to generate workspace folder structure!");
+            return false;
+        }
+        // todo: I am here 1
+        return true;
     }
 }

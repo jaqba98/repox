@@ -1,9 +1,9 @@
 import {singleton} from "tsyringe";
-import {mkdirSync, readdirSync} from "fs";
+import {mkdirSync, readdirSync, renameSync} from "fs";
 import {EMPTY_STRING} from "@lib/const";
 import {basename, extname} from "path";
 import process from "process";
-import {createPath, existPath} from "./path-utils.service";
+import {createPath, existPath, pathNotExist} from "./path-utils.service";
 
 @singleton()
 /**
@@ -27,8 +27,17 @@ export class FolderUtilsService {
     }
 }
 
-export const createFolder = (...folderPath: string[]): string | undefined => {
+export const createFolder = (...folderPath: string[]): boolean => {
     const path = createPath(...folderPath);
-    if (existPath(path)) return undefined;
-    return mkdirSync(path, {recursive: true});
+    if (existPath(path)) return false;
+    mkdirSync(path, {recursive: true});
+    return true;
+}
+
+export const renameFolder = (folderPath: string[], folderName: string): boolean => {
+    const oldFolderPath = createPath(...folderPath);
+    const newFolderPath = createPath(...folderPath, "../", folderName);
+    if (pathNotExist(oldFolderPath)) return false;
+    renameSync(oldFolderPath, newFolderPath);
+    return true;
 }
