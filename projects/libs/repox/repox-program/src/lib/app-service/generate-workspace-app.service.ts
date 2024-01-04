@@ -1,19 +1,18 @@
 import {singleton} from "tsyringe";
 
+import {StepMessageAppService} from "@lib/logger";
+
 @singleton()
 /**
- * The app service is responsible for generating workspace.
+ * This app service is responsible for generating workspace content.
  */
 export class GenerateWorkspaceAppService {
-  // constructor (
-  //   private readonly simpleMessage: SimpleMessageAppService,
-  //   private readonly generateWsStructure: GenerateWsStructureService
-  // ) {
-  // }
+    constructor(private readonly stepMessage: StepMessageAppService) {
+    }
 
-  run(): boolean {
-    // this.simpleMessage.writePlain(`Step: Generate Workspace`);
-    // this.generateWsStructure.generateStructure();
-    return true;
-  }
+    run(): boolean {
+        this.stepMessage.write("Generate Workspace");
+        // todo: I am here
+        return true;
+    }
 }
