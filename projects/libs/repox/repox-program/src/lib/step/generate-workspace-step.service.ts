@@ -4,6 +4,7 @@ import {GenerateWorkspaceCommandModel} from "@lib/repox-domain";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {ChangePathAppService, CreateFolderAppService, FolderNotExistAppService} from "@lib/program-step";
+import {GenerateWorkspaceAppService} from "../app-service/generate-workspace-app.service";
 
 @singleton()
 /**
@@ -16,6 +17,7 @@ export class GenerateWorkspaceStepService {
         private readonly folderNotExist: FolderNotExistAppService,
         private readonly createFolder: CreateFolderAppService,
         private readonly changePath: ChangePathAppService,
+        private readonly generateWorkspace: GenerateWorkspaceAppService
     ) {
     }
 
@@ -26,34 +28,10 @@ export class GenerateWorkspaceStepService {
         if (!this.folderNotExist.run(workspaceName)) return;
         if (!this.createFolder.run(workspaceName)) return;
         if (!this.changePath.run(workspaceName)) return;
-        console.log(workspaceName);
-        // I am here
+        if (!this.generateWorkspace.run()) return;
+        this.newline.writeNewline();
+        this.simpleMessage.writeSuccess("Command executed correctly!");
     }
 }
 
-// @singleton()
-// /**
-//  * The list of steps for the program generate workspace.
-//  */
-// export class GenerateWorkspaceStepService {
-//   constructor(
-//     private readonly createFolder: CreateFolderAppService,
-//     private readonly changePath: ChangePathAppService,
-//     private readonly generateWorkspace: GenerateWorkspaceAppService,
-//     private readonly runCommand: RunCommandAppService
-//   ) {
-//   }
-//
-//   runSteps(
-//     _programModel: Record<string, never>,
-//     commandModel: GenerateWorkspaceCommandModel
-//   ): void {
-//     if (!this.generateWorkspace.run()) return;
-//     if (!this.runCommand.run(`git init`)) return;
-//     if (!this.runCommand.run(`git config core.autocrlf false`)) return;
-//     if (!this.runCommand.run(`git add .`)) return;
-//     if (!this.runCommand.run(`git commit -m "init commit"`)) return;
-//     this.newline.writeNewline();
-//     this.simpleMessage.writeSuccess(`Command executed correctly`);
-//   }
-// }
+// todo: done
