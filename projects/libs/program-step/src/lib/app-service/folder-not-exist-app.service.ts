@@ -1,28 +1,26 @@
 import {singleton} from "tsyringe";
-import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {PathUtilsService} from "@lib/utils";
+
+import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
+import {pathNotExist} from "@lib/utils";
 
 @singleton()
 /**
- * The app service is responsible for checking whether
- * the folder name not exist.
+ * This app service is responsible for checking whether the folder not exist.
  */
 export class FolderNotExistAppService {
     constructor(
-        private readonly simpleMessage: SimpleMessageAppService,
-        private readonly pathUtils: PathUtilsService,
-        private readonly newline: NewlineAppService
+        private readonly stepMessage: StepMessageAppService,
+        private readonly simpleMessage: SimpleMessageAppService
     ) {
     }
 
-    run(folderName: string): boolean {
-        this.simpleMessage.writePlain(`Step: Folder Not Exist >>> ${folderName}`);
-        if (this.pathUtils.notExistPath(folderName)) {
-            return true;
-        }
-        this.newline.writeNewline();
-        this.simpleMessage.writeError(`A ${folderName} folder exists in the current directory`);
-        this.simpleMessage.writeWarning(`Specify a different workspace name and restart the program`);
+    run(folderPath: string): boolean {
+        this.stepMessage.write("Check if the folder does not exist");
+        if (pathNotExist(folderPath)) return true;
+        this.simpleMessage.writeError(`The ${folderPath} folder already exists!`);
+        this.simpleMessage.writeWarning("Specify a different folder name and restart the program.");
         return false;
     }
 }
+
+// todo: done

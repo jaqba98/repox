@@ -1,21 +1,25 @@
 import {singleton} from "tsyringe";
-import {SimpleMessageAppService} from "@lib/logger";
-import {FolderUtilsService} from "@lib/utils";
+
+import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
+import {createFolder} from "@lib/utils";
 
 @singleton()
 /**
- * The app service is responsible for creating the folder.
+ * This app service is responsible for creating the folder.
  */
 export class CreateFolderAppService {
     constructor(
-        private readonly simpleMessage: SimpleMessageAppService,
-        private readonly folderUtils: FolderUtilsService
+        private readonly stepMessage: StepMessageAppService,
+        private readonly simpleMessage: SimpleMessageAppService
     ) {
     }
 
-    run(folderName: string): boolean {
-        this.simpleMessage.writePlain(`Step: Create Folder >>> ${folderName}`);
-        this.folderUtils.createFolder(folderName);
-        return true;
+    run(folderPath: string): boolean {
+        this.stepMessage.write("Create the folder");
+        if (createFolder(folderPath)) return true;
+        this.simpleMessage.writeError(`Failed to create folder ${folderPath} !`);
+        return false;
     }
 }
+
+// todo: done

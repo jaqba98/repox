@@ -25,3 +25,5 @@ export class FolderUtilsService {
         return basename(process.cwd());
     }
 }
+
+export const createFolder = (folderPath: string): string | undefined => mkdirSync(folderPath, {recursive: true});

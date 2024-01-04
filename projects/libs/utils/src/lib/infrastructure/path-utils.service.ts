@@ -82,3 +82,7 @@ export const findWorkspacePath = (path: string): string => {
     const previousPath = join(path, "../");
     return findWorkspacePath(previousPath);
 };
+
+export const pathExist = (path: string): boolean => existsSync(path);
+
+export const pathNotExist = (path: string): boolean => !pathExist(path);

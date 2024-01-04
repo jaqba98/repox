@@ -12,10 +12,10 @@ export class GenerateProjectProgramService implements ProgramModel {
     constructor(private readonly step: GenerateProjectStepService) {
     }
 
-    runProgram(programDomain: unknown, commandDomain: unknown): void {
+    runProgram(programModel: unknown, commandModel: unknown): void {
         this.step.runProgramSteps(
-            programDomain as Record<string, never>,
-            commandDomain as GenerateProjectCommandModel
+            programModel as Record<string, never>,
+            commandModel as GenerateProjectCommandModel
         );
     }
 }

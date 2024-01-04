@@ -12,10 +12,10 @@ export class GenerateWorkspaceProgramService implements ProgramModel {
     constructor(private readonly step: GenerateWorkspaceStepService) {
     }
 
-    runProgram(programDomain: unknown, commandDomain: unknown): void {
+    runProgram(programModel: unknown, commandModel: unknown): void {
         this.step.runProgramSteps(
-            programDomain as Record<string, never>,
-            commandDomain as GenerateWorkspaceCommandModel
+            programModel as Record<string, never>,
+            commandModel as GenerateWorkspaceCommandModel
         );
     }
 }

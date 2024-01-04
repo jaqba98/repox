@@ -17,7 +17,7 @@ export class GenerateProjectStepService {
     ) {
     }
 
-    runProgramSteps(_programDomain: Record<string, never>, _commandDomain: GenerateProjectCommandModel): void {
+    runProgramSteps(_programModel: Record<string, never>, _commandModel: GenerateProjectCommandModel): void {
         this.simpleMessage.writeInfo("Generate Project", REPOX_LOGO);
         this.newline.writeNewline();
         if (!this.goToWorkspaceRoot.run()) return;
