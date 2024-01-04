@@ -3,6 +3,7 @@ import {mkdirSync, readdirSync} from "fs";
 import {EMPTY_STRING} from "@lib/const";
 import {basename, extname} from "path";
 import process from "process";
+import {createPath} from "./path-utils.service";
 
 @singleton()
 /**
@@ -26,4 +27,7 @@ export class FolderUtilsService {
     }
 }
 
-export const createFolder = (folderPath: string): string | undefined => mkdirSync(folderPath, {recursive: true});
+export const createFolder = (...folderPath: string[]): string | undefined => {
+    const path = createPath(...folderPath);
+    return mkdirSync(path, {recursive: true});
+}

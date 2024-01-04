@@ -74,7 +74,7 @@ export class WsDomainStoreService {
             name: projectName,
             type: projectType,
             path: projectPath,
-            src: this.pathUtils.createPath(projectPath, WorkspaceFolderEnum.src),
+            src: this.pathUtils.createPath(projectPath, 'src'),
             assets: [],
             alias: this.getProjectAlias(projectName, projectType),
             indexPath: this.getProjectIndexPath(projectPath),
@@ -95,7 +95,7 @@ export class WsDomainStoreService {
     }
 
     private getProjectIndexPath(projectPath: string): string[] {
-        return [this.pathUtils.createPath(projectPath, WorkspaceFolderEnum.src, WorkspaceFileEnum.indexTsFile)];
+        return [this.pathUtils.createPath(projectPath, 'src', WorkspaceFileEnum.indexTsFile)];
     }
 }
 

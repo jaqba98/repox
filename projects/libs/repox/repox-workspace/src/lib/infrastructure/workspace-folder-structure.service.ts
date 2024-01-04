@@ -9,8 +9,11 @@ import {WorkspaceFolderEnum} from "../enum/workspace/workspace-folder.enum";
  */
 export class WorkspaceFolderStructureService {
     generateStructure(): boolean {
-        createFolder(WorkspaceFolderEnum.projects);
-        // todo: I am here 2
-        return true;
+        if (!createFolder(WorkspaceFolderEnum.projects)) return false;
+        if (!createFolder(WorkspaceFolderEnum.projects, WorkspaceFolderEnum.apps)) return false;
+        if (!createFolder(WorkspaceFolderEnum.projects, WorkspaceFolderEnum.libs)) return false;
+        return !!createFolder(WorkspaceFolderEnum.projects, WorkspaceFolderEnum.tools);
     }
 }
+
+// todo: done

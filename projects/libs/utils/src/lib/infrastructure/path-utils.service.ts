@@ -86,3 +86,11 @@ export const findWorkspacePath = (path: string): string => {
 export const pathExist = (path: string): boolean => existsSync(path);
 
 export const pathNotExist = (path: string): boolean => !pathExist(path);
+
+export const normalizePath = (path: string): string => {
+    return path.replace(/\\/g, `/`);
+}
+
+export const createPath = (...pathItems: string[]): string => {
+    return normalizePath(join(...pathItems));
+}
