@@ -1,28 +1,28 @@
 import {singleton} from "tsyringe";
-import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {PathUtilsService} from "@lib/utils";
+
+import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
+import {changePath, pathExist} from "@lib/utils";
 
 @singleton()
 /**
- * The app service is responsible for changing
- * the current path to the selected path.
+ * This app service is responsible for changing the current path to the destination path.
  */
 export class ChangePathAppService {
-  constructor (
-    private readonly simpleMessage: SimpleMessageAppService,
-    private readonly pathUtils: PathUtilsService,
-    private readonly newline: NewlineAppService
-  ) {
-  }
-
-  run (path: string): boolean {
-    this.simpleMessage.writePlain(`Step: Change Path >>> ${path}`);
-    if (this.pathUtils.existPath(path)) {
-      this.pathUtils.changePath(path);
-      return true;
+    constructor(
+        private readonly stepMessage: StepMessageAppService,
+        private readonly simpleMessage: SimpleMessageAppService
+    ) {
     }
-    this.newline.writeNewline();
-    this.simpleMessage.writeError(`The path ${path} does not exist`);
-    return false;
-  }
+
+    run(path: string): boolean {
+        this.stepMessage.write("Change path");
+        if (pathExist(path)) {
+            changePath(path);
+            return true;
+        }
+        this.simpleMessage.writeError(`The path ${path} does not exist!`);
+        return false;
+    }
 }
+
+// todo: done

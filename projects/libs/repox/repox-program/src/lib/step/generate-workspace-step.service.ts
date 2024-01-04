@@ -3,7 +3,7 @@ import {singleton} from "tsyringe";
 import {GenerateWorkspaceCommandModel} from "@lib/repox-domain";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {CreateFolderAppService, FolderNotExistAppService} from "@lib/program-step";
+import {ChangePathAppService, CreateFolderAppService, FolderNotExistAppService} from "@lib/program-step";
 
 @singleton()
 /**
@@ -14,7 +14,8 @@ export class GenerateWorkspaceStepService {
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,
         private readonly folderNotExist: FolderNotExistAppService,
-        private readonly createFolder: CreateFolderAppService
+        private readonly createFolder: CreateFolderAppService,
+        private readonly changePath: ChangePathAppService,
     ) {
     }
 
@@ -24,6 +25,7 @@ export class GenerateWorkspaceStepService {
         const {workspaceName} = commandModel;
         if (!this.folderNotExist.run(workspaceName)) return;
         if (!this.createFolder.run(workspaceName)) return;
+        if (!this.changePath.run(workspaceName)) return;
         console.log(workspaceName);
         // I am here
     }
@@ -46,7 +48,6 @@ export class GenerateWorkspaceStepService {
 //     _programModel: Record<string, never>,
 //     commandModel: GenerateWorkspaceCommandModel
 //   ): void {
-//     if (!this.changePath.run(workspaceName)) return;
 //     if (!this.generateWorkspace.run()) return;
 //     if (!this.runCommand.run(`git init`)) return;
 //     if (!this.runCommand.run(`git config core.autocrlf false`)) return;

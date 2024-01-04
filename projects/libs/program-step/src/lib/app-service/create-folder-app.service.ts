@@ -17,7 +17,7 @@ export class CreateFolderAppService {
     run(folderPath: string): boolean {
         this.stepMessage.write("Create the folder");
         if (createFolder(folderPath)) return true;
-        this.simpleMessage.writeError(`Failed to create folder ${folderPath} !`);
+        this.simpleMessage.writeError(`Failed to create ${folderPath} folder!`);
         return false;
     }
 }
