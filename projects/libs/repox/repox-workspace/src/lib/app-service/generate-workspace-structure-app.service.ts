@@ -4,21 +4,22 @@ import {WorkspaceStructureActionsModel} from "../model/workspace/workspace-struc
 import {WORKSPACE_STRUCTURE} from "../const/workspace-structure.const";
 import {WorkspaceActionEnum} from "../enum/workspace/workspace-action.enum";
 import {createPath} from "@lib/utils";
+import {EMPTY_STRING} from "@lib/const";
 
 @singleton()
 /**
  * The service uses recursion to generate workspace.
  */
 export class GenerateWorkspaceStructureAppService {
-    private path: string = "";
+    private path: string = EMPTY_STRING;
 
     generate(): boolean {
-        this.path = "";
+        this.path = EMPTY_STRING;
         return this.runGenerate(WORKSPACE_STRUCTURE.structure);
     }
 
+    // todo: I am here
     private runGenerate(actions: WorkspaceStructureActionsModel[]): boolean {
-        // todo: I am here
         for (const action of actions) {
             switch (action.action) {
                 case WorkspaceActionEnum.createFolder:
