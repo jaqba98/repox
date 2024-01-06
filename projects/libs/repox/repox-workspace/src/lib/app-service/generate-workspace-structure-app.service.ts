@@ -8,7 +8,7 @@ import {
 import {WORKSPACE_STRUCTURE} from "../const/workspace-structure.const";
 import {WorkspaceActionEnum} from "../enum/workspace/workspace-action.enum";
 import {EMPTY_STRING} from "@lib/const";
-import {createFolder, createParentPath, createPath, pathNotExist, writeToFile} from "@lib/utils";
+import {createFolder, createPath, pathNotExist, writeToFile} from "@lib/utils";
 
 @singleton()
 /**
@@ -19,6 +19,7 @@ export class GenerateWorkspaceStructureAppService {
         return this.runGenerate(WORKSPACE_STRUCTURE.structure, EMPTY_STRING);
     }
 
+    // I am here
     private runGenerate(actions: WorkspaceStructureActionsModel[], currentPath: string): boolean {
         for (const action of actions) {
             switch (action.action) {
