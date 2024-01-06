@@ -15,41 +15,38 @@ import {createFolder, createParentPath, createPath, pathNotExist, writeToFile} f
  * The service uses recursion to generate workspace.
  */
 export class GenerateWorkspaceStructureAppService {
-    private path: string = EMPTY_STRING;
-
     generate(): boolean {
-        this.path = EMPTY_STRING;
-        return this.runGenerate(WORKSPACE_STRUCTURE.structure);
+        return this.runGenerate(WORKSPACE_STRUCTURE.structure, EMPTY_STRING);
     }
 
-    private runGenerate(actions: WorkspaceStructureActionsModel[]): boolean {
+    private runGenerate(actions: WorkspaceStructureActionsModel[], path: string): boolean {
         for (const action of actions) {
             switch (action.action) {
                 case WorkspaceActionEnum.createFolder:
-                    if (!this.createFolder(action)) return false;
+                    if (!this.createFolder(action, path)) return false;
                     break;
                 case WorkspaceActionEnum.createFile:
-                    if (!this.createFile(action)) return false;
+                    if (!this.createFile(action, path)) return false;
                     break;
                 default:
                     throw new Error("Not supported generate action!");
             }
         }
-        this.path = createParentPath(this.path);
+        path = createParentPath(path);
         return true;
     }
 
-    private createFolder(action: WorkspaceStructureCreateFolderModel): boolean {
-        this.path = createPath(this.path, action.folderName);
-        if (pathNotExist(this.path)) createFolder(this.path);
-        if (action.subFolders.length > 0) this.runGenerate(action.subFolders);
+    private createFolder(action: WorkspaceStructureCreateFolderModel, path: string): boolean {
+        path = createPath(path, action.folderName);
+        if (pathNotExist(path)) createFolder(path);
+        if (action.subFolders.length > 0) this.runGenerate(action.subFolders, path);
         return true;
     }
 
-    private createFile(action: WorkspaceStructureCreateFileModel): boolean {
-        this.path = createPath(this.path, action.fileName);
-        writeToFile(this.path, action.fileContent);
-        this.path = createParentPath(this.path);
+    private createFile(action: WorkspaceStructureCreateFileModel, path: string): boolean {
+        path = createPath(path, action.fileName);
+        writeToFile(path, action.fileContent);
+        path = createParentPath(path);
         return true;
     }
 }
