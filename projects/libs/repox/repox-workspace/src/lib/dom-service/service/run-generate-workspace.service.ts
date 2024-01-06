@@ -12,7 +12,7 @@ import {WorkspaceActionEnum} from "../../enum/workspace/workspace-action.enum";
 /**
  * The service uses recursion to generate workspace.
  */
-export class RunGenerateService {
+export class RunGenerateWorkspaceService {
     run(actions: WorkspaceStructureActionsModel[], currentPath: string): boolean {
         for (const action of actions) {
             switch (action.action) {
