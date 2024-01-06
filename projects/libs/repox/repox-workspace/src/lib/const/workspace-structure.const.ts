@@ -1,7 +1,9 @@
+import { container } from "tsyringe";
+
 import {WorkspaceStructureModel} from "../model/workspace/workspace-structure.model";
 import {WorkspaceActionEnum} from "../enum/workspace/workspace-action.enum";
 import {WorkspaceFileEnum, WorkspaceFolderEnum} from "@lib/repox-workspace";
-import {EMPTY_STRING} from "@lib/const";
+import {BuildEmptyFileContentService} from "../dom-service/builder/build-empty-file-content.service";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -19,7 +21,7 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                         {
                             action: WorkspaceActionEnum.createFile,
                             fileName: WorkspaceFileEnum.gitKeep,
-                            fileContent: EMPTY_STRING
+                            fileContent: container.resolve(BuildEmptyFileContentService).build()
                         }
                     ]
                 },
@@ -30,7 +32,7 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                         {
                             action: WorkspaceActionEnum.createFile,
                             fileName: WorkspaceFileEnum.gitKeep,
-                            fileContent: EMPTY_STRING
+                            fileContent: container.resolve(BuildEmptyFileContentService).build()
                         }
                     ]
                 },
@@ -41,7 +43,7 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                         {
                             action: WorkspaceActionEnum.createFile,
                             fileName: WorkspaceFileEnum.gitKeep,
-                            fileContent: EMPTY_STRING
+                            fileContent: container.resolve(BuildEmptyFileContentService).build()
                         }
                     ]
                 }
