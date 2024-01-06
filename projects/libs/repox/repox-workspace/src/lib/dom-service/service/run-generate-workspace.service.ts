@@ -3,9 +3,10 @@ import {singleton} from "tsyringe";
 import {
     WorkspaceStructureActionsModel,
     WorkspaceStructureCreateFileModel,
-    WorkspaceStructureCreateFolderModel
+    WorkspaceStructureCreateFolderModel,
+    WorkspaceStructureRunCommandModel
 } from "../../model/workspace/workspace-structure.model";
-import {createPath, createFolder, pathNotExist, writeToFile} from "@lib/utils";
+import {createFolder, createPath, pathNotExist, runCommand, writeToFile} from "@lib/utils";
 import {WorkspaceActionEnum} from "../../enum/workspace/workspace-action.enum";
 
 @singleton()
@@ -21,6 +22,9 @@ export class RunGenerateWorkspaceService {
                     break;
                 case WorkspaceActionEnum.createFile:
                     if (!this.createFile(action, currentPath)) return false;
+                    break;
+                case WorkspaceActionEnum.runCommand:
+                    if (!this.runCommand(action, currentPath)) return false;
                     break;
                 default:
                     throw new Error("Not supported generate action!");
@@ -40,6 +44,11 @@ export class RunGenerateWorkspaceService {
         const filePath = createPath(currentPath, action.fileName);
         const fileContent = action.contentBuilder.build();
         writeToFile(filePath, fileContent);
+        return true;
+    }
+
+    private runCommand(action: WorkspaceStructureRunCommandModel, currentPath: string): boolean {
+        runCommand(action.command, currentPath);
         return true;
     }
 }

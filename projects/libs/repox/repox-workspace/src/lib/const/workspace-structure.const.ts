@@ -1,4 +1,4 @@
-import { container } from "tsyringe";
+import {container} from "tsyringe";
 
 import {WorkspaceStructureModel} from "../model/workspace/workspace-structure.model";
 import {WorkspaceActionEnum} from "../enum/workspace/workspace-action.enum";
@@ -48,6 +48,10 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                     ]
                 }
             ]
+        },
+        {
+            action: WorkspaceActionEnum.runCommand,
+            command: "npm init -y"
         }
     ]
 };

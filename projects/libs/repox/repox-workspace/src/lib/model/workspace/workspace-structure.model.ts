@@ -14,7 +14,15 @@ export interface WorkspaceStructureCreateFileModel {
     contentBuilder: WorkspaceContentBuilderModel;
 }
 
-export type WorkspaceStructureActionsModel = WorkspaceStructureCreateFolderModel | WorkspaceStructureCreateFileModel;
+export interface WorkspaceStructureRunCommandModel {
+    action: WorkspaceActionEnum.runCommand;
+    command: string;
+}
+
+export type WorkspaceStructureActionsModel =
+    WorkspaceStructureCreateFolderModel |
+    WorkspaceStructureCreateFileModel |
+    WorkspaceStructureRunCommandModel;
 
 export interface WorkspaceStructureModel {
     structure: WorkspaceStructureActionsModel[];

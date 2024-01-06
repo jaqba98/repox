@@ -3,7 +3,8 @@
  */
 export enum WorkspaceActionEnum {
     createFolder = "createFolder",
-    createFile = "createFile"
+    createFile = "createFile",
+    runCommand = "runCommand"
 }
 
 // todo: done
