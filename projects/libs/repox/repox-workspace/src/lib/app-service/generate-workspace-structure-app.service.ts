@@ -18,7 +18,7 @@ export class GenerateWorkspaceStructureAppService {
         return this.runGenerate(WORKSPACE_STRUCTURE.structure);
     }
 
-    // todo: I am here
+    // I am here
     private runGenerate(actions: WorkspaceStructureActionsModel[]): boolean {
         for (const action of actions) {
             switch (action.action) {
