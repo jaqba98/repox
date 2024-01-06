@@ -1,9 +1,6 @@
-import {container} from "tsyringe";
-
 import {WorkspaceStructureModel} from "../model/workspace/workspace-structure.model";
 import {WorkspaceActionEnum} from "../enum/workspace/workspace-action.enum";
-import {WorkspaceFileEnum, WorkspaceFolderEnum} from "@lib/repox-workspace";
-import {BuildEmptyFileContentService} from "../dom-service/builder/build-empty-file-content.service";
+import {WorkspaceFolderEnum} from "../enum/workspace/workspace-folder.enum";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -17,41 +14,19 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                 {
                     action: WorkspaceActionEnum.createFolder,
                     folderName: WorkspaceFolderEnum.apps,
-                    subFolders: [
-                        {
-                            action: WorkspaceActionEnum.createFile,
-                            fileName: WorkspaceFileEnum.gitKeep,
-                            contentBuilder: container.resolve(BuildEmptyFileContentService)
-                        }
-                    ]
+                    subFolders: []
                 },
                 {
                     action: WorkspaceActionEnum.createFolder,
                     folderName: WorkspaceFolderEnum.libs,
-                    subFolders: [
-                        {
-                            action: WorkspaceActionEnum.createFile,
-                            fileName: WorkspaceFileEnum.gitKeep,
-                            contentBuilder: container.resolve(BuildEmptyFileContentService)
-                        }
-                    ]
+                    subFolders: []
                 },
                 {
                     action: WorkspaceActionEnum.createFolder,
                     folderName: WorkspaceFolderEnum.tools,
-                    subFolders: [
-                        {
-                            action: WorkspaceActionEnum.createFile,
-                            fileName: WorkspaceFileEnum.gitKeep,
-                            contentBuilder: container.resolve(BuildEmptyFileContentService)
-                        }
-                    ]
+                    subFolders: []
                 }
             ]
-        },
-        {
-            action: WorkspaceActionEnum.runCommand,
-            command: "npm init -y"
         }
     ]
 };
