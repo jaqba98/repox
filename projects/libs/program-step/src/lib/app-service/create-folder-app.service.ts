@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
-import {createFolder} from "@lib/utils";
+import {createFolder, pathNotExist} from "@lib/utils";
 
 @singleton()
 /**
@@ -16,7 +16,10 @@ export class CreateFolderAppService {
 
     run(folderPath: string): boolean {
         this.stepMessage.write("Create the folder");
-        if (createFolder(folderPath)) return true;
+        if (pathNotExist(folderPath)) {
+            createFolder(folderPath);
+            return true;
+        }
         this.simpleMessage.writeError(`Failed to create ${folderPath} folder!`);
         return false;
     }

@@ -94,3 +94,5 @@ export const normalizePath = (path: string): string => {
 export const createPath = (...pathItems: string[]): string => {
     return normalizePath(join(...pathItems));
 }
+
+export const createParentPath = (path: string): string => createPath(path, "../");

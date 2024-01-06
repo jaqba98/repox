@@ -1,10 +1,14 @@
 import {singleton} from "tsyringe";
 
-import {WorkspaceStructureActionsModel} from "../model/workspace/workspace-structure.model";
+import {
+    WorkspaceStructureActionsModel,
+    WorkspaceStructureCreateFileModel,
+    WorkspaceStructureCreateFolderModel
+} from "../model/workspace/workspace-structure.model";
 import {WORKSPACE_STRUCTURE} from "../const/workspace-structure.const";
 import {WorkspaceActionEnum} from "../enum/workspace/workspace-action.enum";
-import {createPath} from "@lib/utils";
 import {EMPTY_STRING} from "@lib/const";
+import {createFolder, createParentPath, createPath, pathNotExist, writeToFile} from "@lib/utils";
 
 @singleton()
 /**
@@ -18,25 +22,36 @@ export class GenerateWorkspaceStructureAppService {
         return this.runGenerate(WORKSPACE_STRUCTURE.structure);
     }
 
-    // I am here
     private runGenerate(actions: WorkspaceStructureActionsModel[]): boolean {
         for (const action of actions) {
             switch (action.action) {
                 case WorkspaceActionEnum.createFolder:
-                    this.path = createPath(this.path, action.folderName);
-                    console.log(this.path);
-                    if (action.subFolders.length > 0) this.runGenerate(action.subFolders);
+                    if (!this.createFolder(action)) return false;
                     break;
                 case WorkspaceActionEnum.createFile:
-                    this.path = createPath(this.path, action.fileName);
-                    console.log(this.path);
-                    this.path = createPath(this.path, "../");
+                    if (!this.createFile(action)) return false;
                     break;
                 default:
                     throw new Error("Not supported generate action!");
             }
         }
-        this.path = createPath(this.path, "../");
+        this.path = createParentPath(this.path);
+        return true;
+    }
+
+    private createFolder(action: WorkspaceStructureCreateFolderModel): boolean {
+        this.path = createPath(this.path, action.folderName);
+        if (pathNotExist(this.path)) createFolder(this.path);
+        if (action.subFolders.length > 0) this.runGenerate(action.subFolders);
+        return true;
+    }
+
+    private createFile(action: WorkspaceStructureCreateFileModel): boolean {
+        this.path = createPath(this.path, action.fileName);
+        writeToFile(this.path, action.fileContent);
+        this.path = createParentPath(this.path);
         return true;
     }
 }
+
+// todo: done

@@ -27,11 +27,9 @@ export class FolderUtilsService {
     }
 }
 
-export const createFolder = (...folderPath: string[]): boolean => {
+export const createFolder = (...folderPath: string[]): void => {
     const path = createPath(...folderPath);
-    if (existPath(path)) return false;
     mkdirSync(path, {recursive: true});
-    return true;
 }
 
 export const renameFolder = (folderPath: string[], folderName: string): boolean => {

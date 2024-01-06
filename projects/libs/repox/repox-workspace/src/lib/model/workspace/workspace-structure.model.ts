@@ -1,13 +1,13 @@
 import {WorkspaceActionEnum} from "../../enum/workspace/workspace-action.enum";
 import {WorkspaceFileEnum, WorkspaceFolderEnum} from "@lib/repox-workspace";
 
-interface WorkspaceStructureCreateFolderModel {
+export interface WorkspaceStructureCreateFolderModel {
     action: WorkspaceActionEnum.createFolder;
     folderName: WorkspaceFolderEnum;
     subFolders: WorkspaceStructureActionsModel[];
 }
 
-interface WorkspaceStructureCreateFileModel {
+export interface WorkspaceStructureCreateFileModel {
     action: WorkspaceActionEnum.createFile;
     fileName: WorkspaceFileEnum;
     fileContent: string;

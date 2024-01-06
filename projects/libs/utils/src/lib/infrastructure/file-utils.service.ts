@@ -74,3 +74,8 @@ export class FileUtilsService {
             .map(path => this.pathUtils.normalizePath(path));
     }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const writeToFile = (path: string, content: any): void => {
+    writeFileSync(path, content);
+}
