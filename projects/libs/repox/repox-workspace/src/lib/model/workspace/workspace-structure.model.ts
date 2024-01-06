@@ -13,7 +13,7 @@ interface WorkspaceStructureCreateFileModel {
     fileContent: string;
 }
 
-type WorkspaceStructureActionsModel = WorkspaceStructureCreateFolderModel | WorkspaceStructureCreateFileModel;
+export type WorkspaceStructureActionsModel = WorkspaceStructureCreateFolderModel | WorkspaceStructureCreateFileModel;
 
 export interface WorkspaceStructureModel {
     structure: WorkspaceStructureActionsModel[];
