@@ -1,5 +1,6 @@
 import {WorkspaceActionEnum} from "../../enum/workspace/workspace-action.enum";
 import {WorkspaceFileEnum, WorkspaceFolderEnum} from "@lib/repox-workspace";
+import {WorkspaceContentBuilderModel} from "./workspace-content-builder.model";
 
 export interface WorkspaceStructureCreateFolderModel {
     action: WorkspaceActionEnum.createFolder;
@@ -10,7 +11,7 @@ export interface WorkspaceStructureCreateFolderModel {
 export interface WorkspaceStructureCreateFileModel {
     action: WorkspaceActionEnum.createFile;
     fileName: WorkspaceFileEnum;
-    fileContent: string;
+    contentBuilder: WorkspaceContentBuilderModel;
 }
 
 export type WorkspaceStructureActionsModel = WorkspaceStructureCreateFolderModel | WorkspaceStructureCreateFileModel;

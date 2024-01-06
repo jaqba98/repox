@@ -21,7 +21,7 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                         {
                             action: WorkspaceActionEnum.createFile,
                             fileName: WorkspaceFileEnum.gitKeep,
-                            fileContent: container.resolve(BuildEmptyFileContentService).build()
+                            contentBuilder: container.resolve(BuildEmptyFileContentService)
                         }
                     ]
                 },
@@ -32,7 +32,7 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                         {
                             action: WorkspaceActionEnum.createFile,
                             fileName: WorkspaceFileEnum.gitKeep,
-                            fileContent: container.resolve(BuildEmptyFileContentService).build()
+                            contentBuilder: container.resolve(BuildEmptyFileContentService)
                         }
                     ]
                 },
@@ -43,7 +43,7 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                         {
                             action: WorkspaceActionEnum.createFile,
                             fileName: WorkspaceFileEnum.gitKeep,
-                            fileContent: container.resolve(BuildEmptyFileContentService).build()
+                            contentBuilder: container.resolve(BuildEmptyFileContentService)
                         }
                     ]
                 }

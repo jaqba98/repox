@@ -45,7 +45,7 @@ export class GenerateWorkspaceStructureAppService {
 
     private createFile(action: WorkspaceStructureCreateFileModel, currentPath: string): boolean {
         const filePath = createPath(currentPath, action.fileName);
-        writeToFile(filePath, action.fileContent);
+        writeToFile(filePath, action.contentBuilder.build());
         return true;
     }
 }
