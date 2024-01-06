@@ -19,34 +19,32 @@ export class GenerateWorkspaceStructureAppService {
         return this.runGenerate(WORKSPACE_STRUCTURE.structure, EMPTY_STRING);
     }
 
-    private runGenerate(actions: WorkspaceStructureActionsModel[], path: string): boolean {
+    private runGenerate(actions: WorkspaceStructureActionsModel[], currentPath: string): boolean {
         for (const action of actions) {
             switch (action.action) {
                 case WorkspaceActionEnum.createFolder:
-                    if (!this.createFolder(action, path)) return false;
+                    if (!this.createFolder(action, currentPath)) return false;
                     break;
                 case WorkspaceActionEnum.createFile:
-                    if (!this.createFile(action, path)) return false;
+                    if (!this.createFile(action, currentPath)) return false;
                     break;
                 default:
                     throw new Error("Not supported generate action!");
             }
         }
-        path = createParentPath(path);
         return true;
     }
 
-    private createFolder(action: WorkspaceStructureCreateFolderModel, path: string): boolean {
-        path = createPath(path, action.folderName);
-        if (pathNotExist(path)) createFolder(path);
-        if (action.subFolders.length > 0) this.runGenerate(action.subFolders, path);
+    private createFolder(action: WorkspaceStructureCreateFolderModel, currentPath: string): boolean {
+        const folderPath = createPath(currentPath, action.folderName);
+        if (pathNotExist(folderPath)) createFolder(folderPath);
+        if (action.subFolders.length > 0) this.runGenerate(action.subFolders, folderPath);
         return true;
     }
 
-    private createFile(action: WorkspaceStructureCreateFileModel, path: string): boolean {
-        path = createPath(path, action.fileName);
-        writeToFile(path, action.fileContent);
-        path = createParentPath(path);
+    private createFile(action: WorkspaceStructureCreateFileModel, currentPath: string): boolean {
+        const filePath = createPath(currentPath, action.fileName);
+        writeToFile(filePath, action.fileContent);
         return true;
     }
 }
