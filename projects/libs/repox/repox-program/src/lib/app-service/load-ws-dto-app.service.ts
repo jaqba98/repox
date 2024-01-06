@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
 import {PathUtilsService} from "@lib/utils";
-import {WorkspaceFileEnum, WsDtoStoreService} from "@lib/repox-workspace";
+import {WsDtoStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -17,14 +17,14 @@ export class LoadWsDtoAppService {
 
     run(): boolean {
         this.simpleMessage.writePlain(`Step: Load WS dto`);
-        if (this.pathUtils.notExistPath(WorkspaceFileEnum.repoxJsonFile)) {
+        if (this.pathUtils.notExistPath("WorkspaceFileEnum.repoxJsonFile")) {
             this.simpleMessage.writeError(`Incorrect workspace structure`);
-            this.simpleMessage.writeError(`The ${WorkspaceFileEnum.repoxJsonFile} file does not exist`);
+            this.simpleMessage.writeError(`The ${"WorkspaceFileEnum.repoxJsonFile"} file does not exist`);
             return false;
         }
-        if (this.pathUtils.notExistPath(WorkspaceFileEnum.tsconfigJsonFile)) {
+        if (this.pathUtils.notExistPath("WorkspaceFileEnum.tsconfigJsonFile")) {
             this.simpleMessage.writeError(`Incorrect workspace structure`);
-            this.simpleMessage.writeError(`The ${WorkspaceFileEnum.tsconfigJsonFile} file does not exist`);
+            this.simpleMessage.writeError(`The ${"WorkspaceFileEnum.tsconfigJsonFile"} file does not exist`);
             return false;
         }
         this.wsDtoStore.loadWsDto();

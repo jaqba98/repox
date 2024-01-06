@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
-import {ProjectTypeEnum, WorkspaceFileEnum, WsDomainStoreService, WsProjectDomainModel} from "@lib/repox-workspace";
+import {ProjectTypeEnum, WsDomainStoreService, WsProjectDomainModel} from "@lib/repox-workspace";
 import {PathUtilsService, RunCommandUtilsService} from "@lib/utils";
 
 @singleton()
@@ -34,7 +34,7 @@ export class BuildProjectAppService {
     }
 
     private buildProjectAppTypescript(project: WsProjectDomainModel): boolean {
-        const projectTsconfig = this.pathUtils.createPath(project.path, WorkspaceFileEnum.tsconfigJsonFile);
+        const projectTsconfig = this.pathUtils.createPath(project.path, "WorkspaceFileEnum.tsconfigJsonFile");
         if (!this.pathUtils.existPath(projectTsconfig)) {
             this.simpleMessage.writeError(`There is no tsconfig.json file for the project.`);
             return false;

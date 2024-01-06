@@ -1,11 +1,5 @@
 import {singleton} from "tsyringe";
-import {
-    ProjectTypeEnum,
-    WorkspaceFileEnum,
-    WorkspaceFolderEnum,
-    WsDtoStoreService,
-    type WsProjectDomainModel
-} from "@lib/repox-workspace";
+import {ProjectTypeEnum, WsDtoStoreService, type WsProjectDomainModel} from "@lib/repox-workspace";
 import {type WsDomainModel} from "../../model/ws-domain/ws-domain.model";
 import {BuildProjectAliasService} from "../builder/build-project-alias.service";
 import {EMPTY_STRING} from "@lib/const";
@@ -95,7 +89,7 @@ export class WsDomainStoreService {
     }
 
     private getProjectIndexPath(projectPath: string): string[] {
-        return [this.pathUtils.createPath(projectPath, 'src', WorkspaceFileEnum.indexTsFile)];
+        return [this.pathUtils.createPath(projectPath, 'src', "WorkspaceFileEnum.indexTsFile")];
     }
 }
 

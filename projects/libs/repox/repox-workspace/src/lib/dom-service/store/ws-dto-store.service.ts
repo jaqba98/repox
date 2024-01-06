@@ -3,7 +3,6 @@ import {WsRepoxDtoModel, WsRepoxProjectDtoModel} from "../../model/ws-dto/ws-rep
 import {WsTsconfigDtoModel} from "../../model/ws-dto/ws-tsconfig-dto.model";
 import {FileUtilsService, PathUtilsService} from "@lib/utils";
 import {Validator, ValidatorResult} from "jsonschema";
-import {WorkspaceFileEnum} from "../../enum/workspace/workspace-file.enum";
 import {WsProjectDomainModel} from "../../model/ws-domain/ws-domain.model";
 import {EMPTY_STRING} from "@lib/const";
 import {repoxJsonFileSchema, tsconfigJsonFileSchema} from "../../const/schema.const";
@@ -25,8 +24,8 @@ export class WsDtoStoreService {
     }
 
     loadWsDto(): void {
-        this.wsRepoxDto = this.fileUtils.readJsonFile<WsRepoxDtoModel>(WorkspaceFileEnum.repoxJsonFile);
-        this.wsTsconfigDto = this.fileUtils.readJsonFile<WsTsconfigDtoModel>(WorkspaceFileEnum.tsconfigJsonFile);
+        this.wsRepoxDto = this.fileUtils.readJsonFile<WsRepoxDtoModel>("WorkspaceFileEnum.repoxJsonFile");
+        this.wsTsconfigDto = this.fileUtils.readJsonFile<WsTsconfigDtoModel>("WorkspaceFileEnum.tsconfigJsonFile");
     }
 
     saveWsDto(): void {
@@ -36,8 +35,8 @@ export class WsDtoStoreService {
         if (this.wsTsconfigDto === undefined) {
             throw new Error(`The tsconfig store is undefined!`);
         }
-        this.fileUtils.writeJsonFile<WsRepoxDtoModel>(WorkspaceFileEnum.repoxJsonFile, this.wsRepoxDto);
-        this.fileUtils.writeJsonFile<WsTsconfigDtoModel>(WorkspaceFileEnum.tsconfigJsonFile, this.wsTsconfigDto);
+        this.fileUtils.writeJsonFile<WsRepoxDtoModel>("WorkspaceFileEnum.repoxJsonFile", this.wsRepoxDto);
+        this.fileUtils.writeJsonFile<WsTsconfigDtoModel>("WorkspaceFileEnum.tsconfigJsonFile", this.wsTsconfigDto);
     }
 
     getWsRepoxDto(): WsRepoxDtoModel {
@@ -87,7 +86,7 @@ export class WsDtoStoreService {
     getProjectAlias(projectSrc: string): string {
         const tsconfigDto = this.getWsTsconfigDto();
         const projectIndexTs = this.pathUtils.createPath(
-            tsconfigDto.compilerOptions.rootDir, projectSrc, WorkspaceFileEnum.indexTsFile
+            tsconfigDto.compilerOptions.rootDir, projectSrc, "WorkspaceFileEnum.indexTsFile"
         );
         const alias = Object.keys(tsconfigDto.compilerOptions.paths)
             .find(pathAlias => tsconfigDto.compilerOptions.paths[pathAlias].includes(projectIndexTs));

@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
-import {WorkspaceFileEnum, WsDtoStoreService} from "@lib/repox-workspace";
+import {WsDtoStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -17,13 +17,13 @@ export class VerificationWsDtoAppService {
         this.simpleMessage.writePlain(`Step: Verification WS dto`);
         const verifyRepoxDto = this.wsDtoStore.verifyWsRepoxDto();
         if (verifyRepoxDto.errors.length > 0) {
-            this.simpleMessage.writeError(`Incorrect content of ${WorkspaceFileEnum.repoxJsonFile} file`);
+            this.simpleMessage.writeError(`Incorrect content of ${"WorkspaceFileEnum.repoxJsonFile"} file`);
             verifyRepoxDto.errors.forEach(error => this.simpleMessage.writeError(error.toString()));
             return false;
         }
         const verifyTsconfigDto = this.wsDtoStore.verifyWsTsconfigDto();
         if (verifyTsconfigDto.errors.length > 0) {
-            this.simpleMessage.writeError(`Incorrect content of ${WorkspaceFileEnum.tsconfigJsonFile} file`);
+            this.simpleMessage.writeError(`Incorrect content of ${"WorkspaceFileEnum.tsconfigJsonFile"} file`);
             verifyTsconfigDto.errors.forEach(error => this.simpleMessage.writeError(error.toString()));
             return false;
         }

@@ -1,11 +1,6 @@
 import {singleton} from "tsyringe";
-import {
-    WorkspaceFileEnum
-} from "../enum/workspace/workspace-file.enum";
 import {FileUtilsService, PathUtilsService} from "@lib/utils";
-import {
-    WorkspaceImportEnum
-} from "../enum/workspace/workspace-import.enum";
+import {WorkspaceImportEnum} from "../enum/workspace/workspace-import.enum";
 
 @singleton()
 /**
@@ -20,7 +15,7 @@ export class CreateWsFileAppService {
     }
 
     buildProjectTsconfigJsonContentFile(projectPath: string): string {
-        const tsconfigRootPath = this.pathUtils.getRootPath(projectPath, WorkspaceFileEnum.tsconfigJsonFile);
+        const tsconfigRootPath = this.pathUtils.getRootPath(projectPath, "WorkspaceFileEnum.tsconfigJsonFile");
         const content = {
             extends: tsconfigRootPath
         };
