@@ -8,7 +8,7 @@ import {
     type GenerateWorkspaceCommandModel,
     type LintProjectRepoxCommandModel,
     type PublishNpmRepoxCommandModel,
-    type RegenerateWorkspaceRepoxCommandModel,
+    type RegenerateWorkspaceCommandModel,
     RepoxArgumentEnum
 } from "@lib/repox-domain";
 import {ParamDomainAppService} from "@lib/param-domain";
@@ -44,7 +44,7 @@ export class RepoxBuildParamModelService {
     }
 
     regenerateWorkspaceCommand():
-        RegenerateWorkspaceRepoxCommandModel {
+        RegenerateWorkspaceCommandModel {
         return {
             isForceMode: this.paramDomain.getCommandBooleanValue(RepoxArgumentEnum.force)
         };

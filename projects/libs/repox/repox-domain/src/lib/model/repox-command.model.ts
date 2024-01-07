@@ -12,7 +12,7 @@ export interface GenerateWorkspaceCommandModel {
     workspaceName: string;
 }
 
-export interface RegenerateWorkspaceRepoxCommandModel {
+export interface RegenerateWorkspaceCommandModel {
     isForceMode: boolean;
 }
 
@@ -37,7 +37,7 @@ export interface LintProjectRepoxCommandModel {
 export type TRepoxCommandModel =
     EmptyRepoxCommandModel |
     GenerateWorkspaceCommandModel |
-    RegenerateWorkspaceRepoxCommandModel |
+    RegenerateWorkspaceCommandModel |
     GenerateProjectCommandModel |
     BuildProjectRepoxCommandModel |
     PublishNpmRepoxCommandModel |

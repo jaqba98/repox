@@ -1,48 +1,27 @@
-import { singleton } from "tsyringe";
-import {
-  NewlineAppService,
-  SimpleMessageAppService
-} from "@lib/logger";
-import {
-  CheckForceModeAppService,
-  SystemProgramEnum,
-  SystemProgramExistAppService
-} from "@lib/program-step";
-import {
-  GenerateWorkspaceAppService
-} from "../app-service/generate-workspace-app.service";
-import {
-  EmptyRepoxProgramModel,
-  RegenerateWorkspaceRepoxCommandModel
-} from "@lib/repox-domain";
-import { REPOX_LOGO } from "@lib/repox-const";
+import {singleton} from "tsyringe";
+
+import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
+import {RegenerateWorkspaceCommandModel} from "@lib/repox-domain";
+import {REPOX_LOGO} from "@lib/repox-const";
+import {CheckForceModeAppService} from "@lib/program-step";
 
 @singleton()
 /**
- * The list of steps for the program regenerate workspace.
+ * The program steps service is responsible for executing the step list to regenerate workspace.
  */
 export class RegenerateWorkspaceStepService {
-  constructor(
-    private readonly simpleMessage: SimpleMessageAppService,
-    private readonly newline: NewlineAppService,
-    private readonly systemProgramExist: SystemProgramExistAppService,
-    private readonly checkForceMode: CheckForceModeAppService,
-    private readonly generateWorkspace: GenerateWorkspaceAppService
-  ) {
-  }
+    constructor(
+        private readonly simpleMessage: SimpleMessageAppService,
+        private readonly newline: NewlineAppService,
+        private readonly checkForceMode: CheckForceModeAppService
+    ) {
+    }
 
-  runSteps(
-    _programModel: EmptyRepoxProgramModel,
-    commandModel: RegenerateWorkspaceRepoxCommandModel
-  ): void {
-    this.simpleMessage.writeInfo(`Regenerate workspace`, REPOX_LOGO);
-    this.newline.writeNewline();
-    if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
-    if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
-    if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
-    if (!this.checkForceMode.run(commandModel.isForceMode)) return;
-    if (!this.generateWorkspace.run()) return;
-    this.newline.writeNewline();
-    this.simpleMessage.writeSuccess(`Command executed correctly`);
-  }
+    runProgramSteps(_programModel: Record<string, never>, commandModel: RegenerateWorkspaceCommandModel): void {
+        this.simpleMessage.writeInfo("Regenerate Workspace", REPOX_LOGO);
+        this.newline.writeNewline();
+        const {isForceMode} = commandModel;
+        if (!this.checkForceMode.run(isForceMode)) return;
+        // I am here
+    }
 }

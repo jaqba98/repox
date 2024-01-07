@@ -1,27 +1,23 @@
 import {singleton} from "tsyringe";
+
 import {ProgramModel} from "@lib/model";
-import {
-    RegenerateWorkspaceStepService
-} from "../step/regenerate-workspace-step.service";
-import {
-    EmptyRepoxProgramModel,
-    RegenerateWorkspaceRepoxCommandModel
-} from "@lib/repox-domain";
+import {RegenerateWorkspaceStepService} from "../step/regenerate-workspace-step.service";
+import {RegenerateWorkspaceCommandModel} from "@lib/repox-domain";
 
 @singleton()
 /**
- * The start point of the program regenerate workspace.
- * It regenerates workspace (each configuration files).
+ * The program is responsible for regenerating the existing project workspace.
  */
-export class RegenerateWorkspaceProgramService
-    implements ProgramModel {
+export class RegenerateWorkspaceProgramService implements ProgramModel {
     constructor(private readonly step: RegenerateWorkspaceStepService) {
     }
 
-    runProgram(programDomain: unknown, commandDomain: unknown): void {
-        this.step.runSteps(
-            programDomain as EmptyRepoxProgramModel,
-            commandDomain as RegenerateWorkspaceRepoxCommandModel
+    runProgram(programModel: unknown, commandModel: unknown): void {
+        this.step.runProgramSteps(
+            programModel as Record<string, never>,
+            commandModel as RegenerateWorkspaceCommandModel
         );
     }
 }
+
+// todo: done
