@@ -9,7 +9,7 @@ import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-cont
  */
 export class BuildGitkeepContentService implements WorkspaceContentBuilderModel {
     condition(_path: string): boolean {
-``        // I am here
+        // I am here
         return true;
     }
 
