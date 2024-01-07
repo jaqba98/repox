@@ -49,6 +49,7 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                 }
             ]
         }
+        // I am here
     ]
 };
 
