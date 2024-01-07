@@ -7,7 +7,11 @@ import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-cont
 /**
  * The service is responsible for building an empty file content.
  */
-export class BuildEmptyFileContentService implements WorkspaceContentBuilderModel {
+export class BuildGitkeepContentService implements WorkspaceContentBuilderModel {
+    condition(_path: string): boolean {
+        return true;
+    }
+
     build(): string {
         return EMPTY_STRING;
     }
