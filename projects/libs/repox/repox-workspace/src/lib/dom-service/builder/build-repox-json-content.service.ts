@@ -8,11 +8,11 @@ import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-cont
  * The service is responsible for building the repox.json content file.
  */
 export class BuildRepoxJsonContentService implements WorkspaceContentBuilderModel {
-    condition(_path: string): boolean {
+    checkBeforeBuildContent(_path: string): boolean {
         return true;
     }
 
-    build(): string {
+    buildContent(): string {
         return EMPTY_STRING;
     }
 }

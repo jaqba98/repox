@@ -42,9 +42,10 @@ export class RunGenerateWorkspaceService {
 
     private createFile(action: WorkspaceStructureCreateFileModel, currentPath: string): boolean {
         const filePath = createPath(currentPath, action.fileName);
-        if (!action.contentBuilder.condition(filePath)) return true;
-        const fileContent = action.contentBuilder.build();
-        writeToFile(filePath, fileContent);
+        if (action.contentBuilder.checkBeforeBuildContent(filePath)) {
+            const fileContent = action.contentBuilder.buildContent();
+            writeToFile(filePath, fileContent);
+        }
         return true;
     }
 

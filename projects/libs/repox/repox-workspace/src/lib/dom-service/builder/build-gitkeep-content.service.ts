@@ -2,20 +2,25 @@ import {singleton} from "tsyringe";
 
 import {EMPTY_STRING} from "@lib/const";
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
-import {createParentPath, isEmptyFolder, pathNotExist} from "@lib/utils";
+import {createParentPath, isEmptyFolder, pathExist, pathNotExist, removeFile} from "@lib/utils";
 
 @singleton()
 /**
  * The service is responsible for building the .gitkeep content file.
  */
 export class BuildGitkeepContentService implements WorkspaceContentBuilderModel {
-    condition(path: string): boolean {
+    checkBeforeBuildContent(path: string): boolean {
         const parentPath = createParentPath(path);
         if (pathNotExist(parentPath)) return false;
-        return isEmptyFolder(parentPath);
+        if (isEmptyFolder(parentPath)) return true;
+        if (pathExist(path)) {
+            removeFile(path);
+            return false;
+        }
+        return true;
     }
 
-    build(): string {
+    buildContent(): string {
         return EMPTY_STRING;
     }
 }

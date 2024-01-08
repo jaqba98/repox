@@ -2,9 +2,9 @@
  * The model is a recipe for all workspace builders.
  */
 export interface WorkspaceContentBuilderModel {
-    condition: (path: string) => boolean;
+    checkBeforeBuildContent: (path: string) => boolean;
 
-    build: () => string;
+    buildContent: () => string;
 }
 
 // todo: done
