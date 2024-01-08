@@ -6,7 +6,7 @@ import {createParentPath, isEmptyFolder, pathNotExist} from "@lib/utils";
 
 @singleton()
 /**
- * The service is responsible for building an empty file content.
+ * The service is responsible for building the .gitkeep content file.
  */
 export class BuildGitkeepContentService implements WorkspaceContentBuilderModel {
     condition(path: string): boolean {
