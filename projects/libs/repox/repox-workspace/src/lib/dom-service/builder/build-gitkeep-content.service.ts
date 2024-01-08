@@ -25,6 +25,7 @@ export class BuildGitkeepContentService implements WorkspaceContentBuilderModel 
             removeFile(path);
             return true;
         }
+        if (manyFilesInFolder(parentPath) && pathExist(path)) removeFile(path);
         return false;
     }
 
