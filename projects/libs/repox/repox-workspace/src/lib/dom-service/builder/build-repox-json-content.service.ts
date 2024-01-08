@@ -1,7 +1,6 @@
 import {singleton} from "tsyringe";
-
-import {EMPTY_STRING} from "@lib/const";
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
+import {RepoxJsonDtoModel} from "../../model/dto/repox-json-dto.model";
 
 @singleton()
 /**
@@ -13,7 +12,11 @@ export class BuildRepoxJsonContentService implements WorkspaceContentBuilderMode
     }
 
     buildContent(): string {
-        return EMPTY_STRING;
+        const config: RepoxJsonDtoModel = {
+            projects: {}
+            // I am here
+        };
+        return JSON.stringify(config, null, 2);
     }
 }
 

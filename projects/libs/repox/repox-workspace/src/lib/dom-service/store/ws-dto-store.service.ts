@@ -1,5 +1,5 @@
 import {singleton} from "tsyringe";
-import {WsRepoxDtoModel, WsRepoxProjectDtoModel} from "../../model/ws-dto/ws-repox-dto.model";
+import {RepoxJsonDtoModel} from "../../model/dto/repox-json-dto.model";
 import {WsTsconfigDtoModel} from "../../model/ws-dto/ws-tsconfig-dto.model";
 import {FileUtilsService, PathUtilsService} from "@lib/utils";
 import {Validator, ValidatorResult} from "jsonschema";
@@ -13,7 +13,7 @@ import {repoxJsonFileSchema, tsconfigJsonFileSchema} from "../../const/schema.co
  * configuration file content directly from files.
  */
 export class WsDtoStoreService {
-    private wsRepoxDto: WsRepoxDtoModel | undefined;
+    private wsRepoxDto: RepoxJsonDtoModel | undefined;
     private wsTsconfigDto: WsTsconfigDtoModel | undefined;
 
     constructor(
@@ -24,7 +24,7 @@ export class WsDtoStoreService {
     }
 
     loadWsDto(): void {
-        this.wsRepoxDto = this.fileUtils.readJsonFile<WsRepoxDtoModel>("WorkspaceFileEnum.repoxJsonFile");
+        this.wsRepoxDto = this.fileUtils.readJsonFile<RepoxJsonDtoModel>("WorkspaceFileEnum.repoxJsonFile");
         this.wsTsconfigDto = this.fileUtils.readJsonFile<WsTsconfigDtoModel>("WorkspaceFileEnum.tsconfigJsonFile");
     }
 
@@ -35,11 +35,11 @@ export class WsDtoStoreService {
         if (this.wsTsconfigDto === undefined) {
             throw new Error(`The tsconfig store is undefined!`);
         }
-        this.fileUtils.writeJsonFile<WsRepoxDtoModel>("WorkspaceFileEnum.repoxJsonFile", this.wsRepoxDto);
+        this.fileUtils.writeJsonFile<RepoxJsonDtoModel>("WorkspaceFileEnum.repoxJsonFile", this.wsRepoxDto);
         this.fileUtils.writeJsonFile<WsTsconfigDtoModel>("WorkspaceFileEnum.tsconfigJsonFile", this.wsTsconfigDto);
     }
 
-    getWsRepoxDto(): WsRepoxDtoModel {
+    getWsRepoxDto(): RepoxJsonDtoModel {
         if (this.wsRepoxDto === undefined) {
             throw new Error(`The repox store is undefined!`);
         }
@@ -53,7 +53,8 @@ export class WsDtoStoreService {
         return this.wsTsconfigDto;
     }
 
-    getWsRepoxDtoProjects(): WsRepoxProjectDtoModel[] {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getWsRepoxDtoProjects(): any[] {
         const {projects} = this.getWsRepoxDto();
         if (projects === undefined) {
             throw new Error(`The projects in repox store is undefined!`);
@@ -71,13 +72,13 @@ export class WsDtoStoreService {
         if (this.wsTsconfigDto === undefined) {
             throw new Error(`The tsconfig store is undefined!`);
         }
-        this.wsRepoxDto.projects[project.name] = {
-            name: project.name === EMPTY_STRING ? undefined : project.name,
-            type: project.type,
-            path: project.path === EMPTY_STRING ? undefined : project.path,
-            src: project.src === EMPTY_STRING ? undefined : project.src,
-            assets: project.assets.length === 0 ? undefined : project.assets
-        };
+        // this.wsRepoxDto.projects[project.name] = {
+        //     name: project.name === EMPTY_STRING ? undefined : project.name,
+        //     type: project.type,
+        //     path: project.path === EMPTY_STRING ? undefined : project.path,
+        //     src: project.src === EMPTY_STRING ? undefined : project.src,
+        //     assets: project.assets.length === 0 ? undefined : project.assets
+        // };
         if (project.alias === EMPTY_STRING) return;
         this.wsTsconfigDto.compilerOptions
             .paths[project.alias] = project.indexPath;
