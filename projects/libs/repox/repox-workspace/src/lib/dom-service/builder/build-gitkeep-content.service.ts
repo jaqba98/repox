@@ -2,15 +2,7 @@ import {singleton} from "tsyringe";
 
 import {EMPTY_STRING} from "@lib/const";
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
-import {
-    createParentPath,
-    isEmptyFolder,
-    manyFilesInFolder,
-    oneFileInFolder,
-    pathExist,
-    pathNotExist,
-    removeFile
-} from "@lib/utils";
+import {createParentPath, isEmptyFolder, oneFileInFolder, pathExist, pathNotExist, removeFile} from "@lib/utils";
 
 @singleton()
 /**
