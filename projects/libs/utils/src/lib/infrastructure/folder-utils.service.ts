@@ -43,3 +43,11 @@ export const renameFolder = (folderPath: string[], folderName: string): boolean 
     renameSync(oldFolderPath, newFolderPath);
     return true;
 }
+
+export const oneFileInFolder = (folderPath: string): boolean => {
+    return readdirSync(folderPath).length === 1;
+}
+
+export const manyFilesInFolder = (folderPath: string): boolean => {
+    return readdirSync(folderPath).length > 1;
+}
