@@ -2,15 +2,16 @@ import {singleton} from "tsyringe";
 
 import {EMPTY_STRING} from "@lib/const";
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
+import {isEmptyFolder, pathNotExist} from "@lib/utils";
 
 @singleton()
 /**
  * The service is responsible for building an empty file content.
  */
 export class BuildGitkeepContentService implements WorkspaceContentBuilderModel {
-    condition(_path: string): boolean {
-        // I am here
-        return true;
+    condition(path: string): boolean {
+        if (pathNotExist(path)) return false;
+        return isEmptyFolder(path);
     }
 
     build(): string {
