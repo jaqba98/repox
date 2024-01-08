@@ -3,7 +3,7 @@ import {mkdirSync, readdirSync, renameSync} from "fs";
 import {EMPTY_STRING} from "@lib/const";
 import {basename, extname} from "path";
 import process from "process";
-import {createPath, existPath, pathNotExist} from "./path-utils.service";
+import {createPath, pathNotExist} from "./path-utils.service";
 
 @singleton()
 /**
@@ -25,6 +25,10 @@ export class FolderUtilsService {
     getCurrentFolderName(): string {
         return basename(process.cwd());
     }
+}
+
+export const isEmptyFolder = (folderPath: string): boolean => {
+    return readdirSync(folderPath).length === 0;
 }
 
 export const createFolder = (...folderPath: string[]): void => {
