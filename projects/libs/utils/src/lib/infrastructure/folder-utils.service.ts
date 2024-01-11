@@ -3,7 +3,7 @@ import {mkdirSync, readdirSync, renameSync} from "fs";
 import {EMPTY_STRING} from "@lib/const";
 import {basename, extname} from "path";
 import process from "process";
-import {createPath, pathNotExist} from "./path-utils.service";
+import {createPath, getCurrentPath, pathNotExist} from "./path-utils.service";
 
 @singleton()
 /**
@@ -51,3 +51,5 @@ export const oneFileInFolder = (folderPath: string): boolean => {
 export const manyFilesInFolder = (folderPath: string): boolean => {
     return readdirSync(folderPath).length > 1;
 }
+
+export const getCurrentFolderName = (): string => basename(getCurrentPath());

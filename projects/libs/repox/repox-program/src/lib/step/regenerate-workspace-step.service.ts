@@ -5,6 +5,7 @@ import {RegenerateWorkspaceCommandModel} from "@lib/repox-domain";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {CheckForceModeAppService, GoToWorkspaceRootAppService} from "@lib/program-step";
 import {GenerateWorkspaceAppService} from "../app-service/generate-workspace-app.service";
+import {getCurrentFolderName} from "@lib/utils";
 
 @singleton()
 /**
@@ -26,7 +27,8 @@ export class RegenerateWorkspaceStepService {
         const {isForceMode} = commandModel;
         if (!this.checkForceMode.run(isForceMode)) return;
         if (!this.goToWorkspaceRoot.run()) return;
-        if (!this.generateWorkspace.run()) return;
+        const workspaceName = getCurrentFolderName();
+        if (!this.generateWorkspace.run(workspaceName)) return;
         this.newline.writeNewline();
         this.simpleMessage.writeSuccess("Command executed correctly!");
     }

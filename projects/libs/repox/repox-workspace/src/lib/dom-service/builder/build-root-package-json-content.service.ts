@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
-import {EMPTY_STRING} from "@lib/const";
+import {PackageJsonDtoModel} from "../../model/dto/package-json-dto.model";
 
 @singleton()
 /**
@@ -12,8 +12,21 @@ export class BuildRootPackageJsonContentService implements WorkspaceContentBuild
         return true;
     }
 
-    buildContent(): string {
-        return EMPTY_STRING;
+    buildContent(workspaceName: string): string {
+        const rootPackageJson: PackageJsonDtoModel = {
+            name: workspaceName,
+            version: "1.0.0",
+            description: "",
+            scripts: {
+                test: "echo \"Error: no test specified\" && exit 1"
+            },
+            keywords: [],
+            author: "",
+            license: "ISC",
+            devDependencies: {},
+            dependencies: {}
+        };
+        return JSON.stringify(rootPackageJson, null, 2);
     }
 }
 

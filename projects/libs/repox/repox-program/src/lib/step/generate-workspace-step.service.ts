@@ -28,7 +28,7 @@ export class GenerateWorkspaceStepService {
         if (!this.folderNotExist.run(workspaceName)) return;
         if (!this.createFolder.run(workspaceName)) return;
         if (!this.changePath.run(workspaceName)) return;
-        if (!this.generateWorkspace.run()) return;
+        if (!this.generateWorkspace.run(workspaceName)) return;
         this.newline.writeNewline();
         this.simpleMessage.writeSuccess("Command executed correctly!");
     }

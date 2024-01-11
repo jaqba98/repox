@@ -14,14 +14,14 @@ import {WorkspaceActionEnum} from "../../enum/workspace/workspace-action.enum";
  * The service uses recursion to generate workspace.
  */
 export class RunGenerateWorkspaceService {
-    run(actions: WorkspaceStructureActionsModel[], currentPath: string): boolean {
+    run(actions: WorkspaceStructureActionsModel[], currentPath: string, workspaceName: string): boolean {
         for (const action of actions) {
             switch (action.action) {
                 case WorkspaceActionEnum.createFolder:
-                    if (!this.createFolder(action, currentPath)) return false;
+                    if (!this.createFolder(action, currentPath, workspaceName)) return false;
                     break;
                 case WorkspaceActionEnum.createFile:
-                    if (!this.createFile(action, currentPath)) return false;
+                    if (!this.createFile(action, currentPath, workspaceName)) return false;
                     break;
                 case WorkspaceActionEnum.runCommand:
                     if (!this.runCommand(action, currentPath)) return false;
@@ -33,17 +33,25 @@ export class RunGenerateWorkspaceService {
         return true;
     }
 
-    private createFolder(action: WorkspaceStructureCreateFolderModel, currentPath: string): boolean {
+    private createFolder(
+        action: WorkspaceStructureCreateFolderModel,
+        currentPath: string,
+        workspaceName: string
+    ): boolean {
         const folderPath = createPath(currentPath, action.folderName);
         if (pathNotExist(folderPath)) createFolder(folderPath);
-        if (action.subFolders.length > 0) this.run(action.subFolders, folderPath);
+        if (action.subFolders.length > 0) this.run(action.subFolders, folderPath, workspaceName);
         return true;
     }
 
-    private createFile(action: WorkspaceStructureCreateFileModel, currentPath: string): boolean {
+    private createFile(
+        action: WorkspaceStructureCreateFileModel,
+        currentPath: string,
+        workspaceName: string
+    ): boolean {
         const filePath = createPath(currentPath, action.fileName);
         if (action.contentBuilder.checkBeforeBuildContent(filePath)) {
-            const fileContent = action.contentBuilder.buildContent();
+            const fileContent = action.contentBuilder.buildContent(workspaceName);
             writeToFile(filePath, fileContent);
         }
         return true;

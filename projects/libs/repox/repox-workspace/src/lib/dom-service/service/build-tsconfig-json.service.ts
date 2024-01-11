@@ -4,8 +4,8 @@ import {
 import {singleton} from "tsyringe";
 import {ArrayUtilsService, FileUtilsService, PathUtilsService} from "@lib/utils";
 import {
-    type WsPackageJsonDtoModel
-} from "../../model/ws-dto/ws-package-json-dto.model";
+    type PackageJsonDtoModel
+} from "../../model/dto/package-json-dto.model";
 import {BuildProjectAliasService} from "@lib/repox-workspace";
 
 @singleton()
@@ -71,11 +71,12 @@ export class BuildTsconfigJsonService {
             .filter(project => project.projectType !== `app`)
             .map(project => ({
                 ...project,
-                projectName: this.fileUtils.readJsonFile<WsPackageJsonDtoModel>(project.packageJson).name
+                projectName: this.fileUtils.readJsonFile<PackageJsonDtoModel>(project.packageJson).name
             }))
             .map(project => ({
                 ...project,
-                projectAlias: this.buildProjectAlias.buildAlias(project.projectName, project.projectType, `@`)
+                // projectAlias: this.buildProjectAlias.buildAlias(project.projectName, project.projectType, `@`)
+                projectAlias: ""
             }))
             .map(project => ({
                 ...project,
