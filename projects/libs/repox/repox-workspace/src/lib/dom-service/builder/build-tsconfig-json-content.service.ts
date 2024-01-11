@@ -18,8 +18,8 @@ export class BuildTsconfigJsonContentService implements WorkspaceContentBuilderM
                 rootDir: "./projects",
                 outDir: "./dist"
             },
-            exclude: [
-                "**/jest.config.ts"
+            include: [
+                "./projects"
             ]
         };
         return JSON.stringify(tsconfig, null, 2);

@@ -7,7 +7,7 @@ export interface TsconfigJsonDtoModel {
         rootDir?: string;
         outDir?: string;
     },
-    exclude?: string[];
+    include?: string[];
 }
 
 // todo: done
