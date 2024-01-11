@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
-import {EMPTY_STRING} from "@lib/const";
+import {TsconfigJsonDtoModel} from "../../model/dto/tsconfig-json-dto.model";
 
 @singleton()
 /**
@@ -13,7 +13,16 @@ export class BuildTsconfigJsonContentService implements WorkspaceContentBuilderM
     }
 
     buildContent(): string {
-        return EMPTY_STRING;
+        const tsconfig: TsconfigJsonDtoModel = {
+            compilerOptions: {
+                rootDir: "./projects",
+                outDir: "./dist"
+            },
+            exclude: [
+                "**/*.jest.config.ts"
+            ]
+        };
+        return JSON.stringify(tsconfig, null, 2);
     }
 }
 

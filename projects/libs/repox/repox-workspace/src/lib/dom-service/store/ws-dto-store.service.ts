@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 import {RepoxJsonDtoModel} from "../../model/dto/repox-json-dto.model";
-import {WsTsconfigDtoModel} from "../../model/ws-dto/ws-tsconfig-dto.model";
+import {TsconfigJsonDtoModel} from "../../model/dto/tsconfig-json-dto.model";
 import {FileUtilsService, PathUtilsService} from "@lib/utils";
 import {Validator, ValidatorResult} from "jsonschema";
 import {WsProjectDomainModel} from "../../model/ws-domain/ws-domain.model";
@@ -14,7 +14,7 @@ import {repoxJsonFileSchema, tsconfigJsonFileSchema} from "../../const/schema.co
  */
 export class WsDtoStoreService {
     private wsRepoxDto: RepoxJsonDtoModel | undefined;
-    private wsTsconfigDto: WsTsconfigDtoModel | undefined;
+    private wsTsconfigDto: TsconfigJsonDtoModel | undefined;
 
     constructor(
         private readonly fileUtils: FileUtilsService,
@@ -25,7 +25,7 @@ export class WsDtoStoreService {
 
     loadWsDto(): void {
         this.wsRepoxDto = this.fileUtils.readJsonFile<RepoxJsonDtoModel>("WorkspaceFileEnum.repoxJsonFile");
-        this.wsTsconfigDto = this.fileUtils.readJsonFile<WsTsconfigDtoModel>("WorkspaceFileEnum.tsconfigJsonFile");
+        this.wsTsconfigDto = this.fileUtils.readJsonFile<TsconfigJsonDtoModel>("WorkspaceFileEnum.tsconfigJsonFile");
     }
 
     saveWsDto(): void {
@@ -36,7 +36,7 @@ export class WsDtoStoreService {
             throw new Error(`The tsconfig store is undefined!`);
         }
         this.fileUtils.writeJsonFile<RepoxJsonDtoModel>("WorkspaceFileEnum.repoxJsonFile", this.wsRepoxDto);
-        this.fileUtils.writeJsonFile<WsTsconfigDtoModel>("WorkspaceFileEnum.tsconfigJsonFile", this.wsTsconfigDto);
+        this.fileUtils.writeJsonFile<TsconfigJsonDtoModel>("WorkspaceFileEnum.tsconfigJsonFile", this.wsTsconfigDto);
     }
 
     getWsRepoxDto(): RepoxJsonDtoModel {
@@ -46,7 +46,7 @@ export class WsDtoStoreService {
         return this.wsRepoxDto;
     }
 
-    getWsTsconfigDto(): WsTsconfigDtoModel {
+    getWsTsconfigDto(): TsconfigJsonDtoModel {
         if (this.wsTsconfigDto === undefined) {
             throw new Error(`The tsconfig store is undefined!`);
         }
@@ -80,23 +80,25 @@ export class WsDtoStoreService {
         //     assets: project.assets.length === 0 ? undefined : project.assets
         // };
         if (project.alias === EMPTY_STRING) return;
-        this.wsTsconfigDto.compilerOptions
-            .paths[project.alias] = project.indexPath;
+        // this.wsTsconfigDto.compilerOptions
+        //     .paths[project.alias] = project.indexPath;
     }
 
-    getProjectAlias(projectSrc: string): string {
-        const tsconfigDto = this.getWsTsconfigDto();
-        const projectIndexTs = this.pathUtils.createPath(
-            tsconfigDto.compilerOptions.rootDir, projectSrc, "WorkspaceFileEnum.indexTsFile"
-        );
-        const alias = Object.keys(tsconfigDto.compilerOptions.paths)
-            .find(pathAlias => tsconfigDto.compilerOptions.paths[pathAlias].includes(projectIndexTs));
-        return alias ?? EMPTY_STRING;
+    getProjectAlias(_projectSrc: string): string {
+        return "";
+        // const tsconfigDto = this.getWsTsconfigDto();
+        // const projectIndexTs = this.pathUtils.createPath(
+        //     tsconfigDto.compilerOptions.rootDir, projectSrc, "WorkspaceFileEnum.indexTsFile"
+        // );
+        // const alias = Object.keys(tsconfigDto.compilerOptions.paths)
+        //     .find(pathAlias => tsconfigDto.compilerOptions.paths[pathAlias].includes(projectIndexTs));
+        // return alias ?? EMPTY_STRING;
     }
 
-    getProjectIndexPath(projectAlias: string): string[] {
-        const tsconfigDto = this.getWsTsconfigDto();
-        return tsconfigDto.compilerOptions.paths[projectAlias] ?? [];
+    getProjectIndexPath(_projectAlias: string): string[] {
+        // const tsconfigDto = this.getWsTsconfigDto();
+        // return tsconfigDto.compilerOptions.paths[projectAlias] ?? [];
+        return [];
     }
 
     verifyWsRepoxDto(): ValidatorResult {
