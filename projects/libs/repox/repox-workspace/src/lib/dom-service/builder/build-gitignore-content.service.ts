@@ -1,14 +1,21 @@
 import {singleton} from "tsyringe";
 
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
+import {SystemProgramEnum, SystemProgramExistService} from "@lib/program-step";
+import {pathExist, removeFile} from "@lib/utils";
 
 @singleton()
 /**
  * The service is responsible for building the .gitignore content file.
  */
 export class BuildGitignoreContentService implements WorkspaceContentBuilderModel {
-    checkBeforeBuildContent(_path: string): boolean {
-        return true;
+    constructor(private readonly systemProgramExist: SystemProgramExistService) {
+    }
+
+    checkBeforeBuildContent(path: string): boolean {
+        if (this.systemProgramExist.checkExist(SystemProgramEnum.git)) return true;
+        if (pathExist(path)) removeFile(path);
+        return false;
     }
 
     buildContent(): string {

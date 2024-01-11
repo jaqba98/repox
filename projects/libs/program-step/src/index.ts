@@ -8,3 +8,4 @@ export * from "./lib/app-service/create-folder-app.service";
 export * from "./lib/app-service/check-force-mode-app.service";
 export * from "./lib/app-service/run-command-app.service";
 export * from "./lib/enum/system-program.enum";
+export * from "./lib/infrastructure/system-program-exist.service";
