@@ -5,9 +5,9 @@ import {EMPTY_STRING} from "@lib/const";
 
 @singleton()
 /**
- * The service is responsible for building the package.json content file.
+ * The service is responsible for building the package.json content file in the root of workspace.
  */
-export class BuildPackageJsonContentService implements WorkspaceContentBuilderModel {
+export class BuildRootPackageJsonContentService implements WorkspaceContentBuilderModel {
     checkBeforeBuildContent(_path: string): boolean {
         return true;
     }

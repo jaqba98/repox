@@ -7,7 +7,7 @@ import {WorkspaceFileEnum} from "../enum/workspace/workspace-file.enum";
 import {BuildGitkeepContentService} from "../dom-service/builder/build-gitkeep-content.service";
 import {BuildRepoxJsonContentService} from "../dom-service/builder/build-repox-json-content.service";
 import {BuildTsconfigJsonContentService} from "../dom-service/builder/build-tsconfig-json-content.service";
-import {BuildPackageJsonContentService} from "../dom-service/builder/build-package-json-content.service";
+import {BuildRootPackageJsonContentService} from "../dom-service/builder/build-root-package-json-content.service";
 import {BuildJestConfigTsContentService} from "../dom-service/builder/build-jest-config-ts-content.service";
 import {BuildGitignoreContentService} from "../dom-service/builder/build-gitignore-content.service";
 import {BuildEslintrcTsContentService} from "../dom-service/builder/build-eslintrc-ts-content.service";
@@ -74,7 +74,7 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         {
             action: WorkspaceActionEnum.createFile,
             fileName: WorkspaceFileEnum.packageJson,
-            contentBuilder: container.resolve(BuildPackageJsonContentService)
+            contentBuilder: container.resolve(BuildRootPackageJsonContentService)
         },
         {
             action: WorkspaceActionEnum.createFile,
