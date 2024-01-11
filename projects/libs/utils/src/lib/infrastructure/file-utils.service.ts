@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 import {copyFileSync, readFileSync, unlinkSync, writeFileSync} from "fs";
 import {EMPTY_STRING} from "@lib/const";
-import {PathUtilsService} from "./path-utils.service";
+import {pathExist, PathUtilsService} from "./path-utils.service";
 import {globSync} from "glob";
 import {basename} from "path";
 import {FolderUtilsService} from "./folder-utils.service";
@@ -81,3 +81,10 @@ export const writeToFile = (path: string, content: any): void => {
 }
 
 export const removeFile = (path: string): void => unlinkSync(path);
+
+export const readJsonFile = <T>(filePath: string): T => {
+    if (!pathExist(filePath)) {
+        return <T>{};
+    }
+    return JSON.parse(readFileSync(filePath, `utf-8`)) as T;
+}

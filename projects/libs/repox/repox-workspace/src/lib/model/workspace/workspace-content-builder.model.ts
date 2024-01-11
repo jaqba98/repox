@@ -4,7 +4,7 @@
 export interface WorkspaceContentBuilderModel {
     checkBeforeBuildContent: (path: string) => boolean;
 
-    buildContent: (workspaceName: string) => string;
+    buildContent: (path: string, workspaceName: string) => string;
 }
 
 // todo: done

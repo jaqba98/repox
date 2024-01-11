@@ -2,6 +2,7 @@ import {singleton} from "tsyringe";
 
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
 import {PackageJsonDtoModel} from "../../model/dto/package-json-dto.model";
+import {readJsonFile} from "@lib/utils";
 
 @singleton()
 /**
@@ -12,19 +13,26 @@ export class BuildRootPackageJsonContentService implements WorkspaceContentBuild
         return true;
     }
 
-    buildContent(workspaceName: string): string {
+    buildContent(path: string, workspaceName: string): string {
+        const currentRootPackageJson = readJsonFile<PackageJsonDtoModel>(path);
         const rootPackageJson: PackageJsonDtoModel = {
+            ...currentRootPackageJson,
             name: workspaceName,
             version: "1.0.0",
             description: "",
             scripts: {
+                ...currentRootPackageJson.scripts,
                 test: "echo \"Error: no test specified\" && exit 1"
             },
-            keywords: [],
+            keywords: currentRootPackageJson.keywords ?? [],
             author: "",
             license: "ISC",
-            devDependencies: {},
-            dependencies: {}
+            devDependencies: {
+                ...currentRootPackageJson.devDependencies
+            },
+            dependencies: {
+                ...currentRootPackageJson.dependencies
+            }
         };
         return JSON.stringify(rootPackageJson, null, 2);
     }
