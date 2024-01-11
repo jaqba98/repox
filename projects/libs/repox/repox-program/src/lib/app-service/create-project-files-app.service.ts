@@ -1,11 +1,6 @@
 import {singleton} from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
-import {
-    CreateWsFileAppService,
-    WorkspaceFileEnum,
-    WorkspaceFolderEnum,
-    WsDomainStoreService
-} from "@lib/repox-workspace";
+import {CreateWsFileAppService, WsDomainStoreService} from "@lib/repox-workspace";
 import {FileUtilsService, FolderUtilsService, PathUtilsService, RunCommandUtilsService} from "@lib/utils";
 
 @singleton()
@@ -35,19 +30,19 @@ export class CreateProjectFilesAppService {
         const currentPath = this.pathUtils.getCurrentPath();
         this.folderUtils.createFolder(project.path);
         this.pathUtils.changePath(project.path);
-        this.folderUtils.createFolder(WorkspaceFolderEnum.src);
-        this.pathUtils.changePath(WorkspaceFolderEnum.src);
-        this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitignoreTextFile);
+        // this.folderUtils.createFolder(WorkspaceFolderEnum.src);
+        // this.pathUtils.changePath(WorkspaceFolderEnum.src);
+        // this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitignoreTextFile);
         this.pathUtils.changePath(`../`);
         this.runCommandUtils.runCommand(`npm init -y`);
-        this.fileUtils.writeTextFile(
-            WorkspaceFileEnum.jestConfigJsFile,
-            this.createWsFile.buildProjectJestConfigTsContentFile(project.path)
-        );
-        this.fileUtils.writeTextFile(
-            WorkspaceFileEnum.tsconfigJsonFile,
-            this.createWsFile.buildProjectTsconfigJsonContentFile(project.path)
-        );
+        // this.fileUtils.writeTextFile(
+        //     WorkspaceFileEnum.jestConfigJsFile,
+        //     this.createWsFile.buildProjectJestConfigTsContentFile(project.path)
+        // );
+        // this.fileUtils.writeTextFile(
+        //     WorkspaceFileEnum.tsconfigJsonFile,
+        //     this.createWsFile.buildProjectTsconfigJsonContentFile(project.path)
+        // );
         this.pathUtils.changePath(currentPath);
         return true;
     }
