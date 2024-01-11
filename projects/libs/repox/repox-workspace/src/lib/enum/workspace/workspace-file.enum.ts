@@ -3,7 +3,12 @@
  */
 export enum WorkspaceFileEnum {
     gitKeep = ".gitkeep",
-    repoxJson = "repox.json"
+    eslintrcTs = ".eslintrc.ts",
+    gitignore = ".gitignore",
+    jestConfigTs = "jest.config.ts",
+    packageJson = "package.json",
+    repoxJson = "repox.json",
+    tsconfigJson = "tsconfig.json"
 }
 
 // todo: done

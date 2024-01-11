@@ -5,9 +5,9 @@ import {EMPTY_STRING} from "@lib/const";
 
 @singleton()
 /**
- * The service is responsible for building the repox.json content file.
+ * The service is responsible for building the .eslintrc.ts content file.
  */
-export class BuildRepoxJsonContentService implements WorkspaceContentBuilderModel {
+export class BuildEslintrcTsContentService implements WorkspaceContentBuilderModel {
     checkBeforeBuildContent(_path: string): boolean {
         return true;
     }

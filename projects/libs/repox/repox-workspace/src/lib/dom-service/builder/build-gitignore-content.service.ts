@@ -5,9 +5,9 @@ import {EMPTY_STRING} from "@lib/const";
 
 @singleton()
 /**
- * The service is responsible for building the repox.json content file.
+ * The service is responsible for building the .gitignore content file.
  */
-export class BuildRepoxJsonContentService implements WorkspaceContentBuilderModel {
+export class BuildGitignoreContentService implements WorkspaceContentBuilderModel {
     checkBeforeBuildContent(_path: string): boolean {
         return true;
     }

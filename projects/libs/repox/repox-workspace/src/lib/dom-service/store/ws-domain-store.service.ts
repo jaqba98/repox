@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 import {ProjectTypeEnum, WsDtoStoreService, type WsProjectDomainModel} from "@lib/repox-workspace";
 import {type WsDomainModel} from "../../model/ws-domain/ws-domain.model";
-import {BuildProjectAliasService} from "../builder/build-project-alias.service";
+import {BuildProjectAliasService} from "../service/build-project-alias.service";
 import {EMPTY_STRING} from "@lib/const";
 import {PathUtilsService} from "@lib/utils";
 
