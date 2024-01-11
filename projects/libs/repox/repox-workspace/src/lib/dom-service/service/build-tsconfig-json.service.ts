@@ -1,6 +1,6 @@
 import {
-    type WsTsconfigDtoModel
-} from "../../model/ws-dto/ws-tsconfig-dto.model";
+    type TsconfigJsonDtoModel
+} from "../../model/dto/tsconfig-json-dto.model";
 import {singleton} from "tsyringe";
 import {ArrayUtilsService, FileUtilsService, PathUtilsService} from "@lib/utils";
 import {
@@ -22,7 +22,7 @@ export class BuildTsconfigJsonService {
     ) {
     }
 
-    rebuild(wsTsconfigDto: WsTsconfigDtoModel): WsTsconfigDtoModel {
+    rebuild(wsTsconfigDto: TsconfigJsonDtoModel): TsconfigJsonDtoModel {
         return {
             ...(wsTsconfigDto ?? {}),
             ...this.build(),
@@ -37,30 +37,31 @@ export class BuildTsconfigJsonService {
         };
     }
 
-    build(): WsTsconfigDtoModel {
-        return {
-            compilerOptions: {
-                target: `ES2022`,
-                experimentalDecorators: true,
-                emitDecoratorMetadata: true,
-                module: `commonjs`,
-                rootDir: `./projects`,
-                outDir: `./dist`,
-                esModuleInterop: true,
-                forceConsistentCasingInFileNames: true,
-                strict: true,
-                skipLibCheck: true,
-                baseUrl: `.`,
-                sourceMap: true,
-                paths: this.getTsconfigPath()
-            },
-            exclude: [
-                `node_modules`,
-                `**/*.spec.ts`,
-                `**/*.test.ts`,
-                `**/jest.config.ts`
-            ]
-        };
+    build(): TsconfigJsonDtoModel {
+        return <TsconfigJsonDtoModel>{}
+        // return {
+        //     compilerOptions: {
+        //         target: `ES2022`,
+        //         experimentalDecorators: true,
+        //         emitDecoratorMetadata: true,
+        //         module: `commonjs`,
+        //         rootDir: `./projects`,
+        //         outDir: `./dist`,
+        //         esModuleInterop: true,
+        //         forceConsistentCasingInFileNames: true,
+        //         strict: true,
+        //         skipLibCheck: true,
+        //         baseUrl: `.`,
+        //         sourceMap: true,
+        //         paths: this.getTsconfigPath()
+        //     },
+        //     exclude: [
+        //         `node_modules`,
+        //         `**/*.spec.ts`,
+        //         `**/*.test.ts`,
+        //         `**/jest.config.ts`
+        //     ]
+        // };
     }
 
     private getTsconfigPath(): { [key: string]: string[] } {

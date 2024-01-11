@@ -31,7 +31,9 @@ export class BuildRootPackageJsonContentService implements WorkspaceContentBuild
             version: currentRootPackageJson?.version ?? "1.0.0",
             description: currentRootPackageJson?.description ?? EMPTY_STRING,
             scripts: currentRootPackageJson?.scripts ?? {},
-            keywords: currentRootPackageJson?.keywords ?? [],
+            keywords: [
+                ...(currentRootPackageJson?.keywords ?? [])
+            ],
             author: currentRootPackageJson?.author ?? EMPTY_STRING,
             license: currentRootPackageJson?.license ?? "ISC",
             devDependencies: {
