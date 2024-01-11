@@ -85,6 +85,10 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
             action: WorkspaceActionEnum.createFile,
             fileName: WorkspaceFileEnum.tsconfigJson,
             contentBuilder: container.resolve(BuildTsconfigJsonContentService)
+        },
+        {
+            action: WorkspaceActionEnum.runCommand,
+            command: "npm install"
         }
     ]
 };
