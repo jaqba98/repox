@@ -21,13 +21,13 @@ export class BuildTsconfigJsonContentService implements WorkspaceContentBuilderM
         delete customTsconfigJson?.exclude;
         const tsconfig: TsconfigJsonDtoModel = {
             compilerOptions: {
-                rootDir: "./projects",
-                outDir: "./dist",
-                ...customTsconfigJson.compilerOptions
+                rootDir: currentTsconfigJson?.compilerOptions?.rootDir ?? "./projects",
+                outDir: currentTsconfigJson?.compilerOptions?.outDir ?? "./dist",
+                ...customTsconfigJson?.compilerOptions
             },
             exclude: [
-                ...(customTsconfigJson?.exclude ?? []),
-                "**/*.jest.config.ts"
+                "**/jest.config.ts",
+                ...(currentTsconfigJson?.exclude ?? []),
             ],
             ...customTsconfigJson
         };
