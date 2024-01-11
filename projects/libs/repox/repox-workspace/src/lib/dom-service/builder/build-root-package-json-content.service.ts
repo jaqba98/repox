@@ -3,6 +3,7 @@ import {singleton} from "tsyringe";
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
 import {PackageJsonDtoModel} from "../../model/dto/package-json-dto.model";
 import {readJsonFile} from "@lib/utils";
+import {EMPTY_STRING} from "@lib/const";
 
 @singleton()
 /**
@@ -15,26 +16,34 @@ export class BuildRootPackageJsonContentService implements WorkspaceContentBuild
 
     buildContent(path: string, workspaceName: string): string {
         const currentRootPackageJson = readJsonFile<PackageJsonDtoModel>(path);
-        const rootPackageJson: PackageJsonDtoModel = {
-            ...currentRootPackageJson,
-            name: workspaceName,
-            version: "1.0.0",
-            description: "",
-            scripts: {
-                ...currentRootPackageJson.scripts,
-                test: "echo \"Error: no test specified\" && exit 1"
-            },
-            keywords: currentRootPackageJson.keywords ?? [],
-            author: "",
-            license: "ISC",
+        const customRootPackageJson: PackageJsonDtoModel = { ...currentRootPackageJson };
+        delete customRootPackageJson.name;
+        delete customRootPackageJson.version;
+        delete customRootPackageJson.description;
+        delete customRootPackageJson.scripts;
+        delete customRootPackageJson.keywords;
+        delete customRootPackageJson.author;
+        delete customRootPackageJson.license;
+        delete customRootPackageJson.devDependencies;
+        delete customRootPackageJson.dependencies;
+        const mergedRootPackageJson: PackageJsonDtoModel = {
+            name: currentRootPackageJson?.name ?? workspaceName,
+            version: currentRootPackageJson?.version ?? "1.0.0",
+            description: currentRootPackageJson?.description ?? EMPTY_STRING,
+            scripts: currentRootPackageJson?.scripts ?? {},
+            keywords: currentRootPackageJson?.keywords ?? [],
+            author: currentRootPackageJson?.author ?? EMPTY_STRING,
+            license: currentRootPackageJson?.license ?? "ISC",
             devDependencies: {
-                ...currentRootPackageJson.devDependencies
+                ...currentRootPackageJson.devDependencies,
+                typescript: "5.3.3"
             },
             dependencies: {
                 ...currentRootPackageJson.dependencies
-            }
+            },
+            ...customRootPackageJson
         };
-        return JSON.stringify(rootPackageJson, null, 2);
+        return JSON.stringify(mergedRootPackageJson, null, 2);
     }
 }
 
