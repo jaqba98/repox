@@ -51,7 +51,7 @@ export class RunGenerateWorkspaceService {
     ): boolean {
         const filePath = createPath(currentPath, action.fileName);
         if (action.contentBuilder.checkBeforeBuildContent(filePath)) {
-            const fileContent = action.contentBuilder.buildContent(workspaceName);
+            const fileContent = action.contentBuilder.buildContent(filePath, workspaceName);
             writeToFile(filePath, fileContent);
         }
         return true;
