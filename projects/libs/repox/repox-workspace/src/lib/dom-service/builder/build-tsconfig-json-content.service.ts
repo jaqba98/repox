@@ -2,7 +2,6 @@ import {singleton} from "tsyringe";
 
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
 import {TsconfigJsonDtoModel} from "../../model/dto/tsconfig-json-dto.model";
-import {readJsonFile} from "@lib/utils";
 
 @singleton()
 /**
@@ -13,23 +12,15 @@ export class BuildTsconfigJsonContentService implements WorkspaceContentBuilderM
         return true;
     }
 
-    buildContent(path: string, _workspaceName: string): string {
-        const currentTsconfigJson = readJsonFile<TsconfigJsonDtoModel>(path);
-        const customTsconfigJson: TsconfigJsonDtoModel = { ...currentTsconfigJson };
-        delete customTsconfigJson?.compilerOptions?.rootDir;
-        delete customTsconfigJson?.compilerOptions?.outDir;
-        delete customTsconfigJson?.exclude;
+    buildContent(_path: string, _workspaceName: string): string {
         const tsconfig: TsconfigJsonDtoModel = {
             compilerOptions: {
                 rootDir: "./projects",
-                outDir: "./dist",
-                ...customTsconfigJson.compilerOptions
+                outDir: "./dist"
             },
             exclude: [
-                ...(customTsconfigJson?.exclude ?? []),
-                "**/*.jest.config.ts"
-            ],
-            ...customTsconfigJson
+                "**/jest.config.ts"
+            ]
         };
         return JSON.stringify(tsconfig, null, 2);
     }
