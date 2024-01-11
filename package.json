@@ -4,14 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --project projects/apps/repox --outDir dist/repox && tsc-alias --outDir dist/repox",
-    "generate:workspace": "cd tmp && node ../dist/repox/apps/repox/src/main generate workspace --name=pets",
-    "regenerate:workspace": "cd tmp/pets && node ../../dist/repox/apps/repox/src/main regenerate workspace --force",
-    "generate:project": "cd tmp/pets && node ../../dist/repox/apps/repox/src/main generate project --name=dog --type=@app/ts",
-    "build:project": "cd tmp/pets && node ../../dist/repox/apps/repox/src/main build project --name=dog",
-    "lint:project": "cd tmp/pets && node ../../dist/repox/apps/repox/src/main lint project",
-    "publish:npm": "cd tmp/pets && node ../../dist/repox/apps/repox/src/main publish npm --name=dog",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && tsc-alias --outDir dist",
+    "regenerate:workspace": "node dist/apps/repox/src/main regenerate workspace --force"
   },
   "keywords": [],
   "author": "",

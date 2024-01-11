@@ -13,9 +13,8 @@ export class BuildGitignoreContentService implements WorkspaceContentBuilderMode
     }
 
     checkBeforeBuildContent(path: string): boolean {
-        if (this.systemProgramExist.checkExist(SystemProgramEnum.git)) return true;
         if (pathExist(path)) removeFile(path);
-        return false;
+        return this.systemProgramExist.checkExist(SystemProgramEnum.git);
     }
 
     buildContent(): string {
@@ -23,13 +22,13 @@ export class BuildGitignoreContentService implements WorkspaceContentBuilderMode
 .idea/
 
 # Compilation output
-dist/
+**/dist/**
 
 # Dependency directories
-node_modules/
+**/node_modules/**
 
 # Temporary files and directories
-tmp/
+**/tmp/**
 `;
     }
 }
