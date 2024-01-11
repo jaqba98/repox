@@ -1,7 +1,6 @@
 import {singleton} from "tsyringe";
 
 import {WorkspaceContentBuilderModel} from "../../model/workspace/workspace-content-builder.model";
-import {EMPTY_STRING} from "@lib/const";
 
 @singleton()
 /**
@@ -13,7 +12,18 @@ export class BuildGitignoreContentService implements WorkspaceContentBuilderMode
     }
 
     buildContent(): string {
-        return EMPTY_STRING;
+        return `# JetBrains tools
+.idea/
+
+# Compilation output
+dist/
+
+# Dependency directories
+node_modules/
+
+# Temporary files and directories
+tmp/
+`;
     }
 }
 
