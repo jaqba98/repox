@@ -15,8 +15,18 @@ export class BuildTsconfigJsonContentService implements WorkspaceContentBuilderM
     buildContent(_path: string, _workspaceName: string): string {
         const tsconfig: TsconfigJsonDtoModel = {
             compilerOptions: {
+                target: "es2016",
+                module: "commonjs",
+                esModuleInterop: true,
+                forceConsistentCasingInFileNames: true,
+                strict: true,
+                skipLibCheck: true,
+                experimentalDecorators: true,
+                emitDecoratorMetadata: true,
                 rootDir: "./projects",
-                outDir: "./dist"
+                outDir: "./dist",
+                sourceMap: true,
+                paths: {}
             },
             include: [
                 "./projects"

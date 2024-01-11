@@ -30,10 +30,10 @@ export class BuildTsconfigJsonService {
                 ...(wsTsconfigDto.compilerOptions ?? {}),
                 ...this.build().compilerOptions,
             },
-            exclude: this.arrayUtils.removeDuplicates([
-                ...(wsTsconfigDto.exclude ?? []),
-                ...this.build().exclude
-            ])
+            // exclude: this.arrayUtils.removeDuplicates([
+            //     ...(wsTsconfigDto.exclude ?? []),
+            //     ...this.build().exclude
+            // ])
         };
     }
 
@@ -41,15 +41,6 @@ export class BuildTsconfigJsonService {
         return <TsconfigJsonDtoModel>{}
         // return {
         //     compilerOptions: {
-        //         target: `ES2022`,
-        //         experimentalDecorators: true,
-        //         emitDecoratorMetadata: true,
-        //         module: `commonjs`,
-        //         rootDir: `./projects`,
-        //         outDir: `./dist`,
-        //         esModuleInterop: true,
-        //         forceConsistentCasingInFileNames: true,
-        //         strict: true,
         //         skipLibCheck: true,
         //         baseUrl: `.`,
         //         sourceMap: true,
