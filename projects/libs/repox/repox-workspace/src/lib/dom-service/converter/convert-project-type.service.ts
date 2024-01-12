@@ -19,3 +19,5 @@ export class ConvertProjectTypeService {
     return WorkspaceFolderEnum.apps;
   }
 }
+
+// todo: refactor the code

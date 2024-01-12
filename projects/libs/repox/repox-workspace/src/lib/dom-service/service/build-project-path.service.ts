@@ -24,3 +24,5 @@ export class BuildProjectPathService {
         return this.pathUtils.createPath(path, name);
     }
 }
+
+// todo: refactor the code

@@ -28,3 +28,5 @@ export interface WorkspaceStructureModel {
     structure: WorkspaceStructureActionsModel[];
 }
 
+
+// todo: refactor the code

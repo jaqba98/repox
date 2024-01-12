@@ -9,3 +9,5 @@ export * from "./lib/model/ws-domain/ws-domain.model";
 export * from "./lib/app-service/create-ws-file-app.service";
 export * from "./lib/dom-service/service/run-generate-workspace.service";
 export * from "./lib/const/workspace-structure.const";
+
+// todo: refactor the code

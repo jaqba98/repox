@@ -20,3 +20,5 @@ export class SaveWsDtoAppService {
         return true;
     }
 }
+
+// todo: refactor the code

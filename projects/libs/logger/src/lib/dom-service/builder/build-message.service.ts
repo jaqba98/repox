@@ -59,3 +59,5 @@ export class BuildMessageService {
             : buildWord(fgColor, content);
     }
 }
+
+// todo: refactor the code

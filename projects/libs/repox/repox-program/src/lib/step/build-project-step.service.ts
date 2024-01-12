@@ -44,3 +44,5 @@ export class BuildProjectStepService {
         this.simpleMessage.writeSuccess(`Command executed correctly`);
     }
 }
+
+// todo: refactor the code

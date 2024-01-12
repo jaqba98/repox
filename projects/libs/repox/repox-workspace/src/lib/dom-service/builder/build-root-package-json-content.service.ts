@@ -31,3 +31,5 @@ export class BuildRootPackageJsonContentService implements WorkspaceContentBuild
     }
 }
 
+
+// todo: refactor the code

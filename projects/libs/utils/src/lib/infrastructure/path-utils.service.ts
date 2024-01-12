@@ -96,3 +96,5 @@ export const createPath = (...pathItems: string[]): string => {
 }
 
 export const createParentPath = (path: string): string => createPath(path, "../");
+
+// todo: refactor the code

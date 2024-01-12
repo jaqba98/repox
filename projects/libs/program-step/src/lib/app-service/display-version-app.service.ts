@@ -13,3 +13,5 @@ export class DisplayVersionAppService {
         this.simpleMessage.writeInfo(version);
     }
 }
+
+// todo: refactor the code

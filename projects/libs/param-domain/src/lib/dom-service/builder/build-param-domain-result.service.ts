@@ -15,3 +15,5 @@ export class BuildParamDomainResultService {
         return {success: false, wrongIndexes, errors, tips};
     }
 }
+
+// todo: refactor the code

@@ -14,3 +14,5 @@ export interface LauncherProgramModel {
 export interface LauncherModel {
     programs: LauncherProgramModel[];
 }
+
+// todo: refactor the code

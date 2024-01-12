@@ -7,3 +7,5 @@ import {type ParamDtoValidationModel} from "./param-dto-validation.model";
 export interface ValidatorDtoModel {
     runValidator: () => ParamDtoValidationModel;
 }
+
+// todo: refactor the code

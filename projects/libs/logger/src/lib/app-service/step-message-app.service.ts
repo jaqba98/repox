@@ -19,3 +19,5 @@ export class StepMessageAppService {
         this.writeMessage.write(outputMessage);
     }
 }
+
+// todo: refactor the code

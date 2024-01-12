@@ -19,3 +19,5 @@ export class LoadWsDomainAppService {
         return true;
     }
 }
+
+// todo: refactor the code

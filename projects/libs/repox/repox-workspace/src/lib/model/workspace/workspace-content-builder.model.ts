@@ -7,3 +7,5 @@ export interface WorkspaceContentBuilderModel {
     buildContent: (path: string, workspaceName: string) => string;
 }
 
+
+// todo: refactor the code

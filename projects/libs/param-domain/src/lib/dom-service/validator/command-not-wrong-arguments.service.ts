@@ -44,3 +44,5 @@ export class CommandNotWrongArgumentsService implements ValidatorDomainModel {
         );
     }
 }
+
+// todo: refactor the code

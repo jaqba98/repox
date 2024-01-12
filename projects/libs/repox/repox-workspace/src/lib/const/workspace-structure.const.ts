@@ -132,3 +132,5 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
     ]
 };
 
+
+// todo: refactor the code

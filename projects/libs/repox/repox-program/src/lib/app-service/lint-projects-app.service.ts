@@ -41,3 +41,5 @@ export class LintProjectsAppService {
         }
     }
 }
+
+// todo: refactor the code

@@ -56,3 +56,5 @@ export class PublishNpmStepService {
         this.simpleMessage.writeSuccess(`Command executed correctly`);
     }
 }
+
+// todo: refactor the code

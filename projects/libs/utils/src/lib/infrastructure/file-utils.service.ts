@@ -92,3 +92,4 @@ export const readJsonFile = <T>(filePath: string): T => {
         return <T>{};
     }
 }
+// todo: refactor the code

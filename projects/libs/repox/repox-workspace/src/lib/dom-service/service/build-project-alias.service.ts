@@ -12,3 +12,5 @@ export class BuildProjectAliasService {
         return `${prefix}${typePrefix}/${name}`;
     }
 }
+
+// todo: refactor the code

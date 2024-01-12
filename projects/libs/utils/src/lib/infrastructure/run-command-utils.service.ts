@@ -20,3 +20,5 @@ export class RunCommandUtilsService {
 }
 
 export const runCommand = (command: string, path: string): string => execSync(command, { cwd: createPath(path), encoding: `utf-8` });
+
+// todo: refactor the code

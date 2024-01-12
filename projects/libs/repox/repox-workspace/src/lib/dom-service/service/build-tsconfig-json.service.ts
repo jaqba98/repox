@@ -96,3 +96,5 @@ export class BuildTsconfigJsonService {
         throw new Error(`Not supported project type!`);
     }
 }
+
+// todo: refactor the code

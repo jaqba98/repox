@@ -59,3 +59,5 @@ export const tsconfigJsonFileSchema: Schema = {
     },
     required: [`compilerOptions`]
 };
+
+// todo: refactor the code

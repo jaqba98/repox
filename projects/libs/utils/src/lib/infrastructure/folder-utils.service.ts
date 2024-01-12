@@ -53,3 +53,4 @@ export const manyFilesInFolder = (folderPath: string): boolean => {
 }
 
 export const getCurrentFolderName = (): string => basename(getCurrentPath());
+// todo: refactor the code

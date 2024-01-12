@@ -21,3 +21,5 @@ export class GetParamDtoNameAppService {
         return (command != null) ? command.paramName : EMPTY_STRING;
     }
 }
+
+// todo: refactor the code

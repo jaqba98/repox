@@ -7,3 +7,5 @@ export enum ProjectTypeEnum {
     libTs = `@lib/ts`,
     toolTs = `@tool/ts`
 }
+
+// todo: refactor the code

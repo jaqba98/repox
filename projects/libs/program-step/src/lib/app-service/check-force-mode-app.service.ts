@@ -22,3 +22,5 @@ export class CheckForceModeAppService {
     }
 }
 
+
+// todo: refactor the code

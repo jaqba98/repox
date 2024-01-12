@@ -8,3 +8,5 @@ import {type ParamDomainValidationModel} from "../param-domain/param-domain-vali
 export interface ValidatorDomainModel {
     runValidator: (getParamDepService: BaseGetParamDepModel) => ParamDomainValidationModel;
 }
+
+// todo: refactor the code

@@ -39,3 +39,5 @@ export const buildUnderscoreWord = (fgColor: string, word: string): string => bu
     .concat(fgColor)
     .concat(TEXT_UNDERSCORE)
     .concat(word);
+
+// todo: refactor the code

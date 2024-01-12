@@ -65,3 +65,5 @@ export class BuildParamNameService {
         return (alias != null) ? alias.key : BaseParamTypeEnum.unknown;
     }
 }
+
+// todo: refactor the code

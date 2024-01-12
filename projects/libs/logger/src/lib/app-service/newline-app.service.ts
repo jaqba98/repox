@@ -15,3 +15,5 @@ export class NewlineAppService {
         this.writeMessage.write(EMPTY_STRING);
     }
 }
+
+// todo: refactor the code
