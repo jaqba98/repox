@@ -17,4 +17,3 @@ export class BuildEslintrcTsContentService implements WorkspaceContentBuilderMod
     }
 }
 
-// todo: done

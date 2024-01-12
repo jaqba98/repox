@@ -17,4 +17,3 @@ export class BuildRepoxJsonContentService implements WorkspaceContentBuilderMode
     }
 }
 
-// todo: done

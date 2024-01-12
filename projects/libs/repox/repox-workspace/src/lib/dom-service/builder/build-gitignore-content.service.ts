@@ -33,4 +33,3 @@ export class BuildGitignoreContentService implements WorkspaceContentBuilderMode
     }
 }
 
-// todo: done

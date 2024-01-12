@@ -28,4 +28,3 @@ export interface WorkspaceStructureModel {
     structure: WorkspaceStructureActionsModel[];
 }
 
-// todo: done

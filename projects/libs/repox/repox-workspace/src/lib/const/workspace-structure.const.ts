@@ -132,4 +132,3 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
     ]
 };
 
-// todo: done

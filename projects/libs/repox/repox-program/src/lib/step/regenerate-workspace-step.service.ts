@@ -34,4 +34,3 @@ export class RegenerateWorkspaceStepService {
     }
 }
 
-// todo: done

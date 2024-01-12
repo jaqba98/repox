@@ -30,4 +30,3 @@ export class GoToWorkspaceRootAppService {
     }
 }
 
-// todo: done

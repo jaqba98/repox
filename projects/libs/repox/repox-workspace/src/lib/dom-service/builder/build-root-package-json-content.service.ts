@@ -31,4 +31,3 @@ export class BuildRootPackageJsonContentService implements WorkspaceContentBuild
     }
 }
 
-// todo: done

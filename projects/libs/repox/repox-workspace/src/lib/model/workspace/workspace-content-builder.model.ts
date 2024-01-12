@@ -7,4 +7,3 @@ export interface WorkspaceContentBuilderModel {
     buildContent: (path: string, workspaceName: string) => string;
 }
 
-// todo: done

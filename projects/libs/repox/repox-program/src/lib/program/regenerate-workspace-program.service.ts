@@ -20,4 +20,3 @@ export class RegenerateWorkspaceProgramService implements ProgramModel {
     }
 }
 
-// todo: done

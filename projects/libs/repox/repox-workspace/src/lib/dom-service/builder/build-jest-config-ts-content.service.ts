@@ -17,4 +17,3 @@ export class BuildJestConfigTsContentService implements WorkspaceContentBuilderM
     }
 }
 
-// todo: done

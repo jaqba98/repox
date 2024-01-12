@@ -40,4 +40,3 @@ export class BuildGitkeepContentService implements WorkspaceContentBuilderModel 
     }
 }
 
-// todo: done
