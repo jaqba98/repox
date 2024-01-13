@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && tsc-alias --outDir dist",
+    "run": "node dist/apps/repox/src/main",
     "regenerate:workspace": "node dist/apps/repox/src/main regenerate workspace --force"
   },
   "keywords": [],
