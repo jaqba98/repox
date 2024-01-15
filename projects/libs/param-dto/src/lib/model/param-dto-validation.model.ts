@@ -1,6 +1,4 @@
-/**
- * The result model of the parameter DTO validation.
- */
+/** The result model of the parameter DTO validation. */
 export interface ParamDtoValidationModel {
     success: boolean;
     wrongIndexes: number[];
@@ -8,5 +6,3 @@ export interface ParamDtoValidationModel {
     errors: string[];
     tips: string[];
 }
-
-// todo: refactor the code

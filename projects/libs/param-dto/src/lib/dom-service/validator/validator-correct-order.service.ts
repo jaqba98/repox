@@ -1,5 +1,5 @@
 import {singleton} from "tsyringe";
-import {type ValidatorDtoModel} from "../../model/validator-dto.model";
+import {type ParamDtoValidatorModel} from "../../model/param-dto-validator.model";
 import {BuildParamDtoResultService} from "../builder/build-param-dto-result.service";
 import {FindParamDtoEntityService} from "../finder/find-param-dto-entity.service";
 import {type ParamDtoEntityModel} from "../../model/param-dto.model";
@@ -12,7 +12,7 @@ import {ParamDtoStoreService} from "../store/param-dto-store.service";
  * Check the given DTO parameters are in correct order.
  */
 export class ValidatorCorrectOrderService
-    implements ValidatorDtoModel {
+    implements ParamDtoValidatorModel {
     constructor(
         private readonly paramDtoStore: ParamDtoStoreService,
         private readonly buildParamDtoResult: BuildParamDtoResultService,
@@ -20,7 +20,7 @@ export class ValidatorCorrectOrderService
     ) {
     }
 
-    runValidator(): ParamDtoValidationModel {
+    run(): ParamDtoValidationModel {
         const paramDto = this.paramDtoStore.getParamDto();
         const program = this.findParamDtoEntity.findPrograms()[0];
         const wrongParamsDto = paramDto.params.filter(
@@ -41,18 +41,18 @@ export class ValidatorCorrectOrderService
 
     private checkParamOrder(paramDto: ParamDtoEntityModel, program: ParamDtoEntityModel | undefined): boolean {
         const paramOrder = this.getParamOrder().find(
-            order => order.paramTypes.includes(paramDto.paramType)
+            order => order.paramTypes.includes(paramDto.type)
         );
         if (paramOrder == null) {
             throw new Error(`Not supported param type!`);
         }
         if (paramOrder.order === 3 && (program == null)) {
-            return paramDto.paramIndex >= 2;
+            return paramDto.index >= 2;
         }
         if (paramOrder.order === 3 && (program != null)) {
-            return paramDto.paramIndex >= paramOrder.order;
+            return paramDto.index >= paramOrder.order;
         }
-        return paramDto.paramIndex === paramOrder.order;
+        return paramDto.index === paramOrder.order;
     }
 
     private getParamOrder(): Array<{ order: number; paramTypes: ParamTypeEnum[]; }> {

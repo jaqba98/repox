@@ -1,5 +1,5 @@
 import {singleton} from "tsyringe";
-import {type ValidatorDtoModel} from "../../model/validator-dto.model";
+import {type ParamDtoValidatorModel} from "../../model/param-dto-validator.model";
 import {BuildParamDtoResultService} from "../builder/build-param-dto-result.service";
 import {type ParamDtoEntityModel} from "../../model/param-dto.model";
 import {type ParamDtoValidationModel} from "../../model/param-dto-validation.model";
@@ -11,14 +11,14 @@ import {ParamDtoStoreService} from "../store/param-dto-store.service";
  * Check the given DTO parameters have correct pattern.
  */
 export class ValidatorCorrectPatternService
-    implements ValidatorDtoModel {
+    implements ParamDtoValidatorModel {
     constructor(
         private readonly paramDtoStore: ParamDtoStoreService,
         private readonly buildParamDtoResult: BuildParamDtoResultService
     ) {
     }
 
-    runValidator(): ParamDtoValidationModel {
+    run(): ParamDtoValidationModel {
         const paramDto = this.paramDtoStore.getParamDto();
         const wrongParamsDto = paramDto.params.filter(
             param => !this.checkParamPattern(param)
@@ -34,18 +34,18 @@ export class ValidatorCorrectPatternService
     }
 
     private checkParamPattern(paramDto: ParamDtoEntityModel): boolean {
-        const {paramBaseValue, paramType, paramHasValue} = paramDto;
-        switch (paramType) {
+        const {baseValue, type, hasValue} = paramDto;
+        switch (type) {
             case ParamTypeEnum.executor:
             case ParamTypeEnum.application:
                 return true;
             case ParamTypeEnum.program:
             case ParamTypeEnum.command:
-                return this.checkProgramAndCommand(paramBaseValue);
+                return this.checkProgramAndCommand(baseValue);
             case ParamTypeEnum.argument:
-                return this.checkArgument(paramHasValue, paramBaseValue);
+                return this.checkArgument(hasValue, baseValue);
             case ParamTypeEnum.alias:
-                return this.checkAlias(paramHasValue, paramBaseValue);
+                return this.checkAlias(hasValue, baseValue);
             default:
                 throw new Error(`Not supported parameter type`);
         }
@@ -68,22 +68,22 @@ export class ValidatorCorrectPatternService
     }
 
     private getParamTip(paramDto: ParamDtoEntityModel): string {
-        const {paramType, paramBaseValue} = paramDto;
-        switch (paramType) {
+        const {type, baseValue} = paramDto;
+        switch (type) {
             case ParamTypeEnum.program:
             case ParamTypeEnum.command:
                 return this.buildCorrectPatternMessage(
-                    paramBaseValue,
+                    baseValue,
                     `<name>`
                 );
             case ParamTypeEnum.argument:
                 return this.buildCorrectPatternMessage(
-                    paramBaseValue,
+                    baseValue,
                     `--<name> or --<name>=<value>`
                 );
             case ParamTypeEnum.alias:
                 return this.buildCorrectPatternMessage(
-                    paramBaseValue,
+                    baseValue,
                     `-<sign> or -<sign>=<value>`
                 );
             default:

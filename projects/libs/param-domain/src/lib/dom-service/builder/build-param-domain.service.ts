@@ -37,25 +37,25 @@ export class BuildParamDomainService {
         const commandArgs = this.getParamDtoArg.getCommandArgs(commandIndex);
         const programDomainArgs = programArgs
             .map<ParamDomainArgModel>(programArg => ({
-                baseName: programArg.paramBaseValue,
+                baseName: programArg.baseValue,
                 name: this.buildParamName.buildArgumentName(
-                    programArg.paramType, programArg.paramName, argumentEnums, aliasEnums
+                    programArg.type, programArg.name, argumentEnums, aliasEnums
                 ),
-                index: programArg.paramIndex,
-                values: programArg.paramValues,
-                hasValue: programArg.paramHasValue,
-                hasManyValues: programArg.paramHasManyValues
+                index: programArg.index,
+                values: programArg.values,
+                hasValue: programArg.hasValue,
+                hasManyValues: programArg.hasManyValues
             }));
         const commandDomainArgs = commandArgs
             .map<ParamDomainArgModel>(programArg => ({
-                baseName: programArg.paramBaseValue,
+                baseName: programArg.baseValue,
                 name: this.buildParamName.buildArgumentName(
-                    programArg.paramType, programArg.paramName, argumentEnums, aliasEnums
+                    programArg.type, programArg.name, argumentEnums, aliasEnums
                 ),
-                index: programArg.paramIndex,
-                values: programArg.paramValues,
-                hasValue: programArg.paramHasValue,
-                hasManyValues: programArg.paramHasManyValues
+                index: programArg.index,
+                values: programArg.values,
+                hasValue: programArg.hasValue,
+                hasManyValues: programArg.hasManyValues
             }));
         const paramDomain: ParamDomainModel = {
             program: {

@@ -13,12 +13,12 @@ export class GetParamDtoNameAppService {
 
     getProgramName(): string {
         const program = this.findParamDtoEntity.findPrograms().at(0);
-        return (program != null) ? program.paramName : EMPTY_STRING;
+        return (program != null) ? program.name : EMPTY_STRING;
     }
 
     getCommandName(): string {
         const command = this.findParamDtoEntity.findCommands().at(0);
-        return (command != null) ? command.paramName : EMPTY_STRING;
+        return (command != null) ? command.name : EMPTY_STRING;
     }
 }
 

@@ -27,7 +27,7 @@ export class BuildParamDtoResultService {
         const paramDto = this.paramDtoStore.getParamDto();
         return {
             success: false,
-            wrongIndexes: wrongParamsDto.map(item => item.paramIndex),
+            wrongIndexes: wrongParamsDto.map(item => item.index),
             baseValues: this.getBaseValues(paramDto),
             errors,
             tips
@@ -35,7 +35,7 @@ export class BuildParamDtoResultService {
     }
 
     private getBaseValues(paramDto: ParamDtoModel): string[] {
-        return paramDto.params.map(param => param.paramBaseValue);
+        return paramDto.params.map(param => param.baseValue);
     }
 }
 

@@ -1,5 +1,5 @@
 import {singleton} from "tsyringe";
-import {type ValidatorDtoModel} from "../../model/validator-dto.model";
+import {type ParamDtoValidatorModel} from "../../model/param-dto-validator.model";
 import {BuildParamDtoResultService} from "../builder/build-param-dto-result.service";
 import {type ParamDtoEntityModel} from "../../model/param-dto.model";
 import {type ParamDtoValidationModel} from "../../model/param-dto-validation.model";
@@ -11,7 +11,7 @@ import {ParamDtoStoreService} from "../store/param-dto-store.service";
  * Check the given DTO parameters contain only supported signs.
  */
 export class ValidatorOnlySupportedSignService
-    implements ValidatorDtoModel {
+    implements ParamDtoValidatorModel {
     constructor(
         private readonly paramDtoStore: ParamDtoStoreService,
         private readonly buildParamDtoResult: BuildParamDtoResultService
@@ -34,17 +34,17 @@ export class ValidatorOnlySupportedSignService
     }
 
     private checkParamSigns(paramDto: ParamDtoEntityModel): boolean {
-        const {paramBaseValue, paramType} = paramDto;
-        switch (paramType) {
+        const {baseValue, type} = paramDto;
+        switch (type) {
             case ParamTypeEnum.executor:
             case ParamTypeEnum.application:
                 return true;
             case ParamTypeEnum.program:
             case ParamTypeEnum.command:
-                return this.checkProgramAndCommand(paramBaseValue);
+                return this.checkProgramAndCommand(baseValue);
             case ParamTypeEnum.argument:
             case ParamTypeEnum.alias:
-                return this.checkArgumentAndAlias(paramBaseValue);
+                return this.checkArgumentAndAlias(baseValue);
             default:
                 throw new Error(`Not supported parameter type!`);
         }
@@ -59,18 +59,18 @@ export class ValidatorOnlySupportedSignService
     }
 
     private getParamTip(paramDto: ParamDtoEntityModel): string {
-        const {paramBaseValue, paramType} = paramDto;
-        switch (paramType) {
+        const {baseValue, type} = paramDto;
+        switch (type) {
             case ParamTypeEnum.program:
             case ParamTypeEnum.command:
                 return this.buildSupportedSignsMessage(
-                    paramBaseValue,
+                    baseValue,
                     `[a-Z] [0-9] [-]`
                 );
             case ParamTypeEnum.argument:
             case ParamTypeEnum.alias:
                 return this.buildSupportedSignsMessage(
-                    paramBaseValue,
+                    baseValue,
                     `[a-Z] [0-9] [-] [=] ["] ['] [\`] [,] [/] [.] [@] [*] [space]`
                 );
             default:

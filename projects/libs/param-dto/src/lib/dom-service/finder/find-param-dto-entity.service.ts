@@ -13,7 +13,7 @@ export class FindParamDtoEntityService {
 
     findApplication(): ParamDtoEntityModel {
         const application = this.paramDtoStore.getParamDto().params.find(
-            param => param.paramType === ParamTypeEnum.application
+            param => param.type === ParamTypeEnum.application
         );
         if (application == null) {
             throw new Error(`Application cannot be undefined!`);
@@ -22,23 +22,23 @@ export class FindParamDtoEntityService {
     }
 
     findPrograms(): ParamDtoEntityModel[] {
-        return this.paramDtoStore.getParamDto().params.filter(param => param.paramType === ParamTypeEnum.program);
+        return this.paramDtoStore.getParamDto().params.filter(param => param.type === ParamTypeEnum.program);
     }
 
     findCommands(): ParamDtoEntityModel[] {
-        return this.paramDtoStore.getParamDto().params.filter(param => param.paramType === ParamTypeEnum.command);
+        return this.paramDtoStore.getParamDto().params.filter(param => param.type === ParamTypeEnum.command);
     }
 
     findProgramArgs(programIndex: number, commandIndex: number): ParamDtoEntityModel[] {
         return this.paramDtoStore.getParamDto().params
-            .filter(param => param.paramType === ParamTypeEnum.argument || param.paramType === ParamTypeEnum.alias)
-            .filter(param => param.paramIndex > programIndex && param.paramIndex < commandIndex);
+            .filter(param => param.type === ParamTypeEnum.argument || param.type === ParamTypeEnum.alias)
+            .filter(param => param.index > programIndex && param.index < commandIndex);
     }
 
     findCommandArgs(commandIndex: number): ParamDtoEntityModel[] {
         return this.paramDtoStore.getParamDto().params
-            .filter(param => param.paramType === ParamTypeEnum.argument || param.paramType === ParamTypeEnum.alias)
-            .filter(param => param.paramIndex > commandIndex);
+            .filter(param => param.type === ParamTypeEnum.argument || param.type === ParamTypeEnum.alias)
+            .filter(param => param.index > commandIndex);
     }
 }
 

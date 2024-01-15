@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 import {type ParamDtoModel} from "../../model/param-dto.model";
 import {ParamTypeEnum} from "@lib/param-dto";
-import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATION} from "../../const/param-dto.const";
+import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATOR} from "../../const/param-dto.const";
 import {ParamDtoStoreService} from "../store/param-dto-store.service";
 
 @singleton()
@@ -26,7 +26,7 @@ export class BuildParamDtoService {
                     paramName: this.getParamName(param.paramBaseValue, param.paramHasValue, param.paramType),
                     paramValues: this.getParamValues(param.paramBaseValue, param.paramHasValue)
                 }))
-                .map(param => ({...param, paramHasManyValues: param.paramValues.length > 1}))
+                .map(param => ({...param, hasManyValues: param.paramValues.length > 1}))
         };
         this.paramDtoStore.setParamDto(paramDto);
     }
@@ -62,7 +62,7 @@ export class BuildParamDtoService {
             .replace(/\s/g, ``)
             .replace(/^(["'`])/, ``)
             .replace(/(["'`])$/, ``)
-            .split(VALUE_SEPARATION);
+            .split(VALUE_SEPARATOR);
     }
 }
 

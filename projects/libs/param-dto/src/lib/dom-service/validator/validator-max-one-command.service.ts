@@ -1,5 +1,5 @@
 import {singleton} from "tsyringe";
-import {type ValidatorDtoModel} from "../../model/validator-dto.model";
+import {type ParamDtoValidatorModel} from "../../model/param-dto-validator.model";
 import {BuildParamDtoResultService} from "../builder/build-param-dto-result.service";
 import {FindParamDtoEntityService} from "../finder/find-param-dto-entity.service";
 import {type ParamDtoValidationModel} from "../../model/param-dto-validation.model";
@@ -10,14 +10,14 @@ import {type ParamDtoValidationModel} from "../../model/param-dto-validation.mod
  * (0 or 1 if the program exist and 0 if the program not exist).
  */
 export class ValidatorMaxOneCommandService
-    implements ValidatorDtoModel {
+    implements ParamDtoValidatorModel {
     constructor(
         private readonly buildParamDtoResult: BuildParamDtoResultService,
         private readonly findParamDtoEntity: FindParamDtoEntityService
     ) {
     }
 
-    runValidator(): ParamDtoValidationModel {
+    run(): ParamDtoValidationModel {
         const program = this.findParamDtoEntity.findPrograms()[0];
         const commands = this.findParamDtoEntity.findCommands();
         if (program === undefined && commands.length > 0) {

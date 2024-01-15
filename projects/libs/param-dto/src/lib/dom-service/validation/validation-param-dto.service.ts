@@ -1,6 +1,6 @@
 import {container, singleton} from "tsyringe";
 import {BuildParamDtoResultService} from "../builder/build-param-dto-result.service";
-import {type ValidatorDtoModel} from "../../model/validator-dto.model";
+import {type ParamDtoValidatorModel} from "../../model/param-dto-validator.model";
 import {ValidatorOnlySupportedSignService} from "../validator/validator-only-supported-sign.service";
 import {ValidatorCorrectPatternService} from "../validator/validator-correct-pattern.service";
 import {ValidatorMaxOneProgramService} from "../validator/validator-max-one-program.service";
@@ -33,7 +33,7 @@ export class ValidationParamDtoService {
 
     runValidation(): void {
         for (const service of this.getValidators()) {
-            const result = service.runValidator();
+            const result = service.run();
             if (!result.success) {
                 this.paramDtoStore.setParamDtoValidation(result);
                 return;
@@ -43,14 +43,14 @@ export class ValidationParamDtoService {
         this.paramDtoStore.setParamDtoValidation(success);
     }
 
-    private getValidators(): ValidatorDtoModel[] {
+    private getValidators(): ParamDtoValidatorModel[] {
         return [
             ValidatorOnlySupportedSignService,
             ValidatorCorrectPatternService,
             ValidatorMaxOneProgramService,
             ValidatorMaxOneCommandService,
             ValidatorCorrectOrderService
-        ].map(service => container.resolve<ValidatorDtoModel>(service));
+        ].map(service => container.resolve<ParamDtoValidatorModel>(service));
     }
 }
 

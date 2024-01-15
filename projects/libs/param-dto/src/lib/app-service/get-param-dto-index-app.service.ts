@@ -17,15 +17,15 @@ export class GetParamDtoIndexAppService {
 
     getProgramIndex(programName: string): number {
         const program = this.findParamDtoEntity.findPrograms().at(0);
-        const programIndex: number = (program != null) ? program.paramIndex : -1;
+        const programIndex: number = (program != null) ? program.index : -1;
         return programName === EMPTY_STRING
-            ? this.findParamDtoEntity.findApplication().paramIndex
+            ? this.findParamDtoEntity.findApplication().index
             : programIndex;
     }
 
     getCommandIndex(commandName: string): number {
         const command = this.findParamDtoEntity.findCommands().at(0);
-        const commandIndex: number = (command != null) ? command.paramIndex : -1;
+        const commandIndex: number = (command != null) ? command.index : -1;
         return commandName === EMPTY_STRING
             ? this.paramDtoStore.getParamDto().params.length
             : commandIndex;
