@@ -1,5 +1,5 @@
 import {singleton} from "tsyringe";
-import {GetParamDtoArgAppService, GetParamDtoIndexAppService, GetParamDtoNameAppService} from "@lib/param-dto";
+import {GetParamDtoAppService} from "@lib/param-dto";
 import {ParamDomainStoreService} from "../store/param-domain-store.service";
 import {type KeyValueModel} from "@lib/model";
 import {BuildParamNameService} from "./build-param-name.service";
@@ -11,10 +11,8 @@ import {type ParamDomainArgModel, type ParamDomainModel} from "@lib/param-domain
  */
 export class BuildParamDomainService {
     constructor(
-        private readonly getParamDtoName: GetParamDtoNameAppService,
-        private readonly getParamDtoIndex: GetParamDtoIndexAppService,
+        private readonly getParamDto: GetParamDtoAppService,
         private readonly buildParamName: BuildParamNameService,
-        private readonly getParamDtoArg: GetParamDtoArgAppService,
         private readonly paramDomainStore: ParamDomainStoreService
     ) {
     }
@@ -27,14 +25,14 @@ export class BuildParamDomainService {
         argumentEnums: KeyValueModel[],
         aliasEnums: KeyValueModel[]
     ): void {
-        const programBaseName = this.getParamDtoName.getProgramName();
-        const commandBaseName = this.getParamDtoName.getCommandName();
-        const programIndex = this.getParamDtoIndex.getProgramIndex(programBaseName);
-        const commandIndex = this.getParamDtoIndex.getCommandIndex(commandBaseName);
+        const programBaseName = this.getParamDto.getProgramName();
+        const commandBaseName = this.getParamDto.getCommandName();
+        const programIndex = this.getParamDto.getProgramIndex(programBaseName);
+        const commandIndex = this.getParamDto.getCommandIndex(commandBaseName);
         const programName = this.buildParamName.buildProgramName(programBaseName, programEnums, programAliasEnums);
         const commandName = this.buildParamName.buildCommandName(commandBaseName, commandEnums, commandAliasEnums);
-        const programArgs = this.getParamDtoArg.getProgramArgs(programIndex, commandIndex);
-        const commandArgs = this.getParamDtoArg.getCommandArgs(commandIndex);
+        const programArgs = this.getParamDto.getProgramArgs(programIndex, commandIndex);
+        const commandArgs = this.getParamDto.getCommandArgs(commandIndex);
         const programDomainArgs = programArgs
             .map<ParamDomainArgModel>(programArg => ({
                 baseName: programArg.baseValue,
