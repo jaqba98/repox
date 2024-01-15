@@ -1,40 +1,33 @@
 import {singleton} from "tsyringe";
-import {type ParamDtoModel} from "../../model/param-dto.model";
-import {ParamTypeEnum} from "@lib/param-dto";
+
+import {ParamDtoEntityModel, ParamDtoModel} from "../../model/param-dto.model";
 import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATOR} from "../../const/param-dto.const";
-import {ParamDtoStoreService} from "../store/param-dto-store.service";
+import {EMPTY_STRING} from "@lib/const";
+import {ParamTypeEnum} from "../../enum/param-type.enum";
 
 @singleton()
-/**
- * Build the parameter DTO model from the command line parameters.
- */
+/** Build the parameter DTO model from the command line parameters. */
 export class BuildParamDtoService {
-    constructor(private readonly paramDtoStore: ParamDtoStoreService) {
-    }
-
-    buildParamDto(argv: string[]): void {
-        const paramDto: ParamDtoModel = {
-            params: argv
-                .map((arg: string, index: number) => ({
-                    paramBaseValue: arg,
-                    paramIndex: index,
-                    paramType: this.getParamType(arg, index),
-                    paramHasValue: arg.includes(EQUAL_SIGN)
+    build(args: string[]): ParamDtoModel {
+        return {
+            params: args
+                .map((arg: string, index: number): Omit<ParamDtoEntityModel, "name" | "values" | "hasManyValues"> => ({
+                    baseValue: arg,
+                    index: index,
+                    type: this.getParamType(arg, index),
+                    hasValue: arg.includes(EQUAL_SIGN)
                 }))
-                .map(param => ({
+                .map((param): Omit<ParamDtoEntityModel, "hasManyValues"> => ({
                     ...param,
-                    paramName: this.getParamName(param.paramBaseValue, param.paramHasValue, param.paramType),
-                    paramValues: this.getParamValues(param.paramBaseValue, param.paramHasValue)
+                    name: this.getParamName(param.baseValue, param.hasValue, param.type),
+                    values: this.getParamValues(param.baseValue, param.hasValue)
                 }))
-                .map(param => ({...param, hasManyValues: param.paramValues.length > 1}))
+                .map((param): ParamDtoEntityModel => ({...param, hasManyValues: param.values.length > 1}))
         };
-        this.paramDtoStore.setParamDto(paramDto);
     }
 
     private getParamType(arg: string, index: number): ParamTypeEnum {
-        if (arg.startsWith(ARGUMENT_PREFIX)) {
-            return ParamTypeEnum.argument;
-        }
+        if (arg.startsWith(ARGUMENT_PREFIX)) return ParamTypeEnum.argument;
         if (arg.startsWith(ALIAS_PREFIX)) return ParamTypeEnum.alias;
         if (index === 0) return ParamTypeEnum.executor;
         if (index === 1) return ParamTypeEnum.application;
@@ -42,28 +35,20 @@ export class BuildParamDtoService {
         return ParamTypeEnum.command;
     }
 
-    private getParamName(paramBaseValue: string, paramHasValue: boolean, paramType: ParamTypeEnum): string {
-        const paramName: string = paramHasValue
-            ? paramBaseValue.split(EQUAL_SIGN)[0]
-            : paramBaseValue;
-        if (paramType === ParamTypeEnum.argument) {
-            return paramName.replace(ARGUMENT_PREFIX, ``);
-        }
-        if (paramType === ParamTypeEnum.alias) {
-            return paramName.replace(ALIAS_PREFIX, ``);
-        }
-        return paramName;
+    private getParamName(baseValue: string, hasValue: boolean, type: ParamTypeEnum): string {
+        const name: string = hasValue ? baseValue.split(EQUAL_SIGN)[0] : baseValue;
+        if (type === ParamTypeEnum.argument) return name.replace(ARGUMENT_PREFIX, EMPTY_STRING);
+        if (type === ParamTypeEnum.alias) return name.replace(ALIAS_PREFIX, EMPTY_STRING);
+        return name;
     }
 
-    private getParamValues(paramBaseValue: string, paramHasValue: boolean): string[] {
-        if (!paramHasValue) return [];
-        return paramBaseValue
+    private getParamValues(baseValue: string, hasValue: boolean): string[] {
+        if (!hasValue) return [];
+        return baseValue
             .split(EQUAL_SIGN)[1]
-            .replace(/\s/g, ``)
-            .replace(/^(["'`])/, ``)
-            .replace(/(["'`])$/, ``)
+            .replace(/\s/g, EMPTY_STRING)
+            .replace(/^(["'`])/, EMPTY_STRING)
+            .replace(/(["'`])$/, EMPTY_STRING)
             .split(VALUE_SEPARATOR);
     }
 }
-
-// todo: refactor the code

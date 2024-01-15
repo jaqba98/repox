@@ -23,7 +23,9 @@ const config = {
   preset: "ts-jest",
   setupFilesAfterEnv: ["core-js/features/reflect"],
   testEnvironment: "jest-environment-node",
-  moduleNameMapper: buildModuleNameMapper()
+  moduleNameMapper: {
+    "@lib/const": path.resolve(__dirname, "projects/libs/const/src/index.ts")
+  },
 };
 
 module.exports = config;

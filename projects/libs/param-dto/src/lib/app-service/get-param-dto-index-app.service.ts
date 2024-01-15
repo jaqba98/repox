@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 import {ParamDtoStoreService} from "../dom-service/store/param-dto-store.service";
 import {FindParamDtoEntityService} from "../dom-service/finder/find-param-dto-entity.service";
-import {EMPTY_STRING} from "@lib/const";
+import { EMPTY_STRING } from "@lib/const";
 
 @singleton()
 /**
