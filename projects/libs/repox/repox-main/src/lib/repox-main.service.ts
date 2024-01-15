@@ -2,6 +2,8 @@ import "core-js/features/reflect";
 import {container, singleton} from "tsyringe";
 
 import {BuildParamDtoAppService, GetParamDtoAppService} from "@lib/param-dto";
+import {ParamErrorMessageAppService} from "@lib/logger";
+import {REPOX_LOGO} from "@lib/repox-const";
 
 @singleton()
 /**
@@ -10,7 +12,8 @@ import {BuildParamDtoAppService, GetParamDtoAppService} from "@lib/param-dto";
 export class RepoxMainService {
     constructor(
         private readonly buildParamDto: BuildParamDtoAppService,
-        private readonly getParamDtoData: GetParamDtoAppService
+        private readonly getParamDtoData: GetParamDtoAppService,
+        private readonly paramErrorMessage: ParamErrorMessageAppService
     ) {
     }
 
@@ -18,17 +21,15 @@ export class RepoxMainService {
         this.buildParamDto.build();
         const paramDtoValidation = this.getParamDtoData.getParamDtoValidation();
         if (!paramDtoValidation.success) {
-            // this.paramErrorMessage.writeParamError(
-            //     paramDtoValidation.wrongIndexes,
-            //     paramDtoValidation.baseValues,
-            //     paramDtoValidation.errors,
-            //     paramDtoValidation.tips,
-            //     REPOX_LOGO
-            // );
-            console.log("Error");
+            this.paramErrorMessage.writeParamError(
+                paramDtoValidation.wrongIndexes,
+                paramDtoValidation.baseValues,
+                paramDtoValidation.errors,
+                paramDtoValidation.tips,
+                REPOX_LOGO
+            );
             return;
         }
-        console.log("Success");
     }
 }
 
@@ -71,18 +72,6 @@ container.resolve(RepoxMainService).run();
 //     }
 //
 //     run(): void {
-//         this.buildParamDto.build();
-//         const paramDtoValidation = this.getParamDtoData.getParamDtoValidation();
-//         if (!paramDtoValidation.success) {
-//             this.paramErrorMessage.writeParamError(
-//                 paramDtoValidation.wrongIndexes,
-//                 paramDtoValidation.baseValues,
-//                 paramDtoValidation.errors,
-//                 paramDtoValidation.tips,
-//                 REPOX_LOGO
-//             );
-//             return;
-//         }
 //         this.buildParamDomain.build(
 //             RepoxProgramEnum,
 //             RepoxProgramAliasEnum,
