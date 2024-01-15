@@ -4,12 +4,16 @@ import {ParamDtoEntityModel, ParamDtoModel} from "../../model/param-dto.model";
 import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATOR} from "../../const/param-dto.const";
 import {EMPTY_STRING} from "@lib/const";
 import {ParamTypeEnum} from "../../enum/param-type.enum";
+import {ParamDtoStoreService} from "../store/param-dto-store.service";
 
 @singleton()
 /** Build the parameter DTO model from the command line parameters. */
 export class BuildParamDtoService {
-    build(args: string[]): ParamDtoModel {
-        return {
+    constructor(private readonly paramDtoStore: ParamDtoStoreService) {
+    }
+
+    build(args: string[]): void {
+        const dto: ParamDtoModel = {
             params: args
                 .map((arg: string, index: number): Omit<ParamDtoEntityModel, "name" | "values" | "hasManyValues"> => ({
                     baseValue: arg,
@@ -24,6 +28,7 @@ export class BuildParamDtoService {
                 }))
                 .map((param): ParamDtoEntityModel => ({...param, hasManyValues: param.values.length > 1}))
         };
+        this.paramDtoStore.setParamDto(dto);
     }
 
     private getParamType(arg: string, index: number): ParamTypeEnum {

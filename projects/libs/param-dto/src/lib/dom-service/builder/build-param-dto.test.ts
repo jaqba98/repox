@@ -3,6 +3,7 @@ import {container} from "tsyringe";
 import {BuildParamDtoService} from "./build-param-dto.service";
 import {ParamDtoModel} from "../../model/param-dto.model";
 import {ParamTypeEnum} from "../../enum/param-type.enum";
+import {ParamDtoStoreService} from "../store/param-dto-store.service";
 
 describe("BuildParamDtoService", (): void => {
     class MockReadArgumentsService {
@@ -23,6 +24,7 @@ describe("BuildParamDtoService", (): void => {
     }
 
     const service = container.resolve(BuildParamDtoService);
+    const store = container.resolve(ParamDtoStoreService);
     const args = container.resolve(MockReadArgumentsService).read();
 
     afterAll((): void => {
@@ -30,7 +32,8 @@ describe("BuildParamDtoService", (): void => {
     });
 
     test("Should correctly build param DTO model", (): void => {
-        expect(service.build(args)).toEqual<ParamDtoModel>({
+        service.build(args);
+        expect(store.getParamDto()).toEqual<ParamDtoModel>({
             params: [
                 {
                     baseValue: "node",

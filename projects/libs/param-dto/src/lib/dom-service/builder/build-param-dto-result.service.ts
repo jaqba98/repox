@@ -1,13 +1,11 @@
 import {singleton} from "tsyringe";
-import {type ParamDtoEntityModel, type ParamDtoModel} from "../../model/param-dto.model";
-import {type ParamDtoValidationModel} from "../../model/param-dto-validation.model";
+
+import {ParamDtoEntityModel, ParamDtoModel} from "../../model/param-dto.model";
+import {ParamDtoValidationModel} from "../../model/param-dto-validation.model";
 import {ParamDtoStoreService} from "../store/param-dto-store.service";
 
 @singleton()
-/**
- * Build the result of the param DTO validation
- * for success and error.
- */
+/** Build the result of the param DTO validation for success and error. */
 export class BuildParamDtoResultService {
     constructor(private readonly paramDtoStore: ParamDtoStoreService) {
     }
@@ -38,5 +36,3 @@ export class BuildParamDtoResultService {
         return paramDto.params.map(param => param.baseValue);
     }
 }
-
-// todo: refactor the code

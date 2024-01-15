@@ -1,34 +1,28 @@
 import {singleton} from "tsyringe";
-import {type ParamDtoValidatorModel} from "../../model/param-dto-validator.model";
+
+import {ParamDtoValidatorModel} from "../../model/param-dto-validator.model";
 import {BuildParamDtoResultService} from "../builder/build-param-dto-result.service";
-import {type ParamDtoEntityModel} from "../../model/param-dto.model";
-import {type ParamDtoValidationModel} from "../../model/param-dto-validation.model";
-import {ParamTypeEnum} from "@lib/param-dto";
+import {ParamDtoEntityModel} from "../../model/param-dto.model";
+import {ParamDtoValidationModel} from "../../model/param-dto-validation.model";
 import {ParamDtoStoreService} from "../store/param-dto-store.service";
+import {ParamTypeEnum} from "../../enum/param-type.enum";
 
 @singleton()
-/**
- * Check the given DTO parameters contain only supported signs.
- */
-export class ValidatorOnlySupportedSignService
-    implements ParamDtoValidatorModel {
+/** Check the given DTO parameters contain only supported signs. */
+export class ValidatorOnlySupportedSignService implements ParamDtoValidatorModel {
     constructor(
         private readonly paramDtoStore: ParamDtoStoreService,
         private readonly buildParamDtoResult: BuildParamDtoResultService
     ) {
     }
 
-    runValidator(): ParamDtoValidationModel {
+    run(): ParamDtoValidationModel {
         const paramDto = this.paramDtoStore.getParamDto();
-        const wrongParamsDto = paramDto.params.filter(
-            param => !this.checkParamSigns(param)
-        );
-        if (wrongParamsDto.length === 0) {
-            return this.buildParamDtoResult.buildSuccess();
-        }
+        const wrongParamsDto = paramDto.params.filter(param => !this.checkParamSigns(param));
+        if (wrongParamsDto.length === 0) return this.buildParamDtoResult.buildSuccess();
         return this.buildParamDtoResult.buildError(
             wrongParamsDto,
-            [`You have used not supported signs!`],
+            ["You have used not supported signs!"],
             wrongParamsDto.map(param => this.getParamTip(param))
         );
     }
@@ -46,7 +40,7 @@ export class ValidatorOnlySupportedSignService
             case ParamTypeEnum.alias:
                 return this.checkArgumentAndAlias(baseValue);
             default:
-                throw new Error(`Not supported parameter type!`);
+                throw new Error("Not supported parameter type!");
         }
     }
 
@@ -63,18 +57,15 @@ export class ValidatorOnlySupportedSignService
         switch (type) {
             case ParamTypeEnum.program:
             case ParamTypeEnum.command:
-                return this.buildSupportedSignsMessage(
-                    baseValue,
-                    `[a-Z] [0-9] [-]`
-                );
+                return this.buildSupportedSignsMessage(baseValue, "[a-Z] [0-9] [-]");
             case ParamTypeEnum.argument:
             case ParamTypeEnum.alias:
                 return this.buildSupportedSignsMessage(
                     baseValue,
-                    `[a-Z] [0-9] [-] [=] ["] ['] [\`] [,] [/] [.] [@] [*] [space]`
+                    "[a-Z] [0-9] [-] [=] [\"] ['] [`] [,] [/] [.] [@] [*] [space]"
                 );
             default:
-                throw new Error(`Not supported parameter type!`);
+                throw new Error("Not supported parameter type!");
         }
     }
 
@@ -82,5 +73,3 @@ export class ValidatorOnlySupportedSignService
         return `Supported signs for ${paramBaseValue} are: ${signs}`;
     }
 }
-
-// todo: refactor the code
