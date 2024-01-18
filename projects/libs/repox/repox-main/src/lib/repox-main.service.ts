@@ -4,7 +4,9 @@ import {singleton} from "tsyringe";
 import {BuildParamDtoAppService} from "@lib/param-dto";
 
 @singleton()
-/** The main service runs the repox program. */
+/**
+ * The main service runs the repox program.
+ */
 export class RepoxMainService {
     constructor(private readonly buildParamDtoApp: BuildParamDtoAppService) {
     }
