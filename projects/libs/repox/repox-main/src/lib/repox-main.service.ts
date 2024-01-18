@@ -1,40 +1,45 @@
 import "core-js/features/reflect";
-import {container, singleton} from "tsyringe";
+import {singleton} from "tsyringe";
 
-import {BuildParamDtoAppService, GetParamDtoAppService} from "@lib/param-dto";
-import {ParamErrorMessageAppService} from "@lib/logger";
-import {REPOX_LOGO} from "@lib/repox-const";
+import {BuildParamDtoAppService} from "@lib/param-dto";
 
 @singleton()
-/**
- * The main service is responsible for running the repox program.
- */
+/** The main service runs the repox program. */
 export class RepoxMainService {
-    constructor(
-        private readonly buildParamDto: BuildParamDtoAppService,
-        private readonly getParamDtoData: GetParamDtoAppService,
-        private readonly paramErrorMessage: ParamErrorMessageAppService
-    ) {
+    constructor(private readonly buildParamDtoApp: BuildParamDtoAppService) {
     }
 
     run(): void {
-        this.buildParamDto.build();
-        const paramDtoValidation = this.getParamDtoData.getParamDtoValidation();
-        if (!paramDtoValidation.success) {
-            this.paramErrorMessage.writeParamError(
-                paramDtoValidation.wrongIndexes,
-                paramDtoValidation.baseValues,
-                paramDtoValidation.errors,
-                paramDtoValidation.tips,
-                REPOX_LOGO
-            );
-            return;
-        }
+        if (!this.buildParamDtoApp.build()) return;
     }
 }
 
-container.resolve(RepoxMainService).run();
-
+// import "core-js/features/reflect";
+// import {container, singleton} from "tsyringe";
+//
+// @singleton()
+// /**
+//  * The main service is responsible for running the repox program.
+//  */
+// export class RepoxMainService {
+//     run(): void {
+//
+//     }
+// }
+//
+// container.resolve(RepoxMainService).run();
+// this.buildParamDto.build();
+// const paramDtoValidation = this.getParamDtoData.getParamDtoValidation();
+// if (!paramDtoValidation.success) {
+//     this.paramErrorMessage.writeParamError(
+//         paramDtoValidation.wrongIndexes,
+//         paramDtoValidation.baseValues,
+//         paramDtoValidation.errors,
+//         paramDtoValidation.tips,
+//         REPOX_LOGO
+//     );
+//     return;
+// }
 // import "core-js/features/reflect";
 // import {container, singleton} from "tsyringe";
 // import {BuildParamDtoAppService, GetParamDtoDataAppService} from "@lib/param-dto";
