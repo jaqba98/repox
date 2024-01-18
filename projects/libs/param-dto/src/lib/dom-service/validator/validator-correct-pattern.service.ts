@@ -80,3 +80,5 @@ export class ValidatorCorrectPatternService implements ParamDtoValidatorModel {
         return `Correct pattern for ${paramBaseValue} is: ${pattern}`;
     }
 }
+
+// todo: refactor the code

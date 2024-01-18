@@ -36,3 +36,5 @@ export class BuildParamDtoResultService {
         return paramDto.params.map(param => param.baseValue);
     }
 }
+
+// todo: refactor the code

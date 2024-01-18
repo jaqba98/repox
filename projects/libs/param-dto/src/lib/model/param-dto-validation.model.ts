@@ -6,3 +6,5 @@ export interface ParamDtoValidationModel {
     errors: string[];
     tips: string[];
 }
+
+// todo: refactor the code

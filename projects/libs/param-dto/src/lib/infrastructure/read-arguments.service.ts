@@ -8,3 +8,5 @@ export class ReadArgumentsService {
         return process.argv;
     }
 }
+
+// todo: refactor the code
