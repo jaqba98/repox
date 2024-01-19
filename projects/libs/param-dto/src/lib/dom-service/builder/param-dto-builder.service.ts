@@ -1,12 +1,13 @@
 import {container, singleton} from "tsyringe";
 
 import {ParamDtoService} from "../service/param-dto.service";
+import {ParamDtoFinderService} from "../finder/param-dto-finder.service";
 
 @singleton()
 export class ParamDtoBuilderService {
     private readonly paramDto: ParamDtoService;
 
-    constructor() {
+    constructor(private readonly paramDtoFinder: ParamDtoFinderService) {
         this.paramDto = container.resolve(ParamDtoService);
     }
 
@@ -34,6 +35,11 @@ export class ParamDtoBuilderService {
     }
 
     buildCommand(): ParamDtoBuilderService {
+        const { baseArguments, program } = this.paramDto;
+        const commandIndex = this.paramDtoFinder.findCommandIndex(baseArguments, program.index);
+        if (commandIndex === -1) return this;
+        const command = baseArguments[commandIndex];
+        this.paramDto.command = {baseValue: command, index: commandIndex};
         return this;
     }
 
