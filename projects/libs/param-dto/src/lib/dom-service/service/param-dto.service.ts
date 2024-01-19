@@ -1,8 +1,11 @@
 import {singleton} from "tsyringe";
 
-import {BaseParamDtoModel} from "../../model/param-dto.model";
+import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../model/param-dto.model";
 
 @singleton()
+/**
+ * The service is a recipe how to build param dto.
+ */
 export class ParamDtoService {
     baseArguments: string[] = [];
 
@@ -14,9 +17,7 @@ export class ParamDtoService {
 
     command: BaseParamDtoModel = {baseValue: "", index: -1};
 
-    programArguments: string[] = [];
+    programArguments: ArgumentParamDtoModel[] = [];
 
-    commandArguments: string[] = [];
+    commandArguments: ArgumentParamDtoModel[] = [];
 }
-
-// todo: refactor the code

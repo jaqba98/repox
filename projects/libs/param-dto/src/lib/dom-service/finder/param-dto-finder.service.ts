@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 
-import {ParamDtoEntityModel} from "../../model/param-dto.model";
+import {ArgumentParamDtoModel, BaseParamDtoModel, ParamDtoEntityModel} from "../../model/param-dto.model";
 import {ParamTypeEnum} from "../../enum/param-type.enum";
 import {ParamDtoStoreService} from "../store/param-dto-store.service";
 import {ALIAS_PREFIX, ARGUMENT_PREFIX} from "../../const/param-dto.const";
@@ -38,10 +38,10 @@ export class ParamDtoFinderService {
             .filter(param => param.index > commandIndex);
     }
 
-    findArgumentsInRange(argv: string[], startIndex: number, endIndex: number): string[] {
+    findArgumentsInRange(argv: string[], startIndex: number, endIndex: number): BaseParamDtoModel[] {
         const result = [];
-        for (let i = startIndex; i < endIndex; i++) {
-            result.push(argv[i]);
+        for (let i = (startIndex + 1); i < endIndex; i++) {
+            result.push({ baseValue: argv[i], index: i });
         }
         return result;
     }

@@ -24,6 +24,7 @@ export interface ArgumentParamDtoModel extends BaseParamDtoModel {
     name: string;
     values: string[];
     hasManyValues: boolean;
+    isAlias: boolean;
 }
 
 export interface BaseParamDtoModel {

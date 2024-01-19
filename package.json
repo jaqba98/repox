@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && tsc-alias --outDir dist",
-    "run": "node dist/apps/repox/src/main program --arg1 -a command --arg2 -b",
+    "run": "node dist/apps/repox/src/main program --arg1 -a=aaa -z=ppp command --arg2='bbbb,fff,eee' -b",
     "regenerate:workspace": "node dist/apps/repox/src/main regenerate workspace --force"
   },
   "keywords": [],
