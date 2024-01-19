@@ -1,5 +1,5 @@
 import "core-js/features/reflect";
-import {singleton} from "tsyringe";
+import {container, singleton} from "tsyringe";
 
 import {BuildParamDtoAppService} from "@lib/param-dto";
 
@@ -15,6 +15,8 @@ export class RepoxMainService {
         if (!this.buildParamDtoApp.build()) return;
     }
 }
+
+container.resolve(RepoxMainService).run();
 
 // import "core-js/features/reflect";
 // import {container, singleton} from "tsyringe";

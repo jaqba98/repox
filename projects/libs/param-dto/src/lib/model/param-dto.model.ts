@@ -19,4 +19,9 @@ export interface ParamDtoModel {
     params: ParamDtoEntityModel[];
 }
 
+export interface BaseParamDtoModel {
+    baseValue: string;
+    index: number;
+}
+
 // todo: refactor the code
