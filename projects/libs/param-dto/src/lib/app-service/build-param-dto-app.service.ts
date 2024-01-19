@@ -23,6 +23,8 @@ export class BuildParamDtoAppService {
             .buildAppPath()
             .buildProgram()
             .buildCommand()
+            .buildProgramArguments()
+            .buildCommandArguments()
             .build();
         console.log(paramDto);
         return true;

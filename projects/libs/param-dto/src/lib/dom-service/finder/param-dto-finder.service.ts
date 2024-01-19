@@ -38,6 +38,14 @@ export class ParamDtoFinderService {
             .filter(param => param.index > commandIndex);
     }
 
+    findArgumentsInRange(argv: string[], startIndex: number, endIndex: number): string[] {
+        const result = [];
+        for (let i = startIndex; i < endIndex; i++) {
+            result.push(argv[i]);
+        }
+        return result;
+    }
+
     findCommandIndex(argv: string[], programIndex: number): number {
         if (programIndex === -1) return -1;
         if (argv.length < 3) return -1;

@@ -43,6 +43,20 @@ export class ParamDtoBuilderService {
         return this;
     }
 
+    buildProgramArguments(): ParamDtoBuilderService {
+        const { baseArguments, program, command } = this.paramDto;
+        const args = this.paramDtoFinder.findArgumentsInRange(baseArguments, program.index, command.index);
+        this.paramDto.programArguments = [...args];
+        return this;
+    }
+
+    buildCommandArguments(): ParamDtoBuilderService {
+        const { baseArguments, command } = this.paramDto;
+        const args = this.paramDtoFinder.findArgumentsInRange(baseArguments, command.index, baseArguments.length);
+        this.paramDto.commandArguments = [...args];
+        return this;
+    }
+
     build(): ParamDtoService {
         return this.paramDto;
     }

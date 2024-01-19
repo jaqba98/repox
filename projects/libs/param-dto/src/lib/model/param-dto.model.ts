@@ -19,6 +19,13 @@ export interface ParamDtoModel {
     params: ParamDtoEntityModel[];
 }
 
+export interface ArgumentParamDtoModel extends BaseParamDtoModel {
+    hasValue: boolean;
+    name: string;
+    values: string[];
+    hasManyValues: boolean;
+}
+
 export interface BaseParamDtoModel {
     baseValue: string;
     index: number;

@@ -13,6 +13,10 @@ export class ParamDtoService {
     program: BaseParamDtoModel = {baseValue: "", index: -1};
 
     command: BaseParamDtoModel = {baseValue: "", index: -1};
+
+    programArguments: string[] = [];
+
+    commandArguments: string[] = [];
 }
 
 // todo: refactor the code
