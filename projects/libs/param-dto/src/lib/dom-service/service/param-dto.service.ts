@@ -6,13 +6,13 @@ import {BaseParamDtoModel} from "../../model/param-dto.model";
 export class ParamDtoService {
     baseArguments: string[] = [];
 
-    execPath: BaseParamDtoModel | undefined;
+    execPath: BaseParamDtoModel = {baseValue: "", index: -1};
 
-    appPath: BaseParamDtoModel | undefined;
+    appPath: BaseParamDtoModel = {baseValue: "", index: -1};
 
-    program: BaseParamDtoModel | undefined;
+    program: BaseParamDtoModel = {baseValue: "", index: -1};
 
-    command: BaseParamDtoModel | undefined;
+    command: BaseParamDtoModel = {baseValue: "", index: -1};
 }
 
 // todo: refactor the code

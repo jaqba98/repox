@@ -16,17 +16,24 @@ export class ParamDtoBuilderService {
     }
 
     buildExecPath(): ParamDtoBuilderService {
-        this.paramDto.execPath = {baseValue: this.paramDto.baseArguments[0], index: 0};
+        const execPath = this.paramDto.baseArguments[0];
+        if (execPath) this.paramDto.execPath = {baseValue: execPath, index: 0};
         return this;
     }
 
     buildAppPath(): ParamDtoBuilderService {
-        this.paramDto.appPath = {baseValue: this.paramDto.baseArguments[1], index: 1};
+        const appPath = this.paramDto.baseArguments[1];
+        if (appPath) this.paramDto.appPath = {baseValue: appPath, index: 1};
         return this;
     }
 
     buildProgram(): ParamDtoBuilderService {
-        this.paramDto.program = {baseValue: this.paramDto.baseArguments[2], index: 2};
+        const program = this.paramDto.baseArguments[2];
+        if (program) this.paramDto.program = {baseValue: program, index: 2};
+        return this;
+    }
+
+    buildCommand(): ParamDtoBuilderService {
         return this;
     }
 
