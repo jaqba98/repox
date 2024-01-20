@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {GetProcessArgvService} from "../infrastructure/get-process-argv.service";
-import {ParamDtoBuilderService} from "../dom-service/builder/param-dto-builder.service";
+import {ParamDtoDirectorService} from "../dom-service/director/param-dto-director.service";
 
 @singleton()
 /**
@@ -11,21 +11,13 @@ import {ParamDtoBuilderService} from "../dom-service/builder/param-dto-builder.s
 export class BuildParamDtoAppService {
     constructor(
         private readonly getProcessArgv: GetProcessArgvService,
-        private readonly paramDtoBuilder: ParamDtoBuilderService
+        private readonly paramDtoDirector: ParamDtoDirectorService
     ) {
     }
 
     build(): boolean {
         const argv = this.getProcessArgv.get();
-        const paramDto = this.paramDtoBuilder
-            .buildBaseArguments(argv)
-            .buildExecPath()
-            .buildAppPath()
-            .buildProgram()
-            .buildCommand()
-            .buildProgramArguments()
-            .buildCommandArguments()
-            .build();
+        const paramDto = this.paramDtoDirector.buildParamDto(argv);
         console.log(paramDto);
         return true;
     }
