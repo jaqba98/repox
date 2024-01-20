@@ -38,10 +38,10 @@ export class ParamDtoFinderService {
             .filter(param => param.index > commandIndex);
     }
 
-    findArgumentsInRange(argv: string[], startIndex: number, endIndex: number): BaseParamDtoModel[] {
+    getIndexesInRange(startIndex: number, endIndex: number): number[] {
         const result = [];
         for (let i = (startIndex + 1); i < endIndex; i++) {
-            result.push({ baseValue: argv[i], index: i });
+            result.push(i);
         }
         return result;
     }

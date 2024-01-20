@@ -15,4 +15,12 @@ export class ArrayUtilsService {
     }
 }
 
+export const getIndexesBetween = (startIndex: number, endIndex: number): number[] => {
+    const result = [];
+    for (let i = (startIndex + 1); i < endIndex; i++) {
+        result.push(i);
+    }
+    return result;
+}
+
 // todo: refactor the code
