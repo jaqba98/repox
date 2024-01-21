@@ -12,7 +12,7 @@ export class ParamDtoDirectorService {
     constructor(private readonly paramDtoBuilder: ParamDtoBuilderService) {
     }
 
-    buildParamDto(argv: string[]): ParamDtoService {
+    build(argv: string[]): ParamDtoService {
         return this.paramDtoBuilder
             .buildBaseArguments(argv)
             .buildProgram()

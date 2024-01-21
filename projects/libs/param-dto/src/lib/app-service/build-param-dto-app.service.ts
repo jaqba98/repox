@@ -17,7 +17,7 @@ export class BuildParamDtoAppService {
 
     build(): boolean {
         const argv = this.getProcessArgv.get();
-        const paramDto = this.paramDtoDirector.buildParamDto(argv);
+        const paramDto = this.paramDtoDirector.build(argv);
         console.log(paramDto);
         return true;
     }
