@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {ParamDtoValidatorModel} from "../../model/param-dto-validator.model";
-import {BuildParamDtoResultService} from "../builder/build-param-dto-result.service";
+import {BuildParamDtoResultService} from "./build-param-dto-result.service";
 import {ParamDtoFinderService} from "../finder/param-dto-finder.service";
 import {ParamDtoValidationModel} from "../../model/param-dto-validation.model";
 
