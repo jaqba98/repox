@@ -1,7 +1,6 @@
 import {container, singleton} from "tsyringe";
 
 import {ParamDtoService} from "../service/param-dto.service";
-import {ParamDtoFinderService} from "../finder/param-dto-finder.service";
 import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../model/param-dto.model";
 import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATOR} from "../../const/param-dto.const";
 import {copyArray, getIndexesBetween} from "@lib/utils";
@@ -13,7 +12,7 @@ import {copyArray, getIndexesBetween} from "@lib/utils";
 export class ParamDtoBuilderService {
     private readonly paramDto: ParamDtoService;
 
-    constructor(private readonly paramDtoFinder: ParamDtoFinderService) {
+    constructor() {
         this.paramDto = container.resolve(ParamDtoService);
     }
 
