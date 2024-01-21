@@ -14,19 +14,35 @@ export class ParamDtoValidationDirectorService {
     }
 
     buildProgramValidation(_paramDto: ParamDtoService): ParamDtoValidationService {
-        return this.paramDtoValidationBuilder.build();
+        return this.paramDtoValidationBuilder
+            .buildSupportedSignsValidator()
+            .buildCorrectPatternValidator()
+            .buildCorrectOrderValidator()
+            .build();
     }
 
     buildCommandValidation(_paramDto: ParamDtoService): ParamDtoValidationService {
-        return this.paramDtoValidationBuilder.build();
+        return this.paramDtoValidationBuilder
+            .buildSupportedSignsValidator()
+            .buildCorrectPatternValidator()
+            .buildCorrectOrderValidator()
+            .build();
     }
 
     buildProgramArgumentsValidation(_paramDto: ParamDtoService): ParamDtoValidationService {
-        return this.paramDtoValidationBuilder.build();
+        return this.paramDtoValidationBuilder
+            .buildSupportedSignsValidator()
+            .buildCorrectPatternValidator()
+            .buildCorrectOrderValidator()
+            .build();
     }
 
     buildCommandArgumentsValidation(_paramDto: ParamDtoService): ParamDtoValidationService {
-        return this.paramDtoValidationBuilder.build();
+        return this.paramDtoValidationBuilder
+            .buildSupportedSignsValidator()
+            .buildCorrectPatternValidator()
+            .buildCorrectOrderValidator()
+            .build();
     }
 }
 

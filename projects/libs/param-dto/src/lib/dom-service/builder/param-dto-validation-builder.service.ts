@@ -13,6 +13,18 @@ export class ParamDtoValidationBuilderService {
         this.paramDtoValidation = container.resolve(ParamDtoValidationService);
     }
 
+    buildSupportedSignsValidator(): ParamDtoValidationBuilderService {
+        return this;
+    }
+
+    buildCorrectPatternValidator(): ParamDtoValidationBuilderService {
+        return this;
+    }
+
+    buildCorrectOrderValidator(): ParamDtoValidationBuilderService {
+        return this;
+    }
+
     build(): ParamDtoValidationService {
         return this.paramDtoValidation;
     }
