@@ -15,8 +15,6 @@ export class ParamDtoDirectorService {
     buildParamDto(argv: string[]): ParamDtoService {
         return this.paramDtoBuilder
             .buildBaseArguments(argv)
-            .buildExecPath()
-            .buildAppPath()
             .buildProgram()
             .buildCommand()
             .buildProgramArguments()

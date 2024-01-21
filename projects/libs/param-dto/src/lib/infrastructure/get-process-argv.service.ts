@@ -7,6 +7,6 @@ import {singleton} from "tsyringe";
  */
 export class GetProcessArgvService {
     get(): string[] {
-        return process.argv;
+        return process.argv.slice(2);
     }
 }

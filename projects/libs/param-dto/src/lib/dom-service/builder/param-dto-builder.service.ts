@@ -4,7 +4,7 @@ import {ParamDtoService} from "../service/param-dto.service";
 import {ParamDtoFinderService} from "../finder/param-dto-finder.service";
 import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../model/param-dto.model";
 import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATOR} from "../../const/param-dto.const";
-import {getIndexesBetween} from "@lib/utils";
+import {copyArray, getIndexesBetween} from "@lib/utils";
 
 @singleton()
 /**
@@ -18,29 +18,30 @@ export class ParamDtoBuilderService {
     }
 
     buildBaseArguments(argv: string[]): ParamDtoBuilderService {
-        this.paramDto.baseArguments = [...argv];
-        return this;
-    }
-
-    buildExecPath(): ParamDtoBuilderService {
-        this.paramDto.execPath = this.buildBaseParamDto(0);
-        return this;
-    }
-
-    buildAppPath(): ParamDtoBuilderService {
-        this.paramDto.appPath = this.buildBaseParamDto(1);
+        this.paramDto.baseArguments = copyArray(argv);
         return this;
     }
 
     buildProgram(): ParamDtoBuilderService {
-        this.paramDto.program = this.buildBaseParamDto(2);
+        const program = this.paramDto.baseArguments[0];
+        if (!program) return this;
+        if (program.startsWith(ARGUMENT_PREFIX)) return this;
+        if (program.startsWith(ALIAS_PREFIX)) return this;
+        this.paramDto.program = this.buildBaseParamDto(0);
         return this;
     }
 
     buildCommand(): ParamDtoBuilderService {
         const {baseArguments, program} = this.paramDto;
-        const commandIndex = this.paramDtoFinder.findCommandIndex(baseArguments, program.index);
-        this.paramDto.command = this.buildBaseParamDto(commandIndex);
+        const command = baseArguments
+            .map((baseArgument, index): { baseArgument: string, index: number } => ({ baseArgument, index }))
+            .find(argument => {
+                if (argument.index <= program.index) return false;
+                if (argument.baseArgument.startsWith(ARGUMENT_PREFIX)) return false;
+                return !argument.baseArgument.startsWith(ALIAS_PREFIX);
+            });
+        if (!command) return this;
+        this.paramDto.command = this.buildBaseParamDto(command.index);
         return this;
     }
 
@@ -72,21 +73,21 @@ export class ParamDtoBuilderService {
     private buildArgumentParamDto(index: number): ArgumentParamDtoModel {
         const baseParamDto = this.buildBaseParamDto(index);
         const hasValue = baseParamDto.baseValue.includes(EQUAL_SIGN);
-        const name = this.getArgumentName(baseParamDto.baseValue, hasValue);
-        const isAlias = name.length === 1;
-        const values = this.getArgumentValues(baseParamDto.baseValue, hasValue);
+        const name = this.buildArgumentName(baseParamDto.baseValue, hasValue);
+        const values = this.buildArgumentValues(baseParamDto.baseValue, hasValue);
         const hasManyValues = values.length > 1;
-        return {...baseParamDto, hasValue, name, isAlias, values, hasManyValues};
+        const isAlias = name.length === 1;
+        return {...baseParamDto, hasValue, name, values, hasManyValues, isAlias};
     }
 
-    private getArgumentName(baseValue: string, hasValue: boolean): string {
+    private buildArgumentName(baseValue: string, hasValue: boolean): string {
         const name = hasValue ? baseValue.split(EQUAL_SIGN)[0] : baseValue;
         if (name.startsWith(ARGUMENT_PREFIX)) return name.replace(ARGUMENT_PREFIX, "");
         if (name.startsWith(ALIAS_PREFIX)) return name.replace(ALIAS_PREFIX, "");
         return baseValue;
     }
 
-    private getArgumentValues(baseValue: string, hasValue: boolean): string[] {
+    private buildArgumentValues(baseValue: string, hasValue: boolean): string[] {
         if (!hasValue) return [];
         return baseValue
             .split(EQUAL_SIGN)[1]

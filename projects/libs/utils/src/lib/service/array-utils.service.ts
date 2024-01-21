@@ -23,4 +23,8 @@ export const getIndexesBetween = (startIndex: number, endIndex: number): number[
     return result;
 }
 
+export const copyArray = <T>(arr: T[]): T[] => {
+    return [...arr];
+}
+
 // todo: refactor the code
