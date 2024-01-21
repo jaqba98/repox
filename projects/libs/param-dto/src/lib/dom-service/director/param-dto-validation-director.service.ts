@@ -17,6 +17,7 @@ export class ParamDtoValidationDirectorService {
         return this.paramDtoValidationBuilder
             .buildSupportedSignsValidator()
             .buildCorrectPatternValidator()
+            .buildCanExistValidator()
             .buildCorrectOrderValidator()
             .build();
     }
@@ -25,6 +26,7 @@ export class ParamDtoValidationDirectorService {
         return this.paramDtoValidationBuilder
             .buildSupportedSignsValidator()
             .buildCorrectPatternValidator()
+            .buildCanExistValidator()
             .buildCorrectOrderValidator()
             .build();
     }
@@ -33,6 +35,7 @@ export class ParamDtoValidationDirectorService {
         return this.paramDtoValidationBuilder
             .buildSupportedSignsValidator()
             .buildCorrectPatternValidator()
+            .buildCanExistValidator()
             .buildCorrectOrderValidator()
             .build();
     }
@@ -41,6 +44,7 @@ export class ParamDtoValidationDirectorService {
         return this.paramDtoValidationBuilder
             .buildSupportedSignsValidator()
             .buildCorrectPatternValidator()
+            .buildCanExistValidator()
             .buildCorrectOrderValidator()
             .build();
     }

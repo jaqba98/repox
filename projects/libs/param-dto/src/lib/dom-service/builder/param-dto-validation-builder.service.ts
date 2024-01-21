@@ -21,6 +21,10 @@ export class ParamDtoValidationBuilderService {
         return this;
     }
 
+    buildCanExistValidator(): ParamDtoValidationBuilderService {
+        return this;
+    }
+
     buildCorrectOrderValidator(): ParamDtoValidationBuilderService {
         return this;
     }

@@ -20,6 +20,7 @@ export class BuildParamDtoAppService {
     build(): boolean {
         const argv = this.getProcessArgv.get();
         const paramDto = this.paramDtoDirector.build(argv);
+        // todo: I am here
         const programValidation = this.paramDtoValidationDirector.buildProgramValidation(paramDto);
         const commandValidation = this.paramDtoValidationDirector.buildCommandValidation(paramDto);
         const programArgumentsValidation = this.paramDtoValidationDirector.buildProgramArgumentsValidation(paramDto);
