@@ -1,7 +1,7 @@
 import {container, InjectionToken, singleton} from "tsyringe";
 
 import {ParamDtoService} from "../service/param-dto.service";
-import {ParamDtoBuilderAbstractService} from "../builder/param-dto-builder/param-dto-builder-abstract.service";
+import {ParamDtoBuilderAbstractService} from "../builder/param-dto/param-dto-builder-abstract.service";
 
 @singleton()
 /**
@@ -9,8 +9,8 @@ import {ParamDtoBuilderAbstractService} from "../builder/param-dto-builder/param
  * param dto builder steps.
  */
 export class ParamDtoDirectorService {
-    build(paramDtoBuilderAbstract: InjectionToken<ParamDtoBuilderAbstractService>, argv: string[]): ParamDtoService {
-        return container.resolve(paramDtoBuilderAbstract)
+    build(abstract: InjectionToken<ParamDtoBuilderAbstractService>, argv: string[]): ParamDtoService {
+        return container.resolve(abstract)
             .buildBaseArguments(argv)
             .buildProgram()
             .buildCommand()
