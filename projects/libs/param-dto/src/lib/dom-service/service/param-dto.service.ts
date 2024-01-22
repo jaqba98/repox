@@ -1,8 +1,8 @@
-import {singleton} from "tsyringe";
+import {injectable} from "tsyringe";
 
 import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../model/param-dto.model";
 
-@singleton()
+@injectable()
 /**
  * The service is a recipe how to build param dto.
  */
