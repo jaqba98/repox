@@ -1,5 +1,7 @@
 import {singleton} from "tsyringe";
 
+import {deepCopy} from "@lib/utils";
+
 @singleton()
 /**
  * The service retrieves arguments provided by the user.
@@ -7,6 +9,6 @@ import {singleton} from "tsyringe";
  */
 export class GetProcessArgvService {
     get(): string[] {
-        return process.argv.slice(2);
+        return deepCopy(process.argv).slice(2);
     }
 }

@@ -2,7 +2,7 @@ import {container, singleton} from "tsyringe";
 
 import {ParamDtoService} from "../../service/param-dto.service";
 import {ParamDtoBuilderAbstractService} from "./param-dto-builder-abstract.service";
-import {copyArray, getIndexesBetween} from "@lib/utils";
+import {deepCopy, getIndexesBetween} from "@lib/utils";
 import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATOR} from "../../../const/param-dto.const";
 import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../../model/param-dto.model";
 
@@ -18,7 +18,7 @@ export class ParamDtoBuilderService implements ParamDtoBuilderAbstractService {
     }
 
     buildBaseArguments(argv: string[]): ParamDtoBuilderService {
-        this.paramDto.baseArguments = copyArray(argv);
+        this.paramDto.baseArguments = deepCopy(argv);
         return this;
     }
 
@@ -49,7 +49,7 @@ export class ParamDtoBuilderService implements ParamDtoBuilderAbstractService {
         const {program, command} = this.paramDto;
         const programArguments: ArgumentParamDtoModel[] = getIndexesBetween(program.index, command.index)
             .map(index => this.buildArgumentParamDto(index));
-        this.paramDto.programArguments = [...programArguments];
+        this.paramDto.programArguments = deepCopy(programArguments);
         return this;
     }
 
@@ -57,7 +57,7 @@ export class ParamDtoBuilderService implements ParamDtoBuilderAbstractService {
         const {baseArguments, command} = this.paramDto;
         const commandArguments: ArgumentParamDtoModel[] = getIndexesBetween(command.index, baseArguments.length)
             .map(index => this.buildArgumentParamDto(index));
-        this.paramDto.commandArguments = [...commandArguments];
+        this.paramDto.commandArguments = deepCopy(commandArguments);
         return this;
     }
 
