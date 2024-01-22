@@ -5,6 +5,15 @@ import {singleton} from "tsyringe";
  * The service is a recipe how to build param dto valid.
  */
 export class ParamDtoValidService {
-}
+    supportedSigns: boolean = true;
+    supportedSignsWrongIndexes: number[] = [];
 
-// todo: refactor the code
+    correctPattern: boolean = true;
+    correctPatternWrongIndexes: number[] = [];
+
+    canExist: boolean = true;
+    canExistWrongIndexes: number[] = [];
+
+    correctOrder: boolean = true;
+    correctOrderWrongIndexes: number[] = [];
+}

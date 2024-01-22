@@ -2,6 +2,7 @@ import {container, singleton} from "tsyringe";
 
 import {ParamDtoValidService} from "../../service/param-dto-valid.service";
 import {ParamDtoValidBuilderAbstractService} from "./param-dto-valid-builder-abstract.service";
+import {ParamDtoService} from "../../service/param-dto.service";
 
 @singleton()
 /**
@@ -14,19 +15,19 @@ export class ProgramValidBuilderService implements ParamDtoValidBuilderAbstractS
         this.paramDtoValid = container.resolve(ParamDtoValidService);
     }
 
-    buildSupportedSignsValid(): ProgramValidBuilderService {
+    buildSupportedSignsValid(_paramDto: ParamDtoService): ProgramValidBuilderService {
         return this;
     }
 
-    buildCorrectPatternValid(): ProgramValidBuilderService {
+    buildCorrectPatternValid(_paramDto: ParamDtoService): ProgramValidBuilderService {
         return this;
     }
 
-    buildCanExistValid(): ProgramValidBuilderService {
+    buildCanExistValid(_paramDto: ParamDtoService): ProgramValidBuilderService {
         return this;
     }
 
-    buildCorrectOrderValid(): ProgramValidBuilderService {
+    buildCorrectOrderValid(_paramDto: ParamDtoService): ProgramValidBuilderService {
         return this;
     }
 

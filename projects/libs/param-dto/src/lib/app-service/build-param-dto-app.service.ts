@@ -29,10 +29,10 @@ export class BuildParamDtoAppService {
     build(): boolean {
         const argv = this.getProcessArgv.get();
         const paramDto = this.paramDtoDirector.build(ParamDtoBuilderService, argv);
-        const programValid = this.paramDtoValidDirector.build(ProgramValidBuilderService);
-        const commandValid = this.paramDtoValidDirector.build(CommandValidBuilderService);
-        const programArgumentsValid = this.paramDtoValidDirector.build(ProgramArgumentsValidBuilderService);
-        const commandArgumentsValid = this.paramDtoValidDirector.build(CommandArgumentsValidBuilderService);
+        const programValid = this.paramDtoValidDirector.build(ProgramValidBuilderService, paramDto);
+        const commandValid = this.paramDtoValidDirector.build(CommandValidBuilderService, paramDto);
+        const programArgumentsValid = this.paramDtoValidDirector.build(ProgramArgumentsValidBuilderService, paramDto);
+        const commandArgumentsValid = this.paramDtoValidDirector.build(CommandArgumentsValidBuilderService, paramDto);
         console.log(paramDto, programValid, commandValid, programArgumentsValid, commandArgumentsValid);
         return true;
     }
