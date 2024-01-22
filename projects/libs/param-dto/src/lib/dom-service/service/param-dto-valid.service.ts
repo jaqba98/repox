@@ -1,6 +1,6 @@
-import {singleton} from "tsyringe";
+import {injectable} from "tsyringe";
 
-@singleton()
+@injectable()
 /**
  * The service is a recipe how to build param dto valid.
  */

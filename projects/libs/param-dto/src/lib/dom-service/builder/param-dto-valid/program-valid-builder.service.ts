@@ -15,7 +15,12 @@ export class ProgramValidBuilderService implements ParamDtoValidBuilderAbstractS
         this.paramDtoValid = container.resolve(ParamDtoValidService);
     }
 
-    buildSupportedSignsValid(_paramDto: ParamDtoService): ProgramValidBuilderService {
+    buildSupportedSignsValid(paramDto: ParamDtoService): ProgramValidBuilderService {
+        const { baseValue, index } = paramDto.program;
+        if (baseValue === "" && index === -1) return this;
+        if (/^[a-zA-Z0-9-]*$/gm.test(baseValue)) return this;
+        this.paramDtoValid.supportedSigns = false;
+        this.paramDtoValid.supportedSignsWrongIndexes = [index];
         return this;
     }
 

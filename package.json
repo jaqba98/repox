@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc && tsc-alias --outDir dist",
     "run": "node dist/apps/repox/src/main program --arg1 -a=aaa -z=ppp command --arg2='bbbb,fff,eee' -b",
+    "run2": "node dist/apps/repox/src/main %%$%RE --aaa --bbb --ccc $#%#$FD",
     "regenerate:workspace": "node dist/apps/repox/src/main regenerate workspace --force"
   },
   "keywords": [],
