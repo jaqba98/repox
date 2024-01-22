@@ -1,16 +1,17 @@
 import {container, singleton} from "tsyringe";
 
-import {ParamDtoService} from "../service/param-dto.service";
-import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../model/param-dto.model";
-import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATOR} from "../../const/param-dto.const";
+import {ParamDtoService} from "../../service/param-dto.service";
+import {ParamDtoBuilderAbstractService} from "./param-dto-builder-abstract.service";
 import {copyArray, getIndexesBetween} from "@lib/utils";
+import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATOR} from "../../../const/param-dto.const";
+import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../../model/param-dto.model";
 
 @singleton()
 /**
  * The builder contains methods to build every single param dto element.
  */
-export class ParamDtoBuilderService {
-    private readonly paramDto: ParamDtoService;
+export class ParamDtoBuilderService implements ParamDtoBuilderAbstractService {
+    readonly paramDto: ParamDtoService;
 
     constructor() {
         this.paramDto = container.resolve(ParamDtoService);
@@ -33,7 +34,7 @@ export class ParamDtoBuilderService {
     buildCommand(): ParamDtoBuilderService {
         const {baseArguments, program} = this.paramDto;
         const command = baseArguments
-            .map((baseArgument, index): { baseArgument: string, index: number } => ({ baseArgument, index }))
+            .map((baseArgument, index): { baseArgument: string, index: number } => ({baseArgument, index}))
             .find(argument => {
                 if (argument.index <= program.index) return false;
                 if (argument.baseArgument.startsWith(ARGUMENT_PREFIX)) return false;

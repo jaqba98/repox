@@ -3,6 +3,7 @@ import {singleton} from "tsyringe";
 import {GetProcessArgvService} from "../infrastructure/get-process-argv.service";
 import {ParamDtoDirectorService} from "../dom-service/director/param-dto-director.service";
 import {ParamDtoValidationDirectorService} from "../dom-service/director/param-dto-validation-director.service";
+import {ParamDtoBuilderService} from "../dom-service/builder/param-dto-builder/param-dto-builder.service";
 
 @singleton()
 /**
@@ -19,7 +20,7 @@ export class BuildParamDtoAppService {
 
     build(): boolean {
         const argv = this.getProcessArgv.get();
-        const paramDto = this.paramDtoDirector.build(argv);
+        const paramDto = this.paramDtoDirector.build(ParamDtoBuilderService, argv);
         // todo: I am here
         const programValidation = this.paramDtoValidationDirector.buildProgramValidation(paramDto);
         const commandValidation = this.paramDtoValidationDirector.buildCommandValidation(paramDto);
