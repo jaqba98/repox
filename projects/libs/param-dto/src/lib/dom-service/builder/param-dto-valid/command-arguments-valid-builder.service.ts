@@ -15,7 +15,14 @@ export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilder
         this.paramDtoValid = container.resolve(ParamDtoValidService);
     }
 
-    buildSupportedSignsValid(_paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+    buildSupportedSignsValid(paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+        const indexes = paramDto.commandArguments
+            .filter(argument => argument.baseValue !== "" && argument.index !== -1)
+            .filter(argument => /^[a-zA-Z0-9-="'`,]*$/gm.test(argument.baseValue))
+            .map(argument => argument.index);
+        if (indexes.length === 0) return this;
+        this.paramDtoValid.supportedSigns = false;
+        this.paramDtoValid.supportedSignsWrongIndexes = [...indexes];
         return this;
     }
 
