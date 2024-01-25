@@ -4,7 +4,7 @@ import {injectable} from "tsyringe";
 /**
  * The service is a recipe how to build param dto valid.
  */
-export class ParamDtoValidService {
+export class ParamDtoValidation {
     supportedSigns: boolean = true;
     supportedSignsWrongIndexes: number[] = [];
 

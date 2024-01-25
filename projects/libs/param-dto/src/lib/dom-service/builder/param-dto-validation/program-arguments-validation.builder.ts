@@ -1,22 +1,22 @@
 import {container, singleton} from "tsyringe";
 
-import {ParamDtoValidService} from "../../service/param-dto-valid.service";
-import {ParamDtoValidBuilderAbstractService} from "./param-dto-valid-builder-abstract.service";
-import {ParamDtoService} from "../../service/param-dto.service";
+import {ParamDtoValidation} from "../../domain/param-dto-validation";
+import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
+import {ParamDto} from "../../domain/param-dto";
 import {CheckBaseValueService} from "../../service/check-base-value.service";
 
 @singleton()
 /**
  * The builder contains methods to build validation steps to the program arguments.
  */
-export class ProgramArgumentsValidBuilderService implements ParamDtoValidBuilderAbstractService {
-    readonly paramDtoValid: ParamDtoValidService;
+export class ProgramArgumentsValidationBuilder implements ParamDtoValidationAbstractBuilder {
+    readonly paramDtoValid: ParamDtoValidation;
 
     constructor(private readonly checkBaseValue: CheckBaseValueService) {
-        this.paramDtoValid = container.resolve(ParamDtoValidService);
+        this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDtoService): ProgramArgumentsValidBuilderService {
+    buildSupportedSignsValid(paramDto: ParamDto): ProgramArgumentsValidationBuilder {
         const indexes = paramDto.programArguments
             .filter(argument => argument.baseValue !== "" && argument.index !== -1)
             .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
@@ -27,7 +27,7 @@ export class ProgramArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDtoService): ProgramArgumentsValidBuilderService {
+    buildCorrectPatternValid(paramDto: ParamDto): ProgramArgumentsValidationBuilder {
         const indexes = paramDto.programArguments
             .filter(argument => argument.baseValue !== "" && argument.index !== -1)
             .filter(argument => !/^[a-zA-Z][a-zA-Z0-9-]*$/gm.test(argument.baseValue))
@@ -41,11 +41,11 @@ export class ProgramArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    buildCanExistValid(_paramDto: ParamDtoService): ProgramArgumentsValidBuilderService {
+    buildCanExistValid(_paramDto: ParamDto): ProgramArgumentsValidationBuilder {
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDtoService): ProgramArgumentsValidBuilderService {
+    buildCorrectOrderValid(paramDto: ParamDto): ProgramArgumentsValidationBuilder {
         const {index} = paramDto.program;
         const indexes = paramDto.programArguments
             .filter(argument => argument.index <= index)
@@ -56,7 +56,7 @@ export class ProgramArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    build(): ParamDtoValidService {
+    build(): ParamDtoValidation {
         return this.paramDtoValid;
     }
 }

@@ -1,19 +1,19 @@
 import {container, InjectionToken, singleton} from "tsyringe";
 
-import {ParamDtoValidService} from "../service/param-dto-valid.service";
-import {ParamDtoValidBuilderAbstractService} from "../builder/param-dto-valid/param-dto-valid-builder-abstract.service";
-import {ParamDtoService} from "../service/param-dto.service";
+import {ParamDtoValidation} from "../domain/param-dto-validation";
+import {ParamDto} from "../domain/param-dto";
 import {deepCopy} from "@lib/utils";
+import {ParamDtoValidationAbstractBuilder} from "../builder/param-dto-validation/param-dto-validation-abstract.builder";
 
 @singleton()
 /**
  * The director service contains logic composed of param dto valid builder steps.
  */
-export class ParamDtoValidDirectorService {
+export class ParamDtoValidationDirector {
     build(
-        abstract: InjectionToken<ParamDtoValidBuilderAbstractService>,
-        paramDto: ParamDtoService
-    ): ParamDtoValidService {
+        abstract: InjectionToken<ParamDtoValidationAbstractBuilder>,
+        paramDto: ParamDto
+    ): ParamDtoValidation {
         const cloneParamDto = deepCopy(paramDto);
         return container.resolve(abstract)
             .buildSupportedSignsValid(cloneParamDto)

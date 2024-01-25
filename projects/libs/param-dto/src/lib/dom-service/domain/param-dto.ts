@@ -6,7 +6,7 @@ import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../model/param-dto.mo
 /**
  * The service is a recipe how to build param dto.
  */
-export class ParamDtoService {
+export class ParamDto {
     baseArguments: string[] = [];
 
     program: BaseParamDtoModel = {baseValue: "", index: -1};

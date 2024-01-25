@@ -1,22 +1,22 @@
 import {container, singleton} from "tsyringe";
 
-import {ParamDtoValidService} from "../../service/param-dto-valid.service";
-import {ParamDtoValidBuilderAbstractService} from "./param-dto-valid-builder-abstract.service";
-import {ParamDtoService} from "../../service/param-dto.service";
+import {ParamDtoValidation} from "../../domain/param-dto-validation";
+import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
+import {ParamDto} from "../../domain/param-dto";
 import {CheckBaseValueService} from "../../service/check-base-value.service";
 
 @singleton()
 /**
  * The builder contains methods to build validation steps to the command arguments.
  */
-export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilderAbstractService {
-    readonly paramDtoValid: ParamDtoValidService;
+export class CommandArgumentsValidationBuilder implements ParamDtoValidationAbstractBuilder {
+    readonly paramDtoValid: ParamDtoValidation;
 
     constructor(private readonly checkBaseValue: CheckBaseValueService) {
-        this.paramDtoValid = container.resolve(ParamDtoValidService);
+        this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+    buildSupportedSignsValid(paramDto: ParamDto): CommandArgumentsValidationBuilder {
         const indexes = paramDto.commandArguments
             .filter(argument => argument.baseValue !== "" && argument.index !== -1)
             .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
@@ -27,7 +27,7 @@ export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+    buildCorrectPatternValid(paramDto: ParamDto): CommandArgumentsValidationBuilder {
         const indexes = paramDto.commandArguments
             .filter(argument => argument.baseValue !== "" && argument.index !== -1)
             .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueCorrectPattern(
@@ -40,7 +40,7 @@ export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    buildCanExistValid(paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+    buildCanExistValid(paramDto: ParamDto): CommandArgumentsValidationBuilder {
         const { baseValue, index } = paramDto.command;
         if (baseValue === "" && index === -1) {
             const indexes = paramDto.commandArguments.map(argument => argument.index);
@@ -50,7 +50,7 @@ export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+    buildCorrectOrderValid(paramDto: ParamDto): CommandArgumentsValidationBuilder {
         const {index} = paramDto.command;
         const indexes = paramDto.commandArguments
             .filter(argument => argument.index <= index)
@@ -61,7 +61,7 @@ export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    build(): ParamDtoValidService {
+    build(): ParamDtoValidation {
         return this.paramDtoValid;
     }
 }

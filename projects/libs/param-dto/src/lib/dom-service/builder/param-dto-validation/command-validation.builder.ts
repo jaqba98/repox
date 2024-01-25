@@ -1,22 +1,22 @@
 import {container, singleton} from "tsyringe";
 
-import {ParamDtoValidService} from "../../service/param-dto-valid.service";
-import {ParamDtoValidBuilderAbstractService} from "./param-dto-valid-builder-abstract.service";
-import {ParamDtoService} from "../../service/param-dto.service";
+import {ParamDtoValidation} from "../../domain/param-dto-validation";
+import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
+import {ParamDto} from "../../domain/param-dto";
 import {CheckBaseValueService} from "../../service/check-base-value.service";
 
 @singleton()
 /**
  * The builder contains methods to build validation steps to the command.
  */
-export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractService {
-    readonly paramDtoValid: ParamDtoValidService;
+export class CommandValidationBuilder implements ParamDtoValidationAbstractBuilder {
+    readonly paramDtoValid: ParamDtoValidation;
 
     constructor(private readonly checkBaseValue: CheckBaseValueService) {
-        this.paramDtoValid = container.resolve(ParamDtoValidService);
+        this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDtoService): CommandValidBuilderService {
+    buildSupportedSignsValid(paramDto: ParamDto): CommandValidationBuilder {
         const {baseValue, index} = paramDto.command;
         if (baseValue === "" && index === -1) return this;
         if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
@@ -25,7 +25,7 @@ export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractS
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDtoService): CommandValidBuilderService {
+    buildCorrectPatternValid(paramDto: ParamDto): CommandValidationBuilder {
         const {baseValue, index} = paramDto.command;
         if (baseValue === "" && index === -1) return this;
         if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
@@ -34,7 +34,7 @@ export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractS
         return this;
     }
 
-    buildCanExistValid(paramDto: ParamDtoService): CommandValidBuilderService {
+    buildCanExistValid(paramDto: ParamDto): CommandValidationBuilder {
         const {baseValue, index} = paramDto.program;
         if (baseValue === "" && index === -1) {
             this.paramDtoValid.canExist = false;
@@ -43,7 +43,7 @@ export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractS
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDtoService): CommandValidBuilderService {
+    buildCorrectOrderValid(paramDto: ParamDto): CommandValidationBuilder {
         const {baseValue, index} = paramDto.command;
         if (baseValue === "" && index === -1) return this;
         if (baseValue !== "" && index > paramDto.program.index) return this;
@@ -52,7 +52,7 @@ export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractS
         return this;
     }
 
-    build(): ParamDtoValidService {
+    build(): ParamDtoValidation {
         return this.paramDtoValid;
     }
 }
