@@ -3,6 +3,7 @@ import {container, singleton} from "tsyringe";
 import {ParamDtoValidService} from "../../service/param-dto-valid.service";
 import {ParamDtoValidBuilderAbstractService} from "./param-dto-valid-builder-abstract.service";
 import {ParamDtoService} from "../../service/param-dto.service";
+import {CheckBaseValueService} from "../../service/check-base-value.service";
 
 @singleton()
 /**
@@ -11,23 +12,23 @@ import {ParamDtoService} from "../../service/param-dto.service";
 export class ProgramValidBuilderService implements ParamDtoValidBuilderAbstractService {
     readonly paramDtoValid: ParamDtoValidService;
 
-    constructor() {
+    constructor(private readonly checkBaseValue: CheckBaseValueService) {
         this.paramDtoValid = container.resolve(ParamDtoValidService);
     }
 
     buildSupportedSignsValid(paramDto: ParamDtoService): ProgramValidBuilderService {
-        const { baseValue, index } = paramDto.program;
+        const {baseValue, index} = paramDto.program;
         if (baseValue === "" && index === -1) return this;
-        if (/^[a-zA-Z0-9-]*$/gm.test(baseValue)) return this;
+        if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
         this.paramDtoValid.supportedSigns = false;
         this.paramDtoValid.supportedSignsWrongIndexes = [index];
         return this;
     }
 
     buildCorrectPatternValid(paramDto: ParamDtoService): ProgramValidBuilderService {
-        const { baseValue, index } = paramDto.program;
+        const {baseValue, index} = paramDto.program;
         if (baseValue === "" && index === -1) return this;
-        if (/^[a-zA-Z][a-zA-Z0-9-]*$/gm.test(baseValue)) return this;
+        if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
         this.paramDtoValid.correctPattern = false;
         this.paramDtoValid.correctPatternWrongIndexes = [index];
         return this;

@@ -8,13 +8,13 @@ import {ParamDtoService} from "../../service/param-dto.service";
 export abstract class ParamDtoValidBuilderAbstractService {
     abstract readonly paramDtoValid: ParamDtoValidService;
 
-    abstract buildSupportedSignsValid(paramDto: ParamDtoService): ProgramValidBuilderService;
+    abstract buildSupportedSignsValid(paramDto: ParamDtoService): ParamDtoValidBuilderAbstractService;
 
-    abstract buildCorrectPatternValid(paramDto: ParamDtoService): ProgramValidBuilderService;
+    abstract buildCorrectPatternValid(paramDto: ParamDtoService): ParamDtoValidBuilderAbstractService;
 
-    abstract buildCanExistValid(paramDto: ParamDtoService): ProgramValidBuilderService;
+    abstract buildCanExistValid(paramDto: ParamDtoService): ParamDtoValidBuilderAbstractService;
 
-    abstract buildCorrectOrderValid(paramDto: ParamDtoService): ProgramValidBuilderService;
+    abstract buildCorrectOrderValid(paramDto: ParamDtoService): ParamDtoValidBuilderAbstractService;
 
     abstract build(): ParamDtoValidService;
 }
