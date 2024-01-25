@@ -38,7 +38,7 @@ export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractS
         const { baseValue, index } = paramDto.program;
         if (baseValue === "" && index === -1) {
             this.paramDtoValid.canExist = false;
-            this.paramDtoValid.canExistWrongIndexes = [index];
+            this.paramDtoValid.canExistWrongIndexes = [paramDto.command.index];
         }
         return this;
     }
