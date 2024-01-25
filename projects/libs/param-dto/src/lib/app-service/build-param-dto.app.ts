@@ -35,7 +35,7 @@ export class BuildParamDtoApp {
         const command = this.paramDtoValidDirector.build(CommandValidationBuilder, paramDto);
         const programArguments = this.paramDtoValidDirector.build(ProgramArgumentsValidationBuilder, paramDto);
         const commandArguments = this.paramDtoValidDirector.build(CommandArgumentsValidationBuilder, paramDto);
-        this.paramDtoStore.set(paramDto)
+        this.paramDtoStore.set(paramDto);
         console.log(paramDto, program, command, programArguments, commandArguments);
         return true;
     }
