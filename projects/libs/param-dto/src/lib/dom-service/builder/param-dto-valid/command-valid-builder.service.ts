@@ -34,7 +34,12 @@ export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractS
         return this;
     }
 
-    buildCanExistValid(_paramDto: ParamDtoService): CommandValidBuilderService {
+    buildCanExistValid(paramDto: ParamDtoService): CommandValidBuilderService {
+        const { baseValue, index } = paramDto.program;
+        if (baseValue === "" && index === -1) {
+            this.paramDtoValid.canExist = false;
+            this.paramDtoValid.canExistWrongIndexes = [index];
+        }
         return this;
     }
 

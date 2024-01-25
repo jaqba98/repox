@@ -40,7 +40,13 @@ export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    buildCanExistValid(_paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+    buildCanExistValid(paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+        const { baseValue, index } = paramDto.command;
+        if (baseValue === "" && index === -1) {
+            const indexes = paramDto.commandArguments.map(argument => argument.index);
+            this.paramDtoValid.canExist = false;
+            this.paramDtoValid.canExistWrongIndexes = [...indexes];
+        }
         return this;
     }
 
