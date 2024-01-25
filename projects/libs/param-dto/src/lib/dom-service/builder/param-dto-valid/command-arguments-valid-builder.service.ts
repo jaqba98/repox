@@ -26,7 +26,14 @@ export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    buildCorrectPatternValid(_paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+    buildCorrectPatternValid(paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+        const indexes = paramDto.commandArguments
+            .filter(argument => argument.baseValue !== "" && argument.index !== -1)
+            .filter(argument => !/^[a-zA-Z][a-zA-Z0-9-]*$/gm.test(argument.baseValue))
+            .map(argument => argument.index);
+        if (indexes.length === 0) return this;
+        this.paramDtoValid.correctPattern = false;
+        this.paramDtoValid.correctPatternWrongIndexes = [...indexes];
         return this;
     }
 
