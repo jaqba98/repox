@@ -45,7 +45,14 @@ export class ProgramArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    buildCorrectOrderValid(_paramDto: ParamDtoService): ProgramArgumentsValidBuilderService {
+    buildCorrectOrderValid(paramDto: ParamDtoService): ProgramArgumentsValidBuilderService {
+        const {index} = paramDto.program;
+        const indexes = paramDto.programArguments
+            .filter(argument => argument.index <= index)
+            .map(argument => argument.index);
+        if (indexes.length === 0) return this;
+        this.paramDtoValid.correctOrder = false;
+        this.paramDtoValid.correctOrderWrongIndexes = [...indexes];
         return this;
     }
 
@@ -53,5 +60,3 @@ export class ProgramArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this.paramDtoValid;
     }
 }
-
-// todo: refactor the code

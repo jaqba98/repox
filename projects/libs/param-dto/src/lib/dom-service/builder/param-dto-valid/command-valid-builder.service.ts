@@ -35,7 +35,7 @@ export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractS
     }
 
     buildCanExistValid(paramDto: ParamDtoService): CommandValidBuilderService {
-        const { baseValue, index } = paramDto.program;
+        const {baseValue, index} = paramDto.program;
         if (baseValue === "" && index === -1) {
             this.paramDtoValid.canExist = false;
             this.paramDtoValid.canExistWrongIndexes = [paramDto.command.index];
@@ -43,7 +43,12 @@ export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractS
         return this;
     }
 
-    buildCorrectOrderValid(_paramDto: ParamDtoService): CommandValidBuilderService {
+    buildCorrectOrderValid(paramDto: ParamDtoService): CommandValidBuilderService {
+        const {baseValue, index} = paramDto.command;
+        if (baseValue === "" && index === -1) return this;
+        if (baseValue !== "" && index > paramDto.program.index) return this;
+        this.paramDtoValid.correctOrder = false;
+        this.paramDtoValid.correctOrderWrongIndexes = [index];
         return this;
     }
 
@@ -51,5 +56,3 @@ export class CommandValidBuilderService implements ParamDtoValidBuilderAbstractS
         return this.paramDtoValid;
     }
 }
-
-// todo: refactor the code

@@ -50,7 +50,14 @@ export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this;
     }
 
-    buildCorrectOrderValid(_paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+    buildCorrectOrderValid(paramDto: ParamDtoService): CommandArgumentsValidBuilderService {
+        const {index} = paramDto.command;
+        const indexes = paramDto.commandArguments
+            .filter(argument => argument.index <= index)
+            .map(argument => argument.index);
+        if (indexes.length === 0) return this;
+        this.paramDtoValid.correctOrder = false;
+        this.paramDtoValid.correctOrderWrongIndexes = [...indexes];
         return this;
     }
 
@@ -58,5 +65,3 @@ export class CommandArgumentsValidBuilderService implements ParamDtoValidBuilder
         return this.paramDtoValid;
     }
 }
-
-// todo: refactor the code

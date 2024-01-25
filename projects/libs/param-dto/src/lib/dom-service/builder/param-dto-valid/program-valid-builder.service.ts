@@ -38,7 +38,12 @@ export class ProgramValidBuilderService implements ParamDtoValidBuilderAbstractS
         return this;
     }
 
-    buildCorrectOrderValid(_paramDto: ParamDtoService): ProgramValidBuilderService {
+    buildCorrectOrderValid(paramDto: ParamDtoService): ProgramValidBuilderService {
+        const {baseValue, index} = paramDto.program;
+        if (baseValue === "" && index === -1) return this;
+        if (baseValue !== "" && index === 0) return this;
+        this.paramDtoValid.correctOrder = false;
+        this.paramDtoValid.correctOrderWrongIndexes = [index];
         return this;
     }
 
@@ -46,5 +51,3 @@ export class ProgramValidBuilderService implements ParamDtoValidBuilderAbstractS
         return this.paramDtoValid;
     }
 }
-
-// todo: refactor the code
