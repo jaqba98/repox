@@ -12,6 +12,7 @@ import {
 import {
     CommandArgumentsValidationBuilder
 } from "../dom-service/builder/param-dto-validation/command-arguments-validation.builder";
+import {ParamDtoStore} from "../dom-service/store/param-dto.store";
 
 @singleton()
 /**
@@ -22,7 +23,8 @@ export class BuildParamDtoApp {
     constructor(
         private readonly getProcessArgv: GetProcessArgvService,
         private readonly paramDtoDirector: ParamDtoDirector,
-        private readonly paramDtoValidDirector: ParamDtoValidationDirector
+        private readonly paramDtoValidDirector: ParamDtoValidationDirector,
+        private readonly paramDtoStore: ParamDtoStore
     ) {
     }
 
@@ -33,6 +35,7 @@ export class BuildParamDtoApp {
         const command = this.paramDtoValidDirector.build(CommandValidationBuilder, paramDto);
         const programArguments = this.paramDtoValidDirector.build(ProgramArgumentsValidationBuilder, paramDto);
         const commandArguments = this.paramDtoValidDirector.build(CommandArgumentsValidationBuilder, paramDto);
+        this.paramDtoStore.set(paramDto)
         console.log(paramDto, program, command, programArguments, commandArguments);
         return true;
     }
