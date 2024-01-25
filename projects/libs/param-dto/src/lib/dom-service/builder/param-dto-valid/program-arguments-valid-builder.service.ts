@@ -18,7 +18,7 @@ export class ProgramArgumentsValidBuilderService implements ParamDtoValidBuilder
     buildSupportedSignsValid(paramDto: ParamDtoService): ProgramArgumentsValidBuilderService {
         const indexes = paramDto.programArguments
             .filter(argument => argument.baseValue !== "" && argument.index !== -1)
-            .filter(argument => /^[a-zA-Z0-9-="'`,]*$/gm.test(argument.baseValue))
+            .filter(argument => !/^[a-zA-Z0-9-="'`,]*$/gm.test(argument.baseValue))
             .map(argument => argument.index);
         if (indexes.length === 0) return this;
         this.paramDtoValid.supportedSigns = false;
