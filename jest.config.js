@@ -1,21 +1,4 @@
-const fs = require("fs");
 const path = require("path");
-
-const buildModuleNameMapper = () => {
-  const tsconfigPath = path.join(__dirname, "tsconfig.json");
-  const tsconfigText = fs.readFileSync(tsconfigPath, "utf-8");
-  const tsconfigJson = JSON.parse(tsconfigText);
-  if (tsconfigJson?.compilerOptions?.paths === undefined) return {};
-  const { paths } = tsconfigJson.compilerOptions;
-  return Object.entries(paths)
-    .map(path => ({ alias: path[0], index: path[1][0] }))
-    .reduce((acc, curr) => {
-      return {
-        ...acc,
-        [curr.alias]: path.resolve(__dirname, curr.index)
-      };
-    }, {});
-};
 
 const config = {
   clearMocks: true,
@@ -24,7 +7,8 @@ const config = {
   setupFilesAfterEnv: ["core-js/features/reflect"],
   testEnvironment: "jest-environment-node",
   moduleNameMapper: {
-    "@lib/const": path.resolve(__dirname, "projects/libs/const/src/index.ts")
+    "@lib/const": path.resolve(__dirname, "projects/libs/const/src/index.ts"),
+    "@lib/utils": path.resolve(__dirname, "projects/libs/utils/src/index.ts")
   },
 };
 

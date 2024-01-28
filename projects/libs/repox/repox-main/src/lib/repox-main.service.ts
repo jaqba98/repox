@@ -1,14 +1,14 @@
 import "core-js/features/reflect";
 import {container, singleton} from "tsyringe";
 
-import {BuildParamDtoApp} from "@lib/param-dto";
+import {BuildParamDtoAppService} from "@lib/param-dto";
 
 @singleton()
 /**
  * The main service runs the repox program.
  */
 export class RepoxMainService {
-    constructor(private readonly buildParamDtoApp: BuildParamDtoApp) {
+    constructor(private readonly buildParamDtoApp: BuildParamDtoAppService) {
     }
 
     run(): void {
