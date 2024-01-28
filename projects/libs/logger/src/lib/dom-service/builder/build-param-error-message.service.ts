@@ -13,8 +13,7 @@ export class BuildParamErrorMessageService {
             .map((param, index): LoggerWordModel => ({
                 content: param,
                 underscore: wrongParamIndexes.includes(index)
-            }))
-            .filter((_, index): boolean => index > 1);
+            }));
         return [{content: prefixContent, underscore: false}, ...words];
     }
 }

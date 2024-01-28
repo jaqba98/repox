@@ -18,6 +18,9 @@ import {ProgramErrorBuilder} from "../dom-service/builder/param-dto-error/progra
 import {CommandErrorBuilder} from "../dom-service/builder/param-dto-error/command-error.builder";
 import {ProgramArgumentsErrorBuilder} from "../dom-service/builder/param-dto-error/program-arguments-error.builder";
 import {CommandArgumentsErrorBuilder} from "../dom-service/builder/param-dto-error/command-arguments-error.builder";
+import {CombineParamDtoErrorsService} from "../dom-service/service/combine-param-dto-errors.service";
+import {ParamErrorMessageAppService} from "@lib/logger";
+import {REPOX_LOGO} from "@lib/repox-const";
 
 @singleton()
 /**
@@ -30,7 +33,9 @@ export class BuildParamDtoApp {
         private readonly paramDtoDirector: ParamDtoDirector,
         private readonly paramDtoValidDirector: ParamDtoValidationDirector,
         private readonly paramDtoError: ParamDtoErrorDirector,
-        private readonly paramDtoStore: ParamDtoStore
+        private readonly paramDtoStore: ParamDtoStore,
+        private readonly combineParamDtoErrors: CombineParamDtoErrorsService,
+        private readonly paramErrorMessage: ParamErrorMessageAppService
     ) {
     }
 
@@ -45,10 +50,15 @@ export class BuildParamDtoApp {
         const commandErrors = this.paramDtoError.build(CommandErrorBuilder, command);
         const programArgumentsErrors = this.paramDtoError.build(ProgramArgumentsErrorBuilder, programArguments);
         const commandArgumentsErrors = this.paramDtoError.build(CommandArgumentsErrorBuilder, commandArguments);
-        this.paramDtoStore.set(paramDto);
-        console.log(programErrors, commandErrors, programArgumentsErrors, commandArgumentsErrors);
-        return true;
+        const combine = this.combineParamDtoErrors.combine(
+            [programErrors, commandErrors, programArgumentsErrors, commandArgumentsErrors]
+        );
+        if (combine.length === 0) {
+            this.paramDtoStore.set(paramDto);
+            return true;
+        }
+        const first = combine[0];
+        this.paramErrorMessage.writeParamError(first.wrongParamIndexes, argv, first.errors, first.tips, REPOX_LOGO);
+        return false;
     }
 }
-
-// todo: refactor the code
