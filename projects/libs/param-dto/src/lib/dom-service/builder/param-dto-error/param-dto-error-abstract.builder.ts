@@ -15,3 +15,4 @@ export abstract class ParamDtoErrorAbstractBuilder {
 
     abstract build(): ParamDtoError;
 }
+// todo: refactor the code

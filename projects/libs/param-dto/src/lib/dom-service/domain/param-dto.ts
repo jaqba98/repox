@@ -17,3 +17,4 @@ export class ParamDto {
 
     commandArguments: ArgumentParamDtoModel[] = [];
 }
+// todo: refactor the code

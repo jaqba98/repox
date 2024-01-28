@@ -15,3 +15,4 @@ export interface BaseParamDtoModel {
     baseValue: string;
     index: number;
 }
+// todo: refactor the code

@@ -12,3 +12,4 @@ export class GetProcessArgvService {
         return deepCopy(process.argv).slice(2);
     }
 }
+// todo: refactor the code

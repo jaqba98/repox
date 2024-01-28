@@ -56,3 +56,4 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
         return this.paramDtoValid;
     }
 }
+// todo: refactor the code

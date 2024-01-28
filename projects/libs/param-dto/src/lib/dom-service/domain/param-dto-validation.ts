@@ -17,3 +17,4 @@ export class ParamDtoValidation {
     correctOrder: boolean = true;
     correctOrderWrongIndexes: number[] = [];
 }
+// todo: refactor the code

@@ -59,3 +59,4 @@ export class CommandErrorBuilder implements ParamDtoErrorAbstractBuilder {
         return this.paramDtoError;
     }
 }
+// todo: refactor the code

@@ -19,3 +19,4 @@ export abstract class ParamDtoAbstractBuilder {
 
     abstract build(): ParamDto;
 }
+// todo: refactor the code

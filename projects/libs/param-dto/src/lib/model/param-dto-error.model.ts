@@ -3,3 +3,4 @@ export interface ParamDtoErrorModel {
     errors: string[];
     tips: string[];
 }
+// todo: refactor the code

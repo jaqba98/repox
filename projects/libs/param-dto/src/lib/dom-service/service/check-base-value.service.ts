@@ -30,3 +30,4 @@ export class CheckBaseValueService {
         return /^-[a-zA-Z]=[a-zA-Z"'`][a-zA-Z0-9-,]*[a-zA-Z"'`]/gm.test(baseValue);
     }
 }
+// todo: refactor the code

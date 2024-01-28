@@ -17,3 +17,4 @@ export abstract class ParamDtoValidationAbstractBuilder {
 
     abstract build(): ParamDtoValidation;
 }
+// todo: refactor the code
