@@ -15,19 +15,43 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
         this.paramDtoError = container.resolve(ParamDtoError);
     }
 
-    buildSupportedSignsErrors(_paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+    buildSupportedSignsErrors(paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+        if (paramDtoValidation.supportedSigns) return this;
+        this.paramDtoError.supportedSignsErrors = {
+            wrongParamIndexes: [...paramDtoValidation.supportedSignsWrongIndexes],
+            errors: ["Error :("],
+            tips: ["Tip :)"]
+        };
         return this;
     }
 
-    buildCorrectPatternErrors(_paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+    buildCorrectPatternErrors(paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+        if (paramDtoValidation.correctPattern) return this;
+        this.paramDtoError.correctPatternErrors = {
+            wrongParamIndexes: [...paramDtoValidation.correctPatternWrongIndexes],
+            errors: ["Error :("],
+            tips: ["Tip :)"]
+        };
         return this;
     }
 
-    buildCanExistErrors(_paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+    buildCanExistErrors(paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+        if (paramDtoValidation.canExist) return this;
+        this.paramDtoError.canExistErrors = {
+            wrongParamIndexes: [...paramDtoValidation.canExistWrongIndexes],
+            errors: ["Error :("],
+            tips: ["Tip :)"]
+        };
         return this;
     }
 
-    buildCorrectOrderErrors(_paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+    buildCorrectOrderErrors(paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+        if (paramDtoValidation.correctOrder) return this;
+        this.paramDtoError.correctOrderErrors = {
+            wrongParamIndexes: [...paramDtoValidation.correctOrderWrongIndexes],
+            errors: ["Error :("],
+            tips: ["Tip :)"]
+        };
         return this;
     }
 

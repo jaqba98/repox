@@ -1,15 +1,17 @@
 import {injectable} from "tsyringe";
 
+import {ParamDtoErrorModel} from "../../model/param-dto-error.model";
+
 @injectable()
 /**
  * The service is a recipe how to build param dto error.
  */
 export class ParamDtoError {
-    supportedSignsErrors: number[] = [];
+    supportedSignsErrors: ParamDtoErrorModel | undefined;
 
-    correctPatternErrors: number[] = [];
+    correctPatternErrors: ParamDtoErrorModel | undefined;
 
-    canExistErrors: number[] = [];
+    canExistErrors: ParamDtoErrorModel | undefined;
 
-    correctOrderErrors: number[] = [];
+    correctOrderErrors: ParamDtoErrorModel | undefined;
 }
