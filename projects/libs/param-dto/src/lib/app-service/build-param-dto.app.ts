@@ -41,15 +41,12 @@ export class BuildParamDtoApp {
         const command = this.paramDtoValidDirector.build(CommandValidationBuilder, paramDto);
         const programArguments = this.paramDtoValidDirector.build(ProgramArgumentsValidationBuilder, paramDto);
         const commandArguments = this.paramDtoValidDirector.build(CommandArgumentsValidationBuilder, paramDto);
-        const programErrors = this.paramDtoError.build(ProgramErrorBuilder);
-        const commandErrors = this.paramDtoError.build(CommandErrorBuilder);
-        const programArgumentsErrors = this.paramDtoError.build(ProgramArgumentsErrorBuilder);
-        const commandArgumentsErrors = this.paramDtoError.build(CommandArgumentsErrorBuilder);
+        const programErrors = this.paramDtoError.build(ProgramErrorBuilder, program);
+        const commandErrors = this.paramDtoError.build(CommandErrorBuilder, command);
+        const programArgumentsErrors = this.paramDtoError.build(ProgramArgumentsErrorBuilder, programArguments);
+        const commandArgumentsErrors = this.paramDtoError.build(CommandArgumentsErrorBuilder, commandArguments);
         this.paramDtoStore.set(paramDto);
-        console.log(
-            program, command, programArguments, commandArguments,
-            programErrors, commandErrors, programArgumentsErrors, commandArgumentsErrors
-        );
+        console.log(programErrors, commandErrors, programArgumentsErrors, commandArgumentsErrors);
         return true;
     }
 }
