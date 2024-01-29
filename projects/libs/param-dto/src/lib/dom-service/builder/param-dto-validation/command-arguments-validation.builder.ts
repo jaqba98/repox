@@ -2,7 +2,7 @@ import {container, singleton} from "tsyringe";
 
 import {ParamDtoValidation} from "../../domain/param-dto-validation";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
-import {ParamDto} from "../../domain/param-dto";
+import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {CheckBaseValueService} from "../../service/check-base-value.service";
 
 @singleton()
@@ -16,7 +16,7 @@ export class CommandArgumentsValidationBuilder implements ParamDtoValidationAbst
         this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDto): CommandArgumentsValidationBuilder {
+    buildSupportedSignsValid(paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
         const indexes = paramDto.commandArguments
             .filter(argument => argument.baseValue !== "" && argument.index !== -1)
             .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
@@ -27,7 +27,7 @@ export class CommandArgumentsValidationBuilder implements ParamDtoValidationAbst
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDto): CommandArgumentsValidationBuilder {
+    buildCorrectPatternValid(paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
         const indexes = paramDto.commandArguments
             .filter(argument => argument.baseValue !== "" && argument.index !== -1)
             .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueCorrectPattern(
@@ -40,7 +40,7 @@ export class CommandArgumentsValidationBuilder implements ParamDtoValidationAbst
         return this;
     }
 
-    buildCanExistValid(paramDto: ParamDto): CommandArgumentsValidationBuilder {
+    buildCanExistValid(paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
         const { baseValue, index } = paramDto.command;
         if (baseValue === "" && index === -1) {
             const indexes = paramDto.commandArguments.map(argument => argument.index);
@@ -50,7 +50,7 @@ export class CommandArgumentsValidationBuilder implements ParamDtoValidationAbst
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDto): CommandArgumentsValidationBuilder {
+    buildCorrectOrderValid(paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
         const {index} = paramDto.command;
         const indexes = paramDto.commandArguments
             .filter(argument => argument.index <= index)

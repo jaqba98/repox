@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 
-import {ParamDto} from "../domain/param-dto";
+import {ParamDtoDomain} from "../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 
 @singleton()
@@ -8,14 +8,14 @@ import {deepCopy} from "@lib/utils";
  * The store contains the param dto model.
  */
 export class ParamDtoStore {
-    private paramDto: ParamDto | undefined;
+    private paramDto: ParamDtoDomain | undefined;
 
-    get(): ParamDto {
+    get(): ParamDtoDomain {
         if (!this.paramDto) throw new Error("The store is not defined!");
         return this.paramDto;
     }
 
-    set(paramDto: ParamDto): void {
+    set(paramDto: ParamDtoDomain): void {
         this.paramDto = deepCopy(paramDto);
     }
 }

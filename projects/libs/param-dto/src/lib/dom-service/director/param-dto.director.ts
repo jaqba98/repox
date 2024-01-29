@@ -1,22 +1,20 @@
 import {container, InjectionToken, singleton} from "tsyringe";
 
-import {ParamDto} from "../domain/param-dto";
+import {ParamDtoDomain} from "../domain/param-dto.domain";
 import {ParamDtoAbstractBuilder} from "../builder/param-dto/param-dto-abstract.builder";
 
 @singleton()
 /**
- * The director service contains logic composed of
- * param dto builder steps.
+ * The director uses param dto builder to build parameter dto model.
  */
 export class ParamDtoDirector {
-    build(abstract: InjectionToken<ParamDtoAbstractBuilder>, argv: string[]): ParamDto {
-        return container.resolve(abstract)
-            .buildBaseArguments(argv)
+    build(service: InjectionToken<ParamDtoAbstractBuilder>, args: string[]): ParamDtoDomain {
+        return container.resolve(service)
+            .buildBaseArgs(args)
             .buildProgram()
             .buildCommand()
-            .buildProgramArguments()
-            .buildCommandArguments()
+            .buildProgramArgs()
+            .buildCommandArgs()
             .build();
     }
 }
-// todo: refactor the code

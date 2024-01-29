@@ -2,7 +2,7 @@ import {container, singleton} from "tsyringe";
 
 import {ParamDtoValidation} from "../../domain/param-dto-validation";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
-import {ParamDto} from "../../domain/param-dto";
+import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {CheckBaseValueService} from "../../service/check-base-value.service";
 
 @singleton()
@@ -16,7 +16,7 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
         this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDto): ProgramValidationBuilder {
+    buildSupportedSignsValid(paramDto: ParamDtoDomain): ProgramValidationBuilder {
         const {baseValue, index} = paramDto.program;
         if (baseValue === "" && index === -1) return this;
         if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
@@ -25,7 +25,7 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDto): ProgramValidationBuilder {
+    buildCorrectPatternValid(paramDto: ParamDtoDomain): ProgramValidationBuilder {
         const {baseValue, index} = paramDto.program;
         if (baseValue === "" && index === -1) return this;
         if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
@@ -34,11 +34,11 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
         return this;
     }
 
-    buildCanExistValid(_paramDto: ParamDto): ProgramValidationBuilder {
+    buildCanExistValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDto): ProgramValidationBuilder {
+    buildCorrectOrderValid(paramDto: ParamDtoDomain): ProgramValidationBuilder {
         const {baseValue, index} = paramDto.program;
         if (baseValue === "" && index === -1) return this;
         if (baseValue !== "" && index === 0) return this;

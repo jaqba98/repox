@@ -1,7 +1,7 @@
 import {container, InjectionToken, singleton} from "tsyringe";
 
 import {ParamDtoValidation} from "../domain/param-dto-validation";
-import {ParamDto} from "../domain/param-dto";
+import {ParamDtoDomain} from "../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "../builder/param-dto-validation/param-dto-validation-abstract.builder";
 
@@ -12,7 +12,7 @@ import {ParamDtoValidationAbstractBuilder} from "../builder/param-dto-validation
 export class ParamDtoValidationDirector {
     build(
         abstract: InjectionToken<ParamDtoValidationAbstractBuilder>,
-        paramDto: ParamDto
+        paramDto: ParamDtoDomain
     ): ParamDtoValidation {
         const cloneParamDto = deepCopy(paramDto);
         return container.resolve(abstract)

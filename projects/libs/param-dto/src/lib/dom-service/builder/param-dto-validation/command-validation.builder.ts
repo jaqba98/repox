@@ -2,7 +2,7 @@ import {container, singleton} from "tsyringe";
 
 import {ParamDtoValidation} from "../../domain/param-dto-validation";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
-import {ParamDto} from "../../domain/param-dto";
+import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {CheckBaseValueService} from "../../service/check-base-value.service";
 
 @singleton()
@@ -16,7 +16,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
         this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDto): CommandValidationBuilder {
+    buildSupportedSignsValid(paramDto: ParamDtoDomain): CommandValidationBuilder {
         const {baseValue, index} = paramDto.command;
         if (baseValue === "" && index === -1) return this;
         if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
@@ -25,7 +25,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDto): CommandValidationBuilder {
+    buildCorrectPatternValid(paramDto: ParamDtoDomain): CommandValidationBuilder {
         const {baseValue, index} = paramDto.command;
         if (baseValue === "" && index === -1) return this;
         if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
@@ -34,7 +34,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
         return this;
     }
 
-    buildCanExistValid(paramDto: ParamDto): CommandValidationBuilder {
+    buildCanExistValid(paramDto: ParamDtoDomain): CommandValidationBuilder {
         const {baseValue, index} = paramDto.program;
         if (baseValue === "" && index === -1) {
             this.paramDtoValid.canExist = false;
@@ -43,7 +43,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDto): CommandValidationBuilder {
+    buildCorrectOrderValid(paramDto: ParamDtoDomain): CommandValidationBuilder {
         const {baseValue, index} = paramDto.command;
         if (baseValue === "" && index === -1) return this;
         if (baseValue !== "" && index > paramDto.program.index) return this;

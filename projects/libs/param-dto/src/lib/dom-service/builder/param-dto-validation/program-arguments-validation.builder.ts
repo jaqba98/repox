@@ -2,7 +2,7 @@ import {container, singleton} from "tsyringe";
 
 import {ParamDtoValidation} from "../../domain/param-dto-validation";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
-import {ParamDto} from "../../domain/param-dto";
+import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {CheckBaseValueService} from "../../service/check-base-value.service";
 
 @singleton()
@@ -16,7 +16,7 @@ export class ProgramArgumentsValidationBuilder implements ParamDtoValidationAbst
         this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDto): ProgramArgumentsValidationBuilder {
+    buildSupportedSignsValid(paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
         const indexes = paramDto.programArguments
             .filter(argument => argument.baseValue !== "" && argument.index !== -1)
             .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
@@ -27,7 +27,7 @@ export class ProgramArgumentsValidationBuilder implements ParamDtoValidationAbst
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDto): ProgramArgumentsValidationBuilder {
+    buildCorrectPatternValid(paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
         const indexes = paramDto.programArguments
             .filter(argument => argument.baseValue !== "" && argument.index !== -1)
             .filter(argument => !/^[a-zA-Z][a-zA-Z0-9-]*$/gm.test(argument.baseValue))
@@ -41,11 +41,11 @@ export class ProgramArgumentsValidationBuilder implements ParamDtoValidationAbst
         return this;
     }
 
-    buildCanExistValid(_paramDto: ParamDto): ProgramArgumentsValidationBuilder {
+    buildCanExistValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDto): ProgramArgumentsValidationBuilder {
+    buildCorrectOrderValid(paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
         const {index} = paramDto.program;
         const indexes = paramDto.programArguments
             .filter(argument => argument.index <= index)

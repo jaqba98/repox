@@ -1,18 +1,26 @@
 import {singleton} from "tsyringe";
 
 import {CommandLineArgsService} from "../infrastructure/command-line-args.service";
+import {ParamDtoDirector} from "../dom-service/director/param-dto.director";
+import {ParamDtoBuilder} from "../dom-service/builder/param-dto/param-dto.builder";
 
 @singleton()
 /**
  * The app service builds and validate param dto model.
  */
 export class BuildParamDtoAppService {
-    constructor(private readonly commandLineArgs: CommandLineArgsService) {
+    constructor(
+        private readonly commandLineArgs: CommandLineArgsService,
+        private readonly paramDto: ParamDtoDirector
+    ) {
     }
 
     build(): boolean {
+        // Get arguments provided by user.
         const userArgs = this.commandLineArgs.getUserArgs();
-        console.log(userArgs);
+        // Build the parameter dto object.
+        const paramDto = this.paramDto.build(ParamDtoBuilder, userArgs);
+        console.log(paramDto);
         return true;
     }
 }

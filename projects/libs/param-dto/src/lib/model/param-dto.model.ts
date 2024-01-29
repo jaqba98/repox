@@ -1,6 +1,6 @@
 /**
- * The dto model of parameters (data transport model)
- * for all parameters directly from the command line.
+ * The param dto model of parameters (data transport model)
+ * for all parameters provided by the user.
  */
 
 export interface ArgumentParamDtoModel extends BaseParamDtoModel {
@@ -15,4 +15,3 @@ export interface BaseParamDtoModel {
     baseValue: string;
     index: number;
 }
-// todo: refactor the code

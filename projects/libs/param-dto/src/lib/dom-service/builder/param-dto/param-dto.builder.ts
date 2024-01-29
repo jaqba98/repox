@@ -1,83 +1,94 @@
 import {container, singleton} from "tsyringe";
 
-import {ParamDto} from "../../domain/param-dto";
 import {ParamDtoAbstractBuilder} from "./param-dto-abstract.builder";
+import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {deepCopy, getIndexesBetween} from "@lib/utils";
-import {ALIAS_PREFIX, ARGUMENT_PREFIX, EQUAL_SIGN, VALUE_SEPARATOR} from "../../../const/param-dto.const";
-import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../../model/param-dto.model";
+import {
+    ALIAS_PREFIX,
+    ARGUMENT_PREFIX,
+    EQUAL_SIGN,
+    VALUE_SEPARATOR
+} from "../../../const/param-dto.const";
+import {ArgumentParamDtoModel} from "../../../model/param-dto.model";
 
 @singleton()
 /**
  * The builder contains methods to build every single param dto element.
  */
 export class ParamDtoBuilder implements ParamDtoAbstractBuilder {
-    readonly paramDto: ParamDto;
+    readonly paramDto: ParamDtoDomain;
 
     constructor() {
-        this.paramDto = container.resolve(ParamDto);
+        this.paramDto = container.resolve(ParamDtoDomain);
     }
 
-    buildBaseArguments(argv: string[]): ParamDtoBuilder {
-        this.paramDto.baseArguments = deepCopy(argv);
+    buildBaseArgs(args: string[]): ParamDtoAbstractBuilder {
+        this.paramDto.baseArgs = deepCopy(args);
         return this;
     }
 
-    buildProgram(): ParamDtoBuilder {
-        const program = this.paramDto.baseArguments[0];
-        if (!program) return this;
+    buildProgram(): ParamDtoAbstractBuilder {
+        if (this.paramDto.baseArgs === undefined) return this;
+        const program = this.paramDto.baseArgs.at(0);
+        if (program === undefined) return this;
         if (program.startsWith(ARGUMENT_PREFIX)) return this;
         if (program.startsWith(ALIAS_PREFIX)) return this;
-        this.paramDto.program = this.buildBaseParamDto(0);
+        this.paramDto.program = {baseValue: program, index: 0};
         return this;
     }
 
-    buildCommand(): ParamDtoBuilder {
-        const {baseArguments, program} = this.paramDto;
-        const command = baseArguments
-            .map((baseArgument, index): { baseArgument: string, index: number } => ({baseArgument, index}))
-            .find(argument => {
-                if (argument.index <= program.index) return false;
-                if (argument.baseArgument.startsWith(ARGUMENT_PREFIX)) return false;
-                return !argument.baseArgument.startsWith(ALIAS_PREFIX);
+    buildCommand(): ParamDtoAbstractBuilder {
+        const {baseArgs, program} = this.paramDto;
+        if (baseArgs === undefined) return this;
+        if (program === undefined) return this;
+        const command = baseArgs
+            .map((baseValue: string, index: number) => ({baseValue, index}))
+            .find(baseParamDto => {
+                if (baseParamDto.index <= program.index) return false;
+                if (baseParamDto.baseValue.startsWith(ARGUMENT_PREFIX)) return false;
+                return !baseParamDto.baseValue.startsWith(ALIAS_PREFIX);
             });
-        if (!command) return this;
-        this.paramDto.command = this.buildBaseParamDto(command.index);
+        if (command === undefined) return this;
+        this.paramDto.command = deepCopy(command);
         return this;
     }
 
-    buildProgramArguments(): ParamDtoBuilder {
-        const {program, command} = this.paramDto;
-        const programArguments: ArgumentParamDtoModel[] = getIndexesBetween(program.index, command.index)
-            .map(index => this.buildArgumentParamDto(index));
-        this.paramDto.programArguments = deepCopy(programArguments);
+    buildProgramArgs(): ParamDtoAbstractBuilder {
+        const {baseArgs} = this.paramDto;
+        if (baseArgs === undefined) return this;
+        const startIndex = this.paramDto.program?.index ?? -1;
+        const endIndex = this.paramDto.command?.index ?? baseArgs.length;
+        const args: ArgumentParamDtoModel[] = getIndexesBetween(startIndex, endIndex)
+            .map(index => this.buildArgumentParamDto(index, baseArgs));
+        if (args.length === 0) return this;
+        this.paramDto.programArgs = deepCopy(args);
         return this;
     }
 
-    buildCommandArguments(): ParamDtoBuilder {
-        const {baseArguments, command} = this.paramDto;
-        const commandArguments: ArgumentParamDtoModel[] = getIndexesBetween(command.index, baseArguments.length)
-            .map(index => this.buildArgumentParamDto(index));
-        this.paramDto.commandArguments = deepCopy(commandArguments);
+    buildCommandArgs(): ParamDtoAbstractBuilder {
+        const {baseArgs} = this.paramDto;
+        if (baseArgs === undefined) return this;
+        const startIndex = this.paramDto.command?.index ?? -1;
+        const endIndex = baseArgs.length;
+        const args: ArgumentParamDtoModel[] = getIndexesBetween(startIndex, endIndex)
+            .map(index => this.buildArgumentParamDto(index, baseArgs));
+        if (args.length === 0) return this;
+        this.paramDto.commandArgs = deepCopy(args);
         return this;
     }
 
-    build(): ParamDto {
+    build(): ParamDtoDomain {
         return this.paramDto;
     }
 
-    private buildBaseParamDto(index: number): BaseParamDtoModel {
-        const baseValue = this.paramDto.baseArguments[index];
-        return baseValue ? {baseValue, index} : {baseValue: "", index: -1};
-    }
-
-    private buildArgumentParamDto(index: number): ArgumentParamDtoModel {
-        const baseParamDto = this.buildBaseParamDto(index);
-        const hasValue = baseParamDto.baseValue.includes(EQUAL_SIGN);
-        const name = this.buildArgumentName(baseParamDto.baseValue, hasValue);
-        const values = this.buildArgumentValues(baseParamDto.baseValue, hasValue);
+    private buildArgumentParamDto(index: number, args: string[]): ArgumentParamDtoModel {
+        const baseValue = args[index] ?? "";
+        const hasValue = baseValue.includes(EQUAL_SIGN);
+        const name = this.buildArgumentName(baseValue, hasValue);
+        const values = this.buildArgumentValues(baseValue, hasValue);
         const hasManyValues = values.length > 1;
-        const isAlias = name.length === 1;
-        return {...baseParamDto, hasValue, name, values, hasManyValues, isAlias};
+        const isAlias = this.buildIsAlias(baseValue, name);
+        return {baseValue, index, hasValue, name, values, hasManyValues, isAlias};
     }
 
     private buildArgumentName(baseValue: string, hasValue: boolean): string {
@@ -92,9 +103,14 @@ export class ParamDtoBuilder implements ParamDtoAbstractBuilder {
         return baseValue
             .split(EQUAL_SIGN)[1]
             .replace(/\s/g, "")
-            .replace(/^(["'`])/, "")
-            .replace(/(["'`])$/, "")
+            .replace(/^["'`]/, "")
+            .replace(/["'`]$/, "")
             .split(VALUE_SEPARATOR);
     }
+
+    private buildIsAlias(baseValue: string, name: string): boolean {
+        return baseValue[0] === ALIAS_PREFIX &&
+            baseValue[1] !== ALIAS_PREFIX &&
+            name.length === 1;
+    }
 }
-// todo: refactor the code

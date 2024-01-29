@@ -1,22 +1,21 @@
-import {ParamDto} from "../../domain/param-dto";
-import {ParamDtoBuilder} from "./param-dto.builder";
+import {ParamDtoDomain} from "../../domain/param-dto.domain";
 
 /**
- * The abstract builder contains methods which can be implemented in the param dto builder service.
+ * The abstract builder contains methods which can be implemented
+ * in the param dto builder service.
  */
 export abstract class ParamDtoAbstractBuilder {
-    abstract readonly paramDto: ParamDto;
+    abstract readonly paramDto: ParamDtoDomain;
 
-    abstract buildBaseArguments(argv: string[]): ParamDtoBuilder;
+    abstract buildBaseArgs(args: string[]): ParamDtoAbstractBuilder;
 
-    abstract buildProgram(): ParamDtoBuilder;
+    abstract buildProgram(): ParamDtoAbstractBuilder;
 
-    abstract buildCommand(): ParamDtoBuilder;
+    abstract buildCommand(): ParamDtoAbstractBuilder;
 
-    abstract buildProgramArguments(): ParamDtoBuilder;
+    abstract buildProgramArgs(): ParamDtoAbstractBuilder;
 
-    abstract buildCommandArguments(): ParamDtoBuilder;
+    abstract buildCommandArgs(): ParamDtoAbstractBuilder;
 
-    abstract build(): ParamDto;
+    abstract build(): ParamDtoDomain;
 }
-// todo: refactor the code
