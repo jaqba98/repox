@@ -7,16 +7,16 @@ import {ParamDtoDomain} from "../domain/param-dto.domain";
 describe("ParamDtoDirector", (): void => {
     let service: ParamDtoDirector;
 
-    beforeAll((): void => {
+    beforeEach((): void => {
         service = container.resolve(ParamDtoDirector);
     });
 
-    afterAll((): void => {
+    afterEach((): void => {
         container.reset();
         container.clearInstances();
     });
 
-    test("Should return everything undefined if the args are undefined", (): void => {
+    test("Should return undefined structure when args are undefined", (): void => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const args: any = undefined;
         expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
@@ -28,7 +28,9 @@ describe("ParamDtoDirector", (): void => {
         });
     });
 
-    test("Should return correct the param dto object if args are correct", (): void => {
+    // todo: Create the remaining tests.
+
+    test("Should return structure when program and command are defined", (): void => {
         const args = [
             "program",
             "--arg1",
@@ -154,6 +156,66 @@ describe("ParamDtoDirector", (): void => {
                     isAlias: true
                 }
             ]
+        });
+    });
+
+    test("Should return structure when program and command are undefined", (): void => {
+        const args = ["--arg1", "-a"];
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+            baseArgs: ["--arg1", "-a"],
+            program: undefined,
+            command: undefined,
+            programArgs: [
+                {
+                    baseValue: "--arg1",
+                    index: 0,
+                    hasValue: false,
+                    name: "arg1",
+                    values: [],
+                    hasManyValues: false,
+                    isAlias: false
+                },
+                {
+                    baseValue: "-a",
+                    index: 1,
+                    hasValue: false,
+                    name: "a",
+                    values: [],
+                    hasManyValues: false,
+                    isAlias: true
+                }
+            ],
+            commandArgs: undefined
+        });
+    });
+
+    test("Should return structure when command is undefined", (): void => {
+        const args = ["program", "--arg1", "-a"];
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+            baseArgs: ["program", "--arg1", "-a"],
+            program: {baseValue: "program", index: 0},
+            command: undefined,
+            programArgs: [
+                {
+                    baseValue: "--arg1",
+                    index: 1,
+                    hasValue: false,
+                    name: "arg1",
+                    values: [],
+                    hasManyValues: false,
+                    isAlias: false
+                },
+                {
+                    baseValue: "-a",
+                    index: 2,
+                    hasValue: false,
+                    name: "a",
+                    values: [],
+                    hasManyValues: false,
+                    isAlias: true
+                }
+            ],
+            commandArgs: undefined
         });
     });
 });

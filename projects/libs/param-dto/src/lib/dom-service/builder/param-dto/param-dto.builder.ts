@@ -66,8 +66,10 @@ export class ParamDtoBuilder implements ParamDtoAbstractBuilder {
     }
 
     buildCommandArgs(): ParamDtoAbstractBuilder {
-        const {baseArgs} = this.paramDto;
+        const {baseArgs, program, command} = this.paramDto;
         if (baseArgs === undefined) return this;
+        if (program === undefined) return this;
+        if (command === undefined) return this;
         const startIndex = this.paramDto.command?.index ?? -1;
         const endIndex = baseArgs.length;
         const args: ArgumentParamDtoModel[] = getIndexesBetween(startIndex, endIndex)
