@@ -16,48 +16,48 @@ export class CommandArgumentsValidationBuilder implements ParamDtoValidationAbst
         this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
-        const indexes = paramDto.commandArguments
-            .filter(argument => argument.baseValue !== "" && argument.index !== -1)
-            .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
-            .map(argument => argument.index);
-        if (indexes.length === 0) return this;
-        this.paramDtoValid.supportedSigns = false;
-        this.paramDtoValid.supportedSignsWrongIndexes = [...indexes];
+    buildSupportedSignsValid(_paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
+        // const indexes = paramDto.commandArguments
+        //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)
+        //     .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
+        //     .map(argument => argument.index);
+        // if (indexes.length === 0) return this;
+        // this.paramDtoValid.supportedSigns = false;
+        // this.paramDtoValid.supportedSignsWrongIndexes = [...indexes];
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
-        const indexes = paramDto.commandArguments
-            .filter(argument => argument.baseValue !== "" && argument.index !== -1)
-            .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueCorrectPattern(
-                argument.baseValue, argument.hasValue, argument.isAlias
-            ))
-            .map(argument => argument.index);
-        if (indexes.length === 0) return this;
-        this.paramDtoValid.correctPattern = false;
-        this.paramDtoValid.correctPatternWrongIndexes = [...indexes];
+    buildCorrectPatternValid(_paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
+        // const indexes = paramDto.commandArguments
+        //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)
+        //     .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueCorrectPattern(
+        //         argument.baseValue, argument.hasValue, argument.isAlias
+        //     ))
+        //     .map(argument => argument.index);
+        // if (indexes.length === 0) return this;
+        // this.paramDtoValid.correctPattern = false;
+        // this.paramDtoValid.correctPatternWrongIndexes = [...indexes];
         return this;
     }
 
-    buildCanExistValid(paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
-        const { baseValue, index } = paramDto.command;
-        if (baseValue === "" && index === -1) {
-            const indexes = paramDto.commandArguments.map(argument => argument.index);
-            this.paramDtoValid.canExist = false;
-            this.paramDtoValid.canExistWrongIndexes = [...indexes];
-        }
+    buildCanExistValid(_paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
+        // const { baseValue, index } = paramDto.command;
+        // if (baseValue === "" && index === -1) {
+        //     const indexes = paramDto.commandArguments.map(argument => argument.index);
+        //     this.paramDtoValid.canExist = false;
+        //     this.paramDtoValid.canExistWrongIndexes = [...indexes];
+        // }
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
-        const {index} = paramDto.command;
-        const indexes = paramDto.commandArguments
-            .filter(argument => argument.index <= index)
-            .map(argument => argument.index);
-        if (indexes.length === 0) return this;
-        this.paramDtoValid.correctOrder = false;
-        this.paramDtoValid.correctOrderWrongIndexes = [...indexes];
+    buildCorrectOrderValid(_paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
+        // const {index} = paramDto.command;
+        // const indexes = paramDto.commandArguments
+        //     .filter(argument => argument.index <= index)
+        //     .map(argument => argument.index);
+        // if (indexes.length === 0) return this;
+        // this.paramDtoValid.correctOrder = false;
+        // this.paramDtoValid.correctOrderWrongIndexes = [...indexes];
         return this;
     }
 

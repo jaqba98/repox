@@ -16,28 +16,28 @@ export class ProgramArgumentsValidationBuilder implements ParamDtoValidationAbst
         this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
-        const indexes = paramDto.programArguments
-            .filter(argument => argument.baseValue !== "" && argument.index !== -1)
-            .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
-            .map(argument => argument.index);
-        if (indexes.length === 0) return this;
-        this.paramDtoValid.supportedSigns = false;
-        this.paramDtoValid.supportedSignsWrongIndexes = [...indexes];
+    buildSupportedSignsValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
+        // const indexes = paramDto.programArguments
+        //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)
+        //     .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
+        //     .map(argument => argument.index);
+        // if (indexes.length === 0) return this;
+        // this.paramDtoValid.supportedSigns = false;
+        // this.paramDtoValid.supportedSignsWrongIndexes = [...indexes];
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
-        const indexes = paramDto.programArguments
-            .filter(argument => argument.baseValue !== "" && argument.index !== -1)
-            .filter(argument => !/^[a-zA-Z][a-zA-Z0-9-]*$/gm.test(argument.baseValue))
-            .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueCorrectPattern(
-                argument.baseValue, argument.hasValue, argument.isAlias
-            ))
-            .map(argument => argument.index);
-        if (indexes.length === 0) return this;
-        this.paramDtoValid.correctPattern = false;
-        this.paramDtoValid.correctPatternWrongIndexes = [...indexes];
+    buildCorrectPatternValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
+        // const indexes = paramDto.programArguments
+        //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)
+        //     .filter(argument => !/^[a-zA-Z][a-zA-Z0-9-]*$/gm.test(argument.baseValue))
+        //     .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueCorrectPattern(
+        //         argument.baseValue, argument.hasValue, argument.isAlias
+        //     ))
+        //     .map(argument => argument.index);
+        // if (indexes.length === 0) return this;
+        // this.paramDtoValid.correctPattern = false;
+        // this.paramDtoValid.correctPatternWrongIndexes = [...indexes];
         return this;
     }
 
@@ -45,14 +45,14 @@ export class ProgramArgumentsValidationBuilder implements ParamDtoValidationAbst
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
-        const {index} = paramDto.program;
-        const indexes = paramDto.programArguments
-            .filter(argument => argument.index <= index)
-            .map(argument => argument.index);
-        if (indexes.length === 0) return this;
-        this.paramDtoValid.correctOrder = false;
-        this.paramDtoValid.correctOrderWrongIndexes = [...indexes];
+    buildCorrectOrderValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
+        // const {index} = paramDto.program;
+        // const indexes = paramDto.programArguments
+        //     .filter(argument => argument.index <= index)
+        //     .map(argument => argument.index);
+        // if (indexes.length === 0) return this;
+        // this.paramDtoValid.correctOrder = false;
+        // this.paramDtoValid.correctOrderWrongIndexes = [...indexes];
         return this;
     }
 

@@ -16,21 +16,21 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
         this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDtoDomain): ProgramValidationBuilder {
-        const {baseValue, index} = paramDto.program;
-        if (baseValue === "" && index === -1) return this;
-        if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
-        this.paramDtoValid.supportedSigns = false;
-        this.paramDtoValid.supportedSignsWrongIndexes = [index];
+    buildSupportedSignsValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
+        // const {baseValue, index} = paramDto.program;
+        // if (baseValue === "" && index === -1) return this;
+        // if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
+        // this.paramDtoValid.supportedSigns = false;
+        // this.paramDtoValid.supportedSignsWrongIndexes = [index];
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDtoDomain): ProgramValidationBuilder {
-        const {baseValue, index} = paramDto.program;
-        if (baseValue === "" && index === -1) return this;
-        if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
-        this.paramDtoValid.correctPattern = false;
-        this.paramDtoValid.correctPatternWrongIndexes = [index];
+    buildCorrectPatternValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
+        // const {baseValue, index} = paramDto.program;
+        // if (baseValue === "" && index === -1) return this;
+        // if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
+        // this.paramDtoValid.correctPattern = false;
+        // this.paramDtoValid.correctPatternWrongIndexes = [index];
         return this;
     }
 
@@ -38,12 +38,12 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDtoDomain): ProgramValidationBuilder {
-        const {baseValue, index} = paramDto.program;
-        if (baseValue === "" && index === -1) return this;
-        if (baseValue !== "" && index === 0) return this;
-        this.paramDtoValid.correctOrder = false;
-        this.paramDtoValid.correctOrderWrongIndexes = [index];
+    buildCorrectOrderValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
+        // const {baseValue, index} = paramDto.program;
+        // if (baseValue === "" && index === -1) return this;
+        // if (baseValue !== "" && index === 0) return this;
+        // this.paramDtoValid.correctOrder = false;
+        // this.paramDtoValid.correctOrderWrongIndexes = [index];
         return this;
     }
 

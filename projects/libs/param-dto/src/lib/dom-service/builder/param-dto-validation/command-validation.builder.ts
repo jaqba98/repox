@@ -16,39 +16,39 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
         this.paramDtoValid = container.resolve(ParamDtoValidation);
     }
 
-    buildSupportedSignsValid(paramDto: ParamDtoDomain): CommandValidationBuilder {
-        const {baseValue, index} = paramDto.command;
-        if (baseValue === "" && index === -1) return this;
-        if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
-        this.paramDtoValid.supportedSigns = false;
-        this.paramDtoValid.supportedSignsWrongIndexes = [index];
+    buildSupportedSignsValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
+        // const {baseValue, index} = paramDto.command;
+        // if (baseValue === "" && index === -1) return this;
+        // if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
+        // this.paramDtoValid.supportedSigns = false;
+        // this.paramDtoValid.supportedSignsWrongIndexes = [index];
         return this;
     }
 
-    buildCorrectPatternValid(paramDto: ParamDtoDomain): CommandValidationBuilder {
-        const {baseValue, index} = paramDto.command;
-        if (baseValue === "" && index === -1) return this;
-        if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
-        this.paramDtoValid.correctPattern = false;
-        this.paramDtoValid.correctPatternWrongIndexes = [index];
+    buildCorrectPatternValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
+        // const {baseValue, index} = paramDto.command;
+        // if (baseValue === "" && index === -1) return this;
+        // if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
+        // this.paramDtoValid.correctPattern = false;
+        // this.paramDtoValid.correctPatternWrongIndexes = [index];
         return this;
     }
 
-    buildCanExistValid(paramDto: ParamDtoDomain): CommandValidationBuilder {
-        const {baseValue, index} = paramDto.program;
-        if (baseValue === "" && index === -1) {
-            this.paramDtoValid.canExist = false;
-            this.paramDtoValid.canExistWrongIndexes = [paramDto.command.index];
-        }
+    buildCanExistValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
+        // const {baseValue, index} = paramDto.program;
+        // if (baseValue === "" && index === -1) {
+        //     this.paramDtoValid.canExist = false;
+        //     this.paramDtoValid.canExistWrongIndexes = [paramDto.command.index];
+        // }
         return this;
     }
 
-    buildCorrectOrderValid(paramDto: ParamDtoDomain): CommandValidationBuilder {
-        const {baseValue, index} = paramDto.command;
-        if (baseValue === "" && index === -1) return this;
-        if (baseValue !== "" && index > paramDto.program.index) return this;
-        this.paramDtoValid.correctOrder = false;
-        this.paramDtoValid.correctOrderWrongIndexes = [index];
+    buildCorrectOrderValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
+        // const {baseValue, index} = paramDto.command;
+        // if (baseValue === "" && index === -1) return this;
+        // if (baseValue !== "" && index > paramDto.program.index) return this;
+        // this.paramDtoValid.correctOrder = false;
+        // this.paramDtoValid.correctOrderWrongIndexes = [index];
         return this;
     }
 
