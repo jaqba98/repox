@@ -8,7 +8,10 @@ import {ParamDtoAbstractBuilder} from "../builder/param-dto/param-dto-abstract.b
  * The director uses param dto builder to build parameter dto model.
  */
 export class ParamDtoDirector {
-    build(service: InjectionToken<ParamDtoAbstractBuilder>, args: string[]): ParamDtoDomain {
+    build(
+        service: InjectionToken<ParamDtoAbstractBuilder>,
+        args: string[]
+    ): ParamDtoDomain {
         return container.resolve(service)
             .buildBaseArgs(args)
             .buildProgram()
