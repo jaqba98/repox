@@ -1,10 +1,14 @@
-import {container} from "tsyringe";
+import {container, singleton} from "tsyringe";
 
 import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
 import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
 
+@singleton()
+/**
+ * The builder contains methods to build validation steps to the command.
+ */
 export class CommandValidationBuilder implements ParamDtoValidationAbstractBuilder {
     paramDtoValidation: ParamDtoValidationDomain;
 
@@ -28,6 +32,12 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
     }
 
     buildCanExistValidation(): CommandValidationBuilder {
+        const program = this.paramDto?.program;
+        const command = this.paramDto?.command;
+        if (!program && command) {
+            this.paramDtoValidation.canExist = false;
+            this.paramDtoValidation.canExistWrongIndexes = [command.index];
+        }
         return this;
     }
 
@@ -40,24 +50,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
     }
 }
 
-// import {container, singleton} from "tsyringe";
-//
-// import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
-// import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
-// import {ParamDtoDomain} from "../../domain/param-dto.domain";
-// import {CheckBaseValueService} from "../../service/check-base-value.service";
-//
-// @singleton()
-// /**
-//  * The builder contains methods to build validation steps to the command.
-//  */
 // export class CommandValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     readonly paramDtoValid: ParamDtoValidationDomain;
-//
-//     constructor(private readonly checkBaseValue: CheckBaseValueService) {
-//         this.paramDtoValid = container.resolve(ParamDtoValidationDomain);
-//     }
-//
 //     buildSupportedSignsValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
 //         // const {baseValue, index} = paramDto.command;
 //         // if (baseValue === "" && index === -1) return this;
@@ -76,15 +69,6 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
 //         return this;
 //     }
 //
-//     buildCanExistValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
-//         // const {baseValue, index} = paramDto.program;
-//         // if (baseValue === "" && index === -1) {
-//         //     this.paramDtoValid.canExist = false;
-//         //     this.paramDtoValid.canExistWrongIndexes = [paramDto.command.index];
-//         // }
-//         return this;
-//     }
-//
 //     buildCorrectOrderValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
 //         // const {baseValue, index} = paramDto.command;
 //         // if (baseValue === "" && index === -1) return this;
@@ -92,10 +76,6 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
 //         // this.paramDtoValid.correctOrder = false;
 //         // this.paramDtoValid.correctOrderWrongIndexes = [index];
 //         return this;
-//     }
-//
-//     build(): ParamDtoValidationDomain {
-//         return this.paramDtoValid;
 //     }
 // }
 // todo: refactor the code

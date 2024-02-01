@@ -1,10 +1,14 @@
-import {container} from "tsyringe";
+import {container, singleton} from "tsyringe";
 
 import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
 import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
 
+@singleton()
+/**
+ * The builder contains methods to build validation steps to the program args.
+ */
 export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractBuilder {
     paramDtoValidation: ParamDtoValidationDomain;
 
@@ -40,24 +44,7 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
     }
 }
 
-// import {container, singleton} from "tsyringe";
-//
-// import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
-// import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
-// import {ParamDtoDomain} from "../../domain/param-dto.domain";
-// import {CheckBaseValueService} from "../../service/check-base-value.service";
-//
-// @singleton()
-// /**
-//  * The builder contains methods to build validation steps to the program arguments.
-//  */
 // export class ProgramArgumentsValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     readonly paramDtoValid: ParamDtoValidationDomain;
-//
-//     constructor(private readonly checkBaseValue: CheckBaseValueService) {
-//         this.paramDtoValid = container.resolve(ParamDtoValidationDomain);
-//     }
-//
 //     buildSupportedSignsValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
 //         // const indexes = paramDto.programArguments
 //         //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)
@@ -83,10 +70,6 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
 //         return this;
 //     }
 //
-//     buildCanExistValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
-//         return this;
-//     }
-//
 //     buildCorrectOrderValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
 //         // const {index} = paramDto.program;
 //         // const indexes = paramDto.programArguments
@@ -96,10 +79,6 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
 //         // this.paramDtoValid.correctOrder = false;
 //         // this.paramDtoValid.correctOrderWrongIndexes = [...indexes];
 //         return this;
-//     }
-//
-//     build(): ParamDtoValidationDomain {
-//         return this.paramDtoValid;
 //     }
 // }
 // todo: refactor the code

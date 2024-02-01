@@ -1,10 +1,14 @@
-import {container} from "tsyringe";
+import {container, singleton} from "tsyringe";
 
 import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
 import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
 
+@singleton()
+/**
+ * The builder contains methods to build validation steps to the program.
+ */
 export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuilder {
     paramDtoValidation: ParamDtoValidationDomain;
 
@@ -40,24 +44,7 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
     }
 }
 
-// import {container, singleton} from "tsyringe";
-//
-// import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
-// import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-builder";
-// import {ParamDtoDomain} from "../../domain/param-dto.domain";
-// import {CheckBaseValueService} from "../../service/check-base-value.service";
-//
-// @singleton()
-// /**
-//  * The builder contains methods to build validation steps to the program.
-//  */
 // export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     readonly paramDtoValid: ParamDtoValidationDomain;
-//
-//     constructor(private readonly checkBaseValue: CheckBaseValueService) {
-//         this.paramDtoValid = container.resolve(ParamDtoValidationDomain);
-//     }
-//
 //     buildSupportedSignsValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
 //         // const {baseValue, index} = paramDto.program;
 //         // if (baseValue === "" && index === -1) return this;
@@ -76,10 +63,6 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
 //         return this;
 //     }
 //
-//     buildCanExistValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
-//         return this;
-//     }
-//
 //     buildCorrectOrderValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
 //         // const {baseValue, index} = paramDto.program;
 //         // if (baseValue === "" && index === -1) return this;
@@ -87,10 +70,6 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
 //         // this.paramDtoValid.correctOrder = false;
 //         // this.paramDtoValid.correctOrderWrongIndexes = [index];
 //         return this;
-//     }
-//
-//     build(): ParamDtoValidationDomain {
-//         return this.paramDtoValid;
 //     }
 // }
 // todo: refactor the code
