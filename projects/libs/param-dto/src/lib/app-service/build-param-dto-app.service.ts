@@ -3,6 +3,21 @@ import {singleton} from "tsyringe";
 import {CommandLineArgsService} from "../infrastructure/command-line-args.service";
 import {ParamDtoDirector} from "../dom-service/director/param-dto.director";
 import {ParamDtoBuilder} from "../dom-service/builder/param-dto/param-dto.builder";
+import {
+    ParamDtoValidationDirector
+} from "../dom-service/director/param-dto-validation.director";
+import {
+    ProgramValidationBuilder
+} from "../dom-service/builder/param-dto-validation/program-validation.builder";
+import {
+    CommandValidationBuilder
+} from "../dom-service/builder/param-dto-validation/command-validation.builder";
+import {
+    ProgramArgsValidationBuilder
+} from "../dom-service/builder/param-dto-validation/program-args-validation.builder";
+import {
+    CommandArgsValidationBuilder
+} from "../dom-service/builder/param-dto-validation/command-args-validation.builder";
 
 @singleton()
 /**
@@ -11,16 +26,26 @@ import {ParamDtoBuilder} from "../dom-service/builder/param-dto/param-dto.builde
 export class BuildParamDtoAppService {
     constructor(
         private readonly commandLineArgs: CommandLineArgsService,
-        private readonly paramDto: ParamDtoDirector
+        private readonly paramDto: ParamDtoDirector,
+        private readonly paramDtoValidation: ParamDtoValidationDirector
     ) {
     }
 
     build(): boolean {
         // Get arguments provided by user.
         const userArgs = this.commandLineArgs.getUserArgs();
-        // Build the parameter dto object.
+        // Build the param dto object.
         const paramDto = this.paramDto.build(ParamDtoBuilder, userArgs);
-        console.log(paramDto);
+        // Build the param dto validation objects.
+        const programValidation = this.paramDtoValidation
+            .build(ProgramValidationBuilder, paramDto);
+        const commandValidation = this.paramDtoValidation
+            .build(CommandValidationBuilder, paramDto);
+        const programArgsValidation = this.paramDtoValidation
+            .build(ProgramArgsValidationBuilder, paramDto);
+        const commandArgsValidation = this.paramDtoValidation
+            .build(CommandArgsValidationBuilder, paramDto);
+        console.log(programValidation, commandValidation, programArgsValidation, commandArgsValidation);
         return true;
     }
 }

@@ -2,9 +2,9 @@ import {injectable} from "tsyringe";
 
 @injectable()
 /**
- * The service is a recipe how to build param dto valid.
+ * The domain class is a recipe how to build param dto validation object.
  */
-export class ParamDtoValidation {
+export class ParamDtoValidationDomain {
     supportedSigns: boolean = true;
     supportedSignsWrongIndexes: number[] = [];
 
@@ -17,4 +17,3 @@ export class ParamDtoValidation {
     correctOrder: boolean = true;
     correctOrderWrongIndexes: number[] = [];
 }
-// todo: refactor the code

@@ -1,26 +1,26 @@
 import {container, InjectionToken, singleton} from "tsyringe";
 
-import {ParamDtoValidation} from "../domain/param-dto-validation";
+import {ParamDtoValidationDomain} from "../domain/param-dto-validation.domain";
+import {
+    ParamDtoValidationAbstractBuilder
+} from "../builder/param-dto-validation/param-dto-validation-abstract.builder";
 import {ParamDtoDomain} from "../domain/param-dto.domain";
-import {deepCopy} from "@lib/utils";
-import {ParamDtoValidationAbstractBuilder} from "../builder/param-dto-validation/param-dto-validation-abstract.builder";
 
 @singleton()
 /**
- * The director service contains logic composed of param dto valid builder steps.
+ * The director uses param dto validation builder to build param dto validation model.
  */
 export class ParamDtoValidationDirector {
     build(
-        abstract: InjectionToken<ParamDtoValidationAbstractBuilder>,
+        service: InjectionToken<ParamDtoValidationAbstractBuilder>,
         paramDto: ParamDtoDomain
-    ): ParamDtoValidation {
-        const cloneParamDto = deepCopy(paramDto);
-        return container.resolve(abstract)
-            .buildSupportedSignsValid(cloneParamDto)
-            .buildCorrectPatternValid(cloneParamDto)
-            .buildCanExistValid(cloneParamDto)
-            .buildCorrectOrderValid(cloneParamDto)
+    ): ParamDtoValidationDomain {
+        return container.resolve(service)
+            .buildParamDto(paramDto)
+            .buildSupportedSignsValidation()
+            .buildCorrectPatternValidation()
+            .buildCanExistValidation()
+            .buildCorrectOrderValidation()
             .build();
     }
 }
-// todo: refactor the code

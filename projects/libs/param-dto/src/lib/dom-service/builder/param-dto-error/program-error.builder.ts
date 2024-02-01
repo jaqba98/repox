@@ -2,7 +2,7 @@ import {container, singleton} from "tsyringe";
 
 import {ParamDtoErrorAbstractBuilder} from "./param-dto-error-abstract.builder";
 import {ParamDtoError} from "../../domain/param-dto-error";
-import {ParamDtoValidation} from "../../domain/param-dto-validation";
+import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
 
 @singleton()
 /**
@@ -15,7 +15,7 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
         this.paramDtoError = container.resolve(ParamDtoError);
     }
 
-    buildSupportedSignsErrors(paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+    buildSupportedSignsErrors(paramDtoValidation: ParamDtoValidationDomain): ParamDtoErrorAbstractBuilder {
         if (paramDtoValidation.supportedSigns) return this;
         this.paramDtoError.supportedSignsErrors = {
             wrongParamIndexes: [...paramDtoValidation.supportedSignsWrongIndexes],
@@ -25,7 +25,7 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
         return this;
     }
 
-    buildCorrectPatternErrors(paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+    buildCorrectPatternErrors(paramDtoValidation: ParamDtoValidationDomain): ParamDtoErrorAbstractBuilder {
         if (paramDtoValidation.correctPattern) return this;
         this.paramDtoError.correctPatternErrors = {
             wrongParamIndexes: [...paramDtoValidation.correctPatternWrongIndexes],
@@ -35,7 +35,7 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
         return this;
     }
 
-    buildCanExistErrors(paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+    buildCanExistErrors(paramDtoValidation: ParamDtoValidationDomain): ParamDtoErrorAbstractBuilder {
         if (paramDtoValidation.canExist) return this;
         this.paramDtoError.canExistErrors = {
             wrongParamIndexes: [...paramDtoValidation.canExistWrongIndexes],
@@ -45,7 +45,7 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
         return this;
     }
 
-    buildCorrectOrderErrors(paramDtoValidation: ParamDtoValidation): ParamDtoErrorAbstractBuilder {
+    buildCorrectOrderErrors(paramDtoValidation: ParamDtoValidationDomain): ParamDtoErrorAbstractBuilder {
         if (paramDtoValidation.correctOrder) return this;
         this.paramDtoError.correctOrderErrors = {
             wrongParamIndexes: [...paramDtoValidation.correctOrderWrongIndexes],

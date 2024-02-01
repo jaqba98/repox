@@ -5,7 +5,7 @@ import {ParamDtoAbstractBuilder} from "../builder/param-dto/param-dto-abstract.b
 
 @singleton()
 /**
- * The director uses param dto builder to build parameter dto model.
+ * The director uses param dto builder to build param dto model.
  */
 export class ParamDtoDirector {
     build(

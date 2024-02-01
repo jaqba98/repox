@@ -1,20 +1,20 @@
-import {ParamDtoValidation} from "../../domain/param-dto-validation";
 import {ParamDtoDomain} from "../../domain/param-dto.domain";
+import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
 
-/**
- * The abstract builder contains methods which can be implemented in the param dto validation builder service.
- */
 export abstract class ParamDtoValidationAbstractBuilder {
-    abstract readonly paramDtoValid: ParamDtoValidation;
+    abstract paramDtoValidation: ParamDtoValidationDomain;
 
-    abstract buildSupportedSignsValid(paramDto: ParamDtoDomain): ParamDtoValidationAbstractBuilder;
+    abstract paramDto: ParamDtoDomain | undefined;
 
-    abstract buildCorrectPatternValid(paramDto: ParamDtoDomain): ParamDtoValidationAbstractBuilder;
+    abstract buildParamDto(paramDto: ParamDtoDomain): ParamDtoValidationAbstractBuilder;
 
-    abstract buildCanExistValid(paramDto: ParamDtoDomain): ParamDtoValidationAbstractBuilder;
+    abstract buildSupportedSignsValidation(): ParamDtoValidationAbstractBuilder;
 
-    abstract buildCorrectOrderValid(paramDto: ParamDtoDomain): ParamDtoValidationAbstractBuilder;
+    abstract buildCorrectPatternValidation(): ParamDtoValidationAbstractBuilder;
 
-    abstract build(): ParamDtoValidation;
+    abstract buildCanExistValidation(): ParamDtoValidationAbstractBuilder;
+
+    abstract buildCorrectOrderValidation(): ParamDtoValidationAbstractBuilder;
+
+    abstract build(): ParamDtoValidationDomain;
 }
-// todo: refactor the code
