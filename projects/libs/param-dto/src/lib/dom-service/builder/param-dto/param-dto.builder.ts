@@ -40,11 +40,11 @@ export class ParamDtoBuilder implements ParamDtoAbstractBuilder {
     buildCommand(): ParamDtoAbstractBuilder {
         const {baseArgs, program} = this.paramDto;
         if (baseArgs === undefined) return this;
-        if (program === undefined) return this;
+        const endIndex = program ? program.index : 0;
         const command = baseArgs
             .map((baseValue: string, index: number) => ({baseValue, index}))
             .find(baseParamDto => {
-                if (baseParamDto.index <= program.index) return false;
+                if (baseParamDto.index <= endIndex) return false;
                 if (baseParamDto.baseValue.startsWith(ARGUMENT_PREFIX)) return false;
                 return !baseParamDto.baseValue.startsWith(ALIAS_PREFIX);
             });
@@ -66,9 +66,8 @@ export class ParamDtoBuilder implements ParamDtoAbstractBuilder {
     }
 
     buildCommandArgs(): ParamDtoAbstractBuilder {
-        const {baseArgs, program, command} = this.paramDto;
+        const {baseArgs, command} = this.paramDto;
         if (baseArgs === undefined) return this;
-        if (program === undefined) return this;
         if (command === undefined) return this;
         const startIndex = this.paramDto.command?.index ?? -1;
         const endIndex = baseArgs.length;
