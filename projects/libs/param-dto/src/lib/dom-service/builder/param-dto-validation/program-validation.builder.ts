@@ -36,6 +36,12 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
     }
 
     buildCorrectOrderValidation(): ProgramValidationBuilder {
+        const program = this.paramDto?.program;
+        if (!program) return this;
+        if (program.index !== 0) {
+            this.paramDtoValidation.correctOrder = false;
+            this.paramDtoValidation.correctOrderWrongIndexes = [program.index];
+        }
         return this;
     }
 
@@ -60,15 +66,6 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
 //         // if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
 //         // this.paramDtoValid.correctPattern = false;
 //         // this.paramDtoValid.correctPatternWrongIndexes = [index];
-//         return this;
-//     }
-//
-//     buildCorrectOrderValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
-//         // const {baseValue, index} = paramDto.program;
-//         // if (baseValue === "" && index === -1) return this;
-//         // if (baseValue !== "" && index === 0) return this;
-//         // this.paramDtoValid.correctOrder = false;
-//         // this.paramDtoValid.correctOrderWrongIndexes = [index];
 //         return this;
 //     }
 // }

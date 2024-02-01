@@ -36,6 +36,17 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
     }
 
     buildCorrectOrderValidation(): ProgramArgsValidationBuilder {
+        const programArgs = this.paramDto?.programArgs;
+        if (!programArgs) return this;
+        const program = this.paramDto?.program;
+        const startIndex = program ? program.index : -1;
+        const wrongIndexes = programArgs
+            .filter(arg => arg.index <= startIndex)
+            .map(arg => arg.index);
+        if (wrongIndexes.length > 0) {
+            this.paramDtoValidation.correctOrder = false;
+            this.paramDtoValidation.correctOrderWrongIndexes = deepCopy(wrongIndexes);
+        }
         return this;
     }
 
@@ -67,17 +78,6 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
 //         // if (indexes.length === 0) return this;
 //         // this.paramDtoValid.correctPattern = false;
 //         // this.paramDtoValid.correctPatternWrongIndexes = [...indexes];
-//         return this;
-//     }
-//
-//     buildCorrectOrderValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
-//         // const {index} = paramDto.program;
-//         // const indexes = paramDto.programArguments
-//         //     .filter(argument => argument.index <= index)
-//         //     .map(argument => argument.index);
-//         // if (indexes.length === 0) return this;
-//         // this.paramDtoValid.correctOrder = false;
-//         // this.paramDtoValid.correctOrderWrongIndexes = [...indexes];
 //         return this;
 //     }
 // }

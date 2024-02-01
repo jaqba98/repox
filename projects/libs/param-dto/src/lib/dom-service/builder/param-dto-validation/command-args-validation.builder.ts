@@ -43,6 +43,23 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
     }
 
     buildCorrectOrderValidation(): CommandArgsValidationBuilder {
+        const commandArgs = this.paramDto?.commandArgs;
+        if (!commandArgs) return this;
+        const command = this.paramDto?.command;
+        if (!command) {
+            const wrongIndexes = commandArgs.map(arg => arg.index);
+            this.paramDtoValidation.correctOrder = false;
+            this.paramDtoValidation.correctOrderWrongIndexes = deepCopy(wrongIndexes);
+            return this;
+        }
+        const {index} = command;
+        const wrongIndexes = commandArgs
+            .filter(arg => arg.index <= index)
+            .map(arg => arg.index);
+        if (wrongIndexes.length > 0) {
+            this.paramDtoValidation.correctOrder = false;
+            this.paramDtoValidation.correctOrderWrongIndexes = deepCopy(wrongIndexes);
+        }
         return this;
     }
 
@@ -73,17 +90,6 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
 //         // if (indexes.length === 0) return this;
 //         // this.paramDtoValid.correctPattern = false;
 //         // this.paramDtoValid.correctPatternWrongIndexes = [...indexes];
-//         return this;
-//     }
-//
-//     buildCorrectOrderValid(_paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
-//         // const {index} = paramDto.command;
-//         // const indexes = paramDto.commandArguments
-//         //     .filter(argument => argument.index <= index)
-//         //     .map(argument => argument.index);
-//         // if (indexes.length === 0) return this;
-//         // this.paramDtoValid.correctOrder = false;
-//         // this.paramDtoValid.correctOrderWrongIndexes = [...indexes];
 //         return this;
 //     }
 // }

@@ -42,6 +42,11 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
     }
 
     buildCorrectOrderValidation(): CommandValidationBuilder {
+        const command = this.paramDto?.command;
+        if (command && command.index === 0) {
+            this.paramDtoValidation.correctOrder = false;
+            this.paramDtoValidation.correctOrderWrongIndexes = [command.index];
+        }
         return this;
     }
 
@@ -66,15 +71,6 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
 //         // if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
 //         // this.paramDtoValid.correctPattern = false;
 //         // this.paramDtoValid.correctPatternWrongIndexes = [index];
-//         return this;
-//     }
-//
-//     buildCorrectOrderValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
-//         // const {baseValue, index} = paramDto.command;
-//         // if (baseValue === "" && index === -1) return this;
-//         // if (baseValue !== "" && index > paramDto.program.index) return this;
-//         // this.paramDtoValid.correctOrder = false;
-//         // this.paramDtoValid.correctOrderWrongIndexes = [index];
 //         return this;
 //     }
 // }
