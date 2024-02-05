@@ -5,6 +5,7 @@ import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
 import {CheckSupportedSignsService} from "../../service/check-supported-signs.service";
+import {CheckCorrectPatternService} from "../../service/check-correct-pattern.service";
 
 @singleton()
 /**
@@ -15,7 +16,10 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
 
     paramDto: ParamDtoDomain | undefined;
 
-    constructor(private readonly checkSupportedSigns: CheckSupportedSignsService) {
+    constructor(
+        private readonly checkSupportedSigns: CheckSupportedSignsService,
+        private readonly checkCorrectPattern: CheckCorrectPatternService
+    ) {
         this.paramDtoValidation = container.resolve(ParamDtoValidationDomain);
     }
 
@@ -34,6 +38,13 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
     }
 
     buildCorrectPatternValidation(): ProgramValidationBuilder {
+        const program = this.paramDto?.program;
+        if (!program) return this;
+        if (this.checkCorrectPattern.checkProgramAndCommand(program.baseValue)) {
+            return this;
+        }
+        this.paramDtoValidation.correctPattern = false;
+        this.paramDtoValidation.correctPatternWrongIndexes = [program.index];
         return this;
     }
 
@@ -55,15 +66,3 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
         return this.paramDtoValidation;
     }
 }
-
-// export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     buildCorrectPatternValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
-//         // const {baseValue, index} = paramDto.program;
-//         // if (baseValue === "" && index === -1) return this;
-//         // if (this.checkBaseValue.checkBaseBaseValueCorrectPattern(baseValue)) return this;
-//         // this.paramDtoValid.correctPattern = false;
-//         // this.paramDtoValid.correctPatternWrongIndexes = [index];
-//         return this;
-//     }
-// }
-// todo: refactor the code

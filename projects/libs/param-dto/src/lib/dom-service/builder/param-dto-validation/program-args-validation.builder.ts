@@ -6,6 +6,7 @@ import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
 import {CheckSupportedSignsService} from "../../service/check-supported-signs.service";
 import {EQUAL_SIGN} from "../../../const/param-dto.const";
+import {CheckCorrectPatternService} from "../../service/check-correct-pattern.service";
 
 @singleton()
 /**
@@ -16,7 +17,10 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
 
     paramDto: ParamDtoDomain | undefined;
 
-    constructor(private readonly checkSupportedSigns: CheckSupportedSignsService) {
+    constructor(
+        private readonly checkSupportedSigns: CheckSupportedSignsService,
+        private readonly checkCorrectPattern: CheckCorrectPatternService
+    ) {
         this.paramDtoValidation = container.resolve(ParamDtoValidationDomain);
     }
 
@@ -42,6 +46,24 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
     }
 
     buildCorrectPatternValidation(): ProgramArgsValidationBuilder {
+        const programArgs = this.paramDto?.programArgs;
+        if (!programArgs) return this;
+        const wrongIndexes = programArgs
+            .map(programArg => ({
+                name: programArg.baseValue.split(EQUAL_SIGN)[0],
+                index: programArg.index,
+                isAlias: programArg.isAlias
+            }))
+            .filter(programArg => {
+                if (programArg.isAlias) {
+                    return this.checkCorrectPattern.checkAlias(programArg.name);
+                }
+                return this.checkCorrectPattern.checkArgument(programArg.name);
+            })
+            .map(programArg => programArg.index);
+        if (wrongIndexes.length === 0) return this;
+        this.paramDtoValidation.correctPattern = false;
+        this.paramDtoValidation.correctPatternWrongIndexes = [...wrongIndexes];
         return this;
     }
 
@@ -68,20 +90,3 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
         return this.paramDtoValidation;
     }
 }
-
-// export class ProgramArgumentsValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     buildCorrectPatternValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
-//         // const indexes = paramDto.programArguments
-//         //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)
-//         //     .filter(argument => !/^[a-zA-Z][a-zA-Z0-9-]*$/gm.test(argument.baseValue))
-//         //     .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueCorrectPattern(
-//         //         argument.baseValue, argument.hasValue, argument.isAlias
-//         //     ))
-//         //     .map(argument => argument.index);
-//         // if (indexes.length === 0) return this;
-//         // this.paramDtoValid.correctPattern = false;
-//         // this.paramDtoValid.correctPatternWrongIndexes = [...indexes];
-//         return this;
-//     }
-// }
-// todo: refactor the code

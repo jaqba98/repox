@@ -1,4 +1,4 @@
-import  {container, singleton} from "tsyringe";
+import {container, singleton} from "tsyringe";
 
 import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
 import {ParamDtoDomain} from "../../domain/param-dto.domain";
@@ -6,6 +6,7 @@ import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
 import {CheckSupportedSignsService} from "../../service/check-supported-signs.service";
 import {EQUAL_SIGN} from "../../../const/param-dto.const";
+import {CheckCorrectPatternService} from "../../service/check-correct-pattern.service";
 
 @singleton()
 /**
@@ -16,7 +17,10 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
 
     paramDto: ParamDtoDomain | undefined;
 
-    constructor(private readonly checkSupportedSigns: CheckSupportedSignsService) {
+    constructor(
+        private readonly checkSupportedSigns: CheckSupportedSignsService,
+        private readonly checkCorrectPattern: CheckCorrectPatternService
+    ) {
         this.paramDtoValidation = container.resolve(ParamDtoValidationDomain);
     }
 
@@ -42,6 +46,24 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
     }
 
     buildCorrectPatternValidation(): CommandArgsValidationBuilder {
+        const commandArgs = this.paramDto?.commandArgs;
+        if (!commandArgs) return this;
+        const wrongIndexes = commandArgs
+            .map(commandArg => ({
+                name: commandArg.baseValue.split(EQUAL_SIGN)[0],
+                index: commandArg.index,
+                isAlias: commandArg.isAlias
+            }))
+            .filter(commandArg => {
+                if (commandArg.isAlias) {
+                    return this.checkCorrectPattern.checkAlias(commandArg.name);
+                }
+                return this.checkCorrectPattern.checkArgument(commandArg.name);
+            })
+            .map(programArg => programArg.index);
+        if (wrongIndexes.length === 0) return this;
+        this.paramDtoValidation.correctPattern = false;
+        this.paramDtoValidation.correctPatternWrongIndexes = [...wrongIndexes];
         return this;
     }
 
@@ -81,19 +103,3 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
         return this.paramDtoValidation;
     }
 }
-
-// export class CommandArgumentsValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     buildCorrectPatternValid(_paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
-//         // const indexes = paramDto.commandArguments
-//         //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)
-//         //     .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueCorrectPattern(
-//         //         argument.baseValue, argument.hasValue, argument.isAlias
-//         //     ))
-//         //     .map(argument => argument.index);
-//         // if (indexes.length === 0) return this;
-//         // this.paramDtoValid.correctPattern = false;
-//         // this.paramDtoValid.correctPatternWrongIndexes = [...indexes];
-//         return this;
-//     }
-// }
-// todo: refactor the code
