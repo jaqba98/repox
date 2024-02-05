@@ -56,9 +56,9 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
             }))
             .filter(commandArg => {
                 if (commandArg.isAlias) {
-                    return this.checkCorrectPattern.checkAlias(commandArg.name);
+                    return !this.checkCorrectPattern.checkAlias(commandArg.name);
                 }
-                return this.checkCorrectPattern.checkArgument(commandArg.name);
+                return !this.checkCorrectPattern.checkArgument(commandArg.name);
             })
             .map(programArg => programArg.index);
         if (wrongIndexes.length === 0) return this;

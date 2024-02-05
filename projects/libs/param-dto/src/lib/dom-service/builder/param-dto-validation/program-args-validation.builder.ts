@@ -56,9 +56,9 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
             }))
             .filter(programArg => {
                 if (programArg.isAlias) {
-                    return this.checkCorrectPattern.checkAlias(programArg.name);
+                    return !this.checkCorrectPattern.checkAlias(programArg.name);
                 }
-                return this.checkCorrectPattern.checkArgument(programArg.name);
+                return !this.checkCorrectPattern.checkArgument(programArg.name);
             })
             .map(programArg => programArg.index);
         if (wrongIndexes.length === 0) return this;
