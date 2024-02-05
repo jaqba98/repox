@@ -37,7 +37,7 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
                 name: commandArg.baseValue.split(EQUAL_SIGN)[0],
                 index: commandArg.index
             }))
-            .filter(commandArg => this.checkSupportedSigns.checkName(commandArg.name))
+            .filter(commandArg => !this.checkSupportedSigns.checkName(commandArg.name))
             .map(commandArg => commandArg.index);
         if (wrongIndexes.length === 0) return this;
         this.paramDtoValidation.supportedSigns = false;

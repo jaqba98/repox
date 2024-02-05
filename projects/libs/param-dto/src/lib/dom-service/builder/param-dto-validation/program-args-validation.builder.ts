@@ -37,7 +37,7 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
                 name: programArg.baseValue.split(EQUAL_SIGN)[0],
                 index: programArg.index
             }))
-            .filter(programArg => this.checkSupportedSigns.checkName(programArg.name))
+            .filter(programArg => !this.checkSupportedSigns.checkName(programArg.name))
             .map(programArg => programArg.index);
         if (wrongIndexes.length === 0) return this;
         this.paramDtoValidation.supportedSigns = false;
