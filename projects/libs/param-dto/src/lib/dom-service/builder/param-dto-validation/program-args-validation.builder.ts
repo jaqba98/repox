@@ -4,6 +4,8 @@ import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain
 import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
+import {CheckSupportedSignsService} from "../../service/check-supported-signs.service";
+import {EQUAL_SIGN} from "../../../const/param-dto.const";
 
 @singleton()
 /**
@@ -14,7 +16,7 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
 
     paramDto: ParamDtoDomain | undefined;
 
-    constructor() {
+    constructor(private readonly checkSupportedSigns: CheckSupportedSignsService) {
         this.paramDtoValidation = container.resolve(ParamDtoValidationDomain);
     }
 
@@ -24,6 +26,18 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
     }
 
     buildSupportedSignsValidation(): ProgramArgsValidationBuilder {
+        const programArgs = this.paramDto?.programArgs;
+        if (!programArgs) return this;
+        const wrongIndexes = programArgs
+            .map(programArg => ({
+                name: programArg.baseValue.split(EQUAL_SIGN)[0],
+                index: programArg.index
+            }))
+            .filter(programArg => this.checkSupportedSigns.checkName(programArg.name))
+            .map(programArg => programArg.index);
+        if (wrongIndexes.length === 0) return this;
+        this.paramDtoValidation.supportedSigns = false;
+        this.paramDtoValidation.supportedSignsWrongIndexes = [...wrongIndexes];
         return this;
     }
 
@@ -56,17 +70,6 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
 }
 
 // export class ProgramArgumentsValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     buildSupportedSignsValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
-//         // const indexes = paramDto.programArguments
-//         //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)
-//         //     .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
-//         //     .map(argument => argument.index);
-//         // if (indexes.length === 0) return this;
-//         // this.paramDtoValid.supportedSigns = false;
-//         // this.paramDtoValid.supportedSignsWrongIndexes = [...indexes];
-//         return this;
-//     }
-//
 //     buildCorrectPatternValid(_paramDto: ParamDtoDomain): ProgramArgumentsValidationBuilder {
 //         // const indexes = paramDto.programArguments
 //         //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)

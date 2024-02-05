@@ -1,9 +1,11 @@
-import {container, singleton} from "tsyringe";
+import  {container, singleton} from "tsyringe";
 
 import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
 import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
+import {CheckSupportedSignsService} from "../../service/check-supported-signs.service";
+import {EQUAL_SIGN} from "../../../const/param-dto.const";
 
 @singleton()
 /**
@@ -14,7 +16,7 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
 
     paramDto: ParamDtoDomain | undefined;
 
-    constructor() {
+    constructor(private readonly checkSupportedSigns: CheckSupportedSignsService) {
         this.paramDtoValidation = container.resolve(ParamDtoValidationDomain);
     }
 
@@ -24,6 +26,18 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
     }
 
     buildSupportedSignsValidation(): CommandArgsValidationBuilder {
+        const commandArgs = this.paramDto?.commandArgs;
+        if (!commandArgs) return this;
+        const wrongIndexes = commandArgs
+            .map(commandArg => ({
+                name: commandArg.baseValue.split(EQUAL_SIGN)[0],
+                index: commandArg.index
+            }))
+            .filter(commandArg => this.checkSupportedSigns.checkName(commandArg.name))
+            .map(commandArg => commandArg.index);
+        if (wrongIndexes.length === 0) return this;
+        this.paramDtoValidation.supportedSigns = false;
+        this.paramDtoValidation.supportedSignsWrongIndexes = [...wrongIndexes];
         return this;
     }
 
@@ -69,17 +83,6 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
 }
 
 // export class CommandArgumentsValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     buildSupportedSignsValid(_paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
-//         // const indexes = paramDto.commandArguments
-//         //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)
-//         //     .filter(argument => !this.checkBaseValue.checkArgumentsBaseValueSupportedSigns(argument.baseValue))
-//         //     .map(argument => argument.index);
-//         // if (indexes.length === 0) return this;
-//         // this.paramDtoValid.supportedSigns = false;
-//         // this.paramDtoValid.supportedSignsWrongIndexes = [...indexes];
-//         return this;
-//     }
-//
 //     buildCorrectPatternValid(_paramDto: ParamDtoDomain): CommandArgumentsValidationBuilder {
 //         // const indexes = paramDto.commandArguments
 //         //     .filter(argument => argument.baseValue !== "" && argument.index !== -1)

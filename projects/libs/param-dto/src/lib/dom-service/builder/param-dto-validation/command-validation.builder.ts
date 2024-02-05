@@ -4,6 +4,7 @@ import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain
 import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
+import {CheckSupportedSignsService} from "../../service/check-supported-signs.service";
 
 @singleton()
 /**
@@ -14,7 +15,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
 
     paramDto: ParamDtoDomain | undefined;
 
-    constructor() {
+    constructor(private readonly checkSupportedSigns: CheckSupportedSignsService) {
         this.paramDtoValidation = container.resolve(ParamDtoValidationDomain);
     }
 
@@ -24,6 +25,11 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
     }
 
     buildSupportedSignsValidation(): CommandValidationBuilder {
+        const command = this.paramDto?.command;
+        if (!command) return this;
+        if (this.checkSupportedSigns.checkName(command.baseValue)) return this;
+        this.paramDtoValidation.supportedSigns = false;
+        this.paramDtoValidation.supportedSignsWrongIndexes = [command.index];
         return this;
     }
 
@@ -56,15 +62,6 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
 }
 
 // export class CommandValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     buildSupportedSignsValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
-//         // const {baseValue, index} = paramDto.command;
-//         // if (baseValue === "" && index === -1) return this;
-//         // if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
-//         // this.paramDtoValid.supportedSigns = false;
-//         // this.paramDtoValid.supportedSignsWrongIndexes = [index];
-//         return this;
-//     }
-//
 //     buildCorrectPatternValid(_paramDto: ParamDtoDomain): CommandValidationBuilder {
 //         // const {baseValue, index} = paramDto.command;
 //         // if (baseValue === "" && index === -1) return this;

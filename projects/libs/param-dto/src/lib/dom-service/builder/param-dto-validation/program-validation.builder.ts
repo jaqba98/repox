@@ -4,6 +4,7 @@ import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain
 import {ParamDtoDomain} from "../../domain/param-dto.domain";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
+import {CheckSupportedSignsService} from "../../service/check-supported-signs.service";
 
 @singleton()
 /**
@@ -14,7 +15,7 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
 
     paramDto: ParamDtoDomain | undefined;
 
-    constructor() {
+    constructor(private readonly checkSupportedSigns: CheckSupportedSignsService) {
         this.paramDtoValidation = container.resolve(ParamDtoValidationDomain);
     }
 
@@ -24,6 +25,11 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
     }
 
     buildSupportedSignsValidation(): ProgramValidationBuilder {
+        const program = this.paramDto?.program;
+        if (!program) return this;
+        if (this.checkSupportedSigns.checkName(program.baseValue)) return this;
+        this.paramDtoValidation.supportedSigns = false;
+        this.paramDtoValidation.supportedSignsWrongIndexes = [program.index];
         return this;
     }
 
@@ -51,15 +57,6 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
 }
 
 // export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuilder {
-//     buildSupportedSignsValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
-//         // const {baseValue, index} = paramDto.program;
-//         // if (baseValue === "" && index === -1) return this;
-//         // if (this.checkBaseValue.checkBaseBaseValueSupportedSigns(baseValue)) return this;
-//         // this.paramDtoValid.supportedSigns = false;
-//         // this.paramDtoValid.supportedSignsWrongIndexes = [index];
-//         return this;
-//     }
-//
 //     buildCorrectPatternValid(_paramDto: ParamDtoDomain): ProgramValidationBuilder {
 //         // const {baseValue, index} = paramDto.program;
 //         // if (baseValue === "" && index === -1) return this;
