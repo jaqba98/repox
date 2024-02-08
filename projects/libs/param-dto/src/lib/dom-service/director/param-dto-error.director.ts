@@ -1,7 +1,9 @@
 import {container, InjectionToken, singleton} from "tsyringe";
 
-import {ParamDtoErrorAbstractBuilder} from "../builder/param-dto-error/param-dto-error-abstract.builder";
 import {ParamDtoError} from "../domain/param-dto-error";
+import {
+    ParamDtoErrorAbstractBuilder
+} from "../builder/param-dto-error/param-dto-error-abstract.builder";
 import {ParamDtoValidationDomain} from "../domain/param-dto-validation.domain";
 import {deepCopy} from "@lib/utils";
 
@@ -16,11 +18,11 @@ export class ParamDtoErrorDirector {
     ): ParamDtoError {
         const cloneParamDtoValidation = deepCopy(paramDtoValidation);
         return container.resolve(abstract)
-            .buildSupportedSignsErrors(cloneParamDtoValidation)
-            .buildCorrectPatternErrors(cloneParamDtoValidation)
-            .buildCanExistErrors(cloneParamDtoValidation)
-            .buildCorrectOrderErrors(cloneParamDtoValidation)
+            .buildParamDtoValidation(cloneParamDtoValidation)
+            .buildSupportedSignsErrors()
+            .buildCorrectPatternErrors()
+            .buildCanExistErrors()
+            .buildCorrectOrderErrors()
             .build();
     }
 }
-// todo: refactor the code

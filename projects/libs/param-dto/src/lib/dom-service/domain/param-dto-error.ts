@@ -4,15 +4,21 @@ import {ParamDtoErrorModel} from "../../model/param-dto-error.model";
 
 @injectable()
 /**
- * The service is a recipe how to build param dto error.
+ * The domain class is a recipe how to build param dto error object.
  */
 export class ParamDtoError {
-    supportedSignsErrors: ParamDtoErrorModel | undefined;
+    supportedSignsErrors: ParamDtoErrorModel;
 
-    correctPatternErrors: ParamDtoErrorModel | undefined;
+    correctPatternErrors: ParamDtoErrorModel;
 
-    canExistErrors: ParamDtoErrorModel | undefined;
+    canExistErrors: ParamDtoErrorModel;
 
-    correctOrderErrors: ParamDtoErrorModel | undefined;
+    correctOrderErrors: ParamDtoErrorModel;
+
+    constructor() {
+        this.supportedSignsErrors = {wrongParamIndexes: [], errors: [], tips: []};
+        this.correctPatternErrors = {wrongParamIndexes: [], errors: [], tips: []};
+        this.canExistErrors = {wrongParamIndexes: [], errors: [], tips: []};
+        this.correctOrderErrors = {wrongParamIndexes: [], errors: [], tips: []};
+    }
 }
-// todo: refactor the code

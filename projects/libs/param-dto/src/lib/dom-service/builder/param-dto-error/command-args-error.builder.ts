@@ -7,9 +7,9 @@ import {deepCopy} from "@lib/utils";
 
 @singleton()
 /**
- * The builder contains methods to build error steps to the command.
+ * The builder contains methods to build error steps to the command arguments.
  */
-export class CommandErrorBuilder implements ParamDtoErrorAbstractBuilder {
+export class CommandArgsErrorBuilder implements ParamDtoErrorAbstractBuilder {
     paramDtoValidation: ParamDtoValidationDomain | undefined;
 
     readonly paramDtoError: ParamDtoError;
@@ -32,11 +32,12 @@ export class CommandErrorBuilder implements ParamDtoErrorAbstractBuilder {
             this.paramDtoError.supportedSignsErrors = {
                 wrongParamIndexes: deepCopy(supportedSignsWrongIndexes),
                 errors: [
-                    "The specified command contains unsupported characters!"
+                    "The specified command arguments contain unsupported characters!"
                 ],
                 tips: [
-                    "Specify a command containing only supported characters and run the command again.",
-                    "Supported characters for the command are: [a-z], [A-Z], [0-9] and [-]."
+                    "Remember! The command argument value may contain an unsupported character!",
+                    "Specify a command arguments containing only supported characters and run the command again.",
+                    "Supported characters for the command arguments are: [a-z], [A-Z], [0-9] and [-]."
                 ]
             };
         }
@@ -50,11 +51,13 @@ export class CommandErrorBuilder implements ParamDtoErrorAbstractBuilder {
             this.paramDtoError.correctPatternErrors = {
                 wrongParamIndexes: deepCopy(correctPatternWrongIndexes),
                 errors: [
-                    "The specified command has incorrect pattern!"
+                    "The specified command arguments have incorrect pattern!"
                 ],
                 tips: [
-                    "Specify a command with correct pattern and run the command again.",
-                    "Example of correct pattern for command is: test-command"
+                    "Specify a command arguments with correct pattern and run the command again.",
+                    "Example of correct pattern for command arguments are:",
+                    `1) --arg1, --arg1=test, --arg1="test", --arg1='test', --arg1=\`test\``,
+                    `2) -a, -a=test, -a="test", -a='test', -a=\`test\``,
                 ]
             };
         }
@@ -68,10 +71,10 @@ export class CommandErrorBuilder implements ParamDtoErrorAbstractBuilder {
             this.paramDtoError.correctPatternErrors = {
                 wrongParamIndexes: deepCopy(canExistWrongIndexes),
                 errors: [
-                    "The specified command can not exist without program!"
+                    "The specified command arguments can not exist without command!"
                 ],
                 tips: [
-                    "Specify a program for given command and run the command again."
+                    "Specify a command for given command arguments and run the command again."
                 ]
             };
         }
@@ -85,10 +88,10 @@ export class CommandErrorBuilder implements ParamDtoErrorAbstractBuilder {
             this.paramDtoError.correctPatternErrors = {
                 wrongParamIndexes: deepCopy(correctOrderWrongIndexes),
                 errors: [
-                    "The specified command has not correct order!"
+                    "The specified command arguments have not correct order!"
                 ],
                 tips: [
-                    "Specify the command after the program and run the command again."
+                    "Specify the command args after the command and run the command again."
                 ]
             };
         }
@@ -99,4 +102,3 @@ export class CommandErrorBuilder implements ParamDtoErrorAbstractBuilder {
         return this.paramDtoError;
     }
 }
-

@@ -18,6 +18,19 @@ import {
 import {
     CommandArgsValidationBuilder
 } from "../dom-service/builder/param-dto-validation/command-args-validation.builder";
+import {ParamDtoErrorDirector} from "../dom-service/director/param-dto-error.director";
+import {
+    ProgramErrorBuilder
+} from "../dom-service/builder/param-dto-error/program-error.builder";
+import {
+    CommandErrorBuilder
+} from "../dom-service/builder/param-dto-error/command-error.builder";
+import {
+    ProgramArgsErrorBuilder
+} from "../dom-service/builder/param-dto-error/program-args-error.builder";
+import {
+    CommandArgsErrorBuilder
+} from "../dom-service/builder/param-dto-error/command-args-error.builder";
 
 @singleton()
 /**
@@ -27,7 +40,8 @@ export class BuildParamDtoAppService {
     constructor(
         private readonly commandLineArgs: CommandLineArgsService,
         private readonly paramDto: ParamDtoDirector,
-        private readonly paramDtoValidation: ParamDtoValidationDirector
+        private readonly paramDtoValidation: ParamDtoValidationDirector,
+        private readonly paramDtoError: ParamDtoErrorDirector
     ) {
     }
 
@@ -45,7 +59,16 @@ export class BuildParamDtoAppService {
             .build(ProgramArgsValidationBuilder, paramDto);
         const commandArgsValidation = this.paramDtoValidation
             .build(CommandArgsValidationBuilder, paramDto);
-        console.log(programValidation, commandValidation, programArgsValidation, commandArgsValidation);
+        // Build the param dto error object.
+        const programError = this.paramDtoError
+            .build(ProgramErrorBuilder, programValidation);
+        const commandError = this.paramDtoError
+            .build(CommandErrorBuilder, commandValidation);
+        const programArgsError = this.paramDtoError
+            .build(ProgramArgsErrorBuilder, programArgsValidation);
+        const commandArgsError = this.paramDtoError
+            .build(CommandArgsErrorBuilder, commandArgsValidation);
+        console.log(programError, commandError, programArgsError, commandArgsError);
         return true;
     }
 }
@@ -68,8 +91,8 @@ export class BuildParamDtoAppService {
 // import {ParamDtoErrorDirector} from "../dom-service/director/param-dto-error.director";
 // import {ProgramErrorBuilder} from "../dom-service/builder/param-dto-error/program-error.builder";
 // import {CommandErrorBuilder} from "../dom-service/builder/param-dto-error/command-error.builder";
-// import {ProgramArgumentsErrorBuilder} from "../dom-service/builder/param-dto-error/program-arguments-error.builder";
-// import {CommandArgumentsErrorBuilder} from "../dom-service/builder/param-dto-error/command-arguments-error.builder";
+// import {ProgramArgsErrorBuilder} from "../dom-service/builder/param-dto-error/program-arguments-error.builder";
+// import {CommandArgsErrorBuilder} from "../dom-service/builder/param-dto-error/command-arguments-error.builder";
 // import {CombineParamDtoErrorsService} from "../dom-service/service/combine-param-dto-errors.service";
 // import {ParamErrorMessageAppService} from "@lib/logger";
 // import {REPOX_LOGO} from "@lib/repox-const";
@@ -100,8 +123,8 @@ export class BuildParamDtoAppService {
 //         const commandArguments = this.paramDtoValidDirector.build(CommandArgumentsValidationBuilder, paramDto);
 //         const programErrors = this.paramDtoError.build(ProgramErrorBuilder, program);
 //         const commandErrors = this.paramDtoError.build(CommandErrorBuilder, command);
-//         const programArgumentsErrors = this.paramDtoError.build(ProgramArgumentsErrorBuilder, programArguments);
-//         const commandArgumentsErrors = this.paramDtoError.build(CommandArgumentsErrorBuilder, commandArguments);
+//         const programArgumentsErrors = this.paramDtoError.build(ProgramArgsErrorBuilder, programArguments);
+//         const commandArgumentsErrors = this.paramDtoError.build(CommandArgsErrorBuilder, commandArguments);
 //         const combine = this.combineParamDtoErrors.combine(
 //             [programErrors, commandErrors, programArgumentsErrors, commandArgumentsErrors]
 //         );
@@ -114,4 +137,4 @@ export class BuildParamDtoAppService {
 //         return false;
 //     }
 // }
-// // todo: refactor the code
+// todo: refactor the code
