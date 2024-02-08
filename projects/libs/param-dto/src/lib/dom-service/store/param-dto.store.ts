@@ -11,7 +11,9 @@ export class ParamDtoStore {
     private paramDto: ParamDtoDomain | undefined;
 
     get(): ParamDtoDomain {
-        if (!this.paramDto) throw new Error("The store is not defined!");
+        if (!this.paramDto) {
+            throw new Error("The param dto store does not exist!");
+        }
         return this.paramDto;
     }
 
@@ -19,4 +21,3 @@ export class ParamDtoStore {
         this.paramDto = deepCopy(paramDto);
     }
 }
-// todo: refactor the code

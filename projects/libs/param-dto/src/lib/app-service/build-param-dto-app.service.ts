@@ -36,6 +36,7 @@ import {
 } from "../dom-service/service/merge-param-dto-errors.service";
 import {ParamErrorMessageAppService} from "@lib/logger";
 import {REPOX_LOGO} from "@lib/repox-const";
+import {ParamDtoStore} from "../dom-service/store/param-dto.store";
 
 @singleton()
 /**
@@ -48,7 +49,8 @@ export class BuildParamDtoAppService {
         private readonly paramDtoValidation: ParamDtoValidationDirector,
         private readonly paramDtoError: ParamDtoErrorDirector,
         private readonly mergeParamDtoErrors: MergeParamDtoErrorsService,
-        private readonly paramErrorMessage: ParamErrorMessageAppService
+        private readonly paramErrorMessage: ParamErrorMessageAppService,
+        private readonly paramDtoStore: ParamDtoStore
     ) {
     }
 
@@ -81,6 +83,7 @@ export class BuildParamDtoAppService {
         ]);
         // Return the result of the process.
         if (mergeErrors.length === 0) {
+            this.paramDtoStore.set(paramDto);
             return true;
         }
         const firstError = mergeErrors[0];
@@ -94,4 +97,3 @@ export class BuildParamDtoAppService {
         return false;
     }
 }
-// todo: refactor the code
