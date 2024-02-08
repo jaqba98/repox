@@ -10,11 +10,12 @@ import {ParamDtoError} from "../domain/param-dto-error";
  */
 export class MergeParamDtoErrorsService {
     merge(errors: ParamDtoError[]): ParamDtoErrorModel[] {
-        return [
+        const allErrors =  [
             ...errors.map(error => error.supportedSignsErrors),
             ...errors.map(error => error.correctPatternErrors),
             ...errors.map(error => error.canExistErrors),
             ...errors.map(error => error.correctOrderErrors),
         ];
+        return allErrors.filter(error => error.wrongParamIndexes.length > 0);
     }
 }
