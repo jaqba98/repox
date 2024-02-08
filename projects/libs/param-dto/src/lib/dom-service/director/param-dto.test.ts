@@ -2,7 +2,7 @@ import {container} from "tsyringe";
 
 import {ParamDtoDirector} from "./param-dto.director";
 import {ParamDtoBuilder} from "../builder/param-dto/param-dto.builder";
-import {ParamDtoDomain} from "../domain/param-dto.domain";
+import {ParamDto} from "../domain/param-dto";
 
 describe("ParamDtoDirector", (): void => {
     let service: ParamDtoDirector;
@@ -20,7 +20,7 @@ describe("ParamDtoDirector", (): void => {
     test("Should be correct undefined", (): void => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const args: any = undefined;
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: undefined,
             program: undefined,
             command: undefined,
@@ -32,7 +32,7 @@ describe("ParamDtoDirector", (): void => {
     // 2. args === []
     test("Should be correct empty array", (): void => {
         const args: string[] = [];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: [],
             program: undefined,
             command: undefined,
@@ -44,7 +44,7 @@ describe("ParamDtoDirector", (): void => {
     // 3. args === ["program", "--arg1", "-a", "command", "--arg2", "-b"]
     test("Should be correct: program --arg1 -a command --arg2 -b", (): void => {
         const args = ["program", "--arg1", "-a", "command", "--arg2", "-b"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", "--arg1", "-a", "command", "--arg2", "-b"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 3},
@@ -94,7 +94,7 @@ describe("ParamDtoDirector", (): void => {
     // 4. args === ["program", "--arg1", "-a", "--arg2", "-b"]
     test("Should be correct: program --arg1 -a --arg2 -b", (): void => {
         const args = ["program", "--arg1", "-a", "--arg2", "-b"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", "--arg1", "-a", "--arg2", "-b"],
             program: {baseValue: "program", index: 0},
             command: undefined,
@@ -142,7 +142,7 @@ describe("ParamDtoDirector", (): void => {
     // 5. args === ["--arg1", "-a", "--arg2", "-b", "command"]
     test("Should be correct: --arg1 -a --arg2 -b command", (): void => {
         const args = ["--arg1", "-a", "--arg2", "-b", "command"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["--arg1", "-a", "--arg2", "-b", "command"],
             program: undefined,
             command: {baseValue: "command", index: 4},
@@ -191,7 +191,7 @@ describe("ParamDtoDirector", (): void => {
     // 6. args === ["--arg1", "-a", "--arg2", "-b"]
     test("Should be correct: --arg1 -a --arg2 -b", (): void => {
         const args = ["--arg1", "-a", "--arg2", "-b"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["--arg1", "-a", "--arg2", "-b"],
             program: undefined,
             command: undefined,
@@ -240,7 +240,7 @@ describe("ParamDtoDirector", (): void => {
     // 7. args === ["--arg1", "-a", "command", "--arg2", "-b"]
     test("Should be correct: --arg1 -a command --arg2 -b", (): void => {
         const args = ["--arg1", "-a", "command", "--arg2", "-b"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["--arg1", "-a", "command", "--arg2", "-b"],
             program: undefined,
             command: {baseValue: "command", index: 2},
@@ -290,7 +290,7 @@ describe("ParamDtoDirector", (): void => {
     // 8. args === ["program", "command"]
     test("Should be correct: program command", (): void => {
         const args = ["program", "command"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", "command"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 1},
@@ -302,7 +302,7 @@ describe("ParamDtoDirector", (): void => {
     // 9. args === ["program"]
     test("Should be correct: program", (): void => {
         const args = ["program"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program"],
             program: {baseValue: "program", index: 0},
             command: undefined,
@@ -314,7 +314,7 @@ describe("ParamDtoDirector", (): void => {
     // 10. args === ["program", "--arg1", "--arg2", "command", "--arg3", "--arg4"]
     test("Should be correct: program --arg1 --arg2 command --arg3 --arg4", (): void => {
         const args = ["program", "--arg1", "--arg2", "command", "--arg3", "--arg4"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", "--arg1", "--arg2", "command", "--arg3", "--arg4"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 3},
@@ -364,7 +364,7 @@ describe("ParamDtoDirector", (): void => {
     // 11. args === ["program", "--arg1=value1", '--arg2="value1"', "command", "--arg3='value1'", "--arg4=`value1`"]
     test("Should be correct: program --arg1=value1 --arg2=\"value1\" command --arg3='value1' --arg4=`value1`", (): void => {
         const args = ["program", "--arg1=value1", '--arg2="value1"', "command", "--arg3='value1'", "--arg4=`value1`"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", "--arg1=value1", '--arg2="value1"', "command", "--arg3='value1'", "--arg4=`value1`"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 3},
@@ -414,7 +414,7 @@ describe("ParamDtoDirector", (): void => {
     // 12. args === ["program", "--arg1=value1,value2", '--arg2="value1,value2"', "command", "--arg3='value1,value2'", "--arg4=`value1,value2`"]
     test("Should be correct: program --arg1=value1,value2 --arg2=\"value1,value2\" command --arg3='value1,value2' --arg4=`value1,value2`", (): void => {
         const args = ["program", "--arg1=value1,value2", '--arg2="value1,value2"', "command", "--arg3='value1,value2'", "--arg4=`value1,value2`"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", "--arg1=value1,value2", '--arg2="value1,value2"', "command", "--arg3='value1,value2'", "--arg4=`value1,value2`"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 3},
@@ -464,7 +464,7 @@ describe("ParamDtoDirector", (): void => {
     // 13. args === ["program", '--arg2="value1, value2"', "command", "--arg3='value1, value2'", "--arg4=`value1, value2`"]
     test("Should be correct: program --arg2=\"value1, value2\" command --arg3='value1, value2' --arg4=`value1, value2`", (): void => {
         const args = ["program", '--arg2="value1, value2"', "command", "--arg3='value1, value2'", "--arg4=`value1, value2`"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", '--arg2="value1, value2"', "command", "--arg3='value1, value2'", "--arg4=`value1, value2`"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 2},
@@ -505,7 +505,7 @@ describe("ParamDtoDirector", (): void => {
     // 14. args === ["program", "-a", "-b", "command", "-c", "-d"]
     test("Should be correct: program -a -b command -c -d", (): void => {
         const args = ["program", "-a", "-b", "command", "-c", "-d"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", "-a", "-b", "command", "-c", "-d"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 3},
@@ -555,7 +555,7 @@ describe("ParamDtoDirector", (): void => {
     // 15. args === ["program", "-a=value1", '-b="value1"', "command", "-c='value1'", "-d=`value1`"]
     test("Should be correct: program -a=value1 -b=\"value1\" command -c='value1' -d=`value1`", (): void => {
         const args = ["program", "-a=value1", '-b="value1"', "command", "-c='value1'", "-d=`value1`"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", "-a=value1", '-b="value1"', "command", "-c='value1'", "-d=`value1`"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 3},
@@ -605,7 +605,7 @@ describe("ParamDtoDirector", (): void => {
     // 16. args === ["program", "-a=value1,value2", '-b="value1,value2"', "command", "-c='value1,value2'", "-d=`value1,value2`"]
     test("Should be correct: program -a=value1,value2 -b=\"value1,value2\" command -c='value1,value2' -d=`value1,value2`", (): void => {
         const args = ["program", "-a=value1,value2", '-b="value1,value2"', "command", "-c='value1,value2'", "-d=`value1,value2`"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", "-a=value1,value2", '-b="value1,value2"', "command", "-c='value1,value2'", "-d=`value1,value2`"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 3},
@@ -655,7 +655,7 @@ describe("ParamDtoDirector", (): void => {
     // 17. args === ["program", '-a="value1, value2"', "command", "-b='value1, value2'", "-c=`value1, value2`"]
     test("Should be correct: program -a=\"value1,value2\" command -b='value1,value2' -c=`value1,value2`", (): void => {
         const args = ["program", '-a="value1,value2"', "command", "-b='value1,value2'", "-c=`value1,value2`"];
-        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDtoDomain>({
+        expect(service.build(ParamDtoBuilder, args)).toEqual<ParamDto>({
             baseArgs: ["program", '-a="value1,value2"', "command", "-b='value1,value2'", "-c=`value1,value2`"],
             program: {baseValue: "program", index: 0},
             command: {baseValue: "command", index: 2},

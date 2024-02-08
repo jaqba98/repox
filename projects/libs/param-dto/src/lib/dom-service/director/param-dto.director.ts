@@ -1,6 +1,6 @@
 import {container, InjectionToken, singleton} from "tsyringe";
 
-import {ParamDtoDomain} from "../domain/param-dto.domain";
+import {ParamDto} from "../domain/param-dto";
 import {ParamDtoAbstractBuilder} from "../builder/param-dto/param-dto-abstract.builder";
 
 @singleton()
@@ -11,7 +11,7 @@ export class ParamDtoDirector {
     build(
         service: InjectionToken<ParamDtoAbstractBuilder>,
         args: string[]
-    ): ParamDtoDomain {
+    ): ParamDto {
         return container.resolve(service)
             .buildBaseArgs(args)
             .buildProgram()

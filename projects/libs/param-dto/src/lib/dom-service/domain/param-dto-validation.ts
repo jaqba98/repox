@@ -4,7 +4,7 @@ import {injectable} from "tsyringe";
 /**
  * The domain class is a recipe how to build param dto validation object.
  */
-export class ParamDtoValidationDomain {
+export class ParamDtoValidation {
     supportedSigns: boolean = true;
     supportedSignsWrongIndexes: number[] = [];
 

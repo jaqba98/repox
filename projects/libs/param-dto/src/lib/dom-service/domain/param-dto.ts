@@ -6,7 +6,7 @@ import {ArgumentParamDtoModel, BaseParamDtoModel} from "../../model/param-dto.mo
 /**
  * The domain class is a recipe how to build param dto object.
  */
-export class ParamDtoDomain {
+export class ParamDto {
     baseArgs: string[] | undefined;
 
     program: BaseParamDtoModel | undefined;

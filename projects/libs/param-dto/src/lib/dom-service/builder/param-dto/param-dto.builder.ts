@@ -1,7 +1,7 @@
 import {container, singleton} from "tsyringe";
 
 import {ParamDtoAbstractBuilder} from "./param-dto-abstract.builder";
-import {ParamDtoDomain} from "../../domain/param-dto.domain";
+import {ParamDto} from "../../domain/param-dto";
 import {deepCopy, getIndexesBetween} from "@lib/utils";
 import {
     ALIAS_PREFIX,
@@ -16,10 +16,10 @@ import {ArgumentParamDtoModel} from "../../../model/param-dto.model";
  * The builder contains methods to build every single param dto element.
  */
 export class ParamDtoBuilder implements ParamDtoAbstractBuilder {
-    readonly paramDto: ParamDtoDomain;
+    readonly paramDto: ParamDto;
 
     constructor() {
-        this.paramDto = container.resolve(ParamDtoDomain);
+        this.paramDto = container.resolve(ParamDto);
     }
 
     buildBaseArgs(args: string[]): ParamDtoAbstractBuilder {
@@ -78,7 +78,7 @@ export class ParamDtoBuilder implements ParamDtoAbstractBuilder {
         return this;
     }
 
-    build(): ParamDtoDomain {
+    build(): ParamDto {
         return this.paramDto;
     }
 

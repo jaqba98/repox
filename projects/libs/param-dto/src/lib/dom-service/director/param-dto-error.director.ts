@@ -4,7 +4,7 @@ import {ParamDtoError} from "../domain/param-dto-error";
 import {
     ParamDtoErrorAbstractBuilder
 } from "../builder/param-dto-error/param-dto-error-abstract.builder";
-import {ParamDtoValidationDomain} from "../domain/param-dto-validation.domain";
+import {ParamDtoValidation} from "../domain/param-dto-validation";
 import {deepCopy} from "@lib/utils";
 
 @singleton()
@@ -14,7 +14,7 @@ import {deepCopy} from "@lib/utils";
 export class ParamDtoErrorDirector {
     build(
         abstract: InjectionToken<ParamDtoErrorAbstractBuilder>,
-        paramDtoValidation: ParamDtoValidationDomain
+        paramDtoValidation: ParamDtoValidation
     ): ParamDtoError {
         const cloneParamDtoValidation = deepCopy(paramDtoValidation);
         return container.resolve(abstract)

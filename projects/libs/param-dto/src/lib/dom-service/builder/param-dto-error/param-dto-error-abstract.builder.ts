@@ -1,5 +1,5 @@
 import {ParamDtoError} from "../../domain/param-dto-error";
-import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
+import {ParamDtoValidation} from "../../domain/param-dto-validation";
 
 /**
  * The abstract builder contains methods which can be implemented
@@ -8,10 +8,10 @@ import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain
 export abstract class ParamDtoErrorAbstractBuilder {
     abstract paramDtoError: ParamDtoError;
 
-    abstract paramDtoValidation: ParamDtoValidationDomain | undefined;
+    abstract paramDtoValidation: ParamDtoValidation | undefined;
 
     abstract buildParamDtoValidation(
-        paramDtoValidation: ParamDtoValidationDomain
+        paramDtoValidation: ParamDtoValidation
     ): ParamDtoErrorAbstractBuilder;
 
     abstract buildSupportedSignsErrors(): ParamDtoErrorAbstractBuilder;

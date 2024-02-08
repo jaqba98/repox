@@ -2,7 +2,7 @@ import {container, singleton} from "tsyringe";
 
 import {ParamDtoErrorAbstractBuilder} from "./param-dto-error-abstract.builder";
 import {ParamDtoError} from "../../domain/param-dto-error";
-import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
+import {ParamDtoValidation} from "../../domain/param-dto-validation";
 import {deepCopy} from "@lib/utils";
 
 @singleton()
@@ -10,7 +10,7 @@ import {deepCopy} from "@lib/utils";
  * The builder contains methods to build error steps to the program.
  */
 export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
-    paramDtoValidation: ParamDtoValidationDomain | undefined;
+    paramDtoValidation: ParamDtoValidation | undefined;
 
     readonly paramDtoError: ParamDtoError;
 
@@ -19,7 +19,7 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
     }
 
     buildParamDtoValidation(
-        paramDtoValidation: ParamDtoValidationDomain
+        paramDtoValidation: ParamDtoValidation
     ): ParamDtoErrorAbstractBuilder {
         this.paramDtoValidation = deepCopy(paramDtoValidation)
         return this;

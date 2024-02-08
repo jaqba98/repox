@@ -1,7 +1,7 @@
 import {container, singleton} from "tsyringe";
 
-import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
-import {ParamDtoDomain} from "../../domain/param-dto.domain";
+import {ParamDtoValidation} from "../../domain/param-dto-validation";
+import {ParamDto} from "../../domain/param-dto";
 import {deepCopy} from "@lib/utils";
 import {ParamDtoValidationAbstractBuilder} from "./param-dto-validation-abstract.builder";
 import {CheckSupportedSignsService} from "../../service/check-supported-signs.service";
@@ -12,18 +12,18 @@ import {CheckCorrectPatternService} from "../../service/check-correct-pattern.se
  * The builder contains methods to build validation steps to the command.
  */
 export class CommandValidationBuilder implements ParamDtoValidationAbstractBuilder {
-    paramDtoValidation: ParamDtoValidationDomain;
+    paramDtoValidation: ParamDtoValidation;
 
-    paramDto: ParamDtoDomain | undefined;
+    paramDto: ParamDto | undefined;
 
     constructor(
         private readonly checkSupportedSigns: CheckSupportedSignsService,
         private readonly checkCorrectPattern: CheckCorrectPatternService
     ) {
-        this.paramDtoValidation = container.resolve(ParamDtoValidationDomain);
+        this.paramDtoValidation = container.resolve(ParamDtoValidation);
     }
 
-    buildParamDto(paramDto: ParamDtoDomain): CommandValidationBuilder {
+    buildParamDto(paramDto: ParamDto): CommandValidationBuilder {
         this.paramDto = deepCopy(paramDto);
         return this;
     }
@@ -67,7 +67,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
         return this;
     }
 
-    build(): ParamDtoValidationDomain {
+    build(): ParamDtoValidation {
         return this.paramDtoValidation;
     }
 }

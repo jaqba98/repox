@@ -1,12 +1,12 @@
-import {ParamDtoDomain} from "../../domain/param-dto.domain";
-import {ParamDtoValidationDomain} from "../../domain/param-dto-validation.domain";
+import {ParamDto} from "../../domain/param-dto";
+import {ParamDtoValidation} from "../../domain/param-dto-validation";
 
 export abstract class ParamDtoValidationAbstractBuilder {
-    abstract paramDtoValidation: ParamDtoValidationDomain;
+    abstract paramDtoValidation: ParamDtoValidation;
 
-    abstract paramDto: ParamDtoDomain | undefined;
+    abstract paramDto: ParamDto | undefined;
 
-    abstract buildParamDto(paramDto: ParamDtoDomain): ParamDtoValidationAbstractBuilder;
+    abstract buildParamDto(paramDto: ParamDto): ParamDtoValidationAbstractBuilder;
 
     abstract buildSupportedSignsValidation(): ParamDtoValidationAbstractBuilder;
 
@@ -16,5 +16,5 @@ export abstract class ParamDtoValidationAbstractBuilder {
 
     abstract buildCorrectOrderValidation(): ParamDtoValidationAbstractBuilder;
 
-    abstract build(): ParamDtoValidationDomain;
+    abstract build(): ParamDtoValidation;
 }

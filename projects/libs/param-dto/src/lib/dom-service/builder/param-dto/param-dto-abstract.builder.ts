@@ -1,11 +1,11 @@
-import {ParamDtoDomain} from "../../domain/param-dto.domain";
+import {ParamDto} from "../../domain/param-dto";
 
 /**
  * The abstract builder contains methods which can be implemented
  * in the param dto builder service.
  */
 export abstract class ParamDtoAbstractBuilder {
-    abstract readonly paramDto: ParamDtoDomain;
+    abstract readonly paramDto: ParamDto;
 
     abstract buildBaseArgs(args: string[]): ParamDtoAbstractBuilder;
 
@@ -17,5 +17,5 @@ export abstract class ParamDtoAbstractBuilder {
 
     abstract buildCommandArgs(): ParamDtoAbstractBuilder;
 
-    abstract build(): ParamDtoDomain;
+    abstract build(): ParamDto;
 }
