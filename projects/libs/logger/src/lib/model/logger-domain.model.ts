@@ -1,4 +1,4 @@
-import {type LoggerModeEnum} from "../enum/logger-mode.enum";
+import {LoggerModeEnum} from "../enum/logger-mode.enum";
 
 /**
  * The logger domain model that stores data.
@@ -27,5 +27,3 @@ export interface LoggerLineModel {
 export interface LoggerDomainModel {
     lines: LoggerLineModel[];
 }
-
-// todo: refactor the code

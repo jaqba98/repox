@@ -1,5 +1,8 @@
 import {singleton} from "tsyringe";
-import {BuildSimpleMessageService} from "../dom-service/builder/build-simple-message.service";
+
+import {
+    BuildSimpleMessageService
+} from "../dom-service/builder/build-simple-message.service";
 import {WriteMessageService} from "../infrastructure/write-message.service";
 import {EMPTY_STRING} from "@lib/const";
 
@@ -40,5 +43,3 @@ export class SimpleMessageAppService {
         this.writeMessage.write(outputMessage);
     }
 }
-
-// todo: refactor the code

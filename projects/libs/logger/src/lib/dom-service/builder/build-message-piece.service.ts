@@ -22,22 +22,22 @@ export const buildLogo = (bgColor: string, logo: string): string => buildEmptyMe
     .concat(logo)
     .concat(SPACE);
 
-export const buildHeader = (bgColor: string, header: string): string => buildEmptyMessage()
-    .concat(TEXT_BRIGHT)
-    .concat(bgColor)
-    .concat(SPACE)
-    .concat(header)
-    .concat(SPACE);
+export const buildHeader = (bgColor: string, header: string): string =>
+    buildEmptyMessage()
+        .concat(TEXT_BRIGHT)
+        .concat(bgColor)
+        .concat(SPACE)
+        .concat(header)
+        .concat(SPACE);
 
 export const buildWord = (fgColor: string, word: string): string => buildEmptyMessage()
     .concat(TEXT_BRIGHT)
     .concat(fgColor)
     .concat(word);
 
-export const buildUnderscoreWord = (fgColor: string, word: string): string => buildEmptyMessage()
-    .concat(TEXT_BRIGHT)
-    .concat(fgColor)
-    .concat(TEXT_UNDERSCORE)
-    .concat(word);
-
-// todo: refactor the code
+export const buildUnderscoreWord = (fgColor: string, word: string): string =>
+    buildEmptyMessage()
+        .concat(TEXT_BRIGHT)
+        .concat(fgColor)
+        .concat(TEXT_UNDERSCORE)
+        .concat(word);

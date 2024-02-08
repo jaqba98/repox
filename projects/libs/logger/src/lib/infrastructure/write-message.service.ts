@@ -10,5 +10,3 @@ export class WriteMessageService {
         console.log(message);
     }
 }
-
-// todo: refactor the code

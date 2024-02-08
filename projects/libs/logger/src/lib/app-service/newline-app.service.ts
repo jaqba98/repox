@@ -1,4 +1,5 @@
 import {singleton} from "tsyringe";
+
 import {WriteMessageService} from "../infrastructure/write-message.service";
 import {EMPTY_STRING} from "@lib/const";
 
@@ -15,5 +16,3 @@ export class NewlineAppService {
         this.writeMessage.write(EMPTY_STRING);
     }
 }
-
-// todo: refactor the code

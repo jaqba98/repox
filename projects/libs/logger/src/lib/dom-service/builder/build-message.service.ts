@@ -1,6 +1,11 @@
 import {singleton} from "tsyringe";
+
 import {ConvertModeToColorService} from "../converter/convert-mode-to-color.service";
-import {type LoggerDomainModel, type LoggerLineModel, type LoggerWordModel} from "../../model/logger-domain.model";
+import {
+    LoggerDomainModel,
+    LoggerLineModel,
+    LoggerWordModel
+} from "../../model/logger-domain.model";
 import {EMPTY_STRING, NEW_LINE, SPACE} from "@lib/const";
 import {
     buildEmptyMessage,
@@ -59,5 +64,3 @@ export class BuildMessageService {
             : buildWord(fgColor, content);
     }
 }
-
-// todo: refactor the code

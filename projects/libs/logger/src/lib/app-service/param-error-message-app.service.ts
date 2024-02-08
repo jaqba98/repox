@@ -1,5 +1,8 @@
 import {singleton} from "tsyringe";
-import {BuildParamErrorMessageService} from "../dom-service/builder/build-param-error-message.service";
+
+import {
+    BuildParamErrorMessageService
+} from "../dom-service/builder/build-param-error-message.service";
 import {BuildMessageService} from "../dom-service/builder/build-message.service";
 import {WriteMessageService} from "../infrastructure/write-message.service";
 import {BuildLineService} from "../dom-service/builder/build-line.service";
@@ -15,7 +18,7 @@ export class ParamErrorMessageAppService {
     constructor(
         private readonly buildMessage: BuildMessageService,
         private readonly buildLines: BuildLineService,
-        private readonly buildParamError: BuildParamErrorMessageService,
+        private readonly buildError: BuildParamErrorMessageService,
         private readonly writeMessage: WriteMessageService
     ) {
     }
@@ -45,11 +48,7 @@ export class ParamErrorMessageAppService {
                     mode: LoggerModeEnum.error,
                     logo: {visible: false, content: EMPTY_STRING},
                     header: {visible: false, content: EMPTY_STRING},
-                    words: this.buildParamError.build(
-                        wrongParamIndexes,
-                        baseValues,
-                        logo
-                    ),
+                    words: this.buildError.build(wrongParamIndexes, baseValues, logo),
                     newline: 1
                 },
                 ...this.buildLines.buildErrorLines(errors),
@@ -59,5 +58,3 @@ export class ParamErrorMessageAppService {
         this.writeMessage.write(outputMessage);
     }
 }
-
-// todo: refactor the code

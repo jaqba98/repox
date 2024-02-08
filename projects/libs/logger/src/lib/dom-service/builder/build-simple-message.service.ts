@@ -1,4 +1,5 @@
 import {singleton} from "tsyringe";
+
 import {BuildMessageService} from "./build-message.service";
 import {LoggerModeEnum} from "../../enum/logger-mode.enum";
 import {EMPTY_STRING} from "@lib/const";
@@ -39,7 +40,11 @@ export class BuildSimpleMessageService {
         });
     }
 
-    private baseBuildMsg(message: string, logo: string, loggerMode: LoggerModeEnum): string {
+    private baseBuildMsg(
+        message: string,
+        logo: string,
+        loggerMode: LoggerModeEnum
+    ): string {
         const logoVisible = logo !== EMPTY_STRING;
         const headerContent = loggerMode.toUpperCase();
         return this.buildMessage.build({
@@ -53,5 +58,3 @@ export class BuildSimpleMessageService {
         });
     }
 }
-
-// todo: refactor the code

@@ -1,4 +1,5 @@
 import {singleton} from "tsyringe";
+
 import {LoggerModeEnum} from "../../enum/logger-mode.enum";
 import {
     BG_TEXT_GRAY,
@@ -15,7 +16,7 @@ import {
 
 @singleton()
 /**
- * The converter service is responsible for convert
+ * The converter service is responsible for converting
  * the logger mode to the color value.
  */
 export class ConvertModeToColorService {
@@ -53,5 +54,3 @@ export class ConvertModeToColorService {
         }
     }
 }
-
-// todo: refactor the code

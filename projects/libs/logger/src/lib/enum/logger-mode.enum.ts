@@ -3,11 +3,9 @@
  * messages will be displayed.
  */
 export enum LoggerModeEnum {
-    success = `success`,
-    error = `error`,
-    warning = `warning`,
-    info = `info`,
-    plain = `plain`
+    success = "success",
+    error = "error",
+    warning = "warning",
+    info = "info",
+    plain = "plain"
 }
-
-// todo: refactor the code

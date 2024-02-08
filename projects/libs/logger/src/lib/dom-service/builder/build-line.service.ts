@@ -1,5 +1,6 @@
 import {singleton} from "tsyringe";
-import {type LoggerLineModel} from "../../model/logger-domain.model";
+
+import {LoggerLineModel} from "../../model/logger-domain.model";
 import {LoggerModeEnum} from "../../enum/logger-mode.enum";
 import {ERR, TIP} from "../../const/logger.const";
 import {EMPTY_STRING} from "@lib/const";
@@ -40,5 +41,3 @@ export class BuildLineService {
         }
     }
 }
-
-// todo: refactor the code
