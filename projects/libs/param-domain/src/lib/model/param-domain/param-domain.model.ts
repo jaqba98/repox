@@ -1,29 +1,32 @@
 /**
  * Domain parameter model for all parameters
- * prepared with param DTO model.
+ * prepared with param dto model.
  */
 
-export interface ParamDomainBaseEntityModel {
+export interface BaseParamDomainModel {
     baseName: string;
     name: string;
     index: number;
 }
 
-export interface ParamDomainArgModel
-    extends ParamDomainBaseEntityModel {
+export interface ArgParamDomainModel extends BaseParamDomainModel {
     values: string[];
     hasValue: boolean;
     hasManyValues: boolean;
 }
 
-export interface ParamDomainEntityModel
-    extends ParamDomainBaseEntityModel {
-    args: ParamDomainArgModel[];
+export interface ArgsParamDomainModel {
+    args: Record<string, ArgParamDomainModel>;
 }
 
-export interface ParamDomainModel {
-    program: ParamDomainEntityModel;
-    command: ParamDomainEntityModel;
+export interface ProgramDomainModel extends BaseParamDomainModel {
 }
 
-// todo: refactor the code
+export interface CommandDomainModel extends BaseParamDomainModel {
+}
+
+export interface ProgramArgsDomainModel extends ArgsParamDomainModel {
+}
+
+export interface CommandArgsDomainModel extends ArgsParamDomainModel {
+}
