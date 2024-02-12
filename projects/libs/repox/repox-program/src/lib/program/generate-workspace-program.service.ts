@@ -1,24 +1,25 @@
 import {singleton} from "tsyringe";
 
-import {ProgramModel} from "@lib/model";
-import {GenerateWorkspaceStepService} from "../step/generate-workspace-step.service";
-import {GenerateWorkspaceCommandModel} from "@lib/repox-domain";
+import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
+import {REPOX_LOGO} from "@lib/repox-const";
 
 @singleton()
 /**
- * The program is responsible for generating the project workspace in the given path.
+ * The start point of the program generate, command workspace.
+ * Possible arguments
  */
-export class GenerateWorkspaceProgramService implements ProgramModel {
-    constructor(private readonly step: GenerateWorkspaceStepService) {
+export class GenerateWorkspaceProgramService {
+    constructor(
+        private readonly simpleMessage: SimpleMessageAppService,
+        private readonly newline: NewlineAppService
+    ) {
     }
 
-    runProgram(programModel: unknown, commandModel: unknown): void {
-        this.step.runProgramSteps(
-            programModel as Record<string, never>,
-            commandModel as GenerateWorkspaceCommandModel
-        );
+    runProgram(): boolean {
+        this.simpleMessage.writeInfo("Generate Project", REPOX_LOGO);
+        this.newline.writeNewline();
+        return true;
     }
 }
-
 
 // todo: refactor the code

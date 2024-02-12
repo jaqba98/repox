@@ -13,14 +13,14 @@ export class RepoxMainService {
     constructor(
         private readonly buildParamDto: BuildParamDtoAppService,
         private readonly buildParamDomain: BuildParamDomainAppService,
-        private readonly repoxLauncher: RepoxProgramLauncher
+        private readonly programLauncher: RepoxProgramLauncher
     ) {
     }
 
     run(): void {
         if (!this.buildParamDto.build()) return;
         if (!this.buildParamDomain.build()) return;
-        if (!this.repoxLauncher.launchProgram()) return;
+        if (!this.programLauncher.launchProgram()) return;
     }
 }
 

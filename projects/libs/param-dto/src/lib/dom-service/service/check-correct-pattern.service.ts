@@ -10,7 +10,7 @@ export class CheckCorrectPatternService {
     }
 
     checkArgument(name: string): boolean {
-        return /^--[a-zA-Z0-9-]*$/.test(name);
+        return /^--[a-zA-Z0-9-]{2,}$/.test(name);
     }
 
     checkAlias(name: string): boolean {
