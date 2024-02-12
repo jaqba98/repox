@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {singleton} from "tsyringe";
-import {type ParamDomainDepModel} from "@lib/param-domain";
 import {RepoxArgumentEnum, RepoxCommandEnum, RepoxProgramEnum} from "@lib/repox-domain";
 import {ProjectTypeEnum} from "@lib/repox-workspace";
 
@@ -9,7 +9,8 @@ import {ProjectTypeEnum} from "@lib/repox-workspace";
  * for given program.
  */
 export class RepoxGetParamDepService {
-    getProgramDefault(): ParamDomainDepModel {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getProgramDefault(): any {
         return {
             program: RepoxProgramEnum.default,
             commands: {
@@ -29,7 +30,7 @@ export class RepoxGetParamDepService {
         };
     }
 
-    getProgramGenerate(): ParamDomainDepModel {
+    getProgramGenerate(): any {
         return {
             program: RepoxProgramEnum.generate,
             commands: {
@@ -76,7 +77,7 @@ export class RepoxGetParamDepService {
         };
     }
 
-    getProgramRegenerate(): ParamDomainDepModel {
+    getProgramRegenerate(): any {
         return {
             program: RepoxProgramEnum.regenerate,
             commands: {
@@ -100,7 +101,7 @@ export class RepoxGetParamDepService {
         };
     }
 
-    getProgramBuild(): ParamDomainDepModel {
+    getProgramBuild(): any {
         return {
             program: RepoxProgramEnum.build,
             commands: {
@@ -137,7 +138,7 @@ export class RepoxGetParamDepService {
         };
     }
 
-    getProgramPublish(): ParamDomainDepModel {
+    getProgramPublish(): any {
         return {
             program: RepoxProgramEnum.publish,
             commands: {
@@ -161,7 +162,8 @@ export class RepoxGetParamDepService {
         };
     }
 
-    getProgramLint(): ParamDomainDepModel {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getProgramLint(): any {
         return {
             program: RepoxProgramEnum.lint,
             commands: {

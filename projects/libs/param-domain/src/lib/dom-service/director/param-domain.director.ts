@@ -3,7 +3,7 @@ import {container, InjectionToken, singleton} from "tsyringe";
 import {ParamDomain} from "../domain/param-domain";
 import {
     ParamDomainAbstractBuilder
-} from "../builder/param-domain/param-domain-abstract.builder";
+} from "../builder/param-domain-abstract.builder";
 
 @singleton()
 /**

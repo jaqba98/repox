@@ -11,7 +11,6 @@ import {
     type RegenerateWorkspaceCommandModel,
     RepoxArgumentEnum
 } from "@lib/repox-domain";
-import {ParamDomainAppService} from "@lib/param-domain";
 import {ProjectTypeEnum} from "@lib/repox-workspace";
 
 @singleton()
@@ -20,8 +19,8 @@ import {ProjectTypeEnum} from "@lib/repox-workspace";
  * model for all kinds of programs and commends.
  */
 export class RepoxBuildParamModelService {
-    constructor(private readonly paramDomain: ParamDomainAppService) {
-    }
+    // constructor(private readonly paramDomain: ParamDomainAppService) {
+    // }
 
     emptyProgram(): EmptyRepoxProgramModel {
         return {};
@@ -33,46 +32,55 @@ export class RepoxBuildParamModelService {
 
     defaultProgram(): DefaultDefaultRepoxProgramModel {
         return {
-            showVersion: this.paramDomain.getProgramBooleanValue(RepoxArgumentEnum.version)
+            showVersion: false
+            // showVersion: this.paramDomain.getProgramBooleanValue(RepoxArgumentEnum.version)
         };
     }
 
     generateWorkspaceCommand(): GenerateWorkspaceCommandModel {
         return {
-            workspaceName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
+            workspaceName: ""
+            // workspaceName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
         };
     }
 
     regenerateWorkspaceCommand():
         RegenerateWorkspaceCommandModel {
         return {
-            isForceMode: this.paramDomain.getCommandBooleanValue(RepoxArgumentEnum.force)
+            isForceMode: false
+            // isForceMode: this.paramDomain.getCommandBooleanValue(RepoxArgumentEnum.force)
         };
     }
 
     generateProjectCommand(): GenerateProjectCommandModel {
         return {
-            projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name),
-            projectType: this.paramDomain.getCommandEnumValue(RepoxArgumentEnum.type, ProjectTypeEnum.appTs),
-            projectPath: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.path)
+            projectName: "",
+            projectPath: "",
+            projectType: ProjectTypeEnum.appTs
+            // projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name),
+            // projectType: this.paramDomain.getCommandEnumValue(RepoxArgumentEnum.type, ProjectTypeEnum.appTs),
+            // projectPath: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.path)
         };
     }
 
     buildProjectCommand(): BuildProjectRepoxCommandModel {
         return {
-            projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
+            projectName: ""
+            // projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
         };
     }
 
     publishNpmCommand(): PublishNpmRepoxCommandModel {
         return {
-            projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
+            projectName: ""
+            // projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
         };
     }
 
     lintProjectCommand(): LintProjectRepoxCommandModel {
         return {
-            isFixMode: this.paramDomain.getCommandBooleanValue(RepoxArgumentEnum.fix)
+            isFixMode: false
+            // isFixMode: this.paramDomain.getCommandBooleanValue(RepoxArgumentEnum.fix)
         };
     }
 }

@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { singleton } from "tsyringe";
-import { type ParamDomainDepModel } from "@lib/param-domain";
 import { type BaseGetParamDepModel } from "@lib/model";
 import {
   RepoxGetParamDepService
@@ -18,7 +18,7 @@ implements BaseGetParamDepModel {
   ) {
   }
 
-  getDependency (program: string): ParamDomainDepModel {
+  getDependency (program: string): any {
     switch (program) {
       case RepoxProgramEnum.default:
         return this.repoxGetParamDep.getProgramDefault();

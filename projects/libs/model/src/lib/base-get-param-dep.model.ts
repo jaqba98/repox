@@ -1,10 +1,10 @@
-import {type ParamDomainDepModel} from "@lib/param-domain";
 
 /**
  * The base get param dependency for each project.
  */
 export interface BaseGetParamDepModel {
-    getDependency: (program: string) => ParamDomainDepModel;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getDependency: (program: string) => any;
 }
 
 // todo: refactor the code

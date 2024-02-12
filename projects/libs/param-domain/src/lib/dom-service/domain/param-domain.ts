@@ -1,35 +1,18 @@
 import {injectable} from "tsyringe";
 
-import {
-    CommandArgsDomainModel,
-    CommandDomainModel,
-    ProgramArgsDomainModel,
-    ProgramDomainModel
-} from "@lib/param-domain";
 import {BaseParamTypeEnum} from "../../enum/base-param-type.enum";
+import {ParamDomainArgsModel} from "../../model/param-domain.model";
 
 @injectable()
 /**
  * The domain class is a recipe how to build param domain object.
  */
 export class ParamDomain {
-    program: ProgramDomainModel = {
-        baseName: BaseParamTypeEnum.unknown,
-        name: BaseParamTypeEnum.unknown,
-        index: -1
-    };
+    program: string = BaseParamTypeEnum.unknown;
 
-    command: CommandDomainModel = {
-        baseName: BaseParamTypeEnum.unknown,
-        name: BaseParamTypeEnum.unknown,
-        index: -1
-    };
+    command: string = BaseParamTypeEnum.unknown;
 
-    programArgs: ProgramArgsDomainModel = {
-        args: {}
-    };
+    programArgs: ParamDomainArgsModel = {};
 
-    commandArgs: CommandArgsDomainModel = {
-        args: {}
-    };
+    commandArgs: ParamDomainArgsModel = {};
 }
