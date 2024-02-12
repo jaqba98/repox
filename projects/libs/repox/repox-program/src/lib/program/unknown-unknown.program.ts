@@ -20,7 +20,7 @@ export class UnknownUnknownProgram {
     runProgram(): boolean {
         const {programArgs} = this.store.get();
         if (!programArgs) return true;
-        if (programArgs["version"] || programArgs["v"]) {
+        if (programArgs["version"]) {
             this.displayVersion.display(REPOX_VERSION);
             return true;
         }
