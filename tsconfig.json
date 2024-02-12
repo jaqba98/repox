@@ -46,8 +46,8 @@
       "@lib/logger": [
         "projects/libs/logger/src/index.ts"
       ],
-      "@lib/launcher": [
-        "projects/libs/launcher/src/index.ts"
+      "@lib/repox-launcher": [
+        "projects/libs/repox/repox-launcher/src/index.ts"
       ],
       "@lib/const": [
         "projects/libs/const/src/index.ts"

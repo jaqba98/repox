@@ -1,5 +1,4 @@
 import { container, singleton } from "tsyringe";
-import { type LauncherModel } from "@lib/launcher";
 import {
   RepoxCommandEnum,
   RepoxProgramEnum
@@ -20,7 +19,8 @@ import {
  * for repox project.
  */
 export class RepoxLaunchProgramAppService {
-  getPrograms (): LauncherModel {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getPrograms (): any {
     return {
       programs: [
         {
