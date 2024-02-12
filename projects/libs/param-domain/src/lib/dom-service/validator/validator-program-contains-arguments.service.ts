@@ -28,7 +28,8 @@ export class ValidatorProgramContainsArgumentsService
         const wrongArgs = Object.values(programArgs)
             .filter(programArg => programArg.required)
             .filter(programArg => paramDomain.program.args
-                .find(arg => arg.name === programArg.name) == null
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .find((arg: any) => arg.name === programArg.name) == null
             );
         if (wrongArgs.length === 0) {
             return this.buildParamDomain.buildSuccess();

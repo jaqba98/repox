@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {singleton} from "tsyringe";
 import {type ValidatorDomainModel} from "../../model/validator/validator-domain.model";
 import {BuildParamDomainResultService} from "../builder/build-param-domain-result.service";
@@ -28,15 +29,15 @@ export class CommandNotWrongArgumentsService implements ValidatorDomainModel {
             .getDependency(programName);
         const command = programDep.commands[commandName];
         const commandArgs = Object.values(command.args);
-        const wrongArgs = paramDomain.command.args.filter(arg =>
+        const wrongArgs = paramDomain.command.args.filter((arg: any) =>
             commandArgs.find(commandArg => commandArg.name === arg.name) == null
         );
         if (wrongArgs.length === 0) {
             return this.buildParamDomain.buildSuccess();
         }
-        const notExistedArgs = wrongArgs.map(arg => arg.name).join(`,`);
+        const notExistedArgs = wrongArgs.map((arg: any) => arg.name).join(`,`);
         return this.buildParamDomain.buildError(
-            [...wrongArgs.map(arg => arg.index)],
+            [...wrongArgs.map((arg: any) => arg.index)],
             [`You have specified not existed arguments for command!`],
             [
                 `Not existed arguments for command: ${notExistedArgs}`

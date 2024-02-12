@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {singleton} from "tsyringe";
-import {type ParamDomainModel} from "@lib/param-domain";
 import {type ParamDomainValidationModel} from "../../model/param-domain/param-domain-validation.model";
 
 @singleton()
@@ -8,10 +8,10 @@ import {type ParamDomainValidationModel} from "../../model/param-domain/param-do
  * and validation domain result.
  */
 export class ParamDomainStoreService {
-    private domain: ParamDomainModel | undefined;
+    private domain: any | undefined;
     private validation: ParamDomainValidationModel | undefined;
 
-    setParamDomain(domain: ParamDomainModel): void {
+    setParamDomain(domain: any): void {
         this.domain = domain;
     }
 
@@ -21,7 +21,7 @@ export class ParamDomainStoreService {
         this.validation = validation;
     }
 
-    getParamDomain(): ParamDomainModel {
+    getParamDomain(): any {
         if (this.domain === undefined) {
             throw new Error(`The domain store is undefined!`);
         }

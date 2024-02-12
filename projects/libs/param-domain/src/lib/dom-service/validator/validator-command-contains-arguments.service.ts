@@ -30,7 +30,8 @@ export class ValidatorCommandContainsArgumentsService
         const wrongArgs = Object.values(commandArgs)
             .filter(commandArg => commandArg.required)
             .filter(commandArg => paramDomain.command.args
-                .find(arg => arg.name === commandArg.name) == null
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .find((arg: any) => arg.name === commandArg.name) == null
             );
         if (wrongArgs.length === 0) {
             return this.buildParamDomain.buildSuccess();

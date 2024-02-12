@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {singleton} from "tsyringe";
 import {type ValidatorDomainModel} from "../../model/validator/validator-domain.model";
 import {BuildParamDomainResultService} from "../builder/build-param-domain-result.service";
@@ -29,15 +30,15 @@ export class ValidatorProgramArgIsCorrectValueService
             .getDependency(programName);
         const programArgs = programDep.args;
         const wrongArgs = paramDomain.program.args
-            .filter(arg => arg.name !== BaseParamTypeEnum.unknown)
-            .map(arg => this.checkArgument.argumentValue(arg, programArgs))
-            .filter(arg => !arg.success);
+            .filter((arg: any) => arg.name !== BaseParamTypeEnum.unknown)
+            .map((arg: any) => this.checkArgument.argumentValue(arg, programArgs))
+            .filter((arg: any) => !arg.success);
         if (wrongArgs.length === 0) {
             return this.buildParamDomain.buildSuccess();
         }
         return this.buildParamDomain.buildError(
-            [...wrongArgs.map(arg => arg.index)],
-            [...wrongArgs.map(arg => arg.error)],
+            [...wrongArgs.map((arg: any) => arg.index)],
+            [...wrongArgs.map((arg: any) => arg.error)],
             [
                 `Check the documentation to get full list of arguments.`
             ]

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {singleton} from "tsyringe";
 import {type ValidatorDomainModel} from "../../model/validator/validator-domain.model";
 import {BuildParamDomainResultService} from "../builder/build-param-domain-result.service";
@@ -25,15 +26,15 @@ export class ValidatorProgramNotWrongArgumentsService
         const programDep: ParamDomainDepModel = getParamDepService
             .getDependency(programName);
         const programArgs = Object.values(programDep.args);
-        const wrongArgs = paramDomain.program.args.filter(arg =>
+        const wrongArgs = paramDomain.program.args.filter((arg: any) =>
             programArgs.find(programArg => programArg.name === arg.name) == null
         );
         if (wrongArgs.length === 0) {
             return this.buildParamDomain.buildSuccess();
         }
-        const notExistedArgs = wrongArgs.map(arg => arg.name).join(`,`);
+        const notExistedArgs = wrongArgs.map((arg: any) => arg.name).join(`,`);
         return this.buildParamDomain.buildError(
-            [...wrongArgs.map(arg => arg.index)],
+            [...wrongArgs.map((arg: any) => arg.index)],
             [`You have specified not existed arguments for program!`],
             [
                 `Not existed arguments for program: ${notExistedArgs}`

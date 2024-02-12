@@ -1,5 +1,4 @@
 import {singleton} from "tsyringe";
-import {type ParamDomainArgModel} from "@lib/param-domain";
 import {type ParamDomainDepArgsModel} from "@lib/param-domain";
 
 @singleton()
@@ -9,7 +8,8 @@ import {type ParamDomainDepArgsModel} from "@lib/param-domain";
  */
 export class CheckArgumentService {
     valueMode(
-        paramArg: ParamDomainArgModel,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        paramArg: any,
         paramDomainDepArgs: ParamDomainDepArgsModel
     ): { success: boolean; error: string; index: number } {
         const arg = paramDomainDepArgs[paramArg.name];
@@ -39,7 +39,8 @@ export class CheckArgumentService {
     }
 
     argumentValue(
-        paramArg: ParamDomainArgModel,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        paramArg: any,
         paramDomainDepArgs: ParamDomainDepArgsModel
     ): { success: boolean; error: string; index: number } {
         const arg = paramDomainDepArgs[paramArg.name];
