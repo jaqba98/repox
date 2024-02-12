@@ -8,7 +8,7 @@ import {REPOX_VERSION} from "@lib/repox-const";
 /**
  * The start point of the program unknown, command unknown.
  * Possible arguments
- * --version, display the current version
+ * --version or -v, display the current version
  */
 export class UnknownUnknownProgram {
     constructor(
@@ -20,7 +20,7 @@ export class UnknownUnknownProgram {
     runProgram(): boolean {
         const {programArgs} = this.store.get();
         if (!programArgs) return true;
-        if (programArgs["version"]) {
+        if (programArgs["version"] || programArgs["v"]) {
             this.displayVersion.display(REPOX_VERSION);
             return true;
         }
