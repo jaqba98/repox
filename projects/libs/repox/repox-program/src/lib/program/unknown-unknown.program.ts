@@ -8,7 +8,7 @@ import {REPOX_VERSION} from "@lib/repox-const";
 /**
  * The start point of the program unknown, command unknown.
  * Possible arguments
- * --version <<< display current repox version
+ * --version, display the current version
  */
 export class UnknownUnknownProgram {
     constructor(

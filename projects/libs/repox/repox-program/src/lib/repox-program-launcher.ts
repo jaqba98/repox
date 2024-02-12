@@ -3,6 +3,9 @@ import {singleton} from "tsyringe";
 import {ParamDomainStore} from "@lib/param-domain";
 import {UnknownUnknownProgram} from "./program/unknown-unknown.program";
 import {SimpleMessageAppService} from "@lib/logger";
+import {
+    GenerateWorkspaceProgramService
+} from "./program/generate-workspace-program.service";
 
 @singleton()
 /**
@@ -13,6 +16,7 @@ export class RepoxProgramLauncher {
     constructor(
         private readonly store: ParamDomainStore,
         private readonly unknownUnknown: UnknownUnknownProgram,
+        private readonly generateWorkspace: GenerateWorkspaceProgramService,
         private readonly simpleMessage: SimpleMessageAppService
     ) {
     }
@@ -23,6 +27,8 @@ export class RepoxProgramLauncher {
         switch (action) {
             case "unknown-unknown":
                 return this.unknownUnknown.runProgram();
+            case "generate-workspace":
+                return this.generateWorkspace.runProgram();
             default:
                 this.simpleMessage.writeError(
                     `Repox does not support given program: ${program} ${command}`

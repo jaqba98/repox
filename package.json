@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && tsc-alias --outDir dist",
-    "run": "node dist/apps/repox/src/main generate workspace"
+    "run": "cd tmp && node ../dist/apps/repox/src/main generate workspace"
   },
   "keywords": [],
   "author": "",
