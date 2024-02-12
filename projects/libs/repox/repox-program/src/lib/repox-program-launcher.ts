@@ -1,6 +1,8 @@
 import {singleton} from "tsyringe";
 
 import {ParamDomainStore} from "@lib/param-domain";
+import {UnknownUnknownProgram} from "./program/unknown-unknown.program";
+import {SimpleMessageAppService} from "@lib/logger";
 
 @singleton()
 /**
@@ -8,43 +10,24 @@ import {ParamDomainStore} from "@lib/param-domain";
  * by given program name and command name.
  */
 export class RepoxProgramLauncher {
-    constructor(private readonly store: ParamDomainStore) {
+    constructor(
+        private readonly store: ParamDomainStore,
+        private readonly unknownUnknown: UnknownUnknownProgram,
+        private readonly simpleMessage: SimpleMessageAppService
+    ) {
     }
 
     launchProgram(): boolean {
-        return true;
+        const {program, command} = this.store.get();
+        const action = `${program}-${command}`;
+        switch (action) {
+            case "unknown-unknown":
+                return this.unknownUnknown.runProgram();
+            default:
+                this.simpleMessage.writeError(
+                    `Repox does not support given program: ${program} ${command}`
+                );
+                return false;
+        }
     }
 }
-
-// import {singleton} from "tsyringe";
-// // import {ParamDomainAppService} from "@lib/param-domain";
-// import {LauncherModel} from "../model/launcher.model";
-// import {ProgramModel} from "@lib/model";
-//
-// @singleton()
-// /**
-//  * The app service is responsible for select service to run
-//  * by given program name and command name.
-//  */
-// export class RepoxProgramLauncher {
-//     // constructor(private readonly paramDomain: ParamDomainAppService) {
-//     // }
-//
-//     launchProgram(_launcher: LauncherModel): ProgramModel {
-//         // const programName = this.paramDomain.getProgramName();
-//         // const commandName = this.paramDomain.getCommandName();
-//         // const programToRun = launcher.programs.find(program =>
-//         //     program.programName === programName &&
-//         //     program.commandName === commandName
-//         // );
-//         // if (programToRun === undefined) {
-//         //     throw new Error(`Not found implementation for given program!`);
-//         // }
-//         // return programToRun.service;
-//         return {
-//             runProgram(): void {}
-//         };
-//     }
-// }
-//
-// // todo: refactor the code

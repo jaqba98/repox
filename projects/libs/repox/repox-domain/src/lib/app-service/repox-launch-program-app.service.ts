@@ -5,7 +5,7 @@ import {
 } from "@lib/repox-domain";
 import {
   BuildProjectProgramService,
-  DefaultDefaultProgramService,
+  UnknownUnknownProgram,
   GenerateProjectProgramService,
   GenerateWorkspaceProgramService,
   LintProjectProgramService,
@@ -26,7 +26,7 @@ export class RepoxLaunchProgramAppService {
         {
           programName: RepoxProgramEnum.default,
           commandName: RepoxCommandEnum.default,
-          service: container.resolve(DefaultDefaultProgramService)
+          service: container.resolve(UnknownUnknownProgram)
         },
         {
           programName: RepoxProgramEnum.generate,
