@@ -20,4 +20,12 @@ export class ParamDomainStore {
     set(paramDomain: ParamDomain): void {
         this.paramDomain = deepCopy(paramDomain);
     }
+
+    hasProgramArg(programArg: string): boolean {
+        return !!this.get().programArgs[programArg];
+    }
+
+    hasCommandArg(commandArg: string): boolean {
+        return !!this.get().commandArgs[commandArg];
+    }
 }

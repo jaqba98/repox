@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 
-import {DisplayVersionAppService} from "@lib/program-step";
+import {WriteVersionAppService} from "@lib/program-step";
 import {ParamDomainStore} from "@lib/param-domain";
 import {REPOX_VERSION} from "@lib/repox-const";
 
@@ -13,16 +13,13 @@ import {REPOX_VERSION} from "@lib/repox-const";
 export class UnknownUnknownProgram {
     constructor(
         private readonly store: ParamDomainStore,
-        private readonly displayVersion: DisplayVersionAppService
+        private readonly writeVersion: WriteVersionAppService
     ) {
     }
 
     runProgram(): boolean {
-        const {programArgs} = this.store.get();
-        if (!programArgs) return true;
-        if (programArgs["version"] || programArgs["v"]) {
-            this.displayVersion.display(REPOX_VERSION);
-            return true;
+        if (this.store.hasProgramArg("version") || this.store.hasProgramArg("v")) {
+            this.writeVersion.write(REPOX_VERSION);
         }
         return true;
     }
