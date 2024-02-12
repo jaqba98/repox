@@ -4,7 +4,7 @@ import {container, singleton} from "tsyringe";
 import {BuildParamDtoAppService} from "@lib/param-dto";
 import {SimpleMessageAppService} from "@lib/logger";
 import {BuildParamDomainAppService} from "@lib/param-domain";
-import {RepoxLauncherAppService} from "@lib/repox-domain";
+import {RepoxProgramLauncher} from "@lib/repox-program";
 
 @singleton()
 /**
@@ -15,7 +15,7 @@ export class RepoxMainService {
         private readonly buildParamDto: BuildParamDtoAppService,
         private readonly buildParamDomain: BuildParamDomainAppService,
         private readonly simpleMessage: SimpleMessageAppService,
-        private readonly repoxLauncher: RepoxLauncherAppService
+        private readonly repoxLauncher: RepoxProgramLauncher
     ) {
     }
 
@@ -45,7 +45,7 @@ container.resolve(RepoxMainService).run();
 //     RepoxProgramAliasEnum,
 //     RepoxProgramEnum
 // } from "@lib/repox-domain";
-// import {RepoxLauncherAppService} from "@lib/launcher";
+// import {RepoxProgramLauncher} from "@lib/launcher";
 // import {REPOX_LOGO} from "@lib/repox-const";
 //
 // @singleton()
@@ -61,7 +61,7 @@ container.resolve(RepoxMainService).run();
 //         private readonly paramDomain: ParamDomainAppService,
 //         private readonly launchProgram: RepoxLaunchProgramAppService,
 //         private readonly buildParamModel: RepoxBuildParamModelAppService,
-//         private readonly launcher: RepoxLauncherAppService
+//         private readonly launcher: RepoxProgramLauncher
 //     ) {
 //     }
 //

@@ -1,4 +1,5 @@
 import {singleton} from "tsyringe";
+
 import {ParamDomainStore} from "@lib/param-domain";
 
 @singleton()
@@ -6,7 +7,7 @@ import {ParamDomainStore} from "@lib/param-domain";
  * The app service is responsible for selecting service to run
  * by given program name and command name.
  */
-export class RepoxLauncherAppService {
+export class RepoxProgramLauncher {
     constructor(private readonly store: ParamDomainStore) {
     }
 
@@ -25,7 +26,7 @@ export class RepoxLauncherAppService {
 //  * The app service is responsible for select service to run
 //  * by given program name and command name.
 //  */
-// export class RepoxLauncherAppService {
+// export class RepoxProgramLauncher {
 //     // constructor(private readonly paramDomain: ParamDomainAppService) {
 //     // }
 //
