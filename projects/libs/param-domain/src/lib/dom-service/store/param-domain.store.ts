@@ -28,4 +28,14 @@ export class ParamDomainStore {
     hasCommandArg(commandArg: string): boolean {
         return !!this.get().commandArgs[commandArg];
     }
+
+    getCommandArg(commandArg: string, commandAlias: string): string[] | undefined {
+        if (this.hasCommandArg(commandArg)) {
+            return this.get().commandArgs[commandArg].values;
+        }
+        if (this.hasCommandArg(commandAlias)) {
+            return this.get().commandArgs[commandAlias].values;
+        }
+        return undefined;
+    }
 }
