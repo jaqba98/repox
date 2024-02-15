@@ -3,6 +3,7 @@ import {ProjectsFolderBuilder} from "../dom-service/builder/projects-folder.buil
 import {AppsFolderBuilder} from "../dom-service/builder/apps-folder.builder";
 import {LibsFolderBuilder} from "../dom-service/builder/libs-folder.builder";
 import {ToolsFolderBuilder} from "../dom-service/builder/tools-folder.builder";
+import {WorkspaceFolderEnum} from "../enum/workspace/workspace-folder.enum";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -10,21 +11,21 @@ import {ToolsFolderBuilder} from "../dom-service/builder/tools-folder.builder";
 export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
     structure: [
         {
-            path: "projects",
+            path: WorkspaceFolderEnum.projects,
             builder: ProjectsFolderBuilder,
             children: [
                 {
-                    path: "apps",
+                    path: WorkspaceFolderEnum.apps,
                     builder: AppsFolderBuilder,
                     children: []
                 },
                 {
-                    path: "libs",
+                    path: WorkspaceFolderEnum.libs,
                     builder: LibsFolderBuilder,
                     children: []
                 },
                 {
-                    path: "tools",
+                    path: WorkspaceFolderEnum.tools,
                     builder: ToolsFolderBuilder,
                     children: []
                 }
