@@ -1,7 +1,8 @@
 import {singleton} from "tsyringe";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
-import {createFolder} from "@lib/utils";
+import {createFolder, existPath} from "@lib/utils";
+import {WorkspaceFolderEnum} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -9,6 +10,7 @@ import {createFolder} from "@lib/utils";
  */
 export class LibsFolderBuilder extends WorkspaceStructureAbstractBuilder {
     build() {
-        createFolder("libs");
+        if (existPath(WorkspaceFolderEnum.libs)) return;
+        createFolder(WorkspaceFolderEnum.libs);
     }
 }
