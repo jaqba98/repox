@@ -4,6 +4,7 @@ import {AppsFolderBuilder} from "../dom-service/builder/apps-folder.builder";
 import {LibsFolderBuilder} from "../dom-service/builder/libs-folder.builder";
 import {ToolsFolderBuilder} from "../dom-service/builder/tools-folder.builder";
 import {WorkspaceFolderEnum} from "../enum/workspace-folder.enum";
+import {GitignoreFileBuilder} from "../dom-service/builder/gitignore-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -30,6 +31,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                     children: []
                 }
             ]
+        },
+        {
+            path: WorkspaceFolderEnum.current,
+            builder: GitignoreFileBuilder,
+            children: []
         }
     ]
 };

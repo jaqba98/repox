@@ -5,6 +5,7 @@ import {
     WorkspaceStructureBuilderModel
 } from "../model/workspace-structure.model";
 import {changePath} from "@lib/utils";
+import {WorkspaceFolderEnum} from "../enum/workspace-folder.enum";
 
 @singleton()
 /**
@@ -19,9 +20,9 @@ export class RunGenerateWorkspaceService {
     private runGenerateWorkspace(children: WorkspaceStructureBuilderModel[]): void {
         for (const child of children) {
             container.resolve(child.builder).build();
-            changePath(child.path);
+            if (child.path !== WorkspaceFolderEnum.current) changePath(child.path);
             this.runGenerateWorkspace(child.children);
-            changePath("../");
+            if (child.path !== WorkspaceFolderEnum.current) changePath("../");
         }
     }
 }
