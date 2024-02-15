@@ -8,10 +8,10 @@ import {
     type GenerateWorkspaceCommandModel,
     type LintProjectRepoxCommandModel,
     type PublishNpmRepoxCommandModel,
-    type RegenerateWorkspaceCommandModel,
-    RepoxArgumentEnum
+    type RegenerateWorkspaceCommandModel
 } from "@lib/repox-domain";
-import {ProjectTypeEnum} from "@lib/repox-workspace";
+
+// import {ProjectTypeEnum} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -56,7 +56,7 @@ export class RepoxBuildParamModelService {
         return {
             projectName: "",
             projectPath: "",
-            projectType: ProjectTypeEnum.appTs
+            projectType: 'ProjectTypeEnum.appTs'
             // projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name),
             // projectType: this.paramDomain.getCommandEnumValue(RepoxArgumentEnum.type, ProjectTypeEnum.appTs),
             // projectPath: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.path)

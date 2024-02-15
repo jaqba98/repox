@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {singleton} from "tsyringe";
 import {RepoxArgumentEnum, RepoxCommandEnum, RepoxProgramEnum} from "@lib/repox-domain";
-import {ProjectTypeEnum} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -60,7 +59,7 @@ export class RepoxGetParamDepService {
                         },
                         [RepoxArgumentEnum.type]: {
                             name: RepoxArgumentEnum.type,
-                            values: Object.values(ProjectTypeEnum),
+                            values: Object.values([]),
                             valueMode: `single`,
                             required: true
                         },

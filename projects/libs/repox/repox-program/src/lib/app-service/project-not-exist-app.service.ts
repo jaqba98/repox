@@ -1,6 +1,5 @@
 import {singleton} from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
-import {WsDomainStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -10,16 +9,16 @@ import {WsDomainStoreService} from "@lib/repox-workspace";
 export class ProjectNotExistAppService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
-        private readonly wsDomainStore: WsDomainStoreService
+        // private readonly wsDomainStore: WsDomainStoreService
     ) {
     }
 
     run(projectName: string): boolean {
         this.simpleMessage.writePlain(`Step: Project not exist`);
-        const project = this.wsDomainStore.getProjectByName(projectName);
-        if (project === undefined) {
-            return true;
-        }
+        // const project = this.wsDomainStore.getProjectByName(projectName);
+        // if (project === undefined) {
+        //     return true;
+        // }
         this.simpleMessage.writeError(`The ${projectName} project already exist!`);
         this.simpleMessage.writeWarning(`Specify a different project name and restart the program`);
         return false;

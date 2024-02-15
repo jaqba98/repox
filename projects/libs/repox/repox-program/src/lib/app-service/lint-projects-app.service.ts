@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
-import {WsDomainStoreService} from "@lib/repox-workspace";
+// import {WsDomainStoreService} from "@lib/repox-workspace";
 import {RunCommandUtilsService} from "@lib/utils";
 
 @singleton()
@@ -10,8 +10,8 @@ import {RunCommandUtilsService} from "@lib/utils";
 export class LintProjectsAppService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
-        private readonly wsDomainStore: WsDomainStoreService,
-        private readonly runCommandUtils: RunCommandUtilsService
+        // private readonly wsDomainStore: WsDomainStoreService,
+        // private readonly runCommandUtils: RunCommandUtilsService
     ) {
     }
 
@@ -26,19 +26,19 @@ export class LintProjectsAppService {
     }
 
     private lint(): void {
-        const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
-        for (const project of projects) {
-            this.simpleMessage.writePlain(`Lint: ${project.name} project`);
-            this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.js`, true);
-        }
+        // const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
+        // for (const project of projects) {
+        //     this.simpleMessage.writePlain(`Lint: ${project.name} project`);
+        //     this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.js`, true);
+        // }
     }
 
     private lintFix(): void {
-        const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
-        for (const project of projects) {
-            this.simpleMessage.writePlain(`Lint: ${project.name} project`);
-            this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.js --fix`, true);
-        }
+        // const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
+        // for (const project of projects) {
+        //     this.simpleMessage.writePlain(`Lint: ${project.name} project`);
+        //     this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.js --fix`, true);
+        // }
     }
 }
 

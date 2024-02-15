@@ -1,6 +1,5 @@
 import {singleton} from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
-import {WsDomainStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -9,14 +8,14 @@ import {WsDomainStoreService} from "@lib/repox-workspace";
  */
 export class SaveWsDomainAppService {
     constructor(
-        private readonly simpleMessage: SimpleMessageAppService,
-        private readonly wsDomainStore: WsDomainStoreService
+        private readonly simpleMessage: SimpleMessageAppService
+        // private readonly wsDomainStore: WsDomainStoreService
     ) {
     }
 
     run(): boolean {
         this.simpleMessage.writePlain(`Step: Save WS Domain`);
-        this.wsDomainStore.saveWsDomain();
+        // this.wsDomainStore.saveWsDomain();
         return true;
     }
 }

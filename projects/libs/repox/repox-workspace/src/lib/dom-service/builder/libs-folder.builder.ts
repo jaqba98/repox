@@ -2,7 +2,7 @@ import {singleton} from "tsyringe";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
 import {createFolder, existPath} from "@lib/utils";
-import {WorkspaceFolderEnum} from "@lib/repox-workspace";
+import {WorkspaceFolderEnum} from "../../enum/workspace-folder.enum";
 
 @singleton()
 /**

@@ -1,7 +1,6 @@
 import {singleton} from "tsyringe";
 import {SimpleMessageAppService} from "@lib/logger";
 import {PathUtilsService} from "@lib/utils";
-import {WsDtoStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -11,7 +10,7 @@ export class LoadWsDtoAppService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly pathUtils: PathUtilsService,
-        private readonly wsDtoStore: WsDtoStoreService
+        // private readonly wsDtoStore: WsDtoStoreService
     ) {
     }
 
@@ -27,7 +26,7 @@ export class LoadWsDtoAppService {
             this.simpleMessage.writeError(`The ${"WorkspaceFileEnum.tsconfigJsonFile"} file does not exist`);
             return false;
         }
-        this.wsDtoStore.loadWsDto();
+        // this.wsDtoStore.loadWsDto();
         return true;
     }
 }

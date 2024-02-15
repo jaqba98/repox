@@ -1,4 +1,3 @@
-import {type ProjectTypeEnum} from "@lib/repox-workspace";
 
 /**
  * The repox command model for all commands.
@@ -18,7 +17,8 @@ export interface RegenerateWorkspaceCommandModel {
 
 export interface GenerateProjectCommandModel {
     projectName: string;
-    projectType: ProjectTypeEnum;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    projectType: any;
     projectPath: string;
 }
 

@@ -2,7 +2,7 @@ import {InjectionToken} from "tsyringe";
 
 import {
     WorkspaceStructureAbstractBuilder
-} from "../../dom-service/builder/workspace-structure-abstract.builder";
+} from "../dom-service/builder/workspace-structure-abstract.builder";
 
 /**
  * The model represent structure of workspace.
