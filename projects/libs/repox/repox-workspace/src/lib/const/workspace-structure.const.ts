@@ -1,11 +1,8 @@
-import {container} from "tsyringe";
-
 import {WorkspaceStructureModel} from "../model/workspace/workspace-structure.model";
-import {WorkspaceActionEnum} from "../enum/workspace/workspace-action.enum";
-import {WorkspaceFileEnum} from "../enum/workspace/workspace-file.enum";
-import {BuildGitignoreContentService} from "../dom-service/builder/build-gitignore-content.service";
-import {WorkspaceFolderEnum} from "../enum/workspace/workspace-folder.enum";
-import {BuildGitkeepContentService} from "../dom-service/builder/build-gitkeep-content.service";
+import {ProjectsFolderBuilder} from "../dom-service/builder/projects-folder.builder";
+import {AppsFolderBuilder} from "../dom-service/builder/apps-folder.builder";
+import {LibsFolderBuilder} from "../dom-service/builder/libs-folder.builder";
+import {ToolsFolderBuilder} from "../dom-service/builder/tools-folder.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -13,124 +10,25 @@ import {BuildGitkeepContentService} from "../dom-service/builder/build-gitkeep-c
 export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
     structure: [
         {
-            action: WorkspaceActionEnum.createFolder,
-            folderName: WorkspaceFolderEnum.projects,
-            subFolders: [
+            path: "projects",
+            builder: ProjectsFolderBuilder,
+            children: [
                 {
-                    action: WorkspaceActionEnum.createFolder,
-                    folderName: WorkspaceFolderEnum.apps,
-                    subFolders: [
-                        {
-                            action: WorkspaceActionEnum.createFile,
-                            fileName: WorkspaceFileEnum.gitKeep,
-                            contentBuilder: container.resolve(BuildGitkeepContentService)
-                        }
-                    ]
+                    path: "apps",
+                    builder: AppsFolderBuilder,
+                    children: []
                 },
                 {
-                    action: WorkspaceActionEnum.createFolder,
-                    folderName: WorkspaceFolderEnum.libs,
-                    subFolders: [
-                        {
-                            action: WorkspaceActionEnum.createFile,
-                            fileName: WorkspaceFileEnum.gitKeep,
-                            contentBuilder: container.resolve(BuildGitkeepContentService)
-                        }
-                    ]
+                    path: "libs",
+                    builder: LibsFolderBuilder,
+                    children: []
                 },
                 {
-                    action: WorkspaceActionEnum.createFolder,
-                    folderName: WorkspaceFolderEnum.tools,
-                    subFolders: [
-                        {
-                            action: WorkspaceActionEnum.createFile,
-                            fileName: WorkspaceFileEnum.gitKeep,
-                            contentBuilder: container.resolve(BuildGitkeepContentService)
-                        }
-                    ]
+                    path: "tools",
+                    builder: ToolsFolderBuilder,
+                    children: []
                 }
             ]
-        },
-        {
-            action: WorkspaceActionEnum.createFile,
-            fileName: WorkspaceFileEnum.gitignore,
-            contentBuilder: container.resolve(BuildGitignoreContentService)
         }
-        // {
-        //     action: WorkspaceActionEnum.createFolder,
-        //     folderName: WorkspaceFolderEnum.projects,
-        //     subFolders: [
-        //         {
-        //             action: WorkspaceActionEnum.createFolder,
-        //             folderName: WorkspaceFolderEnum.apps,
-        //             subFolders: [
-        //                 {
-        //                     action: WorkspaceActionEnum.createFile,
-        //                     fileName: WorkspaceFileEnum.gitKeep,
-        //                     contentBuilder: container.resolve(BuildGitkeepContentService)
-        //                 }
-        //             ]
-        //         },
-        //         {
-        //             action: WorkspaceActionEnum.createFolder,
-        //             folderName: WorkspaceFolderEnum.libs,
-        //             subFolders: [
-        //                 {
-        //                     action: WorkspaceActionEnum.createFile,
-        //                     fileName: WorkspaceFileEnum.gitKeep,
-        //                     contentBuilder: container.resolve(BuildGitkeepContentService)
-        //                 }
-        //             ]
-        //         },
-        //         {
-        //             action: WorkspaceActionEnum.createFolder,
-        //             folderName: WorkspaceFolderEnum.tools,
-        //             subFolders: [
-        //                 {
-        //                     action: WorkspaceActionEnum.createFile,
-        //                     fileName: WorkspaceFileEnum.gitKeep,
-        //                     contentBuilder: container.resolve(BuildGitkeepContentService)
-        //                 }
-        //             ]
-        //         }
-        //     ]
-        // },
-        // {
-        //     action: WorkspaceActionEnum.createFile,
-        //     fileName: WorkspaceFileEnum.eslintrcTs,
-        //     contentBuilder: container.resolve(BuildEslintrcTsContentService)
-        // },
-        // {
-        //     action: WorkspaceActionEnum.createFile,
-        //     fileName: WorkspaceFileEnum.gitignore,
-        //     contentBuilder: container.resolve(BuildGitignoreContentService)
-        // },
-        // {
-        //     action: WorkspaceActionEnum.createFile,
-        //     fileName: WorkspaceFileEnum.jestConfigTs,
-        //     contentBuilder: container.resolve(BuildJestConfigTsContentService)
-        // },
-        // {
-        //     action: WorkspaceActionEnum.createFile,
-        //     fileName: WorkspaceFileEnum.packageJson,
-        //     contentBuilder: container.resolve(BuildRootPackageJsonContentService)
-        // },
-        // {
-        //     action: WorkspaceActionEnum.createFile,
-        //     fileName: WorkspaceFileEnum.repoxJson,
-        //     contentBuilder: container.resolve(BuildRepoxJsonContentService)
-        // },
-        // {
-        //     action: WorkspaceActionEnum.createFile,
-        //     fileName: WorkspaceFileEnum.tsconfigJson,
-        //     contentBuilder: container.resolve(BuildTsconfigJsonContentService)
-        // },
-        // {
-        //     action: WorkspaceActionEnum.runCommand,
-        //     command: "npm install"
-        // }
     ]
 };
-
-
-// todo: refactor the code
