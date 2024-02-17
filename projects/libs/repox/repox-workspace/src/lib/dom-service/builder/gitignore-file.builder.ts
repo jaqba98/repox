@@ -14,13 +14,13 @@ export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
 .idea/
 
 # Compilation output
-**/dist/**
+dist
 
 # Dependency directories
-**/node_modules/**
+node_modules
 
 # Temporary files and directories
-**/tmp/**
+tmp
 `);
     }
 }
