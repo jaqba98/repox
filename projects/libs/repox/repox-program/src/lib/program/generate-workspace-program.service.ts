@@ -40,7 +40,7 @@ export class GenerateWorkspaceProgramService {
         for (const workspaceName of workspaceNames) {
             if (!this.createFolder.run(workspaceName)) return false;
             if (!this.changePath.run(workspaceName)) return false;
-            if (!this.generateWorkspace.run()) return false;
+            if (!this.generateWorkspace.run(workspaceName)) return false;
             if (!this.changePath.run("../")) return false;
         }
         this.newline.writeNewline();

@@ -1,6 +1,5 @@
 import {singleton} from "tsyringe";
 import {execSync} from "child_process";
-import {createPath} from "./path-utils.service";
 
 @singleton()
 /**
@@ -19,6 +18,6 @@ export class RunCommandUtilsService {
     }
 }
 
-export const runCommand = (command: string, path: string): string => execSync(command, { cwd: createPath(path), encoding: `utf-8` });
+export const runCommand = (command: string): string => execSync(command, { encoding: `utf-8` });
 
 // todo: refactor the code

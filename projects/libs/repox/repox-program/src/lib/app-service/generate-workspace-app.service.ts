@@ -15,9 +15,9 @@ export class GenerateWorkspaceAppService {
     ) {
     }
 
-    run(): boolean {
+    run(workspaceName: string): boolean {
         this.stepMessage.write("Generate Workspace");
-        if (this.runGenerateWorkspace.run()) return true;
+        if (this.runGenerateWorkspace.run(workspaceName)) return true;
         this.simpleMessage.writeError("Failed to generate workspace!");
         return false;
     }

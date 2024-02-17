@@ -6,6 +6,9 @@ import {ToolsFolderBuilder} from "../dom-service/builder/tools-folder.builder";
 import {WorkspaceFolderEnum} from "../enum/workspace-folder.enum";
 import {GitkeepFileBuilder} from "../dom-service/builder/gitkeep-file.builder";
 import {RepoxJsonFileBuilder} from "../dom-service/builder/repox-json-file.builder";
+import {
+    RootPackageJsonFileBuilder
+} from "../dom-service/builder/root-package-json-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -54,6 +57,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         {
             path: WorkspaceFolderEnum.current,
             builder: RepoxJsonFileBuilder,
+            children: []
+        },
+        {
+            path: WorkspaceFolderEnum.current,
+            builder: RootPackageJsonFileBuilder,
             children: []
         }
     ]

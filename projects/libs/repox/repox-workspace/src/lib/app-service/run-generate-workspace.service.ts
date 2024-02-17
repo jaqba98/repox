@@ -12,16 +12,18 @@ import {WorkspaceFolderEnum} from "../enum/workspace-folder.enum";
  * The service uses recursion to generate workspace.
  */
 export class RunGenerateWorkspaceService {
-    run(): boolean {
-        this.runGenerateWorkspace(WORKSPACE_STRUCTURE.structure);
+    run(workspaceName: string): boolean {
+        this.runGenerateWorkspace(WORKSPACE_STRUCTURE.structure, workspaceName);
         return true;
     }
 
-    private runGenerateWorkspace(children: WorkspaceStructureBuilderModel[]): void {
+    private runGenerateWorkspace(
+        children: WorkspaceStructureBuilderModel[], workspaceName: string
+    ): void {
         for (const child of children) {
-            container.resolve(child.builder).generate();
+            container.resolve(child.builder).generate(workspaceName);
             changePath(child.path);
-            this.runGenerateWorkspace(child.children);
+            this.runGenerateWorkspace(child.children, workspaceName);
             if (child.path === WorkspaceFolderEnum.current) continue;
             changePath("../");
         }

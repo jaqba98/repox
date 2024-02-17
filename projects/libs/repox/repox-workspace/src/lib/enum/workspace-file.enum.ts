@@ -3,5 +3,6 @@
  */
 export enum WorkspaceFileEnum {
     gitkeep = ".gitkeep",
-    repoxJson = "repox.json"
+    repoxJson = "repox.json",
+    packageJson = "package.json"
 }
