@@ -11,7 +11,7 @@ import {WorkspaceFileEnum} from "../../enum/workspace-file.enum";
 export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
         writeToFile(WorkspaceFileEnum.gitignore, `# JetBrains tools
-.idea/
+.idea
 
 # Compilation output
 dist
