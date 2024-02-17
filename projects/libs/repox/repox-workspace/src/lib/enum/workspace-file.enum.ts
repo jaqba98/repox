@@ -4,5 +4,6 @@
 export enum WorkspaceFileEnum {
     gitkeep = ".gitkeep",
     repoxJson = "repox.json",
-    packageJson = "package.json"
+    packageJson = "package.json",
+    tsconfigJson = "tsconfig.json"
 }

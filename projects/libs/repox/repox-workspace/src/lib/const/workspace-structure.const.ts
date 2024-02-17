@@ -9,6 +9,7 @@ import {RepoxJsonFileBuilder} from "../dom-service/builder/repox-json-file.build
 import {
     RootPackageJsonFileBuilder
 } from "../dom-service/builder/root-package-json-file.builder";
+import {TsconfigJsonFileBuilder} from "../dom-service/builder/tsconfig-json-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -62,6 +63,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         {
             path: WorkspaceFolderEnum.current,
             builder: RootPackageJsonFileBuilder,
+            children: []
+        },
+        {
+            path: WorkspaceFolderEnum.current,
+            builder: TsconfigJsonFileBuilder,
             children: []
         }
     ]
