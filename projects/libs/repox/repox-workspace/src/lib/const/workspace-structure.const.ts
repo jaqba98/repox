@@ -11,6 +11,7 @@ import {
 } from "../dom-service/builder/root-package-json-file.builder";
 import {TsconfigJsonFileBuilder} from "../dom-service/builder/tsconfig-json-file.builder";
 import {GitFolderBuilder} from "../dom-service/builder/git-folder.builder";
+import {GitignoreFileBuilder} from "../dom-service/builder/gitignore-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -74,6 +75,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         {
             path: WorkspaceFolderEnum.current,
             builder: GitFolderBuilder,
+            children: []
+        },
+        {
+            path: WorkspaceFolderEnum.current,
+            builder: GitignoreFileBuilder,
             children: []
         }
     ]
