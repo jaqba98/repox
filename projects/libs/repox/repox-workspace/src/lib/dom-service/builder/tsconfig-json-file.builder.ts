@@ -17,10 +17,18 @@ export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
         writeJsonToFile<TsconfigJsonDtoPartialModel>(WorkspaceFileEnum.tsconfigJson, {
             compilerOptions: {
                 target: ts.server.protocol.ScriptTarget.ES2022,
+                experimentalDecorators: true,
+                emitDecoratorMetadata: true,
                 module: ts.server.protocol.ModuleKind.CommonJS,
                 rootDir: WorkspaceFolderEnum.projects,
                 outDir: WorkspaceFolderEnum.dist,
-                strict: true
+                esModuleInterop: true,
+                forceConsistentCasingInFileNames: true,
+                strict: true,
+                skipLibCheck: true,
+                baseUrl: WorkspaceFolderEnum.current,
+                sourceMap: true,
+                path: {}
             }
         });
     }
