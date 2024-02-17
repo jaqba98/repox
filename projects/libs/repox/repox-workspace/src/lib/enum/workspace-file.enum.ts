@@ -2,5 +2,6 @@
  * All files in the workspace.
  */
 export enum WorkspaceFileEnum {
-    gitkeep = ".gitkeep"
+    gitkeep = ".gitkeep",
+    repoxJson = "repox.json"
 }

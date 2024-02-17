@@ -1,10 +1,11 @@
-import {WorkspaceStructureModel} from "../model/workspace-structure.model";
+import {WorkspaceStructureModel} from "../model/workspace/workspace-structure.model";
 import {ProjectsFolderBuilder} from "../dom-service/builder/projects-folder.builder";
 import {AppsFolderBuilder} from "../dom-service/builder/apps-folder.builder";
 import {LibsFolderBuilder} from "../dom-service/builder/libs-folder.builder";
 import {ToolsFolderBuilder} from "../dom-service/builder/tools-folder.builder";
 import {WorkspaceFolderEnum} from "../enum/workspace-folder.enum";
 import {GitkeepFileBuilder} from "../dom-service/builder/gitkeep-file.builder";
+import {RepoxJsonFileBuilder} from "../dom-service/builder/repox-json-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -49,6 +50,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                     ]
                 }
             ]
+        },
+        {
+            path: WorkspaceFolderEnum.current,
+            builder: RepoxJsonFileBuilder,
+            children: []
         }
     ]
 };

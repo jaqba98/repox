@@ -75,6 +75,10 @@ export class FileUtilsService {
     }
 }
 
+export const writeJsonToFile = <T>(path: string, content: T): void => {
+    writeFileSync(path, JSON.stringify(content, null, 2));
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const writeToFile = (path: string, content: any): void => {
     writeFileSync(path, content);
