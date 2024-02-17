@@ -2,7 +2,7 @@
  * All folders in the workspace.
  */
 export enum WorkspaceFolderEnum {
-    current = "",
+    current = ".",
     projects = "projects",
     apps = "apps",
     libs = "libs",

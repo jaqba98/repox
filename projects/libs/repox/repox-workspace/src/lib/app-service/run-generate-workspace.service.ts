@@ -19,10 +19,11 @@ export class RunGenerateWorkspaceService {
 
     private runGenerateWorkspace(children: WorkspaceStructureBuilderModel[]): void {
         for (const child of children) {
-            container.resolve(child.builder).build();
-            if (child.path !== WorkspaceFolderEnum.current) changePath(child.path);
+            container.resolve(child.builder).generate();
+            changePath(child.path);
             this.runGenerateWorkspace(child.children);
-            if (child.path !== WorkspaceFolderEnum.current) changePath("../");
+            if (child.path === WorkspaceFolderEnum.current) continue;
+            changePath("../");
         }
     }
 }

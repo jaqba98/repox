@@ -3,5 +3,5 @@
  * in the workspace structure builder service.
  */
 export abstract class WorkspaceStructureAbstractBuilder {
-    abstract build(): void;
+    abstract generate(): void;
 }
