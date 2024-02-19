@@ -26,10 +26,16 @@ export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
                 forceConsistentCasingInFileNames: true,
                 strict: true,
                 skipLibCheck: true,
-                baseUrl: WorkspaceFolderEnum.current,
+                baseUrl: ".",
                 sourceMap: true,
                 path: {}
-            }
+            },
+            exclude: [
+                "node_modules",
+                "**/*.spec.ts",
+                "**/*.test.ts",
+                "**/jest.config.ts"
+            ]
         });
     }
 }

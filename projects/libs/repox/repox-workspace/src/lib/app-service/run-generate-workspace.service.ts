@@ -24,7 +24,7 @@ export class RunGenerateWorkspaceService {
             container.resolve(child.builder).generate(workspaceName);
             changePath(child.path);
             this.runGenerateWorkspace(child.children, workspaceName);
-            if (child.path === WorkspaceFolderEnum.current) continue;
+            if (child.path === ".") continue;
             changePath("../");
         }
     }
