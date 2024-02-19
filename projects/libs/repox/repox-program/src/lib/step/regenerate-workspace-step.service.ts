@@ -28,7 +28,8 @@ export class RegenerateWorkspaceStepService {
         if (!this.checkForceMode.run(isForceMode)) return;
         if (!this.goToWorkspaceRoot.run()) return;
         const workspaceName = getCurrentFolderName();
-        if (!this.generateWorkspace.run(workspaceName)) return;
+        console.log(workspaceName);
+        // if (!this.generateWorkspace.run(workspaceName)) return;
         this.newline.writeNewline();
         this.simpleMessage.writeSuccess("Command executed correctly!");
     }

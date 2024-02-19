@@ -5,8 +5,6 @@ export enum WorkspaceFolderEnum {
     projects = "projects",
     apps = "apps",
     libs = "libs",
-    tools = "tools"
+    tools = "tools",
+    dist = "dist"
 }
-
-
-// todo: refactor the code

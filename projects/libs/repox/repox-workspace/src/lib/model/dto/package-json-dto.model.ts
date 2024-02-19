@@ -1,17 +1,16 @@
 /**
- * The model is representation of real package.json file on the disc.
+ * The model DTO represents real content of package.json file.
  */
+
 export interface PackageJsonDtoModel {
-  name?: string;
-  version?: string;
-  description?: string;
-  scripts?: Record<string, string>;
-  keywords?: string[];
-  author?: string;
-  license?: string;
-  devDependencies?: Record<string, string>;
-  dependencies?: Record<string, string>;
+    name: string;
+    version: string;
+    description: string;
+    scripts: Record<string, string>;
+    keywords: string[];
+    author: string;
+    license: string;
+    devDependencies: Record<string, string>;
 }
 
-
-// todo: refactor the code
+export interface PackageJsonDtoPartialModel extends Partial<PackageJsonDtoModel> {}

@@ -20,10 +20,7 @@ export class CreateFolderAppService {
             createFolder(folderPath);
             return true;
         }
-        this.simpleMessage.writeError(`Failed to create ${folderPath} folder!`);
+        this.simpleMessage.writeError(`The ${folderPath} folder already exist!`);
         return false;
     }
 }
-
-
-// todo: refactor the code

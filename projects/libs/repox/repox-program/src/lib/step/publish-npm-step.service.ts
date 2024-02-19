@@ -7,7 +7,6 @@ import {LoadWsDtoAppService} from "../app-service/load-ws-dto-app.service";
 import {VerificationWsDtoAppService} from "../app-service/verification-ws-dto-app.service";
 import {LoadWsDomainAppService} from "../app-service/load-ws-domain-app.service";
 import {ProjectExistAppService} from "../app-service/project-exist-app.service";
-import {WsDomainStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -23,7 +22,7 @@ export class PublishNpmStepService {
         private readonly verificationWsDto: VerificationWsDtoAppService,
         private readonly loadWsDomain: LoadWsDomainAppService,
         private readonly projectExist: ProjectExistAppService,
-        private readonly wsDomainStore: WsDomainStoreService,
+        // private readonly wsDomainStore: WsDomainStoreService,
         // private readonly folderExist: FolderExistAppService,
         // private readonly changePath: ChangePathAppService,
         // private readonly npmPublish: NpmPublishAppService
@@ -45,8 +44,8 @@ export class PublishNpmStepService {
         if (!this.loadWsDomain.run()) return;
         const { projectName } = commandModel;
         if (!this.projectExist.run(projectName)) return;
-        const project = this.wsDomainStore.getProject(projectName);
-        console.log(project);
+        // const project = this.wsDomainStore.getProject(projectName);
+        // console.log(project);
         // const output = project?..build.output ?? EMPTY_STRING;
         // const output = EMPTY_STRING;
         // if (!this.folderExist.run(output)) return;

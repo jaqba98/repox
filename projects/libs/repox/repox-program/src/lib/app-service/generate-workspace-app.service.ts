@@ -1,8 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
-import {RunGenerateWorkspaceService, WORKSPACE_STRUCTURE} from "@lib/repox-workspace";
-import {EMPTY_STRING} from "@lib/const";
+import {RunGenerateWorkspaceService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -18,11 +17,8 @@ export class GenerateWorkspaceAppService {
 
     run(workspaceName: string): boolean {
         this.stepMessage.write("Generate Workspace");
-        if (this.runGenerateWorkspace.run(WORKSPACE_STRUCTURE.structure, EMPTY_STRING, workspaceName)) return true;
+        if (this.runGenerateWorkspace.run(workspaceName)) return true;
         this.simpleMessage.writeError("Failed to generate workspace!");
         return false;
     }
 }
-
-
-// todo: refactor the code

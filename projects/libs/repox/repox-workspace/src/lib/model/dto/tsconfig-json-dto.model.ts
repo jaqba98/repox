@@ -1,24 +1,13 @@
+import ts from "typescript";
+
 /**
- * The real dto model of the tsconfig.json file on the disc with all required properties.
+ * The model DTO represents real content of tsconfig.json file.
  */
 
 export interface TsconfigJsonDtoModel {
-    compilerOptions?: {
-        target?: string;
-        module?: string;
-        esModuleInterop?: boolean;
-        forceConsistentCasingInFileNames?: boolean;
-        strict?: boolean;
-        skipLibCheck?: boolean;
-        experimentalDecorators?: boolean;
-        emitDecoratorMetadata?: boolean;
-        rootDir?: string;
-        outDir?: string;
-        sourceMap?: boolean;
-        paths?: Record<string, string[]>;
-    },
-    include?: string[];
+    compilerOptions: ts.server.protocol.CompilerOptions;
+    exclude: string[];
 }
 
-
-// todo: refactor the code
+export interface TsconfigJsonDtoPartialModel extends Partial<TsconfigJsonDtoModel> {
+}

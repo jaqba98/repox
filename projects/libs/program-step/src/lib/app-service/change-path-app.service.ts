@@ -24,6 +24,3 @@ export class ChangePathAppService {
         return false;
     }
 }
-
-
-// todo: refactor the code

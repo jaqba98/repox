@@ -1,11 +1,11 @@
 # JetBrains tools
-.idea/
+.idea
 
 # Compilation output
-**/dist/**
+dist
 
 # Dependency directories
-**/node_modules/**
+node_modules
 
 # Temporary files and directories
-**/tmp/**
+tmp

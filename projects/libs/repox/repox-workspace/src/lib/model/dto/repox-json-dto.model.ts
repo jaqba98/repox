@@ -1,10 +1,13 @@
 /**
- * The dto model of repox.json file.
+ * The model DTO represents real content of repox.json file.
  */
-export interface RepoxJsonDtoModel {
-    projects: Record<string, never>;
-    // I am here
+
+export interface RepoxJsonDtoProjectModel {
 }
 
+export interface RepoxJsonDtoProjectsModel {
+    projects: Record<string, RepoxJsonDtoProjectModel>;
+}
 
-// todo: refactor the code
+export interface RepoxJsonDtoModel extends RepoxJsonDtoProjectsModel {
+}
