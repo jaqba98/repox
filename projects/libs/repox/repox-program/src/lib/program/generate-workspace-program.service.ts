@@ -32,8 +32,8 @@ export class GenerateWorkspaceProgramService {
         this.newline.writeNewline();
         const workspaceNames = this.store.getCommandArg("name", "n");
         if (!workspaceNames) {
-            this.simpleMessage.writeError("You do not specified name for newly workspace!");
-            this.simpleMessage.writeWarning("Specify --name or -n as the workspace name and run the program again.");
+            this.simpleMessage.writeError("You did not specify a workspace name!");
+            this.simpleMessage.writeWarning("Specify workspace name by --name or -n and rerun the program.");
             return false;
         }
         if (!this.foldersNotExist.run(workspaceNames)) return false;

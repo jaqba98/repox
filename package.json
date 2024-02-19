@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && tsc-alias --outDir dist",
     "generate": "cd ../test && node ../repox/dist/apps/repox/src/main generate workspace --name=workspace",
-    "regenerate": "cd ../test && node ../repox/dist/apps/repox/src/main regenerate workspace --force"
+    "regenerate": "cd ../test && node ../repox/dist/apps/repox/src/main regenerate workspace"
   },
   "keywords": [],
   "author": "",

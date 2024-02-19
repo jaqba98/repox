@@ -1,24 +1,34 @@
 import {singleton} from "tsyringe";
-
-import {ProgramModel} from "@lib/model";
-import {RegenerateWorkspaceStepService} from "../step/regenerate-workspace-step.service";
-import {RegenerateWorkspaceCommandModel} from "@lib/repox-domain";
-
-@singleton()
-/**
- * The program is responsible for regenerating the existing project workspace.
- */
-export class RegenerateWorkspaceProgramService implements ProgramModel {
-    constructor(private readonly step: RegenerateWorkspaceStepService) {
-    }
-
-    runProgram(programModel: unknown, commandModel: unknown): void {
-        this.step.runProgramSteps(
-            programModel as Record<string, never>,
-            commandModel as RegenerateWorkspaceCommandModel
-        );
-    }
-}
-
-
-// todo: refactor the code
+//
+// import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
+// import {REPOX_LOGO} from "@lib/repox-const";
+// import {ParamDomainStore} from "@lib/param-domain";
+//
+// @singleton()
+// /**
+//  * The start point of the program regenerate, command workspace.
+//  * Possible arguments
+//  */
+// export class RegenerateWorkspaceProgramService {
+//     constructor(
+//         private readonly simpleMessage: SimpleMessageAppService,
+//         private readonly newline: NewlineAppService,
+//         private readonly store: ParamDomainStore
+//     ) {
+//     }
+//
+//     runProgram(): boolean {
+//         this.simpleMessage.writeInfo("Regenerate Workspace", REPOX_LOGO);
+//         this.newline.writeNewline();
+//         const forceMode = this.store.getCommandArg("force", "f");
+//         if (!forceMode) {
+//             this.simpleMessage.writeError("The program must be run in forced mode!");
+//             this.simpleMessage.writeWarning("Specify force mode by --force or -f and rerun the program.");
+//             return false;
+//         }
+//         console.log(forceMode);
+//         return true;
+//     }
+// }
+//
+// // todo: refactor the code

@@ -6,6 +6,9 @@ import {SimpleMessageAppService} from "@lib/logger";
 import {
     GenerateWorkspaceProgramService
 } from "./program/generate-workspace-program.service";
+import {
+    RegenerateWorkspaceProgramService
+} from "./program/regenerate-workspace-program.service";
 
 @singleton()
 /**
@@ -17,6 +20,7 @@ export class RepoxProgramLauncher {
         private readonly store: ParamDomainStore,
         private readonly unknownUnknown: UnknownUnknownProgram,
         private readonly generateWorkspace: GenerateWorkspaceProgramService,
+        private readonly regenerateWorkspace: RegenerateWorkspaceProgramService,
         private readonly simpleMessage: SimpleMessageAppService
     ) {
     }
@@ -28,6 +32,8 @@ export class RepoxProgramLauncher {
                 return this.launchUnknownCommand();
             case "generate":
                 return this.launchGenerateCommand();
+            case "regenerate":
+                return this.launchRegenerateCommand();
             default:
                 this.simpleMessage.writeError(
                     `The ${program} program does not exist!`
@@ -54,6 +60,19 @@ export class RepoxProgramLauncher {
         switch (command) {
             case "workspace":
                 return this.generateWorkspace.runProgram();
+            default:
+                this.simpleMessage.writeError(
+                    `The ${command} command does not exist for specified program!`
+                );
+                return false;
+        }
+    }
+
+    private launchRegenerateCommand(): boolean {
+        const {command} = this.store.get();
+        switch (command) {
+            case "workspace":
+                return this.regenerateWorkspace.runProgram();
             default:
                 this.simpleMessage.writeError(
                     `The ${command} command does not exist for specified program!`
