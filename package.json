@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:run": "npm run build && npm run run",
     "build": "tsc && tsc-alias --outDir dist",
-    "run": "cd ../test && node ../repox/dist/apps/repox/src/main generate workspace --name=workspace"
+    "generate": "cd ../test && node ../repox/dist/apps/repox/src/main generate workspace --name=workspace",
+    "regenerate": "cd ../test && node ../repox/dist/apps/repox/src/main regenerate workspace --force"
   },
   "keywords": [],
   "author": "",
