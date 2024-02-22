@@ -4,4 +4,6 @@
  */
 export abstract class WorkspaceStructureAbstractBuilder {
     abstract generate(workspaceName: string): void;
+
+    abstract regenerate(): void;
 }

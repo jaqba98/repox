@@ -12,4 +12,7 @@ export class AppsFolderBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
         createFolder(WorkspaceFolderEnum.apps);
     }
+
+    regenerate() {
+    }
 }

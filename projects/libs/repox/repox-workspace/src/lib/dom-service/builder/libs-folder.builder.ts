@@ -12,4 +12,7 @@ export class LibsFolderBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
         createFolder(WorkspaceFolderEnum.libs);
     }
+
+    regenerate() {
+    }
 }

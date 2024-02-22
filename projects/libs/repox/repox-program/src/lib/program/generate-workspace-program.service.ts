@@ -6,7 +6,9 @@ import {ParamDomainStore} from "@lib/param-domain";
 import {
     ChangePathAppService,
     CreateFolderAppService,
-    FoldersNotExistAppService
+    FoldersNotExistAppService,
+    SystemProgramEnum,
+    SystemProgramExistAppService
 } from "@lib/program-step";
 import {GenerateWorkspaceAppService} from "../app-service/generate-workspace-app.service";
 
@@ -23,7 +25,8 @@ export class GenerateWorkspaceProgramService {
         private readonly foldersNotExist: FoldersNotExistAppService,
         private readonly createFolder: CreateFolderAppService,
         private readonly changePath: ChangePathAppService,
-        private readonly generateWorkspace: GenerateWorkspaceAppService
+        private readonly generateWorkspace: GenerateWorkspaceAppService,
+        private readonly systemProgramExist: SystemProgramExistAppService
     ) {
     }
 
@@ -36,6 +39,7 @@ export class GenerateWorkspaceProgramService {
             this.simpleMessage.writeWarning("Specify workspace name by --name or -n and rerun the program.");
             return false;
         }
+        if (this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         if (!this.foldersNotExist.run(workspaceNames)) return false;
         for (const workspaceName of workspaceNames) {
             if (!this.createFolder.run(workspaceName)) return false;

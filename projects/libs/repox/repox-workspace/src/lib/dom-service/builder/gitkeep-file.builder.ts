@@ -12,4 +12,7 @@ export class GitkeepFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
         writeToFile(WorkspaceFileEnum.gitkeep, "");
     }
+
+    regenerate() {
+    }
 }

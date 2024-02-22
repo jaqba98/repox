@@ -15,4 +15,7 @@ export class RepoxJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
             projects: {}
         });
     }
+
+    regenerate() {
+    }
 }

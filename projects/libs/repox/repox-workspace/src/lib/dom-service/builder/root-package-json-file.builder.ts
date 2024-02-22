@@ -25,4 +25,7 @@ export class RootPackageJsonFileBuilder extends WorkspaceStructureAbstractBuilde
         });
         runCommand("npm install");
     }
+
+    regenerate() {
+    }
 }

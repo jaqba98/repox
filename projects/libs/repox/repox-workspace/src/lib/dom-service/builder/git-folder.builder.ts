@@ -11,4 +11,7 @@ export class GitFolderBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
         runCommand("git init");
     }
+
+    regenerate() {
+    }
 }

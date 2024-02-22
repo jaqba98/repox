@@ -23,4 +23,7 @@ node_modules
 tmp
 `);
     }
+
+    regenerate() {
+    }
 }

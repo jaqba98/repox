@@ -12,4 +12,7 @@ export class ProjectsFolderBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
         createFolder(WorkspaceFolderEnum.projects);
     }
+
+    regenerate() {
+    }
 }

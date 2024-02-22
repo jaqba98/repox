@@ -38,4 +38,7 @@ export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
             ]
         });
     }
+
+    regenerate() {
+    }
 }
