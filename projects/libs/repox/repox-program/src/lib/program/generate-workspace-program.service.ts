@@ -39,7 +39,7 @@ export class GenerateWorkspaceProgramService {
             this.simpleMessage.writeWarning("Specify workspace name by --name or -n and rerun the program.");
             return false;
         }
-        if (this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+        if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         if (!this.foldersNotExist.run(workspaceNames)) return false;
         for (const workspaceName of workspaceNames) {
             if (!this.createFolder.run(workspaceName)) return false;

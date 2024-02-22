@@ -32,7 +32,7 @@ export class RegenerateWorkspaceProgramService {
             this.simpleMessage.writeWarning("Specify force mode by --force or -f and rerun the program.");
             return false;
         }
-        if (this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+        if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         if (!this.regenerateWorkspace.run()) return false;
         this.newline.writeNewline();
         this.simpleMessage.writeSuccess("Command executed correctly!");
