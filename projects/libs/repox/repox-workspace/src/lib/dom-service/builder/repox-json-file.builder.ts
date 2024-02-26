@@ -11,11 +11,22 @@ import {RepoxJsonDtoModel} from "../../model/dto/repox-json-dto.model";
  */
 export class RepoxJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
-        writeJsonToFile<RepoxJsonDtoModel>(WorkspaceFileEnum.repoxJson, {
-            projects: {}
-        });
+        writeJsonToFile<RepoxJsonDtoModel>(
+            WorkspaceFileEnum.repoxJson,
+            this.createRepoxJsonContent()
+        );
     }
 
     regenerate() {
+        writeJsonToFile<RepoxJsonDtoModel>(
+            WorkspaceFileEnum.repoxJson,
+            this.createRepoxJsonContent()
+        );
+    }
+
+    private createRepoxJsonContent(): RepoxJsonDtoModel {
+        return {
+            projects: {}
+        };
     }
 }
