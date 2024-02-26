@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
-import {runCommand, writeJsonToFile} from "@lib/utils";
+import {getCurrentFolderName, readJsonFile, writeJsonToFile} from "@lib/utils";
 import {WorkspaceFileEnum} from "../../enum/workspace-file.enum";
 import {
     BasePackageJsonDtoModel,
@@ -13,36 +13,42 @@ import {
  * Create root package.json file.
  */
 export class RootPackageJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
-    generate(workspaceName: string) {
-        const rootPackageJsonContent = this.buildRootPackageJson(workspaceName);
+    generate() {
+        const rootPackageJsonContent = this.buildRootPackageJson();
         writeJsonToFile(WorkspaceFileEnum.packageJson, rootPackageJsonContent);
-        runCommand("npm install");
     }
 
     regenerate() {
+        const rootPackageJsonContent = this.buildRootPackageJson();
+        writeJsonToFile(WorkspaceFileEnum.packageJson, rootPackageJsonContent);
     }
 
-    private buildRootPackageJson(workspaceName: string): PackageJsonDtoPartialModel {
+    private buildRootPackageJson(): PackageJsonDtoPartialModel {
+        const oldRootPackageJson =
+            readJsonFile<PackageJsonDtoPartialModel>(WorkspaceFileEnum.packageJson);
         return {
-            ...this.buildBaseContent(workspaceName),
+            ...oldRootPackageJson,
+            ...this.buildBase(),
             devDependencies: {
-                ...this.buildBaseDevDependencies()
+                ...oldRootPackageJson.devDependencies,
+                ...this.buildDevDependencies()
             },
             dependencies: {
-                ...this.buildBaseDependencies()
+                ...oldRootPackageJson.dependencies,
+                ...this.buildDependencies()
             }
         };
     }
 
-    private buildBaseContent(workspaceName: string): BasePackageJsonDtoModel {
+    private buildBase(): BasePackageJsonDtoModel {
         return {
-            name: workspaceName,
+            name: getCurrentFolderName(),
             version: "1.0.0",
             private: true
         };
     }
 
-    private buildBaseDevDependencies(): PackageJsonDtoPartialModel["devDependencies"] {
+    private buildDevDependencies(): PackageJsonDtoPartialModel["devDependencies"] {
         return {
             "@types/core-js": "^2.5.8",
             "@types/node": "^20.11.20",
@@ -52,7 +58,7 @@ export class RootPackageJsonFileBuilder extends WorkspaceStructureAbstractBuilde
         };
     }
 
-    private buildBaseDependencies(): PackageJsonDtoPartialModel["devDependencies"] {
+    private buildDependencies(): PackageJsonDtoPartialModel["devDependencies"] {
         return {
             "core-js": "^3.36.0",
             "tsyringe": "^4.8.0"
