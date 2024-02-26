@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "sourceMap": true,
-    "path": {
+    "paths": {
       "@lib/utils": [
         "projects/libs/utils/src/index.ts"
       ],

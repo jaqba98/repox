@@ -38,8 +38,8 @@ devDependencies:
     specifier: 29.7.0
     version: 29.7.0(@types/node@20.11.20)
   repox:
-    specifier: ^1.4.24
-    version: 1.4.24
+    specifier: ^1.4.25
+    version: 1.4.25
   ts-jest:
     specifier: ^29.1.2
     version: 29.1.2(@babel/core@7.23.9)(jest@29.7.0)(typescript@5.3.3)
@@ -2275,8 +2275,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /repox@1.4.24:
-    resolution: {integrity: sha512-+5GRQOBEuE9QHzBhbOaN93IV00CE99I89vVowjr+B+1vj4vf2VCFH61ZrfrhPm73l1Tli039tyfMLzHKgOJl7Q==}
+  /repox@1.4.25:
+    resolution: {integrity: sha512-Y9sYhBnELhqrjsMnXy0R6uAI/dQ4/MWUXV95rDxbCs6BKE/jQMYqE+KZhmvrvaVTSaN7lq7AHNi02ABIFu1IXA==}
     hasBin: true
     dependencies:
       command-exists: 1.2.9
