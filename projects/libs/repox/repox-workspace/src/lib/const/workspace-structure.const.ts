@@ -10,7 +10,6 @@ import {
 } from "../dom-service/builder/root-package-json-file.builder";
 import {RepoxJsonFileBuilder} from "../dom-service/builder/repox-json-file.builder";
 import {TsconfigJsonFileBuilder} from "../dom-service/builder/tsconfig-json-file.builder";
-import {GitFolderBuilder} from "../dom-service/builder/git-folder.builder";
 import {GitignoreFileBuilder} from "../dom-service/builder/gitignore-file.builder";
 
 /**
@@ -70,11 +69,6 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         {
             path: ".",
             builder: TsconfigJsonFileBuilder,
-            children: []
-        },
-        {
-            path: ".",
-            builder: GitFolderBuilder,
             children: []
         },
         {

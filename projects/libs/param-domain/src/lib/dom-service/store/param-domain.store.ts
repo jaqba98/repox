@@ -29,13 +29,13 @@ export class ParamDomainStore {
         return !!this.get().commandArgs[commandArg];
     }
 
-    getCommandArg(commandArg: string, commandAlias: string): string[] | undefined {
+    getCommandArg(commandArg: string, commandAlias: string): string[] | false {
         if (this.hasCommandArg(commandArg)) {
             return this.get().commandArgs[commandArg].values;
         }
         if (this.hasCommandArg(commandAlias)) {
             return this.get().commandArgs[commandAlias].values;
         }
-        return undefined;
+        return false;
     }
 }

@@ -2,15 +2,15 @@
  * The model DTO represents real content of package.json file.
  */
 
-export interface PackageJsonDtoModel {
+export interface BasePackageJsonDtoModel {
     name: string;
     version: string;
-    description: string;
-    scripts: Record<string, string>;
-    keywords: string[];
-    author: string;
-    license: string;
+    private: boolean;
+}
+
+export interface PackageJsonDtoModel extends BasePackageJsonDtoModel {
     devDependencies: Record<string, string>;
+    dependencies: Record<string, string>;
 }
 
 export interface PackageJsonDtoPartialModel extends Partial<PackageJsonDtoModel> {}

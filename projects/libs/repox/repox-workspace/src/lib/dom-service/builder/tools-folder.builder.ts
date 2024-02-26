@@ -1,7 +1,8 @@
 import {singleton} from "tsyringe";
 
+import {createFolder, pathExist} from "@lib/utils";
+
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
-import {createFolder} from "@lib/utils";
 import {WorkspaceFolderEnum} from "../../enum/workspace-folder.enum";
 
 @singleton()
@@ -10,6 +11,15 @@ import {WorkspaceFolderEnum} from "../../enum/workspace-folder.enum";
  */
 export class ToolsFolderBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
+        this.createToolsFolder();
+    }
+
+    regenerate() {
+        this.createToolsFolder();
+    }
+
+    private createToolsFolder(): void {
+        if (pathExist(WorkspaceFolderEnum.tools)) return;
         createFolder(WorkspaceFolderEnum.tools);
     }
 }

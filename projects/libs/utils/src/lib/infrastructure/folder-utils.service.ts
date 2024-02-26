@@ -27,10 +27,6 @@ export class FolderUtilsService {
     }
 }
 
-export const isEmptyFolder = (folderPath: string): boolean => {
-    return readdirSync(folderPath).length === 0;
-}
-
 export const createFolder = (...folderPath: string[]): void => {
     const path = createPath(...folderPath);
     mkdirSync(path, {recursive: true});
@@ -48,9 +44,14 @@ export const oneFileInFolder = (folderPath: string): boolean => {
     return readdirSync(folderPath).length === 1;
 }
 
-export const manyFilesInFolder = (folderPath: string): boolean => {
+export const isManyFilesInFolder = (folderPath: string): boolean => {
     return readdirSync(folderPath).length > 1;
 }
 
 export const getCurrentFolderName = (): string => basename(getCurrentPath());
+
+export const isEmptyFolder = (folderPath: string): boolean => {
+    return readdirSync(folderPath).length === 0;
+}
+
 // todo: refactor the code

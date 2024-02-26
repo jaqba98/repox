@@ -8,19 +8,19 @@ import {changePath} from "@lib/utils";
 
 @singleton()
 /**
- * The service uses recursion to generate workspace.
+ * The service uses recursion to regenerate workspace.
  */
-export class RunGenerateWorkspaceService {
+export class RunRegenerateWorkspaceService {
     run(): boolean {
-        this.runGenerateWorkspace(WORKSPACE_STRUCTURE.structure);
+        this.runRegenerateWorkspace(WORKSPACE_STRUCTURE.structure);
         return true;
     }
 
-    private runGenerateWorkspace(children: WorkspaceStructureBuilderModel[]): void {
+    private runRegenerateWorkspace(children: WorkspaceStructureBuilderModel[]): void {
         for (const child of children) {
-            container.resolve(child.builder).generate();
+            container.resolve(child.builder).regenerate();
             changePath(child.path);
-            this.runGenerateWorkspace(child.children);
+            this.runRegenerateWorkspace(child.children);
             if (child.path === ".") continue;
             changePath("../");
         }

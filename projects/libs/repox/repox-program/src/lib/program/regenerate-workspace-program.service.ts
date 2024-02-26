@@ -1,24 +1,50 @@
 import {singleton} from "tsyringe";
 
-import {ProgramModel} from "@lib/model";
-import {RegenerateWorkspaceStepService} from "../step/regenerate-workspace-step.service";
-import {RegenerateWorkspaceCommandModel} from "@lib/repox-domain";
+import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
+import {REPOX_LOGO} from "@lib/repox-const";
+import {ParamDomainStore} from "@lib/param-domain";
+import {
+    RunCommandAppService,
+    SystemProgramEnum,
+    SystemProgramExistAppService
+} from "@lib/program-step";
+import {
+    RegenerateWorkspaceAppService
+} from "../app-service/regenerate-workspace-app.service";
 
 @singleton()
 /**
- * The program is responsible for regenerating the existing project workspace.
+ * The start point of the program regenerate, command workspace.
+ * Possible arguments
  */
-export class RegenerateWorkspaceProgramService implements ProgramModel {
-    constructor(private readonly step: RegenerateWorkspaceStepService) {
+export class RegenerateWorkspaceProgramService {
+    constructor(
+        private readonly simpleMessage: SimpleMessageAppService,
+        private readonly newline: NewlineAppService,
+        private readonly store: ParamDomainStore,
+        private readonly systemProgramExist: SystemProgramExistAppService,
+        private readonly regenerateWorkspace: RegenerateWorkspaceAppService,
+        private readonly runCommand: RunCommandAppService
+    ) {
     }
 
-    runProgram(programModel: unknown, commandModel: unknown): void {
-        this.step.runProgramSteps(
-            programModel as Record<string, never>,
-            commandModel as RegenerateWorkspaceCommandModel
-        );
+    runProgram(): boolean {
+        this.simpleMessage.writeInfo("Regenerate Workspace", REPOX_LOGO);
+        this.newline.writeNewline();
+        const forceMode = this.store.getCommandArg("force", "f");
+        if (!forceMode) {
+            this.simpleMessage.writeError("The program must be run in forced mode!");
+            this.simpleMessage.writeWarning("Specify force mode by --force or -f and rerun the program.");
+            return false;
+        }
+        if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+        if (!this.runCommand.run("npm i -g pnpm")) return false;
+        if (!this.regenerateWorkspace.run()) return false;
+        if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
+        if (!this.runCommand.run("git init")) return false;
+        if (!this.runCommand.run("git config core.autocrlf false")) return false;
+        this.newline.writeNewline();
+        this.simpleMessage.writeSuccess("Command executed correctly!");
+        return true;
     }
 }
-
-
-// todo: refactor the code
