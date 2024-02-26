@@ -12,6 +12,7 @@ import {RepoxJsonFileBuilder} from "../dom-service/builder/repox-json-file.build
 import {TsconfigJsonFileBuilder} from "../dom-service/builder/tsconfig-json-file.builder";
 import {GitignoreFileBuilder} from "../dom-service/builder/gitignore-file.builder";
 import {ReadmeFileBuilder} from "../dom-service/builder/readme-file.builder";
+import {NpmrcFileBuilder} from "../dom-service/builder/npmrc-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -80,6 +81,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         {
             path: ".",
             builder: ReadmeFileBuilder,
+            children: []
+        },
+        {
+            path: ".",
+            builder: NpmrcFileBuilder,
             children: []
         }
     ]

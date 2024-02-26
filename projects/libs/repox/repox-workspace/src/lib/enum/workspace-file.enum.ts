@@ -7,5 +7,6 @@ export enum WorkspaceFileEnum {
     packageJson = "package.json",
     tsconfigJson = "tsconfig.json",
     gitignore = ".gitignore",
-    readmeMd = "README.md"
+    readmeMd = "README.md",
+    npmrc = ".npmrc"
 }
