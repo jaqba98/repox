@@ -52,7 +52,7 @@ export class RootPackageJsonFileBuilder extends WorkspaceStructureAbstractBuilde
         return {
             "@types/core-js": "^2.5.8",
             "@types/node": "^20.11.20",
-            "repox": "^1.4.25",
+            "repox": "^1.4.26",
             "tsc-alias": "^1.8.8",
             "typescript": "^5.3.3"
         };

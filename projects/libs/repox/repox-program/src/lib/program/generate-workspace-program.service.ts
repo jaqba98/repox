@@ -48,8 +48,8 @@ export class GenerateWorkspaceProgramService {
             if (!this.changePath.run(workspaceName)) return false;
             if (!this.generateWorkspace.run()) return false;
             if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
-            if (!this.runCommand.run("git config core.autocrlf false")) return false;
             if (!this.runCommand.run("git init")) return false;
+            if (!this.runCommand.run("git config core.autocrlf false")) return false;
             if (!this.runCommand.run("git add .")) return false;
             if (!this.runCommand.run('git commit -m "initial commit"')) return false;
             if (!this.changePath.run("../")) return false;

@@ -42,6 +42,7 @@ export class RegenerateWorkspaceProgramService {
         if (!this.regenerateWorkspace.run()) return false;
         if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
         if (!this.runCommand.run("git init")) return false;
+        if (!this.runCommand.run("git config core.autocrlf false")) return false;
         this.newline.writeNewline();
         this.simpleMessage.writeSuccess("Command executed correctly!");
         return true;
