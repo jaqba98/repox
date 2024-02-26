@@ -3,7 +3,11 @@ import {singleton} from "tsyringe";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {ParamDomainStore} from "@lib/param-domain";
-import {SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
+import {
+    RunCommandAppService,
+    SystemProgramEnum,
+    SystemProgramExistAppService
+} from "@lib/program-step";
 import {
     RegenerateWorkspaceAppService
 } from "../app-service/regenerate-workspace-app.service";
@@ -19,7 +23,8 @@ export class RegenerateWorkspaceProgramService {
         private readonly newline: NewlineAppService,
         private readonly store: ParamDomainStore,
         private readonly systemProgramExist: SystemProgramExistAppService,
-        private readonly regenerateWorkspace: RegenerateWorkspaceAppService
+        private readonly regenerateWorkspace: RegenerateWorkspaceAppService,
+        private readonly runCommand: RunCommandAppService
     ) {
     }
 
@@ -33,7 +38,9 @@ export class RegenerateWorkspaceProgramService {
             return false;
         }
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+        if (!this.runCommand.run("npm i -g pnpm")) return false;
         if (!this.regenerateWorkspace.run()) return false;
+        if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
         this.newline.writeNewline();
         this.simpleMessage.writeSuccess("Command executed correctly!");
         return true;

@@ -6,7 +6,7 @@ import {ParamDomainStore} from "@lib/param-domain";
 import {
     ChangePathAppService,
     CreateFolderAppService,
-    FoldersNotExistAppService,
+    FoldersNotExistAppService, RunCommandAppService,
     SystemProgramEnum,
     SystemProgramExistAppService
 } from "@lib/program-step";
@@ -26,7 +26,8 @@ export class GenerateWorkspaceProgramService {
         private readonly createFolder: CreateFolderAppService,
         private readonly changePath: ChangePathAppService,
         private readonly generateWorkspace: GenerateWorkspaceAppService,
-        private readonly systemProgramExist: SystemProgramExistAppService
+        private readonly systemProgramExist: SystemProgramExistAppService,
+        private readonly runCommand: RunCommandAppService
     ) {
     }
 
@@ -40,11 +41,13 @@ export class GenerateWorkspaceProgramService {
             return false;
         }
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+        if (!this.runCommand.run("npm i -g pnpm")) return false;
         if (!this.foldersNotExist.run(workspaceNames)) return false;
         for (const workspaceName of workspaceNames) {
             if (!this.createFolder.run(workspaceName)) return false;
             if (!this.changePath.run(workspaceName)) return false;
             if (!this.generateWorkspace.run()) return false;
+            if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
             if (!this.changePath.run("../")) return false;
         }
         this.newline.writeNewline();
