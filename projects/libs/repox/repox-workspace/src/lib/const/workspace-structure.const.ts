@@ -74,11 +74,6 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         },
         {
             path: ".",
-            builder: GitFolderBuilder,
-            children: []
-        },
-        {
-            path: ".",
             builder: GitignoreFileBuilder,
             children: []
         }

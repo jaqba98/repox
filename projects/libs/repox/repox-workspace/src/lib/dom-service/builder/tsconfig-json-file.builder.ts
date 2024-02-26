@@ -14,7 +14,21 @@ import {WorkspaceFolderEnum} from "../../enum/workspace-folder.enum";
  */
 export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
-        writeJsonToFile<TsconfigJsonDtoPartialModel>(WorkspaceFileEnum.tsconfigJson, {
+        writeJsonToFile<TsconfigJsonDtoPartialModel>(
+            WorkspaceFileEnum.tsconfigJson,
+            this.createTsconfigJson()
+        );
+    }
+
+    regenerate() {
+        writeJsonToFile<TsconfigJsonDtoPartialModel>(
+            WorkspaceFileEnum.tsconfigJson,
+            this.createTsconfigJson()
+        );
+    }
+
+    private createTsconfigJson(): TsconfigJsonDtoPartialModel {
+        return {
             compilerOptions: {
                 target: ts.server.protocol.ScriptTarget.ES2022,
                 experimentalDecorators: true,
@@ -36,9 +50,6 @@ export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
                 "**/*.test.ts",
                 "**/jest.config.ts"
             ]
-        });
-    }
-
-    regenerate() {
+        };
     }
 }
