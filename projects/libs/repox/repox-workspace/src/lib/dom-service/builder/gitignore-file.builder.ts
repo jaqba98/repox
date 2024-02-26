@@ -10,7 +10,15 @@ import {WorkspaceFileEnum} from "../../enum/workspace-file.enum";
  */
 export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
-        writeToFile(WorkspaceFileEnum.gitignore, `# JetBrains tools
+        writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
+    }
+
+    regenerate() {
+        writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
+    }
+
+    private createGitignoreContent(): string {
+        return `# JetBrains tools
 .idea
 
 # Compilation output
@@ -21,9 +29,6 @@ node_modules
 
 # Temporary files and directories
 tmp
-`);
-    }
-
-    regenerate() {
+`;
     }
 }
