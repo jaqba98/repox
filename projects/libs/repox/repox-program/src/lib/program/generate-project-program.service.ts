@@ -5,6 +5,8 @@ import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {GoToWorkspaceRootAppService} from "@lib/program-step";
 
 import {LoadWorkspaceDtoAppService} from "../app-service/load-workspace-dto-app.service";
+import {SaveWorkspaceDtoAppService} from "../app-service/save-workspace-dto-app.service";
+import {WorkspaceDtoStoreService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -15,7 +17,9 @@ export class GenerateProjectProgramService {
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,
         private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService,
-        private readonly loadWorkspaceDto: LoadWorkspaceDtoAppService
+        private readonly loadWorkspaceDto: LoadWorkspaceDtoAppService,
+        private readonly workspaceDtoStore: WorkspaceDtoStoreService,
+        private readonly saveWorkspaceDto: SaveWorkspaceDtoAppService
     ) {
     }
 
@@ -24,6 +28,8 @@ export class GenerateProjectProgramService {
         this.newline.writeNewline();
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.loadWorkspaceDto.run()) return false;
+        this.workspaceDtoStore.packageJsonDto.name = "hello world :)";
+        if (!this.saveWorkspaceDto.run()) return false;
         this.simpleMessage.writeSuccess("Command executed correctly!");
         return true;
     }
