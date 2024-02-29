@@ -3,6 +3,6 @@
  */
 
 export const REPOX_LOGO: string = `REPOX`;
-export const REPOX_VERSION: string = "1.4.33";
+export const REPOX_VERSION: string = "1.4.36";
 
 // todo: refactor the code

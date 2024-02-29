@@ -13,6 +13,7 @@ import {LoadWorkspaceDtoAppService} from "../app-service/load-workspace-dto-app.
 import {SaveWorkspaceDtoAppService} from "../app-service/save-workspace-dto-app.service";
 import {AddProjectToDtoAppService} from "../app-service/add-project-to-dto-app.service";
 import {getCurrentPath} from "@lib/utils";
+import {RunGenerateProjectService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -28,7 +29,8 @@ export class GenerateProjectProgramService {
         private readonly addProjectToDto: AddProjectToDtoAppService,
         private readonly changePath: ChangePathAppService,
         private readonly createFolder: CreateFolderAppService,
-        private readonly saveWorkspaceDto: SaveWorkspaceDtoAppService
+        private readonly saveWorkspaceDto: SaveWorkspaceDtoAppService,
+        private readonly runGenerateProject: RunGenerateProjectService
     ) {
     }
 
@@ -56,6 +58,8 @@ export class GenerateProjectProgramService {
         if (!this.saveWorkspaceDto.run()) return false;
         if (!this.changePath.run(projectPath)) return false;
         if (!this.createFolder.run(projectName)) return false;
+        if (!this.changePath.run(projectName)) return false;
+        if (!this.runGenerateProject.run()) return false;
         if (!this.changePath.run(currentPath)) return false;
         this.newline.writeNewline();
         this.simpleMessage.writeSuccess("Command executed correctly!");
