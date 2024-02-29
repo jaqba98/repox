@@ -1,6 +1,6 @@
 {
   "name": "repox",
-  "version": "1.4.30",
+  "version": "1.4.36",
   "description": "Lightweight monorepo for many huge projects.",
   "main": "./apps/repox/src/main.js",
   "bin": "./apps/repox/src/main.js",
@@ -13,7 +13,9 @@
   "dependencies": {
     "command-exists": "^1.2.9",
     "core-js": "^3.36.0",
+    "deepcopy": "^2.1.0",
     "glob": "^10.3.10",
-    "tsyringe": "^4.8.0"
+    "tsyringe": "^4.8.0",
+    "typescript": "^5.3.3"
   }
 }

@@ -4,6 +4,7 @@ import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {ParamDomainStore} from "@lib/param-domain";
 import {
+    GoToWorkspaceRootAppService,
     RunCommandAppService,
     SystemProgramEnum,
     SystemProgramExistAppService
@@ -24,7 +25,8 @@ export class RegenerateWorkspaceProgramService {
         private readonly store: ParamDomainStore,
         private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly regenerateWorkspace: RegenerateWorkspaceAppService,
-        private readonly runCommand: RunCommandAppService
+        private readonly runCommand: RunCommandAppService,
+        private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService
     ) {
     }
 
@@ -37,6 +39,7 @@ export class RegenerateWorkspaceProgramService {
             this.simpleMessage.writeWarning("Specify force mode by --force or -f and rerun the program.");
             return false;
         }
+        if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         if (!this.runCommand.run("npm i -g pnpm")) return false;
         if (!this.regenerateWorkspace.run()) return false;

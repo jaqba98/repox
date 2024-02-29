@@ -52,16 +52,16 @@ export class RootPackageJsonFileBuilder extends WorkspaceStructureAbstractBuilde
         return {
             "@types/core-js": "^2.5.8",
             "@types/node": "^20.11.20",
-            "repox": "^1.4.30",
-            "tsc-alias": "^1.8.8",
-            "typescript": "^5.3.3"
+            "repox": "^1.4.36",
+            "tsc-alias": "^1.8.8"
         };
     }
 
     private buildDependencies(): PackageJsonDtoPartialModel["devDependencies"] {
         return {
             "core-js": "^3.36.0",
-            "tsyringe": "^4.8.0"
+            "tsyringe": "^4.8.0",
+            "typescript": "^5.3.3"
         };
     }
 }

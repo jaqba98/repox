@@ -35,7 +35,7 @@ devDependencies:
     specifier: ^29.5.12
     version: 29.5.12
   '@types/node':
-    specifier: ^20.11.24
+    specifier: ^20.11.20
     version: 20.11.24
   jest:
     specifier: 29.7.0
@@ -2268,18 +2268,6 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       picomatch: 2.3.1
-    dev: true
-
-  /repox@1.4.34:
-    resolution: {integrity: sha512-1J0SzB6NMK3Nudn4Bi7E7snksQtLI4GPfiZZnX/+j8x+5kmfPJ+QhUoIw+ygT/BXzSj1GpKZypeYElzxQJTnTw==}
-    hasBin: true
-    dependencies:
-      command-exists: 1.2.9
-      core-js: 3.36.0
-      deepcopy: 2.1.0
-      glob: 10.3.10
-      tsyringe: 4.8.0
-      typescript: 5.3.3
     dev: true
 
   /repox@1.4.36:
