@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc && tsc-alias --outDir dist",
-    "generate": "cd ../test && node ../repox/dist/apps/repox/src/main generate workspace --name=workspace",
-    "regenerate": "cd ../test/workspace && node ../../repox/dist/apps/repox/src/main regenerate workspace --force"
+    "generate:workspace": "cd ../test && node ../repox/dist/apps/repox/src/main generate workspace --name=workspace",
+    "regenerate:workspace": "cd ../test/workspace && node ../../repox/dist/apps/repox/src/main regenerate workspace --force",
+    "generate:program": "cd ../test/workspace && node ../../repox/dist/apps/repox/src/main generate program"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.1",

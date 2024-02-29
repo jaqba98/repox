@@ -9,6 +9,7 @@ import {
 import {
     RegenerateWorkspaceProgramService
 } from "./program/regenerate-workspace-program.service";
+import {GenerateProjectProgramService} from "./program/generate-project-program.service";
 
 @singleton()
 /**
@@ -21,6 +22,7 @@ export class RepoxProgramLauncher {
         private readonly unknownUnknown: UnknownUnknownProgram,
         private readonly generateWorkspace: GenerateWorkspaceProgramService,
         private readonly regenerateWorkspace: RegenerateWorkspaceProgramService,
+        private readonly generateProject: GenerateProjectProgramService,
         private readonly simpleMessage: SimpleMessageAppService
     ) {
     }
@@ -60,6 +62,8 @@ export class RepoxProgramLauncher {
         switch (command) {
             case "workspace":
                 return this.generateWorkspace.runProgram();
+            case "program":
+                return this.generateProject.runProgram();
             default:
                 this.simpleMessage.writeError(
                     `The ${command} command does not exist for specified program!`
