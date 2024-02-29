@@ -3,7 +3,7 @@ import {singleton} from "tsyringe";
 import {PackageJsonDtoPartialModel} from "../../model/dto/package-json-dto.model";
 import {RepoxJsonDtoPartialModel} from "../../model/dto/repox-json-dto.model";
 import {TsconfigJsonDtoPartialModel} from "../../model/dto/tsconfig-json-dto.model";
-import {readJsonFile, writeJsonToFile} from "@lib/utils";
+import {createPath, readJsonFile, writeJsonToFile} from "@lib/utils";
 import {WorkspaceFileEnum} from "../../enum/workspace-file.enum";
 
 @singleton()
@@ -29,14 +29,14 @@ export class WorkspaceDtoStoreService {
         writeJsonToFile(WorkspaceFileEnum.tsconfigJson, this.tsconfigJsonDto);
     }
 
-    // addProject(): void {
-    //     if (this.repoxJsonDto.projects) {
-    //         this.repoxJsonDto.projects["test"] = {};
-    //     }
-    //     if (this.tsconfigJsonDto.compilerOptions?.paths) {
-    //         this.tsconfigJsonDto.compilerOptions.paths["@lib/utils"] = [
-    //             "projects/libs/utils/src/index.ts"
-    //         ]
-    //     }
-    // }
+    addProjectToRepoxJson(projectName: string, projectPath: string): void {
+        if (this.repoxJsonDto.projects) {
+            this.repoxJsonDto.projects[projectName] = {
+                name: projectName,
+                root: createPath(projectPath),
+                sourceRoot: createPath(projectPath, "src"),
+                targets: {}
+            };
+        }
+    }
 }

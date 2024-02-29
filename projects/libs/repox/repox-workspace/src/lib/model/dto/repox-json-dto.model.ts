@@ -1,9 +1,12 @@
 /**
  * The model DTO represents real content of repox.json file.
  */
-import {PackageJsonDtoModel} from "./package-json-dto.model";
 
 export interface RepoxJsonDtoProjectModel {
+    name: string;
+    root: string;
+    sourceRoot: string;
+    targets: {}
 }
 
 export interface RepoxJsonDtoProjectsModel {
