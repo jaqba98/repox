@@ -62,7 +62,7 @@ export class RepoxProgramLauncher {
         switch (command) {
             case "workspace":
                 return this.generateWorkspace.runProgram();
-            case "program":
+            case "project":
                 return this.generateProject.runProgram();
             default:
                 this.simpleMessage.writeError(

@@ -4,7 +4,6 @@ import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import {ParamDomainStore} from "@lib/param-domain";
-import {WorkspaceDtoStoreService} from "@lib/repox-workspace";
 
 import {LoadWorkspaceDtoAppService} from "../app-service/load-workspace-dto-app.service";
 import {SaveWorkspaceDtoAppService} from "../app-service/save-workspace-dto-app.service";
@@ -21,7 +20,6 @@ export class GenerateProjectProgramService {
         private readonly store: ParamDomainStore,
         private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService,
         private readonly loadWorkspaceDto: LoadWorkspaceDtoAppService,
-        private readonly workspaceDtoStore: WorkspaceDtoStoreService,
         private readonly addProjectToDto: AddProjectToDtoAppService,
         private readonly saveWorkspaceDto: SaveWorkspaceDtoAppService
     ) {
