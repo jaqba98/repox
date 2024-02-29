@@ -56,9 +56,8 @@ export class GenerateProjectProgramService {
         if (!this.loadWorkspaceDto.run()) return false;
         if (!this.addProjectToDto.run(projectName, projectPath)) return false;
         if (!this.saveWorkspaceDto.run()) return false;
+        if (!this.createFolder.run(projectPath)) return false;
         if (!this.changePath.run(projectPath)) return false;
-        if (!this.createFolder.run(projectName)) return false;
-        if (!this.changePath.run(projectName)) return false;
         if (!this.runGenerateProject.run()) return false;
         if (!this.changePath.run(currentPath)) return false;
         this.newline.writeNewline();
