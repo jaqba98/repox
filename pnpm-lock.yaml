@@ -41,8 +41,8 @@ devDependencies:
     specifier: 29.7.0
     version: 29.7.0(@types/node@20.11.24)
   repox:
-    specifier: ^1.4.36
-    version: 1.4.36
+    specifier: ^1.4.37
+    version: 1.4.37
   ts-jest:
     specifier: ^29.1.2
     version: 29.1.2(@babel/core@7.23.9)(jest@29.7.0)(typescript@5.3.3)
@@ -2284,6 +2284,18 @@ packages:
 
   /repox@1.4.36:
     resolution: {integrity: sha512-r7EtRRZPTNPeliKHHGk2eexmf7SzqnuVeeSiMyOt89qPcUUYZrxcpPSdNtf1DYddJzLvrEM5+wfi88z3IrfRbw==}
+    hasBin: true
+    dependencies:
+      command-exists: 1.2.9
+      core-js: 3.36.0
+      deepcopy: 2.1.0
+      glob: 10.3.10
+      tsyringe: 4.8.0
+      typescript: 5.3.3
+    dev: true
+
+  /repox@1.4.37:
+    resolution: {integrity: sha512-UoV1C0QXLFp4nDTdId+9piuNEYFonPruqD9t8u7BT7NEU1HcTje1XR4gQTByqlcnzQmBkpLVS/d8gJOAEs1Gwg==}
     hasBin: true
     dependencies:
       command-exists: 1.2.9
