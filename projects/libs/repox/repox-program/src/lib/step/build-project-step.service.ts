@@ -5,7 +5,7 @@ import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {GoToWorkspaceRootAppService, SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
 import {LoadWsDomainAppService} from "../app-service/load-ws-domain-app.service";
 import {VerificationWsDtoAppService} from "../app-service/verification-ws-dto-app.service";
-import {LoadWsDtoAppService} from "../app-service/load-ws-dto-app.service";
+import {LoadWorkspaceDtoAppService} from "../app-service/load-workspace-dto-app.service";
 import {ProjectExistAppService} from "../app-service/project-exist-app.service";
 import {BuildProjectAppService} from "../app-service/build-project-app.service";
 
@@ -18,7 +18,7 @@ export class BuildProjectStepService {
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,
         private readonly systemProgramExist: SystemProgramExistAppService,
-        private readonly loadWsDto: LoadWsDtoAppService,
+        private readonly loadWsDto: LoadWorkspaceDtoAppService,
         private readonly goToProjectRoot: GoToWorkspaceRootAppService,
         private readonly loadWsDomain: LoadWsDomainAppService,
         private readonly verificationWsDto: VerificationWsDtoAppService,

@@ -27,7 +27,7 @@
 //
 // // export class GenerateProjectStepService {
 // //     constructor(
-// //         // private readonly loadWsDto: LoadWsDtoAppService,
+// //         // private readonly loadWsDto: LoadWorkspaceDtoAppService,
 // //         // private readonly verificationWsDto: VerificationWsDtoAppService,
 // //         // private readonly loadWsDomain: LoadWsDomainAppService,
 // //         // private readonly projectNotExist: ProjectNotExistAppService,
@@ -42,7 +42,6 @@
 // //         _programModel: Record<string, never>,
 // //         _commandModel: GenerateProjectCommandModel
 // //     ): void {
-// //         // if (!this.goToProjectRoot.run()) return;
 // //         // if (!this.loadWsDto.run()) return;
 // //         // if (!this.verificationWsDto.run()) return;
 // //         // if (!this.loadWsDomain.run()) return;
