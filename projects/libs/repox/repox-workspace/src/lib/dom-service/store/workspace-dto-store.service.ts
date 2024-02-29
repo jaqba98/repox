@@ -11,11 +11,11 @@ import {WorkspaceFileEnum} from "../../enum/workspace-file.enum";
  * The service is a store of workspace dto.
  */
 export class WorkspaceDtoStoreService {
-    packageJsonDto: PackageJsonDtoPartialModel = {};
+    private packageJsonDto: PackageJsonDtoPartialModel = {};
 
-    repoxJsonDto: RepoxJsonDtoPartialModel = {};
+    private repoxJsonDto: RepoxJsonDtoPartialModel = {};
 
-    tsconfigJsonDto: TsconfigJsonDtoPartialModel = {};
+    private tsconfigJsonDto: TsconfigJsonDtoPartialModel = {};
 
     load(): void {
         this.packageJsonDto = readJsonFile(WorkspaceFileEnum.packageJson);
@@ -28,4 +28,15 @@ export class WorkspaceDtoStoreService {
         writeJsonToFile(WorkspaceFileEnum.repoxJson, this.repoxJsonDto);
         writeJsonToFile(WorkspaceFileEnum.tsconfigJson, this.tsconfigJsonDto);
     }
+
+    // addProject(): void {
+    //     if (this.repoxJsonDto.projects) {
+    //         this.repoxJsonDto.projects["test"] = {};
+    //     }
+    //     if (this.tsconfigJsonDto.compilerOptions?.paths) {
+    //         this.tsconfigJsonDto.compilerOptions.paths["@lib/utils"] = [
+    //             "projects/libs/utils/src/index.ts"
+    //         ]
+    //     }
+    // }
 }
