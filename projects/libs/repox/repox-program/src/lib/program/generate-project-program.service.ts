@@ -8,6 +8,7 @@ import {WorkspaceDtoStoreService} from "@lib/repox-workspace";
 
 import {LoadWorkspaceDtoAppService} from "../app-service/load-workspace-dto-app.service";
 import {SaveWorkspaceDtoAppService} from "../app-service/save-workspace-dto-app.service";
+import {AddProjectToDtoAppService} from "../app-service/add-project-to-dto-app.service";
 
 @singleton()
 /**
@@ -21,6 +22,7 @@ export class GenerateProjectProgramService {
         private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService,
         private readonly loadWorkspaceDto: LoadWorkspaceDtoAppService,
         private readonly workspaceDtoStore: WorkspaceDtoStoreService,
+        private readonly addProjectToDto: AddProjectToDtoAppService,
         private readonly saveWorkspaceDto: SaveWorkspaceDtoAppService
     ) {
     }
@@ -44,7 +46,7 @@ export class GenerateProjectProgramService {
         const projectPath = path[0];
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.loadWorkspaceDto.run()) return false;
-        this.workspaceDtoStore.addProjectToRepoxJson(projectName, projectPath);
+        if (!this.addProjectToDto.run(projectName, projectPath)) return false;
         if (!this.saveWorkspaceDto.run()) return false;
         this.newline.writeNewline();
         this.simpleMessage.writeSuccess("Command executed correctly!");
