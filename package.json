@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc && tsc-alias --outDir dist",
-    "generate:workspace": "cd ../test && node ../repox/dist/apps/repox/src/main generate2 workspace --name=workspace",
+    "generate:workspace": "cd ../test && node ../repox/dist/apps/repox/src/main generate workspace --name=workspace",
     "regenerate:workspace": "cd ../test/workspace && node ../../repox/dist/apps/repox/src/main regenerate workspace --force",
     "generate:project": "cd ../test/workspace && node ../../repox/dist/apps/repox/src/main generate project --name=dog --path=projects/apps/dog"
   },
