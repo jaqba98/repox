@@ -25,7 +25,6 @@ export class GenerateWorkspaceAppService {
         private readonly foldersNotExist: FoldersNotExistAppService,
         private readonly createFolder: CreateFolderAppService,
         private readonly changePath: ChangePathAppService,
-        private readonly generateWorkspace: GenerateWorkspaceAppService,
         private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly runCommand: RunCommandAppService
     ) {
@@ -46,7 +45,7 @@ export class GenerateWorkspaceAppService {
         for (const workspaceName of workspaceNames) {
             if (!this.createFolder.run(workspaceName)) return false;
             if (!this.changePath.run(workspaceName)) return false;
-            if (!this.generateWorkspace.runProgram()) return false;
+            // if (!this.generateWorkspace.runProgram()) return false;
             if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
             if (!this.runCommand.run("git init")) return false;
             if (!this.runCommand.run("git config core.autocrlf false")) return false;
