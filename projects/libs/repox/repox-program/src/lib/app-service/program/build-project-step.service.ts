@@ -3,11 +3,11 @@ import {BuildProjectRepoxCommandModel, EmptyRepoxProgramModel} from "@lib/repox-
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {GoToWorkspaceRootAppService, SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
-import {LoadWsDomainAppService} from "../app-service/load-ws-domain-app.service";
-import {VerificationWsDtoAppService} from "../app-service/verification-ws-dto-app.service";
-import {LoadWorkspaceDtoAppService} from "../app-service/load-workspace-dto-app.service";
-import {ProjectExistAppService} from "../app-service/project-exist-app.service";
-import {BuildProjectAppService} from "../app-service/build-project-app.service";
+import {LoadWsDomainAppService} from "../../dom-service/load-ws-domain-app.service";
+import {VerificationWsDtoAppService} from "../../dom-service/verification-ws-dto-app.service";
+import {LoadWorkspaceDtoAppService} from "../../dom-service/load-workspace-dto-app.service";
+import {ProjectExistAppService} from "../../dom-service/project-exist-app.service";
+import {BuildProjectAppService} from "../../dom-service/build-project-app.service";
 
 @singleton()
 /**

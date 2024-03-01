@@ -9,9 +9,9 @@ import {
 } from "@lib/program-step";
 import {ParamDomainStore} from "@lib/param-domain";
 
-import {LoadWorkspaceDtoAppService} from "../app-service/load-workspace-dto-app.service";
-import {SaveWorkspaceDtoAppService} from "../app-service/save-workspace-dto-app.service";
-import {AddProjectToDtoAppService} from "../app-service/add-project-to-dto-app.service";
+import {LoadWorkspaceDtoAppService} from "../../dom-service/load-workspace-dto-app.service";
+import {SaveWorkspaceDtoAppService} from "../../dom-service/save-workspace-dto-app.service";
+import {AddProjectToDtoAppService} from "../../dom-service/add-project-to-dto-app.service";
 import {getCurrentPath} from "@lib/utils";
 import {RunGenerateProjectService} from "@lib/repox-workspace";
 

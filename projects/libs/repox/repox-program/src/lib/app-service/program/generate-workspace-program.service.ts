@@ -10,7 +10,7 @@ import {
     SystemProgramEnum,
     SystemProgramExistAppService
 } from "@lib/program-step";
-import {GenerateWorkspaceAppService} from "../app-service/generate-workspace-app.service";
+import {GenerateWorkspaceAppService} from "../../dom-service/generate-workspace-app.service";
 
 @singleton()
 /**

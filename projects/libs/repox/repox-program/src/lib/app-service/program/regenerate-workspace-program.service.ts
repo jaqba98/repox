@@ -11,7 +11,7 @@ import {
 } from "@lib/program-step";
 import {
     RegenerateWorkspaceAppService
-} from "../app-service/regenerate-workspace-app.service";
+} from "../../dom-service/regenerate-workspace-app.service";
 
 @singleton()
 /**

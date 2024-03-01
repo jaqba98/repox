@@ -3,10 +3,10 @@ import type {EmptyRepoxProgramModel, LintProjectRepoxCommandModel} from "@lib/re
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {GoToWorkspaceRootAppService, SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
-import {LoadWorkspaceDtoAppService} from "../app-service/load-workspace-dto-app.service";
-import {VerificationWsDtoAppService} from "../app-service/verification-ws-dto-app.service";
-import {LoadWsDomainAppService} from "../app-service/load-ws-domain-app.service";
-import {LintProjectsAppService} from "../app-service/lint-projects-app.service";
+import {LoadWorkspaceDtoAppService} from "../../dom-service/load-workspace-dto-app.service";
+import {VerificationWsDtoAppService} from "../../dom-service/verification-ws-dto-app.service";
+import {LoadWsDomainAppService} from "../../dom-service/load-ws-domain-app.service";
+import {LintProjectsAppService} from "../../dom-service/lint-projects-app.service";
 
 @singleton()
 /**

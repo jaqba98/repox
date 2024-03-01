@@ -1,22 +1,22 @@
 import {singleton} from "tsyringe";
 
 import {ParamDomainStore} from "@lib/param-domain";
-import {UnknownUnknownProgram} from "./program/unknown-unknown.program";
+import {UnknownUnknownProgram} from "../program/unknown-unknown.program";
 import {SimpleMessageAppService} from "@lib/logger";
 import {
     GenerateWorkspaceProgramService
-} from "./program/generate-workspace-program.service";
+} from "../program/generate-workspace-program.service";
 import {
     RegenerateWorkspaceProgramService
-} from "./program/regenerate-workspace-program.service";
-import {GenerateProjectProgramService} from "./program/generate-project-program.service";
+} from "../program/regenerate-workspace-program.service";
+import {GenerateProjectProgramService} from "../program/generate-project-program.service";
 
 @singleton()
 /**
  * The app service is responsible for selecting service to run
  * by given program name and command name.
  */
-export class RepoxProgramLauncher {
+export class RepoxLauncherAppService {
     constructor(
         private readonly store: ParamDomainStore,
         private readonly unknownUnknown: UnknownUnknownProgram,
@@ -27,7 +27,7 @@ export class RepoxProgramLauncher {
     ) {
     }
 
-    launchProgram(): boolean {
+    launch(): boolean {
         const {program} = this.store.get();
         switch (program) {
             case "unknown":
