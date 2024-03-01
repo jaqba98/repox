@@ -29,59 +29,40 @@ export class RepoxLauncherAppService {
 
     launch(): boolean {
         const {program} = this.store.get();
-        switch (program) {
-            case "unknown":
-                return this.launchUnknownCommand();
-            case "generate":
-                return this.launchGenerateCommand();
-            case "regenerate":
-                return this.launchRegenerateCommand();
-            default:
-                this.simpleMessage.writeError(
-                    `The ${program} program does not exist!`
-                );
-                return false;
-        }
+        if (program === "unknown") return this.launchUnknownCommand();
+        if (program === "generate") return this.launchGenerateCommand();
+        if (program === "regenerate") return this.launchRegenerateCommand();
+        this.throwLauncherProgramError();
+        return false;
     }
 
     private launchUnknownCommand(): boolean {
         const {command} = this.store.get();
-        switch (command) {
-            case "unknown":
-                return this.unknownUnknown.runProgram();
-            default:
-                this.simpleMessage.writeError(
-                    `The ${command} command does not exist for specified program!`
-                );
-                return false;
-        }
+        if (command === "unknown") return this.unknownUnknown.runProgram();
+        this.throwLauncherCommandError();
+        return false;
     }
 
     private launchGenerateCommand(): boolean {
         const {command} = this.store.get();
-        switch (command) {
-            case "workspace":
-                return this.generateWorkspace.runProgram();
-            case "project":
-                return this.generateProject.runProgram();
-            default:
-                this.simpleMessage.writeError(
-                    `The ${command} command does not exist for specified program!`
-                );
-                return false;
-        }
+        if (command === "workspace") return this.generateWorkspace.runProgram();
+        if (command === "project") return this.generateProject.runProgram();
+        this.throwLauncherCommandError();
+        return false;
     }
 
     private launchRegenerateCommand(): boolean {
         const {command} = this.store.get();
-        switch (command) {
-            case "workspace":
-                return this.regenerateWorkspace.runProgram();
-            default:
-                this.simpleMessage.writeError(
-                    `The ${command} command does not exist for specified program!`
-                );
-                return false;
-        }
+        if (command === "workspace") return this.regenerateWorkspace.runProgram();
+        this.throwLauncherCommandError();
+        return false;
+    }
+
+    private throwLauncherProgramError(): void {
+        this.simpleMessage.writeError("The program does not exist!");
+    }
+
+    private throwLauncherCommandError(): void {
+        this.simpleMessage.writeError("The command does not exist for specific program!");
     }
 }
