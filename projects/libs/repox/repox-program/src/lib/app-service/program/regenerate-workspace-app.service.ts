@@ -39,7 +39,7 @@ export class RegenerateWorkspaceAppService {
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         if (!this.runCommand.run("npm i -g pnpm")) return false;
-        if (!this.regenerateWorkspace.run()) return false;
+        if (!this.regenerateWorkspace.runProgram()) return false;
         if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
         if (!this.runCommand.run("git init")) return false;
         if (!this.runCommand.run("git config core.autocrlf false")) return false;

@@ -46,7 +46,7 @@ export class GenerateWorkspaceAppService {
         for (const workspaceName of workspaceNames) {
             if (!this.createFolder.run(workspaceName)) return false;
             if (!this.changePath.run(workspaceName)) return false;
-            if (!this.generateWorkspace.run()) return false;
+            if (!this.generateWorkspace.runProgram()) return false;
             if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
             if (!this.runCommand.run("git init")) return false;
             if (!this.runCommand.run("git config core.autocrlf false")) return false;
