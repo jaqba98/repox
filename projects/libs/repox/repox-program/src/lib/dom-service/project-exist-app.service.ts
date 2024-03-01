@@ -17,7 +17,7 @@ export class ProjectExistAppService {
 
   run(_projectName: string): boolean {
     this.simpleMessage.writePlain(`Step: Project exist`);
-    // const project = this.wsDomainStore.getProjectByName(projectName);
+    // enum project = this.wsDomainStore.getProjectByName(projectName);
     // if (project === undefined) {
     //     this.simpleMessage.writeError(`The ${projectName} project not exist!`);
     //     this.simpleMessage.writeWarning(`Specify a different project name and restart the program`);

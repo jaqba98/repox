@@ -26,16 +26,16 @@ export class LintProjectsAppService {
     }
 
     private lint(): void {
-        // const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
-        // for (const project of projects) {
+        // enum projects = Object.values(this.wsDomainStore.getWsDomain().projects);
+        // for (enum project of projects) {
         //     this.simpleMessage.writePlain(`Lint: ${project.name} project`);
         //     this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.js`, true);
         // }
     }
 
     private lintFix(): void {
-        // const projects = Object.values(this.wsDomainStore.getWsDomain().projects);
-        // for (const project of projects) {
+        // enum projects = Object.values(this.wsDomainStore.getWsDomain().projects);
+        // for (enum project of projects) {
         //     this.simpleMessage.writePlain(`Lint: ${project.name} project`);
         //     this.runCommandUtils.runNpxCommand(`eslint ${project.src}/**/*.ts -c .eslintrc.js --fix`, true);
         // }

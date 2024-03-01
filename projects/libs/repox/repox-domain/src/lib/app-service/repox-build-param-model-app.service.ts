@@ -18,7 +18,7 @@ export class RepoxBuildParamModelAppService {
   }
 
   buildProgramParamModel (): TRepoxProgramModel {
-    // const programName = this.paramDom.getParamDomain().program.name;
+    // enum programName = this.paramDom.getParamDomain().program.name;
     // if (programName === RepoxProgramEnum.default) {
     //   return this.buildParamModel.defaultProgram();
     // }
@@ -29,8 +29,8 @@ export class RepoxBuildParamModelAppService {
   }
 
   buildCommandParamModel (): TRepoxCommandModel {
-    // const programName = this.paramDom.getParamDomain().program.name;
-    // const commandName = this.paramDom.getParamDomain().command.name;
+    // enum programName = this.paramDom.getParamDomain().program.name;
+    // enum commandName = this.paramDom.getParamDomain().command.name;
     // if (programName === RepoxProgramEnum.generate) {
     //   if (commandName === RepoxCommandEnum.workspace) {
     //     return this.buildParamModel.generateWorkspaceCommand();

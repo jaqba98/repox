@@ -1,15 +1,16 @@
 import {singleton} from "tsyringe";
 
 import {ParamDomainStore} from "@lib/param-domain";
-import {UnknownUnknownProgram} from "../program/unknown-unknown.program";
 import {SimpleMessageAppService} from "@lib/logger";
-import {
-    GenerateWorkspaceProgramService
-} from "../program/generate-workspace-program.service";
-import {
-    RegenerateWorkspaceProgramService
-} from "../program/regenerate-workspace-program.service";
-import {GenerateProjectProgramService} from "../program/generate-project-program.service";
+
+import {UnknownUnknownAppService} from "../program/unknown-unknown-app.service";
+import {GenerateWorkspaceAppService} from "../program/generate-workspace-app.service";
+import {RegenerateWorkspaceAppService} from "../program/regenerate-workspace-app.service";
+import {GenerateProjectAppService} from "../program/generate-project-app.service";
+import {ErrorMessageEnum} from "../../enum/message/error-message.enum";
+import {ProgramEnum} from "../../enum/launcher/program.enum";
+import {CommandEnum} from "../../enum/launcher/command.enum";
+import {WarningMessageEnum} from "../../enum/message/warning-message.enum";
 
 @singleton()
 /**
@@ -19,50 +20,49 @@ import {GenerateProjectProgramService} from "../program/generate-project-program
 export class RepoxLauncherAppService {
     constructor(
         private readonly store: ParamDomainStore,
-        private readonly unknownUnknown: UnknownUnknownProgram,
-        private readonly generateWorkspace: GenerateWorkspaceProgramService,
-        private readonly regenerateWorkspace: RegenerateWorkspaceProgramService,
-        private readonly generateProject: GenerateProjectProgramService,
+        private readonly unknownUnknown: UnknownUnknownAppService,
+        private readonly generateWorkspace: GenerateWorkspaceAppService,
+        private readonly regenerateWorkspace: RegenerateWorkspaceAppService,
+        private readonly generateProject: GenerateProjectAppService,
         private readonly simpleMessage: SimpleMessageAppService
     ) {
     }
 
     launch(): boolean {
-        const {program} = this.store.get();
-        if (program === "unknown") return this.launchUnknownCommand();
-        if (program === "generate") return this.launchGenerateCommand();
-        if (program === "regenerate") return this.launchRegenerateCommand();
+        const {program, command} = this.store.get();
+        if (program === ProgramEnum.unknown) return this.unknownCommand(command);
+        if (program === ProgramEnum.generate) return this.generateCommand(command);
+        if (program === ProgramEnum.regenerate) return this.regenerateCommand(command);
         this.throwLauncherProgramError();
         return false;
     }
 
-    private launchUnknownCommand(): boolean {
-        const {command} = this.store.get();
-        if (command === "unknown") return this.unknownUnknown.runProgram();
+    private unknownCommand(command: string): boolean {
+        if (command === CommandEnum.unknown) return this.unknownUnknown.runProgram();
         this.throwLauncherCommandError();
         return false;
     }
 
-    private launchGenerateCommand(): boolean {
-        const {command} = this.store.get();
-        if (command === "workspace") return this.generateWorkspace.runProgram();
-        if (command === "project") return this.generateProject.runProgram();
+    private generateCommand(command: string): boolean {
+        if (command === CommandEnum.workspace) return this.generateWorkspace.runProgram();
+        if (command === CommandEnum.project) return this.generateProject.runProgram();
         this.throwLauncherCommandError();
         return false;
     }
 
-    private launchRegenerateCommand(): boolean {
-        const {command} = this.store.get();
-        if (command === "workspace") return this.regenerateWorkspace.runProgram();
+    private regenerateCommand(command: string): boolean {
+        if (command === CommandEnum.workspace) return this.regenerateWorkspace.runProgram();
         this.throwLauncherCommandError();
         return false;
     }
 
     private throwLauncherProgramError(): void {
-        this.simpleMessage.writeError("The program does not exist!");
+        this.simpleMessage.writeError(ErrorMessageEnum.programNotExist);
+        this.simpleMessage.writeWarning(WarningMessageEnum.moreInfo);
     }
 
     private throwLauncherCommandError(): void {
-        this.simpleMessage.writeError("The command does not exist for specific program!");
+        this.simpleMessage.writeError(ErrorMessageEnum.commandNotExist);
+        this.simpleMessage.writeWarning(WarningMessageEnum.moreInfo);
     }
 }

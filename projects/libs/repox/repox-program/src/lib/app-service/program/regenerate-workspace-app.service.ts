@@ -9,16 +9,13 @@ import {
     SystemProgramEnum,
     SystemProgramExistAppService
 } from "@lib/program-step";
-import {
-    RegenerateWorkspaceAppService
-} from "../../dom-service/regenerate-workspace-app.service";
 
 @singleton()
 /**
  * The start point of the program regenerate, command workspace.
  * Possible arguments
  */
-export class RegenerateWorkspaceProgramService {
+export class RegenerateWorkspaceAppService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,

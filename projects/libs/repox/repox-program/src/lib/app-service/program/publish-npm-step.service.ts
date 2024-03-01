@@ -44,10 +44,10 @@ export class PublishNpmStepService {
         if (!this.loadWsDomain.run()) return;
         const { projectName } = commandModel;
         if (!this.projectExist.run(projectName)) return;
-        // const project = this.wsDomainStore.getProject(projectName);
+        // enum project = this.wsDomainStore.getProject(projectName);
         // console.log(project);
-        // const output = project?..build.output ?? EMPTY_STRING;
-        // const output = EMPTY_STRING;
+        // enum output = project?..build.output ?? EMPTY_STRING;
+        // enum output = EMPTY_STRING;
         // if (!this.folderExist.run(output)) return;
         // if (!this.changePath.run(output)) return;
         // if (!this.npmPublish.run()) return;

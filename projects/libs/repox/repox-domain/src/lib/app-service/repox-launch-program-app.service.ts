@@ -5,12 +5,12 @@ import {
 } from "@lib/repox-domain";
 import {
   BuildProjectProgramService,
-  UnknownUnknownProgram,
-  GenerateProjectProgramService,
-  GenerateWorkspaceProgramService,
+  UnknownUnknownAppService,
+  GenerateProjectAppService,
+  GenerateWorkspaceAppService,
   LintProjectProgramService,
   PublishNpmProgramService,
-  RegenerateWorkspaceProgramService
+  RegenerateWorkspaceAppService
 } from "@lib/repox-program";
 
 @singleton()
@@ -26,24 +26,24 @@ export class RepoxLaunchProgramAppService {
         {
           programName: RepoxProgramEnum.default,
           commandName: RepoxCommandEnum.default,
-          service: container.resolve(UnknownUnknownProgram)
+          service: container.resolve(UnknownUnknownAppService)
         },
         {
           programName: RepoxProgramEnum.generate,
           commandName: RepoxCommandEnum.workspace,
-          service: container.resolve(GenerateWorkspaceProgramService)
+          service: container.resolve(GenerateWorkspaceAppService)
         },
         {
           programName: RepoxProgramEnum.regenerate,
           commandName: RepoxCommandEnum.workspace,
           service: container.resolve(
-            RegenerateWorkspaceProgramService
+            RegenerateWorkspaceAppService
           )
         },
         {
           programName: RepoxProgramEnum.generate,
           commandName: RepoxCommandEnum.project,
-          service: container.resolve(GenerateProjectProgramService)
+          service: container.resolve(GenerateProjectAppService)
         },
         {
           programName: RepoxProgramEnum.build,

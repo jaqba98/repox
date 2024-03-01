@@ -6,18 +6,18 @@ import {ParamDomainStore} from "@lib/param-domain";
 import {
     ChangePathAppService,
     CreateFolderAppService,
-    FoldersNotExistAppService, RunCommandAppService,
+    FoldersNotExistAppService,
+    RunCommandAppService,
     SystemProgramEnum,
     SystemProgramExistAppService
 } from "@lib/program-step";
-import {GenerateWorkspaceAppService} from "../../dom-service/generate-workspace-app.service";
 
 @singleton()
 /**
  * The start point of the program generate, command workspace.
  * Possible arguments
  */
-export class GenerateWorkspaceProgramService {
+export class GenerateWorkspaceAppService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,

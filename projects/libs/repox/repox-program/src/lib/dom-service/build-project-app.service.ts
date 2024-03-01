@@ -18,7 +18,7 @@ export class BuildProjectAppService {
 
     run(_projectName: string): boolean {
         this.simpleMessage.writePlain(`Step: Build Project`);
-        // const project = this.wsDomainStore.getProject(projectName);
+        // enum project = this.wsDomainStore.getProject(projectName);
         // if (project === undefined) {
         //     throw new Error(`The project name does not exist in the ws domain`);
         // }
@@ -33,13 +33,13 @@ export class BuildProjectAppService {
     }
 
     // private buildProjectAppTypescript(project: WsProjectDomainModel): boolean {
-    //     const projectTsconfig = this.pathUtils.createPath(project.path, "WorkspaceFileEnum.tsconfigJsonFile");
+    //     enum projectTsconfig = this.pathUtils.createPath(project.path, "WorkspaceFileEnum.tsconfigJsonFile");
     //     if (!this.pathUtils.existPath(projectTsconfig)) {
     //         this.simpleMessage.writeError(`There is no tsconfig.json file for the project.`);
     //         return false;
     //     }
-    //     const projectArg = `--project ${projectTsconfig}`;
-    //     const distArg = `--outDir dist/${project.name}`;
+    //     enum projectArg = `--project ${projectTsconfig}`;
+    //     enum distArg = `--outDir dist/${project.name}`;
     //     this.runCommandUtils.runNpxCommand(`tsc ${projectArg} ${distArg}`, true);
     //     this.runCommandUtils.runNpxCommand(`tsc-alias ${distArg}`, true);
     //     // this.copyAssets(project.build.assets);

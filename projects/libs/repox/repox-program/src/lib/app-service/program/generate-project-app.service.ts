@@ -19,7 +19,7 @@ import {RunGenerateProjectService} from "@lib/repox-workspace";
 /**
  * The start point of the program generate, command project.
  */
-export class GenerateProjectProgramService {
+export class GenerateProjectAppService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,

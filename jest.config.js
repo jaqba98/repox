@@ -7,7 +7,7 @@ const config = {
   setupFilesAfterEnv: ["core-js/features/reflect"],
   testEnvironment: "jest-environment-node",
   moduleNameMapper: {
-    "@lib/const": path.resolve(__dirname, "projects/libs/const/src/index.ts"),
+    "@lib/const": path.resolve(__dirname, "projects/libs/enum/src/index.ts"),
     "@lib/utils": path.resolve(__dirname, "projects/libs/utils/src/index.ts")
   },
 };

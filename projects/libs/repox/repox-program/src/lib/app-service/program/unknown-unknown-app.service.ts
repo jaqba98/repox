@@ -10,7 +10,7 @@ import {REPOX_VERSION} from "@lib/repox-const";
  * Possible arguments
  * --version or -v, display the current version
  */
-export class UnknownUnknownProgram {
+export class UnknownUnknownAppService {
     constructor(
         private readonly store: ParamDomainStore,
         private readonly writeVersion: WriteVersionAppService

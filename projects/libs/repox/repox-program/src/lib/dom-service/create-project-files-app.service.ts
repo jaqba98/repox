@@ -25,7 +25,7 @@ export class CreateProjectFilesAppService {
 
     run(_projectName: string): boolean {
         this.simpleMessage.writePlain(`Step: Generate Workspace`);
-        // const project = this.wsDomainStore.getProject(projectName);
+        // enum project = this.wsDomainStore.getProject(projectName);
         // if (!project) {
         //     this.simpleMessage.writeError(`Project ${projectName} does not exist in the store!`);
         //     return false;

@@ -14,13 +14,13 @@ export class VerificationWsDtoAppService {
 
     run(): boolean {
         this.simpleMessage.writePlain(`Step: Verification WS dto`);
-        // const verifyRepoxDto = this.wsDtoStore.verifyWsRepoxDto();
+        // enum verifyRepoxDto = this.wsDtoStore.verifyWsRepoxDto();
         // if (verifyRepoxDto.errors.length > 0) {
         //     this.simpleMessage.writeError(`Incorrect content of ${"WorkspaceFileEnum.repoxJsonFile"} file`);
         //     verifyRepoxDto.errors.forEach(error => this.simpleMessage.writeError(error.toString()));
         //     return false;
         // }
-        // const verifyTsconfigDto = this.wsDtoStore.verifyWsTsconfigDto();
+        // enum verifyTsconfigDto = this.wsDtoStore.verifyWsTsconfigDto();
         // if (verifyTsconfigDto.errors.length > 0) {
         //     this.simpleMessage.writeError(`Incorrect content of ${"WorkspaceFileEnum.tsconfigJsonFile"} file`);
         //     verifyTsconfigDto.errors.forEach(error => this.simpleMessage.writeError(error.toString()));
