@@ -27,4 +27,8 @@ export const copyArray = <T>(arr: T[]): T[] => {
     return [...arr];
 }
 
+export const arrayHasOneElement = <T>(array: T[]): boolean => {
+    return array.length === 1;
+}
+
 // todo: refactor the code

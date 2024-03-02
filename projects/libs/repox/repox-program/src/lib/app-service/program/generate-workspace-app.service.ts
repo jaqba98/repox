@@ -2,6 +2,7 @@ import {singleton} from "tsyringe";
 
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {REPOX_LOGO} from "@lib/repox-const";
+import {ParamDomainStore} from "@lib/param-domain";
 
 import {ProgramHeaderBuilder} from "../../dom-service/builder/program-header.builder";
 import {ProgramEnum} from "../../enum/launcher/program.enum";
@@ -15,17 +16,23 @@ export class GenerateWorkspaceAppService {
     constructor(
         private readonly programHeader: ProgramHeaderBuilder,
         private readonly simpleMessage: SimpleMessageAppService,
-        private readonly newline: NewlineAppService
+        private readonly newline: NewlineAppService,
+        private readonly store: ParamDomainStore
     ) {
     }
 
     run(): boolean {
+        // Display header
         const header = this.programHeader.build(
             ProgramEnum.generate,
             CommandEnum.workspace
         );
         this.simpleMessage.writeInfo(header, REPOX_LOGO);
         this.newline.writeNewline();
+        // Get arguments
+        const name = this.store.getCommandArg("name", "n");
+        if (!name) return false;
+        console.log(name);
         return true;
 
         // const workspaceNames = this.store.getCommandArg("name", "n");
