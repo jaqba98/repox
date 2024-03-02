@@ -1,13 +1,8 @@
 import {singleton} from "tsyringe";
 
-import {arrayHasOneElement, deepCopy} from "@lib/utils";
-import {SimpleMessageAppService} from "@lib/logger";
+import {deepCopy} from "@lib/utils";
 
 import {ParamDomain} from "../domain/param-domain";
-import {
-    aliasMustHaveSingleTextValue, argumentIsNotSpecified,
-    argumentMustHaveSingleTextValue
-} from "../../const/message/error-message.const";
 
 @singleton()
 /**
@@ -15,9 +10,6 @@ import {
  */
 export class ParamDomainStore {
     private paramDomain: ParamDomain | undefined;
-
-    constructor(private readonly simpleMessage: SimpleMessageAppService) {
-    }
 
     get(): ParamDomain {
         if (!this.paramDomain) {
@@ -31,28 +23,22 @@ export class ParamDomainStore {
     }
 
     hasProgramArg(programArg: string): boolean {
-        return !!this.get().programArgs[programArg];
+        return Boolean(this.get().programArgs[programArg]);
     }
 
     hasCommandArg(commandArg: string): boolean {
-        return !!this.get().commandArgs[commandArg];
+        return Boolean(this.get().commandArgs[commandArg]);
     }
 
-    getCommandArg(arg: string, alias: string, defaultValue?: string): string | undefined {
+    getCommandArgValues(arg: string, alias: string): string[] | undefined {
         if (this.hasCommandArg(arg)) {
             const {values} = this.get().commandArgs[arg];
-            if (arrayHasOneElement(values)) return values.at(0);
-            this.simpleMessage.writeError(argumentMustHaveSingleTextValue(arg));
-            return undefined;
+            return values;
         }
         if (this.hasCommandArg(alias)) {
             const {values} = this.get().commandArgs[alias];
-            if (arrayHasOneElement(values)) return values.at(0);
-            this.simpleMessage.writeError(aliasMustHaveSingleTextValue(alias));
-            return undefined;
+            return values;
         }
-        if (defaultValue) return defaultValue;
-        this.simpleMessage.writeError(argumentIsNotSpecified(arg));
         return undefined;
     }
 }

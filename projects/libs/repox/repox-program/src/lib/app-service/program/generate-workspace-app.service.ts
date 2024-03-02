@@ -1,21 +1,22 @@
 import {singleton} from "tsyringe";
 
-import {ParamDomainStore} from "@lib/param-domain";
-
 import {WriteHeaderStep} from "../../dom-service/step/write-header.step";
 import {ProgramEnum} from "../../enum/launcher/program.enum";
 import {CommandEnum} from "../../enum/launcher/command.enum";
+import {
+    GetCommandArgSingleValueStep
+} from "../../dom-service/step/get-command-arg-single-value.step";
 
 @singleton()
 /**
  * The service is responsible for generating workspace from scratch.
- * Arguments:
- * --name or -n | Required | Name of the workspace
+ * Argument | Alias | Required | Description
+ * --name   | -n    | true     | Name of the workspace
  */
 export class GenerateWorkspaceAppService {
     constructor(
         private readonly writeHeader: WriteHeaderStep,
-        private readonly store: ParamDomainStore
+        private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep
     ) {
     }
 
@@ -23,8 +24,7 @@ export class GenerateWorkspaceAppService {
         if (!this.writeHeader.run(ProgramEnum.generate, CommandEnum.workspace)) {
             return false;
         }
-        // Get arguments
-        const name = this.store.getCommandArg("name", "n");
+        const name = this.getCommandArgSingleValue.run("name", "n");
         if (!name) return false;
         console.log(name);
         return true;
