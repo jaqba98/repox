@@ -11,6 +11,8 @@ import {CommandEnum} from "../../enum/launcher/command.enum";
 @singleton()
 /**
  * The service is responsible for generating workspace from scratch.
+ * Arguments:
+ * --name or -n | Required | Name of the workspace
  */
 export class GenerateWorkspaceAppService {
     constructor(
