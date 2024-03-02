@@ -1,10 +1,8 @@
 import {singleton} from "tsyringe";
 
-import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {REPOX_LOGO} from "@lib/repox-const";
 import {ParamDomainStore} from "@lib/param-domain";
 
-import {ProgramHeaderBuilder} from "../../dom-service/builder/program-header.builder";
+import {WriteHeaderStepService} from "../../dom-service/step/write-header-step.service";
 import {ProgramEnum} from "../../enum/launcher/program.enum";
 import {CommandEnum} from "../../enum/launcher/command.enum";
 
@@ -16,21 +14,15 @@ import {CommandEnum} from "../../enum/launcher/command.enum";
  */
 export class GenerateWorkspaceAppService {
     constructor(
-        private readonly programHeader: ProgramHeaderBuilder,
-        private readonly simpleMessage: SimpleMessageAppService,
-        private readonly newline: NewlineAppService,
+        private readonly writeHeader: WriteHeaderStepService,
         private readonly store: ParamDomainStore
     ) {
     }
 
     run(): boolean {
-        // Display header
-        const header = this.programHeader.build(
-            ProgramEnum.generate,
-            CommandEnum.workspace
-        );
-        this.simpleMessage.writeInfo(header, REPOX_LOGO);
-        this.newline.writeNewline();
+        if (!this.writeHeader.run(ProgramEnum.generate, CommandEnum.workspace)) {
+            return false;
+        }
         // Get arguments
         const name = this.store.getCommandArg("name", "n");
         if (!name) return false;
