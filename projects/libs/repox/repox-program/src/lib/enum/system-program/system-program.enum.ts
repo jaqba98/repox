@@ -1,5 +1,5 @@
 /**
- * The enum contains all the system program names requires to work.
+ * The enum contains all the system program names required to work.
  */
 export enum SystemProgramEnum {
   node = "node",

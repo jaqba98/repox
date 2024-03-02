@@ -4,6 +4,6 @@
  */
 export enum SystemProgramUrlEnum {
   node = "https://nodejs.org/",
-  npm = "https://nodejs.org/",
+  npm = "https://www.npmjs.com/",
   git = "https://git-scm.com/"
 }

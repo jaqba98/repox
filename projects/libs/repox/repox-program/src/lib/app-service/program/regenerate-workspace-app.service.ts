@@ -6,8 +6,6 @@ import {ParamDomainStore} from "@lib/param-domain";
 import {
     GoToWorkspaceRootAppService,
     RunCommandAppService,
-    SystemProgramEnum,
-    SystemProgramExistAppService
 } from "@lib/program-step";
 
 @singleton()
@@ -20,7 +18,6 @@ export class RegenerateWorkspaceAppService {
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,
         private readonly store: ParamDomainStore,
-        private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly runCommand: RunCommandAppService,
         private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService
     ) {
@@ -36,7 +33,7 @@ export class RegenerateWorkspaceAppService {
             return false;
         }
         if (!this.goToWorkspaceRoot.run()) return false;
-        if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         if (!this.runCommand.run("npm i -g pnpm")) return false;
         if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
         if (!this.runCommand.run("git init")) return false;

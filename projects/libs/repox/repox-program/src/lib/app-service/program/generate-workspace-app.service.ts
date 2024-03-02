@@ -6,6 +6,8 @@ import {CommandEnum} from "../../enum/launcher/command.enum";
 import {
     GetCommandArgSingleValueStep
 } from "../../dom-service/step/get-command-arg-single-value.step";
+import {SystemProgramExistStep} from "../../dom-service/step/system-program-exist.step";
+import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
 
 @singleton()
 /**
@@ -16,7 +18,8 @@ import {
 export class GenerateWorkspaceAppService {
     constructor(
         private readonly writeHeader: WriteHeaderStep,
-        private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep
+        private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep,
+        private readonly systemProgramExist: SystemProgramExistStep
     ) {
     }
 
@@ -26,10 +29,11 @@ export class GenerateWorkspaceAppService {
         }
         const name = this.getCommandArgSingleValue.run("name", "n");
         if (!name) return false;
-        console.log(name);
+        if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false;
+        if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
+        if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         return true;
 
-        // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         // if (!this.runCommand.run("npm i -g pnpm")) return false;
         // if (!this.foldersNotExist.run(workspaceNames)) return false;
         // for (const workspaceName of workspaceNames) {

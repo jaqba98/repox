@@ -2,7 +2,7 @@ import {singleton} from "tsyringe";
 import {BuildProjectRepoxCommandModel, EmptyRepoxProgramModel} from "@lib/repox-domain";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {GoToWorkspaceRootAppService, SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
+import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import {LoadWsDomainAppService} from "../../dom-service/load-ws-domain-app.service";
 import {VerificationWsDtoAppService} from "../../dom-service/verification-ws-dto-app.service";
 import {LoadWorkspaceDtoAppService} from "../../dom-service/load-workspace-dto-app.service";
@@ -17,7 +17,7 @@ export class BuildProjectStepService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,
-        private readonly systemProgramExist: SystemProgramExistAppService,
+        // private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly loadWsDto: LoadWorkspaceDtoAppService,
         private readonly goToProjectRoot: GoToWorkspaceRootAppService,
         private readonly loadWsDomain: LoadWsDomainAppService,
@@ -30,9 +30,9 @@ export class BuildProjectStepService {
     runSteps(_programModel: EmptyRepoxProgramModel, commandModel: BuildProjectRepoxCommandModel): void {
         this.simpleMessage.writeInfo(`Build project`, REPOX_LOGO);
         this.newline.writeNewline();
-        if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
-        if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
-        if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
         if (!this.goToProjectRoot.run()) return;
         if (!this.loadWsDto.run()) return;
         if (!this.verificationWsDto.run()) return;

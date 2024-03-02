@@ -1,12 +1,16 @@
 import {singleton} from "tsyringe";
 
 import {ParamDomainStore} from "@lib/param-domain";
-import {SimpleMessageAppService} from "@lib/logger";
+import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
+
 import {
     argumentIsNotSpecified,
     argumentMustHaveSingleTextValue
 } from "../../const/message/error-message.enum";
 import {moreInfoLookThroughOurDocs} from "../../const/message/warning-message.const";
+import {
+    getCommandArgSingleValue
+} from "../../const/message/step-message.const";
 
 @singleton()
 /**
@@ -15,12 +19,14 @@ import {moreInfoLookThroughOurDocs} from "../../const/message/warning-message.co
  */
 export class GetCommandArgSingleValueStep {
     constructor(
+        private readonly stepMessage: StepMessageAppService,
         private readonly store: ParamDomainStore,
         private readonly simpleMessage: SimpleMessageAppService
     ) {
     }
 
     run(arg: string, alias: string, defaultValue?: string): string | undefined {
+        this.stepMessage.write(getCommandArgSingleValue(arg));
         const commandArgValues = this.store.getCommandArgValues(arg, alias);
         if (!commandArgValues) {
             if (defaultValue) return defaultValue;

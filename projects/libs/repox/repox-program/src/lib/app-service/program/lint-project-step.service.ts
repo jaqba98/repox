@@ -2,7 +2,7 @@ import {singleton} from "tsyringe";
 import type {EmptyRepoxProgramModel, LintProjectRepoxCommandModel} from "@lib/repox-domain";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {GoToWorkspaceRootAppService, SystemProgramEnum, SystemProgramExistAppService} from "@lib/program-step";
+import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import {LoadWorkspaceDtoAppService} from "../../dom-service/load-workspace-dto-app.service";
 import {VerificationWsDtoAppService} from "../../dom-service/verification-ws-dto-app.service";
 import {LoadWsDomainAppService} from "../../dom-service/load-ws-domain-app.service";
@@ -16,7 +16,7 @@ export class LintProjectStepService {
     constructor(
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,
-        private readonly systemProgramExist: SystemProgramExistAppService,
+        // private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly goToProjectRoot: GoToWorkspaceRootAppService,
         private readonly loadWsDto: LoadWorkspaceDtoAppService,
         private readonly verificationWsDto: VerificationWsDtoAppService,
@@ -31,9 +31,9 @@ export class LintProjectStepService {
     ): void {
         this.simpleMessage.writeInfo(`Lint project`, REPOX_LOGO);
         this.newline.writeNewline();
-        if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
-        if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
-        if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
         const {isFixMode} = commandModel;
         if (!this.goToProjectRoot.run()) return;
         if (!this.loadWsDto.run()) return;
