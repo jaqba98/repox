@@ -37,12 +37,6 @@ export class GenerateWorkspaceAppService {
         console.log(name);
         return true;
 
-        // const workspaceNames = this.store.getCommandArg("name", "n");
-        // if (!workspaceNames) {
-        //     this.simpleMessage.writeError("You did not specify a workspace name!");
-        //     this.simpleMessage.writeWarning("Specify workspace name by --name or -n and rerun the program.");
-        //     return false;
-        // }
         // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         // if (!this.runCommand.run("npm i -g pnpm")) return false;
         // if (!this.foldersNotExist.run(workspaceNames)) return false;
