@@ -2,7 +2,7 @@ import {singleton} from "tsyringe";
 
 import {ParamDomainStore} from "@lib/param-domain";
 
-import {WriteHeaderStepService} from "../../dom-service/step/write-header-step.service";
+import {WriteHeaderStep} from "../../dom-service/step/write-header.step";
 import {ProgramEnum} from "../../enum/launcher/program.enum";
 import {CommandEnum} from "../../enum/launcher/command.enum";
 
@@ -14,7 +14,7 @@ import {CommandEnum} from "../../enum/launcher/command.enum";
  */
 export class GenerateWorkspaceAppService {
     constructor(
-        private readonly writeHeader: WriteHeaderStepService,
+        private readonly writeHeader: WriteHeaderStep,
         private readonly store: ParamDomainStore
     ) {
     }
