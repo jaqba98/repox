@@ -30,27 +30,27 @@ export class RepoxLauncherAppService {
 
     launch(): boolean {
         const {program, command} = this.store.get();
-        if (program === ProgramEnum.unknown) return this.unknownCommand(command);
-        if (program === ProgramEnum.generate) return this.generateCommand(command);
-        if (program === ProgramEnum.regenerate) return this.regenerateCommand(command);
+        if (program === ProgramEnum.unknown) return this.unknownProgram(command);
+        if (program === ProgramEnum.generate) return this.generateProgram(command);
+        if (program === ProgramEnum.regenerate) return this.regenerateProgram(command);
         this.throwLauncherProgramError();
         return false;
     }
 
-    private unknownCommand(command: string): boolean {
+    private unknownProgram(command: string): boolean {
         if (command === CommandEnum.unknown) return this.unknownUnknown.runProgram();
         this.throwLauncherCommandError();
         return false;
     }
 
-    private generateCommand(command: string): boolean {
-        if (command === CommandEnum.workspace) return this.generateWorkspace.runProgram();
+    private generateProgram(command: string): boolean {
+        if (command === CommandEnum.workspace) return this.generateWorkspace.run();
         if (command === CommandEnum.project) return this.generateProject.runProgram();
         this.throwLauncherCommandError();
         return false;
     }
 
-    private regenerateCommand(command: string): boolean {
+    private regenerateProgram(command: string): boolean {
         if (command === CommandEnum.workspace) return this.regenerateWorkspace.runProgram();
         this.throwLauncherCommandError();
         return false;

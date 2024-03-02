@@ -16,7 +16,7 @@ import {
 
 @singleton()
 /**
- * The converter service is responsible for converting
+ * The builder service is responsible for converting
  * the logger mode to the color value.
  */
 export class ConvertModeToColorService {
