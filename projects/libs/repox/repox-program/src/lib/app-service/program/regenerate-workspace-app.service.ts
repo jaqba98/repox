@@ -29,7 +29,7 @@ export class RegenerateWorkspaceAppService {
     runProgram(): boolean {
         this.simpleMessage.writeInfo("Regenerate Workspace", REPOX_LOGO);
         this.newline.writeNewline();
-        const forceMode = this.store.getCommandArg("force", "f");
+        const forceMode = this.store.getCommandArgValues("force", "f");
         if (!forceMode) {
             this.simpleMessage.writeError("The program must be run in forced mode!");
             this.simpleMessage.writeWarning("Specify force mode by --force or -f and rerun the program.");

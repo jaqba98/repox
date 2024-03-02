@@ -38,14 +38,14 @@ export class GenerateProjectAppService {
         this.simpleMessage.writeInfo("Generate Program", REPOX_LOGO);
         this.newline.writeNewline();
         if (!this.goToWorkspaceRoot.run()) return false;
-        const projectNames = this.store.getCommandArg("name", "n");
+        const projectNames = this.store.getCommandArgValues("name", "n");
         if (!projectNames) {
             this.simpleMessage.writeError("You did not specify a project name!");
             this.simpleMessage.writeWarning("Specify project name by --name or -n and rerun the program.");
             return false;
         }
         const projectName = projectNames[0];
-        const projectPaths = this.store.getCommandArg("path", "p");
+        const projectPaths = this.store.getCommandArgValues("path", "p");
         if (!projectPaths) {
             this.simpleMessage.writeError("You did not specify a project path!");
             this.simpleMessage.writeWarning("Specify project path by --path or -p and rerun the program.");
