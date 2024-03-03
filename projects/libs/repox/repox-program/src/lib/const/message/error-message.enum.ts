@@ -16,3 +16,6 @@ export const argumentMustHaveSingleTextValue = (arg: string, alias: string): str
 
 export const systemProgramNotExist = (systemProgram: string): string =>
     `The ${systemProgram} program does not exist on the system!`;
+
+export const folderAlreadyExist = (folder: string): string =>
+    `The ${folder} folder already exists!`;

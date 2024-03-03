@@ -8,3 +8,5 @@ export const getCommandArgSingleValue = (arg: string): string =>
 
 export const systemProgramExist = (systemProgram: SystemProgramEnum) =>
     `System program exist: ${systemProgram}`;
+
+export const folderNotExist = (folderPath: string) => `Folder not exist: ${folderPath}`;

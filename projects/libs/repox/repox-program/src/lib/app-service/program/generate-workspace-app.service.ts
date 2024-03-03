@@ -8,6 +8,7 @@ import {
 } from "../../dom-service/step/get-command-arg-single-value.step";
 import {SystemProgramExistStep} from "../../dom-service/step/system-program-exist.step";
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
+import {FolderNotExistStep} from "../../dom-service/step/folder-not-exist.step";
 
 @singleton()
 /**
@@ -19,7 +20,8 @@ export class GenerateWorkspaceAppService {
     constructor(
         private readonly writeHeader: WriteHeaderStep,
         private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep,
-        private readonly systemProgramExist: SystemProgramExistStep
+        private readonly systemProgramExist: SystemProgramExistStep,
+        private readonly folderNotExist: FolderNotExistStep
     ) {
     }
 
@@ -32,10 +34,10 @@ export class GenerateWorkspaceAppService {
         if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+        if (!this.folderNotExist.run(name)) return false;
         return true;
 
         // if (!this.runCommand.run("npm i -g pnpm")) return false;
-        // if (!this.foldersNotExist.run(workspaceNames)) return false;
         // for (const workspaceName of workspaceNames) {
         //     if (!this.createFolder.run(workspaceName)) return false;
         //     if (!this.changePath.run(workspaceName)) return false;
