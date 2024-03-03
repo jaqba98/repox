@@ -1,6 +1,10 @@
 import {singleton} from "tsyringe";
 
-import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
+import {
+    NewlineAppService,
+    SimpleMessageAppService,
+    StepMessageAppService
+} from "@lib/logger";
 
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
 import {systemProgramExist} from "../../const/message/step-message.const";
@@ -22,7 +26,8 @@ export class SystemProgramExistStep {
     constructor(
         private readonly stepMessage: StepMessageAppService,
         private readonly systemProgramExist: SystemProgramExistService,
-        private readonly simpleMessage: SimpleMessageAppService
+        private readonly simpleMessage: SimpleMessageAppService,
+        private readonly newline: NewlineAppService
     ) {
     }
 
@@ -31,7 +36,9 @@ export class SystemProgramExistStep {
         if (this.systemProgramExist.checkExist(systemProgram)) return true;
         const url = SystemProgramUrlEnum[systemProgram];
         this.simpleMessage.writeError(systemProgramNotExist(systemProgram));
+        this.newline.writeNewline();
         this.simpleMessage.writeWarning(systemProgramNotExistResolveThisIssue(url));
+        this.newline.writeNewline();
         this.simpleMessage.writeWarning(moreInfoLookThroughOurDocs());
         return true;
     }
