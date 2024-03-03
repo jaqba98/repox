@@ -1,14 +1,14 @@
 /**
  * All step messages for that project.
  */
-import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
 
-export const getCommandArgSingleValueMsg = (arg: string): string =>
-    `Get command arg single value: --${arg}`;
+export const createFolderStepMsg = (folderName: string) => `Create folder: ${folderName}`;
 
-export const systemProgramExistMsg = (systemProgram: SystemProgramEnum) =>
+export const folderNotExistStepMsg = (folderName: string) =>
+    `Folder not exist: ${folderName}`;
+
+export const getSingleCommandArgValueStepMsg = (arg: string) =>
+    `Get a single command argument value: ${arg}`;
+
+export const systemProgramExistStepMsg = (systemProgram: string) =>
     `System program exist: ${systemProgram}`;
-
-export const folderNotExistMsg = (folderPath: string) => `Folder not exist: ${folderPath}`;
-
-export const createFolderMsg = (folderPath: string) => `Create folder: ${folderPath}`;

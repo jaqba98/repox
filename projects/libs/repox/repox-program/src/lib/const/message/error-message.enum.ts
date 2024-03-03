@@ -2,20 +2,17 @@
  * All error messages for that project.
  */
 
-export const programNotExistMsg = (program: string): string =>
-    `The ${program} program does not exist!`;
+export const failedToCreateFolderErrorMsg = (folderName: string) =>
+    `Failed to create a folder named ${folderName}!`;
 
-export const commandNotExistMsg = (program: string, command: string): string =>
-    `The ${command} command does not exist for the ${program} program!`;
+export const folderAlreadyExistErrorMsg = (folderName: string) =>
+    `The ${folderName} folder already exist!`;
 
-export const argumentIsNotSpecifiedMsg = (arg: string, alias: string): string =>
-    `The --${arg} argument (or -${alias} alias) is not specified, but is required!`;
+export const argumentIsNotSpecifiedErrorMsg = (arg: string) =>
+    `The ${arg} argument is not specified!`;
 
-export const argumentMustHaveSingleTextValueMsg = (arg: string, alias: string): string =>
-    `The --${arg} argument (or -${alias} alias) must have a single text value!`;
+export const argumentIsNotHaveSingleValueErrorMsg = (arg: string) =>
+    `The ${arg} argument does not have a single value!`;
 
-export const systemProgramNotExistMsg = (systemProgram: string): string =>
-    `The ${systemProgram} program does not exist on the system!`;
-
-export const folderAlreadyExistMsg = (folder: string): string =>
-    `The ${folder} folder already exists!`;
+export const systemProgramNotExistInSystemErrorMsg = (systemProgram: string) =>
+    `The ${systemProgram} program does not exist in the system!`;

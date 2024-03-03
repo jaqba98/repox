@@ -3,9 +3,14 @@ import {singleton} from "tsyringe";
 import {ParamDomainStore} from "@lib/param-domain";
 import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 
-import {argumentIsNotSpecifiedMsg} from "../../const/message/error-message.enum";
-import {moreInfoLookThroughOurDocsMsg} from "../../const/message/warning-message.const";
-import {getCommandArgSingleValueMsg} from "../../const/message/step-message.const";
+import {getSingleCommandArgValueStepMsg} from "../../const/message/step-message.const";
+import {
+    argumentIsNotHaveSingleValueErrorMsg,
+    argumentIsNotSpecifiedErrorMsg
+} from "../../const/message/error-message.enum";
+import {
+    specifyArgumentCorrectlyWarningMsg
+} from "../../const/message/warning-message.const";
 
 @singleton()
 /**
@@ -21,24 +26,24 @@ export class GetCommandArgSingleValueStep {
     }
 
     run(arg: string, alias: string, defaultValue?: string): string | undefined {
-        this.stepMessage.write(getCommandArgSingleValueMsg(arg));
+        this.stepMessage.write(getSingleCommandArgValueStepMsg(arg));
         const commandArgValues = this.store.getCommandArgValues(arg, alias);
         if (!commandArgValues) {
             if (defaultValue) return defaultValue;
             this.complexMessage.writeError([
-                argumentIsNotSpecifiedMsg(arg, alias)
+                argumentIsNotSpecifiedErrorMsg(arg)
             ]);
             this.complexMessage.writeWarning([
-                moreInfoLookThroughOurDocsMsg()
+                specifyArgumentCorrectlyWarningMsg(arg)
             ]);
             return undefined;
         }
         if (commandArgValues.length !== 1) {
             this.complexMessage.writeError([
-                argumentIsNotSpecifiedMsg(arg, alias)
+                argumentIsNotHaveSingleValueErrorMsg(arg)
             ]);
             this.complexMessage.writeWarning([
-                moreInfoLookThroughOurDocsMsg()
+                specifyArgumentCorrectlyWarningMsg(arg)
             ]);
             return undefined;
         }

@@ -2,14 +2,17 @@
  * All warning messages for that project.
  */
 
-export const moreInfoLookThroughOurDocsMsg = (): string =>
-    "For more info, take a deeper look through our documentation: https://www.repox.dev/#/docs";
+export const specifiedFolderThatExistOnDiskWarningMsg = (): string =>
+    "You specified the name of a folder that already exists on disk.";
 
-export const systemProgramNotExistResolveThisIssueMsg = (url: string): string =>
-    `To resolve this issue, follow these steps:
-1) Go to ${url} website
-2) Download and install the program on your system`;
+export const specifyDifferentFolderNameWarningMsg = (): string =>
+    "Specify a different folder name and run the program again.";
 
+export const specifyArgumentCorrectlyWarningMsg = (arg: string): string =>
+    `Specify the --${arg} argument correctly and run the program again.`;
 
-export const specifyDifferentMsg = (kind: string): string =>
-    `Specify a different ${kind} and restart the program.`;
+export const installAndRunAgainWarningMsg = (systemProgram: string): string =>
+    `Install ${systemProgram} and run the command again.`;
+
+export const linkToProgramWarningMsg = (systemProgram: string, url: string): string =>
+    `Lint to ${systemProgram}: ${url}`;

@@ -1,25 +1,19 @@
 import {singleton} from "tsyringe";
 
-import {
-    ComplexMessageAppService,
-    NewlineAppService,
-    SimpleMessageAppService,
-    StepMessageAppService
-} from "@lib/logger";
+import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
-import {systemProgramExistMsg} from "../../const/message/step-message.const";
 import {
     SystemProgramExistService
 } from "../../infrastructure/system-program-exist.service";
 import {SystemProgramUrlEnum} from "../../enum/system-program/system-program-url.enum";
+import {systemProgramExistStepMsg} from "../../const/message/step-message.const";
 import {
-    argumentIsNotSpecifiedMsg,
-    systemProgramNotExistMsg
+    systemProgramNotExistInSystemErrorMsg
 } from "../../const/message/error-message.enum";
 import {
-    moreInfoLookThroughOurDocsMsg,
-    systemProgramNotExistResolveThisIssueMsg
+    installAndRunAgainWarningMsg,
+    linkToProgramWarningMsg
 } from "../../const/message/warning-message.const";
 
 @singleton()
@@ -35,15 +29,15 @@ export class SystemProgramExistStep {
     }
 
     run(systemProgram: SystemProgramEnum): boolean {
-        this.stepMessage.write(systemProgramExistMsg(systemProgram));
+        this.stepMessage.write(systemProgramExistStepMsg(systemProgram));
         if (this.systemProgramExist.checkExist(systemProgram)) return true;
         const url = SystemProgramUrlEnum[systemProgram];
         this.complexMessage.writeError([
-            systemProgramNotExistMsg(systemProgram)
+            systemProgramNotExistInSystemErrorMsg(systemProgram)
         ]);
         this.complexMessage.writeWarning([
-            systemProgramNotExistResolveThisIssueMsg(url),
-            moreInfoLookThroughOurDocsMsg()
+            installAndRunAgainWarningMsg(systemProgram),
+            linkToProgramWarningMsg(systemProgram, url)
         ]);
         return true;
     }
