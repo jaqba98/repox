@@ -15,4 +15,4 @@ export const installAndRunAgainWarningMsg = (systemProgram: string): string =>
     `Install ${systemProgram} and run the command again.`;
 
 export const linkToProgramWarningMsg = (systemProgram: string, url: string): string =>
-    `Lint to ${systemProgram}: ${url}`;
+    `Link to ${systemProgram}: ${url}`;
