@@ -2,6 +2,12 @@
  * All error messages for that project.
  */
 
+export const programNotExistErrorMsg = (program: string) =>
+    `The ${program} program does not exist!`;
+
+export const commandNotExistErrorMsg = (program: string, command: string) =>
+    `The ${command} command does not exist for ${program} program!`;
+
 export const failedToCreateFolderErrorMsg = (folderName: string) =>
     `Failed to create a folder named ${folderName}!`;
 

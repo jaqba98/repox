@@ -1,16 +1,18 @@
 import {singleton} from "tsyringe";
 
 import {ParamDomainStore} from "@lib/param-domain";
-import {SimpleMessageAppService} from "@lib/logger";
+import {ComplexMessageAppService} from "@lib/logger";
 
 import {UnknownUnknownAppService} from "../program/unknown-unknown-app.service";
 import {GenerateWorkspaceAppService} from "../program/generate-workspace-app.service";
 import {RegenerateWorkspaceAppService} from "../program/regenerate-workspace-app.service";
 import {GenerateProjectAppService} from "../program/generate-project-app.service";
-import {commandNotExistMsg, programNotExistMsg} from "../../const/message/error-message.enum";
+import {
+    commandNotExistErrorMsg,
+    programNotExistErrorMsg
+} from "../../const/message/error-message.enum";
 import {ProgramEnum} from "../../enum/launcher/program.enum";
 import {CommandEnum} from "../../enum/launcher/command.enum";
-import {moreInfoLookThroughOurDocsMsg} from "../../const/message/warning-message.const";
 
 @singleton()
 /**
@@ -24,7 +26,7 @@ export class RepoxLauncherAppService {
         private readonly generateWorkspace: GenerateWorkspaceAppService,
         private readonly regenerateWorkspace: RegenerateWorkspaceAppService,
         private readonly generateProject: GenerateProjectAppService,
-        private readonly simpleMessage: SimpleMessageAppService
+        private readonly complexMessage: ComplexMessageAppService
     ) {
     }
 
@@ -57,12 +59,14 @@ export class RepoxLauncherAppService {
     }
 
     private throwLauncherProgramError(program: string): void {
-        this.simpleMessage.writeError(programNotExistMsg(program));
-        this.simpleMessage.writeWarning(moreInfoLookThroughOurDocsMsg());
+        this.complexMessage.writeError([
+            programNotExistErrorMsg(program)
+        ]);
     }
 
     private throwLauncherCommandError(program: string, command: string): void {
-        this.simpleMessage.writeError(commandNotExistMsg(program, command));
-        this.simpleMessage.writeWarning(moreInfoLookThroughOurDocsMsg());
+        this.complexMessage.writeError([
+            commandNotExistErrorMsg(program, command)
+        ]);
     }
 }
