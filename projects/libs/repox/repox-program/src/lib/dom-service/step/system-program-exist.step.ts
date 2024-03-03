@@ -7,15 +7,15 @@ import {
 } from "@lib/logger";
 
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
-import {systemProgramExist} from "../../const/message/step-message.const";
+import {systemProgramExistMsg} from "../../const/message/step-message.const";
 import {
     SystemProgramExistService
 } from "../../infrastructure/system-program-exist.service";
 import {SystemProgramUrlEnum} from "../../enum/system-program/system-program-url.enum";
-import {systemProgramNotExist} from "../../const/message/error-message.enum";
+import {systemProgramNotExistMsg} from "../../const/message/error-message.enum";
 import {
-    moreInfoLookThroughOurDocs,
-    systemProgramNotExistResolveThisIssue
+    moreInfoLookThroughOurDocsMsg,
+    systemProgramNotExistResolveThisIssueMsg
 } from "../../const/message/warning-message.const";
 
 @singleton()
@@ -32,14 +32,14 @@ export class SystemProgramExistStep {
     }
 
     run(systemProgram: SystemProgramEnum): boolean {
-        this.stepMessage.write(systemProgramExist(systemProgram));
+        this.stepMessage.write(systemProgramExistMsg(systemProgram));
         if (this.systemProgramExist.checkExist(systemProgram)) return true;
         const url = SystemProgramUrlEnum[systemProgram];
-        this.simpleMessage.writeError(systemProgramNotExist(systemProgram));
+        this.simpleMessage.writeError(systemProgramNotExistMsg(systemProgram));
         this.newline.writeNewline();
-        this.simpleMessage.writeWarning(systemProgramNotExistResolveThisIssue(url));
+        this.simpleMessage.writeWarning(systemProgramNotExistResolveThisIssueMsg(url));
         this.newline.writeNewline();
-        this.simpleMessage.writeWarning(moreInfoLookThroughOurDocs());
+        this.simpleMessage.writeWarning(moreInfoLookThroughOurDocsMsg());
         return true;
     }
 }

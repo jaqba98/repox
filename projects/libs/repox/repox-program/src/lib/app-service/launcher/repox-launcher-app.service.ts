@@ -7,10 +7,10 @@ import {UnknownUnknownAppService} from "../program/unknown-unknown-app.service";
 import {GenerateWorkspaceAppService} from "../program/generate-workspace-app.service";
 import {RegenerateWorkspaceAppService} from "../program/regenerate-workspace-app.service";
 import {GenerateProjectAppService} from "../program/generate-project-app.service";
-import {commandNotExist, programNotExist} from "../../const/message/error-message.enum";
+import {commandNotExistMsg, programNotExistMsg} from "../../const/message/error-message.enum";
 import {ProgramEnum} from "../../enum/launcher/program.enum";
 import {CommandEnum} from "../../enum/launcher/command.enum";
-import {moreInfoLookThroughOurDocs} from "../../const/message/warning-message.const";
+import {moreInfoLookThroughOurDocsMsg} from "../../const/message/warning-message.const";
 
 @singleton()
 /**
@@ -57,12 +57,12 @@ export class RepoxLauncherAppService {
     }
 
     private throwLauncherProgramError(program: string): void {
-        this.simpleMessage.writeError(programNotExist(program));
-        this.simpleMessage.writeWarning(moreInfoLookThroughOurDocs());
+        this.simpleMessage.writeError(programNotExistMsg(program));
+        this.simpleMessage.writeWarning(moreInfoLookThroughOurDocsMsg());
     }
 
     private throwLauncherCommandError(program: string, command: string): void {
-        this.simpleMessage.writeError(commandNotExist(program, command));
-        this.simpleMessage.writeWarning(moreInfoLookThroughOurDocs());
+        this.simpleMessage.writeError(commandNotExistMsg(program, command));
+        this.simpleMessage.writeWarning(moreInfoLookThroughOurDocsMsg());
     }
 }

@@ -1,4 +1,4 @@
-import {singleton} from "tsyringe";
+import {registry, singleton} from "tsyringe";
 
 import {WriteHeaderStep} from "../../dom-service/step/write-header.step";
 import {ProgramEnum} from "../../enum/launcher/program.enum";
@@ -9,6 +9,7 @@ import {
 import {SystemProgramExistStep} from "../../dom-service/step/system-program-exist.step";
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
 import {FolderNotExistStep} from "../../dom-service/step/folder-not-exist.step";
+import {CreateFolderStep} from "../../dom-service/step/create-folder.step";
 
 @singleton()
 /**
@@ -21,7 +22,8 @@ export class GenerateWorkspaceAppService {
         private readonly writeHeader: WriteHeaderStep,
         private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep,
         private readonly systemProgramExist: SystemProgramExistStep,
-        private readonly folderNotExist: FolderNotExistStep
+        private readonly folderNotExist: FolderNotExistStep,
+        private readonly createFolder: CreateFolderStep
     ) {
     }
 
@@ -35,6 +37,7 @@ export class GenerateWorkspaceAppService {
         if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         if (!this.folderNotExist.run(name)) return false;
+        if (!this.createFolder.run(name)) return false;
         return true;
 
         // if (!this.runCommand.run("npm i -g pnpm")) return false;

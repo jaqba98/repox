@@ -3,10 +3,12 @@
  */
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
 
-export const getCommandArgSingleValue = (arg: string): string =>
+export const getCommandArgSingleValueMsg = (arg: string): string =>
     `Get command arg single value: --${arg}`;
 
-export const systemProgramExist = (systemProgram: SystemProgramEnum) =>
+export const systemProgramExistMsg = (systemProgram: SystemProgramEnum) =>
     `System program exist: ${systemProgram}`;
 
-export const folderNotExist = (folderPath: string) => `Folder not exist: ${folderPath}`;
+export const folderNotExistMsg = (folderPath: string) => `Folder not exist: ${folderPath}`;
+
+export const createFolderMsg = (folderPath: string) => `Create folder: ${folderPath}`;

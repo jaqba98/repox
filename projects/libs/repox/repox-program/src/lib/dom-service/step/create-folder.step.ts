@@ -1,17 +1,17 @@
 import {singleton} from "tsyringe";
 
 import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
-import {pathNotExist} from "@lib/utils";
+import {createFolder, pathNotExist} from "@lib/utils";
 
-import {folderNotExistMsg} from "../../const/message/step-message.const";
+import {createFolderMsg} from "../../const/message/step-message.const";
 import {folderAlreadyExistMsg} from "../../const/message/error-message.enum";
 import {specifyDifferentMsg} from "../../const/message/warning-message.const";
 
 @singleton()
 /**
- * The step service is responsible for checking whether folder not exist.
+ * The step service is responsible for creating a folder.
  */
-export class FolderNotExistStep {
+export class CreateFolderStep {
     constructor(
         private readonly stepMessage: StepMessageAppService,
         private readonly simpleMessage: SimpleMessageAppService
@@ -19,8 +19,11 @@ export class FolderNotExistStep {
     }
 
     run(folderPath: string): boolean {
-        this.stepMessage.write(folderNotExistMsg(folderPath));
-        if (pathNotExist(folderPath)) return true;
+        this.stepMessage.write(createFolderMsg(folderPath));
+        if (pathNotExist(folderPath)) {
+            createFolder(folderPath);
+            return true;
+        }
         this.simpleMessage.writeError(folderAlreadyExistMsg(folderPath));
         this.simpleMessage.writeWarning(specifyDifferentMsg("folder name"));
         return false;
