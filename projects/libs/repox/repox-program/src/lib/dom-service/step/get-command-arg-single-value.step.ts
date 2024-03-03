@@ -1,16 +1,11 @@
 import {singleton} from "tsyringe";
 
 import {ParamDomainStore} from "@lib/param-domain";
-import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
+import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 
-import {
-    argumentIsNotSpecifiedMsg,
-    argumentMustHaveSingleTextValueMsg
-} from "../../const/message/error-message.enum";
+import {argumentIsNotSpecifiedMsg} from "../../const/message/error-message.enum";
 import {moreInfoLookThroughOurDocsMsg} from "../../const/message/warning-message.const";
-import {
-    getCommandArgSingleValueMsg
-} from "../../const/message/step-message.const";
+import {getCommandArgSingleValueMsg} from "../../const/message/step-message.const";
 
 @singleton()
 /**
@@ -21,7 +16,7 @@ export class GetCommandArgSingleValueStep {
     constructor(
         private readonly stepMessage: StepMessageAppService,
         private readonly store: ParamDomainStore,
-        private readonly simpleMessage: SimpleMessageAppService
+        private readonly complexMessage: ComplexMessageAppService
     ) {
     }
 
@@ -30,13 +25,21 @@ export class GetCommandArgSingleValueStep {
         const commandArgValues = this.store.getCommandArgValues(arg, alias);
         if (!commandArgValues) {
             if (defaultValue) return defaultValue;
-            this.simpleMessage.writeError(argumentIsNotSpecifiedMsg(arg, alias));
-            this.simpleMessage.writeWarning(moreInfoLookThroughOurDocsMsg());
+            this.complexMessage.writeError([
+                argumentIsNotSpecifiedMsg(arg, alias)
+            ]);
+            this.complexMessage.writeWarning([
+                moreInfoLookThroughOurDocsMsg()
+            ]);
             return undefined;
         }
         if (commandArgValues.length !== 1) {
-            this.simpleMessage.writeError(argumentMustHaveSingleTextValueMsg(arg, alias));
-            this.simpleMessage.writeWarning(moreInfoLookThroughOurDocsMsg());
+            this.complexMessage.writeError([
+                argumentIsNotSpecifiedMsg(arg, alias)
+            ]);
+            this.complexMessage.writeWarning([
+                moreInfoLookThroughOurDocsMsg()
+            ]);
             return undefined;
         }
         return commandArgValues[0];

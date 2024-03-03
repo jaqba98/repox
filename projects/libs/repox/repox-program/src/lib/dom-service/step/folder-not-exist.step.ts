@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 
-import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
+import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 import {pathNotExist} from "@lib/utils";
 
 import {folderNotExistMsg} from "../../const/message/step-message.const";
@@ -14,15 +14,19 @@ import {specifyDifferentMsg} from "../../const/message/warning-message.const";
 export class FolderNotExistStep {
     constructor(
         private readonly stepMessage: StepMessageAppService,
-        private readonly simpleMessage: SimpleMessageAppService
+        private readonly complexMessage: ComplexMessageAppService
     ) {
     }
 
     run(folderPath: string): boolean {
         this.stepMessage.write(folderNotExistMsg(folderPath));
         if (pathNotExist(folderPath)) return true;
-        this.simpleMessage.writeError(folderAlreadyExistMsg(folderPath));
-        this.simpleMessage.writeWarning(specifyDifferentMsg("folder name"));
+        this.complexMessage.writeError([
+            folderAlreadyExistMsg(folderPath)
+        ]);
+        this.complexMessage.writeWarning([
+            specifyDifferentMsg("folder name")
+        ]);
         return false;
     }
 }

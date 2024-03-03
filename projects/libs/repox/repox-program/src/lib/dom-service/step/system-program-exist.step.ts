@@ -1,6 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {
+    ComplexMessageAppService,
     NewlineAppService,
     SimpleMessageAppService,
     StepMessageAppService
@@ -12,7 +13,10 @@ import {
     SystemProgramExistService
 } from "../../infrastructure/system-program-exist.service";
 import {SystemProgramUrlEnum} from "../../enum/system-program/system-program-url.enum";
-import {systemProgramNotExistMsg} from "../../const/message/error-message.enum";
+import {
+    argumentIsNotSpecifiedMsg,
+    systemProgramNotExistMsg
+} from "../../const/message/error-message.enum";
 import {
     moreInfoLookThroughOurDocsMsg,
     systemProgramNotExistResolveThisIssueMsg
@@ -26,8 +30,7 @@ export class SystemProgramExistStep {
     constructor(
         private readonly stepMessage: StepMessageAppService,
         private readonly systemProgramExist: SystemProgramExistService,
-        private readonly simpleMessage: SimpleMessageAppService,
-        private readonly newline: NewlineAppService
+        private readonly complexMessage: ComplexMessageAppService
     ) {
     }
 
@@ -35,11 +38,13 @@ export class SystemProgramExistStep {
         this.stepMessage.write(systemProgramExistMsg(systemProgram));
         if (this.systemProgramExist.checkExist(systemProgram)) return true;
         const url = SystemProgramUrlEnum[systemProgram];
-        this.simpleMessage.writeError(systemProgramNotExistMsg(systemProgram));
-        this.newline.writeNewline();
-        this.simpleMessage.writeWarning(systemProgramNotExistResolveThisIssueMsg(url));
-        this.newline.writeNewline();
-        this.simpleMessage.writeWarning(moreInfoLookThroughOurDocsMsg());
+        this.complexMessage.writeError([
+            systemProgramNotExistMsg(systemProgram)
+        ]);
+        this.complexMessage.writeWarning([
+            systemProgramNotExistResolveThisIssueMsg(url),
+            moreInfoLookThroughOurDocsMsg()
+        ]);
         return true;
     }
 }
