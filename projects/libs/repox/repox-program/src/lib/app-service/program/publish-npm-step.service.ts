@@ -24,7 +24,7 @@ export class PublishNpmStepService {
         private readonly projectExist: ProjectExistAppService,
         // private readonly wsDomainStore: WsDomainStoreService,
         // private readonly folderExist: FolderExistAppService,
-        // private readonly changePath: ChangePathAppService,
+        // private readonly changePath: ChangePathStep,
         // private readonly npmPublish: NpmPublishAppService
     ) {
     }

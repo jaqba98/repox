@@ -2,16 +2,18 @@ import {singleton} from "tsyringe";
 
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {
-    ChangePathAppService,
-    CreateFolderStep,
-    GoToWorkspaceRootAppService
-} from "@lib/program-step";
+import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import {ParamDomainStore} from "@lib/param-domain";
 
-import {LoadWorkspaceDtoAppService} from "../../dom-service/load-workspace-dto-app.service";
-import {SaveWorkspaceDtoAppService} from "../../dom-service/save-workspace-dto-app.service";
-import {AddProjectToDtoAppService} from "../../dom-service/add-project-to-dto-app.service";
+import {
+    LoadWorkspaceDtoAppService
+} from "../../dom-service/load-workspace-dto-app.service";
+import {
+    SaveWorkspaceDtoAppService
+} from "../../dom-service/save-workspace-dto-app.service";
+import {
+    AddProjectToDtoAppService
+} from "../../dom-service/add-project-to-dto-app.service";
 import {getCurrentPath} from "@lib/utils";
 import {RunGenerateProjectService} from "@lib/repox-workspace";
 
@@ -27,8 +29,8 @@ export class GenerateProjectAppService {
         private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService,
         private readonly loadWorkspaceDto: LoadWorkspaceDtoAppService,
         private readonly addProjectToDto: AddProjectToDtoAppService,
-        private readonly changePath: ChangePathAppService,
-        private readonly createFolder: CreateFolderStep,
+        // private readonly changePath: ChangePathAppService,
+        // private readonly createFolder: CreateFolderStep,
         private readonly saveWorkspaceDto: SaveWorkspaceDtoAppService,
         private readonly runGenerateProject: RunGenerateProjectService
     ) {
@@ -56,10 +58,10 @@ export class GenerateProjectAppService {
         if (!this.loadWorkspaceDto.run()) return false;
         if (!this.addProjectToDto.run(projectName, projectPath)) return false;
         if (!this.saveWorkspaceDto.run()) return false;
-        if (!this.createFolder.run(projectPath)) return false;
-        if (!this.changePath.run(projectPath)) return false;
+        // if (!this.createFolder.run(projectPath)) return false;
+        // if (!this.changePath.run(projectPath)) return false;
         if (!this.runGenerateProject.run()) return false;
-        if (!this.changePath.run(currentPath)) return false;
+        // if (!this.changePath.run(currentPath)) return false;
         this.newline.writeNewline();
         this.simpleMessage.writeSuccess("Command executed correctly!");
         return true;

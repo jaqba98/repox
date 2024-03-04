@@ -22,3 +22,6 @@ export const argumentIsNotHaveSingleValueErrorMsg = (arg: string) =>
 
 export const systemProgramNotExistInSystemErrorMsg = (systemProgram: string) =>
     `The ${systemProgram} program does not exist in the system!`;
+
+export const failedToChangePathErrorMsg = (path: string) =>
+    `Failed to change the path: ${path}!`;

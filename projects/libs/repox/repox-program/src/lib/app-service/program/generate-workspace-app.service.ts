@@ -10,6 +10,7 @@ import {SystemProgramExistStep} from "../../dom-service/step/system-program-exis
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
 import {FolderNotExistStep} from "../../dom-service/step/folder-not-exist.step";
 import {CreateFolderStep} from "../../dom-service/step/create-folder.step";
+import {ChangePathStep} from "../../dom-service/step/change-path.step";
 
 @singleton()
 /**
@@ -23,7 +24,8 @@ export class GenerateWorkspaceAppService {
         private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep,
         private readonly systemProgramExist: SystemProgramExistStep,
         private readonly folderNotExist: FolderNotExistStep,
-        private readonly createFolder: CreateFolderStep
+        private readonly createFolder: CreateFolderStep,
+        private readonly changePath: ChangePathStep
     ) {
     }
 
@@ -38,12 +40,11 @@ export class GenerateWorkspaceAppService {
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         if (!this.folderNotExist.run(name)) return false;
         if (!this.createFolder.run(name)) return false;
+        if (!this.changePath.run(name)) return false;
         return true;
 
         // if (!this.runCommand.run("npm i -g pnpm")) return false;
         // for (const workspaceName of workspaceNames) {
-        //     if (!this.createFolder.run(workspaceName)) return false;
-        //     if (!this.changePath.run(workspaceName)) return false;
         //     // if (!this.generateWorkspace.runProgram()) return false;
         //     if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
         //     if (!this.runCommand.run("git init")) return false;

@@ -16,3 +16,6 @@ export const installAndRunAgainWarningMsg = (systemProgram: string): string =>
 
 export const linkToProgramWarningMsg = (systemProgram: string, url: string): string =>
     `Link to ${systemProgram}: ${url}`;
+
+export const pathNotExistWarningMsg = (path: string): string =>
+    `The ${path} path does not exist`;

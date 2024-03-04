@@ -12,3 +12,5 @@ export const getSingleCommandArgValueStepMsg = (arg: string) =>
 
 export const systemProgramExistStepMsg = (systemProgram: string) =>
     `System program exist: ${systemProgram}`;
+
+export const changePathStepMsg = (path: string) => `Change path: ${path}`;
