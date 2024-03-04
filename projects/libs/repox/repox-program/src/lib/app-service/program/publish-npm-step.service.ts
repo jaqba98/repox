@@ -3,7 +3,7 @@ import {type EmptyRepoxProgramModel, type PublishNpmRepoxCommandModel} from "@li
 import {REPOX_LOGO} from "@lib/repox-const";
 import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {LoadWorkspaceDtoAppService} from "../../dom-service/load-workspace-dto-app.service";
+import {BuildWorkspaceDtoStep} from "../../dom-service/step/build-workspace-dto.step";
 import {VerificationWsDtoAppService} from "../../dom-service/verification-ws-dto-app.service";
 import {LoadWsDomainAppService} from "../../dom-service/load-ws-domain-app.service";
 import {ProjectExistAppService} from "../../dom-service/project-exist-app.service";
@@ -18,7 +18,7 @@ export class PublishNpmStepService {
         private readonly newline: NewlineAppService,
         // private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly goToProjectRoot: GoToWorkspaceRootAppService,
-        private readonly loadWsDto: LoadWorkspaceDtoAppService,
+        private readonly loadWsDto: BuildWorkspaceDtoStep,
         private readonly verificationWsDto: VerificationWsDtoAppService,
         private readonly loadWsDomain: LoadWsDomainAppService,
         private readonly projectExist: ProjectExistAppService,

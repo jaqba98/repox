@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {StepMessageAppService} from "@lib/logger";
-import {WorkspaceDtoStoreService} from "@lib/repox-workspace";
+import {WorkspaceDtoStore} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -10,7 +10,7 @@ import {WorkspaceDtoStoreService} from "@lib/repox-workspace";
 export class SaveWorkspaceDtoAppService {
     constructor(
         private readonly stepMessage: StepMessageAppService,
-        private readonly workspaceDtoStore: WorkspaceDtoStoreService
+        private readonly workspaceDtoStore: WorkspaceDtoStore
     ) {
     }
 

@@ -6,8 +6,8 @@ import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import {ParamDomainStore} from "@lib/param-domain";
 
 import {
-    LoadWorkspaceDtoAppService
-} from "../../dom-service/load-workspace-dto-app.service";
+    BuildWorkspaceDtoStep
+} from "../../dom-service/step/build-workspace-dto.step";
 import {
     SaveWorkspaceDtoAppService
 } from "../../dom-service/save-workspace-dto-app.service";
@@ -27,7 +27,7 @@ export class GenerateProjectAppService {
         private readonly newline: NewlineAppService,
         private readonly store: ParamDomainStore,
         private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService,
-        private readonly loadWorkspaceDto: LoadWorkspaceDtoAppService,
+        private readonly loadWorkspaceDto: BuildWorkspaceDtoStep,
         private readonly addProjectToDto: AddProjectToDtoAppService,
         // private readonly changePath: ChangePathAppService,
         // private readonly createFolder: CreateFolderStep,

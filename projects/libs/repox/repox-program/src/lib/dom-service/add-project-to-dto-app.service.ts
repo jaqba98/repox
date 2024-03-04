@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {StepMessageAppService} from "@lib/logger";
-import {WorkspaceDtoStoreService} from "@lib/repox-workspace";
+import {WorkspaceDtoStore} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -11,13 +11,13 @@ import {WorkspaceDtoStoreService} from "@lib/repox-workspace";
 export class AddProjectToDtoAppService {
     constructor(
         private readonly stepMessage: StepMessageAppService,
-        private readonly workspaceDtoStore: WorkspaceDtoStoreService
+        private readonly workspaceDtoStore: WorkspaceDtoStore
     ) {
     }
 
     run(projectName: string, projectPath: string): boolean {
         this.stepMessage.write("Add Project to DTO");
-        this.workspaceDtoStore.addProjectToRepoxJson(projectName, projectPath);
+        // this.workspaceDtoStore.addProjectToRepoxJson(projectName, projectPath);
         return true;
     }
 }

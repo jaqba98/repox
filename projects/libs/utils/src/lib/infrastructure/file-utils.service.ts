@@ -86,6 +86,13 @@ export const writeToFile = (path: string, content: any): void => {
 
 export const removeFile = (path: string): void => unlinkSync(path);
 
+export const readTextFile = (filePath: string): string => {
+    if (!pathExist(filePath)) {
+        return "";
+    }
+    return readFileSync(filePath, "utf-8");
+}
+
 export const readJsonFile = <T>(filePath: string): T => {
     if (!pathExist(filePath)) {
         return <T>{};

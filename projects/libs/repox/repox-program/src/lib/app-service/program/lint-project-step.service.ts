@@ -3,7 +3,7 @@ import type {EmptyRepoxProgramModel, LintProjectRepoxCommandModel} from "@lib/re
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {GoToWorkspaceRootAppService} from "@lib/program-step";
-import {LoadWorkspaceDtoAppService} from "../../dom-service/load-workspace-dto-app.service";
+import {BuildWorkspaceDtoStep} from "../../dom-service/step/build-workspace-dto.step";
 import {VerificationWsDtoAppService} from "../../dom-service/verification-ws-dto-app.service";
 import {LoadWsDomainAppService} from "../../dom-service/load-ws-domain-app.service";
 import {LintProjectsAppService} from "../../dom-service/lint-projects-app.service";
@@ -18,7 +18,7 @@ export class LintProjectStepService {
         private readonly newline: NewlineAppService,
         // private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly goToProjectRoot: GoToWorkspaceRootAppService,
-        private readonly loadWsDto: LoadWorkspaceDtoAppService,
+        private readonly loadWsDto: BuildWorkspaceDtoStep,
         private readonly verificationWsDto: VerificationWsDtoAppService,
         private readonly loadWsDomain: LoadWsDomainAppService,
         private readonly lintProjects: LintProjectsAppService
