@@ -12,6 +12,9 @@ import {FolderNotExistStep} from "../../dom-service/step/folder-not-exist.step";
 import {CreateFolderStep} from "../../dom-service/step/create-folder.step";
 import {ChangePathStep} from "../../dom-service/step/change-path.step";
 import {BuildWorkspaceDtoStep} from "../../dom-service/step/build-workspace-dto.step";
+import {
+    BuildWorkspaceDomainStep
+} from "../../dom-service/step/build-workspace-domain.step";
 
 @singleton()
 /**
@@ -27,7 +30,8 @@ export class GenerateWorkspaceAppService {
         private readonly folderNotExist: FolderNotExistStep,
         private readonly createFolder: CreateFolderStep,
         private readonly changePath: ChangePathStep,
-        private readonly buildWorkspaceDto: BuildWorkspaceDtoStep
+        private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
+        private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep
     ) {
     }
 
@@ -44,6 +48,7 @@ export class GenerateWorkspaceAppService {
         if (!this.createFolder.run(name)) return false;
         if (!this.changePath.run(name)) return false;
         if (!this.buildWorkspaceDto.run()) return false;
+        if (!this.buildWorkspaceDomain.run()) return false;
         return true;
 
         // if (!this.runCommand.run("npm i -g pnpm")) return false;

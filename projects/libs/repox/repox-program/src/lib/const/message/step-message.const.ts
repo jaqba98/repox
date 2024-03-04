@@ -16,3 +16,5 @@ export const systemProgramExistStepMsg = (systemProgram: string) =>
 export const changePathStepMsg = (path: string) => `Change path: ${path}`;
 
 export const buildWorkspaceDtoStepMsg = () => "Build workspace dto";
+
+export const buildWorkspaceDomainStepMsg = () => "Build workspace domain";

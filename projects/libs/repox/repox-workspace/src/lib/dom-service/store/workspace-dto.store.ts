@@ -18,17 +18,17 @@ import {RepoxJsonDtoPartialModel} from "../../model/dto/repox-json-dto.model";
  * The store of workspace dto model.
  */
 export class WorkspaceDtoStore {
-    private gitignoreTextDto: string = "";
+    gitignoreTextDto: string = "";
 
-    private npmRcTextDto: string = "";
+    npmRcTextDto: string = "";
 
-    private readmeMdTextDto: string = "";
+    readmeMdTextDto: string = "";
 
-    private workspacePackageJsonDto: PackageJsonDtoPartialModel = {};
+    workspacePackageJsonDto: PackageJsonDtoPartialModel = {};
 
-    private repoxJsonDto: RepoxJsonDtoPartialModel = {};
+    repoxJsonDto: RepoxJsonDtoPartialModel = {};
 
-    private tsconfigJsonDto: TsconfigJsonDtoPartialModel = {};
+    tsconfigJsonDto: TsconfigJsonDtoPartialModel = {};
 
     load(): void {
         this.loadGitignoreTextDto();
