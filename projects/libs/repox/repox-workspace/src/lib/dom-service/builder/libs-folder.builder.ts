@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 
-import {createFolder, pathExist} from "@lib/utils";
+import {createFolder} from "@lib/utils";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
 import {WorkspaceFolderEnum} from "../../enum/workspace-folder.enum";
@@ -15,7 +15,5 @@ export class LibsFolderBuilder extends WorkspaceStructureAbstractBuilder {
     }
 
     regenerate() {
-        if (pathExist(WorkspaceFolderEnum.libs)) return;
-        createFolder(WorkspaceFolderEnum.libs);
     }
 }

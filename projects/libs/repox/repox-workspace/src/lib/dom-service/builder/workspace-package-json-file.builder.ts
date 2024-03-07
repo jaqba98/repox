@@ -16,8 +16,9 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
     }
 
     generate() {
-        const workspacePackageJson = this.buildWorkspacePackageJson();
-        this.store.setWorkspacePackageJsonDomain(workspacePackageJson);
+        if (this.store.workspaceDomain) {
+            this.store.workspaceDomain.workspacePackageJsonDomain = this.buildWorkspacePackageJson();
+        }
     }
 
     regenerate() {

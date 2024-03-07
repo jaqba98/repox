@@ -4,8 +4,6 @@ import {deepCopy} from "@lib/utils";
 
 import {WorkspaceDtoStore} from "./workspace-dto.store";
 import {WorkspaceDomainModel} from "../../model/workspace/workspace-domain.model";
-import {PackageJsonDomainModel} from "../../model/workspace/package-json-domain.model";
-import {TsconfigJsonDtoModel} from "../../model/dto/tsconfig-json-dto.model";
 
 @singleton()
 /**
@@ -39,12 +37,6 @@ export class WorkspaceDomainStore {
         };
     }
 
-    setWorkspacePackageJsonDomain(domain: PackageJsonDomainModel): void {
-        if (this.workspaceDomain) {
-            this.workspaceDomain.workspacePackageJsonDomain = domain;
-        }
-    }
-
     save(): void {
         if (!this.workspaceDomain) return;
         this.store.gitignoreTextDto = this.workspaceDomain.gitignoreTextDomain;
@@ -54,7 +46,7 @@ export class WorkspaceDomainStore {
         this.store.repoxJsonDto = deepCopy(this.workspaceDomain.repoxJsonDomain);
         this.store.tsconfigJsonDto = {
             compilerOptions: {
-              ...deepCopy(this.workspaceDomain.tsconfigJsonDomain.compilerOptions)
+                ...deepCopy(this.workspaceDomain.tsconfigJsonDomain.compilerOptions)
             },
             exclude: deepCopy(this.workspaceDomain.tsconfigJsonDomain.exclude)
         };

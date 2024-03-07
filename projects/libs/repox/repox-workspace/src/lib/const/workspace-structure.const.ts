@@ -8,6 +8,11 @@ import {ToolsFolderBuilder} from "../dom-service/builder/tools-folder.builder";
 import {
     WorkspacePackageJsonFileBuilder
 } from "../dom-service/builder/workspace-package-json-file.builder";
+import {RepoxJsonFileBuilder} from "../dom-service/builder/repox-json-file.builder";
+import {TsconfigJsonFileBuilder} from "../dom-service/builder/tsconfig-json-file.builder";
+import {GitignoreFileBuilder} from "../dom-service/builder/gitignore-file.builder";
+import {ReadmeFileBuilder} from "../dom-service/builder/readme-file.builder";
+import {NpmrcFileBuilder} from "../dom-service/builder/npmrc-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -55,33 +60,33 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         },
         {
             path: ".",
+            builder: GitignoreFileBuilder,
+            children: []
+        },
+        {
+            path: ".",
+            builder: NpmrcFileBuilder,
+            children: []
+        },
+        {
+            path: ".",
             builder: WorkspacePackageJsonFileBuilder,
             children: []
         },
-        // {
-        //     path: ".",
-        //     builder: RepoxJsonFileBuilder,
-        //     children: []
-        // },
-        // {
-        //     path: ".",
-        //     builder: TsconfigJsonFileBuilder,
-        //     children: []
-        // },
-        // {
-        //     path: ".",
-        //     builder: GitignoreFileBuilder,
-        //     children: []
-        // },
-        // {
-        //     path: ".",
-        //     builder: ReadmeFileBuilder,
-        //     children: []
-        // },
-        // {
-        //     path: ".",
-        //     builder: NpmrcFileBuilder,
-        //     children: []
-        // }
+        {
+            path: ".",
+            builder: ReadmeFileBuilder,
+            children: []
+        },
+        {
+            path: ".",
+            builder: RepoxJsonFileBuilder,
+            children: []
+        },
+        {
+            path: ".",
+            builder: TsconfigJsonFileBuilder,
+            children: []
+        }
     ]
 };

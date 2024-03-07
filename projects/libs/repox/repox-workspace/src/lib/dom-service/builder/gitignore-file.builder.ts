@@ -1,24 +1,20 @@
 import {singleton} from "tsyringe";
+import {WorkspaceDomainStore} from "@lib/repox-workspace";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
-import {writeToFile} from "@lib/utils";
-import {WorkspaceFileEnum} from "../../enum/workspace-file.enum";
 
 @singleton()
 /**
  * Create .gitignore file.
  */
 export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
+    constructor(private readonly store: WorkspaceDomainStore) {
+        super();
+    }
+
     generate() {
-        writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
-    }
-
-    regenerate() {
-        writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
-    }
-
-    private createGitignoreContent(): string {
-        return `# JetBrains tools
+        if (this.store.workspaceDomain) {
+            this.store.workspaceDomain.gitignoreTextDomain = `# JetBrains tools
 .idea
 
 # Compilation output
@@ -30,5 +26,9 @@ node_modules
 # Temporary files and directories
 tmp
 `;
+        }
+    }
+
+    regenerate() {
     }
 }
