@@ -18,6 +18,7 @@ import {
 import {GenerateWorkspaceStep} from "../../dom-service/step/generate-workspace.step";
 import {SaveWorkspaceDomainStep} from "../../dom-service/step/save-workspace-domain.step";
 import {SaveWorkspaceDtoStep} from "../../dom-service/step/save-workspace-dto.step";
+import {WriteSuccessStep} from "../../dom-service/step/write-success.step";
 
 @singleton()
 /**
@@ -37,7 +38,8 @@ export class GenerateWorkspaceAppService {
         private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
         private readonly generateWorkspace: GenerateWorkspaceStep,
         private readonly saveWorkspaceDomain: SaveWorkspaceDomainStep,
-        private readonly saveWorkspaceDto: SaveWorkspaceDtoStep
+        private readonly saveWorkspaceDto: SaveWorkspaceDtoStep,
+        private readonly writeSuccess: WriteSuccessStep
     ) {
     }
 
@@ -58,18 +60,8 @@ export class GenerateWorkspaceAppService {
         if (!this.generateWorkspace.run()) return false;
         if (!this.saveWorkspaceDomain.run()) return false;
         if (!this.saveWorkspaceDto.run()) return false;
+        if (!this.writeSuccess.run()) return false;
         return true;
-
         // if (!this.runCommand.run("npm i -g pnpm")) return false;
-        // for (const workspaceName of workspaceNames) {
-        //     if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
-        //     if (!this.runCommand.run("git init")) return false;
-        //     if (!this.runCommand.run("git config core.autocrlf false")) return false;
-        //     if (!this.runCommand.run("git add .")) return false;
-        //     if (!this.runCommand.run('git commit -m "initial commit"')) return false;
-        //     if (!this.changePath.run("../")) return false;
-        // }
-        // this.newline.writeNewline();
-        // this.simpleMessage.writeSuccess("Command executed correctly!");
     }
 }
