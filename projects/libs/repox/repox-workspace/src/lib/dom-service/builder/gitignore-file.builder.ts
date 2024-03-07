@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
-import {WorkspaceDomainStore} from "@lib/repox-workspace";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
+import {WorkspaceDomainStore} from "../store/workspace-domain.store";
 
 @singleton()
 /**
