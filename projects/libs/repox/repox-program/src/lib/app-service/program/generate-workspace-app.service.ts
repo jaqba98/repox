@@ -15,6 +15,7 @@ import {BuildWorkspaceDtoStep} from "../../dom-service/step/build-workspace-dto.
 import {
     BuildWorkspaceDomainStep
 } from "../../dom-service/step/build-workspace-domain.step";
+import {GenerateWorkspaceStep} from "../../dom-service/step/generate-workspace.step";
 
 @singleton()
 /**
@@ -31,7 +32,8 @@ export class GenerateWorkspaceAppService {
         private readonly createFolder: CreateFolderStep,
         private readonly changePath: ChangePathStep,
         private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
-        private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep
+        private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
+        private readonly generateWorkspace: GenerateWorkspaceStep
     ) {
     }
 
@@ -49,11 +51,11 @@ export class GenerateWorkspaceAppService {
         if (!this.changePath.run(name)) return false;
         if (!this.buildWorkspaceDto.run()) return false;
         if (!this.buildWorkspaceDomain.run()) return false;
+        if (!this.generateWorkspace.run()) return false;
         return true;
 
         // if (!this.runCommand.run("npm i -g pnpm")) return false;
         // for (const workspaceName of workspaceNames) {
-        //     // if (!this.generateWorkspace.runProgram()) return false;
         //     if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
         //     if (!this.runCommand.run("git init")) return false;
         //     if (!this.runCommand.run("git config core.autocrlf false")) return false;

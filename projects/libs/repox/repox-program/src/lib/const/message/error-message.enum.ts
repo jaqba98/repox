@@ -25,3 +25,5 @@ export const systemProgramNotExistInSystemErrorMsg = (systemProgram: string) =>
 
 export const failedToChangePathErrorMsg = (path: string) =>
     `Failed to change the path: ${path}!`;
+
+export const failedToGenerateWorkspaceErrorMsg = () => "Failed to generate workspace!";
