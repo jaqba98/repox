@@ -70,6 +70,6 @@ export class GenerateWorkspaceAppService {
         if (!this.runCommand.run("git add .")) return false;
         if (!this.runCommand.run("git commit -m 'initial commit'")) return false;
         if (!this.writeSuccess.run()) return false;
-    return true;
+        return true;
     }
 }
