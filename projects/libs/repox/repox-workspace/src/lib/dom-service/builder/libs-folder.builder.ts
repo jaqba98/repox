@@ -11,14 +11,10 @@ import {WorkspaceFolderEnum} from "../../enum/workspace-folder.enum";
  */
 export class LibsFolderBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
-        this.createLibsFolder();
+        createFolder(WorkspaceFolderEnum.libs);
     }
 
     regenerate() {
-        this.createLibsFolder();
-    }
-
-    private createLibsFolder(): void {
         if (pathExist(WorkspaceFolderEnum.libs)) return;
         createFolder(WorkspaceFolderEnum.libs);
     }

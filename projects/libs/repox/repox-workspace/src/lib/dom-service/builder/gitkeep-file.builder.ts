@@ -17,14 +17,10 @@ import {WorkspaceFileEnum} from "../../enum/workspace-file.enum";
  */
 export class GitkeepFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
-        this.createGitKeepFile();
+        writeToFile(WorkspaceFileEnum.gitkeep, "");
     }
 
     regenerate() {
-        this.createGitKeepFile();
-    }
-
-    private createGitKeepFile() {
         const emptyFolder = isEmptyFolder(".");
         const fileExist = existPath(WorkspaceFileEnum.gitkeep);
         if (!emptyFolder && !fileExist) return;
