@@ -4,5 +4,6 @@
 export enum SystemProgramEnum {
   node = "node",
   npm = "npm",
-  git = "git"
+  git = "git",
+  pnpm = "pnpm"
 }

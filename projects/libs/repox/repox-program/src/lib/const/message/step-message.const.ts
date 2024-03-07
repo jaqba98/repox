@@ -24,3 +24,5 @@ export const generateWorkspaceStepMsg = () => "Generate workspace";
 export const saveWorkspaceDomainStepMsg = () => "Save workspace domain";
 
 export const saveWorkspaceDtoStepMsg = () => "Save workspace dto";
+
+export const runCommandStepMsg = (command: string) => `Run command: ${command}`;
