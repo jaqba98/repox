@@ -4,7 +4,7 @@ import {getCurrentFolderName} from "@lib/utils";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
 import {PackageJsonDomainModel} from "../../model/workspace/package-json-domain.model";
-import {WorkspaceDomainStore} from "@lib/repox-workspace";
+import {WorkspaceDomainStore} from "../store/workspace-domain.store";
 
 @singleton()
 /**
