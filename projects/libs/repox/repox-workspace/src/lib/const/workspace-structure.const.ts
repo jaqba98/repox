@@ -5,6 +5,9 @@ import {AppsFolderBuilder} from "../dom-service/builder/apps-folder.builder";
 import {GitkeepFileBuilder} from "../dom-service/builder/gitkeep-file.builder";
 import {LibsFolderBuilder} from "../dom-service/builder/libs-folder.builder";
 import {ToolsFolderBuilder} from "../dom-service/builder/tools-folder.builder";
+import {
+    WorkspacePackageJsonFileBuilder
+} from "../dom-service/builder/workspace-package-json-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -50,11 +53,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
                 }
             ]
         },
-        // {
-        //     path: ".",
-        //     builder: RootPackageJsonFileBuilder,
-        //     children: []
-        // },
+        {
+            path: ".",
+            builder: WorkspacePackageJsonFileBuilder,
+            children: []
+        },
         // {
         //     path: ".",
         //     builder: RepoxJsonFileBuilder,

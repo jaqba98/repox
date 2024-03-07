@@ -4,13 +4,14 @@ import {deepCopy} from "@lib/utils";
 
 import {WorkspaceDtoStore} from "./workspace-dto.store";
 import {WorkspaceDomainModel} from "../../model/workspace/workspace-domain.model";
+import {PackageJsonDomainModel} from "../../model/workspace/package-json-domain.model";
 
 @singleton()
 /**
  * The store of workspace domain model.
  */
 export class WorkspaceDomainStore {
-    private workspaceDomain: WorkspaceDomainModel | undefined;
+    workspaceDomain: WorkspaceDomainModel | undefined;
 
     constructor(private readonly store: WorkspaceDtoStore) {
     }
@@ -35,5 +36,11 @@ export class WorkspaceDomainStore {
                 exclude: deepCopy(this.store.tsconfigJsonDto.exclude) ?? []
             }
         };
+    }
+
+    setWorkspacePackageJsonDomain(domain: PackageJsonDomainModel): void {
+        if (this.workspaceDomain) {
+            this.workspaceDomain.workspacePackageJsonDomain = domain;
+        }
     }
 }
