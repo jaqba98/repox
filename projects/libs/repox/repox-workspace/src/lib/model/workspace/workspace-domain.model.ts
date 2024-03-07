@@ -12,5 +12,5 @@ export interface WorkspaceDomainModel {
     readmeMdTextDomain: string;
     workspacePackageJsonDomain: PackageJsonDomainModel;
     repoxJsonDomain: RepoxJsonDomainModel;
-    tsconfigJsonDto: TsconfigJsonDomainModel;
+    tsconfigJsonDomain: TsconfigJsonDomainModel;
 }

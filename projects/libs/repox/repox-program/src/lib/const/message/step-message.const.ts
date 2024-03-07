@@ -20,3 +20,7 @@ export const buildWorkspaceDtoStepMsg = () => "Build workspace dto";
 export const buildWorkspaceDomainStepMsg = () => "Build workspace domain";
 
 export const generateWorkspaceStepMsg = () => "Generate workspace";
+
+export const saveWorkspaceDomainStepMsg = () => "Save workspace domain";
+
+export const saveWorkspaceDtoStepMsg = () => "Save workspace dto";

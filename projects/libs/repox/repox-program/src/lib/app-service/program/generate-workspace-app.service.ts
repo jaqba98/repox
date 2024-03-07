@@ -16,6 +16,8 @@ import {
     BuildWorkspaceDomainStep
 } from "../../dom-service/step/build-workspace-domain.step";
 import {GenerateWorkspaceStep} from "../../dom-service/step/generate-workspace.step";
+import {SaveWorkspaceDomainStep} from "../../dom-service/step/save-workspace-domain.step";
+import {SaveWorkspaceDtoStep} from "../../dom-service/step/save-workspace-dto.step";
 
 @singleton()
 /**
@@ -33,7 +35,9 @@ export class GenerateWorkspaceAppService {
         private readonly changePath: ChangePathStep,
         private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
         private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
-        private readonly generateWorkspace: GenerateWorkspaceStep
+        private readonly generateWorkspace: GenerateWorkspaceStep,
+        private readonly saveWorkspaceDomain: SaveWorkspaceDomainStep,
+        private readonly saveWorkspaceDto: SaveWorkspaceDtoStep
     ) {
     }
 
@@ -52,6 +56,8 @@ export class GenerateWorkspaceAppService {
         if (!this.buildWorkspaceDto.run()) return false;
         if (!this.buildWorkspaceDomain.run()) return false;
         if (!this.generateWorkspace.run()) return false;
+        if (!this.saveWorkspaceDomain.run()) return false;
+        if (!this.saveWorkspaceDto.run()) return false;
         return true;
 
         // if (!this.runCommand.run("npm i -g pnpm")) return false;

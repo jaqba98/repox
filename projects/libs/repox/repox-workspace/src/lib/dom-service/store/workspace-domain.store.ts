@@ -5,6 +5,7 @@ import {deepCopy} from "@lib/utils";
 import {WorkspaceDtoStore} from "./workspace-dto.store";
 import {WorkspaceDomainModel} from "../../model/workspace/workspace-domain.model";
 import {PackageJsonDomainModel} from "../../model/workspace/package-json-domain.model";
+import {TsconfigJsonDtoModel} from "../../model/dto/tsconfig-json-dto.model";
 
 @singleton()
 /**
@@ -31,7 +32,7 @@ export class WorkspaceDomainStore {
             repoxJsonDomain: {
                 projects: deepCopy(this.store.repoxJsonDto.projects) ?? {}
             },
-            tsconfigJsonDto: {
+            tsconfigJsonDomain: {
                 compilerOptions: deepCopy(this.store.tsconfigJsonDto.compilerOptions) ?? {},
                 exclude: deepCopy(this.store.tsconfigJsonDto.exclude) ?? []
             }
@@ -42,5 +43,20 @@ export class WorkspaceDomainStore {
         if (this.workspaceDomain) {
             this.workspaceDomain.workspacePackageJsonDomain = domain;
         }
+    }
+
+    save(): void {
+        if (!this.workspaceDomain) return;
+        this.store.gitignoreTextDto = this.workspaceDomain.gitignoreTextDomain;
+        this.store.npmRcTextDto = this.workspaceDomain.npmRcTextDomain;
+        this.store.readmeMdTextDto = this.workspaceDomain.readmeMdTextDomain;
+        this.store.workspacePackageJsonDto = deepCopy(this.workspaceDomain.workspacePackageJsonDomain);
+        this.store.repoxJsonDto = deepCopy(this.workspaceDomain.repoxJsonDomain);
+        this.store.tsconfigJsonDto = {
+            compilerOptions: {
+              ...deepCopy(this.workspaceDomain.tsconfigJsonDomain.compilerOptions)
+            },
+            exclude: deepCopy(this.workspaceDomain.tsconfigJsonDomain.exclude)
+        };
     }
 }
