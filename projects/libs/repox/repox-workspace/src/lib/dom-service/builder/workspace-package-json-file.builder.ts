@@ -31,14 +31,14 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
             private: true,
             dependencies: {
                 "@types/core-js": "^2.5.8",
-                "@types/node": "^20.11.20",
+                "@types/node": "^20.11.25",
                 "repox": "^1.4.37",
                 "tsc-alias": "^1.8.8"
             },
             devDependencies: {
                 "core-js": "^3.36.0",
                 "tsyringe": "^4.8.0",
-                "typescript": "^5.3.3"
+                "typescript": "^5.4.2"
             }
         };
     }
