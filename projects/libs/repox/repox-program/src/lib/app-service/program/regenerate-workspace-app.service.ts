@@ -3,10 +3,8 @@ import {singleton} from "tsyringe";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {ParamDomainStore} from "@lib/param-domain";
-import {
-    GoToWorkspaceRootAppService,
-    RunCommandAppService,
-} from "@lib/program-step";
+import {GoToWorkspaceRootAppService,} from "@lib/program-step";
+import {RunCommandStep} from "../../dom-service/step/run-command.step";
 
 @singleton()
 /**
@@ -18,7 +16,7 @@ export class RegenerateWorkspaceAppService {
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,
         private readonly store: ParamDomainStore,
-        private readonly runCommand: RunCommandAppService,
+        private readonly runCommand: RunCommandStep,
         private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService
     ) {
     }
