@@ -1,9 +1,6 @@
 import {singleton} from "tsyringe";
 
 import {WriteHeaderStep} from "../../dom-service/step/write-header.step";
-import {
-    GetCommandArgSingleValueStep
-} from "../../dom-service/step/get-command-arg-single-value.step";
 import {SystemProgramExistStep} from "../../dom-service/step/system-program-exist.step";
 import {BuildWorkspaceDtoStep} from "../../dom-service/step/build-workspace-dto.step";
 import {
@@ -18,17 +15,20 @@ import {CommandEnum} from "../../enum/launcher/command.enum";
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
 import {GoToWorkspaceRootStep} from "../../dom-service/step/go-to-workspace-root.step";
 import {RegenerateWorkspaceStep} from "../../dom-service/step/regenerate-workspace.step";
+import {
+    GetCommandArgBooleanValueStep
+} from "../../dom-service/step/get-command-arg-boolean-value.step";
 
 @singleton()
 /**
  * The app service is responsible for regenerating workspace.
- * Argument | Alias | Required | Description
- * --force  | -f    | true     | Run in forced mode.
+ * Argument | Alias | Description         | Required | Value
+ * --force  | -f    | Run in forced mode. | true     | boolean
  */
 export class RegenerateWorkspaceAppService {
     constructor(
         private readonly writeHeader: WriteHeaderStep,
-        private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep,
+        private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep,
         private readonly systemProgramExist: SystemProgramExistStep,
         private readonly runCommand: RunCommandStep,
         private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
@@ -45,8 +45,7 @@ export class RegenerateWorkspaceAppService {
         if (!this.writeHeader.run(ProgramEnum.regenerate, CommandEnum.workspace)) {
             return false;
         }
-        const name = this.getCommandArgSingleValue.run("force", "f");
-        if (!name) return false;
+        if (!this.getCommandArgBooleanValue.run("force", "f")) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;

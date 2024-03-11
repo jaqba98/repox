@@ -24,8 +24,8 @@ import {RunCommandStep} from "../../dom-service/step/run-command.step";
 @singleton()
 /**
  * The app service is responsible for generating workspace from scratch.
- * Argument | Alias | Required | Description
- * --name   | -n    | true     | Name of the workspace
+ * Argument | Alias | Description            | Required | Value
+ * --name   | -n    | Name of the workspace. | true     | string
  */
 export class GenerateWorkspaceAppService {
     constructor(
