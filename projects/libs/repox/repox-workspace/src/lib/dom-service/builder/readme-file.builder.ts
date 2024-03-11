@@ -15,13 +15,17 @@ export class ReadmeFileBuilder extends WorkspaceStructureAbstractBuilder {
     }
 
     generate() {
-        if (this.store.workspaceDomain) {
-            const name = getCurrentFolderName();
-            this.store.workspaceDomain.readmeMdTextDomain = `# ${name}
-`;
-        }
+        this.createDefaultReadMdTextDomain();
     }
 
     regenerate() {
+        this.createDefaultReadMdTextDomain();
+    }
+
+    private createDefaultReadMdTextDomain() {
+        if (!this.store.workspaceDomain) return;
+        const name = getCurrentFolderName();
+        this.store.workspaceDomain.readmeMdTextDomain = `# ${name}
+`;
     }
 }

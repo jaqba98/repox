@@ -16,15 +16,28 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
     }
 
     generate() {
-        if (this.store.workspaceDomain) {
-            this.store.workspaceDomain.workspacePackageJsonDomain = this.buildWorkspacePackageJson();
-        }
+        if (!this.store.workspaceDomain) return;
+        this.store.workspaceDomain.workspacePackageJsonDomain =
+            this.buildDefaultWorkspacePackageJson();
     }
 
     regenerate() {
+        if (!this.store.workspaceDomain) return;
+        this.store.workspaceDomain.workspacePackageJsonDomain = {
+            ...this.store.workspaceDomain.workspacePackageJsonDomain,
+            ...this.buildDefaultWorkspacePackageJson(),
+            dependencies: {
+                ...this.store.workspaceDomain.workspacePackageJsonDomain.dependencies,
+                ...this.buildDefaultWorkspacePackageJson().dependencies,
+            },
+            devDependencies: {
+                ...this.store.workspaceDomain.workspacePackageJsonDomain.devDependencies,
+                ...this.buildDefaultWorkspacePackageJson().devDependencies,
+            }
+        };
     }
 
-    private buildWorkspacePackageJson(): PackageJsonDomainModel {
+    private buildDefaultWorkspacePackageJson(): PackageJsonDomainModel {
         return {
             name: getCurrentFolderName(),
             version: "1.0.0",

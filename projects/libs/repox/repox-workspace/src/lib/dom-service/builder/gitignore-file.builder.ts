@@ -13,8 +13,16 @@ export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
     }
 
     generate() {
-        if (this.store.workspaceDomain) {
-            this.store.workspaceDomain.gitignoreTextDomain = `# JetBrains tools
+        this.createDefaultGitignoreTextDomain();
+    }
+
+    regenerate() {
+        this.createDefaultGitignoreTextDomain();
+    }
+
+    private createDefaultGitignoreTextDomain() {
+        if (!this.store.workspaceDomain) return;
+        this.store.workspaceDomain.gitignoreTextDomain = `# JetBrains tools
 .idea
 
 # Compilation output
@@ -26,9 +34,5 @@ node_modules
 # Temporary files and directories
 tmp
 `;
-        }
-    }
-
-    regenerate() {
     }
 }

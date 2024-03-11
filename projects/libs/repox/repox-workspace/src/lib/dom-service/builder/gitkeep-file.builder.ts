@@ -1,6 +1,6 @@
 import {singleton} from "tsyringe";
 
-import {writeToFile} from "@lib/utils";
+import {isEmptyFolder, writeToFile} from "@lib/utils";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
 import {WorkspaceFileEnum} from "../../enum/workspace-file.enum";
@@ -15,5 +15,7 @@ export class GitkeepFileBuilder extends WorkspaceStructureAbstractBuilder {
     }
 
     regenerate() {
+        if (!isEmptyFolder(".")) return;
+        writeToFile(WorkspaceFileEnum.gitkeep, "");
     }
 }

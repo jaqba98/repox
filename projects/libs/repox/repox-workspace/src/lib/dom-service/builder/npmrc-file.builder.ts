@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
-import { WorkspaceDomainStore } from "../store/workspace-domain.store";
+import {WorkspaceDomainStore} from "../store/workspace-domain.store";
 
 @singleton()
 /**
@@ -13,11 +13,15 @@ export class NpmrcFileBuilder extends WorkspaceStructureAbstractBuilder {
     }
 
     generate() {
-        if (this.store.workspaceDomain) {
-            this.store.workspaceDomain.npmRcTextDomain = "";
-        }
+        this.createDefaultNpmRmTextDomain();
     }
 
     regenerate() {
+        this.createDefaultNpmRmTextDomain();
+    }
+
+    private createDefaultNpmRmTextDomain() {
+        if (!this.store.workspaceDomain) return;
+        this.store.workspaceDomain.npmRcTextDomain = "";
     }
 }
