@@ -1,7 +1,7 @@
 import {singleton} from "tsyringe";
 
 import {SimpleMessageAppService, StepMessageAppService} from "@lib/logger";
-import {RunRegenerateWorkspaceService} from "@lib/repox-workspace";
+import {RunRegenerateWorkspaceAppService} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -10,7 +10,7 @@ import {RunRegenerateWorkspaceService} from "@lib/repox-workspace";
 export class RegenerateWorkspaceAppService {
     constructor(
         private readonly stepMessage: StepMessageAppService,
-        private readonly runRegenerateWorkspace: RunRegenerateWorkspaceService,
+        private readonly runRegenerateWorkspace: RunRegenerateWorkspaceAppService,
         private readonly simpleMessage: SimpleMessageAppService
     ) {
     }

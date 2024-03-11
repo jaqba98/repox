@@ -2,7 +2,7 @@ import {singleton} from "tsyringe";
 import {BuildProjectRepoxCommandModel, EmptyRepoxProgramModel} from "@lib/repox-domain";
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {GoToWorkspaceRootAppService} from "@lib/program-step";
+// import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import {LoadWsDomainAppService} from "../../dom-service/load-ws-domain-app.service";
 import {VerificationWsDtoAppService} from "../../dom-service/verification-ws-dto-app.service";
 import {BuildWorkspaceDtoStep} from "../../dom-service/step/build-workspace-dto.step";
@@ -19,7 +19,7 @@ export class BuildProjectStepService {
         private readonly newline: NewlineAppService,
         // private readonly systemProgramExist: SystemProgramExistAppService,
         private readonly loadWsDto: BuildWorkspaceDtoStep,
-        private readonly goToProjectRoot: GoToWorkspaceRootAppService,
+        // private readonly goToProjectRoot: GoToWorkspaceRootAppService,
         private readonly loadWsDomain: LoadWsDomainAppService,
         private readonly verificationWsDto: VerificationWsDtoAppService,
         private readonly projectExist: ProjectExistAppService,
@@ -33,7 +33,7 @@ export class BuildProjectStepService {
         // if (!this.systemProgramExist.run(SystemProgramEnum.node)) return;
         // if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return;
         // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
-        if (!this.goToProjectRoot.run()) return;
+        // if (!this.goToProjectRoot.run()) return;
         if (!this.loadWsDto.run()) return;
         if (!this.verificationWsDto.run()) return;
         if (!this.loadWsDomain.run()) return;

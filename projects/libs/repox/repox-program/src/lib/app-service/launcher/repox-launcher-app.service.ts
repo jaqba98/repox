@@ -53,7 +53,7 @@ export class RepoxLauncherAppService {
     }
 
     private regenerateProgram(program: string, command: string): boolean {
-        if (command === CommandEnum.workspace) return this.regenerateWorkspace.runProgram();
+        if (command === CommandEnum.workspace) return this.regenerateWorkspace.run();
         this.throwLauncherCommandError(program, command);
         return false;
     }

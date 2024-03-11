@@ -2,7 +2,7 @@ import {singleton} from "tsyringe";
 
 import {REPOX_LOGO} from "@lib/repox-const";
 import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {GoToWorkspaceRootAppService} from "@lib/program-step";
+// import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import {ParamDomainStore} from "@lib/param-domain";
 
 import {
@@ -26,7 +26,7 @@ export class GenerateProjectAppService {
         private readonly simpleMessage: SimpleMessageAppService,
         private readonly newline: NewlineAppService,
         private readonly store: ParamDomainStore,
-        private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService,
+        // private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService,
         private readonly loadWorkspaceDto: BuildWorkspaceDtoStep,
         private readonly addProjectToDto: AddProjectToDtoAppService,
         // private readonly changePath: ChangePathAppService,
@@ -39,7 +39,7 @@ export class GenerateProjectAppService {
     runProgram(): boolean {
         this.simpleMessage.writeInfo("Generate Program", REPOX_LOGO);
         this.newline.writeNewline();
-        if (!this.goToWorkspaceRoot.run()) return false;
+        // if (!this.goToWorkspaceRoot.run()) return false;
         const projectNames = this.store.getCommandArgValues("name", "n");
         if (!projectNames) {
             this.simpleMessage.writeError("You did not specify a project name!");
