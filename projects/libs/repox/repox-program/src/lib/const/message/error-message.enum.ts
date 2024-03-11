@@ -27,3 +27,8 @@ export const failedToChangePathErrorMsg = (path: string) =>
     `Failed to change the path: ${path}!`;
 
 export const failedToGenerateWorkspaceErrorMsg = () => "Failed to generate workspace!";
+
+export const failedToRegenerateWorkspaceErrorMsg = () => "Failed to regenerate workspace!";
+
+export const workspaceRootNotExistErrorMsg = () =>
+    "You are not in an existing repox workspace!";

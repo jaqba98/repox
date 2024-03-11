@@ -19,3 +19,6 @@ export const linkToProgramWarningMsg = (systemProgram: string, url: string): str
 
 export const pathNotExistWarningMsg = (path: string): string =>
     `The ${path} path does not exist`;
+
+export const navigateToExistingWorkspaceFolderWarningMsg = (): string =>
+    "Navigate to the existing workspace folder and run the command again";

@@ -1,43 +1,65 @@
 import {singleton} from "tsyringe";
 
-import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-import {REPOX_LOGO} from "@lib/repox-const";
-import {ParamDomainStore} from "@lib/param-domain";
-import {GoToWorkspaceRootAppService,} from "@lib/program-step";
+import {WriteHeaderStep} from "../../dom-service/step/write-header.step";
+import {
+    GetCommandArgSingleValueStep
+} from "../../dom-service/step/get-command-arg-single-value.step";
+import {SystemProgramExistStep} from "../../dom-service/step/system-program-exist.step";
+import {BuildWorkspaceDtoStep} from "../../dom-service/step/build-workspace-dto.step";
+import {
+    BuildWorkspaceDomainStep
+} from "../../dom-service/step/build-workspace-domain.step";
+import {SaveWorkspaceDomainStep} from "../../dom-service/step/save-workspace-domain.step";
+import {SaveWorkspaceDtoStep} from "../../dom-service/step/save-workspace-dto.step";
+import {WriteSuccessStep} from "../../dom-service/step/write-success.step";
 import {RunCommandStep} from "../../dom-service/step/run-command.step";
+import {ProgramEnum} from "../../enum/launcher/program.enum";
+import {CommandEnum} from "../../enum/launcher/command.enum";
+import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
+import {GoToWorkspaceRootStep} from "../../dom-service/step/go-to-workspace-root.step";
+import {RegenerateWorkspaceStep} from "../../dom-service/step/regenerate-workspace.step";
 
 @singleton()
 /**
- * The start point of the program regenerate, command workspace.
- * Possible arguments
+ * The app service is responsible for regenerating workspace.
+ * Argument | Alias | Required | Description
+ * --force  | -f    | true     | Run in forced mode.
  */
 export class RegenerateWorkspaceAppService {
     constructor(
-        private readonly simpleMessage: SimpleMessageAppService,
-        private readonly newline: NewlineAppService,
-        private readonly store: ParamDomainStore,
+        private readonly writeHeader: WriteHeaderStep,
+        private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep,
+        private readonly systemProgramExist: SystemProgramExistStep,
         private readonly runCommand: RunCommandStep,
-        private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService
+        private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
+        private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
+        private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
+        private readonly regenerateWorkspace: RegenerateWorkspaceStep,
+        private readonly saveWorkspaceDomain: SaveWorkspaceDomainStep,
+        private readonly saveWorkspaceDto: SaveWorkspaceDtoStep,
+        private readonly writeSuccess: WriteSuccessStep
     ) {
     }
 
-    runProgram(): boolean {
-        this.simpleMessage.writeInfo("Regenerate Workspace", REPOX_LOGO);
-        this.newline.writeNewline();
-        const forceMode = this.store.getCommandArgValues("force", "f");
-        if (!forceMode) {
-            this.simpleMessage.writeError("The program must be run in forced mode!");
-            this.simpleMessage.writeWarning("Specify force mode by --force or -f and rerun the program.");
+    run(): boolean {
+        if (!this.writeHeader.run(ProgramEnum.regenerate, CommandEnum.workspace)) {
             return false;
         }
+        const name = this.getCommandArgSingleValue.run("force", "f");
+        if (!name) return false;
+        if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false;
+        if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
+        if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+        if (!this.runCommand.run("npm install --global pnpm")) return false;
+        if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false;
         if (!this.goToWorkspaceRoot.run()) return false;
-        // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
-        if (!this.runCommand.run("npm i -g pnpm")) return false;
+        if (!this.buildWorkspaceDto.run()) return false;
+        if (!this.buildWorkspaceDomain.run()) return false;
+        if (!this.regenerateWorkspace.run()) return false;
+        if (!this.saveWorkspaceDomain.run()) return false;
+        if (!this.saveWorkspaceDto.run()) return false;
         if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
-        if (!this.runCommand.run("git init")) return false;
-        if (!this.runCommand.run("git config core.autocrlf false")) return false;
-        this.newline.writeNewline();
-        this.simpleMessage.writeSuccess("Command executed correctly!");
+        if (!this.writeSuccess.run()) return false;
         return true;
     }
 }
