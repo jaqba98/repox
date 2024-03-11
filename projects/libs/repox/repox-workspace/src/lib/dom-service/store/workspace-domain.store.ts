@@ -24,6 +24,7 @@ export class WorkspaceDomainStore {
                 name: this.store.workspacePackageJsonDto.name ?? "",
                 version: this.store.workspacePackageJsonDto.version ?? "",
                 private: this.store.workspacePackageJsonDto.private ?? false,
+                scripts: deepCopy(this.store.workspacePackageJsonDto.scripts) ?? {},
                 dependencies: deepCopy(this.store.workspacePackageJsonDto.dependencies) ?? {},
                 devDependencies: deepCopy(this.store.workspacePackageJsonDto.devDependencies) ?? {}
             },

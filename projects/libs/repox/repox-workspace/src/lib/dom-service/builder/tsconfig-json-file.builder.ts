@@ -33,7 +33,6 @@ export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
                 }
             },
             exclude: [
-                ...this.store.workspaceDomain.tsconfigJsonDomain.exclude,
                 ...this.buildDefaultTsconfigJson().exclude
             ]
         };

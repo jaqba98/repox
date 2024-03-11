@@ -26,6 +26,10 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
         this.store.workspaceDomain.workspacePackageJsonDomain = {
             ...this.store.workspaceDomain.workspacePackageJsonDomain,
             ...this.buildDefaultWorkspacePackageJson(),
+            scripts: {
+                ...this.store.workspaceDomain.workspacePackageJsonDomain.scripts,
+                ...this.buildDefaultWorkspacePackageJson().scripts,
+            },
             dependencies: {
                 ...this.store.workspaceDomain.workspacePackageJsonDomain.dependencies,
                 ...this.buildDefaultWorkspacePackageJson().dependencies,
@@ -42,10 +46,11 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
             name: getCurrentFolderName(),
             version: "1.0.0",
             private: true,
+            scripts: {},
             dependencies: {
                 "@types/core-js": "^2.5.8",
                 "@types/node": "^20.11.25",
-                "repox": "^1.4.41",
+                "repox": "^1.4.42",
                 "tsc-alias": "^1.8.8"
             },
             devDependencies: {
