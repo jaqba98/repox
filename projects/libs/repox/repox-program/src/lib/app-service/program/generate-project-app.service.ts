@@ -13,7 +13,7 @@ import {
  * Argument | Alias | Description            | Required | Value
  * --name   | -n    | Name of the project.   | true     | string
  */
-export class GenerateWorkspaceAppService {
+export class GenerateProjectAppService {
     constructor(
         private readonly writeHeader: WriteHeaderStep,
         private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep,
