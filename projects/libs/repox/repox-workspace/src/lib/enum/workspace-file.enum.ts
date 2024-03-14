@@ -9,5 +9,6 @@ export enum WorkspaceFileEnum {
     gitignore = ".gitignore",
     readmeMd = "README.md",
     npmrc = ".npmrc",
-    indexTs = "index.ts"
+    indexTs = "index.ts",
+    mainTs = "main.ts"
 }

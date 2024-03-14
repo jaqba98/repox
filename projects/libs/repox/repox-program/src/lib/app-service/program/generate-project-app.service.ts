@@ -26,6 +26,7 @@ import {createPath} from "@lib/utils";
  * Argument | Alias | Description            | Required | Value
  * --name   | -n    | Name of the project.   | true     | string
  * --path   | -p    | Path to the project.   | true     | string
+ * --type   | -t    | Project type.          | true     | string
  */
 export class GenerateProjectAppService {
     constructor(
@@ -52,6 +53,8 @@ export class GenerateProjectAppService {
         if (!name) return false;
         const path = this.getCommandArgSingleValue.run("path", "p");
         if (!path) return false;
+        const type = this.getCommandArgSingleValue.run("type", "t");
+        if (!type) return false;
         const newFolder = createPath(path, name);
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.buildWorkspaceDto.run()) return false;
@@ -59,7 +62,7 @@ export class GenerateProjectAppService {
         if (!this.folderNotExist.run(newFolder)) return false;
         if (!this.createFolder.run(newFolder)) return false;
         if (!this.changePath.run(newFolder)) return false;
-        if (!this.generateProject.run()) return false;
+        if (!this.generateProject.run(name, path, type)) return false;
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.saveWorkspaceDomain.run()) return false;
         if (!this.saveWorkspaceDto.run()) return false;
