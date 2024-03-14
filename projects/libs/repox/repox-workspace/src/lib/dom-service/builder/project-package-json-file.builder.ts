@@ -1,35 +1,29 @@
 import {singleton} from "tsyringe";
 
+import {getCurrentFolderName, writeJsonToFile} from "@lib/utils";
+
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
-import {getCurrentFolderName, readJsonFile, writeJsonToFile} from "@lib/utils";
-import {WorkspaceFileEnum} from "../../enum/workspace-file.enum";
-import {PackageJsonDtoPartialModel} from "../../model/dto/package-json-dto.model";
+import {PackageJsonDomainModel} from "../../model/workspace/package-json-domain.model";
+import {WorkspaceDomainStore} from "../store/workspace-domain.store";
+import {WorkspaceFileEnum} from "@lib/repox-workspace";
 
 @singleton()
 /**
- * Create project package.json file.
+ * Create a project package.json file.
  */
 export class ProjectPackageJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
+    constructor(private readonly store: WorkspaceDomainStore) {
+        super();
+    }
+
     generate() {
-        const rootPackageJsonContent = this.buildRootPackageJson();
-        writeJsonToFile(WorkspaceFileEnum.packageJson, rootPackageJsonContent);
+        writeJsonToFile(WorkspaceFileEnum.packageJson, this.buildDefaultWorkspacePackageJson());
     }
 
     regenerate() {
-        const rootPackageJsonContent = this.buildRootPackageJson();
-        writeJsonToFile(WorkspaceFileEnum.packageJson, rootPackageJsonContent);
     }
 
-    private buildRootPackageJson(): PackageJsonDtoPartialModel {
-        const oldProjectPackageJson =
-            readJsonFile<PackageJsonDtoPartialModel>(WorkspaceFileEnum.packageJson);
-        return {
-            ...oldProjectPackageJson,
-            ...this.buildBase()
-        };
-    }
-
-    private buildBase(): PackageJsonDtoPartialModel {
+    private buildDefaultWorkspacePackageJson(): Pick<PackageJsonDomainModel, "name" | "version"> {
         return {
             name: getCurrentFolderName(),
             version: "1.0.0"

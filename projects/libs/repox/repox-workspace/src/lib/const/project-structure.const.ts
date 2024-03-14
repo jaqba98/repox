@@ -6,6 +6,9 @@ import {
     ProjectMainFileBuilder
 } from "../dom-service/builder/project-main-file.builder";
 import {ProjectIndexFileBuilder} from "../dom-service/builder/project-index-file.builder";
+import {
+    ProjectPackageJsonFileBuilder
+} from "../dom-service/builder/project-package-json-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -33,6 +36,11 @@ export const PROJECT_STRUCTURE: WorkspaceStructureModel = {
                     children: []
                 }
             ]
+        },
+        {
+            path: ".",
+            builder: ProjectPackageJsonFileBuilder,
+            children: []
         }
     ]
 };
