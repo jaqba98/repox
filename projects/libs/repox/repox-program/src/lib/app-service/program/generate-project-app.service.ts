@@ -55,13 +55,13 @@ export class GenerateProjectAppService {
         if (!path) return false;
         const type = this.getCommandArgSingleValue.run("type", "t");
         if (!type) return false;
-        const newFolder = createPath(path, name);
+        const projectPath = createPath(path, name);
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.buildWorkspaceDto.run()) return false;
         if (!this.buildWorkspaceDomain.run()) return false;
-        if (!this.folderNotExist.run(newFolder)) return false;
-        if (!this.createFolder.run(newFolder)) return false;
-        if (!this.changePath.run(newFolder)) return false;
+        if (!this.folderNotExist.run(projectPath)) return false;
+        if (!this.createFolder.run(projectPath)) return false;
+        if (!this.changePath.run(projectPath)) return false;
         if (!this.generateProject.run(name, path, type)) return false;
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.saveWorkspaceDomain.run()) return false;

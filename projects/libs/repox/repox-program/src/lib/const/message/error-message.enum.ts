@@ -34,3 +34,6 @@ export const workspaceRootNotExistErrorMsg = () =>
     "You are not in an existing repox workspace!";
 
 export const failedToGenerateProjectErrorMsg = () => "Failed to generate project!";
+
+export const notSupportedProjectTypeErrorMsg = (type: string) =>
+    `Not supported project type: ${type}`;

@@ -4,7 +4,10 @@ import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 import {RunGenerateProjectAppService} from "@lib/repox-workspace";
 
 import {generateProjectStepMsg} from "../../const/message/step-message.const";
-import {failedToGenerateProjectErrorMsg} from "../../const/message/error-message.enum";
+import {
+    failedToGenerateProjectErrorMsg,
+    notSupportedProjectTypeErrorMsg
+} from "../../const/message/error-message.enum";
 
 @singleton()
 /**
@@ -20,9 +23,10 @@ export class GenerateProjectStep {
 
     run(name: string, path: string, type: string): boolean {
         this.stepMessage.write(generateProjectStepMsg());
-        if (this.runGenerateProject.run(name, type, path)) return true;
+        if (this.runGenerateProject.run(name, path, type)) return true;
         this.complexMessage.writeError([
-            failedToGenerateProjectErrorMsg()
+            failedToGenerateProjectErrorMsg(),
+            notSupportedProjectTypeErrorMsg(type),
         ]);
         return false;
     }
