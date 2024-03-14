@@ -32,3 +32,5 @@ export const failedToRegenerateWorkspaceErrorMsg = () => "Failed to regenerate w
 
 export const workspaceRootNotExistErrorMsg = () =>
     "You are not in an existing repox workspace!";
+
+export const failedToGenerateProjectErrorMsg = () => "Failed to generate project!";

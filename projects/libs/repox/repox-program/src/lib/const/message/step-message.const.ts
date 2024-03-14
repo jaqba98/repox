@@ -33,3 +33,5 @@ export const runCommandStepMsg = (command: string) => `Run command: ${command}`;
 export const goToWorkspaceRootStepMsg = () => "Go to workspace root";
 
 export const regenerateWorkspaceStepMsg = () => "Regenerate workspace";
+
+export const generateProjectStepMsg = () => "Generate project";

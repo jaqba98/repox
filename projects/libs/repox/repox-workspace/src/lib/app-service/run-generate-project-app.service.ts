@@ -1,25 +1,26 @@
 import {container, singleton} from "tsyringe";
+
+import {changePath} from "@lib/utils";
 import {
     WorkspaceStructureBuilderModel
 } from "../model/workspace/workspace-structure.model";
-import {changePath} from "@lib/utils";
 import {PROJECT_STRUCTURE} from "../const/project-structure.const";
 
 @singleton()
 /**
- * The service uses recursion to generate project.
+ * The app service uses recursion to generate project.
  */
-export class RunGenerateProjectService {
+export class RunGenerateProjectAppService {
     run(): boolean {
-        this.runGenerateWorkspace(PROJECT_STRUCTURE.structure);
+        this.runGenerateProject(PROJECT_STRUCTURE.structure);
         return true;
     }
 
-    private runGenerateWorkspace(children: WorkspaceStructureBuilderModel[]): void {
+    private runGenerateProject(children: WorkspaceStructureBuilderModel[]): void {
         for (const child of children) {
             container.resolve(child.builder).generate();
             changePath(child.path);
-            this.runGenerateWorkspace(child.children);
+            this.runGenerateProject(child.children);
             if (child.path === ".") continue;
             changePath("../");
         }

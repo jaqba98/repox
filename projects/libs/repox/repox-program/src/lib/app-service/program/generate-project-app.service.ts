@@ -14,12 +14,18 @@ import {
 import {SaveWorkspaceDomainStep} from "../../dom-service/step/save-workspace-domain.step";
 import {SaveWorkspaceDtoStep} from "../../dom-service/step/save-workspace-dto.step";
 import {WriteSuccessStep} from "../../dom-service/step/write-success.step";
+import {GenerateProjectStep} from "../../dom-service/step/generate-project.step";
+import {FolderNotExistStep} from "../../dom-service/step/folder-not-exist.step";
+import {CreateFolderStep} from "../../dom-service/step/create-folder.step";
+import {ChangePathStep} from "../../dom-service/step/change-path.step";
+import {createPath} from "@lib/utils";
 
 @singleton()
 /**
  * The app service is responsible for generating project from scratch.
  * Argument | Alias | Description            | Required | Value
  * --name   | -n    | Name of the project.   | true     | string
+ * --path   | -p    | Path to the project.   | true     | string
  */
 export class GenerateProjectAppService {
     constructor(
@@ -28,6 +34,10 @@ export class GenerateProjectAppService {
         private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
         private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
         private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
+        private readonly folderNotExist: FolderNotExistStep,
+        private readonly createFolder: CreateFolderStep,
+        private readonly changePath: ChangePathStep,
+        private readonly generateProject: GenerateProjectStep,
         private readonly saveWorkspaceDomain: SaveWorkspaceDomainStep,
         private readonly saveWorkspaceDto: SaveWorkspaceDtoStep,
         private readonly writeSuccess: WriteSuccessStep
@@ -40,9 +50,17 @@ export class GenerateProjectAppService {
         }
         const name = this.getCommandArgSingleValue.run("name", "n");
         if (!name) return false;
+        const path = this.getCommandArgSingleValue.run("path", "p");
+        if (!path) return false;
+        const newFolder = createPath(path, name);
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.buildWorkspaceDto.run()) return false;
         if (!this.buildWorkspaceDomain.run()) return false;
+        if (!this.folderNotExist.run(newFolder)) return false;
+        if (!this.createFolder.run(newFolder)) return false;
+        if (!this.changePath.run(newFolder)) return false;
+        if (!this.generateProject.run()) return false;
+        if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.saveWorkspaceDomain.run()) return false;
         if (!this.saveWorkspaceDto.run()) return false;
         if (!this.writeSuccess.run()) return false;
