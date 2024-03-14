@@ -2,18 +2,12 @@ import {WorkspaceStructureModel} from "../model/workspace/workspace-structure.mo
 import {WorkspaceFolderEnum} from "../enum/workspace-folder.enum";
 import {SrcFolderBuilder} from "../dom-service/builder/src-folder.builder";
 import {LibFolderBuilder} from "../dom-service/builder/lib-folder.builder";
-import {
-    ProjectMainFileBuilder
-} from "../dom-service/builder/project-main-file.builder";
-import {ProjectIndexFileBuilder} from "../dom-service/builder/project-index-file.builder";
-import {
-    ProjectPackageJsonFileBuilder
-} from "../dom-service/builder/project-package-json-file.builder";
+import {GitkeepFileBuilder} from "../dom-service/builder/gitkeep-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
  */
-export const PROJECT_STRUCTURE: WorkspaceStructureModel = {
+export const BASE_PROJECT_STRUCTURE: WorkspaceStructureModel = {
     structure: [
         {
             path: WorkspaceFolderEnum.src,
@@ -25,22 +19,12 @@ export const PROJECT_STRUCTURE: WorkspaceStructureModel = {
                     children: [
                         {
                             path: ".",
-                            builder: ProjectMainFileBuilder,
+                            builder: GitkeepFileBuilder,
                             children: []
                         }
                     ]
-                },
-                {
-                    path: ".",
-                    builder: ProjectIndexFileBuilder,
-                    children: []
                 }
             ]
-        },
-        {
-            path: ".",
-            builder: ProjectPackageJsonFileBuilder,
-            children: []
         }
     ]
 };
