@@ -2,6 +2,7 @@ import {singleton} from "tsyringe";
 
 import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
 import {writeToFile} from "@lib/utils";
+import {WorkspaceFileEnum} from "@lib/repox-workspace";
 
 @singleton()
 /**
@@ -9,9 +10,9 @@ import {writeToFile} from "@lib/utils";
  */
 export class ProjectIndexFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
-        const mainFileContent = `export * from "./lib/main";
+        const projectIndexFileContent = `export * from "./lib/main";
 `;
-        writeToFile("main.ts", mainFileContent);
+        writeToFile(WorkspaceFileEnum.indexTs, projectIndexFileContent);
     }
 
     regenerate() {

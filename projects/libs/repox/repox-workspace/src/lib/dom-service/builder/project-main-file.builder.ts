@@ -9,11 +9,11 @@ import {writeToFile} from "@lib/utils";
  */
 export class ProjectMainFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate() {
-        const mainFileContent = `export function main() {
+        const projectMainFileContent = `export function main() {
     return "main";        
 }
 `;
-        writeToFile("main.ts", mainFileContent);
+        writeToFile("main.ts", projectMainFileContent);
     }
 
     regenerate() {
