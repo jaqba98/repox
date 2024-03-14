@@ -1,69 +1,62 @@
 import {singleton} from "tsyringe";
 
-import {REPOX_LOGO} from "@lib/repox-const";
-import {NewlineAppService, SimpleMessageAppService} from "@lib/logger";
-// import {GoToWorkspaceRootAppService} from "@lib/program-step";
-import {ParamDomainStore} from "@lib/param-domain";
-
+import {WriteHeaderStep} from "../../dom-service/step/write-header.step";
+import {ProgramEnum} from "../../enum/launcher/program.enum";
+import {CommandEnum} from "../../enum/launcher/command.enum";
 import {
-    BuildWorkspaceDtoStep
-} from "../../dom-service/step/build-workspace-dto.step";
-import {
-    SaveWorkspaceDtoAppService
-} from "../../dom-service/save-workspace-dto-app.service";
-import {
-    AddProjectToDtoAppService
-} from "../../dom-service/add-project-to-dto-app.service";
-import {getCurrentPath} from "@lib/utils";
-import {RunGenerateProjectService} from "@lib/repox-workspace";
+    GetCommandArgSingleValueStep
+} from "../../dom-service/step/get-command-arg-single-value.step";
 
 @singleton()
 /**
- * The start point of the program generate, command project.
+ * The app service is responsible for generating project from scratch.
+ * Argument | Alias | Description            | Required | Value
+ * --name   | -n    | Name of the project.   | true     | string
  */
-export class GenerateProjectAppService {
+export class GenerateWorkspaceAppService {
     constructor(
-        private readonly simpleMessage: SimpleMessageAppService,
-        private readonly newline: NewlineAppService,
-        private readonly store: ParamDomainStore,
-        // private readonly goToWorkspaceRoot: GoToWorkspaceRootAppService,
-        private readonly loadWorkspaceDto: BuildWorkspaceDtoStep,
-        private readonly addProjectToDto: AddProjectToDtoAppService,
-        // private readonly changePath: ChangePathAppService,
+        private readonly writeHeader: WriteHeaderStep,
+        private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep,
+        // private readonly systemProgramExist: SystemProgramExistStep,
+        // private readonly runCommand: RunCommandStep,
+        // private readonly folderNotExist: FolderNotExistStep,
         // private readonly createFolder: CreateFolderStep,
-        private readonly saveWorkspaceDto: SaveWorkspaceDtoAppService,
-        private readonly runGenerateProject: RunGenerateProjectService
+        // private readonly changePath: ChangePathStep,
+        // private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
+        // private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
+        // private readonly generateWorkspace: GenerateWorkspaceStep,
+        // private readonly saveWorkspaceDomain: SaveWorkspaceDomainStep,
+        // private readonly saveWorkspaceDto: SaveWorkspaceDtoStep,
+        // private readonly writeSuccess: WriteSuccessStep
     ) {
     }
 
-    runProgram(): boolean {
-        this.simpleMessage.writeInfo("Generate Program", REPOX_LOGO);
-        this.newline.writeNewline();
-        // if (!this.goToWorkspaceRoot.run()) return false;
-        const projectNames = this.store.getCommandArgValues("name", "n");
-        if (!projectNames) {
-            this.simpleMessage.writeError("You did not specify a project name!");
-            this.simpleMessage.writeWarning("Specify project name by --name or -n and rerun the program.");
+    run(): boolean {
+        if (!this.writeHeader.run(ProgramEnum.generate, CommandEnum.project)) {
             return false;
         }
-        const projectName = projectNames[0];
-        const projectPaths = this.store.getCommandArgValues("path", "p");
-        if (!projectPaths) {
-            this.simpleMessage.writeError("You did not specify a project path!");
-            this.simpleMessage.writeWarning("Specify project path by --path or -p and rerun the program.");
-            return false;
-        }
-        const projectPath = projectPaths[0];
-        const currentPath = getCurrentPath();
-        if (!this.loadWorkspaceDto.run()) return false;
-        if (!this.addProjectToDto.run(projectName, projectPath)) return false;
-        if (!this.saveWorkspaceDto.run()) return false;
-        // if (!this.createFolder.run(projectPath)) return false;
-        // if (!this.changePath.run(projectPath)) return false;
-        if (!this.runGenerateProject.run()) return false;
-        // if (!this.changePath.run(currentPath)) return false;
-        this.newline.writeNewline();
-        this.simpleMessage.writeSuccess("Command executed correctly!");
+        const name = this.getCommandArgSingleValue.run("name", "n");
+        if (!name) return false;
+        console.log(name);
+        // if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+        // if (!this.runCommand.run("npm install --global pnpm")) return false;
+        // if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false;
+        // if (!this.folderNotExist.run(name)) return false;
+        // if (!this.createFolder.run(name)) return false;
+        // if (!this.changePath.run(name)) return false;
+        // if (!this.buildWorkspaceDto.run()) return false;
+        // if (!this.buildWorkspaceDomain.run()) return false;
+        // if (!this.generateWorkspace.run()) return false;
+        // if (!this.saveWorkspaceDomain.run()) return false;
+        // if (!this.saveWorkspaceDto.run()) return false;
+        // if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
+        // if (!this.runCommand.run("git init")) return false;
+        // if (!this.runCommand.run("git config core.autocrlf false")) return false;
+        // if (!this.runCommand.run("git add .")) return false;
+        // if (!this.runCommand.run('git commit -m "initial commit"')) return false;
+        // if (!this.writeSuccess.run()) return false;
         return true;
     }
 }
