@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@types/core-js": "^2.5.8",
-    "@types/node": "^20.11.25",
+    "@types/node": "^20.11.28",
     "command-exists": "^1.2.9",
     "core-js": "^3.36.0",
     "deepcopy": "^2.1.0",
     "glob": "^10.3.10",
-    "repox": "^1.4.44",
+    "repox": "^1.4.45",
     "tsc-alias": "^1.8.8",
     "tsyringe": "^4.8.0",
     "typescript": "^5.4.2"
