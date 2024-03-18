@@ -70,16 +70,15 @@ export class GenerateProjectAppService {
         const projectRoot = createPath(path, name);
         const projectSrc = createPath(projectRoot, WorkspaceFolderEnum.src);
         if (!this.goToWorkspaceRoot.run()) return false;
+        if (!this.folderNotExist.run(projectRoot)) return false;
         if (!this.buildWorkspaceDto.run()) return false;
         if (!this.buildWorkspaceDomain.run()) return false;
         if (!this.checkProjectNotExist.run(name)) return false;
         if (!this.addProjectToWorkspaceDomain.run(name, projectRoot, projectSrc, type)) return false;
-        // todo: I am here
-        // if (!this.folderNotExist.run(projectPath)) return false;
-        // if (!this.createFolder.run(projectPath)) return false;
-        // if (!this.changePath.run(projectPath)) return false;
-        // if (!this.generateProject.run(name, path, type)) return false;
-        // if (!this.goToWorkspaceRoot.run()) return false;
+        if (!this.createFolder.run(projectRoot)) return false;
+        if (!this.changePath.run(projectRoot)) return false;
+        if (!this.generateProject.run(type)) return false;
+        if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.saveWorkspaceDomain.run()) return false;
         if (!this.saveWorkspaceDto.run()) return false;
         if (!this.writeSuccess.run()) return false;

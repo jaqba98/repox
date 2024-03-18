@@ -1,12 +1,12 @@
 import {WorkspaceStructureModel} from "../model/workspace/workspace-structure.model";
 import {WorkspaceFolderEnum} from "../enum/workspace-folder.enum";
 import {SrcFolderBuilder} from "../dom-service/builder/src-folder.builder";
-import {AppTsMainFileBuilder} from "../dom-service/builder/app-ts-main-file.builder";
+import {GitkeepFileBuilder} from "../dom-service/builder/gitkeep-file.builder";
 
 /**
- * The contestant contains the whole workspace structure to generate.
+ * The contestant contains the base project structure to generate.
  */
-export const APP_TYPESCRIPT_PROJECT_STRUCTURE: WorkspaceStructureModel = {
+export const BASE_PROJECT_STRUCTURE: WorkspaceStructureModel = {
     structure: [
         {
             path: WorkspaceFolderEnum.src,
@@ -14,7 +14,7 @@ export const APP_TYPESCRIPT_PROJECT_STRUCTURE: WorkspaceStructureModel = {
             children: [
                 {
                     path: ".",
-                    builder: AppTsMainFileBuilder,
+                    builder: GitkeepFileBuilder,
                     children: []
                 }
             ]

@@ -21,9 +21,9 @@ export class GenerateProjectStep {
     ) {
     }
 
-    run(name: string, path: string, type: string): boolean {
+    run(type: string): boolean {
         this.stepMessage.write(generateProjectStepMsg());
-        if (this.runGenerateProject.run(name, path, type)) return true;
+        if (this.runGenerateProject.run(type)) return true;
         this.complexMessage.writeError([
             failedToGenerateProjectErrorMsg(),
             notSupportedProjectTypeErrorMsg(type),
