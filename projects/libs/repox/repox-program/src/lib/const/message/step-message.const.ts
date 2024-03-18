@@ -35,3 +35,6 @@ export const goToWorkspaceRootStepMsg = () => "Go to workspace root";
 export const regenerateWorkspaceStepMsg = () => "Regenerate workspace";
 
 export const generateProjectStepMsg = () => "Generate project";
+
+export const checkProjectNotExistStepMsg = (projectName: string) =>
+    `Check project not exist: ${projectName}`;

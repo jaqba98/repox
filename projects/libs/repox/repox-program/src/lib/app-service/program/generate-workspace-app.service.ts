@@ -54,7 +54,7 @@ export class GenerateWorkspaceAppService {
         if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
-        if (!this.runCommand.run("npm install --global pnpm")) return false;
+        if (!this.runCommand.run("npm install --global pnpm --force")) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false;
         if (!this.folderNotExist.run(name)) return false;
         if (!this.createFolder.run(name)) return false;

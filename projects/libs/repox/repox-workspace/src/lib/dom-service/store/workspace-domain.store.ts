@@ -52,4 +52,11 @@ export class WorkspaceDomainStore {
             exclude: deepCopy(this.workspaceDomain.tsconfigJsonDomain.exclude)
         };
     }
+
+    projectExist(projectName: string): boolean {
+        if (!this.workspaceDomain) return false;
+        const project = Object.values(this.workspaceDomain.repoxJsonDomain.projects)
+            .find(project => project.name === projectName);
+        return Boolean(project);
+    }
 }
