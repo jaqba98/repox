@@ -59,4 +59,14 @@ export class WorkspaceDomainStore {
             .find(project => project.name === projectName);
         return Boolean(project);
     }
+
+    addProject(name: string, root: string, src: string, type: string): void {
+        if (!this.workspaceDomain) return;
+        this.workspaceDomain.repoxJsonDomain.projects[name] = {
+            name: name,
+            root: root,
+            src: src,
+            type: type
+        };
+    }
 }

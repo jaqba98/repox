@@ -23,6 +23,7 @@ import {SystemProgramExistStep} from "../../dom-service/step/system-program-exis
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
 import {WorkspaceFolderEnum} from "@lib/repox-workspace";
 import { CheckProjectNotExistStep } from "../../dom-service/step/check-project-not-exist.step";
+import { AddProjectToWorkspaceDomainStep } from "../../dom-service/step/add-project-to-workspace-domain.step";
 
 @singleton()
 /**
@@ -41,6 +42,7 @@ export class GenerateProjectAppService {
         private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
         private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
         private readonly checkProjectNotExist: CheckProjectNotExistStep,
+        private readonly addProjectToWorkspaceDomain: AddProjectToWorkspaceDomainStep,
         private readonly folderNotExist: FolderNotExistStep,
         private readonly createFolder: CreateFolderStep,
         private readonly changePath: ChangePathStep,
@@ -65,22 +67,22 @@ export class GenerateProjectAppService {
         if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false;
-        const projectPath = createPath(path, name);
-        const projectSrc = createPath(projectPath, WorkspaceFolderEnum.src);
+        const projectRoot = createPath(path, name);
+        const projectSrc = createPath(projectRoot, WorkspaceFolderEnum.src);
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.buildWorkspaceDto.run()) return false;
         if (!this.buildWorkspaceDomain.run()) return false;
         if (!this.checkProjectNotExist.run(name)) return false;
+        if (!this.addProjectToWorkspaceDomain.run(name, projectRoot, projectSrc, type)) return false;
         // todo: I am here
-
         // if (!this.folderNotExist.run(projectPath)) return false;
         // if (!this.createFolder.run(projectPath)) return false;
         // if (!this.changePath.run(projectPath)) return false;
         // if (!this.generateProject.run(name, path, type)) return false;
         // if (!this.goToWorkspaceRoot.run()) return false;
-        // if (!this.saveWorkspaceDomain.run()) return false;
-        // if (!this.saveWorkspaceDto.run()) return false;
-        // if (!this.writeSuccess.run()) return false;
+        if (!this.saveWorkspaceDomain.run()) return false;
+        if (!this.saveWorkspaceDto.run()) return false;
+        if (!this.writeSuccess.run()) return false;
         return true;
     }
 }

@@ -38,3 +38,6 @@ export const generateProjectStepMsg = () => "Generate project";
 
 export const checkProjectNotExistStepMsg = (projectName: string) =>
     `Check project not exist: ${projectName}`;
+
+export const addProjectToWorkspaceDomainStepMsg = (projectName: string) =>
+    `Add project to workspace domain: ${projectName}`;
