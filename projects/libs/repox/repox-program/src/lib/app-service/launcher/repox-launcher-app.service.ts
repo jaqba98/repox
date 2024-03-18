@@ -10,7 +10,7 @@ import {GenerateProjectAppService} from "../program/generate-project-app.service
 import {
     commandNotExistErrorMsg,
     programNotExistErrorMsg
-} from "../../const/message/error-message.enum";
+} from "../../const/message/error-message.const";
 import {ProgramEnum} from "../../enum/launcher/program.enum";
 import {CommandEnum} from "../../enum/launcher/command.enum";
 

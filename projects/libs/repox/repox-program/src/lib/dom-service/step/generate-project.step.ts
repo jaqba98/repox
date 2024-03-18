@@ -7,7 +7,7 @@ import {generateProjectStepMsg} from "../../const/message/step-message.const";
 import {
     failedToGenerateProjectErrorMsg,
     notSupportedProjectTypeErrorMsg
-} from "../../const/message/error-message.enum";
+} from "../../const/message/error-message.const";
 
 @singleton()
 /**

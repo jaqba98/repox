@@ -6,7 +6,7 @@ import {RunRegenerateWorkspaceAppService} from "@lib/repox-workspace";
 import {regenerateWorkspaceStepMsg} from "../../const/message/step-message.const";
 import {
     failedToRegenerateWorkspaceErrorMsg
-} from "../../const/message/error-message.enum";
+} from "../../const/message/error-message.const";
 
 @singleton()
 /**

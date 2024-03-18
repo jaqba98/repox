@@ -4,7 +4,7 @@ import {ParamDomainStore} from "@lib/param-domain";
 import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 
 import {getBooleanCommandArgValueStepMsg} from "../../const/message/step-message.const";
-import {argumentIsNotSpecifiedErrorMsg} from "../../const/message/error-message.enum";
+import {argumentIsNotSpecifiedErrorMsg} from "../../const/message/error-message.const";
 import {
     specifyArgumentCorrectlyWarningMsg
 } from "../../const/message/warning-message.const";

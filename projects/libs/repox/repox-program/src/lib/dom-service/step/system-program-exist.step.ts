@@ -10,7 +10,7 @@ import {SystemProgramUrlEnum} from "../../enum/system-program/system-program-url
 import {systemProgramExistStepMsg} from "../../const/message/step-message.const";
 import {
     systemProgramNotExistInSystemErrorMsg
-} from "../../const/message/error-message.enum";
+} from "../../const/message/error-message.const";
 import {
     installAndRunAgainWarningMsg,
     linkToProgramWarningMsg

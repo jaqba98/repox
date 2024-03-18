@@ -7,7 +7,7 @@ import {getSingleCommandArgValueStepMsg} from "../../const/message/step-message.
 import {
     argumentIsNotHaveSingleValueErrorMsg,
     argumentIsNotSpecifiedErrorMsg
-} from "../../const/message/error-message.enum";
+} from "../../const/message/error-message.const";
 import {
     specifyArgumentCorrectlyWarningMsg
 } from "../../const/message/warning-message.const";

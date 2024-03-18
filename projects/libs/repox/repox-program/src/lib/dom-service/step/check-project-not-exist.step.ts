@@ -1,9 +1,11 @@
 import {singleton} from "tsyringe";
 
-import {StepMessageAppService} from "@lib/logger";
+import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 import {WorkspaceDomainStore} from "@lib/repox-workspace";
 
 import {checkProjectNotExistStepMsg} from "../../const/message/step-message.const";
+import {projectAlreadyExistErrorMsg} from "../../const/message/error-message.const";
+import {specifyDifferentProjectNameWarningMsg} from "../../const/message/warning-message.const";
 
 @singleton()
 /**
@@ -12,12 +14,22 @@ import {checkProjectNotExistStepMsg} from "../../const/message/step-message.cons
 export class CheckProjectNotExistStep {
     constructor(
         private readonly stepMessage: StepMessageAppService,
-        private readonly store: WorkspaceDomainStore
+        private readonly store: WorkspaceDomainStore,
+        private readonly complexMessage: ComplexMessageAppService
     ) {
     }
 
     run(projectName: string): boolean {
         this.stepMessage.write(checkProjectNotExistStepMsg(projectName));
-        return !this.store.projectExist(projectName);
+        if (this.store.projectExist(projectName)) {
+            this.complexMessage.writeError([
+                projectAlreadyExistErrorMsg(projectName)
+            ]);
+            this.complexMessage.writeWarning([
+                specifyDifferentProjectNameWarningMsg()
+            ])
+            return false;
+        }
+        return true;
     }
 }
