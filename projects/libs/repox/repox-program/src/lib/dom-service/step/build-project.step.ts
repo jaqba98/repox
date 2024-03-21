@@ -4,6 +4,7 @@ import {StepMessageAppService} from "@lib/logger";
 import {WorkspaceDomainStore} from "@lib/repox-workspace";
 
 import {buildProjectStepMsg} from "../../const/message/step-message.const";
+import { runCommand } from "@lib/utils";
 
 @singleton()
 /**
@@ -18,6 +19,9 @@ export class BuildProjectStep {
 
     run(name: string): boolean {
         this.stepMessage.write(buildProjectStepMsg(name));
+        if (!this.store.workspaceDomain) return false;
+        const project = this.store.workspaceDomain.repoxJsonDomain.projects[name];
+        runCommand(`npx tsc --rootDir ${project.root} --outDir dist/${project.root}`);
         return true;
     }
 }
