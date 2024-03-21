@@ -16,7 +16,7 @@
     "core-js": "^3.36.0",
     "deepcopy": "^2.1.0",
     "glob": "^10.3.10",
-    "repox": "^1.4.46",
+    "repox": "^1.4.47",
     "tsc-alias": "^1.8.8",
     "tsyringe": "^4.8.0",
     "typescript": "^5.4.2"
@@ -31,7 +31,7 @@
     "repox": "^1.4.42",
     "ts-jest": "^29.1.2",
     "tsc-alias": "^1.8.8",
-    "tsyringe": "^5.4.3",
+    "tsyringe": "^4.8.0",
     "typescript": "^5.4.2"
   }
 }

@@ -16,6 +16,7 @@ import {WriteSuccessStep} from "../../dom-service/step/write-success.step";
 import {SystemProgramExistStep} from "../../dom-service/step/system-program-exist.step";
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
 import {CheckProjectExistStep} from "../../dom-service/step/check-project-exist.step";
+import {BuildProjectStep} from "../../dom-service/step/build-project.step";
 
 @singleton()
 /**
@@ -32,6 +33,7 @@ export class BuildProjectAppService {
         private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
         private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
         private readonly checkProjectExist: CheckProjectExistStep,
+        private readonly buildProject: BuildProjectStep,
         private readonly writeSuccess: WriteSuccessStep
     ) {
     }
@@ -50,6 +52,7 @@ export class BuildProjectAppService {
         if (!this.buildWorkspaceDto.run()) return false;
         if (!this.buildWorkspaceDomain.run()) return false;
         if (!this.checkProjectExist.run(name)) return false;
+        if (!this.buildProject.run(name)) return false;
         if (!this.writeSuccess.run()) return false;
         return true;
     }
