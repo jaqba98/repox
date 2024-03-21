@@ -13,6 +13,7 @@ import {TsconfigJsonFileBuilder} from "../dom-service/builder/tsconfig-json-file
 import {GitignoreFileBuilder} from "../dom-service/builder/gitignore-file.builder";
 import {ReadmeFileBuilder} from "../dom-service/builder/readme-file.builder";
 import {NpmrcFileBuilder} from "../dom-service/builder/npmrc-file.builder";
+import {EslintJsonFileBuilder} from "../dom-service/builder/eslint-json-file.builder";
 
 /**
  * The contestant contains the whole workspace structure to generate.
@@ -86,6 +87,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         {
             path: ".",
             builder: TsconfigJsonFileBuilder,
+            children: []
+        },
+        {
+            path: ".",
+            builder: EslintJsonFileBuilder,
             children: []
         }
     ]
