@@ -8,6 +8,9 @@ export const programNotExistErrorMsg = (program: string) =>
 export const projectAlreadyExistErrorMsg = (project: string) =>
     `The ${project} already exist!`;
 
+export const projectNotExistErrorMsg = (project: string) =>
+    `The ${project} not exist!`;
+
 export const commandNotExistErrorMsg = (program: string, command: string) =>
     `The ${command} command does not exist for ${program} program!`;
 

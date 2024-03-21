@@ -15,6 +15,7 @@ import {SaveWorkspaceDtoStep} from "../../dom-service/step/save-workspace-dto.st
 import {WriteSuccessStep} from "../../dom-service/step/write-success.step";
 import {SystemProgramExistStep} from "../../dom-service/step/system-program-exist.step";
 import {SystemProgramEnum} from "../../enum/system-program/system-program.enum";
+import {CheckProjectExistStep} from "../../dom-service/step/check-project-exist.step";
 
 @singleton()
 /**
@@ -30,7 +31,7 @@ export class BuildProjectAppService {
         private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
         private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
         private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
-        private readonly saveWorkspaceDto: SaveWorkspaceDtoStep,
+        private readonly checkProjectExist: CheckProjectExistStep,
         private readonly writeSuccess: WriteSuccessStep
     ) {
     }
@@ -48,7 +49,7 @@ export class BuildProjectAppService {
         if (!this.goToWorkspaceRoot.run()) return false;
         if (!this.buildWorkspaceDto.run()) return false;
         if (!this.buildWorkspaceDomain.run()) return false;
-        if (!this.saveWorkspaceDto.run()) return false;
+        if (!this.checkProjectExist.run(name)) return false;
         if (!this.writeSuccess.run()) return false;
         return true;
     }

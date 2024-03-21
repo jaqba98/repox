@@ -55,7 +55,7 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
             },
             devDependencies: {
                 "core-js": "^3.36.1",
-                "tsyringe": "^5.4.3",
+                "tsyringe": "^4.8.0",
                 "typescript": "^5.4.2"
             }
         };
