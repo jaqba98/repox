@@ -4,5 +4,6 @@
 export enum ProgramEnum {
     unknown = "unknown",
     generate = "generate",
-    regenerate = "regenerate"
+    regenerate = "regenerate",
+    build = "build"
 }

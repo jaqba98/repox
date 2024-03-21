@@ -13,6 +13,7 @@ import {
 } from "../../const/message/error-message.const";
 import {ProgramEnum} from "../../enum/launcher/program.enum";
 import {CommandEnum} from "../../enum/launcher/command.enum";
+import {BuildProjectAppService} from "../program/build-project-app.service";
 
 @singleton()
 /**
@@ -25,6 +26,7 @@ export class RepoxLauncherAppService {
         private readonly unknownUnknown: UnknownUnknownAppService,
         private readonly generateWorkspace: GenerateWorkspaceAppService,
         private readonly regenerateWorkspace: RegenerateWorkspaceAppService,
+        private readonly buildProject: BuildProjectAppService,
         private readonly generateProject: GenerateProjectAppService,
         private readonly complexMessage: ComplexMessageAppService
     ) {
@@ -35,6 +37,7 @@ export class RepoxLauncherAppService {
         if (program === ProgramEnum.unknown) return this.unknownProgram(program, command);
         if (program === ProgramEnum.generate) return this.generateProgram(program, command);
         if (program === ProgramEnum.regenerate) return this.regenerateProgram(program, command);
+        if (program === ProgramEnum.build) return this.buildProgram(program, command);
         this.throwLauncherProgramError(program);
         return false;
     }
@@ -54,6 +57,12 @@ export class RepoxLauncherAppService {
 
     private regenerateProgram(program: string, command: string): boolean {
         if (command === CommandEnum.workspace) return this.regenerateWorkspace.run();
+        this.throwLauncherCommandError(program, command);
+        return false;
+    }
+
+    private buildProgram(program: string, command: string): boolean {
+        if (command === CommandEnum.project) return this.buildProject.run();
         this.throwLauncherCommandError(program, command);
         return false;
     }
