@@ -4,7 +4,7 @@ import {changePath} from "@lib/utils";
 import {
     WorkspaceStructureBuilderModel
 } from "../model/workspace/workspace-structure.model";
-import {BASE_PROJECT_STRUCTURE} from "../const/base-project-structure.const";
+import {APP_TS_PROJECT_STRUCTURE} from "../const/app-ts-project-structure.const";
 
 @singleton()
 /**
@@ -12,7 +12,9 @@ import {BASE_PROJECT_STRUCTURE} from "../const/base-project-structure.const";
  */
 export class RunGenerateProjectAppService {
     run(type: string): boolean {
-        this.runGenerateProject(BASE_PROJECT_STRUCTURE.structure);
+        if (type === "@app/ts") {
+            this.runGenerateProject(APP_TS_PROJECT_STRUCTURE.structure);
+        }
         return true;
     }
 
