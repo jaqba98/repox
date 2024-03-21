@@ -1,7 +1,7 @@
 import {container, singleton} from "tsyringe";
 import {RepoxCommandEnum, RepoxProgramEnum} from "@lib/repox-domain";
 import {
-    BuildProjectProgramService,
+    BuildProjectAppService,
     GenerateProjectAppService,
     GenerateWorkspaceAppService,
     LintProjectProgramService,
@@ -45,7 +45,7 @@ export class RepoxLaunchProgramAppService {
                 {
                     programName: RepoxProgramEnum.build,
                     commandName: RepoxCommandEnum.project,
-                    service: container.resolve(BuildProjectProgramService)
+                    service: container.resolve(BuildProjectAppService)
                 },
                 {
                     programName: RepoxProgramEnum.publish,
