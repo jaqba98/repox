@@ -54,7 +54,7 @@ export class GenerateWorkspaceAppService {
         if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
-        if (!this.runCommand.run("npm install --global pnpm --force")) return false;
+        if (!this.runCommand.run("npm install --global pnpm")) return false;
         if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false;
         if (!this.folderNotExist.run(name)) return false;
         if (!this.createFolder.run(name)) return false;
@@ -65,7 +65,7 @@ export class GenerateWorkspaceAppService {
         if (!this.saveWorkspaceDomain.run()) return false;
         if (!this.saveWorkspaceDto.run()) return false;
         if (!this.runCommand.run("pnpm install --prefer-offline")) return false;
-        if (!this.runCommand.run("git init")) return false;
+        if (!this.runCommand.run('git init -b "main"')) return false;
         if (!this.runCommand.run("git config core.autocrlf false")) return false;
         if (!this.runCommand.run("git add .")) return false;
         if (!this.runCommand.run('git commit -m "initial commit"')) return false;
