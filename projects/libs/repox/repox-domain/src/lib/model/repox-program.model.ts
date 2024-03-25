@@ -7,11 +7,11 @@ export interface EmptyRepoxProgramModel {
 }
 
 export interface DefaultDefaultRepoxProgramModel {
-  showVersion: boolean;
+  showVersion: boolean
 }
 
 export type TRepoxProgramModel =
   EmptyRepoxProgramModel |
-  DefaultDefaultRepoxProgramModel;
+  DefaultDefaultRepoxProgramModel
 
 // todo: refactor the code

@@ -3,8 +3,8 @@
  * and value field for value.
  */
 export interface KeyValueModel {
-    key: string;
-    value: string;
+  key: string
+  value: string
 }
 
 // todo: refactor the code

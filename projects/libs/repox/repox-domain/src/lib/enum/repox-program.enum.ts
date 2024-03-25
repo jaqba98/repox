@@ -3,20 +3,20 @@
  */
 
 export enum RepoxProgramEnum {
-  default = `default`,
-  generate = `generate`,
-  regenerate = `regenerate`,
-  build = `build`,
-  publish = `publish`,
-  lint = `lint`
+  default = 'default',
+  generate = 'generate',
+  regenerate = 'regenerate',
+  build = 'build',
+  publish = 'publish',
+  lint = 'lint'
 }
 
 export enum RepoxProgramAliasEnum {
-  generate = `g`,
-  regenerate = `r`,
-  build = `b`,
-  publish = `p`,
-  lint = `l`
+  generate = 'g',
+  regenerate = 'r',
+  build = 'b',
+  publish = 'p',
+  lint = 'l'
 }
 
 // todo: refactor the code

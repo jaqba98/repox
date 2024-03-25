@@ -3,43 +3,43 @@
  */
 
 export const programNotExistErrorMsg = (program: string) =>
-    `The ${program} program does not exist!`;
+    `The ${program} program does not exist!`
 
 export const projectAlreadyExistErrorMsg = (project: string) =>
-    `The ${project} already exist!`;
+    `The ${project} already exist!`
 
 export const projectNotExistErrorMsg = (project: string) =>
-    `The ${project} not exist!`;
+    `The ${project} not exist!`
 
 export const commandNotExistErrorMsg = (program: string, command: string) =>
-    `The ${command} command does not exist for ${program} program!`;
+    `The ${command} command does not exist for ${program} program!`
 
 export const failedToCreateFolderErrorMsg = (folderName: string) =>
-    `Failed to create a folder named ${folderName}!`;
+    `Failed to create a folder named ${folderName}!`
 
 export const folderAlreadyExistErrorMsg = (folderName: string) =>
-    `The ${folderName} folder already exist!`;
+    `The ${folderName} folder already exist!`
 
 export const argumentIsNotSpecifiedErrorMsg = (arg: string) =>
-    `The ${arg} argument is not specified!`;
+    `The ${arg} argument is not specified!`
 
 export const argumentIsNotHaveSingleValueErrorMsg = (arg: string) =>
-    `The ${arg} argument does not have a single value!`;
+    `The ${arg} argument does not have a single value!`
 
 export const systemProgramNotExistInSystemErrorMsg = (systemProgram: string) =>
-    `The ${systemProgram} program does not exist in the system!`;
+    `The ${systemProgram} program does not exist in the system!`
 
 export const failedToChangePathErrorMsg = (path: string) =>
-    `Failed to change the path: ${path}!`;
+    `Failed to change the path: ${path}!`
 
-export const failedToGenerateWorkspaceErrorMsg = () => "Failed to generate workspace!";
+export const failedToGenerateWorkspaceErrorMsg = () => 'Failed to generate workspace!'
 
-export const failedToRegenerateWorkspaceErrorMsg = () => "Failed to regenerate workspace!";
+export const failedToRegenerateWorkspaceErrorMsg = () => 'Failed to regenerate workspace!'
 
 export const workspaceRootNotExistErrorMsg = () =>
-    "You are not in an existing repox workspace!";
+  'You are not in an existing repox workspace!'
 
-export const failedToGenerateProjectErrorMsg = () => "Failed to generate project!";
+export const failedToGenerateProjectErrorMsg = () => 'Failed to generate project!'
 
 export const notSupportedProjectTypeErrorMsg = (type: string) =>
-    `Not supported project type: ${type}`;
+    `Not supported project type: ${type}`

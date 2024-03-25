@@ -3,12 +3,12 @@
  */
 
 export interface RepoxJsonDomainProjectModel {
-    name: string;
-    root: string;
-    src: string;
-    type: string;
+  name: string
+  root: string
+  src: string
+  type: string
 }
 
 export interface RepoxJsonDomainModel {
-    projects: Record<string, RepoxJsonDomainProjectModel>;
+  projects: Record<string, RepoxJsonDomainProjectModel>
 }

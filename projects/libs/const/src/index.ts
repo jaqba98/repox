@@ -1,3 +1,3 @@
-export * from "./lib/symbol.const";
+export * from './lib/symbol.const'
 
 // todo: refactor the code

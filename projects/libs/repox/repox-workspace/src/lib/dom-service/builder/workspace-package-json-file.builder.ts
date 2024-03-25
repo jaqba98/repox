@@ -1,69 +1,69 @@
-import {singleton} from "tsyringe";
+import { singleton } from 'tsyringe'
 
-import {getCurrentFolderName} from "@lib/utils";
+import { getCurrentFolderName } from '@lib/utils'
 
-import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
-import {PackageJsonDomainModel} from "../../model/workspace/package-json-domain.model";
-import {WorkspaceDomainStore} from "../store/workspace-domain.store";
+import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
+import { type PackageJsonDomainModel } from '../../model/workspace/package-json-domain.model'
+import { WorkspaceDomainStore } from '../store/workspace-domain.store'
 
 @singleton()
 /**
  * Create a workspace package.json file.
  */
 export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
-    constructor(private readonly store: WorkspaceDomainStore) {
-        super();
-    }
+  constructor (private readonly store: WorkspaceDomainStore) {
+    super()
+  }
 
-    generate() {
-        if (!this.store.workspaceDomain) return;
-        this.store.workspaceDomain.workspacePackageJsonDomain =
-            this.buildDefaultWorkspacePackageJson();
-    }
+  generate () {
+    if (!this.store.workspaceDomain) return
+    this.store.workspaceDomain.workspacePackageJsonDomain =
+            this.buildDefaultWorkspacePackageJson()
+  }
 
-    regenerate() {
-        if (!this.store.workspaceDomain) return;
-        this.store.workspaceDomain.workspacePackageJsonDomain = {
-            ...this.store.workspaceDomain.workspacePackageJsonDomain,
-            ...this.buildDefaultWorkspacePackageJson(),
-            scripts: {
-                ...this.store.workspaceDomain.workspacePackageJsonDomain.scripts,
-                ...this.buildDefaultWorkspacePackageJson().scripts,
-            },
-            dependencies: {
-                ...this.store.workspaceDomain.workspacePackageJsonDomain.dependencies,
-                ...this.buildDefaultWorkspacePackageJson().dependencies,
-            },
-            devDependencies: {
-                ...this.store.workspaceDomain.workspacePackageJsonDomain.devDependencies,
-                ...this.buildDefaultWorkspacePackageJson().devDependencies,
-            }
-        };
+  regenerate () {
+    if (!this.store.workspaceDomain) return
+    this.store.workspaceDomain.workspacePackageJsonDomain = {
+      ...this.store.workspaceDomain.workspacePackageJsonDomain,
+      ...this.buildDefaultWorkspacePackageJson(),
+      scripts: {
+        ...this.store.workspaceDomain.workspacePackageJsonDomain.scripts,
+        ...this.buildDefaultWorkspacePackageJson().scripts
+      },
+      dependencies: {
+        ...this.store.workspaceDomain.workspacePackageJsonDomain.dependencies,
+        ...this.buildDefaultWorkspacePackageJson().dependencies
+      },
+      devDependencies: {
+        ...this.store.workspaceDomain.workspacePackageJsonDomain.devDependencies,
+        ...this.buildDefaultWorkspacePackageJson().devDependencies
+      }
     }
+  }
 
-    private buildDefaultWorkspacePackageJson(): PackageJsonDomainModel {
-        return {
-            name: getCurrentFolderName(),
-            version: "1.0.0",
-            private: true,
-            scripts: {},
-            dependencies: {
-                "@types/core-js": "^2.5.8",
-                "@types/node": "^20.11.30",
-                "repox": "^1.4.49",
-                "tsc-alias": "^1.8.8"
-            },
-            devDependencies: {
-                "core-js": "^3.36.1",
-                "tsyringe": "^4.8.0",
-                "typescript": "^5.4.2",
-                "@typescript-eslint/eslint-plugin": "^6.4.0",
-                "eslint": "^8.0.1",
-                "eslint-config-standard-with-typescript": "^43.0.1",
-                "eslint-plugin-import": "^2.25.2",
-                "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-                "eslint-plugin-promise": "^6.0.0",
-            }
-        };
+  private buildDefaultWorkspacePackageJson (): PackageJsonDomainModel {
+    return {
+      name: getCurrentFolderName(),
+      version: '1.0.0',
+      private: true,
+      scripts: {},
+      dependencies: {
+        '@types/core-js': '^2.5.8',
+        '@types/node': '^20.11.30',
+        repox: '^1.4.49',
+        'tsc-alias': '^1.8.8'
+      },
+      devDependencies: {
+        'core-js': '^3.36.1',
+        tsyringe: '^4.8.0',
+        typescript: '^5.4.2',
+        '@typescript-eslint/eslint-plugin': '^6.4.0',
+        eslint: '^8.0.1',
+        'eslint-config-standard-with-typescript': '^43.0.1',
+        'eslint-plugin-import': '^2.25.2',
+        'eslint-plugin-n': '^15.0.0 || ^16.0.0 ',
+        'eslint-plugin-promise': '^6.0.0'
+      }
     }
+  }
 }

@@ -1,6 +1,6 @@
-import {singleton} from "tsyringe";
+import { singleton } from 'tsyringe'
 
-import {deepCopy} from "@lib/utils";
+import { deepCopy } from '@lib/utils'
 
 @singleton()
 /**
@@ -8,11 +8,11 @@ import {deepCopy} from "@lib/utils";
  * user-supplied arguments on the command line.
  */
 export class CommandLineArgsService {
-    getUserArgs(): string[] {
-        return this.getArgs().slice(2);
-    }
+  getUserArgs (): string[] {
+    return this.getArgs().slice(2)
+  }
 
-    private getArgs(): string[] {
-        return deepCopy(process.argv);
-    }
+  private getArgs (): string[] {
+    return deepCopy(process.argv)
+  }
 }
