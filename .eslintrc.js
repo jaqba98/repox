@@ -23,6 +23,7 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-      "max-lines": "error"
+      "max-lines": "error",
+      "max-depth": "error"
     }
 }

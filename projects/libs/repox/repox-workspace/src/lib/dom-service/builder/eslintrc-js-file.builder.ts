@@ -43,7 +43,8 @@ export class EslintrcJsFileBuilder extends WorkspaceStructureAbstractBuilder {
         "sourceType": "module"
     },
     "rules": {
-      "max-lines": "error"
+      "max-lines": "error",
+      "max-depth": "error"
     }
 }
 `
