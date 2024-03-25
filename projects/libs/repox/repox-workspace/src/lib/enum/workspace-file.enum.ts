@@ -10,5 +10,6 @@ export enum WorkspaceFileEnum {
     readmeMd = "README.md",
     npmrc = ".npmrc",
     indexTs = "index.ts",
-    mainTs = "main.ts"
+    mainTs = "main.ts",
+    eslintrcJs = ".eslintrc.js"
 }
