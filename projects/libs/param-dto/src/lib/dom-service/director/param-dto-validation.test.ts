@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { container } from 'tsyringe'
 
 import { ParamDtoValidationDirector } from './param-dto-validation.director'
