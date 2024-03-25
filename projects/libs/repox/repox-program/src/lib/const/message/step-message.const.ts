@@ -2,48 +2,48 @@
  * All step messages for that project.
  */
 
-export const createFolderStepMsg = (folderName: string) => `Create folder: ${folderName}`
+export const createFolderStepMsg = (folderName: string): string => `Create folder: ${folderName}`
 
-export const folderNotExistStepMsg = (folderName: string) =>
+export const folderNotExistStepMsg = (folderName: string): string =>
     `Folder not exist: ${folderName}`
 
-export const getSingleCommandArgValueStepMsg = (arg: string) =>
+export const getSingleCommandArgValueStepMsg = (arg: string): string =>
     `Get a single command argument value: ${arg}`
 
-export const getBooleanCommandArgValueStepMsg = (arg: string) =>
+export const getBooleanCommandArgValueStepMsg = (arg: string): string =>
     `Get a boolean command argument value: ${arg}`
 
-export const systemProgramExistStepMsg = (systemProgram: string) =>
+export const systemProgramExistStepMsg = (systemProgram: string): string =>
     `System program exist: ${systemProgram}`
 
-export const changePathStepMsg = (path: string) => `Change path: ${path}`
+export const changePathStepMsg = (path: string): string => `Change path: ${path}`
 
-export const buildWorkspaceDtoStepMsg = () => 'Build workspace dto'
+export const buildWorkspaceDtoStepMsg = (): string => 'Build workspace dto'
 
-export const buildWorkspaceDomainStepMsg = () => 'Build workspace domain'
+export const buildWorkspaceDomainStepMsg = (): string => 'Build workspace domain'
 
-export const generateWorkspaceStepMsg = () => 'Generate workspace'
+export const generateWorkspaceStepMsg = (): string => 'Generate workspace'
 
-export const saveWorkspaceDomainStepMsg = () => 'Save workspace domain'
+export const saveWorkspaceDomainStepMsg = (): string => 'Save workspace domain'
 
-export const saveWorkspaceDtoStepMsg = () => 'Save workspace dto'
+export const saveWorkspaceDtoStepMsg = (): string => 'Save workspace dto'
 
-export const runCommandStepMsg = (command: string) => `Run command: ${command}`
+export const runCommandStepMsg = (command: string): string => `Run command: ${command}`
 
-export const goToWorkspaceRootStepMsg = () => 'Go to workspace root'
+export const goToWorkspaceRootStepMsg = (): string => 'Go to workspace root'
 
-export const regenerateWorkspaceStepMsg = () => 'Regenerate workspace'
+export const regenerateWorkspaceStepMsg = (): string => 'Regenerate workspace'
 
-export const generateProjectStepMsg = () => 'Generate project'
+export const generateProjectStepMsg = (): string => 'Generate project'
 
-export const checkProjectNotExistStepMsg = (projectName: string) =>
+export const checkProjectNotExistStepMsg = (projectName: string): string =>
     `Check project not exist: ${projectName}`
 
-export const addProjectToWorkspaceDomainStepMsg = (projectName: string) =>
+export const addProjectToWorkspaceDomainStepMsg = (projectName: string): string =>
     `Add project to workspace domain: ${projectName}`
 
-export const checkProjectExistStepMsg = (projectName: string) =>
+export const checkProjectExistStepMsg = (projectName: string): string =>
     `Check project exist: ${projectName}`
 
-export const buildProjectStepMsg = (projectName: string) =>
+export const buildProjectStepMsg = (projectName: string): string =>
     `Build project: ${projectName}`

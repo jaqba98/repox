@@ -10,11 +10,11 @@ import { WorkspaceFolderEnum } from '../../enum/workspace-folder.enum'
  * Create folder called lib.
  */
 export class LibFolderBuilder extends WorkspaceStructureAbstractBuilder {
-  generate () {
+  generate (): void {
     createFolder(WorkspaceFolderEnum.lib)
   }
 
-  regenerate () {
+  regenerate (): void {
     if (pathExist(WorkspaceFolderEnum.lib)) return
     createFolder(WorkspaceFolderEnum.lib)
   }

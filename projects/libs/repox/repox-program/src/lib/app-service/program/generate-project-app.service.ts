@@ -58,11 +58,11 @@ export class GenerateProjectAppService {
       return false
     }
     const name = this.getCommandArgSingleValue.run('name', 'n')
-    if (!name) return false
+    if (name == null) return false
     const path = this.getCommandArgSingleValue.run('path', 'p')
-    if (!path) return false
+    if (path == null) return false
     const type = this.getCommandArgSingleValue.run('type', 't')
-    if (!type) return false
+    if (type == null) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false

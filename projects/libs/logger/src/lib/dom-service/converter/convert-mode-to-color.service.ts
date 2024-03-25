@@ -33,7 +33,7 @@ export class ConvertModeToColorService {
       case LoggerModeEnum.plain:
         return FG_TEXT_GRAY
       default:
-        throw new Error(`The ${mode} is not supported logger type!`)
+        throw new Error('The is not supported logger type!')
     }
   }
 
@@ -50,7 +50,7 @@ export class ConvertModeToColorService {
       case LoggerModeEnum.plain:
         return BG_TEXT_GRAY
       default:
-        throw new Error(`The ${mode} is not supported logger type!`)
+        throw new Error('The is not supported logger type!')
     }
   }
 }

@@ -39,7 +39,7 @@ export class WorkspaceDomainStore {
   }
 
   save (): void {
-    if (!this.workspaceDomain) return
+    if (this.workspaceDomain == null) return
     this.store.gitignoreTextDto = this.workspaceDomain.gitignoreTextDomain
     this.store.npmRcTextDto = this.workspaceDomain.npmRcTextDomain
     this.store.readmeMdTextDto = this.workspaceDomain.readmeMdTextDomain
@@ -54,14 +54,14 @@ export class WorkspaceDomainStore {
   }
 
   projectExist (projectName: string): boolean {
-    if (!this.workspaceDomain) return false
+    if (this.workspaceDomain == null) return false
     const project = Object.values(this.workspaceDomain.repoxJsonDomain.projects)
       .find(project => project.name === projectName)
     return Boolean(project)
   }
 
   addProject (name: string, root: string, src: string, type: string): void {
-    if (!this.workspaceDomain) return
+    if (this.workspaceDomain == null) return
     this.workspaceDomain.repoxJsonDomain.projects[name] = {
       name,
       root,

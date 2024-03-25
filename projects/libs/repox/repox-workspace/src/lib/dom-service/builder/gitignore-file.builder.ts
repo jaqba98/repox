@@ -12,16 +12,16 @@ export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
     super()
   }
 
-  generate () {
+  generate (): void {
     this.createDefaultGitignoreTextDomain()
   }
 
-  regenerate () {
+  regenerate (): void {
     this.createDefaultGitignoreTextDomain()
   }
 
-  private createDefaultGitignoreTextDomain () {
-    if (!this.store.workspaceDomain) return
+  private createDefaultGitignoreTextDomain (): void {
+    if (this.store.workspaceDomain == null) return
     this.store.workspaceDomain.gitignoreTextDomain = `# JetBrains tools
 .idea
 

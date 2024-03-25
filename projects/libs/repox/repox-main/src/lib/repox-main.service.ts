@@ -20,7 +20,7 @@ export class RepoxMainService {
   run (): void {
     if (!this.buildParamDto.build()) return
     if (!this.buildParamDomain.build()) return
-    if (!this.repoxLauncher.launch()) return
+    this.repoxLauncher.launch()
   }
 }
 

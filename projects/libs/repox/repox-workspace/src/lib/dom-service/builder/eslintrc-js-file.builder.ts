@@ -9,11 +9,11 @@ import { WorkspaceFileEnum } from '../../enum/workspace-file.enum'
  * Create tsconfig.json file.
  */
 export class EslintrcJsFileBuilder extends WorkspaceStructureAbstractBuilder {
-  generate () {
+  generate (): void {
     writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildDefaultEslintrcJsContent())
   }
 
-  regenerate () {
+  regenerate (): void {
     writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildDefaultEslintrcJsContent())
   }
 

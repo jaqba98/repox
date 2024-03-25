@@ -40,7 +40,7 @@ export class ParamDtoBuilder implements ParamDtoAbstractBuilder {
   buildCommand (): ParamDtoAbstractBuilder {
     const { baseArgs, program } = this.paramDto
     if (baseArgs === undefined) return this
-    const endIndex = program ? program.index : 0
+    const endIndex = (program != null) ? program.index : 0
     const command = baseArgs
       .map((baseValue: string, index: number) => ({ baseValue, index }))
       .find(baseParamDto => {

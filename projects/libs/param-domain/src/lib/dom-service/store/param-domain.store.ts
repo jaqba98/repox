@@ -12,7 +12,7 @@ export class ParamDomainStore {
   private paramDomain: ParamDomain | undefined
 
   get (): ParamDomain {
-    if (!this.paramDomain) {
+    if (this.paramDomain == null) {
       throw new Error('The param domain store does not exist!')
     }
     return this.paramDomain

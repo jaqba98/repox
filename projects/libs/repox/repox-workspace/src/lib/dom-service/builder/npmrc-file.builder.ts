@@ -12,16 +12,16 @@ export class NpmrcFileBuilder extends WorkspaceStructureAbstractBuilder {
     super()
   }
 
-  generate () {
+  generate (): void {
     this.createDefaultNpmRmTextDomain()
   }
 
-  regenerate () {
+  regenerate (): void {
     this.createDefaultNpmRmTextDomain()
   }
 
-  private createDefaultNpmRmTextDomain () {
-    if (!this.store.workspaceDomain) return
+  private createDefaultNpmRmTextDomain (): void {
+    if (this.store.workspaceDomain == null) return
     this.store.workspaceDomain.npmRcTextDomain = ''
   }
 }

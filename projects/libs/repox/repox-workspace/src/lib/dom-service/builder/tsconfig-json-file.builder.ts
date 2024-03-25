@@ -15,13 +15,13 @@ export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
     super()
   }
 
-  generate () {
-    if (!this.store.workspaceDomain) return
+  generate (): void {
+    if (this.store.workspaceDomain == null) return
     this.store.workspaceDomain.tsconfigJsonDomain = this.buildDefaultTsconfigJson()
   }
 
-  regenerate () {
-    if (!this.store.workspaceDomain) return
+  regenerate (): void {
+    if (this.store.workspaceDomain == null) return
     this.store.workspaceDomain.tsconfigJsonDomain = {
       ...this.store.workspaceDomain.tsconfigJsonDomain,
       compilerOptions: {

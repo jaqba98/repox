@@ -50,7 +50,7 @@ export class GenerateWorkspaceAppService {
       return false
     }
     const name = this.getCommandArgSingleValue.run('name', 'n')
-    if (!name) return false
+    if (name == null) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false

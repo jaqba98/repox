@@ -11,7 +11,6 @@ import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dt
 import {
   BuildWorkspaceDomainStep
 } from '../../dom-service/step/build-workspace-domain.step'
-import { SaveWorkspaceDtoStep } from '../../dom-service/step/save-workspace-dto.step'
 import { WriteSuccessStep } from '../../dom-service/step/write-success.step'
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step'
 import { SystemProgramEnum } from '../../enum/system-program/system-program.enum'
@@ -43,7 +42,7 @@ export class BuildProjectAppService {
       return false
     }
     const name = this.getCommandArgSingleValue.run('name', 'n')
-    if (!name) return false
+    if (name == null) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false

@@ -10,11 +10,11 @@ import { WorkspaceFileEnum } from '../../enum/workspace-file.enum'
  * Create .gitkeep file.
  */
 export class GitkeepFileBuilder extends WorkspaceStructureAbstractBuilder {
-  generate () {
+  generate (): void {
     writeToFile(WorkspaceFileEnum.gitkeep, '')
   }
 
-  regenerate () {
+  regenerate (): void {
     if (!isEmptyFolder('.')) return
     writeToFile(WorkspaceFileEnum.gitkeep, '')
   }

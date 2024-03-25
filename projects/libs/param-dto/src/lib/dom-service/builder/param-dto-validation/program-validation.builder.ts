@@ -30,7 +30,7 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
 
   buildSupportedSignsValidation (): this {
     const program = this.paramDto?.program
-    if (!program) return this
+    if (program == null) return this
     if (this.checkSupportedSigns.checkName(program.baseValue)) return this
     this.paramDtoValidation.supportedSigns = false
     this.paramDtoValidation.supportedSignsWrongIndexes = [program.index]
@@ -39,7 +39,7 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
 
   buildCorrectPatternValidation (): this {
     const program = this.paramDto?.program
-    if (!program) return this
+    if (program == null) return this
     if (this.checkCorrectPattern.checkProgramAndCommand(program.baseValue)) {
       return this
     }
@@ -54,7 +54,7 @@ export class ProgramValidationBuilder implements ParamDtoValidationAbstractBuild
 
   buildCorrectOrderValidation (): this {
     const program = this.paramDto?.program
-    if (!program) return this
+    if (program == null) return this
     if (program.index !== 0) {
       this.paramDtoValidation.correctOrder = false
       this.paramDtoValidation.correctOrderWrongIndexes = [program.index]

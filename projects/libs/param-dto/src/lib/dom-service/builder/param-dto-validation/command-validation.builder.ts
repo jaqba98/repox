@@ -30,7 +30,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
 
   buildSupportedSignsValidation (): this {
     const command = this.paramDto?.command
-    if (!command) return this
+    if (command == null) return this
     if (this.checkSupportedSigns.checkName(command.baseValue)) return this
     this.paramDtoValidation.supportedSigns = false
     this.paramDtoValidation.supportedSignsWrongIndexes = [command.index]
@@ -39,7 +39,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
 
   buildCorrectPatternValidation (): this {
     const command = this.paramDto?.command
-    if (!command) return this
+    if (command == null) return this
     if (this.checkCorrectPattern.checkProgramAndCommand(command.baseValue)) {
       return this
     }
@@ -51,7 +51,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
   buildCanExistValidation (): this {
     const program = this.paramDto?.program
     const command = this.paramDto?.command
-    if (!program && command) {
+    if ((program == null) && (command != null)) {
       this.paramDtoValidation.canExist = false
       this.paramDtoValidation.canExistWrongIndexes = [command.index]
     }
@@ -60,7 +60,7 @@ export class CommandValidationBuilder implements ParamDtoValidationAbstractBuild
 
   buildCorrectOrderValidation (): this {
     const command = this.paramDto?.command
-    if (command && command.index === 0) {
+    if ((command != null) && command.index === 0) {
       this.paramDtoValidation.correctOrder = false
       this.paramDtoValidation.correctOrderWrongIndexes = [command.index]
     }

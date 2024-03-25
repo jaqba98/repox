@@ -42,6 +42,7 @@ export class FileUtilsService {
     try {
       return JSON.parse(readFileSync(filePath, 'utf-8')) as T
     } catch {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return {} as T
     }
   }
@@ -50,6 +51,7 @@ export class FileUtilsService {
     try {
       return JSON.parse(readFileSync(filePath, 'utf-8')) as T
     } catch {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return {} as T
     }
   }
@@ -81,6 +83,7 @@ export const writeJsonToFile = <T>(path: string, content: T): void => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const writeToFile = (path: string, content: any): void => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   writeFileSync(path, content)
 }
 
@@ -95,11 +98,13 @@ export const readTextFile = (filePath: string): string => {
 
 export const readJsonFile = <T>(filePath: string): T => {
   if (!pathExist(filePath)) {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     return {} as T
   }
   try {
     return JSON.parse(readFileSync(filePath, 'utf-8')) as T
   } catch {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     return {} as T
   }
 }

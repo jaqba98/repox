@@ -10,11 +10,11 @@ import { WorkspaceFileEnum } from '../../enum/workspace-file.enum'
  * Create main.ts file bilder.
  */
 export class MainTsFileBuilder extends WorkspaceStructureAbstractBuilder {
-  generate () {
+  generate (): void {
     writeToFile(WorkspaceFileEnum.mainTs, this.createMainTsFileContent())
   }
 
-  regenerate () {
+  regenerate (): void {
   }
 
   private createMainTsFileContent (): string {

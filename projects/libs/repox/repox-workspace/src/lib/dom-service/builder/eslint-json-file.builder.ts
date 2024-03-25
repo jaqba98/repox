@@ -8,10 +8,10 @@ import { runCommand } from '@lib/utils'
  * Create eslint file.
  */
 export class EslintJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
-  generate () {
+  generate (): void {
     runCommand('npm init @eslint/config')
   }
 
-  regenerate () {
+  regenerate (): void {
   }
 }

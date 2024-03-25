@@ -31,7 +31,7 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
 
   buildSupportedSignsValidation (): this {
     const commandArgs = this.paramDto?.commandArgs
-    if (!commandArgs) return this
+    if (commandArgs == null) return this
     const wrongIndexes = commandArgs
       .map(commandArg => ({
         name: commandArg.baseValue.split(EQUAL_SIGN)[0],
@@ -47,7 +47,7 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
 
   buildCorrectPatternValidation (): this {
     const commandArgs = this.paramDto?.commandArgs
-    if (!commandArgs) return this
+    if (commandArgs == null) return this
     const wrongIndexes = commandArgs
       .map(commandArg => ({
         name: commandArg.baseValue.split(EQUAL_SIGN)[0],
@@ -70,7 +70,7 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
   buildCanExistValidation (): this {
     const command = this.paramDto?.command
     const commandArgs = this.paramDto?.commandArgs
-    if (!command && commandArgs) {
+    if ((command == null) && (commandArgs != null)) {
       const indexes = commandArgs.map(arg => arg.index)
       this.paramDtoValidation.canExist = false
       this.paramDtoValidation.canExistWrongIndexes = deepCopy(indexes)
@@ -80,9 +80,9 @@ export class CommandArgsValidationBuilder implements ParamDtoValidationAbstractB
 
   buildCorrectOrderValidation (): this {
     const commandArgs = this.paramDto?.commandArgs
-    if (!commandArgs) return this
+    if (commandArgs == null) return this
     const command = this.paramDto?.command
-    if (!command) {
+    if (command == null) {
       const wrongIndexes = commandArgs.map(arg => arg.index)
       this.paramDtoValidation.correctOrder = false
       this.paramDtoValidation.correctOrderWrongIndexes = deepCopy(wrongIndexes)

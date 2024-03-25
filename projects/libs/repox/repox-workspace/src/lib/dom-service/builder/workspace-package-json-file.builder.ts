@@ -15,14 +15,14 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
     super()
   }
 
-  generate () {
-    if (!this.store.workspaceDomain) return
+  generate (): void {
+    if (this.store.workspaceDomain == null) return
     this.store.workspaceDomain.workspacePackageJsonDomain =
             this.buildDefaultWorkspacePackageJson()
   }
 
-  regenerate () {
-    if (!this.store.workspaceDomain) return
+  regenerate (): void {
+    if (this.store.workspaceDomain == null) return
     this.store.workspaceDomain.workspacePackageJsonDomain = {
       ...this.store.workspaceDomain.workspacePackageJsonDomain,
       ...this.buildDefaultWorkspacePackageJson(),

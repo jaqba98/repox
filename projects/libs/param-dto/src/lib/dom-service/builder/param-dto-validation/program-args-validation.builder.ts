@@ -31,7 +31,7 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
 
   buildSupportedSignsValidation (): this {
     const programArgs = this.paramDto?.programArgs
-    if (!programArgs) return this
+    if (programArgs == null) return this
     const wrongIndexes = programArgs
       .map(programArg => ({
         name: programArg.baseValue.split(EQUAL_SIGN)[0],
@@ -47,7 +47,7 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
 
   buildCorrectPatternValidation (): this {
     const programArgs = this.paramDto?.programArgs
-    if (!programArgs) return this
+    if (programArgs == null) return this
     const wrongIndexes = programArgs
       .map(programArg => ({
         name: programArg.baseValue.split(EQUAL_SIGN)[0],
@@ -73,9 +73,9 @@ export class ProgramArgsValidationBuilder implements ParamDtoValidationAbstractB
 
   buildCorrectOrderValidation (): this {
     const programArgs = this.paramDto?.programArgs
-    if (!programArgs) return this
+    if (programArgs == null) return this
     const program = this.paramDto?.program
-    const startIndex = program ? program.index : -1
+    const startIndex = (program != null) ? program.index : -1
     const wrongIndexes = programArgs
       .filter(arg => arg.index <= startIndex)
       .map(arg => arg.index)

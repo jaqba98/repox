@@ -19,7 +19,7 @@ export class ParamDomainBuilder implements ParamDomainAbstractBuilder {
   buildProgram (): ParamDomainAbstractBuilder {
     const paramDto = this.paramDtoStore.get()
     const { program } = paramDto
-    if (!program) return this
+    if (program == null) return this
     this.paramDomain.program = program.baseValue
     return this
   }
@@ -27,7 +27,7 @@ export class ParamDomainBuilder implements ParamDomainAbstractBuilder {
   buildCommand (): ParamDomainAbstractBuilder {
     const paramDto = this.paramDtoStore.get()
     const { command } = paramDto
-    if (!command) return this
+    if (command == null) return this
     this.paramDomain.command = command.baseValue
     return this
   }
@@ -35,7 +35,7 @@ export class ParamDomainBuilder implements ParamDomainAbstractBuilder {
   buildProgramArgs (): ParamDomainAbstractBuilder {
     const paramDto = this.paramDtoStore.get()
     const { programArgs } = paramDto
-    if (!programArgs) return this
+    if (programArgs == null) return this
     this.paramDomain.programArgs = programArgs
       .reduce((acc: ParamDomainArgsModel, curr: ArgumentParamDtoModel) => {
         acc[curr.name] = {
@@ -51,7 +51,7 @@ export class ParamDomainBuilder implements ParamDomainAbstractBuilder {
   buildCommandArgs (): ParamDomainAbstractBuilder {
     const paramDto = this.paramDtoStore.get()
     const { commandArgs } = paramDto
-    if (!commandArgs) return this
+    if (commandArgs == null) return this
     this.paramDomain.commandArgs = commandArgs
       .reduce((acc: ParamDomainArgsModel, curr: ArgumentParamDtoModel) => {
         acc[curr.name] = {

@@ -13,13 +13,13 @@ export class RepoxJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
     super()
   }
 
-  generate () {
-    if (!this.store.workspaceDomain) return
+  generate (): void {
+    if (this.store.workspaceDomain == null) return
     this.store.workspaceDomain.repoxJsonDomain = this.buildDefaultRepoxJson()
   }
 
-  regenerate () {
-    if (!this.store.workspaceDomain) return
+  regenerate (): void {
+    if (this.store.workspaceDomain == null) return
     this.store.workspaceDomain.repoxJsonDomain = {
       ...this.store.workspaceDomain.repoxJsonDomain,
       ...this.buildDefaultRepoxJson(),

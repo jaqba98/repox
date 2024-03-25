@@ -11,11 +11,11 @@ import { WorkspaceFileEnum } from '../../enum/workspace-file.enum'
  * Create a project package.json file.
  */
 export class ProjectPackageJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
-  generate () {
+  generate (): void {
     writeJsonToFile(WorkspaceFileEnum.packageJson, this.buildDefaultWorkspacePackageJson())
   }
 
-  regenerate () {
+  regenerate (): void {
   }
 
   private buildDefaultWorkspacePackageJson (): Pick<PackageJsonDomainModel, 'name' | 'version'> {

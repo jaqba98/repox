@@ -9,12 +9,12 @@ import { WorkspaceFileEnum } from '@lib/repox-workspace'
  * Create app ts main file.
  */
 export class AppTsMainFileBuilder extends WorkspaceStructureAbstractBuilder {
-  generate () {
+  generate (): void {
     const appTsMainFileContent = `console.log("Hello, World!");
 `
     writeToFile(WorkspaceFileEnum.mainTs, appTsMainFileContent)
   }
 
-  regenerate () {
+  regenerate (): void {
   }
 }

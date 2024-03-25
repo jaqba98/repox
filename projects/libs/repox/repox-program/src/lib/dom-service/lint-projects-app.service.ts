@@ -1,7 +1,6 @@
 import { singleton } from 'tsyringe'
 import { SimpleMessageAppService } from '@lib/logger'
 // import {WsDomainStoreService} from "@lib/repox-workspace";
-import { RunCommandUtilsService } from '@lib/utils'
 
 @singleton()
 /**

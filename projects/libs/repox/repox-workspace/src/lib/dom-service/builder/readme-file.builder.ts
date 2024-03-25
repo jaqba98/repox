@@ -14,16 +14,16 @@ export class ReadmeFileBuilder extends WorkspaceStructureAbstractBuilder {
     super()
   }
 
-  generate () {
+  generate (): void {
     this.createDefaultReadMdTextDomain()
   }
 
-  regenerate () {
+  regenerate (): void {
     this.createDefaultReadMdTextDomain()
   }
 
-  private createDefaultReadMdTextDomain () {
-    if (!this.store.workspaceDomain) return
+  private createDefaultReadMdTextDomain (): void {
+    if (this.store.workspaceDomain == null) return
     const name = getCurrentFolderName()
     this.store.workspaceDomain.readmeMdTextDomain = `# ${name}
 `

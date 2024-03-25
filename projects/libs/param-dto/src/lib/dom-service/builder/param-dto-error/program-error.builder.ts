@@ -26,7 +26,7 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
   }
 
   buildSupportedSignsErrors (): ParamDtoErrorAbstractBuilder {
-    if (!this.paramDtoValidation) return this
+    if (this.paramDtoValidation == null) return this
     const { supportedSigns, supportedSignsWrongIndexes } = this.paramDtoValidation
     if (!supportedSigns) {
       this.paramDtoError.supportedSignsErrors = {
@@ -44,7 +44,7 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
   }
 
   buildCorrectPatternErrors (): ParamDtoErrorAbstractBuilder {
-    if (!this.paramDtoValidation) return this
+    if (this.paramDtoValidation == null) return this
     const { correctPattern, correctPatternWrongIndexes } = this.paramDtoValidation
     if (!correctPattern) {
       this.paramDtoError.correctPatternErrors = {
@@ -62,7 +62,7 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
   }
 
   buildCanExistErrors (): ParamDtoErrorAbstractBuilder {
-    if (!this.paramDtoValidation) return this
+    if (this.paramDtoValidation == null) return this
     const { canExist, canExistWrongIndexes } = this.paramDtoValidation
     if (!canExist) {
       this.paramDtoError.correctPatternErrors = {
@@ -79,7 +79,7 @@ export class ProgramErrorBuilder implements ParamDtoErrorAbstractBuilder {
   }
 
   buildCorrectOrderErrors (): ParamDtoErrorAbstractBuilder {
-    if (!this.paramDtoValidation) return this
+    if (this.paramDtoValidation == null) return this
     const { correctOrder, correctOrderWrongIndexes } = this.paramDtoValidation
     if (!correctOrder) {
       this.paramDtoError.correctPatternErrors = {

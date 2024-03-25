@@ -28,8 +28,8 @@ export class GetCommandArgSingleValueStep {
   run (arg: string, alias: string, defaultValue?: string): string | undefined {
     this.stepMessage.write(getSingleCommandArgValueStepMsg(arg))
     const commandArgValues = this.store.getCommandArgValues(arg, alias)
-    if (!commandArgValues) {
-      if (defaultValue) return defaultValue
+    if (commandArgValues == null) {
+      if (defaultValue != null) return defaultValue
       this.complexMessage.writeError([
         argumentIsNotSpecifiedErrorMsg(arg)
       ])
