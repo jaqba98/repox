@@ -33,3 +33,17 @@ export const runCommandStepMsg = (command: string) => `Run command: ${command}`;
 export const goToWorkspaceRootStepMsg = () => "Go to workspace root";
 
 export const regenerateWorkspaceStepMsg = () => "Regenerate workspace";
+
+export const generateProjectStepMsg = () => "Generate project";
+
+export const checkProjectNotExistStepMsg = (projectName: string) =>
+    `Check project not exist: ${projectName}`;
+
+export const addProjectToWorkspaceDomainStepMsg = (projectName: string) =>
+    `Add project to workspace domain: ${projectName}`;
+
+export const checkProjectExistStepMsg = (projectName: string) =>
+    `Check project exist: ${projectName}`;
+
+export const buildProjectStepMsg = (projectName: string) =>
+    `Build project: ${projectName}`;

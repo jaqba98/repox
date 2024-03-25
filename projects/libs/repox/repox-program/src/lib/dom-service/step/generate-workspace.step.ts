@@ -4,7 +4,7 @@ import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 import {RunGenerateWorkspaceAppService} from "@lib/repox-workspace";
 
 import {generateWorkspaceStepMsg} from "../../const/message/step-message.const";
-import {failedToGenerateWorkspaceErrorMsg} from "../../const/message/error-message.enum";
+import {failedToGenerateWorkspaceErrorMsg} from "../../const/message/error-message.const";
 
 @singleton()
 /**

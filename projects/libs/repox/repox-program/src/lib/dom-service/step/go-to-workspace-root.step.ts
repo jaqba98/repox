@@ -4,7 +4,7 @@ import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 import {changePath, findWorkspacePath, getCurrentPath} from "@lib/utils";
 
 import {goToWorkspaceRootStepMsg} from "../../const/message/step-message.const";
-import {workspaceRootNotExistErrorMsg,} from "../../const/message/error-message.enum";
+import {workspaceRootNotExistErrorMsg,} from "../../const/message/error-message.const";
 import {
     navigateToExistingWorkspaceFolderWarningMsg
 } from "../../const/message/warning-message.const";

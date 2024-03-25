@@ -5,6 +5,12 @@
 export const programNotExistErrorMsg = (program: string) =>
     `The ${program} program does not exist!`;
 
+export const projectAlreadyExistErrorMsg = (project: string) =>
+    `The ${project} already exist!`;
+
+export const projectNotExistErrorMsg = (project: string) =>
+    `The ${project} not exist!`;
+
 export const commandNotExistErrorMsg = (program: string, command: string) =>
     `The ${command} command does not exist for ${program} program!`;
 
@@ -32,3 +38,8 @@ export const failedToRegenerateWorkspaceErrorMsg = () => "Failed to regenerate w
 
 export const workspaceRootNotExistErrorMsg = () =>
     "You are not in an existing repox workspace!";
+
+export const failedToGenerateProjectErrorMsg = () => "Failed to generate project!";
+
+export const notSupportedProjectTypeErrorMsg = (type: string) =>
+    `Not supported project type: ${type}`;

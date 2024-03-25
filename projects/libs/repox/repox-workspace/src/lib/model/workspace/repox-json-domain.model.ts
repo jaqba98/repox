@@ -5,8 +5,8 @@
 export interface RepoxJsonDomainProjectModel {
     name: string;
     root: string;
-    sourceRoot: string;
-    targets: {};
+    src: string;
+    type: string;
 }
 
 export interface RepoxJsonDomainModel {

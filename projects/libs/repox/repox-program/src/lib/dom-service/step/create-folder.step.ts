@@ -4,7 +4,7 @@ import {ComplexMessageAppService, StepMessageAppService} from "@lib/logger";
 import {createFolder, pathNotExist} from "@lib/utils";
 
 import {createFolderStepMsg} from "../../const/message/step-message.const";
-import {failedToCreateFolderErrorMsg,} from "../../const/message/error-message.enum";
+import {failedToCreateFolderErrorMsg,} from "../../const/message/error-message.const";
 import {
     specifiedFolderThatExistOnDiskWarningMsg,
     specifyDifferentFolderNameWarningMsg

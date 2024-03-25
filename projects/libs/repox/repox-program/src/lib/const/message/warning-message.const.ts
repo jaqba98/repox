@@ -22,3 +22,6 @@ export const pathNotExistWarningMsg = (path: string): string =>
 
 export const navigateToExistingWorkspaceFolderWarningMsg = (): string =>
     "Navigate to the existing workspace folder and run the command again";
+
+export const specifyDifferentProjectNameWarningMsg = (): string =>
+    "Specify a different project name and run the program again.";

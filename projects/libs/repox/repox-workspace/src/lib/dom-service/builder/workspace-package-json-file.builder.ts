@@ -49,12 +49,12 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
             scripts: {},
             dependencies: {
                 "@types/core-js": "^2.5.8",
-                "@types/node": "^20.11.25",
-                "repox": "^1.4.42",
+                "@types/node": "^20.11.30",
+                "repox": "^1.4.48",
                 "tsc-alias": "^1.8.8"
             },
             devDependencies: {
-                "core-js": "^3.36.0",
+                "core-js": "^3.36.1",
                 "tsyringe": "^4.8.0",
                 "typescript": "^5.4.2"
             }
