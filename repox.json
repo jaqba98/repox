@@ -1,3 +1,10 @@
 {
-  "projects": {}
+  "projects": {
+    "repox": {
+      "name": "repox",
+      "root": "projects/apps/repox",
+      "src": "projects/apps/repox/src",
+      "type": "@app/ts"
+    }
+  }
 }
