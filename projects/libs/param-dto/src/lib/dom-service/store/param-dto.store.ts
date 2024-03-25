@@ -11,7 +11,7 @@ export class ParamDtoStore {
   private paramDto: ParamDto | undefined
 
   get (): ParamDto {
-    if (!this.paramDto) {
+    if (this.paramDto == null) {
       throw new Error('The param dto store does not exist!')
     }
     return this.paramDto
