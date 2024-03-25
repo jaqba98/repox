@@ -56,10 +56,7 @@ export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
         paths: {}
       },
       exclude: [
-        'node_modules',
-        '**/*.spec.ts',
-        '**/*.test.ts',
-        '**/jest.config.ts'
+        'node_modules'
       ]
     }
   }
