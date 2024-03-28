@@ -3,14 +3,12 @@ import { singleton } from 'tsyringe'
 import { WriteHeaderStep } from '../../dom-service/step/write-header.step'
 import { ProgramEnum } from '../../enum/launcher/program.enum'
 import { CommandEnum } from '../../enum/launcher/command.enum'
-import {
-  GetCommandArgSingleValueStep
-} from '../../dom-service/step/get-command-arg-single-value.step'
 import { WriteSuccessStep } from '../../dom-service/step/write-success.step'
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step'
 import { SystemProgramEnum } from '../../enum/system-program/system-program.enum'
 import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-root.step'
 import { RunCommandStep } from '../../dom-service/step/run-command.step'
+import { GetCommandArgBooleanValueStep } from '../../dom-service/step/get-command-arg-boolean-value.step'
 
 @singleton()
 /**
@@ -21,7 +19,7 @@ import { RunCommandStep } from '../../dom-service/step/run-command.step'
 export class LintProjectAppService {
   constructor (
     private readonly writeHeader: WriteHeaderStep,
-    private readonly getCommandArgSingleValue: GetCommandArgSingleValueStep,
+    private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep,
     private readonly systemProgramExist: SystemProgramExistStep,
     private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
     private readonly runCommand: RunCommandStep,
@@ -33,7 +31,7 @@ export class LintProjectAppService {
     if (!this.writeHeader.run(ProgramEnum.lint, CommandEnum.project)) {
       return false
     }
-    const all = this.getCommandArgSingleValue.run('all', 'a')
+    const all = this.getCommandArgBooleanValue.run('all', 'a')
     if (all == null) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false

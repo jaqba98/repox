@@ -16,9 +16,9 @@ export class RunCommandStep {
   ) {
   }
 
-  run (command: string): boolean {
+  run (command: string, verbose: boolean = false): boolean {
     this.stepMessage.write(runCommandStepMsg(command))
-    this.runCommandUtils.runCommand(command)
+    this.runCommandUtils.runCommand(command, verbose)
     return true
   }
 }
