@@ -16,7 +16,7 @@
     "core-js": "^3.36.0",
     "deepcopy": "^2.1.0",
     "glob": "^10.3.10",
-    "repox": "^1.4.53",
+    "repox": "^1.4.54",
     "tsc-alias": "^1.8.8",
     "tsyringe": "^4.8.0",
     "typescript": "^5.4.2"
