@@ -38,7 +38,7 @@ export class LintProjectAppService {
     if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false
     if (!this.goToWorkspaceRoot.run()) return false
-    if (!this.runCommand.run('npx eslint **/*.ts', true)) return false
+    if (!this.runCommand.run('npx eslint **/*.ts --fix', true)) return false
     if (!this.writeSuccess.run()) return false
     return true
   }
