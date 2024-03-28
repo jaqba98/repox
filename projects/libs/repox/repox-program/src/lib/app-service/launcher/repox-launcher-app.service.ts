@@ -14,6 +14,7 @@ import {
 import { ProgramEnum } from '../../enum/launcher/program.enum'
 import { CommandEnum } from '../../enum/launcher/command.enum'
 import { BuildProjectAppService } from '../program/build-project-app.service'
+import { LintProjectAppService } from '../program/lint-project-app.service'
 
 @singleton()
 /**
@@ -28,7 +29,8 @@ export class RepoxLauncherAppService {
     private readonly regenerateWorkspace: RegenerateWorkspaceAppService,
     private readonly buildProject: BuildProjectAppService,
     private readonly generateProject: GenerateProjectAppService,
-    private readonly complexMessage: ComplexMessageAppService
+    private readonly complexMessage: ComplexMessageAppService,
+    private readonly lintProject: LintProjectAppService
   ) {
   }
 
@@ -38,6 +40,7 @@ export class RepoxLauncherAppService {
     if (program === ProgramEnum.generate) return this.generateProgram(program, command)
     if (program === ProgramEnum.regenerate) return this.regenerateProgram(program, command)
     if (program === ProgramEnum.build) return this.buildProgram(program, command)
+    if (program === ProgramEnum.lint) return this.lintProgram(program, command)
     this.throwLauncherProgramError(program)
     return false
   }
@@ -63,6 +66,12 @@ export class RepoxLauncherAppService {
 
   private buildProgram (program: string, command: string): boolean {
     if (command === CommandEnum.project) return this.buildProject.run()
+    this.throwLauncherCommandError(program, command)
+    return false
+  }
+
+  private lintProgram (program: string, command: string): boolean {
+    if (command === CommandEnum.project) return this.lintProject.run()
     this.throwLauncherCommandError(program, command)
     return false
   }
