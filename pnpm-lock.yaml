@@ -25,7 +25,7 @@ dependencies:
     version: 10.3.10
   repox:
     specifier: ^1.4.57
-    version: 1.4.57
+    version: 1.4.58
   tsc-alias:
     specifier: ^1.8.8
     version: 1.8.8
@@ -49,6 +49,9 @@ devDependencies:
   eslint:
     specifier: ^8.0.1
     version: 8.57.0
+  eslint-config-love:
+    specifier: ^43.1.0
+    version: 43.1.0(@typescript-eslint/eslint-plugin@6.21.0)(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.6.2)(eslint-plugin-promise@6.1.1)(eslint@8.57.0)(typescript@5.4.2)
   eslint-config-standard-with-typescript:
     specifier: ^43.0.1
     version: 43.0.1(@typescript-eslint/eslint-plugin@6.21.0)(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.6.2)(eslint-plugin-promise@6.1.1)(eslint@8.57.0)(typescript@5.4.2)
@@ -1741,6 +1744,28 @@ packages:
     dependencies:
       eslint: 8.57.0
       semver: 7.6.0
+    dev: true
+
+  /eslint-config-love@43.1.0(@typescript-eslint/eslint-plugin@6.21.0)(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.6.2)(eslint-plugin-promise@6.1.1)(eslint@8.57.0)(typescript@5.4.2):
+    resolution: {integrity: sha512-r3+7mSaOl0BEGf8LEntPPDbWTDw8o0Dpy9vdts7m+NAuSpmz9C/gL+64lC0Z8nKNE4uwdymPGll4czGQiR+XmQ==}
+    peerDependencies:
+      '@typescript-eslint/eslint-plugin': ^6.4.0
+      eslint: ^8.0.1
+      eslint-plugin-import: ^2.25.2
+      eslint-plugin-n: '^15.0.0 || ^16.0.0 '
+      eslint-plugin-promise: ^6.0.0
+      typescript: '*'
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.0)(typescript@5.4.2)
+      '@typescript-eslint/parser': 6.21.0(eslint@8.57.0)(typescript@5.4.2)
+      eslint: 8.57.0
+      eslint-config-standard: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.6.2)(eslint-plugin-promise@6.1.1)(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0)(eslint@8.57.0)
+      eslint-plugin-n: 16.6.2(eslint@8.57.0)
+      eslint-plugin-promise: 6.1.1(eslint@8.57.0)
+      typescript: 5.4.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /eslint-config-standard-with-typescript@43.0.1(@typescript-eslint/eslint-plugin@6.21.0)(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.6.2)(eslint-plugin-promise@6.1.1)(eslint@8.57.0)(typescript@5.4.2):
@@ -3469,8 +3494,8 @@ packages:
       set-function-name: 2.0.2
     dev: true
 
-  /repox@1.4.57:
-    resolution: {integrity: sha512-+/6LaAXiDuG2Ssh3QTDvTefk4Zv/zisqPUHOTx4I6k0SdRq/HXKacIWumkT/3wlauk3TNmwt7KJlL/LocawCrQ==}
+  /repox@1.4.58:
+    resolution: {integrity: sha512-mCDLvbQJ/oMp970JyVn4lxlznoV99QVkr+OdTrQcipwRRFPxaWEi6Jpj0RCq9MdE1vsfr5Z9aZ2voqqLp1eUuw==}
     hasBin: true
     dependencies:
       command-exists: 1.2.9

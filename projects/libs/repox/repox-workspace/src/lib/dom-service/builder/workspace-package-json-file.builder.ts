@@ -50,16 +50,16 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
       dependencies: {
         '@types/core-js': '^2.5.8',
         '@types/node': '^20.11.30',
-        repox: '^1.4.57',
+        repox: '^1.4.58',
         'tsc-alias': '^1.8.8'
       },
       devDependencies: {
         'core-js': '^3.36.1',
         tsyringe: '^4.8.0',
-        typescript: '^5.4.2',
-        '@typescript-eslint/eslint-plugin': '^6.4.0',
+        typescript: '^5.4.3',
+        '@typescript-eslint/eslint-plugin': '^7.4.0',
         eslint: '^8.0.1',
-        'eslint-config-standard-with-typescript': '^43.0.1',
+        'eslint-config-love': '^43.1.0',
         'eslint-plugin-import': '^2.25.2',
         'eslint-plugin-n': '^15.0.0 || ^16.0.0 ',
         'eslint-plugin-promise': '^6.0.0'
