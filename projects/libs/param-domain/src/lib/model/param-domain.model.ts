@@ -4,11 +4,9 @@
  */
 
 export interface ParamDomainArgModel {
-    values: string[];
-    hasValue: boolean;
-    hasManyValues: boolean;
+  values: string[]
+  hasValue: boolean
+  hasManyValues: boolean
 }
 
-export interface ParamDomainArgsModel {
-    [key: string]: ParamDomainArgModel;
-}
+export type ParamDomainArgsModel = Record<string, ParamDomainArgModel>

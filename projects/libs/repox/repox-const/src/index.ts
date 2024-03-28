@@ -1,3 +1,3 @@
-export * from "./lib/repox.const";
+export * from './lib/repox.const'
 
 // todo: refactor the code

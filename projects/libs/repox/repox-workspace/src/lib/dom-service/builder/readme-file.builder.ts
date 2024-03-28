@@ -1,31 +1,31 @@
-import {singleton} from "tsyringe";
+import { singleton } from 'tsyringe'
 
-import {getCurrentFolderName} from "@lib/utils";
+import { getCurrentFolderName } from '@lib/utils'
 
-import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
-import {WorkspaceDomainStore} from "../store/workspace-domain.store";
+import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
+import { WorkspaceDomainStore } from '../store/workspace-domain.store'
 
 @singleton()
 /**
  * Create README.md file.
  */
 export class ReadmeFileBuilder extends WorkspaceStructureAbstractBuilder {
-    constructor(private readonly store: WorkspaceDomainStore) {
-        super();
-    }
+  constructor (private readonly store: WorkspaceDomainStore) {
+    super()
+  }
 
-    generate() {
-        this.createDefaultReadMdTextDomain();
-    }
+  generate (): void {
+    this.createDefaultReadMdTextDomain()
+  }
 
-    regenerate() {
-        this.createDefaultReadMdTextDomain();
-    }
+  regenerate (): void {
+    this.createDefaultReadMdTextDomain()
+  }
 
-    private createDefaultReadMdTextDomain() {
-        if (!this.store.workspaceDomain) return;
-        const name = getCurrentFolderName();
-        this.store.workspaceDomain.readmeMdTextDomain = `# ${name}
-`;
-    }
+  private createDefaultReadMdTextDomain (): void {
+    if (this.store.workspaceDomain == null) return
+    const name = getCurrentFolderName()
+    this.store.workspaceDomain.readmeMdTextDomain = `# ${name}
+`
+  }
 }

@@ -1,4 +1,3 @@
-
 /**
  * The repox command model for all commands.
  */
@@ -8,30 +7,30 @@ export interface EmptyRepoxCommandModel {
 }
 
 export interface GenerateWorkspaceCommandModel {
-    workspaceName: string;
+  workspaceName: string
 }
 
 export interface RegenerateWorkspaceCommandModel {
-    isForceMode: boolean;
+  isForceMode: boolean
 }
 
 export interface GenerateProjectCommandModel {
-    projectName: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    projectType: any;
-    projectPath: string;
+  projectName: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  projectType: any
+  projectPath: string
 }
 
 export interface BuildProjectRepoxCommandModel {
-    projectName: string;
+  projectName: string
 }
 
 export interface PublishNpmRepoxCommandModel {
-    projectName: string;
+  projectName: string
 }
 
 export interface LintProjectRepoxCommandModel {
-    isFixMode: boolean;
+  isFixMode: boolean
 }
 
 export type TRepoxCommandModel =
@@ -41,6 +40,6 @@ export type TRepoxCommandModel =
     GenerateProjectCommandModel |
     BuildProjectRepoxCommandModel |
     PublishNpmRepoxCommandModel |
-    LintProjectRepoxCommandModel;
+    LintProjectRepoxCommandModel
 
 // todo: refactor the code

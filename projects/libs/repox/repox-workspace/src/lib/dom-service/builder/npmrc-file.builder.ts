@@ -1,27 +1,27 @@
-import {singleton} from "tsyringe";
+import { singleton } from 'tsyringe'
 
-import {WorkspaceStructureAbstractBuilder} from "./workspace-structure-abstract.builder";
-import {WorkspaceDomainStore} from "../store/workspace-domain.store";
+import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
+import { WorkspaceDomainStore } from '../store/workspace-domain.store'
 
 @singleton()
 /**
  * Create .npmrc file.
  */
 export class NpmrcFileBuilder extends WorkspaceStructureAbstractBuilder {
-    constructor(private readonly store: WorkspaceDomainStore) {
-        super();
-    }
+  constructor (private readonly store: WorkspaceDomainStore) {
+    super()
+  }
 
-    generate() {
-        this.createDefaultNpmRmTextDomain();
-    }
+  generate (): void {
+    this.createDefaultNpmRmTextDomain()
+  }
 
-    regenerate() {
-        this.createDefaultNpmRmTextDomain();
-    }
+  regenerate (): void {
+    this.createDefaultNpmRmTextDomain()
+  }
 
-    private createDefaultNpmRmTextDomain() {
-        if (!this.store.workspaceDomain) return;
-        this.store.workspaceDomain.npmRcTextDomain = "";
-    }
+  private createDefaultNpmRmTextDomain (): void {
+    if (this.store.workspaceDomain == null) return
+    this.store.workspaceDomain.npmRcTextDomain = ''
+  }
 }

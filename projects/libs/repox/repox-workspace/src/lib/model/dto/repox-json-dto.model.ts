@@ -3,14 +3,14 @@
  */
 
 export interface RepoxJsonDtoProjectModel {
-    name: string;
-    root: string;
-    src: string;
-    type: string;
+  name: string
+  root: string
+  src: string
+  type: string
 }
 
 export interface RepoxJsonDtoProjectsModel {
-    projects: Record<string, RepoxJsonDtoProjectModel>;
+  projects: Record<string, RepoxJsonDtoProjectModel>
 }
 
 export interface RepoxJsonDtoModel extends RepoxJsonDtoProjectsModel {
