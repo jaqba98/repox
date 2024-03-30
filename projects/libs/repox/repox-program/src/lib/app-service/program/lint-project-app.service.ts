@@ -20,7 +20,7 @@ export class LintProjectAppService {
   run (): boolean {
     if (!this.writeHeader.run(ProgramEnum.lint, CommandEnum.project)) return false
     const fix = this.getCommandArgBooleanValue.run('fix', 'f', false)
-    console.log(fix)
+    if (!fix) return false
     return true
   }
 
