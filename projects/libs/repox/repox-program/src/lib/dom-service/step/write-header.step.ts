@@ -1,3 +1,4 @@
+// done
 import { singleton } from 'tsyringe'
 
 import { SimpleMessageAppService, NewlineAppService } from '@lib/logger'
@@ -10,7 +11,7 @@ import { ProgramEnum } from '../../enum/launcher/program.enum'
 
 @singleton()
 /**
- * The step service is responsible for writing header on the console screen.
+ * The step dom-service is responsible for writing header on the console screen.
  */
 export class WriteHeaderStep {
   constructor (

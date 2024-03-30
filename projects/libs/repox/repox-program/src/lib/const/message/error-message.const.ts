@@ -2,6 +2,9 @@
  * All error messages for that project.
  */
 
+export const argumentWasNotSpecifiedErrorMsg = (arg: string): string =>
+    `The --${arg} argument was not specified!`
+
 export const programNotExistErrorMsg = (program: string): string =>
     `The ${program} program does not exist!`
 
@@ -19,9 +22,6 @@ export const failedToCreateFolderErrorMsg = (folderName: string): string =>
 
 export const folderAlreadyExistErrorMsg = (folderName: string): string =>
     `The ${folderName} folder already exist!`
-
-export const argumentIsNotSpecifiedErrorMsg = (arg: string): string =>
-    `The ${arg} argument is not specified!`
 
 export const argumentIsNotHaveSingleValueErrorMsg = (arg: string): string =>
     `The ${arg} argument does not have a single value!`

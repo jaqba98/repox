@@ -10,8 +10,10 @@ export const folderNotExistStepMsg = (folderName: string): string =>
 export const getSingleCommandArgValueStepMsg = (arg: string): string =>
     `Get a single command argument value: ${arg}`
 
+export const getArgumentValue = (arg: string): string => `Get the value of the --${arg} argument`
+
 export const getBooleanCommandArgValueStepMsg = (arg: string): string =>
-    `Get a boolean command argument value: ${arg}`
+    `Get boolean command arg value: ${arg}`
 
 export const systemProgramExistStepMsg = (systemProgram: string): string =>
     `System program exist: ${systemProgram}`

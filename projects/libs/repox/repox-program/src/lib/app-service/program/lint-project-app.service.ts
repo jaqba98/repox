@@ -1,25 +1,26 @@
 import { singleton } from 'tsyringe'
 
-import { WriteHeaderStep } from '../../dom-service/step/write-header.step'
 import { ProgramEnum } from '../../enum/launcher/program.enum'
 import { CommandEnum } from '../../enum/launcher/command.enum'
+import { WriteHeaderStep } from '../../dom-service/step/write-header.step'
+import { GetCommandArgBooleanValueStep } from '../../dom-service/step/get-command-arg-boolean-value.step'
 
 @singleton()
 /**
- * The App-Service program is responsible for linting projects.
+ * The app-service program is responsible for linting projects.
  * Argument | Alias | Description | Required | Value
  * --fix    | -f    |             | False    | Boolean
  */
 export class LintProjectAppService {
   constructor (
-    private readonly writeHeader: WriteHeaderStep
-    // private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep
+    private readonly writeHeader: WriteHeaderStep,
+    private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep
   ) {}
 
   run (): boolean {
     if (!this.writeHeader.run(ProgramEnum.lint, CommandEnum.project)) return false
-    // const fix = this.getCommandArgBooleanValue.run('fix', 'f')
-    // console.log(fix)
+    const fix = this.getCommandArgBooleanValue.run('fix', 'f', false)
+    console.log(fix)
     return true
   }
 
