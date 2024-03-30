@@ -5,8 +5,8 @@ import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
 
 import { getSingleCommandArgValueStepMsg } from '../../const/message/step-message.const'
 import {
-  argumentIsNotHaveSingleValueErrorMsg,
-  argumentIsNotSpecifiedErrorMsg
+  argumentIsNotHaveSingleValueErrorMsg
+  // argumentIsNotSpecifiedErrorMsg
 } from '../../const/message/error-message.const'
 import {
   specifyArgumentCorrectlyWarningMsg
@@ -31,7 +31,7 @@ export class GetCommandArgSingleValueStep {
     if (commandArgValues == null) {
       if (defaultValue != null) return defaultValue
       this.complexMessage.writeError([
-        argumentIsNotSpecifiedErrorMsg(arg)
+        // argumentIsNotSpecifiedErrorMsg(arg)
       ])
       this.complexMessage.writeWarning([
         specifyArgumentCorrectlyWarningMsg(arg)
