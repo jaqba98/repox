@@ -8,19 +8,22 @@ import { CommandEnum } from '../../enum/launcher/command.enum'
 /**
  * The App-Service program is responsible for linting projects.
  * Argument | Alias | Description | Required | Value
+ * --fix    | -f    |             | False    | Boolean
  */
 export class LintProjectAppService {
   constructor (
     private readonly writeHeader: WriteHeaderStep
+    // private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep
   ) {}
 
   run (): boolean {
     if (!this.writeHeader.run(ProgramEnum.lint, CommandEnum.project)) return false
+    // const fix = this.getCommandArgBooleanValue.run('fix', 'f')
+    // console.log(fix)
     return true
   }
 
   // constructor (
-  // private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep,
   // private readonly systemProgramExist: SystemProgramExistStep,
   // private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
   // private readonly runCommand: RunCommandStep,
