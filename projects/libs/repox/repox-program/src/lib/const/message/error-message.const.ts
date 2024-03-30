@@ -5,6 +5,9 @@
 export const argumentWasNotSpecifiedErrorMsg = (arg: string): string =>
     `The --${arg} argument was not specified!`
 
+export const argumentDoesNotHaveValidValueTypeErrorMsg = (arg: string): string =>
+    `The --${arg} argument does not have a valid value type!`
+
 export const programNotExistErrorMsg = (program: string): string =>
     `The ${program} program does not exist!`
 
