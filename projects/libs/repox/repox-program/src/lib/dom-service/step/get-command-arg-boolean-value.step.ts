@@ -23,10 +23,10 @@ export class GetCommandArgBooleanValueStep {
   run (arg: string, alias: string, verbose: boolean = true): boolean {
     this.stepMessage.write(getArgumentValue(arg))
     if (this.paramDomainStore.hasCommandArg(arg)) {
-      return this.checkArgumentValueType(arg)
+      return this.checkArgumentValueType(arg, arg)
     }
     if (this.paramDomainStore.hasCommandArg(alias)) {
-      return this.checkArgumentValueType(arg)
+      return this.checkArgumentValueType(alias, arg)
     }
     if (!verbose) return true
     this.complexMessage.writeError([
@@ -38,16 +38,16 @@ export class GetCommandArgBooleanValueStep {
     return false
   }
 
-  private checkArgumentValueType (arg: string): boolean {
+  private checkArgumentValueType (argToCheck: string, argToWrite: string): boolean {
     const paramDomain = this.paramDomainStore.get()
-    const commandArg = paramDomain.commandArgs[arg]
+    const commandArg = paramDomain.commandArgs[argToCheck]
     if (commandArg === undefined) return false
     if (commandArg.hasValue) {
       this.complexMessage.writeError([
-        argumentDoesNotHaveValidValueTypeErrorMsg(arg)
+        argumentDoesNotHaveValidValueTypeErrorMsg(argToWrite)
       ])
       this.complexMessage.writeWarning([
-        specifyArgumentAndRunAgainWarningMsg(arg, 'boolean')
+        specifyArgumentAndRunAgainWarningMsg(argToWrite, 'boolean')
       ])
       return false
     }
