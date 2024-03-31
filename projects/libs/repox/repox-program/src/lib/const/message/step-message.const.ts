@@ -2,6 +2,8 @@
  * All step messages for that project.
  */
 
+export const getArgumentValueStepMsg = (arg: string): string => `Get the value of the argument: --${arg}`
+
 export const createFolderStepMsg = (folderName: string): string => `Create folder: ${folderName}`
 
 export const folderNotExistStepMsg = (folderName: string): string =>
@@ -9,8 +11,6 @@ export const folderNotExistStepMsg = (folderName: string): string =>
 
 export const getSingleCommandArgValueStepMsg = (arg: string): string =>
     `Get a single command argument value: ${arg}`
-
-export const getArgumentValue = (arg: string): string => `Get the value of the --${arg} argument`
 
 export const getBooleanCommandArgValueStepMsg = (arg: string): string =>
     `Get boolean command arg value: ${arg}`

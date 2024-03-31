@@ -4,7 +4,7 @@ import { singleton } from 'tsyringe'
 import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
 import { ParamDomainStore } from '@lib/param-domain'
 
-import { getArgumentValue } from '../../const/message/step-message.const'
+import { getArgumentValueStepMsg } from '../../const/message/step-message.const'
 import { argumentDoesNotHaveValidValueTypeErrorMsg, argumentWasNotSpecifiedErrorMsg } from '../../const/message/error-message.const'
 import { specifyArgumentAndRunAgainWarningMsg } from '../../const/message/warning-message.const'
 
@@ -21,7 +21,7 @@ export class GetCommandArgStringArrayValueStep {
   ) {}
 
   run (arg: string, alias: string, required: boolean = true): string[] | false {
-    this.stepMessage.write(getArgumentValue(arg))
+    this.stepMessage.write(getArgumentValueStepMsg(arg))
     if (this.paramDomainStore.hasCommandArg(arg)) {
       return this.checkArgumentValueType(arg, arg, alias)
     }
