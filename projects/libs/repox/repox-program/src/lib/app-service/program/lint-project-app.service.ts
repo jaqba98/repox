@@ -7,6 +7,7 @@ import { WriteHeaderStep } from '../../dom-service/step/write-header.step'
 import { GetCommandArgBooleanValueStep } from '../../dom-service/step/get-command-arg-boolean-value.step'
 import { GetCommandArgStringArrayValueStep } from '../../dom-service/step/get-command-arg-string-array-value.step'
 import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-root.step'
+import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step'
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step'
 
 @singleton()
@@ -22,6 +23,7 @@ export class LintProjectAppService {
     private readonly getCommandArgStringArrayValue: GetCommandArgStringArrayValueStep,
     private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep,
     private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
+    private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
     private readonly systemProgramExist: SystemProgramExistStep
   ) {}
 
@@ -35,6 +37,7 @@ export class LintProjectAppService {
     if (!fix) return false
     // Build workspace domain model
     if (!this.goToWorkspaceRoot.run()) return false
+    if (!this.buildWorkspaceDto.run()) return false
     // Check system
     // TODO the package manager should be taken from repox.json configuration
     if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false

@@ -17,9 +17,9 @@ export class WorkspaceDomainStore {
 
   build (): void {
     this.workspaceDomain = {
-      gitignoreTextDomain: this.store.gitignoreTextDto,
-      npmRcTextDomain: this.store.npmRcTextDto,
-      readmeMdTextDomain: this.store.readmeMdTextDto,
+      // gitignoreTextDomain: this.store.gitignoreTextDto,
+      // npmRcTextDomain: this.store.npmRcTextDto,
+      // readmeMdTextDomain: this.store.readmeMdTextDto,
       workspacePackageJsonDomain: {
         name: this.store.workspacePackageJsonDto.name ?? '',
         version: this.store.workspacePackageJsonDto.version ?? '',
@@ -40,9 +40,9 @@ export class WorkspaceDomainStore {
 
   save (): void {
     if (this.workspaceDomain == null) return
-    this.store.gitignoreTextDto = this.workspaceDomain.gitignoreTextDomain
-    this.store.npmRcTextDto = this.workspaceDomain.npmRcTextDomain
-    this.store.readmeMdTextDto = this.workspaceDomain.readmeMdTextDomain
+    // this.store.gitignoreTextDto = this.workspaceDomain.gitignoreTextDomain
+    // this.store.npmRcTextDto = this.workspaceDomain.npmRcTextDomain
+    // this.store.readmeMdTextDto = this.workspaceDomain.readmeMdTextDomain
     this.store.workspacePackageJsonDto = deepCopy(this.workspaceDomain.workspacePackageJsonDomain)
     this.store.repoxJsonDto = deepCopy(this.workspaceDomain.repoxJsonDomain)
     this.store.tsconfigJsonDto = {

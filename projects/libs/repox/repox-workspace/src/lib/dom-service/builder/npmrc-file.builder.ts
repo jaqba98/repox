@@ -21,7 +21,7 @@ export class NpmrcFileBuilder extends WorkspaceStructureAbstractBuilder {
   }
 
   private createDefaultNpmRmTextDomain (): void {
-    if (this.store.workspaceDomain == null) return
-    this.store.workspaceDomain.npmRcTextDomain = ''
+    // if (this.store.workspaceDomain == null) return
+    // this.store.workspaceDomain.npmRcTextDomain = ''
   }
 }

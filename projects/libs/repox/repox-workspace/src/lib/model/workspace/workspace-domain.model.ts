@@ -7,9 +7,9 @@ import { type TsconfigJsonDomainModel } from './tsconfig-json-domain.model'
  */
 
 export interface WorkspaceDomainModel {
-  gitignoreTextDomain: string
-  npmRcTextDomain: string
-  readmeMdTextDomain: string
+  // gitignoreTextDomain: string
+  // npmRcTextDomain: string
+  // readmeMdTextDomain: string
   workspacePackageJsonDomain: PackageJsonDomainModel
   repoxJsonDomain: RepoxJsonDomainModel
   tsconfigJsonDomain: TsconfigJsonDomainModel

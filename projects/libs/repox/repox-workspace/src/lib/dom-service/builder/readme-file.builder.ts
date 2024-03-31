@@ -1,7 +1,5 @@
 import { singleton } from 'tsyringe'
 
-import { getCurrentFolderName } from '@lib/utils'
-
 import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
 import { WorkspaceDomainStore } from '../store/workspace-domain.store'
 
@@ -23,9 +21,9 @@ export class ReadmeFileBuilder extends WorkspaceStructureAbstractBuilder {
   }
 
   private createDefaultReadMdTextDomain (): void {
-    if (this.store.workspaceDomain == null) return
-    const name = getCurrentFolderName()
-    this.store.workspaceDomain.readmeMdTextDomain = `# ${name}
-`
+    // if (this.store.workspaceDomain == null) return
+    //     const name = getCurrentFolderName()
+    //     this.store.workspaceDomain.readmeMdTextDomain = `# ${name}
+    // `
   }
 }

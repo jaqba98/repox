@@ -1,24 +1,35 @@
 import { singleton } from 'tsyringe'
 
-import { StepMessageAppService } from '@lib/logger'
-import { WorkspaceDtoStore } from '@lib/repox-workspace'
+import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
+import { WorkspaceDtoStore, WorkspaceFileEnum } from '@lib/repox-workspace'
 
 import { buildWorkspaceDtoStepMsg } from '../../const/message/step-message.const'
+import { pathNotExist, readJsonFile } from '@lib/utils'
 
 @singleton()
 /**
- * The step service is responsible for building workspace dto model.
+ * The step dom-service is responsible for
+ * building workspace dto model.
  */
 export class BuildWorkspaceDtoStep {
   constructor (
     private readonly stepMessage: StepMessageAppService,
-    private readonly store: WorkspaceDtoStore
-  ) {
-  }
+    private readonly workspaceDtoStore: WorkspaceDtoStore,
+    private readonly complexMessage: ComplexMessageAppService
+  ) {}
 
   run (): boolean {
     this.stepMessage.write(buildWorkspaceDtoStepMsg())
-    this.store.load()
+    if (!this.buildWorkspacePackageJsonDto()) return false
+    return true
+  }
+
+  private buildWorkspacePackageJsonDto (): boolean {
+    if (pathNotExist(WorkspaceFileEnum.packageJson)) {
+      this.complexMessage.writeError([])
+      return false
+    }
+    this.workspaceDtoStore.workspacePackageJsonDto = readJsonFile(WorkspaceFileEnum.packageJson)
     return true
   }
 }

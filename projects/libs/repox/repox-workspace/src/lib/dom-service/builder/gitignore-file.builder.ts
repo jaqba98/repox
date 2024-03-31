@@ -21,18 +21,18 @@ export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
   }
 
   private createDefaultGitignoreTextDomain (): void {
-    if (this.store.workspaceDomain == null) return
-    this.store.workspaceDomain.gitignoreTextDomain = `# JetBrains tools
-.idea
+    //     if (this.store.workspaceDomain == null) return
+    //     this.store.workspaceDomain.gitignoreTextDomain = `# JetBrains tools
+    // .idea
 
-# Compilation output
-dist
+    // # Compilation output
+    // dist
 
-# Dependency directories
-node_modules
+    // # Dependency directories
+    // node_modules
 
-# Temporary files and directories
-tmp
-`
+    // # Temporary files and directories
+    // tmp
+    // `
   }
 }
