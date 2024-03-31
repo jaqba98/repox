@@ -10,6 +10,8 @@ export const argumentWasNotSpecifiedErrorMsg = (arg: string, alias: string): str
 export const argumentDoesNotHaveValidValueTypeErrorMsg = (arg: string, alias: string): string =>
     `The argument --${arg} or alias -${alias} does not have a valid value type!`
 
+export const workspaceRootNotExistErrorMsg = (): string => 'You are not in an existing repox workspace!'
+
 export const systemProgramDoesNotExistErrorMsg = (systemProgram: SystemProgramEnum): string =>
     `The ${systemProgram} program does not exist in the system!`
 
@@ -40,9 +42,6 @@ export const failedToChangePathErrorMsg = (path: string): string =>
 export const failedToGenerateWorkspaceErrorMsg = (): string => 'Failed to generate workspace!'
 
 export const failedToRegenerateWorkspaceErrorMsg = (): string => 'Failed to regenerate workspace!'
-
-export const workspaceRootNotExistErrorMsg = (): string =>
-  'You are not in an existing repox workspace!'
 
 export const failedToGenerateProjectErrorMsg = (): string => 'Failed to generate project!'
 

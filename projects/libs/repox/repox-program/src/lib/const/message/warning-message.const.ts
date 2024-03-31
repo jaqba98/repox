@@ -13,6 +13,9 @@ export const installSystemProgramAndRunAgainWarningMsg = (systemProgram: SystemP
 export const visitSystemProgramPageWarningMsg = (systemProgram: SystemProgramEnum, url: string): string =>
   `For more information about ${systemProgram} visit: ${url}`
 
+export const navigateToTheExistingWorkspaceFolderWarningMsg = (): string =>
+  'Navigate to your existing workspace folder and run the command again.'
+
 export const specifiedFolderThatExistOnDiskWarningMsg = (): string =>
   'You specified the name of a folder that already exists on disk.'
 
@@ -24,9 +27,6 @@ export const specifyArgumentCorrectlyWarningMsg = (arg: string): string =>
 
 export const pathNotExistWarningMsg = (path: string): string =>
     `The ${path} path does not exist`
-
-export const navigateToExistingWorkspaceFolderWarningMsg = (): string =>
-  'Navigate to the existing workspace folder and run the command again'
 
 export const specifyDifferentProjectNameWarningMsg = (): string =>
   'Specify a different project name and run the program again.'

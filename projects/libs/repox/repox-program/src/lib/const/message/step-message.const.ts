@@ -9,6 +9,8 @@ export const getArgumentValueStepMsg = (arg: string): string => `Get the value o
 export const systemProgramExistStepMsg = (systemProgram: SystemProgramEnum): string =>
     `Check if the program exists in the system: ${systemProgram}`
 
+export const goToWorkspaceRootStepMsg = (): string => 'Go to the workspace root'
+
 export const createFolderStepMsg = (folderName: string): string => `Create folder: ${folderName}`
 
 export const folderNotExistStepMsg = (folderName: string): string =>
@@ -33,8 +35,6 @@ export const saveWorkspaceDomainStepMsg = (): string => 'Save workspace domain'
 export const saveWorkspaceDtoStepMsg = (): string => 'Save workspace dto'
 
 export const runCommandStepMsg = (command: string): string => `Run command: ${command}`
-
-export const goToWorkspaceRootStepMsg = (): string => 'Go to workspace root'
 
 export const regenerateWorkspaceStepMsg = (): string => 'Regenerate workspace'
 
