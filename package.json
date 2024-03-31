@@ -4,10 +4,7 @@
   "private": true,
   "scripts": {
     "build": "tsc && tsc-alias --outDir dist",
-    "generate:workspace": "cd ../test && node ../repox/dist/apps/repox/src/main generate workspace --name=workspace",
-    "regenerate:workspace": "cd ../test/workspace && node ../../repox/dist/apps/repox/src/main regenerate workspace --force",
-    "generate:project": "cd ../test/workspace && node ../../repox/dist/apps/repox/src/main generate project --name=dog --path=./projects/apps --type=@app/ts",
-    "build:project": "cd ../test/workspace && node ../../repox/dist/apps/repox/src/main build project --name=dog"
+    "lint:project": "node ../repox/dist/apps/repox/src/main lint project"
   },
   "dependencies": {
     "@types/core-js": "^2.5.8",
