@@ -23,31 +23,31 @@ export class GetCommandArgBooleanValueStep {
   run (arg: string, alias: string, required: boolean = true): boolean {
     this.stepMessage.write(getArgumentValue(arg))
     if (this.paramDomainStore.hasCommandArg(arg)) {
-      return this.checkArgumentValueType(arg, arg)
+      return this.checkArgumentValueType(arg, arg, alias)
     }
     if (this.paramDomainStore.hasCommandArg(alias)) {
-      return this.checkArgumentValueType(alias, arg)
+      return this.checkArgumentValueType(alias, arg, alias)
     }
     if (!required) return true
     this.complexMessage.writeError([
-      argumentWasNotSpecifiedErrorMsg(arg)
+      argumentWasNotSpecifiedErrorMsg(arg, alias)
     ])
     this.complexMessage.writeWarning([
-      specifyArgumentAndRunAgainWarningMsg(arg, 'boolean')
+      specifyArgumentAndRunAgainWarningMsg(arg, alias, 'boolean')
     ])
     return false
   }
 
-  private checkArgumentValueType (argToCheck: string, argToWrite: string): boolean {
+  private checkArgumentValueType (argToCheck: string, arg: string, alias: string): boolean {
     const paramDomain = this.paramDomainStore.get()
     const commandArg = paramDomain.commandArgs[argToCheck]
     if (commandArg === undefined) return false
     if (commandArg.hasValue) {
       this.complexMessage.writeError([
-        argumentDoesNotHaveValidValueTypeErrorMsg(argToWrite)
+        argumentDoesNotHaveValidValueTypeErrorMsg(arg, alias)
       ])
       this.complexMessage.writeWarning([
-        specifyArgumentAndRunAgainWarningMsg(argToWrite, 'boolean')
+        specifyArgumentAndRunAgainWarningMsg(arg, alias, 'boolean')
       ])
       return false
     }

@@ -2,8 +2,8 @@
  * All warning messages for that project.
  */
 
-export const specifyArgumentAndRunAgainWarningMsg = (arg: string, type: string): string =>
-  `Specify the --${arg} argument with a ${type} value type and run the command again.`
+export const specifyArgumentAndRunAgainWarningMsg = (arg: string, alias: string, type: string): string =>
+  `Specify the argument --${arg} or alias -${alias} with a ${type} value type and run the command again.`
 
 export const specifiedFolderThatExistOnDiskWarningMsg = (): string =>
   'You specified the name of a folder that already exists on disk.'

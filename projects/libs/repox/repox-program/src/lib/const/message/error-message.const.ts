@@ -2,11 +2,11 @@
  * All error messages for that project.
  */
 
-export const argumentWasNotSpecifiedErrorMsg = (arg: string): string =>
-    `The --${arg} argument was not specified!`
+export const argumentWasNotSpecifiedErrorMsg = (arg: string, alias: string): string =>
+    `The argument --${arg} or alias -${alias} was not specified!`
 
-export const argumentDoesNotHaveValidValueTypeErrorMsg = (arg: string): string =>
-    `The --${arg} argument does not have a valid value type!`
+export const argumentDoesNotHaveValidValueTypeErrorMsg = (arg: string, alias: string): string =>
+    `The argument --${arg} or alias -${alias} does not have a valid value type!`
 
 export const programNotExistErrorMsg = (program: string): string =>
     `The ${program} program does not exist!`

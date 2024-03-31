@@ -23,31 +23,31 @@ export class GetCommandArgStringArrayValueStep {
   run (arg: string, alias: string, required: boolean = true): string[] | false {
     this.stepMessage.write(getArgumentValue(arg))
     if (this.paramDomainStore.hasCommandArg(arg)) {
-      return this.checkArgumentValueType(arg, arg)
+      return this.checkArgumentValueType(arg, arg, alias)
     }
     if (this.paramDomainStore.hasCommandArg(alias)) {
-      return this.checkArgumentValueType(alias, arg)
+      return this.checkArgumentValueType(alias, arg, alias)
     }
     if (!required) return []
     this.complexMessage.writeError([
-      argumentWasNotSpecifiedErrorMsg(arg)
+      argumentWasNotSpecifiedErrorMsg(arg, alias)
     ])
     this.complexMessage.writeWarning([
-      specifyArgumentAndRunAgainWarningMsg(arg, 'string[]')
+      specifyArgumentAndRunAgainWarningMsg(arg, alias, 'string[]')
     ])
     return false
   }
 
-  private checkArgumentValueType (argToCheck: string, argToWrite: string): string[] | false {
+  private checkArgumentValueType (argToCheck: string, arg: string, alias: string): string[] | false {
     const paramDomain = this.paramDomainStore.get()
     const commandArg = paramDomain.commandArgs[argToCheck]
     if (commandArg === undefined) return false
     if (commandArg.hasValue) return commandArg.values
     this.complexMessage.writeError([
-      argumentDoesNotHaveValidValueTypeErrorMsg(argToWrite)
+      argumentDoesNotHaveValidValueTypeErrorMsg(arg, alias)
     ])
     this.complexMessage.writeWarning([
-      specifyArgumentAndRunAgainWarningMsg(argToWrite, 'string[]')
+      specifyArgumentAndRunAgainWarningMsg(arg, alias, 'string[]')
     ])
     return false
   }
