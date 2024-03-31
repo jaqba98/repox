@@ -1,8 +1,13 @@
+import { type SystemProgramEnum } from '../../enum/system-program/system-program.enum'
+
 /**
  * All step messages for that project.
  */
 
 export const getArgumentValueStepMsg = (arg: string): string => `Get the value of the argument: --${arg}`
+
+export const systemProgramExistStepMsg = (systemProgram: SystemProgramEnum): string =>
+    `Check if the program exists in the system: ${systemProgram}`
 
 export const createFolderStepMsg = (folderName: string): string => `Create folder: ${folderName}`
 
@@ -14,9 +19,6 @@ export const getSingleCommandArgValueStepMsg = (arg: string): string =>
 
 export const getBooleanCommandArgValueStepMsg = (arg: string): string =>
     `Get boolean command arg value: ${arg}`
-
-export const systemProgramExistStepMsg = (systemProgram: string): string =>
-    `System program exist: ${systemProgram}`
 
 export const changePathStepMsg = (path: string): string => `Change path: ${path}`
 

@@ -1,3 +1,5 @@
+import { type SystemProgramEnum } from '../../enum/system-program/system-program.enum'
+
 /**
  * All error messages for that project.
  */
@@ -7,6 +9,9 @@ export const argumentWasNotSpecifiedErrorMsg = (arg: string, alias: string): str
 
 export const argumentDoesNotHaveValidValueTypeErrorMsg = (arg: string, alias: string): string =>
     `The argument --${arg} or alias -${alias} does not have a valid value type!`
+
+export const systemProgramDoesNotExistErrorMsg = (systemProgram: SystemProgramEnum): string =>
+    `The ${systemProgram} program does not exist in the system!`
 
 export const programNotExistErrorMsg = (program: string): string =>
     `The ${program} program does not exist!`
@@ -28,9 +33,6 @@ export const folderAlreadyExistErrorMsg = (folderName: string): string =>
 
 export const argumentIsNotHaveSingleValueErrorMsg = (arg: string): string =>
     `The ${arg} argument does not have a single value!`
-
-export const systemProgramNotExistInSystemErrorMsg = (systemProgram: string): string =>
-    `The ${systemProgram} program does not exist in the system!`
 
 export const failedToChangePathErrorMsg = (path: string): string =>
     `Failed to change the path: ${path}!`
