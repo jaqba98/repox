@@ -42,7 +42,7 @@ export class GetCommandArgStringArrayValueStep {
     const paramDomain = this.paramDomainStore.get()
     const commandArg = paramDomain.commandArgs[argToCheck]
     if (commandArg === undefined) return false
-    if (commandArg.hasManyValues) return commandArg.values
+    if (commandArg.hasValue) return commandArg.values
     this.complexMessage.writeError([
       argumentDoesNotHaveValidValueTypeErrorMsg(argToWrite)
     ])
