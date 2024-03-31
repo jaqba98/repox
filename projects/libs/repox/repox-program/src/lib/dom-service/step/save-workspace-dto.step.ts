@@ -18,7 +18,7 @@ export class SaveWorkspaceDtoStep {
 
   run (): boolean {
     this.stepMessage.write(saveWorkspaceDtoStepMsg())
-    this.store.save()
+    // this.store.save()
     return true
   }
 }

@@ -16,7 +16,7 @@ export class SaveWorkspaceDtoAppService {
 
   run (): boolean {
     this.stepMessage.write('Save Workspace DTO')
-    this.workspaceDtoStore.save()
+    // this.workspaceDtoStore.save()
     return true
   }
 }

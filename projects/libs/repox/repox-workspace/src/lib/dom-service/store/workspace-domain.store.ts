@@ -16,26 +16,26 @@ export class WorkspaceDomainStore {
   }
 
   build (): void {
-    this.workspaceDomain = {
-      // gitignoreTextDomain: this.store.gitignoreTextDto,
-      // npmRcTextDomain: this.store.npmRcTextDto,
-      // readmeMdTextDomain: this.store.readmeMdTextDto,
-      workspacePackageJsonDomain: {
-        name: this.store.workspacePackageJsonDto.name ?? '',
-        version: this.store.workspacePackageJsonDto.version ?? '',
-        private: this.store.workspacePackageJsonDto.private ?? false,
-        scripts: deepCopy(this.store.workspacePackageJsonDto.scripts) ?? {},
-        dependencies: deepCopy(this.store.workspacePackageJsonDto.dependencies) ?? {},
-        devDependencies: deepCopy(this.store.workspacePackageJsonDto.devDependencies) ?? {}
-      },
-      repoxJsonDomain: {
-        projects: deepCopy(this.store.repoxJsonDto.projects) ?? {}
-      },
-      tsconfigJsonDomain: {
-        compilerOptions: deepCopy(this.store.tsconfigJsonDto.compilerOptions) ?? {},
-        exclude: deepCopy(this.store.tsconfigJsonDto.exclude) ?? []
-      }
-    }
+    // this.workspaceDomain = {
+    //   // gitignoreTextDomain: this.store.gitignoreTextDto,
+    //   // npmRcTextDomain: this.store.npmRcTextDto,
+    //   // readmeMdTextDomain: this.store.readmeMdTextDto,
+    //   workspacePackageJsonDomain: {
+    //     name: this.store.workspacePackageJsonDto.name ?? '',
+    //     version: this.store.workspacePackageJsonDto.version ?? '',
+    //     private: this.store.workspacePackageJsonDto.private ?? false,
+    //     scripts: deepCopy(this.store.workspacePackageJsonDto.scripts) ?? {},
+    //     dependencies: deepCopy(this.store.workspacePackageJsonDto.dependencies) ?? {},
+    //     devDependencies: deepCopy(this.store.workspacePackageJsonDto.devDependencies) ?? {}
+    //   },
+    //   repoxJsonDomain: {
+    //     projects: deepCopy(this.store.repoxJsonDto.projects) ?? {}
+    //   },
+    //   tsconfigJsonDomain: {
+    //     compilerOptions: deepCopy(this.store.tsconfigJsonDto.compilerOptions) ?? {},
+    //     exclude: deepCopy(this.store.tsconfigJsonDto.exclude) ?? []
+    //   }
+    // }
   }
 
   save (): void {
