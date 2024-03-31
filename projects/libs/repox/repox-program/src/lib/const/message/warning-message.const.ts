@@ -16,6 +16,9 @@ export const visitSystemProgramPageWarningMsg = (systemProgram: SystemProgramEnu
 export const navigateToTheExistingWorkspaceFolderWarningMsg = (): string =>
   'Navigate to your existing workspace folder and run the command again.'
 
+export const repairConfigurationAndRunAgainWarningMsg = (): string =>
+  'Repair the workspace configuration and run the command again.'
+
 export const specifiedFolderThatExistOnDiskWarningMsg = (): string =>
   'You specified the name of a folder that already exists on disk.'
 

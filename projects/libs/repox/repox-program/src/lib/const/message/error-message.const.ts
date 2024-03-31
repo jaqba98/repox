@@ -1,3 +1,4 @@
+import { type WorkspaceFileEnum } from '@lib/repox-workspace'
 import { type SystemProgramEnum } from '../../enum/system-program/system-program.enum'
 
 /**
@@ -11,6 +12,9 @@ export const argumentDoesNotHaveValidValueTypeErrorMsg = (arg: string, alias: st
     `The argument --${arg} or alias -${alias} does not have a valid value type!`
 
 export const workspaceRootNotExistErrorMsg = (): string => 'You are not in an existing repox workspace!'
+
+export const configurationFileNotFoundErrorMsg = (file: WorkspaceFileEnum): string =>
+  `Configuration file not found: ${file}`
 
 export const systemProgramDoesNotExistErrorMsg = (systemProgram: SystemProgramEnum): string =>
     `The ${systemProgram} program does not exist in the system!`
