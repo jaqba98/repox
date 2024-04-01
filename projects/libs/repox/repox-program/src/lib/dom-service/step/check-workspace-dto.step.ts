@@ -6,23 +6,7 @@ import { WorkspaceDtoStore, WorkspaceFileEnum } from '@lib/repox-workspace'
 
 import { checkWorkspaceDtoStepMsg } from '../../const/message/step-message.const'
 import { configurationFileInvalidErrorMsg } from '../../const/message/error-message.const'
-
-const repoxJsonDtoSchema: Schema = {
-  id: '/RepoxJsonDto',
-  type: 'object',
-  properties: {
-    defaultOptions: {
-      type: 'object'
-    },
-    projects: {
-      type: 'object'
-    }
-  },
-  required: [
-    'defaultOptions',
-    'projects'
-  ]
-}
+import { repoxJsonDtoSchema } from '../../const/schema/repox-json-dto.schema'
 
 @singleton()
 /**
@@ -48,8 +32,10 @@ export class CheckWorkspaceDtoStep {
     const validation = validator.validate(instance, schema)
     if (validation.valid) return true
     this.complexMessage.writeError([
-      configurationFileInvalidErrorMsg(file),
-      ...validation.errors.map(errror => errror.message)
+      configurationFileInvalidErrorMsg(file)
+    ])
+    this.complexMessage.writeWarning([
+      ...validation.errors.map(errror => `${errror.property}, ${errror.message}`)
     ])
     return false
   }
