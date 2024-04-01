@@ -45,12 +45,12 @@ export class WorkspaceDomainStore {
     // this.store.readmeMdTextDto = this.workspaceDomain.readmeMdTextDomain
     this.store.workspacePackageJsonDto = deepCopy(this.workspaceDomain.workspacePackageJsonDomain)
     this.store.repoxJsonDto = deepCopy(this.workspaceDomain.repoxJsonDomain)
-    this.store.tsconfigJsonDto = {
-      compilerOptions: {
-        ...deepCopy(this.workspaceDomain.tsconfigJsonDomain.compilerOptions)
-      },
-      exclude: deepCopy(this.workspaceDomain.tsconfigJsonDomain.exclude)
-    }
+    // this.store.tsconfigJsonDto = {
+    //   compilerOptions: {
+    //     ...deepCopy(this.workspaceDomain.tsconfigJsonDomain.compilerOptions)
+    //   },
+    //   exclude: deepCopy(this.workspaceDomain.tsconfigJsonDomain.exclude)
+    // }
   }
 
   projectExist (projectName: string): boolean {
