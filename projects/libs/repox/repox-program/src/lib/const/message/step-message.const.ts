@@ -13,6 +13,8 @@ export const goToWorkspaceRootStepMsg = (): string => 'Go to the workspace root'
 
 export const buildWorkspaceDtoStepMsg = (): string => 'Build the dto workspace'
 
+export const checkWorkspaceDtoStepMsg = (): string => 'Check the dto workspace'
+
 export const createFolderStepMsg = (folderName: string): string => `Create folder: ${folderName}`
 
 export const folderNotExistStepMsg = (folderName: string): string =>

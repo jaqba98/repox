@@ -1,19 +1,23 @@
 import { singleton } from 'tsyringe'
-import { SimpleMessageAppService } from '@lib/logger'
+
+import { StepMessageAppService } from '@lib/logger'
+
+import { checkWorkspaceDtoStepMsg } from '../../const/message/step-message.const'
 
 @singleton()
 /**
- * The app service is responsible for verification workspace dto model.
+ * The step dom-service is responsible for
+ * checking workspace dto model.
  */
-export class VerificationWsDtoAppService {
+export class CheckWorkspaceDtoStep {
   constructor (
-    private readonly simpleMessage: SimpleMessageAppService
-    // private readonly wsDtoStore: WsDtoStoreService
-  ) {
-  }
+    private readonly stepMessage: StepMessageAppService
+  ) {}
 
   run (): boolean {
-    this.simpleMessage.writePlain('Step: Verification WS dto')
+    this.stepMessage.write(checkWorkspaceDtoStepMsg())
+    return true
+    // this.simpleMessage.writePlain('Step: Verification WS dto')
     // enum verifyRepoxDto = this.wsDtoStore.verifyWsRepoxDto();
     // if (verifyRepoxDto.errors.length > 0) {
     //     this.simpleMessage.writeError(`Incorrect content of ${"WorkspaceFileEnum.repoxJsonFile"} file`);
@@ -26,8 +30,5 @@ export class VerificationWsDtoAppService {
     //     verifyTsconfigDto.errors.forEach(error => this.simpleMessage.writeError(error.toString()));
     //     return false;
     // }
-    return true
   }
 }
-
-// todo: refactor the code

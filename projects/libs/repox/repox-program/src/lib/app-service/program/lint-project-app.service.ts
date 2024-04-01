@@ -9,6 +9,7 @@ import { GetCommandArgStringArrayValueStep } from '../../dom-service/step/get-co
 import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-root.step'
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step'
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step'
+import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step'
 
 @singleton()
 /**
@@ -24,6 +25,7 @@ export class LintProjectAppService {
     private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep,
     private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
     private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
+    private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
     private readonly systemProgramExist: SystemProgramExistStep
   ) {}
 
@@ -38,6 +40,7 @@ export class LintProjectAppService {
     // Build workspace domain model
     if (!this.goToWorkspaceRoot.run()) return false
     if (!this.buildWorkspaceDto.run()) return false
+    if (!this.checkWorkspaceDto.run()) return false
     // Check system
     // TODO the package manager should be taken from repox.json configuration
     if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false

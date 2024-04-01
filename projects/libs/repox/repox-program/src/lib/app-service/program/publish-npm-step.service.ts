@@ -4,7 +4,7 @@ import { REPOX_LOGO } from '@lib/repox-const'
 // import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import { NewlineAppService, SimpleMessageAppService } from '@lib/logger'
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step'
-import { VerificationWsDtoAppService } from '../../dom-service/verification-ws-dto-app.service'
+import { VerificationWsDtoAppService } from '../../dom-service/step/check-workspace-dto.step'
 import { LoadWsDomainAppService } from '../../dom-service/load-ws-domain-app.service'
 import { ProjectExistAppService } from '../../dom-service/project-exist-app.service'
 
