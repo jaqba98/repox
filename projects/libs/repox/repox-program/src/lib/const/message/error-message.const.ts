@@ -16,6 +16,9 @@ export const workspaceRootNotExistErrorMsg = (): string => 'You are not in an ex
 export const configurationFileNotFoundErrorMsg = (file: WorkspaceFileEnum): string =>
   `Configuration file not found: ${file}`
 
+export const configurationFileInvalidErrorMsg = (file: WorkspaceFileEnum): string =>
+`The configuration file is invalid: ${file}`
+
 export const systemProgramDoesNotExistErrorMsg = (systemProgram: SystemProgramEnum): string =>
     `The ${systemProgram} program does not exist in the system!`
 

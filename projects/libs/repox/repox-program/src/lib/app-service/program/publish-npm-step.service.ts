@@ -4,7 +4,7 @@ import { REPOX_LOGO } from '@lib/repox-const'
 // import {GoToWorkspaceRootAppService} from "@lib/program-step";
 import { NewlineAppService, SimpleMessageAppService } from '@lib/logger'
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step'
-import { VerificationWsDtoAppService } from '../../dom-service/step/check-workspace-dto.step'
+// import { VerificationWsDtoAppService } from '../../dom-service/step/check-workspace-dto.step'
 import { LoadWsDomainAppService } from '../../dom-service/load-ws-domain-app.service'
 import { ProjectExistAppService } from '../../dom-service/project-exist-app.service'
 
@@ -19,7 +19,7 @@ export class PublishNpmStepService {
     // private readonly systemProgramExist: SystemProgramExistAppService,
     // private readonly goToProjectRoot: GoToWorkspaceRootAppService,
     private readonly loadWsDto: BuildWorkspaceDtoStep,
-    private readonly verificationWsDto: VerificationWsDtoAppService,
+    // private readonly verificationWsDto: VerificationWsDtoAppService,
     private readonly loadWsDomain: LoadWsDomainAppService,
     private readonly projectExist: ProjectExistAppService
     // private readonly wsDomainStore: WsDomainStoreService,
@@ -40,7 +40,7 @@ export class PublishNpmStepService {
     // if (!this.systemProgramExist.run(SystemProgramEnum.git)) return;
     // if (!this.goToProjectRoot.run()) return;
     if (!this.loadWsDto.run()) return
-    if (!this.verificationWsDto.run()) return
+    // if (!this.verificationWsDto.run()) return
     if (!this.loadWsDomain.run()) return
     const { projectName } = commandModel
     if (!this.projectExist.run(projectName)) return
