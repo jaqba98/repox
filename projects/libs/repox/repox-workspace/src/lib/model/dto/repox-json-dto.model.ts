@@ -1,6 +1,12 @@
+// done
 /**
- * The model DTO represents real content of repox.json file.
+ * The model dto represents a real content
+ * of repox.json file.
  */
+
+export interface RepoxJsonDtoDefaultOptionsModel {
+  packageManager: string
+}
 
 export interface RepoxJsonDtoProjectModel {
   name: string
@@ -9,11 +15,9 @@ export interface RepoxJsonDtoProjectModel {
   type: string
 }
 
-export interface RepoxJsonDtoProjectsModel {
+export interface RepoxJsonDtoModel {
+  defaultOptions: RepoxJsonDtoDefaultOptionsModel
   projects: Record<string, RepoxJsonDtoProjectModel>
 }
 
-export interface RepoxJsonDtoModel extends RepoxJsonDtoProjectsModel {
-}
-
-export interface RepoxJsonDtoPartialModel extends Partial<RepoxJsonDtoModel> {}
+export interface PartialRepoxJsonDtoModel extends Partial<RepoxJsonDtoModel> {}
