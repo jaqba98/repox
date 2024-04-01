@@ -17,7 +17,10 @@ export const configurationFileNotFoundErrorMsg = (file: WorkspaceFileEnum): stri
   `Configuration file not found: ${file}`
 
 export const configurationFileInvalidErrorMsg = (file: WorkspaceFileEnum): string =>
-`The configuration file is invalid: ${file}`
+    `The configuration file is invalid: ${file}`
+
+export const configurationFileInvalidDetailErrorMsg = (property: string, message: string): string =>
+    `${property} ${message}`
 
 export const systemProgramDoesNotExistErrorMsg = (systemProgram: SystemProgramEnum): string =>
     `The ${systemProgram} program does not exist in the system!`

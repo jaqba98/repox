@@ -5,7 +5,7 @@ import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
 import { WorkspaceDtoStore, WorkspaceFileEnum } from '@lib/repox-workspace'
 
 import { checkWorkspaceDtoStepMsg } from '../../const/message/step-message.const'
-import { configurationFileInvalidErrorMsg } from '../../const/message/error-message.const'
+import { configurationFileInvalidDetailErrorMsg, configurationFileInvalidErrorMsg } from '../../const/message/error-message.const'
 import { repoxJsonDtoSchema } from '../../const/schema/repox-json-dto.schema'
 
 @singleton()
@@ -32,10 +32,8 @@ export class CheckWorkspaceDtoStep {
     const validation = validator.validate(instance, schema)
     if (validation.valid) return true
     this.complexMessage.writeError([
-      configurationFileInvalidErrorMsg(file)
-    ])
-    this.complexMessage.writeWarning([
-      ...validation.errors.map(errror => `${errror.property}, ${errror.message}`)
+      configurationFileInvalidErrorMsg(file),
+      ...validation.errors.map(errror => configurationFileInvalidDetailErrorMsg(errror.property, errror.message))
     ])
     return false
   }
