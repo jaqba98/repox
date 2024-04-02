@@ -1,3 +1,4 @@
+// done
 import { container, singleton } from 'tsyringe'
 import { Validator, type Schema } from 'jsonschema'
 
@@ -7,6 +8,8 @@ import { WorkspaceDtoStore, WorkspaceFileEnum } from '@lib/repox-workspace'
 import { checkWorkspaceDtoStepMsg } from '../../const/message/step-message.const'
 import { configurationFileInvalidDetailErrorMsg, configurationFileInvalidErrorMsg } from '../../const/message/error-message.const'
 import { repoxJsonDtoSchema } from '../../const/schema/repox-json-dto.schema'
+import { tsconfigJsonDtoSchema } from '../../const/schema/tsconfig-json-dto.schema'
+import { workspacePackageJsonDtoSchema } from '../../const/schema/workspace-package-json-dto.schema'
 
 @singleton()
 /**
@@ -23,8 +26,25 @@ export class CheckWorkspaceDtoStep {
   run (): boolean {
     this.stepMessage.write(checkWorkspaceDtoStepMsg())
     const validator = container.resolve(Validator)
-    const { repoxJsonDto } = this.workspaceDtoStore
-    if (!this.checkDtoConfiguration(WorkspaceFileEnum.repoxJson, validator, repoxJsonDto, repoxJsonDtoSchema)) return false
+    const { repoxJsonDto, tsconfigJsonDto, workspacePackageJsonDto } = this.workspaceDtoStore
+    if (!this.checkDtoConfiguration(
+      WorkspaceFileEnum.repoxJson,
+      validator,
+      repoxJsonDto,
+      repoxJsonDtoSchema
+    )) return false
+    if (!this.checkDtoConfiguration(
+      WorkspaceFileEnum.tsconfigJson,
+      validator,
+      tsconfigJsonDto,
+      tsconfigJsonDtoSchema
+    )) return false
+    if (!this.checkDtoConfiguration(
+      WorkspaceFileEnum.packageJson,
+      validator,
+      workspacePackageJsonDto,
+      workspacePackageJsonDtoSchema
+    )) return false
     return true
   }
 
