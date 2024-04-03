@@ -1,6 +1,6 @@
 {
   "defaultOptions": {
-    "packageManager": "yarn"
+    "packageManager": "pnpm"
   },
   "projects": {
     "repox": {
