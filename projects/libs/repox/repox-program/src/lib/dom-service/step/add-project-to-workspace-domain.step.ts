@@ -18,7 +18,7 @@ export class AddProjectToWorkspaceDomainStep {
 
   run (name: string, root: string, src: string, type: string): boolean {
     this.stepMessage.write(addProjectToWorkspaceDomainStepMsg(name))
-    this.store.addProject(name, root, src, type)
+    // this.store.addProject(name, root, src, type)
     return true
   }
 }

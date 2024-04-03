@@ -18,7 +18,7 @@ export class SaveWorkspaceDomainStep {
 
   run (): boolean {
     this.stepMessage.write(saveWorkspaceDomainStepMsg())
-    this.store.save()
+    // this.store.save()
     return true
   }
 }

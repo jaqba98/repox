@@ -21,9 +21,9 @@ export class CheckProjectExistStep {
 
   run (projectName: string): boolean {
     this.stepMessage.write(checkProjectExistStepMsg(projectName))
-    if (this.store.projectExist(projectName)) {
-      return true
-    }
+    // if (this.store.projectExist(projectName)) {
+    //   return true
+    // }
     this.complexMessage.writeError([
       projectNotExistErrorMsg(projectName)
     ])
