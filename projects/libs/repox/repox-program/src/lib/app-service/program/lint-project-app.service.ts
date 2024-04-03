@@ -1,5 +1,7 @@
 import { singleton } from 'tsyringe'
 
+import { WorkspaceDomainStore } from '@lib/repox-workspace'
+
 import { ProgramEnum } from '../../enum/launcher/program.enum'
 import { CommandEnum } from '../../enum/launcher/command.enum'
 import { WriteHeaderStep } from '../../dom-service/step/write-header.step'
@@ -10,7 +12,6 @@ import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dt
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step'
 import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step'
 import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace-domain.step'
-import { WorkspaceDomainStore } from '@lib/repox-workspace'
 
 @singleton()
 /**
@@ -49,6 +50,7 @@ export class LintProjectAppService {
     const { packageManager } = workspaceDomain.repoxJsonDomain.defaultOptions
     // Check system
     if (!this.systemProgramExist.run(packageManager)) return false
+    // Lint projects
     return true
   }
 }
