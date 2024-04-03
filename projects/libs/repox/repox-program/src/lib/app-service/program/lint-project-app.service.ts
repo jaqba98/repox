@@ -10,6 +10,7 @@ import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-ro
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step'
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step'
 import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step'
+import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace-domain.step'
 
 @singleton()
 /**
@@ -26,6 +27,7 @@ export class LintProjectAppService {
     private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
     private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
     private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
+    private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
     private readonly systemProgramExist: SystemProgramExistStep
   ) {}
 
@@ -41,6 +43,7 @@ export class LintProjectAppService {
     if (!this.goToWorkspaceRoot.run()) return false
     if (!this.buildWorkspaceDto.run()) return false
     if (!this.checkWorkspaceDto.run()) return false
+    if (!this.buildWorkspaceDomain.run()) return false
     // Check system
     // TODO the package manager should be taken from repox.json configuration
     if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false

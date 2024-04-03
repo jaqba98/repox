@@ -15,6 +15,8 @@ export const buildWorkspaceDtoStepMsg = (): string => 'Build the dto workspace'
 
 export const checkWorkspaceDtoStepMsg = (): string => 'Check the dto workspace'
 
+export const buildWorkspaceDomainStepMsg = (): string => 'Build the domain workspace'
+
 export const createFolderStepMsg = (folderName: string): string => `Create folder: ${folderName}`
 
 export const folderNotExistStepMsg = (folderName: string): string =>
@@ -27,8 +29,6 @@ export const getBooleanCommandArgValueStepMsg = (arg: string): string =>
     `Get boolean command arg value: ${arg}`
 
 export const changePathStepMsg = (path: string): string => `Change path: ${path}`
-
-export const buildWorkspaceDomainStepMsg = (): string => 'Build workspace domain'
 
 export const generateWorkspaceStepMsg = (): string => 'Generate workspace'
 
