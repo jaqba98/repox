@@ -1,6 +1,11 @@
+// done
 /**
- * The domain model uses by the system to work with repox.json file.
+ * The model domain of repox configuration.
  */
+
+export interface RepoxJsonDomainDefaultOptionsModel {
+  packageManager: string
+}
 
 export interface RepoxJsonDomainProjectModel {
   name: string
@@ -10,5 +15,6 @@ export interface RepoxJsonDomainProjectModel {
 }
 
 export interface RepoxJsonDomainModel {
+  defaultOptions: RepoxJsonDomainDefaultOptionsModel
   projects: Record<string, RepoxJsonDomainProjectModel>
 }

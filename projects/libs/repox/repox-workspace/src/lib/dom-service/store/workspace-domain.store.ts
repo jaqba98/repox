@@ -3,7 +3,7 @@ import { singleton } from 'tsyringe'
 import { deepCopy } from '@lib/utils'
 
 import { WorkspaceDtoStore } from './workspace-dto.store'
-import { type WorkspaceDomainModel } from '../../model/workspace/workspace-domain.model'
+import { type WorkspaceDomainModel } from '../../model/domain/workspace-domain.model'
 
 @singleton()
 /**

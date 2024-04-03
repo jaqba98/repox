@@ -2,7 +2,7 @@ import { singleton } from 'tsyringe'
 
 import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
 import { WorkspaceDomainStore } from '../store/workspace-domain.store'
-import { type RepoxJsonDomainModel } from '../../model/workspace/repox-json-domain.model'
+import { type RepoxJsonDomainModel } from '../../model/domain/repox-json-domain.model'
 
 @singleton()
 /**
