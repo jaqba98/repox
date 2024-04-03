@@ -2,7 +2,6 @@ import { singleton } from 'tsyringe'
 
 import { ProgramEnum } from '../../enum/launcher/program.enum'
 import { CommandEnum } from '../../enum/launcher/command.enum'
-import { SystemProgramEnum } from '../../enum/system-program/system-program.enum'
 import { WriteHeaderStep } from '../../dom-service/step/write-header.step'
 import { GetCommandArgBooleanValueStep } from '../../dom-service/step/get-command-arg-boolean-value.step'
 import { GetCommandArgStringArrayValueStep } from '../../dom-service/step/get-command-arg-string-array-value.step'
@@ -47,10 +46,9 @@ export class LintProjectAppService {
     if (!this.checkWorkspaceDto.run()) return false
     if (!this.buildWorkspaceDomain.run()) return false
     const workspaceDomain = this.workspaceDomainStore.getWorkspaceDomain()
-    console.log(workspaceDomain)
+    const { packageManager } = workspaceDomain.repoxJsonDomain.defaultOptions
     // Check system
-    // TODO the package manager should be taken from repox.json configuration
-    if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false
+    if (!this.systemProgramExist.run(packageManager)) return false
     return true
   }
 }

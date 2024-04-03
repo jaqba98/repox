@@ -4,9 +4,10 @@ import { singleton } from 'tsyringe'
 import { StepMessageAppService } from '@lib/logger'
 import { WorkspaceDomainStore, WorkspaceDtoStore } from '@lib/repox-workspace'
 import { deepCopy } from '@lib/utils'
-import { EMPTY_OBJECT, EMPTY_STRING } from '@lib/const'
+import { EMPTY_OBJECT } from '@lib/const'
 
 import { buildWorkspaceDomainStepMsg } from '../../const/message/step-message.const'
+import { SystemProgramEnum } from '../../enum/system-program/system-program.enum'
 
 @singleton()
 /**
@@ -27,7 +28,7 @@ export class BuildWorkspaceDomainStep {
     this.workspaceDomainStore.workspaceDomain = {
       repoxJsonDomain: {
         defaultOptions: {
-          packageManager: repoxJsonDto.defaultOptions?.packageManager ?? EMPTY_STRING
+          packageManager: repoxJsonDto.defaultOptions?.packageManager ?? SystemProgramEnum.npm
         },
         projects: deepCopy(repoxJsonDto.projects) ?? deepCopy(EMPTY_OBJECT)
       }

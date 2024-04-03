@@ -1,11 +1,13 @@
 // done
+import { type SystemProgramEnum } from '@lib/repox-program'
+
 /**
  * The model dto represents a real content
  * of repox.json file.
  */
 
 export interface RepoxJsonDtoDefaultOptionsModel {
-  packageManager: string
+  packageManager: SystemProgramEnum
 }
 
 export interface RepoxJsonDtoProjectModel {
