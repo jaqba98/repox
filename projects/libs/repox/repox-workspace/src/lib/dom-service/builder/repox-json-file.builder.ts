@@ -23,7 +23,7 @@ export class RepoxJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
       ...this.store.workspaceDomain.repoxJsonDomain,
       // ...this.buildDefaultRepoxJson(),
       projects: {
-        ...this.store.workspaceDomain.repoxJsonDomain.projects,
+        ...this.store.workspaceDomain.repoxJsonDomain.projects
         // ...this.buildDefaultRepoxJson().projects
       }
     }
