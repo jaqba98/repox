@@ -6,6 +6,7 @@ import { EOL } from 'os'
 
 export const NEW_LINE: string = EOL
 export const EMPTY_STRING: string = ''
+export const EMPTY_OBJECT = {}
 export const SPACE: string = ' '
 
 // todo: refactor the code

@@ -15,4 +15,11 @@ export class WorkspaceDtoStore {
   repoxJsonDto: PartialRepoxJsonDtoModel | undefined
 
   tsconfigJsonDto: PartialTsconfigJsonDtoModel | undefined
+
+  getRepoxJsonDto (): PartialRepoxJsonDtoModel {
+    if (this.repoxJsonDto === undefined) {
+      throw new Error('The WorkspaceDtoStore.repoxJsonDto is undefined!')
+    }
+    return this.repoxJsonDto
+  }
 }
