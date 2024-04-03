@@ -43,7 +43,7 @@ export class WorkspaceDomainStore {
     // this.store.gitignoreTextDto = this.workspaceDomain.gitignoreTextDomain
     // this.store.npmRcTextDto = this.workspaceDomain.npmRcTextDomain
     // this.store.readmeMdTextDto = this.workspaceDomain.readmeMdTextDomain
-    this.store.workspacePackageJsonDto = deepCopy(this.workspaceDomain.workspacePackageJsonDomain)
+    // this.store.workspacePackageJsonDto = deepCopy(this.workspaceDomain.workspacePackageJsonDomain)
     this.store.repoxJsonDto = deepCopy(this.workspaceDomain.repoxJsonDomain)
     // this.store.tsconfigJsonDto = {
     //   compilerOptions: {
