@@ -9,4 +9,11 @@ import { type WorkspaceDomainModel } from '../../model/domain/workspace-domain.m
  */
 export class WorkspaceDomainStore {
   workspaceDomain: WorkspaceDomainModel | undefined
+
+  getWorkspaceDomain (): WorkspaceDomainModel {
+    if (this.workspaceDomain === undefined) {
+      throw new Error('The WorkspaceDomainModel.workspaceDomain is undefined!')
+    }
+    return this.workspaceDomain
+  }
 }

@@ -22,7 +22,7 @@ export class SystemProgramExistStep {
     private readonly complexMessage: ComplexMessageAppService
   ) {}
 
-  run (systemProgram: SystemProgramEnum): boolean {
+  run (systemProgram: string): boolean {
     this.stepMessage.write(systemProgramExistStepMsg(systemProgram))
     if (this.systemProgramExist.checkExist(systemProgram)) return true
     const url = SystemProgramUrlEnum[systemProgram]

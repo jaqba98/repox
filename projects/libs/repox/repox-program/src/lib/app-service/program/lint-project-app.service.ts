@@ -11,6 +11,7 @@ import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dt
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step'
 import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step'
 import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace-domain.step'
+import { WorkspaceDomainStore } from '@lib/repox-workspace'
 
 @singleton()
 /**
@@ -28,6 +29,7 @@ export class LintProjectAppService {
     private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
     private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
     private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
+    private readonly workspaceDomainStore: WorkspaceDomainStore,
     private readonly systemProgramExist: SystemProgramExistStep
   ) {}
 
@@ -44,6 +46,8 @@ export class LintProjectAppService {
     if (!this.buildWorkspaceDto.run()) return false
     if (!this.checkWorkspaceDto.run()) return false
     if (!this.buildWorkspaceDomain.run()) return false
+    const workspaceDomain = this.workspaceDomainStore.getWorkspaceDomain()
+    console.log(workspaceDomain)
     // Check system
     // TODO the package manager should be taken from repox.json configuration
     if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false
