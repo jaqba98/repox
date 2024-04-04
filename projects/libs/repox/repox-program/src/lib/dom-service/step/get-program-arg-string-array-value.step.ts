@@ -22,10 +22,10 @@ export class GetProgramArgStringArrayValueStep {
 
   run (arg: string, alias: string, required: boolean = true): string[] | false {
     this.stepMessage.write(getArgumentValueStepMsg(arg));
-    if (this.paramDomainStore.hasCommandArg(arg)) {
+    if (this.paramDomainStore.hasProgramArg(arg)) {
       return this.checkArgumentValueType(arg, arg, alias);
     }
-    if (this.paramDomainStore.hasCommandArg(alias)) {
+    if (this.paramDomainStore.hasProgramArg(alias)) {
       return this.checkArgumentValueType(alias, arg, alias);
     }
     if (!required) return [];
