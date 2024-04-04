@@ -7,8 +7,6 @@
     "lint:project": "node ../repox/dist/apps/repox/src/main lint project"
   },
   "dependencies": {
-    "@types/core-js": "^2.5.8",
-    "@types/node": "^20.11.30",
     "command-exists": "^1.2.9",
     "core-js": "^3.36.0",
     "deepcopy": "^2.1.0",
@@ -25,7 +23,6 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.25",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "core-js": "^3.36.1",
     "eslint": "^8.0.1",
     "eslint-config-love": "^43.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
