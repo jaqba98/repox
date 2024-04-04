@@ -20,13 +20,13 @@ export class LintProjectStep {
     const command = `eslint projects/**/*.ts ${fixArg}`
     switch (packageManager) {
       case SystemProgramEnum.npm:
-        runCommand(`npx ${command}`)
+        runCommand(`npx ${command}`, true)
         break
       case SystemProgramEnum.pnpm:
-        runCommand(`pnpm run ${command}`)
+        runCommand(`pnpm run ${command}`, true)
         break
       case SystemProgramEnum.yarn:
-        runCommand(`yarn run ${command}`)
+        runCommand(`yarn run ${command}`, true)
         break
     }
     return true
