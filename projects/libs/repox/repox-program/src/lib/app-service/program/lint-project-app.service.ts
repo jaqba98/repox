@@ -12,6 +12,7 @@ import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dt
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step'
 import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step'
 import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace-domain.step'
+import { LintProjectStep } from '../../dom-service/step/lint-project.step'
 
 @singleton()
 /**
@@ -30,7 +31,8 @@ export class LintProjectAppService {
     private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
     private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
     private readonly workspaceDomainStore: WorkspaceDomainStore,
-    private readonly systemProgramExist: SystemProgramExistStep
+    private readonly systemProgramExist: SystemProgramExistStep,
+    private readonly lintProject: LintProjectStep
   ) {}
 
   run (): boolean {
@@ -51,6 +53,7 @@ export class LintProjectAppService {
     // Check system
     if (!this.systemProgramExist.run(packageManager)) return false
     // Lint projects
+    if (!this.lintProject.run(packageManager, fix)) return false
     return true
   }
 }

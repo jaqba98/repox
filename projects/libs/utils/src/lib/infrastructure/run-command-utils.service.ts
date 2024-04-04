@@ -18,6 +18,10 @@ export class RunCommandUtilsService {
   }
 }
 
-export const runCommand = (command: string): string => execSync(command, { encoding: 'utf-8' })
+export const runCommand = (command: string, verbose: boolean = false): string => {
+  return verbose
+    ? execSync(command, { encoding: 'utf-8', stdio: 'inherit' })
+    : execSync(command, { encoding: 'utf-8' })
+}
 
 // todo: refactor the code

@@ -19,6 +19,8 @@ export const buildWorkspaceDomainStepMsg = (): string => 'Build the domain works
 
 export const createFolderStepMsg = (folderName: string): string => `Create folder: ${folderName}`
 
+export const lintProjectStepMsg = (): string => 'Lint project'
+
 export const folderNotExistStepMsg = (folderName: string): string =>
     `Folder not exist: ${folderName}`
 
