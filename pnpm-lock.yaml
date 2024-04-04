@@ -21,8 +21,8 @@ dependencies:
     specifier: ^1.4.1
     version: 1.4.1
   repox:
-    specifier: ^1.4.57
-    version: 1.4.58
+    specifier: ^1.4.60
+    version: 1.4.60
   tsc-alias:
     specifier: ^1.8.8
     version: 1.8.8
@@ -3508,14 +3508,15 @@ packages:
       set-function-name: 2.0.2
     dev: true
 
-  /repox@1.4.58:
-    resolution: {integrity: sha512-mCDLvbQJ/oMp970JyVn4lxlznoV99QVkr+OdTrQcipwRRFPxaWEi6Jpj0RCq9MdE1vsfr5Z9aZ2voqqLp1eUuw==}
+  /repox@1.4.60:
+    resolution: {integrity: sha512-jeiUx1RBU6OTA9dIqZ2qsCUXtxMCSzwCQjtEgsZBta+SxsPO2CwnBwxrmDFJH/w8eK1EKrkVQjVfafodHacF6g==}
     hasBin: true
     dependencies:
       command-exists: 1.2.9
       core-js: 3.36.1
       deepcopy: 2.1.0
       glob: 10.3.12
+      jsonschema: 1.4.1
       tsyringe: 4.8.0
       typescript: 5.3.3
     dev: false
