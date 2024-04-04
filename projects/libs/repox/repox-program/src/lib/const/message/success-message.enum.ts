@@ -3,3 +3,5 @@
  */
 
 export const commandExecutedCorrectlySuccessMsg = (): string => 'Command executed correctly!';
+
+export const projectIsCorrectSuccessMsg = (): string => 'Project is correct!';

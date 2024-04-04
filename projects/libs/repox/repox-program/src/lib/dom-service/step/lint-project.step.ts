@@ -1,12 +1,14 @@
 // done
 import { singleton } from 'tsyringe';
 
-import { SimpleMessageAppService, StepMessageAppService } from '@lib/logger';
+import { NewlineAppService, SimpleMessageAppService, StepMessageAppService } from '@lib/logger';
 import { createPath, runCommand } from '@lib/utils';
 import { type RepoxJsonDomainProjectModel, WorkspaceDomainStore } from '@lib/repox-workspace';
 
 import { lintProjectStepMsg } from '../../const/message/step-message.const';
 import { SystemProgramEnum } from '../../enum/system-program/system-program.enum';
+import { checkProjectPlainMsg } from '../../const/message/plain-message.const';
+import { projectIsCorrectSuccessMsg } from '../../const/message/success-message.enum';
 
 @singleton()
 /**
@@ -16,7 +18,8 @@ export class LintProjectStep {
   constructor (
     private readonly stepMessage: StepMessageAppService,
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly workspaceDomainStore: WorkspaceDomainStore
+    private readonly workspaceDomainStore: WorkspaceDomainStore,
+    private readonly newline: NewlineAppService
   ) {}
 
   run (packageManager: SystemProgramEnum, fix: boolean, projects: string[]): boolean {
@@ -28,8 +31,11 @@ export class LintProjectStep {
       const pathArg = createPath(projectToLint.src, '**/*.ts');
       const command = `${programArg} ${pathArg} ${fixArg}`;
       const commandToRun = this.buildCommandToRun(packageManager, command);
-      this.simpleMessage.writePlain(commandToRun);
+      this.newline.writeNewline();
+      this.simpleMessage.writePlain(checkProjectPlainMsg(projectToLint.name));
       runCommand(commandToRun, true);
+      this.newline.writeNewline();
+      this.simpleMessage.writeSuccess(projectIsCorrectSuccessMsg());
     }
     return true;
   }
