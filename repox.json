@@ -1,6 +1,6 @@
 {
   "defaultOptions": {
-    "packageManager": "pnpm"
+    "packageManager": "npm"
   },
   "projects": {
     "repox": {
