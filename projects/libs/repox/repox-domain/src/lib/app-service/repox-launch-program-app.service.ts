@@ -4,7 +4,7 @@ import {
   BuildProjectAppService,
   GenerateProjectAppService,
   GenerateWorkspaceAppService,
-  LintProjectAppService,
+  LintUnknownAppService,
   PublishNpmProgramService,
   RegenerateWorkspaceAppService,
   UnknownUnknownAppService
@@ -54,8 +54,8 @@ export class RepoxLaunchProgramAppService {
         },
         {
           programName: RepoxProgramEnum.lint,
-          commandName: RepoxCommandEnum.project,
-          service: container.resolve(LintProjectAppService)
+          commandName: RepoxCommandEnum.default,
+          service: container.resolve(LintUnknownAppService)
         }
       ]
     };

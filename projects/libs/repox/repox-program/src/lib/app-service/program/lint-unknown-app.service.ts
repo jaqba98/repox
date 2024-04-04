@@ -23,7 +23,7 @@ import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
  * --projects | -p    | Specify the project list that should be processed      | false    | string[]
  * --fix      | -f    | Specify whether to run the lint command in repair mode | false    | boolean
  */
-export class LintProjectAppService {
+export class LintUnknownAppService {
   constructor (
     private readonly writeHeader: WriteHeaderStep,
     private readonly getCommandArgStringArrayValue: GetCommandArgStringArrayValueStep,
@@ -40,7 +40,7 @@ export class LintProjectAppService {
 
   run (): boolean {
     // Display headline
-    if (!this.writeHeader.run(ProgramEnum.lint, CommandEnum.project)) return false;
+    if (!this.writeHeader.run(ProgramEnum.lint, CommandEnum.unknown)) return false;
     // Get arguments
     const projects = this.getCommandArgStringArrayValue.run('projects', 'p', false);
     if (projects === false) return false;

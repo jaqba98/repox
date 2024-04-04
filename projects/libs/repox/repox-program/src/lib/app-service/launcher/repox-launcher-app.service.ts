@@ -14,7 +14,7 @@ import {
 import { ProgramEnum } from '../../enum/launcher/program.enum';
 import { CommandEnum } from '../../enum/launcher/command.enum';
 import { BuildProjectAppService } from '../program/build-project-app.service';
-import { LintProjectAppService } from '../program/lint-project-app.service';
+import { LintUnknownAppService } from '../program/lint-unknown-app.service';
 
 @singleton()
 /**
@@ -30,7 +30,7 @@ export class RepoxLauncherAppService {
     private readonly buildProject: BuildProjectAppService,
     private readonly generateProject: GenerateProjectAppService,
     private readonly complexMessage: ComplexMessageAppService,
-    private readonly lintProject: LintProjectAppService
+    private readonly lintUnknown: LintUnknownAppService
   ) {
   }
 
@@ -71,7 +71,7 @@ export class RepoxLauncherAppService {
   }
 
   private lintProgram (program: string, command: string): boolean {
-    if (command === CommandEnum.project) return this.lintProject.run();
+    if (command === CommandEnum.unknown) return this.lintUnknown.run();
     this.throwLauncherCommandError(program, command);
     return false;
   }
