@@ -1,13 +1,12 @@
 // done
 import { singleton } from 'tsyringe'
 
-import { StepMessageAppService } from '@lib/logger'
-// import { runCommand } from '@lib/utils'
+import { SimpleMessageAppService, StepMessageAppService } from '@lib/logger'
+import { createPath, runCommand } from '@lib/utils'
 import { type RepoxJsonDomainProjectModel, WorkspaceDomainStore } from '@lib/repox-workspace'
 
 import { lintProjectStepMsg } from '../../const/message/step-message.const'
-import { type SystemProgramEnum } from '../../enum/system-program/system-program.enum'
-import { createPath } from '@lib/utils'
+import { SystemProgramEnum } from '../../enum/system-program/system-program.enum'
 
 @singleton()
 /**
@@ -16,6 +15,7 @@ import { createPath } from '@lib/utils'
 export class LintProjectStep {
   constructor (
     private readonly stepMessage: StepMessageAppService,
+    private readonly simpleMessage: SimpleMessageAppService,
     private readonly workspaceDomainStore: WorkspaceDomainStore
   ) {}
 
@@ -26,20 +26,11 @@ export class LintProjectStep {
     const fixArg = fix ? '--fix' : ''
     for (const projectToLint of projectsToLint) {
       const pathArg = createPath(projectToLint.src, '**/*.ts')
-      const commandToRun = `${programArg} ${pathArg} ${fixArg}`
-      console.log(commandToRun)
+      const command = `${programArg} ${pathArg} ${fixArg}`
+      const commandToRun = this.buildCommandToRun(packageManager, command)
+      this.simpleMessage.writePlain(commandToRun)
+      runCommand(commandToRun, true)
     }
-    // switch (packageManager) {
-    //   case SystemProgramEnum.npm:
-    //     runCommand(`npx ${command}`, true)
-    //     break
-    //   case SystemProgramEnum.pnpm:
-    //     runCommand(`pnpm run ${command}`, true)
-    //     break
-    //   case SystemProgramEnum.yarn:
-    //     runCommand(`yarn run ${command}`, true)
-    //     break
-    // }
     return true
   }
 
@@ -50,5 +41,18 @@ export class LintProjectStep {
     }
     return Object.values(repoxJsonDomain.projects)
       .filter(project => projects.includes(project.name))
+  }
+
+  private buildCommandToRun (packageManager: SystemProgramEnum, command: string): string {
+    switch (packageManager) {
+      case SystemProgramEnum.npm:
+        return `npx ${command}`
+      case SystemProgramEnum.pnpm:
+        return `pnpm dlx ${command}`
+      case SystemProgramEnum.yarn:
+        return `yarn dlx ${command}`
+      default:
+        throw new Error('Not supported packageManager!')
+    }
   }
 }
