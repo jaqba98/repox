@@ -42,7 +42,7 @@ export class LintProjectAppService {
     const projects = this.getCommandArgStringArrayValue.run('projects', 'p', false)
     if (projects === false) return false
     const fix = this.getCommandArgBooleanValue.run('fix', 'f', false)
-    if (!fix) return false
+    if (fix === undefined) return false
     // Build workspace domain model
     if (!this.goToWorkspaceRoot.run()) return false
     if (!this.buildWorkspaceDto.run()) return false

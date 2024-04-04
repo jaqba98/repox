@@ -20,7 +20,7 @@ export class GetCommandArgBooleanValueStep {
     private readonly complexMessage: ComplexMessageAppService
   ) {}
 
-  run (arg: string, alias: string, required: boolean = true): boolean {
+  run (arg: string, alias: string, required: boolean = true): boolean | undefined {
     this.stepMessage.write(getArgumentValueStepMsg(arg))
     if (this.paramDomainStore.hasCommandArg(arg)) {
       return this.checkArgumentValueType(arg, arg, alias)
@@ -35,7 +35,7 @@ export class GetCommandArgBooleanValueStep {
     this.complexMessage.writeWarning([
       specifyArgumentAndRunAgainWarningMsg(arg, alias, 'boolean')
     ])
-    return false
+    return undefined
   }
 
   private checkArgumentValueType (argToCheck: string, arg: string, alias: string): boolean {
