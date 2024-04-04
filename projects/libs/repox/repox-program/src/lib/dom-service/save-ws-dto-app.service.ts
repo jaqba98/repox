@@ -1,5 +1,5 @@
-import { singleton } from 'tsyringe'
-import { SimpleMessageAppService } from '@lib/logger'
+import { singleton } from 'tsyringe';
+import { SimpleMessageAppService } from '@lib/logger';
 
 @singleton()
 /**
@@ -14,9 +14,9 @@ export class SaveWsDtoAppService {
   }
 
   run (): boolean {
-    this.simpleMessage.writePlain('Step: Save WS DTO')
+    this.simpleMessage.writePlain('Step: Save WS DTO');
     // this.wsDtoStore.saveWsDto();
-    return true
+    return true;
   }
 }
 

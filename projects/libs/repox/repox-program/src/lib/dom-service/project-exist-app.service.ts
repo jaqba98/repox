@@ -1,5 +1,5 @@
-import { singleton } from 'tsyringe'
-import { SimpleMessageAppService } from '@lib/logger'
+import { singleton } from 'tsyringe';
+import { SimpleMessageAppService } from '@lib/logger';
 
 @singleton()
 /**
@@ -16,14 +16,14 @@ export class ProjectExistAppService {
   }
 
   run (_projectName: string): boolean {
-    this.simpleMessage.writePlain('Step: Project exist')
+    this.simpleMessage.writePlain('Step: Project exist');
     // enum project = this.wsDomainStore.getProjectByName(projectName);
     // if (project === undefined) {
     //     this.simpleMessage.writeError(`The ${projectName} project not exist!`);
     //     this.simpleMessage.writeWarning(`Specify a different project name and restart the program`);
     //     return false;
     // }
-    return true
+    return true;
   }
 }
 

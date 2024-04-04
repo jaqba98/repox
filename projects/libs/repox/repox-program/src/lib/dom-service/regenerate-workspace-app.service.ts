@@ -1,7 +1,7 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { SimpleMessageAppService, StepMessageAppService } from '@lib/logger'
-import { RunRegenerateWorkspaceAppService } from '@lib/repox-workspace'
+import { SimpleMessageAppService, StepMessageAppService } from '@lib/logger';
+import { RunRegenerateWorkspaceAppService } from '@lib/repox-workspace';
 
 @singleton()
 /**
@@ -16,9 +16,9 @@ export class RegenerateWorkspaceAppService {
   }
 
   run (): boolean {
-    this.stepMessage.write('Regenerate Workspace')
-    if (this.runRegenerateWorkspace.run()) return true
-    this.simpleMessage.writeError('Failed to regenerate workspace!')
-    return false
+    this.stepMessage.write('Regenerate Workspace');
+    if (this.runRegenerateWorkspace.run()) return true;
+    this.simpleMessage.writeError('Failed to regenerate workspace!');
+    return false;
   }
 }

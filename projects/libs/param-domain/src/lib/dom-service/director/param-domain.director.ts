@@ -1,9 +1,9 @@
-import { container, type InjectionToken, singleton } from 'tsyringe'
+import { container, type InjectionToken, singleton } from 'tsyringe';
 
-import { type ParamDomain } from '../domain/param-domain'
+import { type ParamDomain } from '../domain/param-domain';
 import {
   type ParamDomainAbstractBuilder
-} from '../builder/param-domain-abstract.builder'
+} from '../builder/param-domain-abstract.builder';
 
 @singleton()
 /**
@@ -16,6 +16,6 @@ export class ParamDomainDirector {
       .buildCommand()
       .buildProgramArgs()
       .buildCommandArgs()
-      .build()
+      .build();
   }
 }

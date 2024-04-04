@@ -1,16 +1,16 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { ParamDomainStore } from '@lib/param-domain'
-import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
+import { ParamDomainStore } from '@lib/param-domain';
+import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger';
 
-import { getSingleCommandArgValueStepMsg } from '../../const/message/step-message.const'
+import { getSingleCommandArgValueStepMsg } from '../../const/message/step-message.const';
 import {
-  argumentIsNotHaveSingleValueErrorMsg,
-  argumentIsNotSpecifiedErrorMsg
-} from '../../const/message/error-message.const'
+  argumentIsNotHaveSingleValueErrorMsg
+  // argumentIsNotSpecifiedErrorMsg
+} from '../../const/message/error-message.const';
 import {
   specifyArgumentCorrectlyWarningMsg
-} from '../../const/message/warning-message.const'
+} from '../../const/message/warning-message.const';
 
 @singleton()
 /**
@@ -26,27 +26,27 @@ export class GetCommandArgSingleValueStep {
   }
 
   run (arg: string, alias: string, defaultValue?: string): string | undefined {
-    this.stepMessage.write(getSingleCommandArgValueStepMsg(arg))
-    const commandArgValues = this.store.getCommandArgValues(arg, alias)
+    this.stepMessage.write(getSingleCommandArgValueStepMsg(arg));
+    const commandArgValues = this.store.getCommandArgValues(arg, alias);
     if (commandArgValues == null) {
-      if (defaultValue != null) return defaultValue
+      if (defaultValue != null) return defaultValue;
       this.complexMessage.writeError([
-        argumentIsNotSpecifiedErrorMsg(arg)
-      ])
+        // argumentIsNotSpecifiedErrorMsg(arg)
+      ]);
       this.complexMessage.writeWarning([
         specifyArgumentCorrectlyWarningMsg(arg)
-      ])
-      return undefined
+      ]);
+      return undefined;
     }
     if (commandArgValues.length !== 1) {
       this.complexMessage.writeError([
         argumentIsNotHaveSingleValueErrorMsg(arg)
-      ])
+      ]);
       this.complexMessage.writeWarning([
         specifyArgumentCorrectlyWarningMsg(arg)
-      ])
-      return undefined
+      ]);
+      return undefined;
     }
-    return commandArgValues[0]
+    return commandArgValues[0];
   }
 }

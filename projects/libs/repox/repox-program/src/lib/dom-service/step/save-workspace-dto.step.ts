@@ -1,9 +1,9 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { StepMessageAppService } from '@lib/logger'
-import { WorkspaceDtoStore } from '@lib/repox-workspace'
+import { StepMessageAppService } from '@lib/logger';
+import { WorkspaceDtoStore } from '@lib/repox-workspace';
 
-import { saveWorkspaceDtoStepMsg } from '../../const/message/step-message.const'
+import { saveWorkspaceDtoStepMsg } from '../../const/message/step-message.const';
 
 @singleton()
 /**
@@ -17,8 +17,8 @@ export class SaveWorkspaceDtoStep {
   }
 
   run (): boolean {
-    this.stepMessage.write(saveWorkspaceDtoStepMsg())
-    this.store.save()
-    return true
+    this.stepMessage.write(saveWorkspaceDtoStepMsg());
+    // this.store.save()
+    return true;
   }
 }

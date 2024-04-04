@@ -1,8 +1,8 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
-import { writeFileSync } from 'fs'
-import { WorkspaceFileEnum } from '../../enum/workspace-file.enum'
+import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
+import { writeFileSync } from 'fs';
+import { WorkspaceFileEnum } from '../../enum/workspace-file.enum';
 
 @singleton()
 /**
@@ -10,11 +10,11 @@ import { WorkspaceFileEnum } from '../../enum/workspace-file.enum'
  */
 export class EslintrcJsFileBuilder extends WorkspaceStructureAbstractBuilder {
   generate (): void {
-    writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildDefaultEslintrcJsContent())
+    writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildDefaultEslintrcJsContent());
   }
 
   regenerate (): void {
-    writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildDefaultEslintrcJsContent())
+    writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildDefaultEslintrcJsContent());
   }
 
   private buildDefaultEslintrcJsContent (): string {
@@ -47,6 +47,6 @@ export class EslintrcJsFileBuilder extends WorkspaceStructureAbstractBuilder {
       "max-depth": "error"
     }
 }
-`
+`;
   }
 }

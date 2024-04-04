@@ -1,10 +1,10 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { ParamDomainDirector } from '../dom-service/director/param-domain.director'
+import { ParamDomainDirector } from '../dom-service/director/param-domain.director';
 import {
   ParamDomainBuilder
-} from '../dom-service/builder/param-domain.builder'
-import { ParamDomainStore } from '../dom-service/store/param-domain.store'
+} from '../dom-service/builder/param-domain.builder';
+import { ParamDomainStore } from '../dom-service/store/param-domain.store';
 
 @singleton()
 /**
@@ -19,8 +19,8 @@ export class BuildParamDomainAppService {
   }
 
   build (): boolean {
-    const paramDomain = this.paramDomainDirector.build(ParamDomainBuilder)
-    this.paramDomainStore.set(paramDomain)
-    return true
+    const paramDomain = this.paramDomainDirector.build(ParamDomainBuilder);
+    this.paramDomainStore.set(paramDomain);
+    return true;
   }
 }

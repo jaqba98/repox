@@ -1,9 +1,9 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { StepMessageAppService } from '@lib/logger'
-import { RunCommandUtilsService } from '@lib/utils'
+import { StepMessageAppService } from '@lib/logger';
+import { RunCommandUtilsService } from '@lib/utils';
 
-import { runCommandStepMsg } from '../../const/message/step-message.const'
+import { runCommandStepMsg } from '../../const/message/step-message.const';
 
 @singleton()
 /**
@@ -17,8 +17,8 @@ export class RunCommandStep {
   }
 
   run (command: string, verbose: boolean = false): boolean {
-    this.stepMessage.write(runCommandStepMsg(command))
-    this.runCommandUtils.runCommand(command, verbose)
-    return true
+    this.stepMessage.write(runCommandStepMsg(command));
+    this.runCommandUtils.runCommand(command, verbose);
+    return true;
   }
 }

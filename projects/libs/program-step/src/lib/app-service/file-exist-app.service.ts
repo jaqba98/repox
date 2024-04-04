@@ -1,6 +1,6 @@
-import { singleton } from 'tsyringe'
-import { NewlineAppService, SimpleMessageAppService } from '@lib/logger'
-import { PathUtilsService } from '@lib/utils'
+import { singleton } from 'tsyringe';
+import { NewlineAppService, SimpleMessageAppService } from '@lib/logger';
+import { PathUtilsService } from '@lib/utils';
 
 @singleton()
 /**
@@ -16,13 +16,13 @@ export class FileExistAppService {
   }
 
   run (filePath: string): boolean {
-    this.simpleMessage.writePlain(`Step: File Exist >>> ${filePath}`)
+    this.simpleMessage.writePlain(`Step: File Exist >>> ${filePath}`);
     if (this.pathUtils.existPath(filePath)) {
-      return true
+      return true;
     }
-    this.newline.writeNewline()
-    this.simpleMessage.writeError(`The file ${filePath} does not exist`)
-    return false
+    this.newline.writeNewline();
+    this.simpleMessage.writeError(`The file ${filePath} does not exist`);
+    return false;
   }
 }
 

@@ -1,44 +1,38 @@
-import { singleton } from 'tsyringe'
+// done
+import { singleton } from 'tsyringe';
 
-import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
+import { StepMessageAppService, ComplexMessageAppService } from '@lib/logger';
 
-import { type SystemProgramEnum } from '../../enum/system-program/system-program.enum'
-import {
-  SystemProgramExistService
-} from '../../infrastructure/system-program-exist.service'
-import { SystemProgramUrlEnum } from '../../enum/system-program/system-program-url.enum'
-import { systemProgramExistStepMsg } from '../../const/message/step-message.const'
-import {
-  systemProgramNotExistInSystemErrorMsg
-} from '../../const/message/error-message.const'
-import {
-  installAndRunAgainWarningMsg,
-  linkToProgramWarningMsg
-} from '../../const/message/warning-message.const'
+import { SystemProgramUrlEnum } from '../../enum/system-program/system-program-url.enum';
+import { type SystemProgramEnum } from '../../enum/system-program/system-program.enum';
+import { systemProgramDoesNotExistErrorMsg } from '../../const/message/error-message.const';
+import { systemProgramExistStepMsg } from '../../const/message/step-message.const';
+import { installSystemProgramAndRunAgainWarningMsg, visitSystemProgramPageWarningMsg } from '../../const/message/warning-message.const';
+import { SystemProgramExistService } from '../../infrastructure/system-program-exist.service';
 
 @singleton()
 /**
- * The step service is responsible for checking whether the system program exist.
+ * The step dom-service is responsible for checking
+ * whether the system program exist.
  */
 export class SystemProgramExistStep {
   constructor (
     private readonly stepMessage: StepMessageAppService,
     private readonly systemProgramExist: SystemProgramExistService,
     private readonly complexMessage: ComplexMessageAppService
-  ) {
-  }
+  ) {}
 
   run (systemProgram: SystemProgramEnum): boolean {
-    this.stepMessage.write(systemProgramExistStepMsg(systemProgram))
-    if (this.systemProgramExist.checkExist(systemProgram)) return true
-    const url = SystemProgramUrlEnum[systemProgram]
+    this.stepMessage.write(systemProgramExistStepMsg(systemProgram));
+    if (this.systemProgramExist.checkExist(systemProgram)) return true;
+    const url = SystemProgramUrlEnum[systemProgram];
     this.complexMessage.writeError([
-      systemProgramNotExistInSystemErrorMsg(systemProgram)
-    ])
+      systemProgramDoesNotExistErrorMsg(systemProgram)
+    ]);
     this.complexMessage.writeWarning([
-      installAndRunAgainWarningMsg(systemProgram),
-      linkToProgramWarningMsg(systemProgram, url)
-    ])
-    return true
+      installSystemProgramAndRunAgainWarningMsg(systemProgram),
+      visitSystemProgramPageWarningMsg(systemProgram, url)
+    ]);
+    return false;
   }
 }

@@ -1,10 +1,10 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
-import { RunGenerateWorkspaceAppService } from '@lib/repox-workspace'
+import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger';
+import { RunGenerateWorkspaceAppService } from '@lib/repox-workspace';
 
-import { generateWorkspaceStepMsg } from '../../const/message/step-message.const'
-import { failedToGenerateWorkspaceErrorMsg } from '../../const/message/error-message.const'
+import { generateWorkspaceStepMsg } from '../../const/message/step-message.const';
+import { failedToGenerateWorkspaceErrorMsg } from '../../const/message/error-message.const';
 
 @singleton()
 /**
@@ -19,11 +19,11 @@ export class GenerateWorkspaceStep {
   }
 
   run (): boolean {
-    this.stepMessage.write(generateWorkspaceStepMsg())
-    if (this.runGenerateWorkspace.run()) return true
+    this.stepMessage.write(generateWorkspaceStepMsg());
+    if (this.runGenerateWorkspace.run()) return true;
     this.complexMessage.writeError([
       failedToGenerateWorkspaceErrorMsg()
-    ])
-    return false
+    ]);
+    return false;
   }
 }

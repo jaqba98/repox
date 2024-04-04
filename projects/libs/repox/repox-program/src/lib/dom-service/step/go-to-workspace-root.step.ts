@@ -1,39 +1,38 @@
-import { singleton } from 'tsyringe'
+// done
+import { singleton } from 'tsyringe';
 
-import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
-import { changePath, findWorkspacePath, getCurrentPath } from '@lib/utils'
+import { StepMessageAppService, ComplexMessageAppService } from '@lib/logger';
+import { getCurrentPath, findWorkspacePath, changePath } from '@lib/utils';
+import { EMPTY_STRING } from '@lib/const';
 
-import { goToWorkspaceRootStepMsg } from '../../const/message/step-message.const'
-import { workspaceRootNotExistErrorMsg } from '../../const/message/error-message.const'
-import {
-  navigateToExistingWorkspaceFolderWarningMsg
-} from '../../const/message/warning-message.const'
+import { goToWorkspaceRootStepMsg } from '../../const/message/step-message.const';
+import { workspaceRootNotExistErrorMsg } from '../../const/message/error-message.const';
+import { navigateToTheExistingWorkspaceFolderWarningMsg } from '../../const/message/warning-message.const';
 
 @singleton()
 /**
- * The step service is responsible for going to the root workspace.
+ * The step dom-service is responsible for going to the root workspace.
  */
 export class GoToWorkspaceRootStep {
   constructor (
     private readonly stepMessage: StepMessageAppService,
     private readonly complexMessage: ComplexMessageAppService
-  ) {
-  }
+  ) {}
 
   run (): boolean {
-    this.stepMessage.write(goToWorkspaceRootStepMsg())
-    const currentPath = getCurrentPath()
-    const workspacePath = findWorkspacePath(currentPath)
-    if (workspacePath === '') {
+    this.stepMessage.write(goToWorkspaceRootStepMsg());
+    const currentPath = getCurrentPath();
+    const workspaceRootPath = findWorkspacePath(currentPath);
+    if (workspaceRootPath === EMPTY_STRING) {
       this.complexMessage.writeError([
         workspaceRootNotExistErrorMsg()
-      ])
+      ]);
       this.complexMessage.writeWarning([
-        navigateToExistingWorkspaceFolderWarningMsg()
-      ])
-      return false
+        navigateToTheExistingWorkspaceFolderWarningMsg()
+      ]);
+      return false;
     }
-    changePath(workspacePath)
-    return true
+    changePath(workspaceRootPath);
+    return true;
   }
 }

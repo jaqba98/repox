@@ -1,6 +1,6 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { deepCopy } from '@lib/utils'
+import { deepCopy } from '@lib/utils';
 
 @singleton()
 /**
@@ -9,10 +9,10 @@ import { deepCopy } from '@lib/utils'
  */
 export class CommandLineArgsService {
   getUserArgs (): string[] {
-    return this.getArgs().slice(2)
+    return this.getArgs().slice(2);
   }
 
   private getArgs (): string[] {
-    return deepCopy(process.argv)
+    return deepCopy(process.argv);
   }
 }

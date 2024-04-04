@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { singleton } from 'tsyringe'
-import { RepoxArgumentEnum, RepoxCommandEnum, RepoxProgramEnum } from '@lib/repox-domain'
+import { singleton } from 'tsyringe';
+import { RepoxArgumentEnum, RepoxCommandEnum, RepoxProgramEnum } from '@lib/repox-domain';
 
 @singleton()
 /**
@@ -26,7 +26,7 @@ export class RepoxGetParamDepService {
           required: false
         }
       }
-    }
+    };
   }
 
   getProgramGenerate (): any {
@@ -73,7 +73,7 @@ export class RepoxGetParamDepService {
         }
       },
       args: {}
-    }
+    };
   }
 
   getProgramRegenerate (): any {
@@ -97,7 +97,7 @@ export class RepoxGetParamDepService {
         }
       },
       args: {}
-    }
+    };
   }
 
   getProgramBuild (): any {
@@ -134,7 +134,7 @@ export class RepoxGetParamDepService {
           required: false
         }
       }
-    }
+    };
   }
 
   getProgramPublish (): any {
@@ -158,7 +158,7 @@ export class RepoxGetParamDepService {
         }
       },
       args: {}
-    }
+    };
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -183,7 +183,7 @@ export class RepoxGetParamDepService {
         }
       },
       args: {}
-    }
+    };
   }
 }
 

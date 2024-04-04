@@ -1,8 +1,8 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
-import { writeToFile } from '@lib/utils'
-import { WorkspaceFileEnum } from '@lib/repox-workspace'
+import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
+import { writeToFile } from '@lib/utils';
+import { WorkspaceFileEnum } from '@lib/repox-workspace';
 
 @singleton()
 /**
@@ -11,8 +11,8 @@ import { WorkspaceFileEnum } from '@lib/repox-workspace'
 export class AppTsMainFileBuilder extends WorkspaceStructureAbstractBuilder {
   generate (): void {
     const appTsMainFileContent = `console.log("Hello, World!");
-`
-    writeToFile(WorkspaceFileEnum.mainTs, appTsMainFileContent)
+`;
+    writeToFile(WorkspaceFileEnum.mainTs, appTsMainFileContent);
   }
 
   regenerate (): void {

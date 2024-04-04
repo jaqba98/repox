@@ -1,9 +1,9 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { StepMessageAppService } from '@lib/logger'
-import { WorkspaceDomainStore } from '@lib/repox-workspace'
+import { StepMessageAppService } from '@lib/logger';
+import { WorkspaceDomainStore } from '@lib/repox-workspace';
 
-import { addProjectToWorkspaceDomainStepMsg } from '../../const/message/step-message.const'
+import { addProjectToWorkspaceDomainStepMsg } from '../../const/message/step-message.const';
 
 @singleton()
 /**
@@ -17,8 +17,8 @@ export class AddProjectToWorkspaceDomainStep {
   }
 
   run (name: string, root: string, src: string, type: string): boolean {
-    this.stepMessage.write(addProjectToWorkspaceDomainStepMsg(name))
-    this.store.addProject(name, root, src, type)
-    return true
+    this.stepMessage.write(addProjectToWorkspaceDomainStepMsg(name));
+    // this.store.addProject(name, root, src, type)
+    return true;
   }
 }

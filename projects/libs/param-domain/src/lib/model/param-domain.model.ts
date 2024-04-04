@@ -9,4 +9,4 @@ export interface ParamDomainArgModel {
   hasManyValues: boolean
 }
 
-export type ParamDomainArgsModel = Record<string, ParamDomainArgModel>
+export type ParamDomainArgsModel = Record<string, ParamDomainArgModel>;

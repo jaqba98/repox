@@ -12,6 +12,6 @@ export interface DefaultDefaultRepoxProgramModel {
 
 export type TRepoxProgramModel =
   EmptyRepoxProgramModel |
-  DefaultDefaultRepoxProgramModel
+  DefaultDefaultRepoxProgramModel;
 
 // todo: refactor the code

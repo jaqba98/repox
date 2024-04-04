@@ -1,14 +1,14 @@
-import { container, singleton } from 'tsyringe'
-import { RepoxCommandEnum, RepoxProgramEnum } from '@lib/repox-domain'
+import { container, singleton } from 'tsyringe';
+import { RepoxCommandEnum, RepoxProgramEnum } from '@lib/repox-domain';
 import {
   BuildProjectAppService,
   GenerateProjectAppService,
   GenerateWorkspaceAppService,
-  LintProjectAppService,
+  LintUnknownAppService,
   PublishNpmProgramService,
   RegenerateWorkspaceAppService,
   UnknownUnknownAppService
-} from '@lib/repox-program'
+} from '@lib/repox-program';
 
 @singleton()
 /**
@@ -54,11 +54,11 @@ export class RepoxLaunchProgramAppService {
         },
         {
           programName: RepoxProgramEnum.lint,
-          commandName: RepoxCommandEnum.project,
-          service: container.resolve(LintProjectAppService)
+          commandName: RepoxCommandEnum.default,
+          service: container.resolve(LintUnknownAppService)
         }
       ]
-    }
+    };
   }
 }
 

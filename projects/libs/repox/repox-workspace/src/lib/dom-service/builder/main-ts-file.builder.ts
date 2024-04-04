@@ -1,9 +1,9 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { writeToFile } from '@lib/utils'
+import { writeToFile } from '@lib/utils';
 
-import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
-import { WorkspaceFileEnum } from '../../enum/workspace-file.enum'
+import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
+import { WorkspaceFileEnum } from '../../enum/workspace-file.enum';
 
 @singleton()
 /**
@@ -11,7 +11,7 @@ import { WorkspaceFileEnum } from '../../enum/workspace-file.enum'
  */
 export class MainTsFileBuilder extends WorkspaceStructureAbstractBuilder {
   generate (): void {
-    writeToFile(WorkspaceFileEnum.mainTs, this.createMainTsFileContent())
+    writeToFile(WorkspaceFileEnum.mainTs, this.createMainTsFileContent());
   }
 
   regenerate (): void {
@@ -19,6 +19,6 @@ export class MainTsFileBuilder extends WorkspaceStructureAbstractBuilder {
 
   private createMainTsFileContent (): string {
     return `console.log("Hello, World!");
-`
+`;
   }
 }

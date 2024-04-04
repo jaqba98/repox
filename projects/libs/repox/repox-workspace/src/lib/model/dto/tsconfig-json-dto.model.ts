@@ -1,13 +1,23 @@
-import type ts from 'typescript'
+// done
+import { type CompilerOptions, type ProjectReference } from 'typescript';
 
 /**
- * The model DTO represents real content of tsconfig.json file.
+ * The model dto represents a real content
+ * of tsconfig.json file.
  */
 
+/**
+ * The model was copied directly from typescript project.
+ * It has to be up to date as possible: TSConfig.
+ */
 export interface TsconfigJsonDtoModel {
-  compilerOptions: ts.server.protocol.CompilerOptions
-  exclude: string[]
+  compilerOptions: CompilerOptions
+  compileOnSave: boolean | undefined
+  exclude?: readonly string[]
+  files: readonly string[] | undefined
+  include?: readonly string[]
+  references: readonly ProjectReference[] | undefined
 }
 
-export interface TsconfigJsonDtoPartialModel extends Partial<TsconfigJsonDtoModel> {
+export interface PartialTsconfigJsonDtoModel extends Partial<TsconfigJsonDtoModel> {
 }

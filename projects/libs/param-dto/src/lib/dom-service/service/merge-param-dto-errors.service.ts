@@ -1,7 +1,7 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { type ParamDtoErrorModel } from '../../model/param-dto-error.model'
-import { type ParamDtoError } from '../domain/param-dto-error'
+import { type ParamDtoErrorModel } from '../../model/param-dto-error.model';
+import { type ParamDtoError } from '../domain/param-dto-error';
 
 @singleton()
 /**
@@ -15,7 +15,7 @@ export class MergeParamDtoErrorsService {
       ...errors.map(error => error.correctPatternErrors),
       ...errors.map(error => error.canExistErrors),
       ...errors.map(error => error.correctOrderErrors)
-    ]
-    return allErrors.filter(error => error.wrongParamIndexes.length > 0)
+    ];
+    return allErrors.filter(error => error.wrongParamIndexes.length > 0);
   }
 }

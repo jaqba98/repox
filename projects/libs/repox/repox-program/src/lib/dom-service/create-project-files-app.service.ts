@@ -1,11 +1,11 @@
-import { singleton } from 'tsyringe'
-import { SimpleMessageAppService } from '@lib/logger'
+import { singleton } from 'tsyringe';
+import { SimpleMessageAppService } from '@lib/logger';
 import {
   FileUtilsService,
   FolderUtilsService,
   PathUtilsService,
   RunCommandUtilsService
-} from '@lib/utils'
+} from '@lib/utils';
 
 @singleton()
 /**
@@ -24,20 +24,20 @@ export class CreateProjectFilesAppService {
   }
 
   run (_projectName: string): boolean {
-    this.simpleMessage.writePlain('Step: Generate Workspace')
+    this.simpleMessage.writePlain('Step: Generate Workspace');
     // enum project = this.wsDomainStore.getProject(projectName);
     // if (!project) {
     //     this.simpleMessage.writeError(`Project ${projectName} does not exist in the store!`);
     //     return false;
     // }
-    const currentPath = this.pathUtils.getCurrentPath()
+    const currentPath = this.pathUtils.getCurrentPath();
     // this.folderUtils.createFolder(project.path);
     // this.pathUtils.changePath(project.path);
     // this.folderUtils.createFolder(WorkspaceFolderEnum.src);
     // this.pathUtils.changePath(WorkspaceFolderEnum.src);
     // this.fileUtils.createEmptyFile(WorkspaceFileEnum.gitignoreTextFile);
-    this.pathUtils.changePath('../')
-    this.runCommandUtils.runCommand('npm init -y')
+    this.pathUtils.changePath('../');
+    this.runCommandUtils.runCommand('npm init -y');
     // this.fileUtils.writeTextFile(
     //     WorkspaceFileEnum.jestConfigJsFile,
     //     this.createWsFile.buildProjectJestConfigTsContentFile(project.path)
@@ -46,8 +46,8 @@ export class CreateProjectFilesAppService {
     //     WorkspaceFileEnum.tsconfigJsonFile,
     //     this.createWsFile.buildProjectTsconfigJsonContentFile(project.path)
     // );
-    this.pathUtils.changePath(currentPath)
-    return true
+    this.pathUtils.changePath(currentPath);
+    return true;
   }
 }
 // todo: refactor the code

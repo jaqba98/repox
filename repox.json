@@ -1,10 +1,85 @@
 {
+  "defaultOptions": {
+    "packageManager": "pnpm"
+  },
   "projects": {
     "repox": {
       "name": "repox",
       "root": "projects/apps/repox",
       "src": "projects/apps/repox/src",
       "type": "@app/ts"
+    },
+    "const": {
+      "name": "const",
+      "root": "projects/libs/const",
+      "src": "projects/libs/const/src",
+      "type": "@lib/ts"
+    },
+    "logger": {
+      "name": "logger",
+      "root": "projects/libs/logger",
+      "src": "projects/libs/logger/src",
+      "type": "@lib/ts"
+    },
+    "model": {
+      "name": "model",
+      "root": "projects/libs/model",
+      "src": "projects/libs/model/src",
+      "type": "@lib/ts"
+    },
+    "param-domain": {
+      "name": "param-domain",
+      "root": "projects/libs/param-domain",
+      "src": "projects/libs/param-domain/src",
+      "type": "@lib/ts"
+    },
+    "param-dto": {
+      "name": "param-dto",
+      "root": "projects/libs/param-dto",
+      "src": "projects/libs/param-dto/src",
+      "type": "@lib/ts"
+    },
+    "program-step": {
+      "name": "program-step",
+      "root": "projects/libs/program-step",
+      "src": "projects/libs/program-step/src",
+      "type": "@lib/ts"
+    },
+    "repox-const": {
+      "name": "repox-const",
+      "root": "projects/libs/repox/repox-const",
+      "src": "projects/libs/repox/repox-const/src",
+      "type": "@lib/ts"
+    },
+    "repox-domain": {
+      "name": "repox-domain",
+      "root": "projects/libs/repox/repox-domain",
+      "src": "projects/libs/repox/repox-domain/src",
+      "type": "@lib/ts"
+    },
+    "repox-main": {
+      "name": "repox-main",
+      "root": "projects/libs/repox/repox-main",
+      "src": "projects/libs/repox/repox-main/src",
+      "type": "@lib/ts"
+    },
+    "repox-program": {
+      "name": "repox-program",
+      "root": "projects/libs/repox/repox-program",
+      "src": "projects/libs/repox/repox-program/src",
+      "type": "@lib/ts"
+    },
+    "repox-workspace": {
+      "name": "repox-workspace",
+      "root": "projects/libs/repox/repox-workspace",
+      "src": "projects/libs/repox/repox-workspace/src",
+      "type": "@lib/ts"
+    },
+    "utils": {
+      "name": "utils",
+      "root": "projects/libs/utils",
+      "src": "projects/libs/utils/src",
+      "type": "@lib/ts"
     }
   }
 }

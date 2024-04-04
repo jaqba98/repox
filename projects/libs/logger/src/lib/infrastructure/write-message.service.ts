@@ -1,4 +1,4 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
 @singleton()
 /**
@@ -7,6 +7,6 @@ import { singleton } from 'tsyringe'
  */
 export class WriteMessageService {
   write (message: string): void {
-    console.log(message)
+    console.log(message);
   }
 }

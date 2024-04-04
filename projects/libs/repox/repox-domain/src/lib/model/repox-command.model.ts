@@ -40,6 +40,6 @@ export type TRepoxCommandModel =
     GenerateProjectCommandModel |
     BuildProjectRepoxCommandModel |
     PublishNpmRepoxCommandModel |
-    LintProjectRepoxCommandModel
+    LintProjectRepoxCommandModel;
 
 // todo: refactor the code

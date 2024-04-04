@@ -1,13 +1,13 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
 import {
   BuildParamErrorMessageService
-} from '../dom-service/builder/build-param-error-message.service'
-import { BuildMessageService } from '../dom-service/builder/build-message.service'
-import { WriteMessageService } from '../infrastructure/write-message.service'
-import { BuildLineService } from '../dom-service/builder/build-line.service'
-import { LoggerModeEnum } from '../enum/logger-mode.enum'
-import { EMPTY_STRING } from '@lib/const'
+} from '../dom-service/builder/build-param-error-message.service';
+import { BuildMessageService } from '../dom-service/builder/build-message.service';
+import { WriteMessageService } from '../infrastructure/write-message.service';
+import { BuildLineService } from '../dom-service/builder/build-line.service';
+import { LoggerModeEnum } from '../enum/logger-mode.enum';
+import { EMPTY_STRING } from '@lib/const';
 
 @singleton()
 /**
@@ -54,7 +54,7 @@ export class ParamErrorMessageAppService {
         ...this.buildLines.buildErrorLines(errors),
         ...this.buildLines.buildTipLines(tips)
       ]
-    })
-    this.writeMessage.write(outputMessage)
+    });
+    this.writeMessage.write(outputMessage);
   }
 }
