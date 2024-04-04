@@ -45,7 +45,7 @@ export class RegenerateWorkspaceAppService {
     if (!this.writeHeader.run(ProgramEnum.regenerate, CommandEnum.workspace)) {
       return false
     }
-    if (!this.getCommandArgBooleanValue.run('force', 'f')) return false
+    // if (!this.getCommandArgBooleanValue.run('force', 'f')) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false
     if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false

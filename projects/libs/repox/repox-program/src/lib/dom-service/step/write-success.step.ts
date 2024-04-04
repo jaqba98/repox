@@ -1,14 +1,14 @@
+// done
 import { singleton } from 'tsyringe'
 
-import { NewlineAppService, SimpleMessageAppService } from '@lib/logger'
+import { SimpleMessageAppService, NewlineAppService } from '@lib/logger'
 
-import {
-  commandExecutedCorrectlySuccessMsg
-} from '../../const/message/success-message.enum'
+import { commandExecutedCorrectlySuccessMsg } from '../../const/message/success-message.enum'
 
 @singleton()
 /**
- * The step service is responsible for writing success on the console screen.
+ * The step service is responsible for
+ * writing success on the console screen.
  */
 export class WriteSuccessStep {
   constructor (
