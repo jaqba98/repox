@@ -36,7 +36,7 @@ dependencies:
     specifier: ^4.8.0
     version: 4.8.0
   typescript:
-    specifier: ^5.4.2
+    specifier: ^5.3.3
     version: 5.4.2
 
 devDependencies:

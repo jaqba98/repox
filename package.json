@@ -17,7 +17,7 @@
     "repox": "^1.4.57",
     "tsc-alias": "^1.8.8",
     "tsyringe": "^4.8.0",
-    "typescript": "^5.4.2"
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.1",
