@@ -1,6 +1,6 @@
-import { singleton } from 'tsyringe'
-import { RunCommandUtilsService } from '@lib/utils'
-import { SimpleMessageAppService } from '@lib/logger'
+import { singleton } from 'tsyringe';
+import { RunCommandUtilsService } from '@lib/utils';
+import { SimpleMessageAppService } from '@lib/logger';
 
 @singleton()
 /**
@@ -14,9 +14,9 @@ export class NpmPublishAppService {
   }
 
   run (): boolean {
-    this.simpleMessage.writePlain('Npm publish')
-    this.runCommandUtils.runCommand('npm publish', true)
-    return true
+    this.simpleMessage.writePlain('Npm publish');
+    this.runCommandUtils.runCommand('npm publish', true);
+    return true;
   }
 }
 

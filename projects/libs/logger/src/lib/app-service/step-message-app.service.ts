@@ -1,9 +1,9 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
 import {
   BuildSimpleMessageService
-} from '../dom-service/builder/build-simple-message.service'
-import { WriteMessageService } from '../infrastructure/write-message.service'
+} from '../dom-service/builder/build-simple-message.service';
+import { WriteMessageService } from '../infrastructure/write-message.service';
 
 @singleton()
 /**
@@ -18,7 +18,7 @@ export class StepMessageAppService {
   }
 
   write (message: string): void {
-    const outputMessage = this.buildMessage.buildPlain(`Step >>> ${message} <<<`)
-    this.writeMessage.write(outputMessage)
+    const outputMessage = this.buildMessage.buildPlain(`Step >>> ${message} <<<`);
+    this.writeMessage.write(outputMessage);
   }
 }

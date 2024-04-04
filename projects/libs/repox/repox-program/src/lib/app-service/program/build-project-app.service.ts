@@ -1,21 +1,21 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { WriteHeaderStep } from '../../dom-service/step/write-header.step'
-import { ProgramEnum } from '../../enum/launcher/program.enum'
-import { CommandEnum } from '../../enum/launcher/command.enum'
+import { WriteHeaderStep } from '../../dom-service/step/write-header.step';
+import { ProgramEnum } from '../../enum/launcher/program.enum';
+import { CommandEnum } from '../../enum/launcher/command.enum';
 import {
   GetCommandArgSingleValueStep
-} from '../../dom-service/step/get-command-arg-single-value.step'
-import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-root.step'
-import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step'
+} from '../../dom-service/step/get-command-arg-single-value.step';
+import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-root.step';
+import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step';
 import {
   BuildWorkspaceDomainStep
-} from '../../dom-service/step/build-workspace-domain.step'
-import { WriteSuccessStep } from '../../dom-service/step/write-success.step'
-import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step'
-import { SystemProgramEnum } from '../../enum/system-program/system-program.enum'
-import { CheckProjectExistStep } from '../../dom-service/step/check-project-exist.step'
-import { BuildProjectStep } from '../../dom-service/step/build-project.step'
+} from '../../dom-service/step/build-workspace-domain.step';
+import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
+import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step';
+import { SystemProgramEnum } from '../../enum/system-program/system-program.enum';
+import { CheckProjectExistStep } from '../../dom-service/step/check-project-exist.step';
+import { BuildProjectStep } from '../../dom-service/step/build-project.step';
 
 @singleton()
 /**
@@ -39,20 +39,20 @@ export class BuildProjectAppService {
 
   run (): boolean {
     if (!this.writeHeader.run(ProgramEnum.build, CommandEnum.project)) {
-      return false
+      return false;
     }
-    const name = this.getCommandArgSingleValue.run('name', 'n')
-    if (name == null) return false
-    if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false
-    if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false
-    if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false
-    if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false
-    if (!this.goToWorkspaceRoot.run()) return false
-    if (!this.buildWorkspaceDto.run()) return false
-    if (!this.buildWorkspaceDomain.run()) return false
-    if (!this.checkProjectExist.run(name)) return false
-    if (!this.buildProject.run(name)) return false
-    if (!this.writeSuccess.run()) return false
-    return true
+    const name = this.getCommandArgSingleValue.run('name', 'n');
+    if (name == null) return false;
+    if (!this.systemProgramExist.run(SystemProgramEnum.node)) return false;
+    if (!this.systemProgramExist.run(SystemProgramEnum.npm)) return false;
+    if (!this.systemProgramExist.run(SystemProgramEnum.git)) return false;
+    if (!this.systemProgramExist.run(SystemProgramEnum.pnpm)) return false;
+    if (!this.goToWorkspaceRoot.run()) return false;
+    if (!this.buildWorkspaceDto.run()) return false;
+    if (!this.buildWorkspaceDomain.run()) return false;
+    if (!this.checkProjectExist.run(name)) return false;
+    if (!this.buildProject.run(name)) return false;
+    if (!this.writeSuccess.run()) return false;
+    return true;
   }
 }

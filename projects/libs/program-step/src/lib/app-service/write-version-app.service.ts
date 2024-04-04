@@ -1,6 +1,6 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { SimpleMessageAppService } from '@lib/logger'
+import { SimpleMessageAppService } from '@lib/logger';
 
 @singleton()
 /**
@@ -11,6 +11,6 @@ export class WriteVersionAppService {
   }
 
   write (version: string): void {
-    this.simpleMessage.writePlain(version)
+    this.simpleMessage.writePlain(version);
   }
 }

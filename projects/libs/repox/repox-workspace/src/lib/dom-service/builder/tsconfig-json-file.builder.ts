@@ -1,7 +1,7 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
-import { WorkspaceDomainStore } from '../store/workspace-domain.store'
+import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
+import { WorkspaceDomainStore } from '../store/workspace-domain.store';
 
 @singleton()
 /**
@@ -9,7 +9,7 @@ import { WorkspaceDomainStore } from '../store/workspace-domain.store'
  */
 export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
   constructor (private readonly store: WorkspaceDomainStore) {
-    super()
+    super();
   }
 
   generate (): void {

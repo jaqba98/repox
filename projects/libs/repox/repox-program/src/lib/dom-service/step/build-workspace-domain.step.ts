@@ -1,13 +1,13 @@
 // done
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { StepMessageAppService } from '@lib/logger'
-import { WorkspaceDomainStore, WorkspaceDtoStore } from '@lib/repox-workspace'
-import { deepCopy } from '@lib/utils'
-import { EMPTY_OBJECT } from '@lib/const'
+import { StepMessageAppService } from '@lib/logger';
+import { WorkspaceDomainStore, WorkspaceDtoStore } from '@lib/repox-workspace';
+import { deepCopy } from '@lib/utils';
+import { EMPTY_OBJECT } from '@lib/const';
 
-import { buildWorkspaceDomainStepMsg } from '../../const/message/step-message.const'
-import { SystemProgramEnum } from '../../enum/system-program/system-program.enum'
+import { buildWorkspaceDomainStepMsg } from '../../const/message/step-message.const';
+import { SystemProgramEnum } from '../../enum/system-program/system-program.enum';
 
 @singleton()
 /**
@@ -23,8 +23,8 @@ export class BuildWorkspaceDomainStep {
   }
 
   run (): boolean {
-    this.stepMessage.write(buildWorkspaceDomainStepMsg())
-    const repoxJsonDto = this.workspaceDtoStore.getRepoxJsonDto()
+    this.stepMessage.write(buildWorkspaceDomainStepMsg());
+    const repoxJsonDto = this.workspaceDtoStore.getRepoxJsonDto();
     this.workspaceDomainStore.workspaceDomain = {
       repoxJsonDomain: {
         defaultOptions: {
@@ -32,7 +32,7 @@ export class BuildWorkspaceDomainStep {
         },
         projects: deepCopy(repoxJsonDto.projects) ?? deepCopy(EMPTY_OBJECT)
       }
-    }
-    return true
+    };
+    return true;
   }
 }

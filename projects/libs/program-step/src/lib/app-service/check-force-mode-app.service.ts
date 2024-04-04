@@ -1,6 +1,6 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { SimpleMessageAppService, StepMessageAppService } from '@lib/logger'
+import { SimpleMessageAppService, StepMessageAppService } from '@lib/logger';
 
 @singleton()
 /**
@@ -14,11 +14,11 @@ export class CheckForceModeAppService {
   }
 
   run (isForceMode: boolean): boolean {
-    this.stepMessage.write('Check Force Mode')
-    if (isForceMode) return true
-    this.simpleMessage.writeError('The command requires force mode to run!')
-    this.simpleMessage.writeWarning('Rerun the command with the --force flag.')
-    return false
+    this.stepMessage.write('Check Force Mode');
+    if (isForceMode) return true;
+    this.simpleMessage.writeError('The command requires force mode to run!');
+    this.simpleMessage.writeWarning('Rerun the command with the --force flag.');
+    return false;
   }
 }
 

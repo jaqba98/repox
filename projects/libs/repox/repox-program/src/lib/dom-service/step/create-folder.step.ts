@@ -1,14 +1,14 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
-import { createFolder, pathNotExist } from '@lib/utils'
+import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger';
+import { createFolder, pathNotExist } from '@lib/utils';
 
-import { createFolderStepMsg } from '../../const/message/step-message.const'
-import { failedToCreateFolderErrorMsg } from '../../const/message/error-message.const'
+import { createFolderStepMsg } from '../../const/message/step-message.const';
+import { failedToCreateFolderErrorMsg } from '../../const/message/error-message.const';
 import {
   specifiedFolderThatExistOnDiskWarningMsg,
   specifyDifferentFolderNameWarningMsg
-} from '../../const/message/warning-message.const'
+} from '../../const/message/warning-message.const';
 
 @singleton()
 /**
@@ -22,18 +22,18 @@ export class CreateFolderStep {
   }
 
   run (folderPath: string): boolean {
-    this.stepMessage.write(createFolderStepMsg(folderPath))
+    this.stepMessage.write(createFolderStepMsg(folderPath));
     if (pathNotExist(folderPath)) {
-      createFolder(folderPath)
-      return true
+      createFolder(folderPath);
+      return true;
     }
     this.complexMessage.writeError([
       failedToCreateFolderErrorMsg(folderPath)
-    ])
+    ]);
     this.complexMessage.writeWarning([
       specifiedFolderThatExistOnDiskWarningMsg(),
       specifyDifferentFolderNameWarningMsg()
-    ])
-    return false
+    ]);
+    return false;
   }
 }

@@ -1,8 +1,8 @@
 // done
-import { singleton } from 'tsyringe'
-import { sync } from 'command-exists'
+import { singleton } from 'tsyringe';
+import { sync } from 'command-exists';
 
-import { type SystemProgramEnum } from '../enum/system-program/system-program.enum'
+import { type SystemProgramEnum } from '../enum/system-program/system-program.enum';
 
 @singleton()
 /**
@@ -11,6 +11,6 @@ import { type SystemProgramEnum } from '../enum/system-program/system-program.en
  */
 export class SystemProgramExistService {
   checkExist (systemProgram: SystemProgramEnum): boolean {
-    return sync(systemProgram)
+    return sync(systemProgram);
   }
 }

@@ -1,4 +1,4 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
 @singleton()
 /**
@@ -9,6 +9,6 @@ export class CheckSupportedSignsService {
      * Supported signs for name: a-z A-Z 0-9 -
      */
   checkName (name: string): boolean {
-    return /^[a-zA-Z0-9-]*$/.test(name)
+    return /^[a-zA-Z0-9-]*$/.test(name);
   }
 }

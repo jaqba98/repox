@@ -1,5 +1,5 @@
 // done
-import { type Schema } from 'jsonschema'
+import { type Schema } from 'jsonschema';
 
 /**
  * The schema is responsible for checking
@@ -41,4 +41,4 @@ export const repoxJsonDtoSchema: Schema = {
   },
   required: ['defaultOptions', 'projects'],
   additionalProperties: false
-}
+};

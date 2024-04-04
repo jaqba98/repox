@@ -1,13 +1,13 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
-import { RunGenerateProjectAppService } from '@lib/repox-workspace'
+import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger';
+import { RunGenerateProjectAppService } from '@lib/repox-workspace';
 
-import { generateProjectStepMsg } from '../../const/message/step-message.const'
+import { generateProjectStepMsg } from '../../const/message/step-message.const';
 import {
   failedToGenerateProjectErrorMsg,
   notSupportedProjectTypeErrorMsg
-} from '../../const/message/error-message.const'
+} from '../../const/message/error-message.const';
 
 @singleton()
 /**
@@ -22,12 +22,12 @@ export class GenerateProjectStep {
   }
 
   run (type: string): boolean {
-    this.stepMessage.write(generateProjectStepMsg())
-    if (this.runGenerateProject.run(type)) return true
+    this.stepMessage.write(generateProjectStepMsg());
+    if (this.runGenerateProject.run(type)) return true;
     this.complexMessage.writeError([
       failedToGenerateProjectErrorMsg(),
       notSupportedProjectTypeErrorMsg(type)
-    ])
-    return false
+    ]);
+    return false;
   }
 }

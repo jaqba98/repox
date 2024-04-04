@@ -1,9 +1,9 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { createFolder, pathExist } from '@lib/utils'
+import { createFolder, pathExist } from '@lib/utils';
 
-import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
-import { WorkspaceFolderEnum } from '../../enum/workspace-folder.enum'
+import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
+import { WorkspaceFolderEnum } from '../../enum/workspace-folder.enum';
 
 @singleton()
 /**
@@ -11,11 +11,11 @@ import { WorkspaceFolderEnum } from '../../enum/workspace-folder.enum'
  */
 export class AppsFolderBuilder extends WorkspaceStructureAbstractBuilder {
   generate (): void {
-    createFolder(WorkspaceFolderEnum.apps)
+    createFolder(WorkspaceFolderEnum.apps);
   }
 
   regenerate (): void {
-    if (pathExist(WorkspaceFolderEnum.apps)) return
-    createFolder(WorkspaceFolderEnum.apps)
+    if (pathExist(WorkspaceFolderEnum.apps)) return;
+    createFolder(WorkspaceFolderEnum.apps);
   }
 }

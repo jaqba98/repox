@@ -1,7 +1,7 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { WriteMessageService } from '../infrastructure/write-message.service'
-import { EMPTY_STRING } from '@lib/const'
+import { WriteMessageService } from '../infrastructure/write-message.service';
+import { EMPTY_STRING } from '@lib/const';
 
 @singleton()
 /**
@@ -13,6 +13,6 @@ export class NewlineAppService {
   }
 
   writeNewline (): void {
-    this.writeMessage.write(EMPTY_STRING)
+    this.writeMessage.write(EMPTY_STRING);
   }
 }

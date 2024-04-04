@@ -1,6 +1,6 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder'
+import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
 
 @singleton()
 /**

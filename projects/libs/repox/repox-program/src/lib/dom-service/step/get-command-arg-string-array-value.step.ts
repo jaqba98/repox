@@ -1,12 +1,12 @@
 // done
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
-import { ParamDomainStore } from '@lib/param-domain'
+import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger';
+import { ParamDomainStore } from '@lib/param-domain';
 
-import { getArgumentValueStepMsg } from '../../const/message/step-message.const'
-import { argumentDoesNotHaveValidValueTypeErrorMsg, argumentWasNotSpecifiedErrorMsg } from '../../const/message/error-message.const'
-import { specifyArgumentAndRunAgainWarningMsg } from '../../const/message/warning-message.const'
+import { getArgumentValueStepMsg } from '../../const/message/step-message.const';
+import { argumentDoesNotHaveValidValueTypeErrorMsg, argumentWasNotSpecifiedErrorMsg } from '../../const/message/error-message.const';
+import { specifyArgumentAndRunAgainWarningMsg } from '../../const/message/warning-message.const';
 
 @singleton()
 /**
@@ -21,34 +21,34 @@ export class GetCommandArgStringArrayValueStep {
   ) {}
 
   run (arg: string, alias: string, required: boolean = true): string[] | false {
-    this.stepMessage.write(getArgumentValueStepMsg(arg))
+    this.stepMessage.write(getArgumentValueStepMsg(arg));
     if (this.paramDomainStore.hasCommandArg(arg)) {
-      return this.checkArgumentValueType(arg, arg, alias)
+      return this.checkArgumentValueType(arg, arg, alias);
     }
     if (this.paramDomainStore.hasCommandArg(alias)) {
-      return this.checkArgumentValueType(alias, arg, alias)
+      return this.checkArgumentValueType(alias, arg, alias);
     }
-    if (!required) return []
+    if (!required) return [];
     this.complexMessage.writeError([
       argumentWasNotSpecifiedErrorMsg(arg, alias)
-    ])
+    ]);
     this.complexMessage.writeWarning([
       specifyArgumentAndRunAgainWarningMsg(arg, alias, 'string[]')
-    ])
-    return false
+    ]);
+    return false;
   }
 
   private checkArgumentValueType (argToCheck: string, arg: string, alias: string): string[] | false {
-    const paramDomain = this.paramDomainStore.get()
-    const commandArg = paramDomain.commandArgs[argToCheck]
-    if (commandArg === undefined) return false
-    if (commandArg.hasValue) return commandArg.values
+    const paramDomain = this.paramDomainStore.get();
+    const commandArg = paramDomain.commandArgs[argToCheck];
+    if (commandArg === undefined) return false;
+    if (commandArg.hasValue) return commandArg.values;
     this.complexMessage.writeError([
       argumentDoesNotHaveValidValueTypeErrorMsg(arg, alias)
-    ])
+    ]);
     this.complexMessage.writeWarning([
       specifyArgumentAndRunAgainWarningMsg(arg, alias, 'string[]')
-    ])
-    return false
+    ]);
+    return false;
   }
 }

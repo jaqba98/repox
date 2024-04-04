@@ -1,12 +1,12 @@
 // done
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger'
-import { ParamDomainStore } from '@lib/param-domain'
+import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger';
+import { ParamDomainStore } from '@lib/param-domain';
 
-import { getArgumentValueStepMsg } from '../../const/message/step-message.const'
-import { argumentDoesNotHaveValidValueTypeErrorMsg, argumentWasNotSpecifiedErrorMsg } from '../../const/message/error-message.const'
-import { specifyArgumentAndRunAgainWarningMsg } from '../../const/message/warning-message.const'
+import { getArgumentValueStepMsg } from '../../const/message/step-message.const';
+import { argumentDoesNotHaveValidValueTypeErrorMsg, argumentWasNotSpecifiedErrorMsg } from '../../const/message/error-message.const';
+import { specifyArgumentAndRunAgainWarningMsg } from '../../const/message/warning-message.const';
 
 @singleton()
 /**
@@ -21,36 +21,36 @@ export class GetCommandArgBooleanValueStep {
   ) {}
 
   run (arg: string, alias: string, required: boolean = true): boolean | undefined {
-    this.stepMessage.write(getArgumentValueStepMsg(arg))
+    this.stepMessage.write(getArgumentValueStepMsg(arg));
     if (this.paramDomainStore.hasCommandArg(arg)) {
-      return this.checkArgumentValueType(arg, arg, alias)
+      return this.checkArgumentValueType(arg, arg, alias);
     }
     if (this.paramDomainStore.hasCommandArg(alias)) {
-      return this.checkArgumentValueType(alias, arg, alias)
+      return this.checkArgumentValueType(alias, arg, alias);
     }
-    if (!required) return false
+    if (!required) return false;
     this.complexMessage.writeError([
       argumentWasNotSpecifiedErrorMsg(arg, alias)
-    ])
+    ]);
     this.complexMessage.writeWarning([
       specifyArgumentAndRunAgainWarningMsg(arg, alias, 'boolean')
-    ])
-    return undefined
+    ]);
+    return undefined;
   }
 
   private checkArgumentValueType (argToCheck: string, arg: string, alias: string): boolean {
-    const paramDomain = this.paramDomainStore.get()
-    const commandArg = paramDomain.commandArgs[argToCheck]
-    if (commandArg === undefined) return false
+    const paramDomain = this.paramDomainStore.get();
+    const commandArg = paramDomain.commandArgs[argToCheck];
+    if (commandArg === undefined) return false;
     if (commandArg.hasValue) {
       this.complexMessage.writeError([
         argumentDoesNotHaveValidValueTypeErrorMsg(arg, alias)
-      ])
+      ]);
       this.complexMessage.writeWarning([
         specifyArgumentAndRunAgainWarningMsg(arg, alias, 'boolean')
-      ])
-      return false
+      ]);
+      return false;
     }
-    return true
+    return true;
   }
 }

@@ -1,4 +1,4 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
 @singleton()
 /**
@@ -8,27 +8,27 @@ export class ArrayUtilsService {
   removeDuplicates<T>(arr: T[]): T[] {
     return arr.reduce((acc: T[], curr: T): T[] => {
       if (!acc.includes(curr)) {
-        acc = [...acc, curr]
+        acc = [...acc, curr];
       }
-      return acc
-    }, [])
+      return acc;
+    }, []);
   }
 }
 
 export const getIndexesBetween = (startIndex: number, endIndex: number): number[] => {
-  const result = []
+  const result = [];
   for (let i = (startIndex + 1); i < endIndex; i++) {
-    result.push(i)
+    result.push(i);
   }
-  return result
-}
+  return result;
+};
 
 export const copyArray = <T>(arr: T[]): T[] => {
-  return [...arr]
-}
+  return [...arr];
+};
 
 export const arrayHasOneElement = <T>(array: T[]): boolean => {
-  return array.length === 1
-}
+  return array.length === 1;
+};
 
 // todo: refactor the code

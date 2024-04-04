@@ -1,5 +1,5 @@
-import { singleton } from 'tsyringe'
-import { SimpleMessageAppService } from '@lib/logger'
+import { singleton } from 'tsyringe';
+import { SimpleMessageAppService } from '@lib/logger';
 
 @singleton()
 /**
@@ -13,9 +13,9 @@ export class LoadWsDomainAppService {
   }
 
   run (): boolean {
-    this.simpleMessage.writePlain('Step: Load WS domain')
+    this.simpleMessage.writePlain('Step: Load WS domain');
     // this.wsDomainStore.loadWsDomain();
-    return true
+    return true;
   }
 }
 

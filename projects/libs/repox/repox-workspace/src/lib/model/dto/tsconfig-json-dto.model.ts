@@ -1,5 +1,5 @@
 // done
-import { type CompilerOptions, type ProjectReference } from 'typescript'
+import { type CompilerOptions, type ProjectReference } from 'typescript';
 
 /**
  * The model dto represents a real content

@@ -1,6 +1,6 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { LoggerModeEnum } from '../../enum/logger-mode.enum'
+import { LoggerModeEnum } from '../../enum/logger-mode.enum';
 import {
   BG_TEXT_GRAY,
   BG_TEXT_GREEN,
@@ -12,7 +12,7 @@ import {
   FG_TEXT_MAGENTA,
   FG_TEXT_RED,
   FG_TEXT_YELLOW
-} from '../../const/text-style.const'
+} from '../../const/text-style.const';
 
 @singleton()
 /**
@@ -23,34 +23,34 @@ export class ConvertModeToColorService {
   convertToFg (mode: LoggerModeEnum): string {
     switch (mode) {
       case LoggerModeEnum.success:
-        return FG_TEXT_GREEN
+        return FG_TEXT_GREEN;
       case LoggerModeEnum.error:
-        return FG_TEXT_RED
+        return FG_TEXT_RED;
       case LoggerModeEnum.warning:
-        return FG_TEXT_YELLOW
+        return FG_TEXT_YELLOW;
       case LoggerModeEnum.info:
-        return FG_TEXT_MAGENTA
+        return FG_TEXT_MAGENTA;
       case LoggerModeEnum.plain:
-        return FG_TEXT_GRAY
+        return FG_TEXT_GRAY;
       default:
-        throw new Error('The is not supported logger type!')
+        throw new Error('The is not supported logger type!');
     }
   }
 
   convertToBg (mode: LoggerModeEnum): string {
     switch (mode) {
       case LoggerModeEnum.success:
-        return BG_TEXT_GREEN
+        return BG_TEXT_GREEN;
       case LoggerModeEnum.error:
-        return BG_TEXT_RED
+        return BG_TEXT_RED;
       case LoggerModeEnum.warning:
-        return BG_TEXT_YELLOW
+        return BG_TEXT_YELLOW;
       case LoggerModeEnum.info:
-        return BG_TEXT_MAGENTA
+        return BG_TEXT_MAGENTA;
       case LoggerModeEnum.plain:
-        return BG_TEXT_GRAY
+        return BG_TEXT_GRAY;
       default:
-        throw new Error('The is not supported logger type!')
+        throw new Error('The is not supported logger type!');
     }
   }
 }

@@ -1,20 +1,20 @@
-import { type ParamDto } from '../../domain/param-dto'
-import { type ParamDtoValidation } from '../../domain/param-dto-validation'
+import { type ParamDto } from '../../domain/param-dto';
+import { type ParamDtoValidation } from '../../domain/param-dto-validation';
 
 export abstract class ParamDtoValidationAbstractBuilder {
-  abstract paramDtoValidation: ParamDtoValidation
+  abstract paramDtoValidation: ParamDtoValidation;
 
-  abstract paramDto: ParamDto | undefined
+  abstract paramDto: ParamDto | undefined;
 
-  abstract buildParamDto (paramDto: ParamDto): ParamDtoValidationAbstractBuilder
+  abstract buildParamDto (paramDto: ParamDto): ParamDtoValidationAbstractBuilder;
 
-  abstract buildSupportedSignsValidation (): ParamDtoValidationAbstractBuilder
+  abstract buildSupportedSignsValidation (): ParamDtoValidationAbstractBuilder;
 
-  abstract buildCorrectPatternValidation (): ParamDtoValidationAbstractBuilder
+  abstract buildCorrectPatternValidation (): ParamDtoValidationAbstractBuilder;
 
-  abstract buildCanExistValidation (): ParamDtoValidationAbstractBuilder
+  abstract buildCanExistValidation (): ParamDtoValidationAbstractBuilder;
 
-  abstract buildCorrectOrderValidation (): ParamDtoValidationAbstractBuilder
+  abstract buildCorrectOrderValidation (): ParamDtoValidationAbstractBuilder;
 
-  abstract build (): ParamDtoValidation
+  abstract build (): ParamDtoValidation;
 }

@@ -1,7 +1,7 @@
-import { container, type InjectionToken, singleton } from 'tsyringe'
+import { container, type InjectionToken, singleton } from 'tsyringe';
 
-import { type ParamDto } from '../domain/param-dto'
-import { type ParamDtoAbstractBuilder } from '../builder/param-dto/param-dto-abstract.builder'
+import { type ParamDto } from '../domain/param-dto';
+import { type ParamDtoAbstractBuilder } from '../builder/param-dto/param-dto-abstract.builder';
 
 @singleton()
 /**
@@ -18,6 +18,6 @@ export class ParamDtoDirector {
       .buildCommand()
       .buildProgramArgs()
       .buildCommandArgs()
-      .build()
+      .build();
   }
 }

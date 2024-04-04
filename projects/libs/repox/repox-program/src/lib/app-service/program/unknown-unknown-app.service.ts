@@ -1,8 +1,8 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { WriteVersionAppService } from '@lib/program-step'
-import { ParamDomainStore } from '@lib/param-domain'
-import { REPOX_VERSION } from '@lib/repox-const'
+import { WriteVersionAppService } from '@lib/program-step';
+import { ParamDomainStore } from '@lib/param-domain';
+import { REPOX_VERSION } from '@lib/repox-const';
 
 @singleton()
 /**
@@ -19,8 +19,8 @@ export class UnknownUnknownAppService {
 
   runProgram (): boolean {
     if (this.store.hasProgramArg('version') || this.store.hasProgramArg('v')) {
-      this.writeVersion.write(REPOX_VERSION)
+      this.writeVersion.write(REPOX_VERSION);
     }
-    return true
+    return true;
   }
 }

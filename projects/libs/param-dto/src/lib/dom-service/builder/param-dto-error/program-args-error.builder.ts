@@ -1,33 +1,33 @@
-import { container, singleton } from 'tsyringe'
+import { container, singleton } from 'tsyringe';
 
-import { type ParamDtoErrorAbstractBuilder } from './param-dto-error-abstract.builder'
-import { ParamDtoError } from '../../domain/param-dto-error'
-import { type ParamDtoValidation } from '../../domain/param-dto-validation'
-import { deepCopy } from '@lib/utils'
+import { type ParamDtoErrorAbstractBuilder } from './param-dto-error-abstract.builder';
+import { ParamDtoError } from '../../domain/param-dto-error';
+import { type ParamDtoValidation } from '../../domain/param-dto-validation';
+import { deepCopy } from '@lib/utils';
 
 @singleton()
 /**
  * The builder contains methods to build error steps to the program arguments.
  */
 export class ProgramArgsErrorBuilder implements ParamDtoErrorAbstractBuilder {
-  paramDtoValidation: ParamDtoValidation | undefined
+  paramDtoValidation: ParamDtoValidation | undefined;
 
-  readonly paramDtoError: ParamDtoError
+  readonly paramDtoError: ParamDtoError;
 
   constructor () {
-    this.paramDtoError = container.resolve(ParamDtoError)
+    this.paramDtoError = container.resolve(ParamDtoError);
   }
 
   buildParamDtoValidation (
     paramDtoValidation: ParamDtoValidation
   ): ParamDtoErrorAbstractBuilder {
-    this.paramDtoValidation = deepCopy(paramDtoValidation)
-    return this
+    this.paramDtoValidation = deepCopy(paramDtoValidation);
+    return this;
   }
 
   buildSupportedSignsErrors (): ParamDtoErrorAbstractBuilder {
-    if (this.paramDtoValidation == null) return this
-    const { supportedSigns, supportedSignsWrongIndexes } = this.paramDtoValidation
+    if (this.paramDtoValidation == null) return this;
+    const { supportedSigns, supportedSignsWrongIndexes } = this.paramDtoValidation;
     if (!supportedSigns) {
       this.paramDtoError.supportedSignsErrors = {
         wrongParamIndexes: deepCopy(supportedSignsWrongIndexes),
@@ -39,14 +39,14 @@ export class ProgramArgsErrorBuilder implements ParamDtoErrorAbstractBuilder {
           'Specify a program arguments containing only supported characters and run the command again.',
           'Supported characters for the program arguments are: [a-z], [A-Z], [0-9] and [-].'
         ]
-      }
+      };
     }
-    return this
+    return this;
   }
 
   buildCorrectPatternErrors (): ParamDtoErrorAbstractBuilder {
-    if (this.paramDtoValidation == null) return this
-    const { correctPattern, correctPatternWrongIndexes } = this.paramDtoValidation
+    if (this.paramDtoValidation == null) return this;
+    const { correctPattern, correctPatternWrongIndexes } = this.paramDtoValidation;
     if (!correctPattern) {
       this.paramDtoError.correctPatternErrors = {
         wrongParamIndexes: deepCopy(correctPatternWrongIndexes),
@@ -59,14 +59,14 @@ export class ProgramArgsErrorBuilder implements ParamDtoErrorAbstractBuilder {
           '1) --arg1, --arg1=test, --arg1="test", --arg1=\'test\', --arg1=`test`',
           '2) -a, -a=test, -a="test", -a=\'test\', -a=`test`'
         ]
-      }
+      };
     }
-    return this
+    return this;
   }
 
   buildCanExistErrors (): ParamDtoErrorAbstractBuilder {
-    if (this.paramDtoValidation == null) return this
-    const { canExist, canExistWrongIndexes } = this.paramDtoValidation
+    if (this.paramDtoValidation == null) return this;
+    const { canExist, canExistWrongIndexes } = this.paramDtoValidation;
     if (!canExist) {
       this.paramDtoError.correctPatternErrors = {
         wrongParamIndexes: deepCopy(canExistWrongIndexes),
@@ -76,14 +76,14 @@ export class ProgramArgsErrorBuilder implements ParamDtoErrorAbstractBuilder {
         tips: [
           'Specify a command without program arguments and run the command again.'
         ]
-      }
+      };
     }
-    return this
+    return this;
   }
 
   buildCorrectOrderErrors (): ParamDtoErrorAbstractBuilder {
-    if (this.paramDtoValidation == null) return this
-    const { correctOrder, correctOrderWrongIndexes } = this.paramDtoValidation
+    if (this.paramDtoValidation == null) return this;
+    const { correctOrder, correctOrderWrongIndexes } = this.paramDtoValidation;
     if (!correctOrder) {
       this.paramDtoError.correctPatternErrors = {
         wrongParamIndexes: deepCopy(correctOrderWrongIndexes),
@@ -93,12 +93,12 @@ export class ProgramArgsErrorBuilder implements ParamDtoErrorAbstractBuilder {
         tips: [
           'Specify the program args after the program and run the command again.'
         ]
-      }
+      };
     }
-    return this
+    return this;
   }
 
   build (): ParamDtoError {
-    return this.paramDtoError
+    return this.paramDtoError;
   }
 }

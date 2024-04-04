@@ -1,10 +1,10 @@
-import { container, type InjectionToken, singleton } from 'tsyringe'
+import { container, type InjectionToken, singleton } from 'tsyringe';
 
-import { type ParamDtoValidation } from '../domain/param-dto-validation'
+import { type ParamDtoValidation } from '../domain/param-dto-validation';
 import {
   type ParamDtoValidationAbstractBuilder
-} from '../builder/param-dto-validation/param-dto-validation-abstract.builder'
-import { type ParamDto } from '../domain/param-dto'
+} from '../builder/param-dto-validation/param-dto-validation-abstract.builder';
+import { type ParamDto } from '../domain/param-dto';
 
 @singleton()
 /**
@@ -21,6 +21,6 @@ export class ParamDtoValidationDirector {
       .buildCorrectPatternValidation()
       .buildCanExistValidation()
       .buildCorrectOrderValidation()
-      .build()
+      .build();
   }
 }

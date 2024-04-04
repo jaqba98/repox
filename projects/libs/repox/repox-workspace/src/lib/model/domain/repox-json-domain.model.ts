@@ -1,5 +1,5 @@
 // done
-import { type SystemProgramEnum } from '@lib/repox-program'
+import { type SystemProgramEnum } from '@lib/repox-program';
 
 /**
  * The model domain of repox configuration.

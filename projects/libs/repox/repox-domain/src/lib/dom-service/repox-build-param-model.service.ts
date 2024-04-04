@@ -1,4 +1,4 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 import {
   type BuildProjectRepoxCommandModel,
   type DefaultDefaultRepoxProgramModel,
@@ -9,7 +9,7 @@ import {
   type LintProjectRepoxCommandModel,
   type PublishNpmRepoxCommandModel,
   type RegenerateWorkspaceCommandModel
-} from '@lib/repox-domain'
+} from '@lib/repox-domain';
 
 // import {ProjectTypeEnum} from "@lib/repox-workspace";
 
@@ -23,25 +23,25 @@ export class RepoxBuildParamModelService {
   // }
 
   emptyProgram (): EmptyRepoxProgramModel {
-    return {}
+    return {};
   }
 
   emptyCommand (): EmptyRepoxCommandModel {
-    return {}
+    return {};
   }
 
   defaultProgram (): DefaultDefaultRepoxProgramModel {
     return {
       showVersion: false
       // showVersion: this.paramDomain.getProgramBooleanValue(RepoxArgumentEnum.version)
-    }
+    };
   }
 
   generateWorkspaceCommand (): GenerateWorkspaceCommandModel {
     return {
       workspaceName: ''
       // workspaceName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
-    }
+    };
   }
 
   regenerateWorkspaceCommand ():
@@ -49,7 +49,7 @@ export class RepoxBuildParamModelService {
     return {
       isForceMode: false
       // isForceMode: this.paramDomain.getCommandBooleanValue(RepoxArgumentEnum.force)
-    }
+    };
   }
 
   generateProjectCommand (): GenerateProjectCommandModel {
@@ -60,28 +60,28 @@ export class RepoxBuildParamModelService {
       // projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name),
       // projectType: this.paramDomain.getCommandEnumValue(RepoxArgumentEnum.type, ProjectTypeEnum.appTs),
       // projectPath: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.path)
-    }
+    };
   }
 
   buildProjectCommand (): BuildProjectRepoxCommandModel {
     return {
       projectName: ''
       // projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
-    }
+    };
   }
 
   publishNpmCommand (): PublishNpmRepoxCommandModel {
     return {
       projectName: ''
       // projectName: this.paramDomain.getCommandStringValue(RepoxArgumentEnum.name)
-    }
+    };
   }
 
   lintProjectCommand (): LintProjectRepoxCommandModel {
     return {
       isFixMode: false
       // isFixMode: this.paramDomain.getCommandBooleanValue(RepoxArgumentEnum.fix)
-    }
+    };
   }
 }
 

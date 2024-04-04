@@ -1,8 +1,8 @@
-import { singleton } from 'tsyringe'
+import { singleton } from 'tsyringe';
 
-import { BuildMessageService } from './build-message.service'
-import { LoggerModeEnum } from '../../enum/logger-mode.enum'
-import { EMPTY_STRING } from '@lib/const'
+import { BuildMessageService } from './build-message.service';
+import { LoggerModeEnum } from '../../enum/logger-mode.enum';
+import { EMPTY_STRING } from '@lib/const';
 
 @singleton()
 /**
@@ -13,19 +13,19 @@ export class BuildSimpleMessageService {
   }
 
   buildSuccess (message: string, logo: string): string {
-    return this.baseBuildMsg(message, logo, LoggerModeEnum.success)
+    return this.baseBuildMsg(message, logo, LoggerModeEnum.success);
   }
 
   buildError (message: string, logo: string): string {
-    return this.baseBuildMsg(message, logo, LoggerModeEnum.error)
+    return this.baseBuildMsg(message, logo, LoggerModeEnum.error);
   }
 
   buildWarning (message: string, logo: string): string {
-    return this.baseBuildMsg(message, logo, LoggerModeEnum.warning)
+    return this.baseBuildMsg(message, logo, LoggerModeEnum.warning);
   }
 
   buildInfo (message: string, logo: string): string {
-    return this.baseBuildMsg(message, logo, LoggerModeEnum.info)
+    return this.baseBuildMsg(message, logo, LoggerModeEnum.info);
   }
 
   buildPlain (message: string): string {
@@ -37,7 +37,7 @@ export class BuildSimpleMessageService {
         words: [{ content: message, underscore: false }],
         newline: 0
       }]
-    })
+    });
   }
 
   private baseBuildMsg (
@@ -45,8 +45,8 @@ export class BuildSimpleMessageService {
     logo: string,
     loggerMode: LoggerModeEnum
   ): string {
-    const logoVisible = logo !== EMPTY_STRING
-    const headerContent = loggerMode.toUpperCase()
+    const logoVisible = logo !== EMPTY_STRING;
+    const headerContent = loggerMode.toUpperCase();
     return this.buildMessage.build({
       lines: [{
         mode: loggerMode,
@@ -55,6 +55,6 @@ export class BuildSimpleMessageService {
         words: [{ content: message, underscore: false }],
         newline: 0
       }]
-    })
+    });
   }
 }

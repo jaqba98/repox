@@ -1,5 +1,5 @@
 // done
-import { type Schema } from 'jsonschema'
+import { type Schema } from 'jsonschema';
 
 /**
  * The schema is responsible for checking
@@ -9,4 +9,4 @@ import { type Schema } from 'jsonschema'
 export const tsconfigJsonDtoSchema: Schema = {
   id: '/TsconfigJsonDto',
   type: 'object'
-}
+};

@@ -23,7 +23,8 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-      "max-lines": "error",
-      "max-depth": "error"
+        "max-lines": "error",
+        "max-depth": "error",
+        "@typescript-eslint/semi": ["error", "always"]
     }
 }
