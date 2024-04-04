@@ -1,7 +1,7 @@
 // done
 import { singleton } from 'tsyringe'
 
-import { SimpleMessageAppService, StepMessageAppService } from '@lib/logger'
+import { NewlineAppService, SimpleMessageAppService, StepMessageAppService } from '@lib/logger'
 import { createPath, runCommand } from '@lib/utils'
 import { type RepoxJsonDomainProjectModel, WorkspaceDomainStore } from '@lib/repox-workspace'
 
@@ -16,7 +16,8 @@ export class LintProjectStep {
   constructor (
     private readonly stepMessage: StepMessageAppService,
     private readonly simpleMessage: SimpleMessageAppService,
-    private readonly workspaceDomainStore: WorkspaceDomainStore
+    private readonly workspaceDomainStore: WorkspaceDomainStore,
+    private readonly newline: NewlineAppService
   ) {}
 
   run (packageManager: SystemProgramEnum, fix: boolean, projects: string[]): boolean {
@@ -29,7 +30,9 @@ export class LintProjectStep {
       const command = `${programArg} ${pathArg} ${fixArg}`
       const commandToRun = this.buildCommandToRun(packageManager, command)
       this.simpleMessage.writePlain(commandToRun)
+      this.newline.writeNewline()
       runCommand(commandToRun, true)
+      this.newline.writeNewline()
     }
     return true
   }
