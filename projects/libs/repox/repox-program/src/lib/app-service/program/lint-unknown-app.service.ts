@@ -6,8 +6,6 @@ import { WorkspaceDomainStore } from '@lib/repox-workspace';
 import { ProgramEnum } from '../../enum/launcher/program.enum';
 import { CommandEnum } from '../../enum/launcher/command.enum';
 import { WriteHeaderStep } from '../../dom-service/step/write-header.step';
-import { GetCommandArgBooleanValueStep } from '../../dom-service/step/get-command-arg-boolean-value.step';
-import { GetCommandArgStringArrayValueStep } from '../../dom-service/step/get-command-arg-string-array-value.step';
 import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-root.step';
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step';
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step';
@@ -15,6 +13,8 @@ import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dt
 import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace-domain.step';
 import { LintProjectStep } from '../../dom-service/step/lint-project.step';
 import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
+import { GetProgramArgStringArrayValueStep } from '../../dom-service/step/get-program-arg-string-array-value.step';
+import { GetProgramArgBooleanValueStep } from '../../dom-service/step/get-program-arg-boolean-value.step';
 
 @singleton()
 /**
@@ -26,8 +26,8 @@ import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
 export class LintUnknownAppService {
   constructor (
     private readonly writeHeader: WriteHeaderStep,
-    private readonly getCommandArgStringArrayValue: GetCommandArgStringArrayValueStep,
-    private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep,
+    private readonly getProgramArgStringArrayValue: GetProgramArgStringArrayValueStep,
+    private readonly getProgramArgBooleanValue: GetProgramArgBooleanValueStep,
     private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
     private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
     private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
@@ -42,9 +42,9 @@ export class LintUnknownAppService {
     // Display headline
     if (!this.writeHeader.run(ProgramEnum.lint, CommandEnum.unknown)) return false;
     // Get arguments
-    const projects = this.getCommandArgStringArrayValue.run('projects', 'p', false);
+    const projects = this.getProgramArgStringArrayValue.run('projects', 'p', false);
     if (projects === false) return false;
-    const fix = this.getCommandArgBooleanValue.run('fix', 'f', false);
+    const fix = this.getProgramArgBooleanValue.run('fix', 'f', false);
     if (fix === undefined) return false;
     // Build workspace domain model
     if (!this.goToWorkspaceRoot.run()) return false;
