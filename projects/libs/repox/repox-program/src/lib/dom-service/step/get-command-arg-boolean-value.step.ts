@@ -28,7 +28,7 @@ export class GetCommandArgBooleanValueStep {
     if (this.paramDomainStore.hasCommandArg(alias)) {
       return this.checkArgumentValueType(alias, arg, alias)
     }
-    if (!required) return true
+    if (!required) return false
     this.complexMessage.writeError([
       argumentWasNotSpecifiedErrorMsg(arg, alias)
     ])

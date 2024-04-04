@@ -53,7 +53,7 @@ export class LintProjectAppService {
     // Check system
     if (!this.systemProgramExist.run(packageManager)) return false
     // Lint projects
-    if (!this.lintProject.run(packageManager, fix)) return false
+    if (!this.lintProject.run(packageManager, fix, projects)) return false
     return true
   }
 }
