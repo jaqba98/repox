@@ -25,6 +25,8 @@ module.exports = {
     "rules": {
         "max-lines": "error",
         "max-depth": "error",
-        "@typescript-eslint/semi": ["error", "always"]
+        "@typescript-eslint/semi": ["error", "always"],
+        "@typescript-eslint/no-empty-interface": "error",
+        "@typescript-eslint/no-explicit-any": "error"
     }
 }
