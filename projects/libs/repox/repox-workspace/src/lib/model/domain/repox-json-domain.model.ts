@@ -1,6 +1,8 @@
 // done
 import { type SystemProgramEnum } from '@lib/repox-program';
 
+import { type ProjectTypeEnum } from '../../enum/project-type.enum';
+
 /**
  * The model domain of repox configuration.
  */
@@ -13,7 +15,7 @@ export interface RepoxJsonDomainProjectModel {
   name: string
   root: string
   src: string
-  type: 'app' | 'lib' | 'tool'
+  type: ProjectTypeEnum
   // eslint-disable-next-line @typescript-eslint/ban-types
   targets: Record<string, {}>
 }

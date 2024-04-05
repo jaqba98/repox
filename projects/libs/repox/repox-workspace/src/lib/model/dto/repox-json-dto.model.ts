@@ -1,6 +1,8 @@
 // done
 import { type SystemProgramEnum } from '@lib/repox-program';
 
+import { type ProjectTypeEnum } from '../../enum/project-type.enum';
+
 /**
  * The model dto represents a real content
  * of repox.json file.
@@ -14,7 +16,7 @@ export interface RepoxJsonDtoProjectModel {
   name: string
   root: string
   src: string
-  type: 'app' | 'lib' | 'tool'
+  type: ProjectTypeEnum
   // eslint-disable-next-line @typescript-eslint/ban-types
   targets: Record<string, {}>
 }

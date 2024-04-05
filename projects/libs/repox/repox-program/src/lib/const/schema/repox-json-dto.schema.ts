@@ -1,6 +1,8 @@
 // done
 import { type Schema } from 'jsonschema';
 
+import { ProjectTypeEnum } from '@lib/repox-workspace';
+
 /**
  * The schema is responsible for checking
  * whether the repox.json file is correct.
@@ -32,7 +34,7 @@ export const repoxJsonDtoSchema: Schema = {
             src: { type: 'string' },
             type: {
               type: 'string',
-              enum: ['app', 'lib', 'tool']
+              enum: Object.values(ProjectTypeEnum)
             },
             targets: {
               type: 'object'
