@@ -15,6 +15,8 @@ export interface RepoxJsonDtoProjectModel {
   root: string
   src: string
   type: 'app' | 'lib' | 'tool'
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  targets: Record<string, {}>
 }
 
 export interface RepoxJsonDtoModel {
