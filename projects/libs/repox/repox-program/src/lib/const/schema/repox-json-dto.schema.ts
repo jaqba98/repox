@@ -36,11 +36,9 @@ export const repoxJsonDtoSchema: Schema = {
               type: 'string',
               enum: Object.values(ProjectTypeEnum)
             },
-            targets: {
-              type: 'object'
-            }
+            targets: { type: 'object' }
           },
-          required: ['name', 'root', 'src', 'type'],
+          required: ['name', 'root', 'src', 'type', 'targets'],
           additionalProperties: false
         }
       },
