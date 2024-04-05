@@ -14,7 +14,7 @@ export interface RepoxJsonDtoProjectModel {
   name: string
   root: string
   src: string
-  type: string
+  type: 'app' | 'lib' | 'tool'
 }
 
 export interface RepoxJsonDtoModel {

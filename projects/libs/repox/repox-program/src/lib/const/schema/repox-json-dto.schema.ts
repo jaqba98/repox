@@ -30,7 +30,10 @@ export const repoxJsonDtoSchema: Schema = {
             name: { type: 'string' },
             root: { type: 'string' },
             src: { type: 'string' },
-            type: { type: 'string' }
+            type: {
+              type: 'string',
+              enum: ['app', 'lib', 'tool']
+            }
           },
           required: ['name', 'root', 'src', 'type'],
           additionalProperties: false
