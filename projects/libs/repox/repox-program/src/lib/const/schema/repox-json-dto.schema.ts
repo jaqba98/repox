@@ -3,6 +3,8 @@ import { type Schema } from 'jsonschema';
 
 import { ProjectTypeEnum } from '@lib/repox-workspace';
 
+import { SystemProgramEnum } from '../../enum/system-program/system-program.enum';
+
 /**
  * The schema is responsible for checking
  * whether the repox.json file is correct.
@@ -17,11 +19,13 @@ export const repoxJsonDtoSchema: Schema = {
       properties: {
         packageManager: {
           type: 'string',
-          enum: ['npm', 'pnpm', 'yarn']
+          enum: [
+            SystemProgramEnum.npm,
+            SystemProgramEnum.pnpm,
+            SystemProgramEnum.yarn
+          ]
         }
-      },
-      required: ['packageManager'],
-      additionalProperties: false
+      }
     },
     projects: {
       type: 'object',
@@ -38,13 +42,9 @@ export const repoxJsonDtoSchema: Schema = {
             },
             targets: { type: 'object' }
           },
-          required: ['name', 'root', 'src', 'type', 'targets'],
-          additionalProperties: false
+          required: ['name', 'root', 'src', 'type']
         }
-      },
-      additionalProperties: false
+      }
     }
-  },
-  required: ['defaultOptions', 'projects'],
-  additionalProperties: false
+  }
 };
