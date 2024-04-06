@@ -40,7 +40,31 @@ export const repoxJsonDtoSchema: Schema = {
               type: 'string',
               enum: Object.values(ProjectTypeEnum)
             },
-            targets: { type: 'object' }
+            targets: {
+              type: 'object',
+              properties: {
+                buildTs: {
+                  type: 'object',
+                  properties: {
+                    development: {
+                      type: 'object',
+                      properties: {
+                        tsconfig: { type: 'string' }
+                      },
+                      required: ['tsconfig']
+                    },
+                    production: {
+                      type: 'object',
+                      properties: {
+                        tsconfig: { type: 'string' }
+                      },
+                      required: ['tsconfig']
+                    }
+                  },
+                  required: ['development', 'production']
+                }
+              }
+            }
           },
           required: ['name', 'root', 'src', 'type']
         }
