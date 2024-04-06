@@ -8,7 +8,17 @@
       "root": "projects/apps/repox",
       "src": "projects/apps/repox/src",
       "type": "app",
-      "targets": {}
+      "targets": {
+        "build": {
+          "executor": "@repox/typescript-build",
+          "development": {
+            "tsconfig": "projects/apps/repox/tsconfig.dev.json"
+          },
+          "production": {
+            "tsconfig": "projects/apps/repox/tsconfig.prod.json"
+          }
+        }
+      }
     },
     "const": {
       "name": "const",
