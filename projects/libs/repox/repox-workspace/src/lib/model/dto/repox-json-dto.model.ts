@@ -12,13 +12,25 @@ export interface RepoxJsonDtoDefaultOptionsModel {
   packageManager: SystemProgramEnum
 }
 
+export interface RepoxJsonDtoTargetBuildTsModel {
+  development: {
+    tsconfig: string
+  }
+  production: {
+    tsconfig: string
+  }
+}
+
+export interface RepoxJsonDtoTargetsModel {
+  buildTs: RepoxJsonDtoTargetBuildTsModel
+}
+
 export interface RepoxJsonDtoProjectModel {
   name: string
   root: string
   src: string
   type: ProjectTypeEnum
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  targets: Record<string, {}>
+  targets: Record<string, RepoxJsonDtoTargetsModel>
 }
 
 export interface RepoxJsonDtoModel {
