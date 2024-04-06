@@ -1,26 +1,29 @@
 // done
-import { type SystemProgramEnum } from '@lib/repox-program';
-
-import { type ProjectTypeEnum } from '../../enum/project-type.enum';
+import {
+  type RepoxJsonDtoTargetBuildTsModel,
+  type RepoxJsonDtoDefaultOptionsModel,
+  type RepoxJsonDtoProjectModel
+} from '../dto/repox-json-dto.model';
 
 /**
  * The model domain of repox configuration.
  */
 
-export interface RepoxJsonDomainDefaultOptionsModel {
-  packageManager: SystemProgramEnum
+export interface RepoxJsonDomainDefaultOptionsModel extends RepoxJsonDtoDefaultOptionsModel {
 }
 
-export interface RepoxJsonDomainProjectModel {
-  name: string
-  root: string
-  src: string
-  type: ProjectTypeEnum
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  targets: Record<string, {}>
+export interface RepoxJsonDomainTargetBuildTsModel extends RepoxJsonDtoTargetBuildTsModel {
+}
+
+export interface RepoxJsonDomaimTargetsModel {
+  buildTs: RepoxJsonDomainTargetBuildTsModel
+}
+
+export interface RepoxJsonDomainProjectModel extends Omit<RepoxJsonDtoProjectModel, 'targets'> {
+  targets: Map<string, RepoxJsonDomaimTargetsModel>
 }
 
 export interface RepoxJsonDomainModel {
   defaultOptions: RepoxJsonDomainDefaultOptionsModel
-  projects: Record<string, RepoxJsonDomainProjectModel>
+  projects: Map<string, RepoxJsonDomainProjectModel>
 }
