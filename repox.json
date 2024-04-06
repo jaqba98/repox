@@ -9,8 +9,7 @@
       "src": "projects/apps/repox/src",
       "type": "app",
       "targets": {
-        "build": {
-          "executor": "@repox/typescript-build",
+        "buildTs": {
           "development": {
             "tsconfig": "projects/apps/repox/tsconfig.dev.json"
           },
