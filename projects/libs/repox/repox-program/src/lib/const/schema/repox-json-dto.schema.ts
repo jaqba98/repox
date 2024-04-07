@@ -49,6 +49,20 @@ export const repoxJsonDtoSchema: Schema = {
                     executor: {
                       type: 'string',
                       enum: Object.values(ExecutorEnum)
+                    },
+                    development: {
+                      type: 'object',
+                      properties: {
+                        tsconfig: { type: 'string' }
+                      },
+                      required: ['tsconfig']
+                    },
+                    production: {
+                      type: 'object',
+                      properties: {
+                        tsconfig: { type: 'string' }
+                      },
+                      required: ['tsconfig']
                     }
                   },
                   if: {
@@ -59,22 +73,6 @@ export const repoxJsonDtoSchema: Schema = {
                     }
                   },
                   then: {
-                    properties: {
-                      development: {
-                        type: 'object',
-                        properties: {
-                          tsconfig: { type: 'string' }
-                        },
-                        required: ['tsconfig']
-                      },
-                      production: {
-                        type: 'object',
-                        properties: {
-                          tsconfig: { type: 'string' }
-                        },
-                        required: ['tsconfig']
-                      }
-                    },
                     required: ['development', 'production']
                   },
                   required: ['executor']
