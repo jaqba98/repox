@@ -1,6 +1,5 @@
 // done
 import {
-  type RepoxJsonDtoTargetBuildTsModel,
   type RepoxJsonDtoDefaultOptionsModel,
   type RepoxJsonDtoProjectModel
 } from '../dto/repox-json-dto.model';
@@ -10,9 +9,6 @@ import {
  */
 
 export interface RepoxJsonDomainDefaultOptionsModel extends RepoxJsonDtoDefaultOptionsModel {
-}
-
-export interface RepoxJsonDomainTargetBuildTsModel extends RepoxJsonDtoTargetBuildTsModel {
 }
 
 export interface RepoxJsonDomainProjectModel extends RepoxJsonDtoProjectModel {
