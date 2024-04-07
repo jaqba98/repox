@@ -22,9 +22,8 @@ export interface RepoxJsonDtoTargetBuildTsModel {
   }
 }
 
-export interface RepoxJsonDtoTargetModel {
+export interface RepoxJsonDtoTargetModel extends RepoxJsonDtoTargetBuildTsModel {
   executor: ExecutorEnum
-  options: RepoxJsonDtoTargetBuildTsModel
 }
 
 export interface RepoxJsonDtoProjectModel {

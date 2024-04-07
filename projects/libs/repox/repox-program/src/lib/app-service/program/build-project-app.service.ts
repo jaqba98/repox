@@ -15,6 +15,7 @@ import { SystemProgramExistStep } from '../../dom-service/step/system-program-ex
 import { ProjectExistStep } from '../../dom-service/step/project-exist.step';
 import { TargetExistStep } from '../../dom-service/step/target-exist.step';
 import { BuildProjectStep } from '../../dom-service/step/build-project.step';
+import { GetCommandArgBooleanValueStep } from '../../dom-service/step/get-command-arg-boolean-value.step';
 
 @singleton()
 /**
@@ -26,6 +27,7 @@ export class BuildProjectAppService {
   constructor (
     private readonly writeHeader: WriteHeaderStep,
     private readonly getCommandArgStringValue: GetCommandArgStringValueStep,
+    private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep,
     private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
     private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
     private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
@@ -43,6 +45,8 @@ export class BuildProjectAppService {
     if (!this.writeHeader.run(ProgramEnum.build, CommandEnum.project)) return false;
     const name = this.getCommandArgStringValue.run('name', 'n');
     if (name === false) return false;
+    const prod = this.getCommandArgBooleanValue.run('prod', 'p', false);
+    if (prod === undefined) return false;
     if (!this.goToWorkspaceRoot.run()) return false;
     if (!this.buildWorkspaceDto.run()) return false;
     if (!this.checkWorkspaceDto.run()) return false;
@@ -52,7 +56,7 @@ export class BuildProjectAppService {
     if (!this.systemProgramExist.run(packageManager)) return false;
     if (!this.projectExist.run(name)) return false;
     if (!this.targetExist.run(name, 'build')) return false;
-    if (!this.buildProject.run(name)) return false;
+    if (!this.buildProject.run(name, prod, packageManager)) return false;
     if (!this.writeSuccess.run()) return false;
     return true;
   }
