@@ -4,7 +4,6 @@ import { StepMessageAppService } from '@lib/logger';
 import { WorkspaceDomainStore } from '@lib/repox-workspace';
 
 import { buildProjectStepMsg } from '../../const/message/step-message.const';
-import { runCommand } from '@lib/utils';
 
 @singleton()
 /**
@@ -20,10 +19,10 @@ export class BuildProjectStep {
   run (name: string): boolean {
     this.stepMessage.write(buildProjectStepMsg(name));
     if (this.store.workspaceDomain === undefined) return false;
-    const project = this.store.workspaceDomain.repoxJsonDomain.projects[name];
-    const target = project.targets.buildTs;
-    runCommand(`npx tsc --project ${target.development.tsconfig}`, true);
-    runCommand(`npx tsc-alias -p ${target.development.tsconfig}`, true);
+    // const project = this.store.workspaceDomain.repoxJsonDomain.projects[name];
+    // const target = project.targets.buildTs;
+    // runCommand(`npx tsc --project ${target.development.tsconfig}`, true);
+    // runCommand(`npx tsc-alias -p ${target.development.tsconfig}`, true);
     return true;
   }
 }
