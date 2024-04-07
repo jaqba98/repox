@@ -6,7 +6,7 @@ import { NewlineAppService, SimpleMessageAppService } from '@lib/logger';
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step';
 // import { VerificationWsDtoAppService } from '../../dom-service/step/check-workspace-dto.step'
 import { LoadWsDomainAppService } from '../../dom-service/load-ws-domain-app.service';
-import { ProjectExistAppService } from '../../dom-service/project-exist-app.service';
+// import { ProjectExistAppService } from '../../dom-service/step/project-exist.step';
 
 @singleton()
 /**
@@ -20,8 +20,8 @@ export class PublishNpmStepService {
     // private readonly goToProjectRoot: GoToWorkspaceRootAppService,
     private readonly loadWsDto: BuildWorkspaceDtoStep,
     // private readonly verificationWsDto: VerificationWsDtoAppService,
-    private readonly loadWsDomain: LoadWsDomainAppService,
-    private readonly projectExist: ProjectExistAppService
+    private readonly loadWsDomain: LoadWsDomainAppService
+    // private readonly projectExist: ProjectExistAppService
     // private readonly wsDomainStore: WsDomainStoreService,
     // private readonly folderExist: FolderExistAppService,
     // private readonly changePath: ChangePathStep,
@@ -42,8 +42,8 @@ export class PublishNpmStepService {
     if (!this.loadWsDto.run()) return;
     // if (!this.verificationWsDto.run()) return
     if (!this.loadWsDomain.run()) return;
-    const { projectName } = commandModel;
-    if (!this.projectExist.run(projectName)) return;
+    // const { projectName } = commandModel;
+    // if (!this.projectExist.run(projectName)) return;
     // enum project = this.wsDomainStore.getProject(projectName);
     // console.log(project);
     // enum output = project?..build.output ?? EMPTY_STRING;

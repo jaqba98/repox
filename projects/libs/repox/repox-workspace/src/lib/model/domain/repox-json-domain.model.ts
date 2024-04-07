@@ -1,19 +1,17 @@
 // done
-import { type SystemProgramEnum } from '@lib/repox-program';
+import {
+  type RepoxJsonDtoDefaultOptionsModel,
+  type RepoxJsonDtoProjectModel
+} from '../dto/repox-json-dto.model';
 
 /**
  * The model domain of repox configuration.
  */
 
-export interface RepoxJsonDomainDefaultOptionsModel {
-  packageManager: SystemProgramEnum
+export interface RepoxJsonDomainDefaultOptionsModel extends RepoxJsonDtoDefaultOptionsModel {
 }
 
-export interface RepoxJsonDomainProjectModel {
-  name: string
-  root: string
-  src: string
-  type: string
+export interface RepoxJsonDomainProjectModel extends RepoxJsonDtoProjectModel {
 }
 
 export interface RepoxJsonDomainModel {

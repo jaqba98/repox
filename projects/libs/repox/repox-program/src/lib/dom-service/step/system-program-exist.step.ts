@@ -25,7 +25,7 @@ export class SystemProgramExistStep {
   run (systemProgram: SystemProgramEnum): boolean {
     this.stepMessage.write(systemProgramExistStepMsg(systemProgram));
     if (this.systemProgramExist.checkExist(systemProgram)) return true;
-    const url = SystemProgramUrlEnum[systemProgram];
+    const url = SystemProgramUrlEnum[systemProgram].toString();
     this.complexMessage.writeError([
       systemProgramDoesNotExistErrorMsg(systemProgram)
     ]);

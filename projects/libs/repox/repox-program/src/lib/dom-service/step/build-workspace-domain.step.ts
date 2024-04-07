@@ -2,7 +2,7 @@
 import { singleton } from 'tsyringe';
 
 import { StepMessageAppService } from '@lib/logger';
-import { WorkspaceDomainStore, WorkspaceDtoStore } from '@lib/repox-workspace';
+import { type RepoxJsonDomainModel, WorkspaceDomainStore, WorkspaceDtoStore } from '@lib/repox-workspace';
 import { deepCopy } from '@lib/utils';
 import { EMPTY_OBJECT } from '@lib/const';
 
@@ -24,15 +24,19 @@ export class BuildWorkspaceDomainStep {
 
   run (): boolean {
     this.stepMessage.write(buildWorkspaceDomainStepMsg());
-    const repoxJsonDto = this.workspaceDtoStore.getRepoxJsonDto();
     this.workspaceDomainStore.workspaceDomain = {
-      repoxJsonDomain: {
-        defaultOptions: {
-          packageManager: repoxJsonDto.defaultOptions?.packageManager ?? SystemProgramEnum.npm
-        },
-        projects: deepCopy(repoxJsonDto.projects) ?? deepCopy(EMPTY_OBJECT)
-      }
+      repoxJsonDomain: this.buildRepoxJsonDomain()
     };
     return true;
+  }
+
+  private buildRepoxJsonDomain (): RepoxJsonDomainModel {
+    const repoxJsonDto = this.workspaceDtoStore.getRepoxJsonDto();
+    return {
+      defaultOptions: {
+        packageManager: repoxJsonDto.defaultOptions?.packageManager ?? SystemProgramEnum.npm
+      },
+      projects: deepCopy(repoxJsonDto.projects) ?? deepCopy(EMPTY_OBJECT)
+    };
   }
 }

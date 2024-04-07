@@ -54,9 +54,9 @@ export class LintProjectStep {
       case SystemProgramEnum.npm:
         return `npx ${command}`;
       case SystemProgramEnum.pnpm:
-        return `pnpm exec ${command}`;
+        return `pnpm exec -- ${command}`;
       case SystemProgramEnum.yarn:
-        return `yarn exec ${command}`;
+        return `yarn exec --offline -- ${command}`;
       default:
         throw new Error('Not supported packageManager!');
     }

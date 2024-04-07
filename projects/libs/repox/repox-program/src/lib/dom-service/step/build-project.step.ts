@@ -1,10 +1,11 @@
 import { singleton } from 'tsyringe';
 
 import { StepMessageAppService } from '@lib/logger';
-import { WorkspaceDomainStore } from '@lib/repox-workspace';
+import { ExecutorEnum, WorkspaceDomainStore } from '@lib/repox-workspace';
+import { runCommand } from '@lib/utils';
 
 import { buildProjectStepMsg } from '../../const/message/step-message.const';
-import { changePath, runCommand } from '@lib/utils';
+import { SystemProgramEnum } from '../../enum/system-program/system-program.enum';
 
 @singleton()
 /**
@@ -13,16 +14,38 @@ import { changePath, runCommand } from '@lib/utils';
 export class BuildProjectStep {
   constructor (
     private readonly stepMessage: StepMessageAppService,
-    private readonly store: WorkspaceDomainStore
+    private readonly workspaceDomainStore: WorkspaceDomainStore
   ) {
   }
 
-  run (name: string): boolean {
+  run (name: string, prod: boolean, packageManager: SystemProgramEnum): boolean {
     this.stepMessage.write(buildProjectStepMsg(name));
-    if (this.store.workspaceDomain == null) return false;
-    const project = this.store.workspaceDomain.repoxJsonDomain.projects[name];
-    changePath(project.root);
-    runCommand('npx tsc');
-    return true;
+    const { repoxJsonDomain } = this.workspaceDomainStore.getWorkspaceDomain();
+    const { projects } = repoxJsonDomain;
+    const project = Object.values(projects).find(project => project.name === name);
+    if (project === undefined) return false;
+    const { build } = project.targets;
+    if (build.executor === ExecutorEnum.typescript) {
+      const tsconfig = prod ? build.production.tsconfig : build.development.tsconfig;
+      const commandTsc = `tsc --project ${tsconfig}`;
+      const commandTscAlias = `tsc-alias -p ${tsconfig}`;
+      runCommand(this.buildCommandToRun(packageManager, commandTsc), true);
+      runCommand(this.buildCommandToRun(packageManager, commandTscAlias), true);
+      return true;
+    }
+    return false;
+  }
+
+  private buildCommandToRun (packageManager: SystemProgramEnum, command: string): string {
+    switch (packageManager) {
+      case SystemProgramEnum.npm:
+        return `npx ${command}`;
+      case SystemProgramEnum.pnpm:
+        return `pnpm exec -- ${command}`;
+      case SystemProgramEnum.yarn:
+        return `yarn exec --offline -- ${command}`;
+      default:
+        throw new Error('Not supported packageManager!');
+    }
   }
 }
