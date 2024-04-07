@@ -11,7 +11,6 @@ import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step';
 import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step';
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step';
-import { SystemProgramEnum } from '../../enum/system-program/system-program.enum';
 
 @singleton()
 /**
