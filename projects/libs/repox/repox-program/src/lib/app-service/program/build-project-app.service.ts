@@ -2,28 +2,30 @@ import { singleton } from 'tsyringe';
 
 import { WorkspaceDomainStore } from '@lib/repox-workspace';
 
-import { CommandEnum } from '../../enum/launcher/command.enum';
-import { ProgramEnum } from '../../enum/launcher/program.enum';
-import { WriteHeaderStep } from '../../dom-service/step/write-header.step';
-import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
-import { GetCommandArgStringValueStep } from '../../dom-service/step/get-command-arg-string-value.step';
-import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-root.step';
+import { BuildProjectStep } from '../../dom-service/step/build-project.step';
 import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace-domain.step';
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step';
 import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step';
-import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step';
-import { ProjectExistStep } from '../../dom-service/step/project-exist.step';
-import { TargetExistStep } from '../../dom-service/step/target-exist.step';
-import { BuildProjectStep } from '../../dom-service/step/build-project.step';
 import { GetCommandArgBooleanValueStep } from '../../dom-service/step/get-command-arg-boolean-value.step';
+import { GetCommandArgStringValueStep } from '../../dom-service/step/get-command-arg-string-value.step';
+import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-root.step';
+import { ProjectExistStep } from '../../dom-service/step/project-exist.step';
+import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step';
+import { TargetExistStep } from '../../dom-service/step/target-exist.step';
+import { WriteHeaderStep } from '../../dom-service/step/write-header.step';
+import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
+import { CommandEnum } from '../../enum/launcher/command.enum';
+import { ProgramEnum } from '../../enum/launcher/program.enum';
 
 @singleton()
 /**
  * The app-service program is responsible for building project.
- * Argument   | Alias | Description              | Required | Value
- * --name     | -n    | Name of the project      | true     | string
+ * Argument | Alias | Description                           | Required | Value
+ * --name   | -n    | Name of the project.                  | true     | string
+ * --prod   | -p    | Build the project in production mode. | false    | boolean
  */
 export class BuildProjectAppService {
+  // TODO: I am here
   constructor (
     private readonly writeHeader: WriteHeaderStep,
     private readonly getCommandArgStringValue: GetCommandArgStringValueStep,
