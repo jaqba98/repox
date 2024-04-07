@@ -15,15 +15,10 @@ export interface RepoxJsonDomainDefaultOptionsModel extends RepoxJsonDtoDefaultO
 export interface RepoxJsonDomainTargetBuildTsModel extends RepoxJsonDtoTargetBuildTsModel {
 }
 
-export interface RepoxJsonDomaimTargetsModel {
-  buildTs: RepoxJsonDomainTargetBuildTsModel
-}
-
-export interface RepoxJsonDomainProjectModel extends Omit<RepoxJsonDtoProjectModel, 'targets'> {
-  targets: Map<string, RepoxJsonDomaimTargetsModel>
+export interface RepoxJsonDomainProjectModel extends RepoxJsonDtoProjectModel {
 }
 
 export interface RepoxJsonDomainModel {
   defaultOptions: RepoxJsonDomainDefaultOptionsModel
-  projects: Map<string, RepoxJsonDomainProjectModel>
+  projects: Record<string, RepoxJsonDomainProjectModel>
 }
