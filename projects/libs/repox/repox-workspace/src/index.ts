@@ -6,4 +6,5 @@ export * from './lib/dom-service/store/workspace-domain.store';
 export * from './lib/enum/workspace-file.enum';
 export * from './lib/enum/workspace-folder.enum';
 export * from './lib/enum/project-type.enum';
+export * from './lib/enum/executor.enum';
 export * from './lib/model/domain/repox-json-domain.model';

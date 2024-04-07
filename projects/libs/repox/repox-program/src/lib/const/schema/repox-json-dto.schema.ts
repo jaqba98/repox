@@ -1,7 +1,7 @@
 // done
 import { type Schema } from 'jsonschema';
 
-import { ProjectTypeEnum } from '@lib/repox-workspace';
+import { ExecutorEnum, ProjectTypeEnum } from '@lib/repox-workspace';
 
 import { SystemProgramEnum } from '../../enum/system-program/system-program.enum';
 
@@ -48,13 +48,13 @@ export const repoxJsonDtoSchema: Schema = {
                   properties: {
                     executor: {
                       type: 'string',
-                      enum: ['typescript']
+                      enum: Object.values(ExecutorEnum)
                     }
                   },
                   if: {
                     properties: {
                       executor: {
-                        const: 'typescript'
+                        const: ExecutorEnum.typescript
                       }
                     }
                   },
