@@ -5,7 +5,7 @@ import { ProgramEnum } from '../../enum/launcher/program.enum';
 import { CommandEnum } from '../../enum/launcher/command.enum';
 import {
   GetCommandArgSingleValueStep
-} from '../../dom-service/step/get-command-arg-single-value.step';
+} from '../../dom-service/step/get-command-arg-string-value.step';
 import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-root.step';
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step';
 import {

@@ -5,7 +5,7 @@ import { ProgramEnum } from '../../enum/launcher/program.enum';
 import { CommandEnum } from '../../enum/launcher/command.enum';
 import {
   GetCommandArgSingleValueStep
-} from '../../dom-service/step/get-command-arg-single-value.step';
+} from '../../dom-service/step/get-command-arg-string-value.step';
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step';
 import { SystemProgramEnum } from '../../enum/system-program/system-program.enum';
 import { FolderNotExistStep } from '../../dom-service/step/folder-not-exist.step';
