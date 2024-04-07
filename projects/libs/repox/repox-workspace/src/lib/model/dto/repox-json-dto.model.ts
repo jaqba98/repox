@@ -30,7 +30,7 @@ export interface RepoxJsonDtoProjectModel {
   root: string
   src: string
   type: ProjectTypeEnum
-  targets: Record<string, RepoxJsonDtoTargetsModel>
+  targets: RepoxJsonDtoTargetsModel
 }
 
 export interface RepoxJsonDtoModel {

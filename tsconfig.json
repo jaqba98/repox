@@ -5,7 +5,7 @@
     "emitDecoratorMetadata": true,
     "module": "CommonJS",
     "rootDir": "projects",
-    "outDir": "dist",
+    "outDir": "end",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

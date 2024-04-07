@@ -22,8 +22,8 @@ export class BuildProjectStep {
     if (this.store.workspaceDomain === undefined) return false;
     const project = this.store.workspaceDomain.repoxJsonDomain.projects[name];
     const target = project.targets.buildTs;
-    runCommand(`npx tsc --project ${target.buildTs.development.tsconfig}`, true);
-    runCommand(`npx tsc-alias -p ${target.buildTs.development.tsconfig}`, true);
+    runCommand(`npx tsc --project ${target.development.tsconfig}`, true);
+    runCommand(`npx tsc-alias -p ${target.development.tsconfig}`, true);
     return true;
   }
 }
