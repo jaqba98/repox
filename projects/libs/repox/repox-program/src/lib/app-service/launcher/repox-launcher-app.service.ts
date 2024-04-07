@@ -1,27 +1,25 @@
 import { singleton } from 'tsyringe';
 
-import { ParamDomainStore } from '@lib/param-domain';
 import { ComplexMessageAppService } from '@lib/logger';
+import { ParamDomainStore } from '@lib/param-domain';
 
-import { UnknownUnknownAppService } from '../program/unknown-unknown-app.service';
-import { GenerateWorkspaceAppService } from '../program/generate-workspace-app.service';
-import { RegenerateWorkspaceAppService } from '../program/regenerate-workspace-app.service';
-import { GenerateProjectAppService } from '../program/generate-project-app.service';
-import {
-  commandNotExistErrorMsg,
-  programNotExistErrorMsg
-} from '../../const/message/error-message.const';
-import { ProgramEnum } from '../../enum/launcher/program.enum';
+import { programNotExistErrorMsg, commandNotExistErrorMsg } from '../../const/message/error-message.const';
 import { CommandEnum } from '../../enum/launcher/command.enum';
+import { ProgramEnum } from '../../enum/launcher/program.enum';
 import { BuildProjectAppService } from '../program/build-project-app.service';
+import { GenerateProjectAppService } from '../program/generate-project-app.service';
+import { GenerateWorkspaceAppService } from '../program/generate-workspace-app.service';
 import { LintUnknownAppService } from '../program/lint-unknown-app.service';
+import { RegenerateWorkspaceAppService } from '../program/regenerate-workspace-app.service';
+import { UnknownUnknownAppService } from '../program/unknown-unknown-app.service';
 
 @singleton()
 /**
- * The app service is responsible for selecting service to run
+ * The app-service is responsible for selecting service to run
  * by given program name and command name.
  */
 export class RepoxLauncherAppService {
+  // TODO: I am here
   constructor (
     private readonly store: ParamDomainStore,
     private readonly unknownUnknown: UnknownUnknownAppService,
