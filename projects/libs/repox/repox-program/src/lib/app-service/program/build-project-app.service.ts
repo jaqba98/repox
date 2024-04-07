@@ -4,6 +4,7 @@ import { CommandEnum } from '../../enum/launcher/command.enum';
 import { ProgramEnum } from '../../enum/launcher/program.enum';
 import { WriteHeaderStep } from '../../dom-service/step/write-header.step';
 import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
+import { GetCommandArgStringValueStep } from '../../dom-service/step/get-command-arg-string-value.step';
 
 @singleton()
 /**
@@ -12,7 +13,7 @@ import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
 export class BuildProjectAppService {
   constructor (
     private readonly writeHeader: WriteHeaderStep,
-    // private readonly getCommandArgStringValue: GetCommandArgStringValueStep,
+    private readonly getCommandArgStringValue: GetCommandArgStringValueStep,
     // private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
     // private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
     // private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
@@ -28,8 +29,8 @@ export class BuildProjectAppService {
 
   run (): boolean {
     if (!this.writeHeader.run(ProgramEnum.build, CommandEnum.project)) return false;
-    // const name = this.getCommandArgStringValue.run('name', 'n');
-    // if (name === false) return false;
+    const name = this.getCommandArgStringValue.run('name', 'n');
+    if (name === false) return false;
     // if (!this.goToWorkspaceRoot.run()) return false;
     // if (!this.buildWorkspaceDto.run()) return false;
     // if (!this.checkWorkspaceDto.run()) return false;
