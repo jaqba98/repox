@@ -56,26 +56,26 @@ export const repoxJsonDtoSchema: Schema = {
                       executor: {
                         const: 'typescript'
                       }
-                    },
-                    then: {
-                      properties: {
-                        development: {
-                          type: 'object',
-                          properties: {
-                            tsconfig: { type: 'string' }
-                          },
-                          required: ['tsconfig']
-                        },
-                        production: {
-                          type: 'object',
-                          properties: {
-                            tsconfig: { type: 'string' }
-                          },
-                          required: ['tsconfig']
-                        }
-                      },
-                      required: ['development', 'production']
                     }
+                  },
+                  then: {
+                    properties: {
+                      development: {
+                        type: 'object',
+                        properties: {
+                          tsconfig: { type: 'string' }
+                        },
+                        required: ['tsconfig']
+                      },
+                      production: {
+                        type: 'object',
+                        properties: {
+                          tsconfig: { type: 'string' }
+                        },
+                        required: ['tsconfig']
+                      }
+                    },
+                    required: ['development', 'production']
                   },
                   required: ['executor']
                 }
