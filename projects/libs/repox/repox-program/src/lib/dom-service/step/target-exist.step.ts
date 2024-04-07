@@ -23,7 +23,7 @@ export class TargetExistStep {
     const { projects } = repoxJsonDomain;
     const project = Object.values(projects).find(project => project.name === name);
     if (project === undefined) return false;
-    if (project.targets[target] === undefined) {
+    if (project.targets.buildTs === undefined) {
       return false;
     }
     return true;
