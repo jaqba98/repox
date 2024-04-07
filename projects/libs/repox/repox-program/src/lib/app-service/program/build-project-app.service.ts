@@ -11,6 +11,7 @@ import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step';
 import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step';
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step';
+import { ProjectExistStep } from '../../dom-service/step/project-exist.step';
 
 @singleton()
 /**
@@ -25,25 +26,23 @@ export class BuildProjectAppService {
     private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
     private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
     private readonly workspaceDomainStore: WorkspaceDomainStore,
-    private readonly systemProgramExist: SystemProgramExistStep
+    private readonly systemProgramExist: SystemProgramExistStep,
+    private readonly projectExist: ProjectExistStep
   ) {
   }
 
   run (): boolean {
-    // Display headline
     if (!this.writeHeader.run(ProgramEnum.build, CommandEnum.project)) return false;
-    // Get arguments
     const name = this.getCommandArgStringValue.run('name', 'n');
     if (name === false) return false;
-    // Build workspace domain model
     if (!this.goToWorkspaceRoot.run()) return false;
     if (!this.buildWorkspaceDto.run()) return false;
     if (!this.checkWorkspaceDto.run()) return false;
     if (!this.buildWorkspaceDomain.run()) return false;
     const workspaceDomain = this.workspaceDomainStore.getWorkspaceDomain();
     const { packageManager } = workspaceDomain.repoxJsonDomain.defaultOptions;
-    // Check system
     if (!this.systemProgramExist.run(packageManager)) return false;
+    if (!this.projectExist.run(name)) return false;
     return true;
   }
 }
