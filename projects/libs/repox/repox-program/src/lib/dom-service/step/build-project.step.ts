@@ -27,7 +27,7 @@ export class BuildProjectStep {
     const { build } = project.targets;
     if (build.executor === ExecutorEnum.typescript) {
       const tsconfig = prod ? build.production.tsconfig : build.development.tsconfig;
-      const commandTsc = `--projects ${tsconfig}`;
+      const commandTsc = `tsc --projects ${tsconfig}`;
       const commandTscAlias = `-p ${tsconfig}`;
       runCommand(this.buildCommandToRun(packageManager, commandTsc), true);
       runCommand(this.buildCommandToRun(packageManager, commandTscAlias), true);
