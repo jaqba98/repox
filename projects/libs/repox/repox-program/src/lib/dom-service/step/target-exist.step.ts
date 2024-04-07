@@ -1,10 +1,11 @@
 // done
 import { singleton } from 'tsyringe';
 
-import { StepMessageAppService } from '@lib/logger';
+import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger';
 import { WorkspaceDomainStore } from '@lib/repox-workspace';
 
 import { targetExistStepMsg } from '../../const/message/step-message.const';
+import { targetNotExistErrorMsg } from '../../const/message/error-message.const';
 
 @singleton()
 /**
@@ -14,7 +15,8 @@ import { targetExistStepMsg } from '../../const/message/step-message.const';
 export class TargetExistStep {
   constructor (
     private readonly stepMessage: StepMessageAppService,
-    private readonly workspaceDomainStore: WorkspaceDomainStore
+    private readonly workspaceDomainStore: WorkspaceDomainStore,
+    private readonly complexMessage: ComplexMessageAppService
   ) {}
 
   run (name: string, target: string): boolean {
@@ -22,8 +24,16 @@ export class TargetExistStep {
     const { repoxJsonDomain } = this.workspaceDomainStore.getWorkspaceDomain();
     const { projects } = repoxJsonDomain;
     const project = Object.values(projects).find(project => project.name === name);
-    if (project === undefined) return false;
-    if (project.targets.buildTs === undefined) {
+    if (project === undefined) {
+      this.complexMessage.writeError([
+        targetNotExistErrorMsg(name, target)
+      ]);
+      return false;
+    }
+    if (project.targets.build === undefined) {
+      this.complexMessage.writeError([
+        targetNotExistErrorMsg(name, target)
+      ]);
       return false;
     }
     return true;

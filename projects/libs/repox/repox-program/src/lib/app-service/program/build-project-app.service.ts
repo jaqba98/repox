@@ -13,6 +13,7 @@ import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dt
 import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step';
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step';
 import { ProjectExistStep } from '../../dom-service/step/project-exist.step';
+import { TargetExistStep } from '../../dom-service/step/target-exist.step';
 
 @singleton()
 /**
@@ -31,7 +32,7 @@ export class BuildProjectAppService {
     private readonly workspaceDomainStore: WorkspaceDomainStore,
     private readonly systemProgramExist: SystemProgramExistStep,
     private readonly projectExist: ProjectExistStep,
-    // private readonly targetExist: TargetExistStep,
+    private readonly targetExist: TargetExistStep,
     // private readonly buildProject: BuildProjectStep,
     private readonly writeSuccess: WriteSuccessStep
   ) {
@@ -49,7 +50,7 @@ export class BuildProjectAppService {
     const { packageManager } = workspaceDomain.repoxJsonDomain.defaultOptions;
     if (!this.systemProgramExist.run(packageManager)) return false;
     if (!this.projectExist.run(name)) return false;
-    // if (!this.targetExist.run(name, 'buildTs')) return false;
+    if (!this.targetExist.run(name, 'build')) return false;
     // if (!this.buildProject.run(name)) return false;
     if (!this.writeSuccess.run()) return false;
     return true;

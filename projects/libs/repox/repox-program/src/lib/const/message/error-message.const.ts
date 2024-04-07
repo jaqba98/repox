@@ -34,6 +34,9 @@ export const projectAlreadyExistErrorMsg = (project: string): string =>
 export const projectNotExistErrorMsg = (project: string): string =>
     `The ${project} not exist!`;
 
+export const targetNotExistErrorMsg = (project: string, target: string): string =>
+    `The ${target} target does not exist in the ${project} project!`;
+
 export const commandNotExistErrorMsg = (program: string, command: string): string =>
     `The ${command} command does not exist for ${program} program!`;
 
