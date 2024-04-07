@@ -9,6 +9,8 @@ import { GetCommandArgStringValueStep } from '../../dom-service/step/get-command
 @singleton()
 /**
  * The app-service program is responsible for building project.
+ * Argument   | Alias | Description              | Required | Value
+ * --name     | -n    | Name of the project      | true     | string
  */
 export class BuildProjectAppService {
   constructor (
