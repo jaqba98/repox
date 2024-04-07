@@ -21,8 +21,9 @@ export interface RepoxJsonDtoTargetBuildTsModel {
   }
 }
 
-export interface RepoxJsonDtoTargetsModel {
-  buildTs: RepoxJsonDtoTargetBuildTsModel
+export interface RepoxJsonDtoTargetModel {
+  executor: string
+  options: RepoxJsonDtoTargetBuildTsModel
 }
 
 export interface RepoxJsonDtoProjectModel {
@@ -30,7 +31,7 @@ export interface RepoxJsonDtoProjectModel {
   root: string
   src: string
   type: ProjectTypeEnum
-  targets: RepoxJsonDtoTargetsModel
+  targets: Record<string, RepoxJsonDtoTargetModel>
 }
 
 export interface RepoxJsonDtoModel {
