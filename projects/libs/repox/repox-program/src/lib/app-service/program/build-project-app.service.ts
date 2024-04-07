@@ -14,6 +14,7 @@ import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dt
 import { SystemProgramExistStep } from '../../dom-service/step/system-program-exist.step';
 import { ProjectExistStep } from '../../dom-service/step/project-exist.step';
 import { TargetExistStep } from '../../dom-service/step/target-exist.step';
+import { BuildProjectStep } from '../../dom-service/step/build-project.step';
 
 @singleton()
 /**
@@ -33,7 +34,7 @@ export class BuildProjectAppService {
     private readonly systemProgramExist: SystemProgramExistStep,
     private readonly projectExist: ProjectExistStep,
     private readonly targetExist: TargetExistStep,
-    // private readonly buildProject: BuildProjectStep,
+    private readonly buildProject: BuildProjectStep,
     private readonly writeSuccess: WriteSuccessStep
   ) {
   }
@@ -51,7 +52,7 @@ export class BuildProjectAppService {
     if (!this.systemProgramExist.run(packageManager)) return false;
     if (!this.projectExist.run(name)) return false;
     if (!this.targetExist.run(name, 'build')) return false;
-    // if (!this.buildProject.run(name)) return false;
+    if (!this.buildProject.run(name)) return false;
     if (!this.writeSuccess.run()) return false;
     return true;
   }
