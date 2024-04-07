@@ -76,7 +76,8 @@ export const repoxJsonDtoSchema: Schema = {
                       },
                       required: ['development', 'production']
                     }
-                  }
+                  },
+                  required: ['executor']
                 }
               }
             }
