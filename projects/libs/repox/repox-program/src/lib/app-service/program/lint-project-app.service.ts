@@ -23,7 +23,7 @@ import { GetProgramArgBooleanValueStep } from '../../dom-service/step/get-progra
  * --projects | -p    | Specify the project list that should be processed      | false    | string[]
  * --fix      | -f    | Specify whether to run the lint command in repair mode | false    | boolean
  */
-export class LintUnknownAppService {
+export class LintProjectAppService {
   constructor (
     private readonly writeHeader: WriteHeaderStep,
     private readonly getProgramArgStringArrayValue: GetProgramArgStringArrayValueStep,
