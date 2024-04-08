@@ -2,17 +2,13 @@
   "name": "repox",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "build": "tsc && tsc-alias --outDir dist",
-    "lint:project": "node ../repox/dist/apps/repox/src/main lint project"
-  },
   "dependencies": {
     "command-exists": "^1.2.9",
     "core-js": "^3.36.0",
     "deepcopy": "^2.1.0",
     "glob": "^10.3.10",
     "jsonschema": "^1.4.1",
-    "repox": "^1.4.66",
+    "repox": "^1.4.67",
     "tsc-alias": "^1.8.8",
     "tsyringe": "^4.8.0",
     "typescript": "5.3.3"
