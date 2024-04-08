@@ -12,7 +12,7 @@
     "deepcopy": "^2.1.0",
     "glob": "^10.3.10",
     "jsonschema": "^1.4.1",
-    "repox": "^1.4.65",
+    "repox": "^1.4.66",
     "tsc-alias": "^1.8.8",
     "tsyringe": "^4.8.0",
     "typescript": "5.3.3"
