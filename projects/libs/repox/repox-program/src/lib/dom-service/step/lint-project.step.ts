@@ -35,7 +35,7 @@ export class LintProjectStep {
     const fixArg = fix ? '--fix' : EMPTY_STRING;
     const programArg = 'eslint';
     for (const projectToLint of projectsToLint) {
-      const pathArg = createPath(projectToLint.root, '**/*.{js,ts}');
+      const pathArg = createPath(projectToLint.root, '**/*.{js,mjs,ts}');
       const command = `${programArg} ${pathArg} ${fixArg}`;
       const commandToRun = this.buildCommandToRun.build(packageManager, command);
       this.newline.writeNewline();
