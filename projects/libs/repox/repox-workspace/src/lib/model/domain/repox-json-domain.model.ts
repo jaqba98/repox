@@ -9,14 +9,11 @@ import {
  * The model domain of repox configuration.
  */
 
-export interface RepoxJsonDomainDefaultOptionsModel extends RepoxJsonDtoDefaultOptionsModel {
-}
+export type RepoxJsonDomainDefaultOptionsModel = RepoxJsonDtoDefaultOptionsModel;
 
-export interface RepoxJsonDomainTargetModel extends RepoxJsonDtoTargetModel {
-}
+export type RepoxJsonDomainTargetModel = RepoxJsonDtoTargetModel;
 
-export interface RepoxJsonDomainProjectModel extends RepoxJsonDtoProjectModel {
-}
+export type RepoxJsonDomainProjectModel = RepoxJsonDtoProjectModel;
 
 export interface RepoxJsonDomainModel {
   defaultOptions: RepoxJsonDomainDefaultOptionsModel
