@@ -39,4 +39,4 @@ export interface RepoxJsonDtoModel {
   projects: Record<string, RepoxJsonDtoProjectModel>
 }
 
-export interface PartialRepoxJsonDtoModel extends Partial<RepoxJsonDtoModel> {}
+export type PartialRepoxJsonDtoModel = Partial<RepoxJsonDtoModel>;

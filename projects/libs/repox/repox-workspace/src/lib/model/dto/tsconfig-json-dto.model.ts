@@ -19,5 +19,4 @@ export interface TsconfigJsonDtoModel {
   references: readonly ProjectReference[] | undefined
 }
 
-export interface PartialTsconfigJsonDtoModel extends Partial<TsconfigJsonDtoModel> {
-}
+export type PartialTsconfigJsonDtoModel = Partial<TsconfigJsonDtoModel>;

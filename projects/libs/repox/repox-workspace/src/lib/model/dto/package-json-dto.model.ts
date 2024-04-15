@@ -23,4 +23,4 @@ export interface PackageJsonDtoModel {
   private: boolean
 }
 
-export interface PartialPackageJsonDtoModel extends Partial<PackageJsonDtoModel> {}
+export type PartialPackageJsonDtoModel = Partial<PackageJsonDtoModel>;
