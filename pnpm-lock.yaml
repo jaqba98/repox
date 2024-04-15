@@ -21,8 +21,8 @@ dependencies:
     specifier: ^1.4.1
     version: 1.4.1
   repox:
-    specifier: ^1.4.68
-    version: 1.4.68
+    specifier: ^1.4.69
+    version: 1.4.69
   tsc-alias:
     specifier: ^1.8.8
     version: 1.8.8
@@ -3432,8 +3432,8 @@ packages:
       set-function-name: 2.0.2
     dev: true
 
-  /repox@1.4.68:
-    resolution: {integrity: sha512-/H2VIMWN66xPJe/g3IFijZIcX7hXrG32M1lvDIKwVaEPCOkpXU6vets/JOL91uMyMuiQwN9xHrpr5spGM5p1dw==}
+  /repox@1.4.69:
+    resolution: {integrity: sha512-AG07h13X5AHk7gSCZzdIvB2dVDJVurLlht/nLjkjwTMOH2xs6Ih+unPlUtmdYZlLVmq1hGxxpdswTvmhAi622g==}
     hasBin: true
     dependencies:
       command-exists: 1.2.9
@@ -3805,7 +3805,6 @@ packages:
       mylas: 2.1.13
       normalize-path: 3.0.0
       plimit-lit: 1.6.1
-    dev: false
 
   /tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}

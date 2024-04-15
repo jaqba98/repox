@@ -47,7 +47,7 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
   //     dependencies: {
   //       '@types/core-js': '^2.5.8',
   //       '@types/node': '^20.11.30',
-  //       repox: '^1.4.68',
+  //       repox: '^1.4.69',
   //       'tsc-alias': '^1.8.8'
   //     },
   //     devDependencies: {
