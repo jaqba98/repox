@@ -21,8 +21,8 @@ dependencies:
     specifier: ^1.4.1
     version: 1.4.1
   repox:
-    specifier: ^1.4.70
-    version: 1.4.70
+    specifier: ^1.4.71
+    version: 1.4.71
   tsc-alias:
     specifier: ^1.8.8
     version: 1.8.8
@@ -3562,8 +3562,8 @@ packages:
       set-function-name: 2.0.2
     dev: true
 
-  /repox@1.4.70:
-    resolution: {integrity: sha512-mJRkzyUMRTf51s9hevUV8E5FFp8B4mdvyc1PHsynErZ2WugYPklP7/H1XSNYdGcth1yM7ozFsST0oO6yUhi8aA==}
+  /repox@1.4.71:
+    resolution: {integrity: sha512-UxEvS+zgeg5owqv+kUlg48DM7PBaqB7j1Bjo1L36DHzNjXw371cnIGjwUXKXY5bPNCTgAoxvwZpsdBTwYyFjTA==}
     hasBin: true
     dependencies:
       command-exists: 1.2.9
