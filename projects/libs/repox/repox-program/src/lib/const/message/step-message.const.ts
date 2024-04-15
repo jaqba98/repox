@@ -21,6 +21,8 @@ export const createFolderStepMsg = (folderName: string): string => `Create folde
 
 export const lintProjectStepMsg = (): string => 'Lint project';
 
+export const lintWorkspaceStepMsg = (): string => 'Lint workspace';
+
 export const folderNotExistStepMsg = (folderName: string): string =>
     `Folder not exist: ${folderName}`;
 

@@ -13,6 +13,7 @@ import { GenerateWorkspaceAppService } from '../program/generate-workspace-app.s
 import { LintProjectAppService } from '../program/lint-project-app.service';
 import { RegenerateWorkspaceAppService } from '../program/regenerate-workspace-app.service';
 import { UnknownUnknownAppService } from '../program/unknown-unknown-app.service';
+import { LintWorkspaceAppService } from '../program/lint-workspace-app.service';
 
 @singleton()
 /**
@@ -28,7 +29,8 @@ export class RepoxLauncherAppService {
     private readonly buildProject: BuildProjectAppService,
     private readonly generateProject: GenerateProjectAppService,
     private readonly complexMessage: ComplexMessageAppService,
-    private readonly lintProject: LintProjectAppService
+    private readonly lintProject: LintProjectAppService,
+    private readonly lintWorkspace: LintWorkspaceAppService
   ) {
   }
 
@@ -70,6 +72,7 @@ export class RepoxLauncherAppService {
 
   private lintProgram (program: string, command: string): boolean {
     if (command === CommandEnum.project) return this.lintProject.run();
+    if (command === CommandEnum.workspace) return this.lintWorkspace.run();
     this.throwLauncherCommandError(program, command);
     return false;
   }
