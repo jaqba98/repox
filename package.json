@@ -8,10 +8,10 @@
     "deepcopy": "^2.1.0",
     "glob": "^10.3.12",
     "jsonschema": "^1.4.1",
-    "repox": "^1.4.69",
+    "repox": "^1.4.70",
     "tsc-alias": "^1.8.8",
     "tsyringe": "^4.8.0",
-    "typescript": "5.4.5"
+    "typescript": "5.3.3"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.3",
@@ -19,8 +19,9 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
-    "eslint": "^9.0.0",
+    "eslint": "^8.56.0",
     "eslint-config-love": "^47.0.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^17.2.1",
     "eslint-plugin-promise": "^6.1.1",
