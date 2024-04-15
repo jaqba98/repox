@@ -7,7 +7,7 @@ import {
   WorkspaceDomainStore
 } from '@lib/repox-workspace';
 import { EMPTY_STRING } from '@lib/const';
-import { runCommand } from '@lib/utils';
+import { createPath, runCommand } from '@lib/utils';
 
 import { lintProjectStepMsg } from '../../const/message/step-message.const';
 import { BuildCommandToRunService } from '../service/build-command-to-run.service';
@@ -33,11 +33,10 @@ export class LintProjectStep {
     const { packageManager } = defaultOptions;
     const projectsToLint = this.getProjectsToLint(projects);
     const fixArg = fix ? '--fix' : EMPTY_STRING;
-    const extArg = '--ext .ts,.js';
     const programArg = 'eslint';
     for (const projectToLint of projectsToLint) {
-      const pathArg = projectToLint.root;
-      const command = `${programArg} ${extArg} ${pathArg} ${fixArg}`;
+      const pathArg = createPath(projectToLint.root, '**/*.{js,mjs,ts}');
+      const command = `${programArg} ${pathArg} ${fixArg}`;
       const commandToRun = this.buildCommandToRun.build(packageManager, command);
       this.newline.writeNewline();
       this.simpleMessage.writePlain(lintProjectPlainMsg(projectToLint.name));

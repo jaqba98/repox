@@ -29,7 +29,7 @@ export class LintWorkspaceStep {
     const { defaultOptions } = this.workspaceDomainStore.getWorkspaceDomain().repoxJsonDomain;
     const { packageManager } = defaultOptions;
     const programArg = 'eslint';
-    const pathArg = './*.{js,ts}';
+    const pathArg = './*.{js,mjs,ts}';
     const fixArg = fix ? '--fix' : EMPTY_STRING;
     const command = `${programArg} ${pathArg} ${fixArg}`;
     const commandToRun = this.buildCommandToRun.build(packageManager, command);

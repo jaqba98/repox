@@ -8,7 +8,6 @@ import { RepoxArgumentEnum, RepoxCommandEnum, RepoxProgramEnum } from '@lib/repo
  * for given program.
  */
 export class RepoxGetParamDepService {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getProgramDefault (): any {
     return {
       program: RepoxProgramEnum.default,
@@ -161,7 +160,6 @@ export class RepoxGetParamDepService {
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getProgramLint (): any {
     return {
       program: RepoxProgramEnum.lint,
