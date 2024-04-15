@@ -8,7 +8,6 @@ import { GoToWorkspaceRootStep } from '../../dom-service/step/go-to-workspace-ro
 import { BuildWorkspaceDtoStep } from '../../dom-service/step/build-workspace-dto.step';
 import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dto.step';
 import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace-domain.step';
-import { LintProjectStep } from '../../dom-service/step/lint-project.step';
 import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
 import { GetCommandArgBooleanValueStep } from '../../dom-service/step/get-command-arg-boolean-value.step';
 import { GetCommandArgStringArrayValueStep } from '../../dom-service/step/get-command-arg-string-array-value.step';
