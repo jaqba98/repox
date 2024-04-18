@@ -1,4 +1,5 @@
 import { AppsFolderBuilder } from '../dom-service/builder/apps-folder.builder';
+import { GitignoreFileBuilder } from '../dom-service/builder/gitignore-file.builder';
 import { GitkeepFileBuilder } from '../dom-service/builder/gitkeep-file.builder';
 import { LibsFolderBuilder } from '../dom-service/builder/libs-folder.builder';
 import { ProjectsFolderBuilder } from '../dom-service/builder/projects-folder.builder';
@@ -49,12 +50,12 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
           ]
         }
       ]
+    },
+    {
+      path: '.',
+      builder: GitignoreFileBuilder,
+      children: []
     }
-    // {
-    //   path: '.',
-    //   builder: GitignoreFileBuilder,
-    //   children: []
-    // },
     // {
     //   path: '.',
     //   builder: NpmrcFileBuilder,
