@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "command-exists": "^1.2.9",
     "core-js": "^3.36.1",
     "deepcopy": "^2.1.0",
     "glob": "^10.3.12",
@@ -14,6 +15,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.0.2",
     "@eslint/js": "^9.0.0",
+    "@types/command-exists": "^1.2.3",
     "@types/core-js": "^2.5.8",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.7",

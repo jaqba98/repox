@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  command-exists:
+    specifier: ^1.2.9
+    version: 1.2.9
   core-js:
     specifier: ^3.36.1
     version: 3.36.1
@@ -19,7 +22,7 @@ dependencies:
     version: 1.4.1
   repox:
     specifier: ^1.4.73
-    version: link:projects/apps/repox
+    version: 1.4.73
   tsc-alias:
     specifier: ^1.8.8
     version: 1.8.8
@@ -34,6 +37,9 @@ devDependencies:
   '@eslint/js':
     specifier: ^9.0.0
     version: 9.0.0
+  '@types/command-exists':
+    specifier: ^1.2.3
+    version: 1.2.3
   '@types/core-js':
     specifier: ^2.5.8
     version: 2.5.8
@@ -821,6 +827,10 @@ packages:
       '@babel/types': 7.24.0
     dev: true
 
+  /@types/command-exists@1.2.3:
+    resolution: {integrity: sha512-PpbaE2XWLaWYboXD6k70TcXO/OdOyyRFq5TVpmlUELNxdkkmXU9fkImNosmXU1DtsNrqdUgWd/nJQYXgwmtdXQ==}
+    dev: true
+
   /@types/core-js@2.5.8:
     resolution: {integrity: sha512-VgnAj6tIAhJhZdJ8/IpxdatM8G4OD3VWGlp6xIxUGENZlpbob9Ty4VVdC1FIEp0aK6DBscDDjyzy5FB60TuNqg==}
     dev: true
@@ -1476,6 +1486,10 @@ packages:
 
   /color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+
+  /command-exists@1.2.9:
+    resolution: {integrity: sha512-LTQ/SGc+s0Xc0Fu5WaKnR0YiygZkm9eKFvyS+fRsU7/ZWFF8ykFM6Pc9aCVf1+xasOOZpO3BAVgVrKvsqKHV7w==}
+    dev: false
 
   /commander@9.5.0:
     resolution: {integrity: sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==}
@@ -3523,6 +3537,19 @@ packages:
       set-function-name: 2.0.2
     dev: true
 
+  /repox@1.4.73:
+    resolution: {integrity: sha512-PqVXR1IfXy155V2CKqN1OSVz+x7DQ7pShwZ4FABEXm/KQZ9S5sousf2LKytYnt3oGipqlZ0u/AR/8V8nl4Texw==}
+    hasBin: true
+    dependencies:
+      command-exists: 1.2.9
+      core-js: 3.36.1
+      deepcopy: 2.1.0
+      glob: 10.3.12
+      jsonschema: 1.4.1
+      tsyringe: 4.8.0
+      typescript: 5.4.5
+    dev: false
+
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -3988,7 +4015,6 @@ packages:
     resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: true
 
   /unbox-primitive@1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
