@@ -10,7 +10,6 @@ import { CheckWorkspaceDtoStep } from '../../dom-service/step/check-workspace-dt
 import { BuildWorkspaceDomainStep } from '../../dom-service/step/build-workspace-domain.step';
 import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
 import { GetCommandArgBooleanValueStep } from '../../dom-service/step/get-command-arg-boolean-value.step';
-import { GetCommandArgStringArrayValueStep } from '../../dom-service/step/get-command-arg-string-array-value.step';
 import { PackageManagerExistStep } from '../../dom-service/step/package-manager-exist.step';
 import { LintWorkspaceStep } from '../../dom-service/step/lint-workspace.step';
 
@@ -23,7 +22,6 @@ import { LintWorkspaceStep } from '../../dom-service/step/lint-workspace.step';
 export class LintWorkspaceAppService {
   constructor (
     private readonly writeHeader: WriteHeaderStep,
-    private readonly getCommandArgStringValue: GetCommandArgStringArrayValueStep,
     private readonly getCommandArgBooleanValue: GetCommandArgBooleanValueStep,
     private readonly goToWorkspaceRoot: GoToWorkspaceRootStep,
     private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
