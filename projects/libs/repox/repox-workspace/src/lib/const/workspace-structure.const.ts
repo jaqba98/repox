@@ -2,6 +2,7 @@ import { AppsFolderBuilder } from "../dom-service/builder/apps-folder.builder";
 import { EslintrcJsFileBuilder } from "../dom-service/builder/eslintrc-js-file.builder";
 import { GitignoreFileBuilder } from "../dom-service/builder/gitignore-file.builder";
 import { GitkeepFileBuilder } from "../dom-service/builder/gitkeep-file.builder";
+import { JestConfigJsFileBuilder } from "../dom-service/builder/jest-config-file.builder";
 import { LibsFolderBuilder } from "../dom-service/builder/libs-folder.builder";
 import { ProjectsFolderBuilder } from "../dom-service/builder/projects-folder.builder";
 import { ToolsFolderBuilder } from "../dom-service/builder/tools-folder.builder";
@@ -60,6 +61,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         {
             path: ".",
             builder: GitignoreFileBuilder,
+            children: []
+        },
+        {
+            path: ".",
+            builder: JestConfigJsFileBuilder,
             children: []
         }
     // {
