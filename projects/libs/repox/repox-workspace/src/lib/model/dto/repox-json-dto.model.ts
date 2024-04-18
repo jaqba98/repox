@@ -1,8 +1,8 @@
 // done
-import { type SystemProgramEnum } from '@lib/repox-program';
+import { type SystemProgramEnum } from "@lib/repox-program";
 
-import { type ProjectTypeEnum } from '../../enum/project-type.enum';
-import { type ExecutorEnum } from '../../enum/executor.enum';
+import { type ProjectTypeEnum } from "../../enum/project-type.enum";
+import { type ExecutorEnum } from "../../enum/executor.enum";
 
 /**
  * The model dto represents a real content

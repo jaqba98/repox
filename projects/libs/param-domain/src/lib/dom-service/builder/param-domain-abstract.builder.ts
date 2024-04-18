@@ -1,4 +1,4 @@
-import { type ParamDomain } from '../domain/param-domain';
+import { type ParamDomain } from "../domain/param-domain";
 
 /**
  * The abstract builder contains methods which can be implemented

@@ -1,19 +1,19 @@
 // done
-import { singleton } from 'tsyringe';
+import { singleton } from "tsyringe";
 
-import { createFolder } from '@lib/utils';
+import { createFolder } from "@lib/utils";
 
-import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
-import { WorkspaceFolderEnum } from '../../enum/workspace-folder.enum';
+import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
+import { WorkspaceFolderEnum } from "../../enum/workspace-folder.enum";
 
 @singleton()
 /**
  * Create folder called libs.
  */
 export class ToolsFolderBuilder extends WorkspaceStructureAbstractBuilder {
-  generate (): void {
-    createFolder(WorkspaceFolderEnum.tools);
-  }
+    generate (): void {
+        createFolder(WorkspaceFolderEnum.tools);
+    }
 
-  regenerate (): void {}
+    regenerate (): void {}
 }

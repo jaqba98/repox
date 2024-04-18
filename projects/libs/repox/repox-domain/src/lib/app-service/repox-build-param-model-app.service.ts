@@ -1,9 +1,9 @@
-import { singleton } from 'tsyringe';
+import { singleton } from "tsyringe";
 import {
-  RepoxBuildParamModelService
-} from '../dom-service/repox-build-param-model.service';
-import { type TRepoxProgramModel } from '../model/repox-program.model';
-import { type TRepoxCommandModel } from '../model/repox-command.model';
+    RepoxBuildParamModelService
+} from "../dom-service/repox-build-param-model.service";
+import { type TRepoxProgramModel } from "../model/repox-program.model";
+import { type TRepoxCommandModel } from "../model/repox-command.model";
 
 @singleton()
 /**
@@ -11,13 +11,13 @@ import { type TRepoxCommandModel } from '../model/repox-command.model';
  * for given program and command.
  */
 export class RepoxBuildParamModelAppService {
-  constructor (
+    constructor (
     private readonly buildParamModel: RepoxBuildParamModelService
     // private readonly paramDom: ParamDomainAppService
-  ) {
-  }
+    ) {
+    }
 
-  buildProgramParamModel (): TRepoxProgramModel {
+    buildProgramParamModel (): TRepoxProgramModel {
     // enum programName = this.paramDom.getParamDomain().program.name;
     // if (programName === RepoxProgramEnum.default) {
     //   return this.buildParamModel.defaultProgram();
@@ -25,10 +25,10 @@ export class RepoxBuildParamModelAppService {
     // if (programName === RepoxProgramEnum.build) {
     //   return this.buildParamModel.defaultProgram();
     // }
-    return this.buildParamModel.emptyProgram();
-  }
+        return this.buildParamModel.emptyProgram();
+    }
 
-  buildCommandParamModel (): TRepoxCommandModel {
+    buildCommandParamModel (): TRepoxCommandModel {
     // enum programName = this.paramDom.getParamDomain().program.name;
     // enum commandName = this.paramDom.getParamDomain().command.name;
     // if (programName === RepoxProgramEnum.generate) {
@@ -59,8 +59,8 @@ export class RepoxBuildParamModelAppService {
     //     return this.buildParamModel.lintProjectCommand();
     //   }
     // }
-    return this.buildParamModel.emptyCommand();
-  }
+        return this.buildParamModel.emptyCommand();
+    }
 }
 
 // todo: refactor the code

@@ -1,4 +1,4 @@
-import { type LoggerModeEnum } from '../enum/logger-mode.enum';
+import { type LoggerModeEnum } from "../enum/logger-mode.enum";
 
 /**
  * The logger domain model that stores data.

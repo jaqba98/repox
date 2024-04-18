@@ -14,22 +14,22 @@ import { specifiedFolderThatExistOnDiskWarningMsg, specifyDifferentFolderNameWar
  * whether the given folder does not exist.
  */
 export class FolderNotExistStep {
-  constructor (
+    constructor (
     private readonly stepMessage: StepMessageAppService,
     private readonly complexMessage: ComplexMessageAppService
-  ) {
-  }
+    ) {
+    }
 
-  run (folderPath: string): boolean {
-    this.stepMessage.write(folderNotExistStepMsg(folderPath));
-    if (pathNotExist(folderPath)) return true;
-    this.complexMessage.writeError([
-      folderAlreadyExistErrorMsg(folderPath)
-    ]);
-    this.complexMessage.writeWarning([
-      specifiedFolderThatExistOnDiskWarningMsg(),
-      specifyDifferentFolderNameWarningMsg()
-    ]);
-    return false;
-  }
+    run (folderPath: string): boolean {
+        this.stepMessage.write(folderNotExistStepMsg(folderPath));
+        if (pathNotExist(folderPath)) return true;
+        this.complexMessage.writeError([
+            folderAlreadyExistErrorMsg(folderPath)
+        ]);
+        this.complexMessage.writeWarning([
+            specifiedFolderThatExistOnDiskWarningMsg(),
+            specifyDifferentFolderNameWarningMsg()
+        ]);
+        return false;
+    }
 }

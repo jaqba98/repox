@@ -1,5 +1,5 @@
-import { singleton } from 'tsyringe';
-import { SimpleMessageAppService } from '@lib/logger';
+import { singleton } from "tsyringe";
+import { SimpleMessageAppService } from "@lib/logger";
 
 @singleton()
 /**
@@ -7,17 +7,17 @@ import { SimpleMessageAppService } from '@lib/logger';
  * to the real files.
  */
 export class SaveWsDtoAppService {
-  constructor (
+    constructor (
     private readonly simpleMessage: SimpleMessageAppService
     // private readonly wsDtoStore: WsDtoStoreService
-  ) {
-  }
+    ) {
+    }
 
-  run (): boolean {
-    this.simpleMessage.writePlain('Step: Save WS DTO');
-    // this.wsDtoStore.saveWsDto();
-    return true;
-  }
+    run (): boolean {
+        this.simpleMessage.writePlain("Step: Save WS DTO");
+        // this.wsDtoStore.saveWsDto();
+        return true;
+    }
 }
 
 // todo: refactor the code

@@ -1,13 +1,11 @@
-const path = require('path');
+import { resolve } from "path";
 
-module.exports = {
-  clearMocks: true,
-  coverageProvider: 'v8',
-  preset: 'ts-jest',
-  setupFilesAfterEnv: ['core-js/features/reflect'],
-  testEnvironment: 'jest-environment-node',
-  moduleNameMapper: {
-    '@lib/const': path.resolve(__dirname, 'projects/libs/enum/src/index.ts'),
-    '@lib/utils': path.resolve(__dirname, 'projects/libs/utils/src/index.ts')
-  }
+export const clearMocks = true;
+export const coverageProvider = "v8";
+export const preset = "ts-jest";
+export const setupFilesAfterEnv = ["core-js/features/reflect"];
+export const testEnvironment = "jest-environment-node";
+export const moduleNameMapper = {
+    "@lib/const": resolve(__dirname, "projects/libs/enum/src/index.ts"),
+    "@lib/utils": resolve(__dirname, "projects/libs/utils/src/index.ts")
 };

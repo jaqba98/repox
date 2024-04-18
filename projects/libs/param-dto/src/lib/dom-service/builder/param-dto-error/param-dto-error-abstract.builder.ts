@@ -1,5 +1,5 @@
-import { type ParamDtoError } from '../../domain/param-dto-error';
-import { type ParamDtoValidation } from '../../domain/param-dto-validation';
+import { type ParamDtoError } from "../../domain/param-dto-error";
+import { type ParamDtoValidation } from "../../domain/param-dto-validation";
 
 /**
  * The abstract builder contains methods which can be implemented

@@ -1,8 +1,8 @@
-import { type InjectionToken } from 'tsyringe';
+import { type InjectionToken } from "tsyringe";
 
 import {
-  type WorkspaceStructureAbstractBuilder
-} from '../../dom-service/builder/workspace-structure-abstract.builder';
+    type WorkspaceStructureAbstractBuilder
+} from "../../dom-service/builder/workspace-structure-abstract.builder";
 
 /**
  * The model represent structure of workspace.

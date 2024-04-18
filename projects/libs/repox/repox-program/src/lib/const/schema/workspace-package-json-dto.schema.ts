@@ -1,5 +1,5 @@
 // done
-import { type Schema } from 'jsonschema';
+import { type Schema } from "jsonschema";
 
 /**
  * The schema is responsible for checking
@@ -7,6 +7,6 @@ import { type Schema } from 'jsonschema';
  */
 
 export const workspacePackageJsonDtoSchema: Schema = {
-  id: '/WorkspacePackageJsonDto',
-  type: 'object'
+    id: "/WorkspacePackageJsonDto",
+    type: "object"
 };

@@ -1,24 +1,24 @@
 // done
-import { singleton } from 'tsyringe';
+import { singleton } from "tsyringe";
 
-import { writeToFile } from '@lib/utils';
+import { writeToFile } from "@lib/utils";
 
-import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
-import { WorkspaceFileEnum } from '../../enum/workspace-file.enum';
+import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
+import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
 
 @singleton()
 /**
  * Create .gitignore file.
  */
 export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
-  generate (): void {
-    writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
-  }
+    generate (): void {
+        writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
+    }
 
-  regenerate (): void {}
+    regenerate (): void {}
 
-  private createGitignoreContent (): string {
-    return `# JetBrains tools
+    private createGitignoreContent (): string {
+        return `# JetBrains tools
 .idea
 
 # Compilation output
@@ -30,5 +30,5 @@ node_modules
 # Temporary files and directories
 tmp
 `;
-  }
+    }
 }
