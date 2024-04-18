@@ -1,3 +1,4 @@
+// done
 import { singleton } from 'tsyringe';
 
 import { CommandEnum } from '../../enum/launcher/command.enum';
@@ -10,6 +11,7 @@ import { FolderNotExistStep } from '../../dom-service/step/folder-not-exist.step
 import { CreateFolderStep } from '../../dom-service/step/create-folder.step';
 import { ChangePathStep } from '../../dom-service/step/change-path.step';
 import { WriteSuccessStep } from '../../dom-service/step/write-success.step';
+import { GenerateWorkspaceStep } from '../../dom-service/step/generate-workspace.step';
 
 @singleton()
 /**
@@ -25,7 +27,7 @@ export class GenerateWorkspaceAppService {
     private readonly folderNotExist: FolderNotExistStep,
     private readonly createFolder: CreateFolderStep,
     private readonly changePath: ChangePathStep,
-    // private readonly generateWorkspace: GenerateWorkspaceStep,
+    private readonly generateWorkspace: GenerateWorkspaceStep,
     private readonly writeSuccess: WriteSuccessStep
   ) {
   }
@@ -42,7 +44,7 @@ export class GenerateWorkspaceAppService {
     if (!this.folderNotExist.run(name)) return false;
     if (!this.createFolder.run(name)) return false;
     if (!this.changePath.run(name)) return false;
-    // if (!this.generateWorkspace.run()) return false;
+    if (!this.generateWorkspace.run()) return false;
     if (!this.writeSuccess.run()) return false;
     return true;
   }
