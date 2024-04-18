@@ -58,11 +58,6 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
     }
     // {
     //   path: '.',
-    //   builder: NpmrcFileBuilder,
-    //   children: []
-    // },
-    // {
-    //   path: '.',
     //   builder: WorkspacePackageJsonFileBuilder,
     //   children: []
     // },
