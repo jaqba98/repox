@@ -1,18 +1,17 @@
-import { singleton } from 'tsyringe';
+// done
+import { singleton } from "tsyringe";
 
-import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger';
-import { pathNotExist } from '@lib/utils';
+import { StepMessageAppService, ComplexMessageAppService } from "@lib/logger";
+import { pathNotExist } from "@lib/utils";
 
-import { folderNotExistStepMsg } from '../../const/message/step-message.const';
-import { folderAlreadyExistErrorMsg } from '../../const/message/error-message.const';
-import {
-  specifiedFolderThatExistOnDiskWarningMsg,
-  specifyDifferentFolderNameWarningMsg
-} from '../../const/message/warning-message.const';
+import { folderAlreadyExistErrorMsg } from "../../const/message/error-message.const";
+import { folderNotExistStepMsg } from "../../const/message/step-message.const";
+import { specifiedFolderThatExistOnDiskWarningMsg, specifyDifferentFolderNameWarningMsg } from "../../const/message/warning-message.const";
 
 @singleton()
 /**
- * The step service is responsible for checking whether folder not exist.
+ * The step dom-service is responsible for checking
+ * whether the given folder does not exist.
  */
 export class FolderNotExistStep {
   constructor (

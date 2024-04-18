@@ -1,3 +1,4 @@
+// done
 import { singleton } from 'tsyringe';
 
 import { ComplexMessageAppService, StepMessageAppService } from '@lib/logger';
@@ -12,7 +13,8 @@ import {
 
 @singleton()
 /**
- * The step service is responsible for creating a folder.
+ * The step dom-service is responsible for creating
+ * new empty folder in the given localization.
  */
 export class CreateFolderStep {
   constructor (

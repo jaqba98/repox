@@ -23,8 +23,7 @@ export const lintProjectStepMsg = (): string => 'Lint project';
 
 export const lintWorkspaceStepMsg = (): string => 'Lint workspace';
 
-export const folderNotExistStepMsg = (folderName: string): string =>
-    `Folder not exist: ${folderName}`;
+export const folderNotExistStepMsg = (folderName: string): string => `Folder not exist: ${folderName}`;
 
 export const getSingleCommandArgValueStepMsg = (arg: string): string =>
     `Get a single command argument value: ${arg}`;
