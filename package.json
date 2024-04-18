@@ -4,11 +4,11 @@
   "private": true,
   "dependencies": {
     "command-exists": "^1.2.9",
-    "core-js": "^3.36.1",
+    "core-js": "^3.37.0",
     "deepcopy": "^2.1.0",
     "glob": "^10.3.12",
     "jsonschema": "^1.4.1",
-    "repox": "^1.4.73",
+    "repox": "^1.4.74",
     "tsc-alias": "^1.8.8",
     "tsyringe": "^4.8.0"
   },

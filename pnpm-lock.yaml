@@ -9,8 +9,8 @@ dependencies:
     specifier: ^1.2.9
     version: 1.2.9
   core-js:
-    specifier: ^3.36.1
-    version: 3.36.1
+    specifier: ^3.37.0
+    version: 3.37.0
   deepcopy:
     specifier: ^2.1.0
     version: 2.1.0
@@ -21,8 +21,8 @@ dependencies:
     specifier: ^1.4.1
     version: 1.4.1
   repox:
-    specifier: ^1.4.73
-    version: 1.4.73
+    specifier: ^1.4.74
+    version: 1.4.74
   tsc-alias:
     specifier: ^1.8.8
     version: 1.8.8
@@ -1338,8 +1338,8 @@ packages:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
     dev: true
 
-  /core-js@3.36.1:
-    resolution: {integrity: sha512-BTvUrwxVBezj5SZ3f10ImnX2oRByMxql3EimVqMysepbC9EeMUOpLwdy6Eoili2x6E4kf+ZUB5k/+Jv55alPfA==}
+  /core-js@3.37.0:
+    resolution: {integrity: sha512-fu5vHevQ8ZG4og+LXug8ulUtVxjOcEYvifJr7L5Bfq9GOztVqsKd9/59hUk2ZSbCrS3BqUr3EpaYGIYzq7g3Ug==}
     requiresBuild: true
     dev: false
 
@@ -2776,12 +2776,12 @@ packages:
       picomatch: 2.3.1
     dev: false
 
-  /repox@1.4.73:
-    resolution: {integrity: sha512-PqVXR1IfXy155V2CKqN1OSVz+x7DQ7pShwZ4FABEXm/KQZ9S5sousf2LKytYnt3oGipqlZ0u/AR/8V8nl4Texw==}
+  /repox@1.4.74:
+    resolution: {integrity: sha512-q4aMfp58joxC1lziBbUj5s/at7TXOPrdPPlPtuXqQsVD+84P7ENkkqYInH3fNu9rxnxAsUwWdv2jzIFP11ehRw==}
     hasBin: true
     dependencies:
       command-exists: 1.2.9
-      core-js: 3.36.1
+      core-js: 3.37.0
       deepcopy: 2.1.0
       glob: 10.3.12
       jsonschema: 1.4.1
