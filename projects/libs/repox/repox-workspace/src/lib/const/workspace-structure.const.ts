@@ -1,4 +1,5 @@
 import { AppsFolderBuilder } from "../dom-service/builder/apps-folder.builder";
+import { EslintrcJsFileBuilder } from "../dom-service/builder/eslintrc-js-file.builder";
 import { GitignoreFileBuilder } from "../dom-service/builder/gitignore-file.builder";
 import { GitkeepFileBuilder } from "../dom-service/builder/gitkeep-file.builder";
 import { LibsFolderBuilder } from "../dom-service/builder/libs-folder.builder";
@@ -53,6 +54,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
         },
         {
             path: ".",
+            builder: EslintrcJsFileBuilder,
+            children: []
+        },
+        {
+            path: ".",
             builder: GitignoreFileBuilder,
             children: []
         }
@@ -74,11 +80,6 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
     // {
     //   path: '.',
     //   builder: TsconfigJsonFileBuilder,
-    //   children: []
-    // },
-    // {
-    //   path: '.',
-    //   builder: EslintrcJsFileBuilder,
     //   children: []
     // }
     ]

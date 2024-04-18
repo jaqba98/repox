@@ -1,7 +1,9 @@
+// done
 import { singleton } from "tsyringe";
 
-import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
 import { writeFileSync } from "fs";
+
+import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
 import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
 
 @singleton()
@@ -10,21 +12,22 @@ import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
  */
 export class EslintrcJsFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate (): void {
-        writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildDefaultEslintrcJsContent());
+        writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildEslintrcJsContent());
     }
 
-    regenerate (): void {
-        writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildDefaultEslintrcJsContent());
-    }
+    regenerate (): void {}
 
-    private buildDefaultEslintrcJsContent (): string {
+    private buildEslintrcJsContent (): string {
         return `module.exports = {
     "env": {
         "browser": true,
         "es2021": true,
         "node": true
     },
-    "extends": "standard-with-typescript",
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "overrides": [
         {
             "env": {
@@ -38,15 +41,19 @@ export class EslintrcJsFileBuilder extends WorkspaceStructureAbstractBuilder {
             }
         }
     ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
+    "plugins": ["@typescript-eslint"],
     "rules": {
-      "max-lines": "error",
-      "max-depth": "error"
+        "indent": ["error", 4],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"]
     }
-}
+};
 `;
     }
 }
