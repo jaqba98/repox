@@ -1,7 +1,10 @@
 // done
 import { singleton } from 'tsyringe';
 
+import { writeToFile } from '@lib/utils';
+
 import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
+import { WorkspaceFileEnum } from '../../enum/workspace-file.enum';
 
 @singleton()
 /**
@@ -9,7 +12,7 @@ import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstrac
  */
 export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
   generate (): void {
-    this.createGitignoreContent();
+    writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
   }
 
   regenerate (): void {}
