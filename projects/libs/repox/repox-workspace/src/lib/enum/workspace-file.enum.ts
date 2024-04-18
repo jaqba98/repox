@@ -11,5 +11,6 @@ export enum WorkspaceFileEnum {
   npmrc = ".npmrc",
   indexTs = "index.ts",
   mainTs = "main.ts",
-  eslintrcJs = ".eslintrc.js"
+  eslintrcJs = ".eslintrc.js",
+  jestConfigJs = "jest.config.js"
 }

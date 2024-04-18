@@ -12,7 +12,7 @@ import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
  */
 export class JestConfigJsFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate (): void {
-        writeToFile(WorkspaceFileEnum.gitkeep, this.buildJestConfigJsContent());
+        writeToFile(WorkspaceFileEnum.jestConfigJs, this.buildJestConfigJsContent());
     }
 
     regenerate (): void {}
