@@ -29,7 +29,7 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
                 "deepcopy": "^2.1.0",
                 "glob": "^10.3.12",
                 "jsonschema": "^1.4.1",
-                "repox": "^1.4.75",
+                "repox": "^1.4.76",
                 "tsc-alias": "^1.8.8",
                 "tsyringe": "^4.8.0"
             },
