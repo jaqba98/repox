@@ -15,6 +15,7 @@ import { GenerateWorkspaceStep } from "../../dom-service/step/generate-workspace
 import { BuildWorkspaceDomainStep } from "../../dom-service/step/build-workspace-domain.step";
 import { BuildWorkspaceDtoStep } from "../../dom-service/step/build-workspace-dto.step";
 import { CheckWorkspaceDtoStep } from "../../dom-service/step/check-workspace-dto.step";
+import { InstallNpmStep } from "../../dom-service/step/install-npm.step";
 
 @singleton()
 /**
@@ -34,6 +35,7 @@ export class GenerateWorkspaceAppService {
     private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
     private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
     private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
+    private readonly installNpm: InstallNpmStep,
     private readonly writeSuccess: WriteSuccessStep
     ) {
     }
@@ -54,6 +56,7 @@ export class GenerateWorkspaceAppService {
         if (!this.buildWorkspaceDto.run()) return false;
         if (!this.checkWorkspaceDto.run()) return false;
         if (!this.buildWorkspaceDomain.run()) return false;
+        if (!this.installNpm.run()) return false;
         if (!this.writeSuccess.run()) return false;
         return true;
     }
