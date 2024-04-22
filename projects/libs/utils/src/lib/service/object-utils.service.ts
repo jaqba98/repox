@@ -1,5 +1,5 @@
-import deepcopy from 'deepcopy';
+import deepcopy from "deepcopy";
 
 export const deepCopy = <T>(obj: T): T => {
-  return deepcopy(obj);
+    return deepcopy(obj);
 };

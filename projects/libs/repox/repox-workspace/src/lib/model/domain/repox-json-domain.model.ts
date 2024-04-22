@@ -1,9 +1,9 @@
 // done
 import {
-  type RepoxJsonDtoTargetModel,
-  type RepoxJsonDtoDefaultOptionsModel,
-  type RepoxJsonDtoProjectModel
-} from '../dto/repox-json-dto.model';
+    type RepoxJsonDtoTargetModel,
+    type RepoxJsonDtoDefaultOptionsModel,
+    type RepoxJsonDtoProjectModel
+} from "../dto/repox-json-dto.model";
 
 /**
  * The model domain of repox configuration.

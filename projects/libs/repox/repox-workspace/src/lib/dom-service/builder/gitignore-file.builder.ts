@@ -1,38 +1,34 @@
-import { singleton } from 'tsyringe';
+// done
+import { singleton } from "tsyringe";
 
-import { WorkspaceStructureAbstractBuilder } from './workspace-structure-abstract.builder';
-import { WorkspaceDomainStore } from '../store/workspace-domain.store';
+import { writeToFile } from "@lib/utils";
+
+import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
+import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
 
 @singleton()
 /**
  * Create .gitignore file.
  */
 export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
-  constructor (private readonly store: WorkspaceDomainStore) {
-    super();
-  }
+    generate (): void {
+        writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
+    }
 
-  generate (): void {
-    this.createDefaultGitignoreTextDomain();
-  }
+    regenerate (): void {}
 
-  regenerate (): void {
-    this.createDefaultGitignoreTextDomain();
-  }
+    private createGitignoreContent (): string {
+        return `# JetBrains tools
+.idea
 
-  private createDefaultGitignoreTextDomain (): void {
-    //     if (this.store.workspaceDomain == null) return
-    //     this.store.workspaceDomain.gitignoreTextDomain = `# JetBrains tools
-    // .idea
+# Compilation output
+dist
 
-    // # Compilation output
-    // dist
+# Dependency directories
+node_modules
 
-    // # Dependency directories
-    // node_modules
-
-    // # Temporary files and directories
-    // tmp
-    // `
-  }
+# Temporary files and directories
+tmp
+`;
+    }
 }

@@ -1,9 +1,9 @@
 // done
-import { singleton } from 'tsyringe';
+import { singleton } from "tsyringe";
 
-import { SimpleMessageAppService, NewlineAppService } from '@lib/logger';
+import { SimpleMessageAppService, NewlineAppService } from "@lib/logger";
 
-import { commandExecutedCorrectlySuccessMsg } from '../../const/message/success-message.enum';
+import { commandExecutedCorrectlySuccessMsg } from "../../const/message/success-message.enum";
 
 @singleton()
 /**
@@ -11,15 +11,15 @@ import { commandExecutedCorrectlySuccessMsg } from '../../const/message/success-
  * writing success on the console screen.
  */
 export class WriteSuccessStep {
-  constructor (
+    constructor (
     private readonly simpleMessage: SimpleMessageAppService,
     private readonly newline: NewlineAppService
-  ) {
-  }
+    ) {
+    }
 
-  run (): boolean {
-    this.newline.writeNewline();
-    this.simpleMessage.writeSuccess(commandExecutedCorrectlySuccessMsg());
-    return true;
-  }
+    run (): boolean {
+        this.newline.writeNewline();
+        this.simpleMessage.writeSuccess(commandExecutedCorrectlySuccessMsg());
+        return true;
+    }
 }

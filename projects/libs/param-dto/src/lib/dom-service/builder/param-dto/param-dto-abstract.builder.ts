@@ -1,4 +1,4 @@
-import { type ParamDto } from '../../domain/param-dto';
+import { type ParamDto } from "../../domain/param-dto";
 
 /**
  * The abstract builder contains methods which can be implemented

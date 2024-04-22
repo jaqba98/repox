@@ -1,24 +1,4 @@
-// done
-import { singleton } from "tsyringe";
-
-import { writeFileSync } from "fs";
-
-import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
-import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
-
-@singleton()
-/**
- * Create tsconfig.json file.
- */
-export class EslintrcJsFileBuilder extends WorkspaceStructureAbstractBuilder {
-    generate (): void {
-        writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildEslintrcJsContent());
-    }
-
-    regenerate (): void {}
-
-    private buildEslintrcJsContent (): string {
-        return `module.exports = {
+module.exports = {
     "env": {
         "browser": true,
         "es2021": true,
@@ -51,9 +31,7 @@ export class EslintrcJsFileBuilder extends WorkspaceStructureAbstractBuilder {
         "indent": ["error", 4],
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "double"],
-        "semi": ["error", "always"]
+        "semi": ["error", "always"],
+        "@typescript-eslint/no-unused-vars": "off"
     }
 };
-`;
-    }
-}

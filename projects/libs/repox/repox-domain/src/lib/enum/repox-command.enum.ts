@@ -3,16 +3,16 @@
  */
 
 export enum RepoxCommandEnum {
-  default = 'default',
-  workspace = 'workspace',
-  project = 'project',
-  npm = 'npm'
+  default = "default",
+  workspace = "workspace",
+  project = "project",
+  npm = "npm"
 }
 
 export enum RepoxCommandAliasEnum {
-  workspace = 'w',
-  project = 'p',
-  npm = 'n'
+  workspace = "w",
+  project = "p",
+  npm = "n"
 }
 
 // todo: refactor the code

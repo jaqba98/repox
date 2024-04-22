@@ -1,5 +1,5 @@
-import { type WorkspaceFileEnum } from '@lib/repox-workspace';
-import { type SystemProgramEnum } from '../../enum/system-program/system-program.enum';
+import { type WorkspaceFileEnum } from "@lib/repox-workspace";
+import { type SystemProgramEnum } from "../../enum/system-program/system-program.enum";
 
 /**
  * All error messages for that project.
@@ -11,10 +11,10 @@ export const argumentWasNotSpecifiedErrorMsg = (arg: string, alias: string): str
 export const argumentDoesNotHaveValidValueTypeErrorMsg = (arg: string, alias: string): string =>
     `The argument --${arg} or alias -${alias} does not have a valid value type!`;
 
-export const workspaceRootNotExistErrorMsg = (): string => 'You are not in an existing repox workspace!';
+export const workspaceRootNotExistErrorMsg = (): string => "You are not in an existing repox workspace!";
 
 export const configurationFileNotFoundErrorMsg = (file: WorkspaceFileEnum): string =>
-  `Configuration file not found: ${file}`;
+    `Configuration file not found: ${file}`;
 
 export const configurationFileInvalidErrorMsg = (file: WorkspaceFileEnum): string =>
     `The configuration file is invalid: ${file}`;
@@ -52,11 +52,11 @@ export const argumentIsNotHaveSingleValueErrorMsg = (arg: string): string =>
 export const failedToChangePathErrorMsg = (path: string): string =>
     `Failed to change the path: ${path}!`;
 
-export const failedToGenerateWorkspaceErrorMsg = (): string => 'Failed to generate workspace!';
+export const failedToGenerateWorkspaceErrorMsg = (): string => "Failed to generate workspace!";
 
-export const failedToRegenerateWorkspaceErrorMsg = (): string => 'Failed to regenerate workspace!';
+export const failedToRegenerateWorkspaceErrorMsg = (): string => "Failed to regenerate workspace!";
 
-export const failedToGenerateProjectErrorMsg = (): string => 'Failed to generate project!';
+export const failedToGenerateProjectErrorMsg = (): string => "Failed to generate project!";
 
 export const notSupportedProjectTypeErrorMsg = (type: string): string =>
     `Not supported project type: ${type}`;

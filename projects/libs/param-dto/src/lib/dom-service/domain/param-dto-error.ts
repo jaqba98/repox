@@ -1,24 +1,24 @@
-import { injectable } from 'tsyringe';
+import { injectable } from "tsyringe";
 
-import { type ParamDtoErrorModel } from '../../model/param-dto-error.model';
+import { type ParamDtoErrorModel } from "../../model/param-dto-error.model";
 
 @injectable()
 /**
  * The domain class is a recipe how to build param dto error object.
  */
 export class ParamDtoError {
-  supportedSignsErrors: ParamDtoErrorModel;
+    supportedSignsErrors: ParamDtoErrorModel;
 
-  correctPatternErrors: ParamDtoErrorModel;
+    correctPatternErrors: ParamDtoErrorModel;
 
-  canExistErrors: ParamDtoErrorModel;
+    canExistErrors: ParamDtoErrorModel;
 
-  correctOrderErrors: ParamDtoErrorModel;
+    correctOrderErrors: ParamDtoErrorModel;
 
-  constructor () {
-    this.supportedSignsErrors = { wrongParamIndexes: [], errors: [], tips: [] };
-    this.correctPatternErrors = { wrongParamIndexes: [], errors: [], tips: [] };
-    this.canExistErrors = { wrongParamIndexes: [], errors: [], tips: [] };
-    this.correctOrderErrors = { wrongParamIndexes: [], errors: [], tips: [] };
-  }
+    constructor () {
+        this.supportedSignsErrors = { wrongParamIndexes: [], errors: [], tips: [] };
+        this.correctPatternErrors = { wrongParamIndexes: [], errors: [], tips: [] };
+        this.canExistErrors = { wrongParamIndexes: [], errors: [], tips: [] };
+        this.correctOrderErrors = { wrongParamIndexes: [], errors: [], tips: [] };
+    }
 }
