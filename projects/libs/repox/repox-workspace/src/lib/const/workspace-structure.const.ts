@@ -1,3 +1,4 @@
+// done
 import { AppsFolderBuilder } from "../dom-service/builder/apps-folder.builder";
 import { EslintrcJsFileBuilder } from "../dom-service/builder/eslintrc-js-file.builder";
 import { GitignoreFileBuilder } from "../dom-service/builder/gitignore-file.builder";
@@ -8,6 +9,7 @@ import { ProjectsFolderBuilder } from "../dom-service/builder/projects-folder.bu
 import { ReadmeFileBuilder } from "../dom-service/builder/readme-file.builder";
 import { RepoxJsonFileBuilder } from "../dom-service/builder/repox-json-file.builder";
 import { ToolsFolderBuilder } from "../dom-service/builder/tools-folder.builder";
+import { TsconfigJsonFileBuilder } from "../dom-service/builder/tsconfig-json-file.builder";
 import { WorkspacePackageJsonFileBuilder } from "../dom-service/builder/workspace-package-json-file.builder";
 import { WorkspaceFolderEnum } from "../enum/workspace-folder.enum";
 import { type WorkspaceStructureModel } from "../model/workspace/workspace-structure.model";
@@ -86,10 +88,10 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
             builder: RepoxJsonFileBuilder,
             children: []
         },
-    // {
-    //   path: '.',
-    //   builder: TsconfigJsonFileBuilder,
-    //   children: []
-    // }
+        {
+            path: ".",
+            builder: TsconfigJsonFileBuilder,
+            children: []
+        }
     ]
 };

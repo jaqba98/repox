@@ -11,6 +11,7 @@ import { type CompilerOptions, type ProjectReference } from "typescript";
  * It has to be up to date as possible: TSConfig.
  */
 export interface TsconfigJsonDtoModel {
+  extends: string
   compilerOptions: CompilerOptions
   compileOnSave: boolean | undefined
   exclude?: readonly string[]
