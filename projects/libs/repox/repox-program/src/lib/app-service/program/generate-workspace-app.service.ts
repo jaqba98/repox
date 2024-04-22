@@ -12,6 +12,9 @@ import { CreateFolderStep } from "../../dom-service/step/create-folder.step";
 import { ChangePathStep } from "../../dom-service/step/change-path.step";
 import { WriteSuccessStep } from "../../dom-service/step/write-success.step";
 import { GenerateWorkspaceStep } from "../../dom-service/step/generate-workspace.step";
+import { BuildWorkspaceDomainStep } from "../../dom-service/step/build-workspace-domain.step";
+import { BuildWorkspaceDtoStep } from "../../dom-service/step/build-workspace-dto.step";
+import { CheckWorkspaceDtoStep } from "../../dom-service/step/check-workspace-dto.step";
 
 @singleton()
 /**
@@ -28,6 +31,9 @@ export class GenerateWorkspaceAppService {
     private readonly createFolder: CreateFolderStep,
     private readonly changePath: ChangePathStep,
     private readonly generateWorkspace: GenerateWorkspaceStep,
+    private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
+    private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
+    private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
     private readonly writeSuccess: WriteSuccessStep
     ) {
     }
@@ -45,6 +51,9 @@ export class GenerateWorkspaceAppService {
         if (!this.createFolder.run(name)) return false;
         if (!this.changePath.run(name)) return false;
         if (!this.generateWorkspace.run()) return false;
+        if (!this.buildWorkspaceDto.run()) return false;
+        if (!this.checkWorkspaceDto.run()) return false;
+        if (!this.buildWorkspaceDomain.run()) return false;
         if (!this.writeSuccess.run()) return false;
         return true;
     }
