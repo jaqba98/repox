@@ -5,7 +5,7 @@ import { getCurrentFolderName, writeJsonToFile } from "@lib/utils";
 
 import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
 import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
-import { PartialPackageJsonDtoModel } from "../../model/dto/package-json-dto.model";
+import { PackageJsonDtoModel } from "../../model/dto/package-json-dto.model";
 
 @singleton()
 /**
@@ -18,7 +18,7 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
 
     regenerate (): void {}
 
-    private buildWorkspacePackageJson (): PartialPackageJsonDtoModel {
+    private buildWorkspacePackageJson (): PackageJsonDtoModel {
         return {
             "name": getCurrentFolderName(),
             "version": "1.0.0",

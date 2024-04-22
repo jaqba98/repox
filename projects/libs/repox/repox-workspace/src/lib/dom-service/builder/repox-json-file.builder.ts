@@ -4,7 +4,7 @@ import { SystemProgramEnum } from "@lib/repox-program";
 import { writeJsonToFile } from "@lib/utils";
 
 import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
-import { PartialRepoxJsonDtoModel } from "../../model/dto/repox-json-dto.model";
+import { RepoxJsonDtoModel } from "../../model/dto/repox-json-dto.model";
 import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
 
 @singleton()
@@ -18,7 +18,7 @@ export class RepoxJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
 
     regenerate (): void {}
 
-    private buildRepoxJson (): PartialRepoxJsonDtoModel {
+    private buildRepoxJson (): RepoxJsonDtoModel {
         return {
             defaultOptions: {
                 packageManager: SystemProgramEnum.pnpm

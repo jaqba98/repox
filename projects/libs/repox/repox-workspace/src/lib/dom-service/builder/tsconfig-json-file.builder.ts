@@ -5,7 +5,6 @@ import { writeJsonToFile } from "@lib/utils";
 import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
 import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
 import { PartialTsconfigJsonDtoModel } from "../../model/dto/tsconfig-json-dto.model";
-import { ModuleKind, ScriptTarget } from "typescript";
 
 @singleton()
 /**
