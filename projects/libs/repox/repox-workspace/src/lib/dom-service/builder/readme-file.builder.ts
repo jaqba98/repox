@@ -1,29 +1,26 @@
+// done
 import { singleton } from "tsyringe";
 
+import { getCurrentFolderName, writeToFile } from "@lib/utils";
+
 import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
-import { WorkspaceDomainStore } from "../store/workspace-domain.store";
+import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
 
 @singleton()
 /**
  * Create README.md file.
  */
 export class ReadmeFileBuilder extends WorkspaceStructureAbstractBuilder {
-    constructor (private readonly store: WorkspaceDomainStore) {
-        super();
-    }
 
     generate (): void {
-        this.createDefaultReadMdTextDomain();
+        writeToFile(WorkspaceFileEnum.readmeMd, this.createReadMdTextDomain());
     }
 
-    regenerate (): void {
-        this.createDefaultReadMdTextDomain();
-    }
+    regenerate (): void {}
 
-    private createDefaultReadMdTextDomain (): void {
-    // if (this.store.workspaceDomain == null) return
-    //     const name = getCurrentFolderName()
-    //     this.store.workspaceDomain.readmeMdTextDomain = `# ${name}
-    // `
+    private createReadMdTextDomain(): string {
+        const name = getCurrentFolderName();
+        return `# ${name}
+`;
     }
 }

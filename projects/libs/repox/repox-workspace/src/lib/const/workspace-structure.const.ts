@@ -5,6 +5,7 @@ import { GitkeepFileBuilder } from "../dom-service/builder/gitkeep-file.builder"
 import { JestConfigJsFileBuilder } from "../dom-service/builder/jest-config-file.builder";
 import { LibsFolderBuilder } from "../dom-service/builder/libs-folder.builder";
 import { ProjectsFolderBuilder } from "../dom-service/builder/projects-folder.builder";
+import { ReadmeFileBuilder } from "../dom-service/builder/readme-file.builder";
 import { ToolsFolderBuilder } from "../dom-service/builder/tools-folder.builder";
 import { WorkspacePackageJsonFileBuilder } from "../dom-service/builder/workspace-package-json-file.builder";
 import { WorkspaceFolderEnum } from "../enum/workspace-folder.enum";
@@ -74,11 +75,11 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
             builder: WorkspacePackageJsonFileBuilder,
             children: []
         },
-    // {
-    //   path: '.',
-    //   builder: ReadmeFileBuilder,
-    //   children: []
-    // },
+        {
+            path: ".",
+            builder: ReadmeFileBuilder,
+            children: []
+        },
     // {
     //   path: '.',
     //   builder: RepoxJsonFileBuilder,
