@@ -5,7 +5,7 @@ import { StepMessageAppService } from "@lib/logger";
 import { WorkspaceDomainStore } from "@lib/repox-workspace";
 import { runCommand } from "@lib/utils";
 
-import { lintProjectStepMsg } from "../../const/message/step-message.const";
+import { installNpmStepMsg } from "../../const/message/step-message.const";
 import { BuildCommandToRunService } from "../service/build-command-to-run.service";
 
 @singleton()
@@ -20,7 +20,7 @@ export class InstallNpmStep {
     ) {}
 
     run (): boolean {
-        this.stepMessage.write(lintProjectStepMsg());
+        this.stepMessage.write(installNpmStepMsg());
         const { defaultOptions } = this.workspaceDomainStore.getWorkspaceDomain().repoxJsonDomain;
         const { packageManager } = defaultOptions;
         const commandToRun = this.buildCommandToRun.build(packageManager, "install");
