@@ -39,10 +39,10 @@ export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
     private buildTsconfigJson (): PartialTsconfigJsonDtoModel {
         return {
             "compilerOptions": {
-                "target": ScriptTarget.ES2022,
+                "target": "ES2022",
                 "experimentalDecorators": true,
                 "emitDecoratorMetadata": true,
-                "module": ModuleKind.CommonJS,
+                "module": "CommonJS",
                 "rootDir": "projects",
                 "outDir": "dist",
                 "esModuleInterop": true,
