@@ -1,7 +1,7 @@
 // done
 import { singleton } from "tsyringe";
 
-import { getCurrentFolderName, writeToFile } from "@lib/utils";
+import { getCurrentFolderName, writeJsonToFile } from "@lib/utils";
 
 import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
 import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
@@ -13,7 +13,7 @@ import { PartialPackageJsonDtoModel } from "../../model/dto/package-json-dto.mod
  */
 export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
     generate (): void {
-        writeToFile(WorkspaceFileEnum.packageJson, this.buildWorkspacePackageJson());
+        writeJsonToFile(WorkspaceFileEnum.packageJson, this.buildWorkspacePackageJson());
     }
 
     regenerate (): void {}
