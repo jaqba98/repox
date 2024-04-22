@@ -6,6 +6,7 @@ import { JestConfigJsFileBuilder } from "../dom-service/builder/jest-config-file
 import { LibsFolderBuilder } from "../dom-service/builder/libs-folder.builder";
 import { ProjectsFolderBuilder } from "../dom-service/builder/projects-folder.builder";
 import { ToolsFolderBuilder } from "../dom-service/builder/tools-folder.builder";
+import { WorkspacePackageJsonFileBuilder } from "../dom-service/builder/workspace-package-json-file.builder";
 import { WorkspaceFolderEnum } from "../enum/workspace-folder.enum";
 import { type WorkspaceStructureModel } from "../model/workspace/workspace-structure.model";
 
@@ -67,12 +68,12 @@ export const WORKSPACE_STRUCTURE: WorkspaceStructureModel = {
             path: ".",
             builder: JestConfigJsFileBuilder,
             children: []
-        }
-    // {
-    //   path: '.',
-    //   builder: WorkspacePackageJsonFileBuilder,
-    //   children: []
-    // },
+        },
+        {
+            path: ".",
+            builder: WorkspacePackageJsonFileBuilder,
+            children: []
+        },
     // {
     //   path: '.',
     //   builder: ReadmeFileBuilder,
