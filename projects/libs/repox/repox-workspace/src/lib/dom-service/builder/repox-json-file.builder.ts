@@ -1,37 +1,29 @@
 import { singleton } from "tsyringe";
 
+import { SystemProgramEnum } from "@lib/repox-program";
+import { writeJsonToFile } from "@lib/utils";
+
 import { WorkspaceStructureAbstractBuilder } from "./workspace-structure-abstract.builder";
-import { WorkspaceDomainStore } from "../store/workspace-domain.store";
+import { PartialRepoxJsonDtoModel } from "../../model/dto/repox-json-dto.model";
+import { WorkspaceFileEnum } from "../../enum/workspace-file.enum";
 
 @singleton()
 /**
  * Create repox.json file.
  */
 export class RepoxJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
-    constructor (private readonly store: WorkspaceDomainStore) {
-        super();
-    }
-
     generate (): void {
-    // if (this.store.workspaceDomain == null) return
-    // this.store.workspaceDomain.repoxJsonDomain = this.buildDefaultRepoxJson()
+        writeJsonToFile(WorkspaceFileEnum.repoxJson, this.buildRepoxJson());
     }
 
-    regenerate (): void {
-        if (this.store.workspaceDomain == null) return;
-        this.store.workspaceDomain.repoxJsonDomain = {
-            ...this.store.workspaceDomain.repoxJsonDomain,
-            // ...this.buildDefaultRepoxJson(),
-            projects: {
-                ...this.store.workspaceDomain.repoxJsonDomain.projects
-                // ...this.buildDefaultRepoxJson().projects
-            }
+    regenerate (): void {}
+
+    private buildRepoxJson (): PartialRepoxJsonDtoModel {
+        return {
+            defaultOptions: {
+                packageManager: SystemProgramEnum.pnpm
+            },
+            projects: {}
         };
     }
-
-    // private buildDefaultRepoxJson (): RepoxJsonDomainModel {
-    //   return {
-    //     projects: {}
-    //   }
-    // }
 }
