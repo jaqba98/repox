@@ -15,7 +15,9 @@ export class GitignoreFileBuilder extends WorkspaceStructureAbstractBuilder {
         writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
     }
 
-    regenerate (): void {}
+    regenerate (): void {
+        writeToFile(WorkspaceFileEnum.gitignore, this.createGitignoreContent());
+    }
 
     private createGitignoreContent (): string {
         return `# JetBrains tools

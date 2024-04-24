@@ -16,7 +16,9 @@ export class WorkspacePackageJsonFileBuilder extends WorkspaceStructureAbstractB
         writeJsonToFile(WorkspaceFileEnum.packageJson, this.buildWorkspacePackageJson());
     }
 
-    regenerate (): void {}
+    regenerate (): void {
+        writeJsonToFile(WorkspaceFileEnum.packageJson, this.buildWorkspacePackageJson());
+    }
 
     private buildWorkspacePackageJson (): PackageJsonDtoModel {
         return {

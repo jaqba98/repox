@@ -15,7 +15,9 @@ export class JestConfigJsFileBuilder extends WorkspaceStructureAbstractBuilder {
         writeToFile(WorkspaceFileEnum.jestConfigJs, this.buildJestConfigJsContent());
     }
 
-    regenerate (): void {}
+    regenerate (): void {
+        writeToFile(WorkspaceFileEnum.jestConfigJs, this.buildJestConfigJsContent());
+    }
 
     private buildJestConfigJsContent (): string {
         return `export const clearMocks = true;

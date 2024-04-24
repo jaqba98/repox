@@ -54,4 +54,8 @@ export const isEmptyFolder = (folderPath: string): boolean => {
     return readdirSync(folderPath).length === 0;
 };
 
+export const isNotEmptyFolder = (folderPath: string): boolean => {
+    return !isEmptyFolder(folderPath);
+};
+
 // todo: refactor the code
