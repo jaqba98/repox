@@ -16,7 +16,9 @@ export class RepoxJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
         writeJsonToFile(WorkspaceFileEnum.repoxJson, this.buildRepoxJson());
     }
 
-    regenerate (): void {}
+    regenerate (): void {
+        writeJsonToFile(WorkspaceFileEnum.repoxJson, this.buildRepoxJson());
+    }
 
     private buildRepoxJson (): RepoxJsonDtoModel {
         return {

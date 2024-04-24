@@ -15,7 +15,9 @@ export class EslintrcJsFileBuilder extends WorkspaceStructureAbstractBuilder {
         writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildEslintrcJsContent());
     }
 
-    regenerate (): void {}
+    regenerate (): void {
+        writeFileSync(WorkspaceFileEnum.eslintrcJs, this.buildEslintrcJsContent());
+    }
 
     private buildEslintrcJsContent (): string {
         return `module.exports = {

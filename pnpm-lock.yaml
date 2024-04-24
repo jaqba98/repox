@@ -21,8 +21,8 @@ dependencies:
     specifier: ^1.4.1
     version: 1.4.1
   repox:
-    specifier: ^1.4.76
-    version: 1.4.76
+    specifier: ^1.4.77
+    version: 1.4.77
   tsc-alias:
     specifier: ^1.8.8
     version: 1.8.8
@@ -2776,8 +2776,8 @@ packages:
       picomatch: 2.3.1
     dev: false
 
-  /repox@1.4.76:
-    resolution: {integrity: sha512-0xRTYrIzJqczIb7H6KHDGr6+Z9VvjFSqv5ZWR4YXVE5fOQCrpDji1QXD69Q44HqQOx86LZKVZIRbatssFcS6qg==}
+  /repox@1.4.77:
+    resolution: {integrity: sha512-CQ9Sj45kw4pBKThkOpi/W0y6q0CJKcU/a2M6zNeCx3+7qQY3a1dOlYGPOuWq1KYtfeUSHNWzz5F8u6SXiXAVYg==}
     hasBin: true
     dependencies:
       command-exists: 1.2.9

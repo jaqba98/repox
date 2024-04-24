@@ -16,7 +16,9 @@ export class ReadmeFileBuilder extends WorkspaceStructureAbstractBuilder {
         writeToFile(WorkspaceFileEnum.readmeMd, this.createReadMdTextDomain());
     }
 
-    regenerate (): void {}
+    regenerate (): void {
+        writeToFile(WorkspaceFileEnum.readmeMd, this.createReadMdTextDomain());
+    }
 
     private createReadMdTextDomain(): string {
         const name = getCurrentFolderName();

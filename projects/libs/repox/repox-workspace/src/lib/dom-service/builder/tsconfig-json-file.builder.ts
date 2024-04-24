@@ -17,7 +17,11 @@ export class TsconfigJsonFileBuilder extends WorkspaceStructureAbstractBuilder {
         writeJsonToFile(WorkspaceFileEnum.tsconfigDevJson, this.buildTsconfigDevJson());
     }
 
-    regenerate (): void {}
+    regenerate (): void {
+        writeJsonToFile(WorkspaceFileEnum.tsconfigJson, this.buildTsconfigJson());
+        writeJsonToFile(WorkspaceFileEnum.tsconfigProdJson, this.buildTsconfigProdJson());
+        writeJsonToFile(WorkspaceFileEnum.tsconfigDevJson, this.buildTsconfigDevJson());
+    }
 
     private buildTsconfigProdJson (): PartialTsconfigJsonDtoModel {
         return {
