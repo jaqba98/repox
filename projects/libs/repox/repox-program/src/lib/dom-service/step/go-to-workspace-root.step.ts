@@ -15,8 +15,8 @@ import { navigateToTheExistingWorkspaceFolderWarningMsg } from "../../const/mess
  */
 export class GoToWorkspaceRootStep {
     constructor (
-    private readonly stepMessage: StepMessageAppService,
-    private readonly complexMessage: ComplexMessageAppService
+        private readonly stepMessage: StepMessageAppService,
+        private readonly complexMessage: ComplexMessageAppService
     ) {}
 
     run (): boolean {

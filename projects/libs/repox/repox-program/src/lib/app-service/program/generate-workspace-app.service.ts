@@ -25,18 +25,18 @@ import { InstallNpmStep } from "../../dom-service/step/install-npm.step";
  */
 export class GenerateWorkspaceAppService {
     constructor (
-    private readonly writeHeader: WriteHeaderStep,
-    private readonly getCommandArgStringValue: GetCommandArgStringValueStep,
-    private readonly systemProgramExist: SystemProgramExistStep,
-    private readonly folderNotExist: FolderNotExistStep,
-    private readonly createFolder: CreateFolderStep,
-    private readonly changePath: ChangePathStep,
-    private readonly generateWorkspace: GenerateWorkspaceStep,
-    private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
-    private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
-    private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
-    private readonly installNpm: InstallNpmStep,
-    private readonly writeSuccess: WriteSuccessStep
+        private readonly writeHeader: WriteHeaderStep,
+        private readonly getCommandArgStringValue: GetCommandArgStringValueStep,
+        private readonly systemProgramExist: SystemProgramExistStep,
+        private readonly folderNotExist: FolderNotExistStep,
+        private readonly createFolder: CreateFolderStep,
+        private readonly changePath: ChangePathStep,
+        private readonly generateWorkspace: GenerateWorkspaceStep,
+        private readonly buildWorkspaceDto: BuildWorkspaceDtoStep,
+        private readonly checkWorkspaceDto: CheckWorkspaceDtoStep,
+        private readonly buildWorkspaceDomain: BuildWorkspaceDomainStep,
+        private readonly installNpm: InstallNpmStep,
+        private readonly writeSuccess: WriteSuccessStep
     ) {
     }
 
