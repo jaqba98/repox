@@ -9,3 +9,7 @@ node_modules
 
 # Temporary files and directories
 tmp
+
+# Visual Paradigm specific files
+*.vpp.lck
+*.vpp.bak_*
