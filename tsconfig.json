@@ -11,7 +11,47 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@lib/utils": [
+        "projects/libs/utils/src/index.ts"
+      ],
+      "@lib/repox-workspace": [
+        "projects/libs/repox/repox-workspace/src/index.ts"
+      ],
+      "@lib/repox-program": [
+        "projects/libs/repox/repox-program/src/index.ts"
+      ],
+      "@lib/repox-main": [
+        "projects/libs/repox/repox-main/src/index.ts"
+      ],
+      "@lib/repox-domain": [
+        "projects/libs/repox/repox-domain/src/index.ts"
+      ],
+      "@lib/repox-const": [
+        "projects/libs/repox/repox-const/src/index.ts"
+      ],
+      "@lib/program-step": [
+        "projects/libs/program-step/src/index.ts"
+      ],
+      "@lib/param-dto": [
+        "projects/libs/param-dto/src/index.ts"
+      ],
+      "@lib/param-domain": [
+        "projects/libs/param-domain/src/index.ts"
+      ],
+      "@lib/model": [
+        "projects/libs/model/src/index.ts"
+      ],
+      "@lib/logger": [
+        "projects/libs/logger/src/index.ts"
+      ],
+      "@lib/repox-launcher": [
+        "projects/libs/repox/repox-launcher/src/index.ts"
+      ],
+      "@lib/const": [
+        "projects/libs/const/src/index.ts"
+      ]
+    }
   },
   "exclude": [
     "node_modules"
