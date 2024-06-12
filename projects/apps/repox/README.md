@@ -1,7 +1,3 @@
-# Repox
+# repox
 
-## Documentation
-
-See [https://www.repox.dev](https://www.repox.dev) 
-
-
+This project was generated with [Repox](https://repox.dev).
