@@ -12,6 +12,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@lib/launcher": [
+        "projects/libs/launcher/src/index.ts"
+      ],
       "@lib/utils": [
         "projects/libs/utils/src/index.ts"
       ],
