@@ -34,6 +34,14 @@ module.exports = {
     "semi": ["error", "always"],
     "eol-last": ["error", "always"],
     "max-len": ["error", { "code": 70 }],
+    "max-lines": [
+      "warn",
+      {
+        "max": 300,
+        "skipBlankLines": true,
+        "skipComments": true
+      }
+    ],
     "@typescript-eslint/no-unused-vars": "off"
   }
 };
