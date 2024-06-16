@@ -8,7 +8,7 @@ export class RepoxMainService {
   constructor(private readonly launcher: LauncherAppService) {}
 
   main() {
-    this.launcher.run([]);
+    this.launcher.launch([]);
   }
 }
 

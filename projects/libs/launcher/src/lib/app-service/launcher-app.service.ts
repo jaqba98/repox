@@ -1,4 +1,4 @@
-import { InjectionToken, container, singleton } from "tsyringe";
+import { InjectionToken, singleton } from "tsyringe";
 
 import { ActionModel } from "../model/action.model";
 import {
