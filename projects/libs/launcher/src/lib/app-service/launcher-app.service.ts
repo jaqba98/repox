@@ -1,15 +1,15 @@
-import { singleton, InjectionToken } from "tsyringe";
+import { singleton } from "tsyringe";
 
 import {
   RunActionsService
 } from "../dom-service/run-actions.service";
-import { ActionModel } from "../model/action.model";
+import { ActionType } from "../type/action.type";
 
 @singleton()
 export class LauncherAppService {
   constructor(private readonly runActions: RunActionsService) {}
 
-  launch(actions: InjectionToken<ActionModel>[]) {
+  launch(actions: ActionType[]) {
     this.runActions.run(actions);
   }
 }
