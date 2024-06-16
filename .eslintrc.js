@@ -33,6 +33,7 @@ module.exports = {
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "eol-last": ["error", "always"],
+    "max-len": ["error", { "code": 70 }],
     "@typescript-eslint/no-unused-vars": "off"
   }
 };
