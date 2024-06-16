@@ -1,7 +1,13 @@
+import { ActionStatusEnum } from "../enum/action.enum";
+
 export interface ActionModel {
-  before: () => void;
+  before: () => ActionResultModel;
 
-  run: () => void;
+  run: () => ActionResultModel;
 
-  after: () => void;
+  after: () => ActionResultModel;
+}
+
+export interface ActionResultModel {
+  status: ActionStatusEnum;
 }
