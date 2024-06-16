@@ -1,9 +1,9 @@
-import { InjectionToken, singleton } from "tsyringe";
+import { singleton, InjectionToken } from "tsyringe";
 
-import { ActionModel } from "../model/action.model";
 import {
   RunActionsService
 } from "../dom-service/run-actions.service";
+import { ActionModel } from "../model/action.model";
 
 @singleton()
 export class LauncherAppService {
