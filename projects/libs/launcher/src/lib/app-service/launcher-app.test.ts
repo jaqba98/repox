@@ -1,6 +1,28 @@
 import { container } from "tsyringe";
 
 import { LauncherAppService } from "./launcher-app.service";
+import {
+  ActionModel,
+  ActionResultModel
+} from "../model/action.model";
+import { ActionStatusEnum } from "../enum/action.enum";
+
+class A implements ActionModel {
+  runBefore(): ActionResultModel {
+    console.log("A before");
+    return { status: ActionStatusEnum.completed, actions: [] };
+  }
+  
+  runLogic(): ActionResultModel {
+    console.log("A logic");
+    return { status: ActionStatusEnum.completed, actions: [] };
+  }
+
+  runAfter(): ActionResultModel {
+    console.log("A after");
+    return { status: ActionStatusEnum.completed, actions: [] };
+  }
+}
 
 describe("LauncherApp", () => {
   let launcher: LauncherAppService;
@@ -15,6 +37,13 @@ describe("LauncherApp", () => {
   });
 
   it("Should execute all actions in the correct way", () => {
-    expect(launcher.launch([])).toBeTruthy();
+    const consoleLogSpy = jest.spyOn(console, "log");
+    consoleLogSpy.mockImplementation(() => {});
+    launcher.launch([A]);
+    expect(consoleLogSpy).toHaveBeenCalledTimes(3);
+    expect(consoleLogSpy.mock.calls[0]).toEqual(["A before"]);
+    expect(consoleLogSpy.mock.calls[1]).toEqual(["A logic"]);
+    expect(consoleLogSpy.mock.calls[2]).toEqual(["A after"]);
+    consoleLogSpy.mockRestore();
   });
 });
