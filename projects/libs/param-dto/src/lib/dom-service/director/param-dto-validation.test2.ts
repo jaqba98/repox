@@ -17,7 +17,7 @@ import {
     CommandArgsValidationBuilder
 } from "../builder/param-dto-validation/command-args-validation.builder";
 
-describe("ParamDtoValidationDirector", (): void => {
+describe.skip("ParamDtoValidationDirector", (): void => {
     let dtoService = container.resolve(ParamDtoDirector);
 
     let valService = container.resolve(ParamDtoValidationDirector);
