@@ -1,12 +1,14 @@
 // TODO: Refacter the test
 import { container } from "tsyringe";
 
-import { LauncherAppService } from "./launcher-app.service";
+import {
+  LauncherAppService
+} from "../src/lib/app-service/launcher-app.service";
 import {
   ActionModel,
   ActionResultModel
-} from "../model/action.model";
-import { ActionStatusEnum } from "../enum/action.enum";
+} from "../src/lib/model/action.model";
+import { ActionStatusEnum } from "../src/lib/enum/action.enum";
 
 class A implements ActionModel {
   runBefore(): ActionResultModel {
@@ -37,7 +39,7 @@ describe("LauncherApp", () => {
     container.clearInstances();
   });
 
-  it("Should execute all actions in the correct way", () => {
+  test("Should execute all actions in the correct way", () => {
     const consoleLogSpy = jest.spyOn(console, "log");
     consoleLogSpy.mockImplementation(() => {});
     launcher.launch([A]);
