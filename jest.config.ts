@@ -6,7 +6,7 @@ const config: Config = {
   testEnvironment: "node",
   setupFilesAfterEnv: ["reflect-metadata"],
   testMatch: ["**/*.(spec|test).ts"],
-  // TODO: fix the imports, it should works also from children directory
+  rootDir: __dirname,
   moduleNameMapper: {
     "@lib/const": "<rootDir>/projects/libs/const/src/index.ts",
     "@lib/launcher": "<rootDir>/projects/libs/launcher/src/index.ts",

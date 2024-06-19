@@ -1,5 +1,9 @@
 import type { Config } from "jest";
 
-const config: Config = {};
+import workspaceJestConfig from "../../../jest.config";
+
+const config: Config = {
+  ...workspaceJestConfig
+};
 
 export default config;
