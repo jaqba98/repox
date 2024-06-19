@@ -12,7 +12,7 @@
     "glob": "^10.3.12",
     "jsonschema": "^1.4.1",
     "reflect-metadata": "^0.2.2",
-    "repox": "^1.4.77",
+    "repox": "^1.5.0",
     "tsc-alias": "^1.8.8",
     "tsyringe": "^4.8.0"
   },
