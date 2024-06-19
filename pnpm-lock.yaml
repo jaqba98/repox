@@ -23,9 +23,6 @@ dependencies:
   reflect-metadata:
     specifier: ^0.2.2
     version: 0.2.2
-  repox:
-    specifier: ^1.5.0
-    version: 1.5.0
   tsc-alias:
     specifier: ^1.8.8
     version: 1.8.8
@@ -34,6 +31,9 @@ dependencies:
     version: 4.8.0
 
 devDependencies:
+  '@repox/cli':
+    specifier: ^1.5.0
+    version: 1.5.0
   '@types/command-exists':
     specifier: ^1.2.3
     version: 1.2.3
@@ -772,6 +772,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@repox/cli@1.5.0:
+    resolution: {integrity: sha512-WRlCI0KfPaL2HmgBoigOULtE6qBTe7Z6dvzS7N/0vKlI9PkzsimuQI68VjR5aU5o0rdTcJan/6S0UhWQvGZlGA==}
+    dev: true
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
@@ -2767,10 +2771,6 @@ packages:
 
   /reflect-metadata@0.2.2:
     resolution: {integrity: sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q==}
-    dev: false
-
-  /repox@1.5.0:
-    resolution: {integrity: sha512-pk9reV7orNkvFYyOToMnaOJBwkstSlk977J/venwEC2PYwjzrYRAUng+kvK1NkHenTuERBoITxf29K1Tq0nKqQ==}
     dev: false
 
   /require-directory@2.1.1:
