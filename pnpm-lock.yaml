@@ -25,7 +25,7 @@ dependencies:
     version: 0.2.2
   repox:
     specifier: ^1.5.0
-    version: link:projects/apps/repox
+    version: 1.5.0
   tsc-alias:
     specifier: ^1.8.8
     version: 1.8.8
@@ -2767,6 +2767,10 @@ packages:
 
   /reflect-metadata@0.2.2:
     resolution: {integrity: sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q==}
+    dev: false
+
+  /repox@1.5.0:
+    resolution: {integrity: sha512-pk9reV7orNkvFYyOToMnaOJBwkstSlk977J/venwEC2PYwjzrYRAUng+kvK1NkHenTuERBoITxf29K1Tq0nKqQ==}
     dev: false
 
   /require-directory@2.1.1:
