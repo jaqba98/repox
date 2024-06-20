@@ -1,1 +1,1 @@
-import "@lib/repox-main";
+import "@lib/cli-main";

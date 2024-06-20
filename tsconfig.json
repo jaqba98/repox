@@ -19,19 +19,19 @@
         "projects/libs/utils/src/index.ts"
       ],
       "@lib/repox-workspace": [
-        "projects/libs/repox/repox-workspace/src/index.ts"
+        "projects/libs/cli/repox-workspace/src/index.ts"
       ],
       "@lib/repox-program": [
-        "projects/libs/repox/repox-program/src/index.ts"
+        "projects/libs/cli/repox-program/src/index.ts"
       ],
-      "@lib/repox-main": [
-        "projects/libs/repox/repox-main/src/index.ts"
+      "@lib/cli-main": [
+        "projects/libs/cli/cli-main/src/index.ts"
       ],
       "@lib/repox-domain": [
-        "projects/libs/repox/repox-domain/src/index.ts"
+        "projects/libs/cli/repox-domain/src/index.ts"
       ],
       "@lib/repox-const": [
-        "projects/libs/repox/repox-const/src/index.ts"
+        "projects/libs/cli/repox-const/src/index.ts"
       ],
       "@lib/program-step": [
         "projects/libs/program-step/src/index.ts"
@@ -49,7 +49,7 @@
         "projects/libs/logger/src/index.ts"
       ],
       "@lib/repox-launcher": [
-        "projects/libs/repox/repox-launcher/src/index.ts"
+        "projects/libs/cli/repox-launcher/src/index.ts"
       ],
       "@lib/const": [
         "projects/libs/const/src/index.ts"
