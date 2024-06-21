@@ -11,6 +11,7 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": ".",
+    "declaration": true,
     "paths": {
       "@lib/launcher": [
         "projects/libs/launcher/src/index.ts"

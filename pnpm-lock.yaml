@@ -33,10 +33,10 @@ dependencies:
 devDependencies:
   '@repox/cli':
     specifier: ^1.5.0
-    version: link:projects/apps/cli
+    version: 1.5.0
   '@repox/jest':
     specifier: ^1.5.0
-    version: link:projects/libs/module/jest
+    version: 1.5.0
   '@types/command-exists':
     specifier: ^1.2.3
     version: 1.2.3
@@ -775,6 +775,14 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@repox/cli@1.5.0:
+    resolution: {integrity: sha512-Er/wTxxn7xqPEVW4tfSzerHAGlo2fcBE4Fm8Zoi7oaUzUjJN8Rw0oRIfeyETp3FeeYqcGBjOX9D2kd9JbjddIg==}
+    dev: true
+
+  /@repox/jest@1.5.0:
+    resolution: {integrity: sha512-3h0BrFCA2qQzTxS+n9h+JFWbU6q3HNXxCgKU/4FrbA9FvY72AJdRattnf6zguylEh9gVJO7lZUH6Hb9EBZP5aQ==}
+    dev: true
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}

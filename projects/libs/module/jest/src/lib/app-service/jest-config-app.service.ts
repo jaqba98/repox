@@ -20,13 +20,13 @@ class JestConfigAppService {
   }
 }
 
-export const workspaceJestConfig = (config: Config) => {
+export const workspaceJestConfig = (config: Config): Config => {
   return container
     .resolve(JestConfigAppService)
     .workspaceJestConfig(config);
 };
 
-export const projectJestConfig = (config: Config) => {
+export const projectJestConfig = (config: Config): Config => {
   return container
     .resolve(JestConfigAppService)
     .projectJestConfig(config);
