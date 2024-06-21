@@ -53,6 +53,9 @@
       ],
       "@lib/const": [
         "projects/libs/const/src/index.ts"
+      ],
+      "@lib/jest": [
+        "projects/libs/module/jest/src/index.ts"
       ]
     }
   },
