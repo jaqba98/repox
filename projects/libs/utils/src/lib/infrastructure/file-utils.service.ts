@@ -109,3 +109,7 @@ export const readJsonFile = <T>(filePath: string): T => {
     }
 };
 // todo: refactor the code
+
+export const findAllFiles = (root: string, fileName: string) => {
+  return globSync(`${root}/**/${fileName}`);
+};
