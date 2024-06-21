@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@repox/cli": "^1.5.0",
+    "@repox/jest": "^1.5.0",
     "@types/command-exists": "^1.2.3",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.7",
