@@ -1,5 +1,5 @@
-import { workspaceJestConfig } from "@repox/jest";
+import { workspaceJestConfig } from "./dist/jest/libs/module/jest/src/index";
 
-const config = workspaceJestConfig({});
+const config = workspaceJestConfig;
 
 export default config;
