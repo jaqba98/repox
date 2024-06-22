@@ -1,3 +1,3 @@
-import { repoxJestConfig } from "../../../dist/jest/projects/libs/module/jest/src/index";
+import { repoxJestConfig } from "@repox/jest";
 
 export default repoxJestConfig("../../../tsconfig.json", {});
