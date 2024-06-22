@@ -1,6 +1,8 @@
 import { Config } from "jest";
+import { pathsToModuleNameMapper } from "ts-jest";
 
 import {
+  createPath,
   findWorkspacePath,
   getCurrentPath,
   readJsonFile
@@ -11,6 +13,8 @@ export const getModuleNameMapper = (): Config['moduleNameMapper'] => {
   const currentPath = getCurrentPath();
   const workspacePath = findWorkspacePath(currentPath);
   // TODO: Use enum instead of string
-  const tsconfig = readJsonFile<TsconfigJsonModel>("tsconfig.json");
-  return {};
+  const tsconfigPath = createPath(workspacePath, "tsconfig.json");
+  const tsconfigContent = readJsonFile<TsconfigJsonModel>(tsconfigPath);
+  const paths = tsconfigContent?.compilerOptions?.paths ?? {};
+  return pathsToModuleNameMapper(paths);
 };

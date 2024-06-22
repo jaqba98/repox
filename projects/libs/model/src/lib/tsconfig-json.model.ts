@@ -11,9 +11,7 @@ import { type CompilerOptions, type ProjectReference } from "typescript";
  * It has to be up to date as possible: TSConfig.
  */
 
-export interface CompilerOptionsModel extends Omit<CompilerOptions, "target" | "module"> {
-  target: string
-  module: string
+export interface CompilerOptionsModel extends CompilerOptions {
 }
 
 export interface TsconfigJson2Model {
