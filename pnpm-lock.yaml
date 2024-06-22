@@ -781,7 +781,7 @@ packages:
     dev: true
 
   /@repox/jest@1.5.0:
-    resolution: {integrity: sha512-PHhcpqjlHTfMAg6eyzE947qIb1/hM3s/uhtrMorhR99qq0rR4L3V2xGw2h8S/mZjdV+t7aR+r7nLFoQo4YlmvQ==}
+    resolution: {integrity: sha512-ziP0QSdP/zBLTznksCn5cImg9w+X/v7hjiyvzhOfsJhCR02u+0jUcktSJx/779olg8D1ZLbzjGKrLUVCRZfGMg==}
     dev: true
 
   /@sinclair/typebox@0.27.8:

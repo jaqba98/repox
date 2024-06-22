@@ -1,9 +1,6 @@
-import type { Config } from "jest";
 
-import workspaceJestConfig from "../../../../jest.config";
+import { workspaceJestConfig } from "@repox/jest/libs/module/jest/src";
 
-const config: Config = {
-  ...workspaceJestConfig
-};
-
-export default config;
+export default workspaceJestConfig({
+  rootDir: "../../../../"
+});

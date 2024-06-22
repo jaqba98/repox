@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "tsc:jest": "tsc -p ./projects/libs/module/jest/tsconfig.prod.json",
+    "tsc-alias:jest": "tsc-alias -p ./projects/libs/module/jest/tsconfig.prod.json",
+    "package:jest": "cp ./projects/libs/module/jest/package.json dist/jest"
   },
   "dependencies": {
     "command-exists": "^1.2.9",

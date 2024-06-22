@@ -16,5 +16,5 @@ export const getModuleNameMapper = (): Config['moduleNameMapper'] => {
   const tsconfigPath = createPath(workspacePath, "tsconfig.json");
   const tsconfigContent = readJsonFile<TsconfigJsonModel>(tsconfigPath);
   const paths = tsconfigContent?.compilerOptions?.paths ?? {};
-  return pathsToModuleNameMapper(paths);
+  return pathsToModuleNameMapper(paths, { prefix: "<rootDir>" });
 };

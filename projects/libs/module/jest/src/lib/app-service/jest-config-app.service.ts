@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { Config } from "jest";
 
 import {
