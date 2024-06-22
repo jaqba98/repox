@@ -31,6 +31,9 @@ dependencies:
     version: 4.8.0
 
 devDependencies:
+  '@repox/cli':
+    specifier: ^1.5.0
+    version: 1.5.0
   '@repox/jest':
     specifier: ^1.5.0
     version: 1.5.0
@@ -772,6 +775,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@repox/cli@1.5.0:
+    resolution: {integrity: sha512-Er/wTxxn7xqPEVW4tfSzerHAGlo2fcBE4Fm8Zoi7oaUzUjJN8Rw0oRIfeyETp3FeeYqcGBjOX9D2kd9JbjddIg==}
+    dev: true
 
   /@repox/jest@1.5.0:
     resolution: {integrity: sha512-9IRXrE29jL1aUyGaSyKBiu9IPTHpBfu/SRnfgKG6i0yksK5+oHmZ/HUJYxFEM6aEb9gkhEvWvR5x/vD4DjTnpw==}

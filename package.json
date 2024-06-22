@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "test": "jest",
+    "tsc:cli": "tsc -p ./projects/apps/cli/tsconfig.prod.json",
+    "tsc-alias:cli": "tsc-alias -p ./projects/apps/cli/tsconfig.prod.json",
+    "package:cli": "cp ./projects/apps/cli/package.json dist/cli",
     "tsc:jest": "tsc -p ./projects/libs/module/jest/tsconfig.prod.json",
     "tsc-alias:jest": "tsc-alias -p ./projects/libs/module/jest/tsconfig.prod.json",
     "package:jest": "cp ./projects/libs/module/jest/package.json dist/jest",
@@ -20,6 +23,7 @@
     "tsyringe": "^4.8.0"
   },
   "devDependencies": {
+    "@repox/cli": "^1.5.0",
     "@repox/jest": "^1.5.0",
     "@types/command-exists": "^1.2.3",
     "@types/jest": "^29.5.12",
