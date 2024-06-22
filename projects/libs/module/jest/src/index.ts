@@ -1,1 +1,1 @@
-export * from "./lib/workspace-jest-config";
+export * from "./lib/app-service/jest-config-app.service";
