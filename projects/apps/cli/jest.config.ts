@@ -1,3 +1,3 @@
-import { workspaceJestConfig } from "@repox/jest/libs/module/jest/src";
+import { repoxJestConfig } from "@repox/jest/libs/module/jest/src";
 
-export default workspaceJestConfig({});
+export default repoxJestConfig("../../../tsconfig.json", {});

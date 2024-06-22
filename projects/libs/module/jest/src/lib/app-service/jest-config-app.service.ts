@@ -2,18 +2,19 @@ import "reflect-metadata";
 import { Config } from "jest";
 
 import {
-  getDefaultWorkspaceJestConfig
+  defaultConfig
 } from "../dom-service/jest-config.service";
+import {
+  moduleNameMapper
+} from "../infrastructure/module-name-mapper.service";
 
-export const workspaceJestConfig = (custom: Config): Config => {
+export const repoxJestConfig = (
+  tsconfigPath: string,
+  customConfig: Config
+): Config => {
   return {
-    ...getDefaultWorkspaceJestConfig(),
-    ...custom
-  };
-};
-
-export const projectJsonConfig = (custom: Config): Config => {
-  return {
-    ...custom
+    ...defaultConfig(),
+    ...moduleNameMapper(tsconfigPath),
+    ...customConfig
   };
 };

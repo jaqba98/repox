@@ -6,6 +6,27 @@ import { globSync } from "glob";
 import { basename } from "path";
 import { FolderUtilsService } from "./folder-utils.service";
 
+export const readJsonFile = <T>(filePath: string): T => {
+  if (pathExist(filePath)) {
+    const fileContent = readFileSync(filePath, "utf-8");
+    return <T>JSON.parse(fileContent);
+  }
+  throw new Error(`Failed to read file with path ${filePath}. The file does not exist in the specified path.`);
+};
+
+// export const readJsonFile = <T>(filePath: string): T => {
+//     if (!pathExist(filePath)) {
+//     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+//         return {} as T;
+//     }
+//     try {
+//         return JSON.parse(readFileSync(filePath, "utf-8")) as T;
+//     } catch {
+//     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+//         return {} as T;
+//     }
+// };
+
 @singleton()
 /**
  * The service contains a group of utils to file manage.
@@ -96,18 +117,6 @@ export const readTextFile = (filePath: string): string => {
     return readFileSync(filePath, "utf-8");
 };
 
-export const readJsonFile = <T>(filePath: string): T => {
-    if (!pathExist(filePath)) {
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-        return {} as T;
-    }
-    try {
-        return JSON.parse(readFileSync(filePath, "utf-8")) as T;
-    } catch {
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-        return {} as T;
-    }
-};
 // todo: refactor the code
 
 export const findAllFiles = (root: string, fileName: string) => {

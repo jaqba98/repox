@@ -4,6 +4,10 @@ import process, { chdir } from "process";
 import { dirname, join, parse } from "path";
 import { EMPTY_STRING } from "@lib/const";
 
+export const pathExist = (path: string) => {
+  return existsSync(path);
+};
+
 @singleton()
 /**
  * The service contains a group of utils to path manage.
@@ -82,8 +86,6 @@ export const findWorkspacePath = (path: string): string => {
     const previousPath = join(path, "../");
     return findWorkspacePath(previousPath);
 };
-
-export const pathExist = (path: string): boolean => existsSync(path);
 
 export const pathNotExist = (path: string): boolean => !pathExist(path);
 
