@@ -1,3 +1,4 @@
-import { workspaceJestConfig } from "./dist/jest/libs/module/jest/src/index";
+
+import { workspaceJestConfig } from "@repox/jest/libs/module/jest/src";
 
 export default workspaceJestConfig;
