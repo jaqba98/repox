@@ -777,11 +777,11 @@ packages:
     optional: true
 
   /@repox/cli@1.5.0:
-    resolution: {integrity: sha512-Er/wTxxn7xqPEVW4tfSzerHAGlo2fcBE4Fm8Zoi7oaUzUjJN8Rw0oRIfeyETp3FeeYqcGBjOX9D2kd9JbjddIg==}
+    resolution: {integrity: sha512-9+2FInVdySoAPyqlDLgS/dq17DEyLgaYAw9B4irKxL15hkiY0xIsMYQT1FbJTFKfRjy9gzM/qoh38hkcXDXWXg==}
     dev: true
 
   /@repox/jest@1.5.0:
-    resolution: {integrity: sha512-JrFOlHtG1RfMoQOIylAqz45VU2jjcAspbXW1Y8woq1PopPzgbvEoIrZJDGNPN6OSuLXh7y6QVaxL3qLr6nj/VA==}
+    resolution: {integrity: sha512-P2J0Bb2j/5CUwRMouusWscYoOtVT4IA5oiiUhNIF4UGQYZSdM+J66QH7l88RA/tK/FDC3gpo4IkX8oncpzj3tA==}
     dev: true
 
   /@sinclair/typebox@0.27.8:
