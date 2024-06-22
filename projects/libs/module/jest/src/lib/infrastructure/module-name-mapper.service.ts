@@ -1,15 +1,23 @@
 import { Config } from "jest";
 import { pathsToModuleNameMapper } from "ts-jest";
 
-import { readJsonFile } from "@lib/utils";
+import {
+  createPath,
+  getCurrentPath,
+  getDirnamePath,
+  readJsonFile
+} from "@lib/utils";
 import { TsconfigJsonModel } from "@lib/model";
 
 const getModuleNameMapper = (
   tsconfigPath: string
 ): Config["moduleNameMapper"] => {
+  const currentPath = getCurrentPath();
+  const dirnamePath = getDirnamePath(tsconfigPath);
+  const prefix = createPath(currentPath, dirnamePath);
   const tsconfig = readJsonFile<TsconfigJsonModel>(tsconfigPath);
   const paths = tsconfig?.compilerOptions?.paths ?? {};
-  return pathsToModuleNameMapper(paths, { prefix: "<rootDir>" });
+  return pathsToModuleNameMapper(paths, { prefix });
 }
 
 export const moduleNameMapper = (tsconfigPath: string): Config => {

@@ -8,6 +8,10 @@ export const pathExist = (path: string) => {
   return existsSync(path);
 };
 
+export const getDirnamePath = (path: string): string => {
+  return dirname(path);
+}
+
 @singleton()
 /**
  * The service contains a group of utils to path manage.
