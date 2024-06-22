@@ -1,4 +1,5 @@
 {
   "name": "@repox/jest",
-  "version": "1.5.0"
+  "version": "1.5.0",
+  "main": "./libs/module/jest/src/index.js"
 }
