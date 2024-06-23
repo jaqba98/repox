@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   verdaccio:
     image: verdaccio/verdaccio:5
@@ -10,4 +10,6 @@ services:
       - conf:/verdaccio/conf
 volumes:
   storage:
+    driver: local
   conf:
+    driver: local
