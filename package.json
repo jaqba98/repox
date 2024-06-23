@@ -10,7 +10,8 @@
     "tsc:jest": "tsc -p ./projects/libs/module/jest/tsconfig.prod.json",
     "tsc-alias:jest": "tsc-alias -p ./projects/libs/module/jest/tsconfig.prod.json",
     "package:jest": "cp ./projects/libs/module/jest/package.json dist/jest",
-    "npm:login": "npm login --registry=http://localhost:4873/"
+    "npm:login": "npm login --registry=http://localhost:4873/",
+    "build": "npm run tsc:cli && npm run tsc-alias:cli && npm run package:cli && npm run tsc:jest && npm run tsc-alias:jest && npm run package:jest"
   },
   "dependencies": {
     "command-exists": "^1.2.9",

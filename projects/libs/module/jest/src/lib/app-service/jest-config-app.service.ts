@@ -8,13 +8,10 @@ import {
   moduleNameMapper
 } from "../infrastructure/module-name-mapper.service";
 
-export const repoxJestConfig = (
-  tsconfigPath: string,
-  customConfig: Config
-): Config => {
+export const repoxJestConfig = (customConfig: Config = {}): Config => {
   return {
     ...defaultConfig(),
-    ...moduleNameMapper(tsconfigPath),
+    ...moduleNameMapper(),
     ...customConfig
   };
 };
