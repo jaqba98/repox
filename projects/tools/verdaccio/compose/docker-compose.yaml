@@ -16,6 +16,8 @@ services:
       - ../../../../:/app
     environment:
       - TSCONFIG=./projects/apps/cli/tsconfig.prod.json
+      - PACKAGE=./projects/apps/cli/package.json
+      - OUTPUT=./dist/cli
     depends_on:
       - verdaccio
   jest:
@@ -26,6 +28,8 @@ services:
       - ../../../../:/app
     environment:
       - TSCONFIG=./projects/libs/module/jest/tsconfig.prod.json
+      - PACKAGE=./projects/libs/module/jest/package.json
+      - OUTPUT=./dist/jest
     depends_on:
       - verdaccio
 volumes:

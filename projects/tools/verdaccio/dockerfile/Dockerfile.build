@@ -8,4 +8,8 @@ RUN npm i -g tsc-alias
 
 ENV TSCONFIG=./tsconfig.json
 
-CMD tsc -p $TSCONFIG && tsc-alias -p $TSCONFIG
+ENV PACKAGE=./package.json
+
+ENV OUTPUT=./dist
+
+CMD tsc -p $TSCONFIG && tsc-alias -p $TSCONFIG && cp $PACKAGE $OUTPUT
