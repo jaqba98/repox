@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   verdaccio:
     image: verdaccio/verdaccio:5
@@ -8,8 +8,26 @@ services:
     volumes:
       - storage:/verdaccio/storage
       - conf:/verdaccio/conf
+  cli:
+    build:
+      context: ../dockerfile
+      dockerfile: Dockerfile.build
+    volumes:
+      - ../../../../:/app
+    environment:
+      - TSCONFIG=./projects/apps/cli/tsconfig.prod.json
+    depends_on:
+      - verdaccio
+  jest:
+    build:
+      context: ../dockerfile
+      dockerfile: Dockerfile.build
+    volumes:
+      - ../../../../:/app
+    environment:
+      - TSCONFIG=./projects/libs/module/jest/tsconfig.prod.json
+    depends_on:
+      - verdaccio
 volumes:
   storage:
-    driver: local
   conf:
-    driver: local

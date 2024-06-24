@@ -1,0 +1,11 @@
+FROM node:current-alpine3.19
+
+WORKDIR /app
+
+RUN npm i -g typescript
+
+RUN npm i -g tsc-alias
+
+ENV TSCONFIG=./tsconfig.json
+
+CMD tsc -p $TSCONFIG && tsc-alias -p $TSCONFIG
