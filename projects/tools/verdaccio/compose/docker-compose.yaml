@@ -8,7 +8,7 @@ services:
     volumes:
       - storage:/verdaccio/storage
       - conf:/verdaccio/conf
-  cli:
+  cli_build:
     build:
       context: ../dockerfile
       dockerfile: Dockerfile.build
@@ -20,7 +20,15 @@ services:
       - OUTPUT=./dist/cli
     depends_on:
       - verdaccio
-  jest:
+  cli_publish:
+    build:
+      context: ../dockerfile
+      dockerfile: Dockerfile.publish
+    volumes:
+      - ../../../../dist/cli:/app
+    depends_on:
+      - cli_build
+  jest_build:
     build:
       context: ../dockerfile
       dockerfile: Dockerfile.build
@@ -32,6 +40,14 @@ services:
       - OUTPUT=./dist/jest
     depends_on:
       - verdaccio
+  jest_publish:
+    build:
+      context: ../dockerfile
+      dockerfile: Dockerfile.publish
+    volumes:
+      - ../../../../dist/jest:/app
+    depends_on:
+      - jest_build
 volumes:
   storage:
   conf:

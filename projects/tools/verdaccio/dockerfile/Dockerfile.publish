@@ -1,0 +1,9 @@
+FROM ubuntu
+
+WORKDIR /app
+
+RUN apt update
+
+RUN apt install npm -y
+
+CMD npm publish --registry http://verdaccio:4873/
