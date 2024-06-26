@@ -32,11 +32,11 @@ dependencies:
 
 devDependencies:
   '@repox/cli':
-    specifier: ^1.5.0
-    version: 1.5.0
+    specifier: link:dist\cli
+    version: link:dist/cli
   '@repox/jest':
-    specifier: ^1.5.0
-    version: 1.5.0
+    specifier: link:dist\jest
+    version: link:dist/jest
   '@types/command-exists':
     specifier: ^1.2.3
     version: 1.2.3
@@ -775,14 +775,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /@repox/cli@1.5.0:
-    resolution: {integrity: sha512-9+2FInVdySoAPyqlDLgS/dq17DEyLgaYAw9B4irKxL15hkiY0xIsMYQT1FbJTFKfRjy9gzM/qoh38hkcXDXWXg==}
-    dev: true
-
-  /@repox/jest@1.5.0:
-    resolution: {integrity: sha512-w4/ekpi27yO2sNogaw3dI+Etzv2Qvs/e4Ari7Pi3M7BV4mr7/k5sO7wkx5KYADASFJhg/B2LDs4oU1apUXy3HA==}
-    dev: true
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}

@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  cli_build:
+    build:
+      context: ../dockerfile
+      dockerfile: Dockerfile.build
+    volumes:
+      - ../../../../:/app
+    environment:
+      - TSCONFIG=./projects/apps/cli/tsconfig.prod.json
+      - PACKAGE=./projects/apps/cli/package.json
+      - OUTPUT=./dist/cli
+    stdin_open: true
+    tty: true
+  jest_build:
+    build:
+      context: ../dockerfile
+      dockerfile: Dockerfile.build
+    volumes:
+      - ../../../../:/app
+    environment:
+      - TSCONFIG=./projects/libs/module/jest/tsconfig.prod.json
+      - PACKAGE=./projects/libs/module/jest/package.json
+      - OUTPUT=./dist/jest
+    stdin_open: true
+    tty: true
