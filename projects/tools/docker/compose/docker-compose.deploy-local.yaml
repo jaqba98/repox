@@ -10,8 +10,6 @@ services:
       - TSCONFIG=./projects/apps/cli/tsconfig.prod.json
       - PACKAGE=./projects/apps/cli/package.json
       - OUTPUT=./dist/cli
-    stdin_open: true
-    tty: true
   jest_build:
     build:
       context: ../dockerfile
@@ -22,5 +20,3 @@ services:
       - TSCONFIG=./projects/libs/module/jest/tsconfig.prod.json
       - PACKAGE=./projects/libs/module/jest/package.json
       - OUTPUT=./dist/jest
-    stdin_open: true
-    tty: true
