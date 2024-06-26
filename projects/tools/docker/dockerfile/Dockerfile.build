@@ -4,6 +4,7 @@ WORKDIR /app
 
 RUN apt update
 RUN apt install npm -y
+
 RUN npm i -g typescript
 RUN npm i -g tsc-alias
 

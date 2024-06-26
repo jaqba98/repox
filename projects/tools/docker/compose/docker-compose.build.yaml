@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  cli_build:
+  cli:
     build:
       context: ../dockerfile
       dockerfile: Dockerfile.build
@@ -10,7 +10,7 @@ services:
       - TSCONFIG=./projects/apps/cli/tsconfig.prod.json
       - PACKAGE=./projects/apps/cli/package.json
       - OUTPUT=./dist/cli
-  jest_build:
+  jest:
     build:
       context: ../dockerfile
       dockerfile: Dockerfile.build
