@@ -2,9 +2,6 @@
   "name": "repox",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "postinstall": "pnpm add ./dist/cli ./dist/jest -D"
-  },
   "dependencies": {
     "command-exists": "^1.2.9",
     "deepcopy": "^2.1.0",
