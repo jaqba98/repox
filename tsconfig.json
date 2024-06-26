@@ -52,8 +52,8 @@
       "@lib/repox-launcher": [
         "projects/libs/cli/repox-launcher/src/index.ts"
       ],
-      "@lib/const": [
-        "projects/libs/const/src/index.ts"
+      "@lib/core": [
+        "projects/libs/core/src/index.ts"
       ],
       "@lib/jest": [
         "projects/libs/module/jest/src/index.ts"
