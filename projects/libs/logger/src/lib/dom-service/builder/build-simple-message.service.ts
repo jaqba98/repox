@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 
 import { BuildMessageService } from "./build-message.service";
 import { LoggerModeEnum } from "../../enum/logger-mode.enum";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 
 @singleton()
 /**

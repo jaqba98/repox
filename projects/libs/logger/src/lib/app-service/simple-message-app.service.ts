@@ -4,7 +4,7 @@ import {
     BuildSimpleMessageService
 } from "../dom-service/builder/build-simple-message.service";
 import { WriteMessageService } from "../infrastructure/write-message.service";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 
 @singleton()
 /**

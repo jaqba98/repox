@@ -1,4 +1,4 @@
-import { EMPTY_STRING, NEW_LINE, SPACE } from "@lib/const";
+import { EMPTY_STRING, NEW_LINE, SPACE } from "@lib/core";
 import { TEXT_BRIGHT, TEXT_RESET, TEXT_UNDERSCORE } from "../../const/text-style.const";
 
 /**

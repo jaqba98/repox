@@ -2,7 +2,7 @@ import { singleton } from "tsyringe";
 import { existsSync } from "fs";
 import process, { chdir } from "process";
 import { dirname, join, parse } from "path";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 
 export const pathExist = (path: string) => {
   return existsSync(path);

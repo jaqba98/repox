@@ -6,7 +6,7 @@ import {
     type LoggerLineModel,
     type LoggerWordModel
 } from "../../model/logger-domain.model";
-import { EMPTY_STRING, NEW_LINE, SPACE } from "@lib/const";
+import { EMPTY_STRING, NEW_LINE, SPACE } from "@lib/core";
 import {
     buildEmptyMessage,
     buildHeader,

@@ -4,7 +4,7 @@ import { singleton } from "tsyringe";
 import { StepMessageAppService } from "@lib/logger";
 import { type RepoxJsonDomainModel, WorkspaceDomainStore, WorkspaceDtoStore } from "@lib/repox-workspace";
 import { deepCopy } from "@lib/utils";
-import { EMPTY_OBJECT } from "@lib/const";
+import { EMPTY_OBJECT } from "@lib/core";
 
 import { buildWorkspaceDomainStepMsg } from "../../const/message/step-message.const";
 import { SystemProgramEnum } from "../../enum/system-program/system-program.enum";

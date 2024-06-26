@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { copyFileSync, readFileSync, unlinkSync, writeFileSync } from "fs";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 import { pathExist, PathUtilsService } from "./path-utils.service";
 import { globSync } from "glob";
 import { basename } from "path";

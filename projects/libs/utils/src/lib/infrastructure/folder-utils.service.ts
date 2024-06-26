@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 import { mkdirSync, readdirSync, renameSync } from "fs";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 import { basename, extname } from "path";
 import process from "process";
 import { createPath, getCurrentPath, pathNotExist } from "./path-utils.service";

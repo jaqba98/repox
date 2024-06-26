@@ -4,7 +4,7 @@ import { singleton } from "tsyringe";
 import { SimpleMessageAppService, NewlineAppService } from "@lib/logger";
 import { firstLetterUpperCase } from "@lib/utils";
 import { REPOX_LOGO } from "@lib/repox-const";
-import { EMPTY_STRING, SPACE } from "@lib/const";
+import { EMPTY_STRING, SPACE } from "@lib/core";
 
 import { CommandEnum } from "../../enum/launcher/command.enum";
 import { ProgramEnum } from "../../enum/launcher/program.enum";

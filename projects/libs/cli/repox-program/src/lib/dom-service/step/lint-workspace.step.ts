@@ -3,7 +3,7 @@ import { singleton } from "tsyringe";
 
 import { NewlineAppService, SimpleMessageAppService, StepMessageAppService } from "@lib/logger";
 import { WorkspaceDomainStore } from "@lib/repox-workspace";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 import { runCommand } from "@lib/utils";
 
 import { lintWorkspaceStepMsg } from "../../const/message/step-message.const";

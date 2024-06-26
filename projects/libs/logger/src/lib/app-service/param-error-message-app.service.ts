@@ -7,7 +7,7 @@ import { BuildMessageService } from "../dom-service/builder/build-message.servic
 import { WriteMessageService } from "../infrastructure/write-message.service";
 import { BuildLineService } from "../dom-service/builder/build-line.service";
 import { LoggerModeEnum } from "../enum/logger-mode.enum";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 
 @singleton()
 /**

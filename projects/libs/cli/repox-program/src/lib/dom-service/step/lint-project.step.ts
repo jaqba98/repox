@@ -6,7 +6,7 @@ import {
     type RepoxJsonDomainProjectModel,
     WorkspaceDomainStore
 } from "@lib/repox-workspace";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 import { createPath, runCommand } from "@lib/utils";
 
 import { lintProjectStepMsg } from "../../const/message/step-message.const";

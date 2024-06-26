@@ -3,7 +3,7 @@ import { singleton } from "tsyringe";
 import { type LoggerLineModel } from "../../model/logger-domain.model";
 import { LoggerModeEnum } from "../../enum/logger-mode.enum";
 import { ERR, TIP } from "../../const/logger.const";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 
 @singleton()
 /**

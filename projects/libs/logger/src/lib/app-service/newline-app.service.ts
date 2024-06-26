@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 
 import { WriteMessageService } from "../infrastructure/write-message.service";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 
 @singleton()
 /**

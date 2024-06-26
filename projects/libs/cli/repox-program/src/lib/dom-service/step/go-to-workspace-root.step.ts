@@ -3,7 +3,7 @@ import { singleton } from "tsyringe";
 
 import { StepMessageAppService, ComplexMessageAppService } from "@lib/logger";
 import { getCurrentPath, findWorkspacePath, changePath } from "@lib/utils";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 
 import { goToWorkspaceRootStepMsg } from "../../const/message/step-message.const";
 import { workspaceRootNotExistErrorMsg } from "../../const/message/error-message.const";

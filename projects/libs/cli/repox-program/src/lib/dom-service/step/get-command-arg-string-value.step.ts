@@ -7,7 +7,7 @@ import { ParamDomainStore } from "@lib/param-domain";
 import { getArgumentValueStepMsg } from "../../const/message/step-message.const";
 import { argumentDoesNotHaveValidValueTypeErrorMsg, argumentWasNotSpecifiedErrorMsg } from "../../const/message/error-message.const";
 import { specifyArgumentAndRunAgainWarningMsg } from "../../const/message/warning-message.const";
-import { EMPTY_STRING } from "@lib/const";
+import { EMPTY_STRING } from "@lib/core";
 
 @singleton()
 /**
