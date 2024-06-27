@@ -18,7 +18,7 @@ import {
   buildLine,
   buildUnderscoreWord,
   buildWord
-} from "../builder/build-message-piece.service";
+} from "./build-message-piece.service";
 import { StatusToColorService } from "../converter/status-to-color.service";
 
 @singleton()
