@@ -1,6 +1,4 @@
-import { LoggerModeEnum } from "@lib/logger";
-
-import { ActionStatusEnum } from "../enum/action.enum";
+import { StatusEnum  } from "@lib/core";
 import { ActionType } from "../type/action.type";
 
 export interface ActionModel {
@@ -12,8 +10,8 @@ export interface ActionModel {
 }
 
 export interface ActionResultModel {
-  status: ActionStatusEnum;
+  status: StatusEnum.success | StatusEnum.error;
   message: string;
-  loggerMode: LoggerModeEnum;
+  loggerStatus: StatusEnum;
   actions: ActionType[];
 }

@@ -1,7 +1,7 @@
 import { singleton } from "tsyringe";
 
 import { type LoggerLineModel } from "../../model/logger-domain.model";
-import { LoggerModeEnum } from "../../enum/logger-mode.enum";
+import { LoggerModeEnum } from "../../../../../core/src/lib/enum/status.enum";
 import { ERR, TIP } from "../../const/logger.const";
 import { EMPTY_STRING } from "@lib/core";
 

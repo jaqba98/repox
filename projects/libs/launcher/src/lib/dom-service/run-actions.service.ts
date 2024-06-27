@@ -1,10 +1,8 @@
 import { container, singleton } from "tsyringe";
 
-import { LoggerModeEnum } from "@lib/logger";
-
+import { StatusEnum } from "@lib/core";
 import { ActionType } from "../type/action.type";
 import { ActionResultModel } from "../model/action.model";
-import { ActionStatusEnum } from "../enum/action.enum";
 
 @singleton()
 export class RunActionsService {
@@ -22,7 +20,7 @@ export class RunActionsService {
 
   private runResult(action: ActionResultModel) {
     this.writeResult(action);
-    if (action.status === ActionStatusEnum.completed) {
+    if (action.status === StatusEnum.success) {
       this.run(action.actions);
       return true;
     }
@@ -31,20 +29,20 @@ export class RunActionsService {
 
   // TODO: refactor it, use logger module instead of console log!
   private writeResult(action: ActionResultModel) {
-    switch (action.loggerMode) {
-    case LoggerModeEnum.error:
+    switch (action.loggerStatus) {
+    case StatusEnum.error:
       console.log(`Error: ${action.message}`);
       return;
-    case LoggerModeEnum.success:
+    case StatusEnum.success:
       console.log(`Success: ${action.message}`);
       return;
-    case LoggerModeEnum.warning:
+    case StatusEnum.warning:
       console.log(`Warning: ${action.message}`);
       return;
-    case LoggerModeEnum.info:
+    case StatusEnum.info:
       console.log(`Info: ${action.message}`);
       return;
-    case LoggerModeEnum.plain:
+    case StatusEnum.default:
       console.log(action.message);
       return;
     default:

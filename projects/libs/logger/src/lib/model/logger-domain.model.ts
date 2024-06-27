@@ -1,10 +1,4 @@
-import { type LoggerModeEnum } from "../enum/logger-mode.enum";
-
-/**
- * The logger domain model that stores data.
- * It will be used to build a complete message
- * to be displayed on the console screen.
- */
+import { StatusEnum } from "@lib/core";
 
 export interface LoggerWordModel {
   content: string
@@ -17,7 +11,7 @@ export interface LoggerHeaderModel {
 }
 
 export interface LoggerLineModel {
-  mode: LoggerModeEnum
+  status: StatusEnum
   logo: LoggerHeaderModel
   header: LoggerHeaderModel
   words: LoggerWordModel[]

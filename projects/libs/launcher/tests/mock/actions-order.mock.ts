@@ -1,6 +1,5 @@
-import { LoggerModeEnum } from "@lib/logger";
+import { StatusEnum } from "@lib/core";
 
-import { ActionStatusEnum } from "../../src/lib/enum/action.enum";
 import {
   ActionModel,
   ActionResultModel
@@ -11,25 +10,25 @@ import { ActionsOrderEnum } from "../enum/actions-order.enum";
 export class Action_1 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_1_before,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runLogic(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_1_logic,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runAfter(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_1_after,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
@@ -39,25 +38,25 @@ export class Action_1 implements ActionModel {
 export class Action_2 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_2_before,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runLogic(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_2_logic,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: [Action_2_1]
     };
   }
   runAfter(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_2_after,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
@@ -67,25 +66,25 @@ export class Action_2 implements ActionModel {
 export class Action_2_1 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_2_1_before,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runLogic(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_2_1_logic,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runAfter(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_2_1_after,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: [Action_2_1_1]
     };
   }
@@ -95,25 +94,25 @@ export class Action_2_1 implements ActionModel {
 export class Action_2_1_1 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_2_1_1_before,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runLogic(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_2_1_1_logic,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runAfter(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_2_1_1_after,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
@@ -123,25 +122,25 @@ export class Action_2_1_1 implements ActionModel {
 export class Action_3 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_3_before,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runLogic(): ActionResultModel {
     return {
-      status: ActionStatusEnum.failed,
+      status: StatusEnum.error,
       message: ActionsOrderEnum.action_3_logic,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: [Action_4]
     };
   }
   runAfter(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_3_after,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
@@ -151,25 +150,25 @@ export class Action_3 implements ActionModel {
 export class Action_4 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_4_before,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runLogic(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_4_logic,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }
   runAfter(): ActionResultModel {
     return {
-      status: ActionStatusEnum.completed,
+      status: StatusEnum.success,
       message: ActionsOrderEnum.action_4_after,
-      loggerMode: LoggerModeEnum.plain,
+      loggerStatus: StatusEnum.default,
       actions: []
     };
   }

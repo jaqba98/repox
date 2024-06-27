@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 
-import { LoggerModeEnum } from "../../enum/logger-mode.enum";
+import { LoggerModeEnum } from "../../../../../core/src/lib/enum/status.enum";
 import {
     BG_TEXT_GRAY,
     BG_TEXT_GREEN,
