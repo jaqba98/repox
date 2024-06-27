@@ -3,7 +3,7 @@ import { singleton } from "tsyringe";
 import {
     BuildParamErrorMessageService
 } from "../dom-service/builder/build-param-error-message.service";
-import { BuildMessageService } from "../dom-service/builder/build-message.service";
+import { BuildMessageService } from "../dom-service/build-message.service";
 import { WriteMessageService } from "../infrastructure/write-message.service";
 import { BuildLineService } from "../dom-service/builder/build-line.service";
 import { LoggerModeEnum } from "../../../../core/src/lib/enum/status.enum";

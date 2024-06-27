@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 
-import { BuildMessageService } from "./build-message.service";
+import { BuildMessageService } from "../build-message.service";
 import { LoggerModeEnum } from "../../../../../core/src/lib/enum/status.enum";
 import { EMPTY_STRING } from "@lib/core";
 

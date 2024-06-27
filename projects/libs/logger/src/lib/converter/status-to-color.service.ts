@@ -12,11 +12,11 @@ import {
   FG_TEXT_INFO,
   FG_TEXT_SUCCESS,
   FG_TEXT_WARNING
-} from "../../const/text-style.const";
+} from "../const/text-style.const";
 
 @singleton()
 export class StatusToColorService {
-  convertToFg (status: StatusEnum): string {
+  convertToFg(status: StatusEnum): string {
     switch (status) {
     case StatusEnum.success:
       return FG_TEXT_SUCCESS;
@@ -33,7 +33,7 @@ export class StatusToColorService {
     }
   }
 
-  convertToBg (status: StatusEnum): string {
+  convertToBg(status: StatusEnum): string {
     switch (status) {
     case StatusEnum.success:
       return BG_TEXT_SUCCESS;
