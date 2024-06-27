@@ -1,24 +1,22 @@
 import { singleton } from "tsyringe";
 
-import {
-    BuildSimpleMessageService
-} from "../dom-service/builder/build-simple-message.service";
+import { EMPTY_STRING, StatusEnum } from "@lib/core";
+import { BuildSimpleMessageService } from "../dom-service/build-simple-message.service";
 import { WriteMessageService } from "../infrastructure/write-message.service";
+import { STEP_HEADER } from "../const/header.const";
 
 @singleton()
-/**
- * The app service is responsible for displaying simple message
- * on the console screen.
- */
 export class StepMessageAppService {
-    constructor (
-    private readonly buildMessage: BuildSimpleMessageService,
+  constructor(
+    private readonly buildSimpleMessage: BuildSimpleMessageService,
     private readonly writeMessage: WriteMessageService
-    ) {
-    }
+  ) {
+  }
 
-    write (message: string): void {
-        const outputMessage = this.buildMessage.buildPlain(`Step >>> ${message} <<<`);
-        this.writeMessage.write(outputMessage);
-    }
+  writeStep(message: string) {
+    const newMessage = `>>> ${message} <<<`;
+    const output = this.buildSimpleMessage
+      .build(EMPTY_STRING, STEP_HEADER, newMessage, StatusEnum.default);
+    this.writeMessage.write(output);
+  }
 }
