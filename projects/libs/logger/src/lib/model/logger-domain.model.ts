@@ -2,7 +2,7 @@ import { StatusEnum } from "@lib/core";
 
 export interface LoggerWordModel {
   content: string;
-  underline: boolean;
+  underscore: boolean;
   visible: boolean;
 }
 

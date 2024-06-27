@@ -1,6 +1,6 @@
 import { singleton } from "tsyringe";
 
-import { ConvertModeToColorService } from "../converter/convert-mode-to-color.service";
+import { ConvertModeToColorService } from "../converter/status-to-color.service";
 import {
     type LoggerDomainModel,
     type LoggerLineModel,
