@@ -1,17 +1,16 @@
 import { StatusEnum } from "@lib/core";
-
 import {
   ActionModel,
   ActionResultModel
 } from "../../src/lib/model/action.model";
-import { ActionsOrderEnum } from "../enum/actions-order.enum";
+import { actionsInputMsg } from "./actions-msg.mock";
 
 // Action 1
 export class Action_1 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_1_before,
+      message: actionsInputMsg.action_1_before,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -19,7 +18,7 @@ export class Action_1 implements ActionModel {
   runLogic(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_1_logic,
+      message: actionsInputMsg.action_1_logic,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -27,7 +26,7 @@ export class Action_1 implements ActionModel {
   runAfter(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_1_after,
+      message: actionsInputMsg.action_1_after,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -39,7 +38,7 @@ export class Action_2 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_2_before,
+      message: actionsInputMsg.action_2_before,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -47,7 +46,7 @@ export class Action_2 implements ActionModel {
   runLogic(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_2_logic,
+      message: actionsInputMsg.action_2_logic,
       loggerStatus: StatusEnum.default,
       actions: [Action_2_1]
     };
@@ -55,7 +54,7 @@ export class Action_2 implements ActionModel {
   runAfter(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_2_after,
+      message: actionsInputMsg.action_2_after,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -67,7 +66,7 @@ export class Action_2_1 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_2_1_before,
+      message: actionsInputMsg.action_2_1_before,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -75,7 +74,7 @@ export class Action_2_1 implements ActionModel {
   runLogic(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_2_1_logic,
+      message: actionsInputMsg.action_2_1_logic,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -83,7 +82,7 @@ export class Action_2_1 implements ActionModel {
   runAfter(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_2_1_after,
+      message: actionsInputMsg.action_2_1_after,
       loggerStatus: StatusEnum.default,
       actions: [Action_2_1_1]
     };
@@ -95,7 +94,7 @@ export class Action_2_1_1 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_2_1_1_before,
+      message: actionsInputMsg.action_2_1_1_before,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -103,7 +102,7 @@ export class Action_2_1_1 implements ActionModel {
   runLogic(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_2_1_1_logic,
+      message: actionsInputMsg.action_2_1_1_logic,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -111,7 +110,7 @@ export class Action_2_1_1 implements ActionModel {
   runAfter(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_2_1_1_after,
+      message: actionsInputMsg.action_2_1_1_after,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -123,7 +122,7 @@ export class Action_3 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_3_before,
+      message: actionsInputMsg.action_3_before,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -131,7 +130,7 @@ export class Action_3 implements ActionModel {
   runLogic(): ActionResultModel {
     return {
       status: StatusEnum.error,
-      message: ActionsOrderEnum.action_3_logic,
+      message: actionsInputMsg.action_3_logic,
       loggerStatus: StatusEnum.default,
       actions: [Action_4]
     };
@@ -139,7 +138,7 @@ export class Action_3 implements ActionModel {
   runAfter(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_3_after,
+      message: actionsInputMsg.action_3_after,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -151,7 +150,7 @@ export class Action_4 implements ActionModel {
   runBefore(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_4_before,
+      message: actionsInputMsg.action_4_before,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -159,7 +158,7 @@ export class Action_4 implements ActionModel {
   runLogic(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_4_logic,
+      message: actionsInputMsg.action_4_logic,
       loggerStatus: StatusEnum.default,
       actions: []
     };
@@ -167,7 +166,7 @@ export class Action_4 implements ActionModel {
   runAfter(): ActionResultModel {
     return {
       status: StatusEnum.success,
-      message: ActionsOrderEnum.action_4_after,
+      message: actionsInputMsg.action_4_after,
       loggerStatus: StatusEnum.default,
       actions: []
     };

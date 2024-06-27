@@ -8,7 +8,7 @@ import {
   Action_2,
   Action_3
 } from "../mock/actions-order.mock";
-import { ActionsOrderEnum } from "../enum/actions-order.enum";
+import { actionsOutputMsg } from "../mock/actions-msg.mock";
 
 describe("LauncherApp tests", () => {
   let launcher: LauncherAppService;
@@ -27,21 +27,21 @@ describe("LauncherApp tests", () => {
     expect(consoleLogSpy).toHaveBeenCalledTimes(12);
     const { calls } = consoleLogSpy.mock;
     // Action_1
-    expect(calls[0]).toEqual([ActionsOrderEnum.action_1_before]);
-    expect(calls[1]).toEqual([ActionsOrderEnum.action_1_logic]);
-    expect(calls[2]).toEqual([ActionsOrderEnum.action_1_after]);
+    expect(calls[0]).toEqual([actionsOutputMsg.action_1_before]);
+    expect(calls[1]).toEqual([actionsOutputMsg.action_1_logic]);
+    expect(calls[2]).toEqual([actionsOutputMsg.action_1_after]);
     // Action_2
-    expect(calls[3]).toEqual([ActionsOrderEnum.action_2_before]);
-    expect(calls[4]).toEqual([ActionsOrderEnum.action_2_logic]);
+    expect(calls[3]).toEqual([actionsOutputMsg.action_2_before]);
+    expect(calls[4]).toEqual([actionsOutputMsg.action_2_logic]);
     // Action_2_1
-    expect(calls[5]).toEqual([ActionsOrderEnum.action_2_1_before]);
-    expect(calls[6]).toEqual([ActionsOrderEnum.action_2_1_logic]);
-    expect(calls[7]).toEqual([ActionsOrderEnum.action_2_1_after]);
+    expect(calls[5]).toEqual([actionsOutputMsg.action_2_1_before]);
+    expect(calls[6]).toEqual([actionsOutputMsg.action_2_1_logic]);
+    expect(calls[7]).toEqual([actionsOutputMsg.action_2_1_after]);
     // Action_2_1_1
-    expect(calls[8]).toEqual([ActionsOrderEnum.action_2_1_1_before]);
-    expect(calls[9]).toEqual([ActionsOrderEnum.action_2_1_1_logic]);
-    expect(calls[10]).toEqual([ActionsOrderEnum.action_2_1_1_after]);
-    expect(calls[11]).toEqual([ActionsOrderEnum.action_2_after]);
+    expect(calls[8]).toEqual([actionsOutputMsg.action_2_1_1_before]);
+    expect(calls[9]).toEqual([actionsOutputMsg.action_2_1_1_logic]);
+    expect(calls[10]).toEqual([actionsOutputMsg.action_2_1_1_after]);
+    expect(calls[11]).toEqual([actionsOutputMsg.action_2_after]);
     consoleLogSpy.mockRestore();
   });
 
@@ -52,8 +52,8 @@ describe("LauncherApp tests", () => {
     expect(consoleLogSpy).toHaveBeenCalledTimes(2);
     const { calls } = consoleLogSpy.mock;
     // Action_3
-    expect(calls[0]).toEqual([ActionsOrderEnum.action_3_before]);
-    expect(calls[1]).toEqual([ActionsOrderEnum.action_3_logic]);
+    expect(calls[0]).toEqual([actionsOutputMsg.action_3_before]);
+    expect(calls[1]).toEqual([actionsOutputMsg.action_3_logic]);
     consoleLogSpy.mockRestore();
   });
 });

@@ -1,11 +1,14 @@
 import { container, singleton } from "tsyringe";
 
+import { SimpleMessageAppService } from "@lib/logger";
 import { StatusEnum } from "@lib/core";
 import { ActionType } from "../type/action.type";
 import { ActionResultModel } from "../model/action.model";
 
 @singleton()
 export class RunActionsService {
+  constructor(private readonly simpleMessageApp: SimpleMessageAppService) {}
+
   run(actions: ActionType[]) {
     for (let i = 0; i < actions.length; i++) {
       const action = container.resolve(actions[i]);
@@ -27,26 +30,25 @@ export class RunActionsService {
     return false;
   }
 
-  // TODO: refactor it, use logger module instead of console log!
   private writeResult(action: ActionResultModel) {
-    switch (action.loggerStatus) {
-    case StatusEnum.error:
-      console.log(`Error: ${action.message}`);
-      return;
+    switch(action.loggerStatus) {
     case StatusEnum.success:
-      console.log(`Success: ${action.message}`);
+      this.simpleMessageApp.writeSuccess(action.message);  
       return;
     case StatusEnum.warning:
-      console.log(`Warning: ${action.message}`);
+      this.simpleMessageApp.writeWarning(action.message);  
+      return;
+    case StatusEnum.error:
+      this.simpleMessageApp.writeError(action.message);
       return;
     case StatusEnum.info:
-      console.log(`Info: ${action.message}`);
+      this.simpleMessageApp.writeInfo(action.message);
       return;
     case StatusEnum.default:
-      console.log(action.message);
+      this.simpleMessageApp.writeDefault(action.message);
       return;
     default:
-      throw new Error("Not supported logger mode!");
+      throw new Error("Not supported logger status!");
     }
   }
 }
