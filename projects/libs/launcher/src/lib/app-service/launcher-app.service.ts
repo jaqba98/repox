@@ -1,11 +1,10 @@
 import { container, singleton } from "tsyringe";
 
 import { ActionType } from "../type/action.type";
-import { EMPTY_STRING, StatusEnum } from "@lib/core";
+import { StatusEnum } from "@lib/core";
 import { ActionResultModel } from "../model/action.model";
 import {
   BuildSimpleMessageService,
-  DEFAULT_HEADER,
   WriteMessageService
 } from "@lib/logger";
 
@@ -20,21 +19,16 @@ export class LauncherAppService {
     for (let i = 0; i < actions.length; i++) {
       const action = container.resolve(actions[i]);
       const resultBefore = action.runBefore();
-      if (!this.runResult(resultBefore)) return;
+      if (!this.launchResult(resultBefore)) return;
       const resultLogic = action.runLogic();
-      if (!this.runResult(resultLogic)) return;
+      if (!this.launchResult(resultLogic)) return;
       const resultAfter = action.runAfter();
-      if (!this.runResult(resultAfter)) return;
+      if (!this.launchResult(resultAfter)) return;
     }
   }
 
-  private runResult(action: ActionResultModel) {
-    const message = this.buildSimpleMessage.build(
-      EMPTY_STRING,
-      DEFAULT_HEADER,
-      action.message,
-      StatusEnum.default
-    );
+  private launchResult(action: ActionResultModel) {
+    const message = this.buildSimpleMessage.buildDefault(action.message);
     this.writeMessage.write(message);
     if (action.status === StatusEnum.success) {
       this.launch(action.actions);
