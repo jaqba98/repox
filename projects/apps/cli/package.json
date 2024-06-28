@@ -1,4 +1,8 @@
 {
   "name": "@repox/cli",
-  "version": "1.5.0"
+  "version": "1.5.0",
+  "main": "./projects/apps/cli/src/main.js",
+  "bin": {
+    "repox": "./projects/apps/cli/src/main.js"
+  }
 }
