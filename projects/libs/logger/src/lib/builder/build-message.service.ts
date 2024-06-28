@@ -19,7 +19,9 @@ import {
   buildUnderscoreWord,
   buildWord
 } from "./build-message-piece.service";
-import { StatusToColorService } from "../converter/status-to-color.service";
+import {
+  StatusToColorService
+} from "../converter/status-to-color.service";
 
 @singleton()
 export class BuildMessageService {
