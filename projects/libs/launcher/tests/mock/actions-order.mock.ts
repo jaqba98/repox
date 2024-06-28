@@ -6,7 +6,8 @@ import {
 } from "../../src/lib/model/action.model";
 import { BuildSimpleMessageService } from "@lib/logger";
 
-const buildSimpleMessage = container.resolve(BuildSimpleMessageService);
+const buildSimpleMessage = container
+  .resolve(BuildSimpleMessageService);
 
 export const actionsOrderInput = {
   action_1_before: "Action 1 before",
@@ -27,28 +28,46 @@ export const actionsOrderInput = {
   action_4_before: "Action 4 before",
   action_4_logic: "Action 4 logic",
   action_4_after: "Action 4 after"
-}
+};
 
 export const actionsOrderOutput = {
-  action_1_before: buildSimpleMessage.buildDefault(actionsOrderInput.action_1_before),
-  action_1_logic: buildSimpleMessage.buildDefault(actionsOrderInput.action_1_logic),
-  action_1_after: buildSimpleMessage.buildDefault(actionsOrderInput.action_1_after),
-  action_2_before: buildSimpleMessage.buildDefault(actionsOrderInput.action_2_before),
-  action_2_logic: buildSimpleMessage.buildDefault(actionsOrderInput.action_2_logic),
-  action_2_after: buildSimpleMessage.buildDefault(actionsOrderInput.action_2_after),
-  action_2_1_before: buildSimpleMessage.buildDefault(actionsOrderInput.action_2_1_before),
-  action_2_1_logic: buildSimpleMessage.buildDefault(actionsOrderInput.action_2_1_logic),
-  action_2_1_after: buildSimpleMessage.buildDefault(actionsOrderInput.action_2_1_after),
-  action_2_1_1_before: buildSimpleMessage.buildDefault(actionsOrderInput.action_2_1_1_before),
-  action_2_1_1_logic: buildSimpleMessage.buildDefault(actionsOrderInput.action_2_1_1_logic),
-  action_2_1_1_after: buildSimpleMessage.buildDefault(actionsOrderInput.action_2_1_1_after),
-  action_3_before: buildSimpleMessage.buildDefault(actionsOrderInput.action_3_before),
-  action_3_logic: buildSimpleMessage.buildDefault(actionsOrderInput.action_3_logic),
-  action_3_after: buildSimpleMessage.buildDefault(actionsOrderInput.action_3_after),
-  action_4_before: buildSimpleMessage.buildDefault(actionsOrderInput.action_4_before),
-  action_4_logic: buildSimpleMessage.buildDefault(actionsOrderInput.action_4_logic),
-  action_4_after: buildSimpleMessage.buildDefault(actionsOrderInput.action_4_after)
-}
+  action_1_before: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_1_before),
+  action_1_logic: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_1_logic),
+  action_1_after: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_1_after),
+  action_2_before: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_2_before),
+  action_2_logic: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_2_logic),
+  action_2_after: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_2_after),
+  action_2_1_before: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_2_1_before),
+  action_2_1_logic: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_2_1_logic),
+  action_2_1_after: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_2_1_after),
+  action_2_1_1_before: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_2_1_1_before),
+  action_2_1_1_logic: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_2_1_1_logic),
+  action_2_1_1_after: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_2_1_1_after),
+  action_3_before: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_3_before),
+  action_3_logic: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_3_logic),
+  action_3_after: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_3_after),
+  action_4_before: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_4_before),
+  action_4_logic: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_4_logic),
+  action_4_after: buildSimpleMessage
+    .buildDefault(actionsOrderInput.action_4_after)
+};
 
 // Action 1
 export class Action_1 implements ActionModel {
