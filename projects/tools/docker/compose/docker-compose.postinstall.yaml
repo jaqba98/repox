@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  cli_build:
+    build:
+      context: ../../../../
+      dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.build
+    container_name: cli_build
+    stdin_open: true
+    tty: true
