@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "sudo sh ./projects/tools/docker/shell/postinstall.sh"
+    "preinstall": "sudo sh ./projects/tools/docker/main/preinstall.sh"
   },
   "dependencies": {
     "command-exists": "^1.2.9",

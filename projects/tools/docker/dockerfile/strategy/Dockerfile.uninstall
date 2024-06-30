@@ -1,0 +1,5 @@
+FROM system:local
+
+ENV NPM="@repox/cli"
+
+CMD pnpm uninstall $NPM
