@@ -11,3 +11,10 @@ services:
       - TSCONFIG=./projects/apps/cli/tsconfig.dev.json
       - PACKAGE=./projects/apps/cli/package.json
       - OUTDIR=./dist/cli
+  remove_dist:
+    build:
+      context: ../../../../
+      dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.remove-dist
+    container_name: remove_dist
+    volumes:
+      - ../../../../:/app

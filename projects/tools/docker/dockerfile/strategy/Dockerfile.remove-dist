@@ -1,0 +1,5 @@
+FROM system:local
+
+WORKDIR /app
+
+CMD rm -rf ./dist
