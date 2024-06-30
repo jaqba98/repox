@@ -9,6 +9,9 @@ services:
       - ../../../../:/app
     environment:
       - NPM=@repox/cli
+      - STORE=/home/jaqba98/.local/share/pnpm/store/v3
+    networks:
+      - host
   jest_uninstall:
     build:
       context: ../../../../
@@ -18,3 +21,8 @@ services:
       - ../../../../:/app
     environment:
       - NPM=@repox/jest
+      - STORE=/home/jaqba98/.local/share/pnpm/store/v3
+    networks:
+      - host
+networks:
+  host:
