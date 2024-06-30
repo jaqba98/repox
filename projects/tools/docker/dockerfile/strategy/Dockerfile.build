@@ -1,1 +1,9 @@
 FROM system:local
+
+WORKDIR /app
+
+ENV TSCONFIG=./tsconfig.json
+ENV PACKAGE=./package.json
+ENV OUTDIR=./dist
+
+CMD tsc -p $TSCONFIG && tsc-alias -p $TSCONFIG && cp $PACKAGE $OUTDIR

@@ -3,7 +3,9 @@ FROM ubuntu:24.04
 WORKDIR /app
 
 RUN apt update
-
-RUN apt install nodejs -y
-
 RUN apt install npm -y
+
+RUN npm install -g pnpm
+RUN npm install -g typescript
+RUN npm install -g tsc-alias
+RUN npm install -g npm-cli-adduser

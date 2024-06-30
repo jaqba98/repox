@@ -5,5 +5,9 @@ services:
       context: ../../../../
       dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.build
     container_name: cli_build
-    stdin_open: true
-    tty: true
+    volumes:
+      - ../../../../:/app
+    environment:
+      - TSCONFIG=./projects/apps/cli/tsconfig.dev.json
+      - PACKAGE=./projects/apps/cli/package.json
+      - OUTDIR=./dist/cli
