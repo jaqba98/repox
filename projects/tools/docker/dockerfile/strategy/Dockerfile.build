@@ -6,4 +6,10 @@ ENV TSCONFIG=./tsconfig.json
 ENV PACKAGE=./package.json
 ENV OUTDIR=./dist
 
+HEALTHCHECK --interval=30s \
+            --timeout=30s  \
+            --start-period=5s \
+            --retries=3 \
+            CMD test -f ./dist/cli/projects/apps/cli/src/main.js || exit 1
+
 CMD tsc -p $TSCONFIG && tsc-alias -p $TSCONFIG && cp $PACKAGE $OUTDIR
