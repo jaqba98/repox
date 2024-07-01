@@ -31,6 +31,12 @@ dependencies:
     version: 4.8.0
 
 devDependencies:
+  '@repox/cli':
+    specifier: link:dist\cli
+    version: link:dist/cli
+  '@repox/jest':
+    specifier: link:dist\jest
+    version: link:dist/jest
   '@types/command-exists':
     specifier: ^1.2.3
     version: 1.2.3
