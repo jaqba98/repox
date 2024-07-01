@@ -3,9 +3,20 @@ services:
   repox_cli_build:
     build:
       context: ../../../../
-      dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.build
+      dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.build-dev
     container_name: repox_cli_build
     volumes:
       - ../../../../:/app
-    stdin_open: true
-    tty: true
+    environment:
+      - ROOTDIR=./projects/apps/cli
+      - OUTDIR=./dist/cli
+  repox_jest_build:
+    build:
+      context: ../../../../
+      dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.build-dev
+    container_name: repox_jest_build
+    volumes:
+      - ../../../../:/app
+    environment:
+      - ROOTDIR=./projects/libs/module/jest
+      - OUTDIR=./dist/jest
