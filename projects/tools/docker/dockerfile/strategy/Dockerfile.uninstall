@@ -1,6 +1,7 @@
 FROM system:local
 
 ENV STORE=/home/jaqba98/.local/share/pnpm/store/v3
-ENV NPM="@repox/cli"
 
-CMD pnpm config set store-dir $STORE && pnpm uninstall $NPM
+CMD pnpm config set store-dir $STORE && \
+    pnpm uninstall @repox/cli \
+    pnpm uninstall @repox/jest

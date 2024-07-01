@@ -1,24 +1,12 @@
 version: "3.8"
 services:
-  cli_uninstall:
+  uninstall:
     build:
       context: ../../../../
       dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.uninstall
     volumes:
       - ../../../../:/app
     environment:
-      - NPM=@repox/cli
-      - STORE=/home/jaqba98/.local/share/pnpm/store/v3
-    networks:
-      - host
-  jest_uninstall:
-    build:
-      context: ../../../../
-      dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.uninstall
-    volumes:
-      - ../../../../:/app
-    environment:
-      - NPM=@repox/jest
       - STORE=/home/jaqba98/.local/share/pnpm/store/v3
     networks:
       - host
