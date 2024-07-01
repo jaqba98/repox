@@ -4,20 +4,21 @@ services:
     build:
       context: ../../../../
       dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.build
-    container_name: cli_build
     volumes:
       - ../../../../:/app
     environment:
-      - TSCONFIG=./projects/apps/cli/tsconfig.dev.json
+      - TSCONFIG=./projects/apps/cli/tsconfig.prod.json
       - PACKAGE=./projects/apps/cli/package.json
       - OUTDIR=./dist/cli
-  remove_dist:
+      - TEST=./dist/cli/projects/apps/cli/src/main.js
+  jest_build:
     build:
       context: ../../../../
-      dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.remove-dist
-    container_name: remove_dist
+      dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.build
     volumes:
       - ../../../../:/app
-    depends_on:
-      cli_build:
-        condition: service_completed_successfully
+    environment:
+      - TSCONFIG=./projects/libs/module/jest/tsconfig.prod.json
+      - PACKAGE=./projects/libs/module/jest/package.json
+      - OUTDIR=./dist/jest
+      - TEST=./dist/jest/projects/libs/module/jest/src/main.js
