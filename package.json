@@ -16,8 +16,6 @@
     "tsyringe": "^4.8.0"
   },
   "devDependencies": {
-    "@repox/cli": "link:dist\\cli",
-    "@repox/jest": "link:dist\\jest",
     "@types/command-exists": "^1.2.3",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.7",
