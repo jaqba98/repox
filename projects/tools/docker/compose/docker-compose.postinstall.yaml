@@ -1,5 +1,13 @@
 version: "3.8"
 services:
+  verdaccio:
+    image: verdaccio/verdaccio
+    container_name: verdaccio
+    ports:
+      - "4873:4873"
+    volumes:
+      - ./config:/verdaccio/conf
+      - ./storage:/verdaccio/storage
   cli_build:
     build:
       context: ../../../../
@@ -22,3 +30,6 @@ services:
       - PACKAGE=./projects/libs/module/jest/package.json
       - OUTDIR=./dist/jest
       - TEST=./dist/jest/projects/libs/module/jest/src/main.js
+volumes:
+  config:
+  storage:
