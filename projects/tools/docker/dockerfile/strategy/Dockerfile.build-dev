@@ -3,6 +3,5 @@ FROM system:local
 ENV ROOTDIR=./
 ENV OUTDIR=./dist
 
-CMD tsc -p ${ROOTDIR}/tsconfig.dev.json \
-    tsc-alias -p ${ROOTDIR}/tsconfig.dev.json \
-    cp ${ROOTDIR}/package.json ${OUTDIR}
+CMD chmod +x ./projects/tools/docker/shell/build-dev.sh \
+    sh ./projects/tools/docker/shell/build-dev.sh
