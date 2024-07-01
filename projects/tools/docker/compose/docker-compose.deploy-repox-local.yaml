@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  repox_cli_build:
+    build:
+      context: ../../../../
+      dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.build
+    container_name: repox_cli_build
+    volumes:
+      - ../../../../:/app
+    stdin_open: true
+    tty: true
