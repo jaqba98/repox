@@ -3,5 +3,4 @@ FROM system:local
 ENV ROOTDIR=./
 ENV OUTDIR=./dist
 
-CMD chmod +x ./projects/tools/docker/shell/build-dev.sh \
-    sh ./projects/tools/docker/shell/build-dev.sh
+CMD ["sh", "./projects/tools/docker/shell/build-dev.sh"]

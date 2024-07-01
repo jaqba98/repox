@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "deploy-repox-local": "sudo sh ./projects/tools/docker/main/deploy-repox-local.sh",
-    "postinstall": "pnpm run deploy-repox-local"
+    "deploy-repox-local": "sudo sh ./projects/tools/docker/main/deploy-repox-local.sh"
   },
   "dependencies": {
     "command-exists": "^1.2.9",
