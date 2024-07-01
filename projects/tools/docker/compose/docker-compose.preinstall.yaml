@@ -4,7 +4,6 @@ services:
     build:
       context: ../../../../
       dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.uninstall
-    container_name: cli_uninstall
     volumes:
       - ../../../../:/app
     environment:
@@ -16,7 +15,6 @@ services:
     build:
       context: ../../../../
       dockerfile: ./projects/tools/docker/dockerfile/strategy/Dockerfile.uninstall
-    container_name: jest_uninstall
     volumes:
       - ../../../../:/app
     environment:
